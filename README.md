@@ -7,20 +7,20 @@ This module contains mock data that is shared among RCSB Python modules to facil
 Current mock data includes:
 
 | Subdirectory            | Description        |
-|-----------------------------------------------
-| MOCK_BIRD_CC_REPO| BIRD chemical component definition example data files |
-| MOCK_BIRD_FAMILY_REPO| BIRD/PRD FAMILY example data files |
-| MOCK_BIRD_REPO| BIRD/PRD example data files |
-| MOCK_CHEM_COMP_REPO| Chemical component definition example data files |
-| MOCK_EXCHANGE_SANDBOX| RCSB exchange sandbox example data files |
-| MOCK_PDBX_SANDBOX| PDBx/mmCIF example data files |
-| cluster_data| mmseq2 sequence cluster example data files |
-| config| RCSB application configuration example data files |
-| data_type_info| PDBx/mmCIF application data type mapping example data files |
-| dictionaries| PDBx/mmCIF dictionary example files |
-| examples| Miscellaneous example data files |
-| json-schema| JSON Schema example data files |
-| provenance| Provenance documentation example data files |
-| schema| Example schema definition data files |
-| schema-maps| Legacy RCSB schema data files |
+| ------------------------- | ----------------- |
+| MOCK_BIRD_CC_REPO | BIRD chemical component definition example data files |
+| MOCK_BIRD_FAMILY_REPO | BIRD/PRD FAMILY example data files |
+| MOCK_BIRD_REPO | BIRD/PRD example data files |
+| MOCK_CHEM_COMP_REPO | Chemical component definition example data files |
+| MOCK_EXCHANGE_SANDBOX | RCSB exchange sandbox example data files |
+| MOCK_PDBX_SANDBOX | PDBx/mmCIF example data files |
+| cluster_data | mmseq2 sequence cluster example data files |
+| config | RCSB application configuration example data files |
+| data_type_info | PDBx/mmCIF application data type mapping example data files |
+| dictionaries | PDBx/mmCIF dictionary example files |
+| examples | Miscellaneous example data files |
+| json-schema | JSON Schema example data files |
+| provenance | Provenance documentation example data files |
+| schema | Example schema definition data files |
+| schema-maps | Legacy RCSB schema data files |
 
