@@ -1,0 +1,505 @@
+{
+   "bsonType": "object", 
+   "properties": {
+      "rcsb_load_status": {
+         "required": [
+            "datablock_name", 
+            "load_date", 
+            "locator"
+         ], 
+         "bsonType": "object", 
+         "properties": {
+            "locator": {
+               "bsonType": "string"
+            }, 
+            "datablock_name": {
+               "bsonType": "string"
+            }, 
+            "load_date": {
+               "bsonType": "date"
+            }
+         }
+      }, 
+      "pdbx_chem_comp_audit": {
+         "items": [
+            {
+               "required": [
+                  "action_type", 
+                  "comp_id", 
+                  "date"
+               ], 
+               "bsonType": "object", 
+               "properties": {
+                  "date": {
+                     "bsonType": "date"
+                  }, 
+                  "details": {
+                     "bsonType": "string"
+                  }, 
+                  "processing_site": {
+                     "bsonType": "string"
+                  }, 
+                  "annotator": {
+                     "bsonType": "string"
+                  }, 
+                  "comp_id": {
+                     "bsonType": "string"
+                  }, 
+                  "action_type": {
+                     "enum": [
+                        "Modify name", 
+                        "Modify atom id", 
+                        "Modify leaving atom flag", 
+                        "Create component", 
+                        "Modify synonyms", 
+                        "Modify value order", 
+                        "Modify aromatic_flag", 
+                        "Modify formula", 
+                        "Modify charge", 
+                        "Other modification", 
+                        "Modify one letter code", 
+                        "Modify model coordinates code", 
+                        "Modify processing site", 
+                        "Modify subcomponent list", 
+                        "Initial release", 
+                        "Modify coordinates", 
+                        "Modify component atom id", 
+                        "Modify internal type", 
+                        "Modify parent residue", 
+                        "Modify formal charge", 
+                        "Modify linking type", 
+                        "Modify identifier", 
+                        "Modify descriptor", 
+                        "Obsolete component", 
+                        "Modify component comp_id"
+                     ], 
+                     "bsonType": "string"
+                  }
+               }
+            }
+         ], 
+         "bsonType": "array", 
+         "uniqueItems": true, 
+         "minItems": 0
+      }, 
+      "pdbx_chem_comp_feature": {
+         "items": [
+            {
+               "required": [
+                  "comp_id", 
+                  "source", 
+                  "type", 
+                  "value"
+               ], 
+               "bsonType": "object", 
+               "properties": {
+                  "type": {
+                     "bsonType": "string"
+                  }, 
+                  "comp_id": {
+                     "bsonType": "string"
+                  }, 
+                  "source": {
+                     "bsonType": "string"
+                  }, 
+                  "value": {
+                     "bsonType": "string"
+                  }
+               }
+            }
+         ], 
+         "bsonType": "array", 
+         "uniqueItems": true, 
+         "minItems": 0
+      }, 
+      "chem_comp_bond": {
+         "items": [
+            {
+               "required": [
+                  "atom_id_1", 
+                  "atom_id_2", 
+                  "comp_id"
+               ], 
+               "bsonType": "object", 
+               "properties": {
+                  "pdbx_ordinal": {
+                     "bsonType": "int"
+                  }, 
+                  "pdbx_aromatic_flag": {
+                     "enum": [
+                        "Y", 
+                        "N"
+                     ], 
+                     "bsonType": "string"
+                  }, 
+                  "comp_id": {
+                     "bsonType": "string"
+                  }, 
+                  "value_order": {
+                     "enum": [
+                        "arom", 
+                        "doub", 
+                        "pi", 
+                        "trip", 
+                        "poly", 
+                        "delo", 
+                        "sing", 
+                        "quad"
+                     ], 
+                     "bsonType": "string"
+                  }, 
+                  "pdbx_stereo_config": {
+                     "enum": [
+                        "Z", 
+                        "E", 
+                        "N"
+                     ], 
+                     "bsonType": "string"
+                  }, 
+                  "atom_id_1": {
+                     "bsonType": "string"
+                  }, 
+                  "atom_id_2": {
+                     "bsonType": "string"
+                  }
+               }
+            }
+         ], 
+         "bsonType": "array", 
+         "uniqueItems": true, 
+         "minItems": 0
+      }, 
+      "chem_comp_atom": {
+         "items": [
+            {
+               "required": [
+                  "atom_id", 
+                  "comp_id", 
+                  "type_symbol"
+               ], 
+               "bsonType": "object", 
+               "properties": {
+                  "alt_atom_id": {
+                     "bsonType": "string"
+                  }, 
+                  "type_symbol": {
+                     "bsonType": "string"
+                  }, 
+                  "atom_id": {
+                     "bsonType": "string"
+                  }, 
+                  "pdbx_align": {
+                     "bsonType": "int"
+                  }, 
+                  "pdbx_model_Cartn_x_ideal": {
+                     "bsonType": "double"
+                  }, 
+                  "model_Cartn_z": {
+                     "bsonType": "double"
+                  }, 
+                  "model_Cartn_y": {
+                     "bsonType": "double"
+                  }, 
+                  "model_Cartn_x": {
+                     "bsonType": "double"
+                  }, 
+                  "charge": {
+                     "bsonType": "int", 
+                     "minimum": -8, 
+                     "maximum": 8
+                  }, 
+                  "comp_id": {
+                     "bsonType": "string"
+                  }, 
+                  "pdbx_component_atom_id": {
+                     "bsonType": "string"
+                  }, 
+                  "pdbx_polymer_type": {
+                     "enum": [
+                        "non-polymer", 
+                        "polymer"
+                     ], 
+                     "bsonType": "string"
+                  }, 
+                  "pdbx_residue_numbering": {
+                     "bsonType": "int"
+                  }, 
+                  "pdbx_component_id": {
+                     "bsonType": "int"
+                  }, 
+                  "pdbx_model_Cartn_z_ideal": {
+                     "bsonType": "double"
+                  }, 
+                  "pdbx_model_Cartn_y_ideal": {
+                     "bsonType": "double"
+                  }, 
+                  "pdbx_aromatic_flag": {
+                     "enum": [
+                        "Y", 
+                        "N"
+                     ], 
+                     "bsonType": "string"
+                  }, 
+                  "pdbx_stereo_config": {
+                     "enum": [
+                        "R", 
+                        "S", 
+                        "N"
+                     ], 
+                     "bsonType": "string"
+                  }, 
+                  "pdbx_ordinal": {
+                     "bsonType": "int"
+                  }, 
+                  "pdbx_component_comp_id": {
+                     "bsonType": "string"
+                  }, 
+                  "pdbx_leaving_atom_flag": {
+                     "enum": [
+                        "Y", 
+                        "N"
+                     ], 
+                     "bsonType": "string"
+                  }
+               }
+            }
+         ], 
+         "bsonType": "array", 
+         "uniqueItems": true, 
+         "minItems": 0
+      }, 
+      "pdbx_chem_comp_descriptor": {
+         "items": [
+            {
+               "required": [
+                  "comp_id", 
+                  "descriptor", 
+                  "program", 
+                  "program_version", 
+                  "type"
+               ], 
+               "bsonType": "object", 
+               "properties": {
+                  "program": {
+                     "bsonType": "string"
+                  }, 
+                  "program_version": {
+                     "bsonType": "string"
+                  }, 
+                  "comp_id": {
+                     "bsonType": "string"
+                  }, 
+                  "descriptor": {
+                     "bsonType": "string"
+                  }, 
+                  "type": {
+                     "enum": [
+                        "InChI_MAIN_CONNECT", 
+                        "InChI_MAIN_HATOM", 
+                        "InChI_ISOTOPE", 
+                        "InChI_MAIN_FORMULA", 
+                        "InChI_RECONNECT", 
+                        "InChI_FIXEDH", 
+                        "InChI", 
+                        "InChIKey", 
+                        "InChI_CHARGE", 
+                        "SMILES_CANNONICAL", 
+                        "InChI_STEREO", 
+                        "SMILES", 
+                        "InChI_MAIN", 
+                        "SMILES_CANONICAL"
+                     ], 
+                     "bsonType": "string"
+                  }
+               }
+            }
+         ], 
+         "bsonType": "array", 
+         "uniqueItems": true, 
+         "minItems": 0
+      }, 
+      "pdbx_chem_comp_identifier": {
+         "items": [
+            {
+               "required": [
+                  "comp_id", 
+                  "identifier", 
+                  "program", 
+                  "program_version", 
+                  "type"
+               ], 
+               "bsonType": "object", 
+               "properties": {
+                  "identifier": {
+                     "bsonType": "string"
+                  }, 
+                  "program": {
+                     "bsonType": "string"
+                  }, 
+                  "program_version": {
+                     "bsonType": "string"
+                  }, 
+                  "comp_id": {
+                     "bsonType": "string"
+                  }, 
+                  "type": {
+                     "enum": [
+                        "MDL Identifier", 
+                        "IUPAC CARB NAME", 
+                        "CAS REGISTRY NUMBER", 
+                        "SYSTEMATIC NAME", 
+                        "COMMON NAME", 
+                        "CONDENSED IUPAC CARB NAME", 
+                        "SYNONYM", 
+                        "PUBCHEM Identifier"
+                     ], 
+                     "bsonType": "string"
+                  }
+               }
+            }
+         ], 
+         "bsonType": "array", 
+         "uniqueItems": true, 
+         "minItems": 0
+      }, 
+      "chem_comp": {
+         "required": [
+            "id", 
+            "type"
+         ], 
+         "bsonType": "object", 
+         "properties": {
+            "formula_weight": {
+               "bsonType": "double", 
+               "minimum": 1.0
+            }, 
+            "pdbx_processing_site": {
+               "enum": [
+                  "EBI", 
+                  "PDBJ", 
+                  "PDBE", 
+                  "RCSB"
+               ], 
+               "bsonType": "string"
+            }, 
+            "pdbx_synonyms": {
+               "bsonType": "string"
+            }, 
+            "id": {
+               "bsonType": "string"
+            }, 
+            "pdbx_initial_date": {
+               "bsonType": "date"
+            }, 
+            "formula": {
+               "bsonType": "string"
+            }, 
+            "pdbx_modified_date": {
+               "bsonType": "date"
+            }, 
+            "pdbx_ambiguous_flag": {
+               "bsonType": "string"
+            }, 
+            "pdbx_replaced_by": {
+               "bsonType": "string"
+            }, 
+            "three_letter_code": {
+               "bsonType": "string"
+            }, 
+            "pdbx_ideal_coordinates_details": {
+               "bsonType": "string"
+            }, 
+            "pdbx_model_coordinates_details": {
+               "bsonType": "string"
+            }, 
+            "pdbx_model_coordinates_db_code": {
+               "bsonType": "string"
+            }, 
+            "pdbx_formal_charge": {
+               "bsonType": "int"
+            }, 
+            "name": {
+               "bsonType": "string"
+            }, 
+            "type": {
+               "enum": [
+                  "D-peptide NH3 amino terminus", 
+                  "D-saccharide", 
+                  "saccharide", 
+                  "RNA linking", 
+                  "L-DNA linking", 
+                  "L-RNA linking", 
+                  "DNA linking", 
+                  "D-beta-peptide, C-gamma linking", 
+                  "peptide-like", 
+                  "L-peptide linking", 
+                  "non-polymer", 
+                  "DNA OH 5 prime terminus", 
+                  "D-peptide COOH carboxy terminus", 
+                  "L-peptide NH3 amino terminus", 
+                  "L-gamma-peptide, C-delta linking", 
+                  "D-saccharide 1,4 and 1,4 linking", 
+                  "L-saccharide 1,4 and 1,6 linking", 
+                  "D-saccharide 1,4 and 1,6 linking", 
+                  "DNA OH 3 prime terminus", 
+                  "peptide linking", 
+                  "L-saccharide 1,4 and 1,4 linking", 
+                  "RNA OH 5 prime terminus", 
+                  "L-peptide COOH carboxy terminus", 
+                  "other", 
+                  "D-peptide linking", 
+                  "L-beta-peptide, C-gamma linking", 
+                  "D-gamma-peptide, C-delta linking", 
+                  "RNA OH 3 prime terminus", 
+                  "L-saccharide"
+               ], 
+               "bsonType": "string"
+            }, 
+            "pdbx_type": {
+               "bsonType": "string"
+            }, 
+            "pdbx_subcomponent_list": {
+               "bsonType": "string"
+            }, 
+            "mon_nstd_parent_comp_id": {
+               "items": {
+                  "bsonType": "string"
+               }, 
+               "bsonType": "array", 
+               "uniqueItems": true
+            }, 
+            "pdbx_release_status": {
+               "enum": [
+                  "REL", 
+                  "OBS", 
+                  "REF_ONLY", 
+                  "HPUB", 
+                  "HOLD", 
+                  "DEL"
+               ], 
+               "bsonType": "string"
+            }, 
+            "pdbx_model_coordinates_missing_flag": {
+               "enum": [
+                  "Y", 
+                  "N"
+               ], 
+               "bsonType": "string"
+            }, 
+            "one_letter_code": {
+               "bsonType": "string"
+            }, 
+            "pdbx_ideal_coordinates_missing_flag": {
+               "enum": [
+                  "Y", 
+                  "N"
+               ], 
+               "bsonType": "string"
+            }, 
+            "pdbx_replaces": {
+               "bsonType": "string"
+            }
+         }
+      }
+   }
+}

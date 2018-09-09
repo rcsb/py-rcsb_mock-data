@@ -8,6 +8,7 @@
 #     6-Jul-2018 jdw Name standardization, add category RCSB_INSTANCE_SEQUENCE_CLUSTER_LIST
 #    10-Jul-2018 jdw Add categories RCSB_REPOSITORY_HOLDINGS and RCSB_REPOSITORY_UPDATE
 #    10-Aug-2018 jdw Change methods to implement as calculate_with_helper
+#     5-Sep-2018 jdw Add preliminary identifier categories with category methods.
 #
 ###########################################################################
 
@@ -110,11 +111,15 @@ sys.stdout.write("Category %s\n" % self.getName())
 sys.stdout.write("Number of rows %d \n" % len(self.getRowList()))
 ;
 
-this_block      calculate_with_helper python  'DictMethodHelper.setDatablockId'
-timestamp       calculate_with_helper python  'DictMethodHelper.setLoadDateTime'
-file_container  calculate_with_helper python  'DictMethodHelper.setLocator'
-row_index       calculate_with_helper python  'DictMethodHelper.setRowIndex'
-
+rcsb_this_block                      calculate_with_helper python  'DictMethodHelper.setDatablockId'
+rcsb_timestamp                       calculate_with_helper python  'DictMethodHelper.setLoadDateTime'
+rcsb_file_container                  calculate_with_helper python  'DictMethodHelper.setLocator'
+rcsb_row_index                       calculate_with_helper python  'DictMethodHelper.setRowIndex'
+rcsb_entry_container_identifiers     calculate_with_helper python  'DictMethodHelper.buildContainerEntryIds'
+rcsb_entity_container_identifiers    calculate_with_helper python  'DictMethodHelper.buildContainerEntityIds'
+rcsb_assembly_container_identifiers  calculate_with_helper python  'DictMethodHelper.buildContainerAssemblyIds'
+rcsb_add_deposited_assembly          calculate_with_helper python  'DictMethodHelper.addDepositedAssembly'
+rcsb_filter_assembly_details         calculate_with_helper python  'DictMethodHelper.filterAssemblyDetails'
 
 ##
 ##  Extension definitions start here -
@@ -161,7 +166,7 @@ save__rcsb_load_status.datablock_name
     _item.category_id             rcsb_load_status
     _item.mandatory_code          yes
     _item_type.code               code
-    _item_methods.method_id     'this_block'
+    _item_methods.method_id     'rcsb_this_block'
      save_
 
 save__rcsb_load_status.load_date
@@ -172,7 +177,7 @@ save__rcsb_load_status.load_date
     _item.category_id             rcsb_load_status
     _item.mandatory_code          yes
     _item_type.code               yyyy-mm-dd:hh:mm-flex
-    _item_methods.method_id     'timestamp'
+    _item_methods.method_id     'rcsb_timestamp'
      save_
 
 save__rcsb_load_status.locator
@@ -183,12 +188,22 @@ save__rcsb_load_status.locator
     _item.category_id             rcsb_load_status
     _item.mandatory_code          yes
     _item_type.code               text
-    _item_methods.method_id     'file_container'
+    _item_methods.method_id     'rcsb_file_container'
      save_
 
 ##############################
-## PDBX_STRUCT_ASSEMBLY_GEN ##
+## PDBX_STRUCT_ASSEMBLY_*   ##
 ##############################
+
+save_pdbx_struct_assembly
+    _category.description
+;              Data items in the PDBX_STRUCT_ASSEMBLY category record details about
+               the structural elements that form macromolecular assemblies.
+;
+    _category.id                  pdbx_struct_assembly
+    _category.mandatory_code      no
+    _category_methods.method_id   'rcsb_add_deposited_assembly'
+     save_
 
 save__pdbx_struct_assembly_gen.ordinal
     _item_description.description
@@ -199,9 +214,40 @@ save__pdbx_struct_assembly_gen.ordinal
     _item.category_id             pdbx_struct_assembly_gen
     _item.mandatory_code          yes
     _item_type.code               int
-    _item_methods.method_id     'row_index'
+    _item_methods.method_id     'rcsb_row_index'
     _pdbx_item_context.type       RCSB_CATEGORY_KEY_SUBSTITION
     _pdbx_item_context.item_name  '_pdbx_struct_assembly_gen.ordinal'
+     save_
+
+save__pdbx_struct_assembly_prop.biol_id
+    _item_description.description
+;             The identifier for the assembly used in category PDBX_STRUCT_ASSEMBLY.
+;
+    _item.name                   '_pdbx_struct_assembly_prop.biol_id'
+    _item.category_id            'pdbx_struct_assembly_prop'
+    _item.mandatory_code          yes
+    _item_type.code               code
+    # Add proper parent
+    _item_linked.child_name       '_pdbx_struct_assembly_prop.biol_id'
+    _item_linked.parent_name      '_pdbx_struct_assembly.id'
+save_
+
+save__pdbx_struct_assembly.rcsb_details
+    _item_description.description
+;              A filtered description of the macromolecular assembly.
+;
+    _item.name                  '_pdbx_struct_assembly.rcsb_details'
+    _item.category_id             'pdbx_struct_assembly'
+    _item.mandatory_code          no
+    _item_type.code               line
+    _item_examples.case          'author_and_software_defined_assembly'
+    loop_
+    _item_enumeration.value
+        'author_and_software_defined_assembly'
+        'author_defined_assembly'
+        'software_defined_assembly'
+     _item_methods.method_id     'rcsb_filter_assembly_details'
+     #
      save_
 
 
@@ -514,4 +560,222 @@ save__rcsb_data_exchange_status.update_end_timestamp
     _item.mandatory_code          no
     _item_type.code               'yyyy-mm-dd:hh:mm:ss-iso'
     _item_example.case            '2018-07-11 11:51:37.958508+00:00'
+     save_
+
+##
+##
+##
+
+save_rcsb_entry_container_identifiers
+    _category.description
+;        The rcsb_entry_container_identifiers records identifiers relevant to the
+         container of entry information.
+;
+    _category.id                  rcsb_entry_container_identifiers
+    _category.mandatory_code      no
+    _category_key.name          '_rcsb_entry_container_identifiers.entry_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     loop_
+    _rcsb_entry_container_identifiers.entry_id
+    _rcsb_entry_container_identifiers.entity_ids
+    _rcsb_entry_container_identifiers.entity_ids_polymer
+    _rcsb_entry_container_identifiers.entity_ids_non-polymer
+    _rcsb_entry_container_identifiers.assembly_ids
+    1abc '1,2,3'   '1,2' '3'   '1,2'
+    2abc '1,2,3,4' '1,2' '3,4' '1,2,3,4'
+
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_entry_container_identifiers
+   _category_methods.method_id         'rcsb_entry_container_identifiers'
+     save_
+
+save__rcsb_entry_container_identifiers.entry_id
+    _item_description.description
+;    Entry identifier for the container.
+;
+    _item.name                  '_rcsb_entry_container_identifiers.entry_id'
+    _item.category_id             rcsb_entry_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_entry_container_identifiers.entry_id'
+    _item_linked.parent_name      '_entry.id'
+     save_
+
+save__rcsb_entry_container_identifiers.entity_ids
+    _item_description.description
+;    List of identifiers or the entity constituents for the entry.
+;
+    _item.name                  '_rcsb_entry_container_identifiers.entity_ids'
+    _item.category_id             rcsb_entry_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               ucode-alphanum-csv
+     save_
+
+save__rcsb_entry_container_identifiers.polymer_entity_ids
+    _item_description.description
+;    List of identifiers for the polymer entity constituents for the entry.
+;
+    _item.name                  '_rcsb_entry_container_identifiers.polymer_entity_ids'
+    _item.category_id             rcsb_entry_container_identifiers
+    _item.mandatory_code          no
+    _item_type.code               ucode-alphanum-csv
+     save_
+
+save__rcsb_entry_container_identifiers.non-polymer_entity_ids
+    _item_description.description
+;    List of identifiers for the non-polymer entity constituents for the entry.
+;
+    _item.name                  '_rcsb_entry_container_identifiers.polymer_entity_ids'
+    _item.category_id             rcsb_entry_container_identifiers
+    _item.mandatory_code          no
+    _item_type.code               ucode-alphanum-csv
+     save_
+
+save__rcsb_entry_container_identifiers.assembly_ids
+    _item_description.description
+;    List of identifiers for assemblies generated from the entry.
+;
+    _item.name                  '_rcsb_entry_container_identifiers.assembly_ids'
+    _item.category_id             rcsb_entry_container_identifiers
+    _item.mandatory_code          no
+    _item_type.code               ucode-alphanum-csv
+     save_
+
+##
+##
+##
+
+save_rcsb_entity_container_identifiers
+    _category.description
+;        The rcsb_entity_container_identifiers records identifiers relevant to the
+         container of entity information.
+;
+    _category.id                  rcsb_entity_container_identifiers
+    _category.mandatory_code      no
+    loop_
+    _category_key.name          '_rcsb_entity_container_identifiers.entry_id'
+                                '_rcsb_entity_container_identifiers.entity_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     loop_
+    _rcsb_entity_container_identifiers.entry_id
+    _rcsb_entity_container_identifiers.entity_id
+    1abc  1
+    1abc  2
+    1abc  3
+
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_entity_container_identifiers
+   _category_methods.method_id         'rcsb_entity_container_identifiers'
+     save_
+
+save__rcsb_entity_container_identifiers.entry_id
+    _item_description.description
+;    Entry identifier for the container.
+;
+    _item.name                  '_rcsb_entity_container_identifiers.entry_id'
+    _item.category_id             rcsb_entity_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_entity_container_identifiers.entry_id'
+    _item_linked.parent_name      '_entry.id'
+
+     save_
+
+save__rcsb_entity_container_identifiers.entity_id
+    _item_description.description
+;    Entiy identifier for the container.
+;
+    _item.name                  '_rcsb_entity_container_identifiers.entity_id'
+    _item.category_id             rcsb_entity_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_entity_container_identifiers.entity_id'
+    _item_linked.parent_name      '_entity.id'
+     save_
+
+save_rcsb_assembly_container_identifiers
+    _category.description
+;        The rcsb_assembly_container_identifiers records identifiers relevant to the
+         container of assembly information.
+;
+    _category.id                  rcsb_assembly_container_identifiers
+    _category.mandatory_code      no
+    loop_
+    _category_key.name          '_rcsb_assembly_container_identifiers.entry_id'
+                                '_rcsb_assembly_container_identifiers.assembly_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     loop_
+    _rcsb_assembly_container_identifiers.entry_id
+    _rcsb_assembly_container_identifiers.assembly_id
+    1abc  1
+    1abc  2
+    1abc  3
+
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_assembly_container_identifiers
+   _category_methods.method_id         'rcsb_assembly_container_identifiers'
+     save_
+
+save__rcsb_assembly_container_identifiers.entry_id
+    _item_description.description
+;    Entry identifier for the container.
+;
+    _item.name                  '_rcsb_assembly_container_identifiers.entry_id'
+    _item.category_id             rcsb_assembly_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_assembly_container_identifiers.entry_id'
+    _item_linked.parent_name      '_entry.id'
+
+     save_
+
+save__rcsb_assembly_container_identifiers.assembly_id
+    _item_description.description
+;    Entiy identifier for the container.
+;
+    _item.name                  '_rcsb_assembly_container_identifiers.assembly_id'
+    _item.category_id             rcsb_assembly_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_assembly_container_identifiers.assembly_id'
+    _item_linked.parent_name      '_pdbx_struct_assembly.id'
      save_

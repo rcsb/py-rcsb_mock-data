@@ -1,0 +1,760 @@
+{
+   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/", 
+   "$schema": "http://json-schema.org/draft-04/schema#", 
+   "title": "Schema for content type bird collection bird_v5_0_2", 
+   "properties": {
+      "rcsb_load_status": {
+         "required": [
+            "datablock_name", 
+            "load_date", 
+            "locator"
+         ], 
+         "properties": {
+            "locator": {
+               "description": "Locator of file containing loaded data", 
+               "type": "string"
+            }, 
+            "datablock_name": {
+               "description": "Source data block containing the loaded data set", 
+               "type": "string"
+            }, 
+            "load_date": {
+               "description": "Time stamp of data load", 
+               "type": "string"
+            }
+         }, 
+         "type": "object"
+      }, 
+      "pdbx_reference_entity_poly": {
+         "items": [
+            {
+               "required": [
+                  "prd_id", 
+                  "ref_entity_id"
+               ], 
+               "properties": {
+                  "db_name": {
+                     "description": "The database name for this source information", 
+                     "type": "string"
+                  }, 
+                  "prd_id": {
+                     "description": "              The value of _pdbx_reference_entity_poly.prd_id is a reference\n\t       _pdbx_reference_entity_list.prd_id in the  PDBX_REFERENCE_ENTITY_LIST category.", 
+                     "type": "string"
+                  }, 
+                  "db_code": {
+                     "description": "The database code for this source information", 
+                     "type": "string"
+                  }, 
+                  "ref_entity_id": {
+                     "description": "The value of _pdbx_reference_entity_poly.ref_entity_id is a reference\n to _pdbx_reference_entity_list.ref_entity_id in PDBX_REFERENCE_ENTITY_LIST category.", 
+                     "type": "string"
+                  }, 
+                  "type": {
+                     "enum": [
+                        "nucleic-acid-like", 
+                        "peptide-like", 
+                        "polysaccharide-like"
+                     ], 
+                     "examples": [
+                        "peptide-like"
+                     ], 
+                     "description": "The type of the polymer.", 
+                     "type": "string"
+                  }
+               }, 
+               "type": "object"
+            }
+         ], 
+         "type": "array", 
+         "uniqueItems": true, 
+         "minItems": 0
+      }, 
+      "pdbx_reference_entity_sequence": {
+         "items": [
+            {
+               "required": [
+                  "NRP_flag", 
+                  "one_letter_codes", 
+                  "prd_id", 
+                  "ref_entity_id", 
+                  "type"
+               ], 
+               "properties": {
+                  "NRP_flag": {
+                     "enum": [
+                        "Y", 
+                        "N"
+                     ], 
+                     "examples": [
+                        "Y"
+                     ], 
+                     "description": "A flag to indicate a non-ribosomal entity.", 
+                     "type": "string"
+                  }, 
+                  "one_letter_codes": {
+                     "description": "The one-letter-code sequence for this entity.  Non-standard monomers are represented as 'X'.", 
+                     "type": "string"
+                  }, 
+                  "prd_id": {
+                     "description": "              The value of _pdbx_reference_entity_sequence.prd_id is a reference\n\t       _pdbx_reference_entity_list.prd_id in the  PDBX_REFERENCE_ENTITY_LIST category.", 
+                     "type": "string"
+                  }, 
+                  "ref_entity_id": {
+                     "description": "The value of _pdbx_reference_entity_sequence.ref_entity_id is a reference\n to _pdbx_reference_entity_list.ref_entity_id in PDBX_REFERENCE_ENTITY_LIST category.", 
+                     "type": "string"
+                  }, 
+                  "type": {
+                     "examples": [
+                        "amino acid", 
+                        "nucleic acid"
+                     ], 
+                     "description": "The monomer type for the sequence.", 
+                     "type": "string"
+                  }
+               }, 
+               "type": "object"
+            }
+         ], 
+         "type": "array", 
+         "uniqueItems": true, 
+         "minItems": 0
+      }, 
+      "pdbx_reference_entity_poly_link": {
+         "items": [
+            {
+               "required": [
+                  "atom_id_1", 
+                  "atom_id_2", 
+                  "comp_id_1", 
+                  "comp_id_2", 
+                  "component_id", 
+                  "link_id", 
+                  "prd_id", 
+                  "ref_entity_id"
+               ], 
+               "properties": {
+                  "component_id": {
+                     "description": "The entity component identifier entity containing the linkage. \n", 
+                     "type": "integer"
+                  }, 
+                  "link_id": {
+                     "description": "The value of _pdbx_reference_entity_poly_link.link_id uniquely identifies\n a linkage within a polymer entity.", 
+                     "type": "integer"
+                  }, 
+                  "atom_id_1": {
+                     "description": "The atom identifier/name in the first of the two components making\n the linkage.\n", 
+                     "type": "string"
+                  }, 
+                  "prd_id": {
+                     "description": "The value of _pdbx_reference_entity_poly_link.prd_id is a reference\n _pdbx_reference_entity_list.prd_id in the PDBX_REFERENCE_ENTITY_POLY category.", 
+                     "type": "string"
+                  }, 
+                  "entity_seq_num_2": {
+                     "description": "For a polymer entity, the sequence number in the second of \n the two components making the linkage. \n\n This data item is a pointer to _pdbx_reference_entity_poly_seq.num \n in the PDBX_REFERENCE_ENTITY_POLY_SEQ category.\n", 
+                     "type": "integer"
+                  }, 
+                  "entity_seq_num_1": {
+                     "description": "For a polymer entity, the sequence number in the first of \n the two components making the linkage. \n\n This data item is a pointer to _pdbx_reference_entity_poly_seq.num \n in the PDBX_REFERENCE_ENTITY_POLY_SEQ category.\n", 
+                     "type": "integer"
+                  }, 
+                  "value_order": {
+                     "enum": [
+                        "arom", 
+                        "doub", 
+                        "pi", 
+                        "trip", 
+                        "poly", 
+                        "delo", 
+                        "sing", 
+                        "quad"
+                     ], 
+                     "description": "The bond order target for the non-standard linkage.", 
+                     "type": "string"
+                  }, 
+                  "comp_id_2": {
+                     "description": "The component identifier in the second of the two components making the \n linkage.\n\n This data item is a pointer to _pdbx_reference_entity_poly_seq.mon_id \n in the PDBX_REFERENCE_ENTITY_POLY_SEQ category.", 
+                     "type": "string"
+                  }, 
+                  "ref_entity_id": {
+                     "description": "The reference entity id of the polymer entity containing the linkage.\n\n This data item is a pointer to _pdbx_reference_entity_poly.ref_entity_id \n in the PDBX_REFERENCE_ENTITY_POLY category.", 
+                     "type": "string"
+                  }, 
+                  "atom_id_2": {
+                     "description": "The atom identifier/name in the second of the two components making\n the linkage.", 
+                     "type": "string"
+                  }, 
+                  "comp_id_1": {
+                     "description": "The component identifier in the first of the two components making the \n linkage.\n\n This data item is a pointer to _pdbx_reference_entity_poly_seq.mon_id \n in the PDBX_REFERENCE_ENTITY_POLY_SEQ category.", 
+                     "type": "string"
+                  }
+               }, 
+               "type": "object"
+            }
+         ], 
+         "type": "array", 
+         "uniqueItems": true, 
+         "minItems": 0
+      }, 
+      "pdbx_reference_entity_subcomponents": {
+         "items": [
+            {
+               "required": [
+                  "prd_id", 
+                  "seq"
+               ], 
+               "properties": {
+                  "prd_id": {
+                     "description": "              The value of _pdbx_reference_entity_subcomponents.prd_id is a reference\n\t       _pdbx_reference_molecule.prd_id in the  PDBX_REFERENCE_MOLECULE category.", 
+                     "type": "string"
+                  }, 
+                  "chem_comp_id": {
+                     "examples": [
+                        "0Z3", 
+                        "CD9"
+                     ], 
+                     "description": "For entities represented as single molecules, the identifier\n corresponding to the chemical definition for the molecule.", 
+                     "type": "string"
+                  }, 
+                  "seq": {
+                     "examples": [
+                        "ACE DLY GLY DAL DCY DAS DTY DPR DGL DTR DGN DTR DLE DCY DAL DAL NH2"
+                     ], 
+                     "description": "The subcomponent sequence for the entity.", 
+                     "type": "string"
+                  }
+               }, 
+               "type": "object"
+            }
+         ], 
+         "type": "array", 
+         "uniqueItems": true, 
+         "minItems": 0
+      }, 
+      "pdbx_reference_entity_list": {
+         "items": [
+            {
+               "required": [
+                  "component_id", 
+                  "prd_id", 
+                  "ref_entity_id"
+               ], 
+               "properties": {
+                  "component_id": {
+                     "description": "The component number of this entity within the molecule.", 
+                     "type": "integer"
+                  }, 
+                  "prd_id": {
+                     "description": "The value of _pdbx_reference_entity_list.prd_id is a reference\n _pdbx_reference_molecule.prd_id in the PDBX_REFERENCE_MOLECULE category.", 
+                     "type": "string"
+                  }, 
+                  "details": {
+                     "description": "Additional details about this entity.", 
+                     "type": "string"
+                  }, 
+                  "ref_entity_id": {
+                     "description": "The value of _pdbx_reference_entity_list.ref_entity_id is a unique identifier \n the a constituent entity within this reference molecule.", 
+                     "type": "string"
+                  }, 
+                  "type": {
+                     "examples": [
+                        "polymer", 
+                        "non-polymer", 
+                        "polymer-like"
+                     ], 
+                     "description": "Defines the polymer characteristic of the entity.", 
+                     "type": "string"
+                  }
+               }, 
+               "type": "object"
+            }
+         ], 
+         "type": "array", 
+         "uniqueItems": true, 
+         "minItems": 0
+      }, 
+      "pdbx_prd_audit": {
+         "items": [
+            {
+               "required": [
+                  "action_type", 
+                  "date", 
+                  "prd_id"
+               ], 
+               "properties": {
+                  "date": {
+                     "description": "The date associated with this audit record.", 
+                     "type": "string"
+                  }, 
+                  "details": {
+                     "examples": [
+                        "Revise molecule sequence."
+                     ], 
+                     "description": "Additional details decribing this change.", 
+                     "type": "string"
+                  }, 
+                  "prd_id": {
+                     "description": "              This data item is a pointer to _pdbx_reference_molecule.prd_id in the \n\t       pdbx_reference_molecule category.", 
+                     "type": "string"
+                  }, 
+                  "processing_site": {
+                     "examples": [
+                        "RCSB", 
+                        "PDBE", 
+                        "PDBJ", 
+                        "BMRB"
+                     ], 
+                     "description": "An identifier for the wwPDB site creating or modifying the molecule.", 
+                     "type": "string"
+                  }, 
+                  "annotator": {
+                     "examples": [
+                        "JO", 
+                        "SJ", 
+                        "KB"
+                     ], 
+                     "description": "The initials of the annotator creating of modifying the molecule.", 
+                     "type": "string"
+                  }, 
+                  "action_type": {
+                     "enum": [
+                        "Modify audit", 
+                        "Modify linkage", 
+                        "Other modification", 
+                        "Modify type", 
+                        "Modify class", 
+                        "Modify sequence", 
+                        "Initial release", 
+                        "Create molecule", 
+                        "Modify molecule name", 
+                        "Obsolete molecule", 
+                        "Modify representation", 
+                        "Modify taxonomy organism"
+                     ], 
+                     "description": "The action associated with this audit record.", 
+                     "type": "string"
+                  }
+               }, 
+               "type": "object"
+            }
+         ], 
+         "type": "array", 
+         "uniqueItems": true, 
+         "minItems": 0
+      }, 
+      "pdbx_reference_molecule": {
+         "required": [
+            "prd_id"
+         ], 
+         "properties": {
+            "class": {
+               "enum": [
+                  "Growth factor", 
+                  "Antagonist", 
+                  "Thrombin inhibitor", 
+                  "Lantibiotic", 
+                  "Antimicrobial, Antiretroviral", 
+                  "Antimicrobial, Antitumor", 
+                  "Antineoplastic", 
+                  "Anticoagulant", 
+                  "Antiparasitic", 
+                  "Antimicrobial", 
+                  "Antibiotic", 
+                  "Antiinflammatory", 
+                  "Trypsin inhibitor", 
+                  "Chaperone binding", 
+                  "CASPASE inhibitor", 
+                  "Anthelmintic", 
+                  "Antithrombotic", 
+                  "Immunosuppressant", 
+                  "Inhibitor", 
+                  "Antiviral", 
+                  "Thrombin inhibitor, Trypsin inhibitor", 
+                  "Receptor", 
+                  "Antibiotic, Antineoplastic", 
+                  "Antitumor", 
+                  "Antibiotic, Antimicrobial", 
+                  "Anticoagulant, Antithrombotic", 
+                  "Metal transport", 
+                  "Unknown", 
+                  "Antiretroviral", 
+                  "Antifungal", 
+                  "Enzyme inhibitor", 
+                  "Oxidation-reduction", 
+                  "Toxin", 
+                  "Antimicrobial, Antiparasitic, Antibiotic", 
+                  "Anticancer", 
+                  "Metabolism", 
+                  "Antibiotic, Anthelmintic"
+               ], 
+               "description": "Broadly defines the function of the entity.", 
+               "type": "string"
+            }, 
+            "formula_weight": {
+               "minimum": 1.0, 
+               "description": "Formula mass in daltons of the entity.", 
+               "type": "number"
+            }, 
+            "replaced_by": {
+               "description": "Assigns the identifier of the reference molecule that has replaced this molecule.", 
+               "type": "string"
+            }, 
+            "description": {
+               "description": "Description of this molecule.", 
+               "type": "string"
+            }, 
+            "chem_comp_id": {
+               "examples": [
+                  "0Z3", 
+                  "CD9"
+               ], 
+               "description": "For entities represented as single molecules, the identifier\n corresponding to the chemical definition for the molecule.", 
+               "type": "string"
+            }, 
+            "release_status": {
+               "enum": [
+                  "HOLD", 
+                  "OBS", 
+                  "WAIT", 
+                  "REL"
+               ], 
+               "description": "Defines the current PDB release status for this molecule definition.", 
+               "type": "string"
+            }, 
+            "represent_as": {
+               "enum": [
+                  "polymer", 
+                  "single molecule"
+               ], 
+               "description": "Defines how this entity is represented in PDB data files.", 
+               "type": "string"
+            }, 
+            "formula": {
+               "examples": [
+                  "C18 H19 N7 O8 S"
+               ], 
+               "description": "The formula for the reference entity. Formulae are written\n according to the rules:\n\n 1. Only recognised element symbols may be used.\n\n 2. Each element symbol is followed by a 'count' number. A count\n    of '1' may be omitted.\n\n 3. A space or parenthesis must separate each element symbol and\n    its count, but in general parentheses are not used.\n\n 4. The order of elements depends on whether or not carbon is\n    present. If carbon is present, the order should be: C, then\n    H, then the other elements in alphabetical order of their\n    symbol. If carbon is not present, the elements are listed\n    purely in alphabetic order of their symbol. This is the\n    'Hill' system used by Chemical Abstracts.", 
+               "type": "string"
+            }, 
+            "type": {
+               "enum": [
+                  "Quinolone", 
+                  "Oligosaccharide", 
+                  "Imino sugar", 
+                  "Anthraquinone", 
+                  "Peptide-like", 
+                  "Polypeptide", 
+                  "Chalkophore, Polypeptide", 
+                  "Heterocyclic", 
+                  "Non-polymer", 
+                  "Amino acid", 
+                  "Polycyclic", 
+                  "Chromophore", 
+                  "Thiolactone", 
+                  "Cyclic lipopeptide", 
+                  "Siderophore", 
+                  "Lipoglycopeptide", 
+                  "Keto acid", 
+                  "Oligopeptide", 
+                  "Cyclic peptide", 
+                  "Macrolide", 
+                  "Thiopeptide", 
+                  "Peptaibol", 
+                  "Anthracycline", 
+                  "Cyclic depsipeptide", 
+                  "Chalkophore", 
+                  "Unknown", 
+                  "Polysaccharide", 
+                  "Glycopeptide", 
+                  "Aminoglycoside", 
+                  "Ansamycin", 
+                  "Nucleoside", 
+                  "Lipopeptide"
+               ], 
+               "examples": [
+                  "Peptide-like", 
+                  "Macrolide"
+               ], 
+               "description": "Defines the structural classification of the entity.", 
+               "type": "string"
+            }, 
+            "prd_id": {
+               "description": "The value of _pdbx_reference_molecule.prd_id is the unique identifier \n for the reference molecule in this family.  \n\n By convention this ID uniquely identifies the reference molecule in \n in the PDB reference dictionary.  \n\n The ID has the template form PRD_dddddd (e.g. PRD_000001)", 
+               "type": "string"
+            }, 
+            "representative_PDB_id_code": {
+               "description": "The PDB accession code for the entry containing a representative example of this molecule.", 
+               "type": "string"
+            }, 
+            "replaces": {
+               "description": "Assigns the identifier for the reference molecule which have been replaced \n by this reference molecule.\n Multiple molecule identifier codes should be separated by commas.", 
+               "type": "string"
+            }, 
+            "name": {
+               "examples": [
+                  "thiostrepton"
+               ], 
+               "description": "A name of the entity.", 
+               "type": "string"
+            }, 
+            "compound_details": {
+               "description": "Special details about this molecule.", 
+               "type": "string"
+            }
+         }, 
+         "type": "object"
+      }, 
+      "pdbx_reference_entity_link": {
+         "items": [
+            {
+               "required": [
+                  "atom_id_1", 
+                  "atom_id_2", 
+                  "comp_id_1", 
+                  "comp_id_2", 
+                  "component_1", 
+                  "component_2", 
+                  "link_id", 
+                  "prd_id", 
+                  "ref_entity_id_1", 
+                  "ref_entity_id_2"
+               ], 
+               "properties": {
+                  "component_2": {
+                     "description": "The entity component identifier for the second of two entities containing the linkage. \n", 
+                     "type": "integer"
+                  }, 
+                  "comp_id_2": {
+                     "description": "The component identifier in the second of the two entities containing the linkage. \n\n For polymer entities, this data item is a pointer to _pdbx_reference_entity_poly_seq.mon_id \n in the PDBX_REFERENCE_ENTITY_POLY_SEQ category.\n\n For non-polymer entities, this data item is a pointer to \n _pdbx_reference_entity_nonpoly.chem_comp_id in the \n PDBX_REFERENCE_ENTITY_NONPOLY category.\n", 
+                     "type": "string"
+                  }, 
+                  "link_id": {
+                     "description": "The value of _pdbx_reference_entity_link.link_id uniquely identifies\n linkages between entities with a molecule.\n", 
+                     "type": "integer"
+                  }, 
+                  "component_1": {
+                     "description": "The entity component identifier for the first of two entities containing the linkage. \n", 
+                     "type": "integer"
+                  }, 
+                  "link_class": {
+                     "enum": [
+                        "PP", 
+                        "NP", 
+                        "NN", 
+                        "PN"
+                     ], 
+                     "description": "A code indicating the entity types involved in the linkage.", 
+                     "type": "string"
+                  }, 
+                  "prd_id": {
+                     "description": "The value of _pdbx_reference_entity_link.prd_id is a reference\n _pdbx_reference_entity_list.prd_id in the PDBX_REFERENCE_ENTITY_LIST category.", 
+                     "type": "string"
+                  }, 
+                  "value_order": {
+                     "enum": [
+                        "arom", 
+                        "doub", 
+                        "pi", 
+                        "trip", 
+                        "poly", 
+                        "delo", 
+                        "sing", 
+                        "quad"
+                     ], 
+                     "description": "The bond order target for the chemical linkage.", 
+                     "type": "string"
+                  }, 
+                  "entity_seq_num_1": {
+                     "description": "For a polymer entity, the sequence number in the first of \n the two entities containing the linkage. \n\n This data item is a pointer to _pdbx_reference_entity_poly_seq.num \n in the PDBX_REFERENCE_ENTITY_POLY_SEQ category.\n", 
+                     "type": "integer"
+                  }, 
+                  "comp_id_1": {
+                     "description": "The component identifier in the first of the two entities containing the linkage. \n\n For polymer entities, this data item is a pointer to _pdbx_reference_entity_poly_seq.mon_id \n in the PDBX_REFERENCE_ENTITY_POLY_SEQ category.\n\n For non-polymer entities, this data item is a pointer to \n _pdbx_reference_entity_nonpoly.chem_comp_id in the \n PDBX_REFERENCE_ENTITY_NONPOLY category.\n", 
+                     "type": "string"
+                  }, 
+                  "ref_entity_id_2": {
+                     "description": "The reference entity id of the second of the two entities joined by the\n linkage. \n\n This data item is a pointer to _pdbx_reference_entity_list.ref_entity_id \n in the PDBX_REFERENCE_ENTITY_LIST category.", 
+                     "type": "string"
+                  }, 
+                  "atom_id_1": {
+                     "description": "The atom identifier/name in the first of the two entities containing the linkage. \n", 
+                     "type": "string"
+                  }, 
+                  "atom_id_2": {
+                     "description": "The atom identifier/name in the second of the two entities containing the linkage. \n", 
+                     "type": "string"
+                  }, 
+                  "ref_entity_id_1": {
+                     "description": "The reference entity id of the first of the two entities joined by the\n linkage. \n\n This data item is a pointer to _pdbx_reference_entity_list.ref_entity_id \n in the PDBX_REFERENCE_ENTITY_LIST category.", 
+                     "type": "string"
+                  }
+               }, 
+               "type": "object"
+            }
+         ], 
+         "type": "array", 
+         "uniqueItems": true, 
+         "minItems": 0
+      }, 
+      "pdbx_reference_entity_src_nat": {
+         "items": [
+            {
+               "required": [
+                  "ordinal", 
+                  "prd_id", 
+                  "ref_entity_id"
+               ], 
+               "properties": {
+                  "db_name": {
+                     "description": "The database name for this source information", 
+                     "type": "string"
+                  }, 
+                  "taxid": {
+                     "description": "The NCBI TaxId of the organism from which the entity was isolated.", 
+                     "type": "string"
+                  }, 
+                  "ordinal": {
+                     "description": "              The value of _pdbx_reference_entity_src_nat.ordinal distinguishes \n\t       source details for this entity.", 
+                     "type": "integer"
+                  }, 
+                  "source_id": {
+                     "description": "A identifier within the data source for this information.", 
+                     "type": "string"
+                  }, 
+                  "atcc": {
+                     "description": "The Americal Tissue Culture Collection code for organism from which the entity was isolated.", 
+                     "type": "string"
+                  }, 
+                  "prd_id": {
+                     "description": "              The value of _pdbx_reference_entity_src_nat.prd_id is a reference\n\t       _pdbx_reference_entity_list.prd_id in the  PDBX_REFERENCE_ENTITY_LIST category.", 
+                     "type": "string"
+                  }, 
+                  "source": {
+                     "description": "The data source for this information.", 
+                     "type": "string"
+                  }, 
+                  "organism_scientific": {
+                     "examples": [
+                        "Mus musculus"
+                     ], 
+                     "description": "The scientific name of the organism from which the entity was isolated.", 
+                     "type": "string"
+                  }, 
+                  "db_code": {
+                     "description": "The database code for this source information", 
+                     "type": "string"
+                  }, 
+                  "ref_entity_id": {
+                     "description": "The value of _pdbx_reference_entity_src_nat.ref_entity_id is a reference\n to _pdbx_reference_entity_list.ref_entity_id in PDBX_REFERENCE_ENTITY_LIST category.", 
+                     "type": "string"
+                  }
+               }, 
+               "type": "object"
+            }
+         ], 
+         "type": "array", 
+         "uniqueItems": true, 
+         "minItems": 0
+      }, 
+      "pdbx_reference_entity_poly_seq": {
+         "items": [
+            {
+               "required": [
+                  "hetero", 
+                  "mon_id", 
+                  "num", 
+                  "prd_id", 
+                  "ref_entity_id"
+               ], 
+               "properties": {
+                  "mon_id": {
+                     "description": "This data item is the chemical component identifier of monomer.", 
+                     "type": "string"
+                  }, 
+                  "hetero": {
+                     "enum": [
+                        "Y", 
+                        "N"
+                     ], 
+                     "examples": [
+                        "N"
+                     ], 
+                     "description": "A flag to indicate that sequence heterogeneity at this monomer position.", 
+                     "type": "string"
+                  }, 
+                  "parent_mon_id": {
+                     "description": "This data item is the chemical component identifier for the parent component corresponding to this monomer.", 
+                     "type": "string"
+                  }, 
+                  "num": {
+                     "description": "The value of _pdbx_reference_entity_poly_seq.num must uniquely and sequentially\n identify a record in the PDBX_REFERENCE_ENTITY_POLY_SEQ list.\n\n This value is conforms to author numbering conventions and does not map directly\n to the numbering conventions used for _entity_poly_seq.num.", 
+                     "type": "integer"
+                  }, 
+                  "prd_id": {
+                     "description": "              The value of _pdbx_reference_entity_poly_seq.prd_id is a reference\n\t       _pdbx_reference_entity_poly.prd_id in the  PDBX_REFERENCE_ENTITY_POLY category.", 
+                     "type": "string"
+                  }, 
+                  "observed": {
+                     "enum": [
+                        "Y", 
+                        "N"
+                     ], 
+                     "examples": [
+                        "Y"
+                     ], 
+                     "description": "A flag to indicate that this monomer is observed in the instance example.", 
+                     "type": "string"
+                  }, 
+                  "ref_entity_id": {
+                     "description": "The value of _pdbx_reference_entity_poly_seq.ref_entity_id is a reference\n to _pdbx_reference_entity_poly.ref_entity_id in PDBX_REFERENCE_ENTITY_POLY category.", 
+                     "type": "string"
+                  }
+               }, 
+               "type": "object"
+            }
+         ], 
+         "type": "array", 
+         "uniqueItems": true, 
+         "minItems": 0
+      }, 
+      "pdbx_reference_entity_nonpoly": {
+         "items": [
+            {
+               "required": [
+                  "prd_id", 
+                  "ref_entity_id"
+               ], 
+               "properties": {
+                  "prd_id": {
+                     "description": "The value of _pdbx_reference_entity_nonpoly.prd_id is a reference\n _pdbx_reference_entity_list.prd_id in the PDBX_REFERENCE_ENTITY_LIST category.", 
+                     "type": "string"
+                  }, 
+                  "chem_comp_id": {
+                     "examples": [
+                        "0Z3", 
+                        "CD9"
+                     ], 
+                     "description": "For non-polymer entities, the identifier corresponding \n to the chemical definition for the molecule.", 
+                     "type": "string"
+                  }, 
+                  "name": {
+                     "examples": [
+                        "2-CARBOXYQUINOXALINE"
+                     ], 
+                     "description": "A name of the non-polymer entity.", 
+                     "type": "string"
+                  }, 
+                  "ref_entity_id": {
+                     "description": "The value of _pdbx_reference_entity_nonpoly.ref_entity_id is a reference\n to _pdbx_reference_entity_list.ref_entity_id in PDBX_REFERENCE_ENTITY_LIST category.", 
+                     "type": "string"
+                  }
+               }, 
+               "type": "object"
+            }
+         ], 
+         "type": "array", 
+         "uniqueItems": true, 
+         "minItems": 0
+      }
+   }, 
+   "type": "object"
+}
