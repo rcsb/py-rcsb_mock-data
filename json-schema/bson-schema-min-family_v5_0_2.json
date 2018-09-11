@@ -1,32 +1,228 @@
 {
-   "bsonType": "object", 
    "properties": {
-      "rcsb_load_status": {
-         "required": [
-            "datablock_name"
-         ], 
-         "bsonType": "object", 
+      "pdbx_reference_molecule_annotation": {
+         "uniqueItems": true, 
+         "minItems": 0, 
+         "bsonType": "array", 
+         "items": [
+            {
+               "properties": {
+                  "ordinal": {
+                     "bsonType": "int"
+                  }, 
+                  "text": {
+                     "bsonType": "string"
+                  }, 
+                  "prd_id": {
+                     "bsonType": "string"
+                  }, 
+                  "source": {
+                     "bsonType": "string"
+                  }, 
+                  "chem_comp_id": {
+                     "bsonType": "string"
+                  }, 
+                  "family_prd_id": {
+                     "bsonType": "string"
+                  }, 
+                  "type": {
+                     "bsonType": "string"
+                  }
+               }, 
+               "bsonType": "object", 
+               "required": [
+                  "family_prd_id", 
+                  "ordinal"
+               ]
+            }
+         ]
+      }, 
+      "citation_author": {
+         "uniqueItems": true, 
+         "minItems": 0, 
+         "bsonType": "array", 
+         "items": [
+            {
+               "properties": {
+                  "citation_id": {
+                     "bsonType": "string"
+                  }, 
+                  "name": {
+                     "bsonType": "string"
+                  }, 
+                  "ordinal": {
+                     "bsonType": "int"
+                  }
+               }, 
+               "bsonType": "object", 
+               "required": [
+                  "citation_id", 
+                  "name", 
+                  "ordinal"
+               ]
+            }
+         ]
+      }, 
+      "pdbx_reference_molecule_family": {
          "properties": {
-            "locator": {
+            "name": {
                "bsonType": "string"
+            }, 
+            "family_prd_id": {
+               "bsonType": "string"
+            }, 
+            "replaced_by": {
+               "bsonType": "string"
+            }, 
+            "release_status": {
+               "enum": [
+                  "REL", 
+                  "WAIT", 
+                  "HOLD", 
+                  "OBS"
+               ], 
+               "bsonType": "string"
+            }, 
+            "replaces": {
+               "bsonType": "string"
+            }
+         }, 
+         "bsonType": "object", 
+         "required": [
+            "family_prd_id"
+         ]
+      }, 
+      "pdbx_reference_molecule_list": {
+         "uniqueItems": true, 
+         "minItems": 0, 
+         "bsonType": "array", 
+         "items": [
+            {
+               "properties": {
+                  "family_prd_id": {
+                     "bsonType": "string"
+                  }, 
+                  "prd_id": {
+                     "bsonType": "string"
+                  }
+               }, 
+               "bsonType": "object", 
+               "required": [
+                  "family_prd_id", 
+                  "prd_id"
+               ]
+            }
+         ]
+      }, 
+      "rcsb_load_status": {
+         "properties": {
+            "load_date": {
+               "bsonType": "date"
             }, 
             "datablock_name": {
                "bsonType": "string"
             }, 
-            "load_date": {
-               "bsonType": "date"
+            "locator": {
+               "bsonType": "string"
             }
-         }
+         }, 
+         "bsonType": "object", 
+         "required": [
+            "datablock_name"
+         ]
       }, 
-      "pdbx_reference_molecule_details": {
+      "citation": {
+         "uniqueItems": true, 
+         "minItems": 0, 
+         "bsonType": "array", 
          "items": [
             {
+               "properties": {
+                  "pdbx_database_id_PubMed": {
+                     "bsonType": "int"
+                  }, 
+                  "page_first": {
+                     "bsonType": "string"
+                  }, 
+                  "page_last": {
+                     "bsonType": "string"
+                  }, 
+                  "journal_abbrev": {
+                     "bsonType": "string"
+                  }, 
+                  "title": {
+                     "bsonType": "string"
+                  }, 
+                  "pdbx_database_id_DOI": {
+                     "bsonType": "string"
+                  }, 
+                  "id": {
+                     "bsonType": "string"
+                  }, 
+                  "year": {
+                     "bsonType": "int"
+                  }, 
+                  "journal_volume": {
+                     "bsonType": "string"
+                  }
+               }, 
+               "bsonType": "object", 
+               "required": [
+                  "id"
+               ]
+            }
+         ]
+      }, 
+      "pdbx_reference_molecule_related_structures": {
+         "uniqueItems": true, 
+         "minItems": 0, 
+         "bsonType": "array", 
+         "items": [
+            {
+               "properties": {
+                  "ordinal": {
+                     "bsonType": "int"
+                  }, 
+                  "db_accession": {
+                     "bsonType": "string"
+                  }, 
+                  "citation_id": {
+                     "bsonType": "string"
+                  }, 
+                  "name": {
+                     "bsonType": "string"
+                  }, 
+                  "db_name": {
+                     "bsonType": "string"
+                  }, 
+                  "family_prd_id": {
+                     "bsonType": "string"
+                  }, 
+                  "db_code": {
+                     "bsonType": "string"
+                  }, 
+                  "formula": {
+                     "bsonType": "string"
+                  }
+               }, 
+               "bsonType": "object", 
                "required": [
                   "family_prd_id", 
                   "ordinal"
-               ], 
-               "bsonType": "object", 
+               ]
+            }
+         ]
+      }, 
+      "pdbx_reference_molecule_details": {
+         "uniqueItems": true, 
+         "minItems": 0, 
+         "bsonType": "array", 
+         "items": [
+            {
                "properties": {
+                  "ordinal": {
+                     "bsonType": "int"
+                  }, 
                   "text": {
                      "bsonType": "string"
                   }, 
@@ -41,178 +237,28 @@
                   }, 
                   "family_prd_id": {
                      "bsonType": "string"
-                  }, 
-                  "ordinal": {
-                     "bsonType": "int"
                   }
-               }
-            }
-         ], 
-         "bsonType": "array", 
-         "uniqueItems": true, 
-         "minItems": 0
-      }, 
-      "pdbx_reference_molecule_related_structures": {
-         "items": [
-            {
+               }, 
+               "bsonType": "object", 
                "required": [
                   "family_prd_id", 
                   "ordinal"
-               ], 
-               "bsonType": "object", 
-               "properties": {
-                  "db_code": {
-                     "bsonType": "string"
-                  }, 
-                  "db_accession": {
-                     "bsonType": "string"
-                  }, 
-                  "family_prd_id": {
-                     "bsonType": "string"
-                  }, 
-                  "db_name": {
-                     "bsonType": "string"
-                  }, 
-                  "citation_id": {
-                     "bsonType": "string"
-                  }, 
-                  "formula": {
-                     "bsonType": "string"
-                  }, 
-                  "ordinal": {
-                     "bsonType": "int"
-                  }, 
-                  "name": {
-                     "bsonType": "string"
-                  }
-               }
+               ]
             }
-         ], 
-         "bsonType": "array", 
-         "uniqueItems": true, 
-         "minItems": 0
-      }, 
-      "citation_author": {
-         "items": [
-            {
-               "required": [
-                  "citation_id", 
-                  "name", 
-                  "ordinal"
-               ], 
-               "bsonType": "object", 
-               "properties": {
-                  "citation_id": {
-                     "bsonType": "string"
-                  }, 
-                  "ordinal": {
-                     "bsonType": "int"
-                  }, 
-                  "name": {
-                     "bsonType": "string"
-                  }
-               }
-            }
-         ], 
-         "bsonType": "array", 
-         "uniqueItems": true, 
-         "minItems": 0
-      }, 
-      "citation": {
-         "items": [
-            {
-               "required": [
-                  "id"
-               ], 
-               "bsonType": "object", 
-               "properties": {
-                  "page_last": {
-                     "bsonType": "string"
-                  }, 
-                  "page_first": {
-                     "bsonType": "string"
-                  }, 
-                  "journal_volume": {
-                     "bsonType": "string"
-                  }, 
-                  "pdbx_database_id_DOI": {
-                     "bsonType": "string"
-                  }, 
-                  "id": {
-                     "bsonType": "string"
-                  }, 
-                  "year": {
-                     "bsonType": "int"
-                  }, 
-                  "title": {
-                     "bsonType": "string"
-                  }, 
-                  "journal_abbrev": {
-                     "bsonType": "string"
-                  }, 
-                  "pdbx_database_id_PubMed": {
-                     "bsonType": "int"
-                  }
-               }
-            }
-         ], 
-         "bsonType": "array", 
-         "uniqueItems": true, 
-         "minItems": 0
+         ]
       }, 
       "pdbx_reference_molecule_synonyms": {
+         "uniqueItems": true, 
+         "minItems": 0, 
+         "bsonType": "array", 
          "items": [
             {
-               "required": [
-                  "family_prd_id", 
-                  "ordinal", 
-                  "prd_id"
-               ], 
-               "bsonType": "object", 
                "properties": {
-                  "chem_comp_id": {
-                     "bsonType": "string"
-                  }, 
-                  "prd_id": {
-                     "bsonType": "string"
-                  }, 
-                  "source": {
-                     "bsonType": "string"
-                  }, 
-                  "family_prd_id": {
-                     "bsonType": "string"
-                  }, 
                   "ordinal": {
                      "bsonType": "int"
                   }, 
                   "name": {
                      "bsonType": "string"
-                  }
-               }
-            }
-         ], 
-         "bsonType": "array", 
-         "uniqueItems": true, 
-         "minItems": 0
-      }, 
-      "pdbx_reference_molecule_features": {
-         "items": [
-            {
-               "required": [
-                  "family_prd_id", 
-                  "ordinal", 
-                  "prd_id"
-               ], 
-               "bsonType": "object", 
-               "properties": {
-                  "source_ordinal": {
-                     "bsonType": "int"
-                  }, 
-                  "chem_comp_id": {
-                     "bsonType": "string"
-                  }, 
-                  "type": {
-                     "bsonType": "string"
                   }, 
                   "prd_id": {
                      "bsonType": "string"
@@ -220,34 +266,55 @@
                   "source": {
                      "bsonType": "string"
                   }, 
-                  "value": {
+                  "chem_comp_id": {
                      "bsonType": "string"
                   }, 
                   "family_prd_id": {
                      "bsonType": "string"
-                  }, 
-                  "ordinal": {
-                     "bsonType": "int"
                   }
-               }
+               }, 
+               "bsonType": "object", 
+               "required": [
+                  "family_prd_id", 
+                  "ordinal", 
+                  "prd_id"
+               ]
             }
-         ], 
-         "bsonType": "array", 
-         "uniqueItems": true, 
-         "minItems": 0
+         ]
       }, 
       "pdbx_family_prd_audit": {
+         "uniqueItems": true, 
+         "minItems": 0, 
+         "bsonType": "array", 
          "items": [
             {
-               "required": [
-                  "action_type", 
-                  "date", 
-                  "family_prd_id"
-               ], 
-               "bsonType": "object", 
                "properties": {
                   "date": {
                      "bsonType": "date"
+                  }, 
+                  "action_type": {
+                     "enum": [
+                        "Modify citation", 
+                        "Modify molecule details", 
+                        "Other modification", 
+                        "Initial release", 
+                        "Modify annotation", 
+                        "Modify synonyms", 
+                        "Create family", 
+                        "Modify family name", 
+                        "Modify feature", 
+                        "Modify related structures", 
+                        "Obsolete familyt", 
+                        "Add PRD", 
+                        "Modify sequence", 
+                        "Obsolete family", 
+                        "Remove PRD", 
+                        "Modify family classification"
+                     ], 
+                     "bsonType": "string"
+                  }, 
+                  "annotator": {
+                     "bsonType": "string"
                   }, 
                   "details": {
                      "bsonType": "string"
@@ -255,54 +322,28 @@
                   "processing_site": {
                      "bsonType": "string"
                   }, 
-                  "annotator": {
-                     "bsonType": "string"
-                  }, 
                   "family_prd_id": {
                      "bsonType": "string"
-                  }, 
-                  "action_type": {
-                     "enum": [
-                        "Create family", 
-                        "Modify feature", 
-                        "Modify synonyms", 
-                        "Obsolete family", 
-                        "Other modification", 
-                        "Modify sequence", 
-                        "Modify annotation", 
-                        "Modify family name", 
-                        "Modify related structures", 
-                        "Initial release", 
-                        "Modify citation", 
-                        "Modify family classification", 
-                        "Remove PRD", 
-                        "Obsolete familyt", 
-                        "Modify molecule details", 
-                        "Add PRD"
-                     ], 
-                     "bsonType": "string"
                   }
-               }
+               }, 
+               "bsonType": "object", 
+               "required": [
+                  "action_type", 
+                  "date", 
+                  "family_prd_id"
+               ]
             }
-         ], 
-         "bsonType": "array", 
-         "uniqueItems": true, 
-         "minItems": 0
+         ]
       }, 
-      "pdbx_reference_molecule_annotation": {
+      "pdbx_reference_molecule_features": {
+         "uniqueItems": true, 
+         "minItems": 0, 
+         "bsonType": "array", 
          "items": [
             {
-               "required": [
-                  "family_prd_id", 
-                  "ordinal"
-               ], 
-               "bsonType": "object", 
                "properties": {
-                  "text": {
-                     "bsonType": "string"
-                  }, 
-                  "chem_comp_id": {
-                     "bsonType": "string"
+                  "ordinal": {
+                     "bsonType": "int"
                   }, 
                   "type": {
                      "bsonType": "string"
@@ -313,69 +354,28 @@
                   "source": {
                      "bsonType": "string"
                   }, 
+                  "chem_comp_id": {
+                     "bsonType": "string"
+                  }, 
                   "family_prd_id": {
                      "bsonType": "string"
                   }, 
-                  "ordinal": {
+                  "value": {
+                     "bsonType": "string"
+                  }, 
+                  "source_ordinal": {
                      "bsonType": "int"
                   }
-               }
-            }
-         ], 
-         "bsonType": "array", 
-         "uniqueItems": true, 
-         "minItems": 0
-      }, 
-      "pdbx_reference_molecule_list": {
-         "items": [
-            {
+               }, 
+               "bsonType": "object", 
                "required": [
                   "family_prd_id", 
+                  "ordinal", 
                   "prd_id"
-               ], 
-               "bsonType": "object", 
-               "properties": {
-                  "family_prd_id": {
-                     "bsonType": "string"
-                  }, 
-                  "prd_id": {
-                     "bsonType": "string"
-                  }
-               }
+               ]
             }
-         ], 
-         "bsonType": "array", 
-         "uniqueItems": true, 
-         "minItems": 0
-      }, 
-      "pdbx_reference_molecule_family": {
-         "required": [
-            "family_prd_id"
-         ], 
-         "bsonType": "object", 
-         "properties": {
-            "family_prd_id": {
-               "bsonType": "string"
-            }, 
-            "replaced_by": {
-               "bsonType": "string"
-            }, 
-            "replaces": {
-               "bsonType": "string"
-            }, 
-            "name": {
-               "bsonType": "string"
-            }, 
-            "release_status": {
-               "enum": [
-                  "HOLD", 
-                  "OBS", 
-                  "WAIT", 
-                  "REL"
-               ], 
-               "bsonType": "string"
-            }
-         }
+         ]
       }
-   }
+   }, 
+   "bsonType": "object"
 }

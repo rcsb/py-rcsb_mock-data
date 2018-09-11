@@ -9,6 +9,8 @@
 #    10-Jul-2018 jdw Add categories RCSB_REPOSITORY_HOLDINGS and RCSB_REPOSITORY_UPDATE
 #    10-Aug-2018 jdw Change methods to implement as calculate_with_helper
 #     5-Sep-2018 jdw Add preliminary identifier categories with category methods.
+#     7-Sep-2018 jdw Organize methods in execution priority order
+#    10-Sep-2018 jdw _citation.rcsb_authors and associated methods and types
 #
 ###########################################################################
 
@@ -82,6 +84,12 @@ data_rcsb_mmcif_ext.dic
 ;
                Iso date-time format up to seconds field.
 ;
+
+               alphanum-scsv      char
+               '[][ \t_(),.;:"&<>/\{}'`~!@#$%?+=*A-Za-z0-9|^-]*'
+;              semicolon separated alpha numeric text
+;
+
 ##################
 ## SUB_CATEGORY ##
 ##################
@@ -117,6 +125,7 @@ rcsb_file_container                  calculate_with_helper python  'DictMethodHe
 rcsb_row_index                       calculate_with_helper python  'DictMethodHelper.setRowIndex'
 rcsb_add_deposited_assembly          calculate_with_helper python  'DictMethodHelper.addDepositedAssembly'
 rcsb_filter_assembly_details         calculate_with_helper python  'DictMethodHelper.filterAssemblyDetails'
+rcsb_aggregate_citation_authors      calculate_with_helper python  'DictMethodHelper.aggregateCitationAuthors'
 rcsb_entry_container_identifiers     calculate_with_helper python  'DictMethodHelper.buildContainerEntryIds'
 rcsb_entity_container_identifiers    calculate_with_helper python  'DictMethodHelper.buildContainerEntityIds'
 rcsb_assembly_container_identifiers  calculate_with_helper python  'DictMethodHelper.buildContainerAssemblyIds'
@@ -189,6 +198,28 @@ save__rcsb_load_status.locator
     _item.mandatory_code          yes
     _item_type.code               text
     _item_methods.method_id     'rcsb_file_container'
+     save_
+
+################
+## CITATION   ##
+################
+
+save__citation.rcsb_authors
+   _item_description.description
+;              Names of the authors of the citation; relevant for journal
+               articles, books and book chapters.  Names are separated by semicolons.
+
+               The family name(s), followed by a comma and including any
+               dynastic components, precedes the first name(s) or initial(s).
+
+;
+
+    _item.name                  '_citation.rcsb_authors'
+    _item.category_id             citation
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_examples.case          'Bleary, Percival R.;O'Neil, F.K.'
+    _item_methods.method_id      'rcsb_aggregate_citation_authors'
      save_
 
 ##############################
