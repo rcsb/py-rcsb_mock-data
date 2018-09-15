@@ -41,8 +41,8 @@
                "type": "string",
                "enum": [
                   "author_and_software_defined_assembly",
-                  "author_defined_assembly",
-                  "software_defined_assembly"
+                  "software_defined_assembly",
+                  "author_defined_assembly"
                ],
                "examples": [
                   "author_and_software_defined_assembly"
@@ -71,22 +71,22 @@
                   "experimental_support": {
                      "type": "string",
                      "enum": [
-                        "immunoprecipitation",
-                        "mass spectrometry",
-                        "SAXS",
                         "light scattering",
+                        "microscopy",
+                        "homology",
+                        "gel filtration",
                         "cross-linking",
-                        "none",
+                        "assay for oligomerization",
+                        "SAXS",
                         "fluorescence resonance energy transfer",
                         "isothermal titration calorimetry",
-                        "homology",
-                        "microscopy",
-                        "assay for oligomerization",
-                        "scanning transmission electron microscopy",
-                        "gel filtration",
-                        "surface plasmon resonance",
                         "native gel electrophoresis",
-                        "equilibrium centrifugation"
+                        "mass spectrometry",
+                        "immunoprecipitation",
+                        "surface plasmon resonance",
+                        "none",
+                        "equilibrium centrifugation",
+                        "scanning transmission electron microscopy"
                      ],
                      "description": "Provides the experimental method to determine the state of this assembly"
                   },
@@ -101,7 +101,7 @@
                ]
             }
          ],
-         "minItems": 0,
+         "minItems": 1,
          "uniqueItems": true
       },
       "pdbx_struct_assembly_gen": {
@@ -120,7 +120,7 @@
                         "type": "string",
                         "description": "This data item is a pointer to _struct_asym.id in\n the STRUCT_ASYM category.\n\n This item may be expressed as a comma separated list of identifiers."
                      },
-                     "uniqueItems": true
+                     "uniqueItems": false
                   },
                   "oper_expression": {
                      "type": "string",
@@ -142,7 +142,7 @@
                ]
             }
          ],
-         "minItems": 0,
+         "minItems": 1,
          "uniqueItems": true
       },
       "pdbx_struct_assembly_prop": {
@@ -159,8 +159,8 @@
                      "type": "string",
                      "enum": [
                         "ABSA (A^2)",
-                        "SSA (A^2)",
-                        "MORE"
+                        "MORE",
+                        "SSA (A^2)"
                      ],
                      "description": "The property type for the assembly."
                   },
@@ -175,7 +175,7 @@
                ]
             }
          ],
-         "minItems": 0,
+         "minItems": 1,
          "uniqueItems": true
       },
       "pdbx_struct_oper_list": {
@@ -243,21 +243,21 @@
                   "type": {
                      "type": "string",
                      "enum": [
-                        "point symmetry operation",
-                        "build helical asymmetric unit",
-                        "transform to point frame",
                         "build point asymmetric unit",
-                        "transform to helical frame",
-                        "build 2D crystal asymmetric unit",
-                        "build 3D crystal asymmetric unit",
-                        "transform to crystal frame",
+                        "identity operation",
                         "crystal symmetry operation",
-                        "helical symmetry operation",
+                        "build helical asymmetric unit",
+                        "transform to crystal frame",
+                        "build 3D crystal asymmetric unit",
+                        "transform to point frame",
                         "2D crystal symmetry operation",
-                        "transform to 3D crystal frame",
+                        "transform to helical frame",
                         "3D crystal symmetry operation",
+                        "point symmetry operation",
                         "transform to 2D crystal frame",
-                        "identity operation"
+                        "build 2D crystal asymmetric unit",
+                        "helical symmetry operation",
+                        "transform to 3D crystal frame"
                      ],
                      "description": "A code to indicate the type of operator."
                   },
@@ -279,7 +279,7 @@
                ]
             }
          ],
-         "minItems": 0,
+         "minItems": 1,
          "uniqueItems": true
       },
       "rcsb_assembly_container_identifiers": {
