@@ -40,9 +40,9 @@
             "rcsb_details": {
                "type": "string",
                "enum": [
-                  "author_and_software_defined_assembly",
                   "software_defined_assembly",
-                  "author_defined_assembly"
+                  "author_defined_assembly",
+                  "author_and_software_defined_assembly"
                ],
                "examples": [
                   "author_and_software_defined_assembly"
@@ -56,229 +56,221 @@
       },
       "pdbx_struct_assembly_auth_evidence": {
          "type": "array",
-         "items": [
-            {
-               "type": "object",
-               "properties": {
-                  "assembly_id": {
-                     "type": "string",
-                     "description": "This item references an assembly in pdbx_struct_assembly"
-                  },
-                  "details": {
-                     "type": "string",
-                     "description": "Provides any additional information regarding the evidence of this assembly"
-                  },
-                  "experimental_support": {
-                     "type": "string",
-                     "enum": [
-                        "light scattering",
-                        "microscopy",
-                        "homology",
-                        "gel filtration",
-                        "cross-linking",
-                        "assay for oligomerization",
-                        "SAXS",
-                        "fluorescence resonance energy transfer",
-                        "isothermal titration calorimetry",
-                        "native gel electrophoresis",
-                        "mass spectrometry",
-                        "immunoprecipitation",
-                        "surface plasmon resonance",
-                        "none",
-                        "equilibrium centrifugation",
-                        "scanning transmission electron microscopy"
-                     ],
-                     "description": "Provides the experimental method to determine the state of this assembly"
-                  },
-                  "id": {
-                     "type": "string",
-                     "description": "Identifies a unique record in pdbx_struct_assembly_auth_evidence."
-                  }
+         "items": {
+            "type": "object",
+            "properties": {
+               "assembly_id": {
+                  "type": "string",
+                  "description": "This item references an assembly in pdbx_struct_assembly"
                },
-               "required": [
-                  "assembly_id",
-                  "id"
-               ]
-            }
-         ],
+               "details": {
+                  "type": "string",
+                  "description": "Provides any additional information regarding the evidence of this assembly"
+               },
+               "experimental_support": {
+                  "type": "string",
+                  "enum": [
+                     "gel filtration",
+                     "none",
+                     "mass spectrometry",
+                     "homology",
+                     "scanning transmission electron microscopy",
+                     "assay for oligomerization",
+                     "equilibrium centrifugation",
+                     "immunoprecipitation",
+                     "light scattering",
+                     "cross-linking",
+                     "native gel electrophoresis",
+                     "surface plasmon resonance",
+                     "fluorescence resonance energy transfer",
+                     "microscopy",
+                     "SAXS",
+                     "isothermal titration calorimetry"
+                  ],
+                  "description": "Provides the experimental method to determine the state of this assembly"
+               },
+               "id": {
+                  "type": "string",
+                  "description": "Identifies a unique record in pdbx_struct_assembly_auth_evidence."
+               }
+            },
+            "required": [
+               "assembly_id",
+               "id"
+            ]
+         },
          "minItems": 1,
          "uniqueItems": true
       },
       "pdbx_struct_assembly_gen": {
          "type": "array",
-         "items": [
-            {
-               "type": "object",
-               "properties": {
-                  "assembly_id": {
-                     "type": "string",
-                     "description": "This data item is a pointer to _pdbx_struct_assembly.id in the\n PDBX_STRUCT_ASSEMBLY category."
-                  },
-                  "asym_id_list": {
-                     "type": "array",
-                     "items": {
-                        "type": "string",
-                        "description": "This data item is a pointer to _struct_asym.id in\n the STRUCT_ASYM category.\n\n This item may be expressed as a comma separated list of identifiers."
-                     },
-                     "uniqueItems": false
-                  },
-                  "oper_expression": {
-                     "type": "string",
-                     "examples": [
-                        "(1)",
-                        "(1,2,5)",
-                        "(1-60)",
-                        "(1-60)(61)"
-                     ],
-                     "description": "Identifies the operation of collection of operations\n from category PDBX_STRUCT_OPER_LIST.\n\n Operation expressions may have the forms:\n\n  (1)        the single operation 1\n  (1,2,5)    the operations 1, 2, 5\n  (1-4)      the operations 1,2,3 and 4\n  (1,2)(3,4) the combinations of operations\n             3 and 4 followed by 1 and 2 (i.e.\n             the cartesian product of parenthetical\n             groups applied from right to left)\n"
-                  },
-                  "ordinal": {
-                     "type": "integer",
-                     "description": "This data item is an ordinal index for the\n PDBX_STRUCT_ASSEMBLY category."
-                  }
+         "items": {
+            "type": "object",
+            "properties": {
+               "assembly_id": {
+                  "type": "string",
+                  "description": "This data item is a pointer to _pdbx_struct_assembly.id in the\n PDBX_STRUCT_ASSEMBLY category."
                },
-               "required": [
-                  "ordinal"
-               ]
-            }
-         ],
+               "asym_id_list": {
+                  "type": "array",
+                  "items": {
+                     "type": "string",
+                     "description": "This data item is a pointer to _struct_asym.id in\n the STRUCT_ASYM category.\n\n This item may be expressed as a comma separated list of identifiers."
+                  },
+                  "uniqueItems": false
+               },
+               "oper_expression": {
+                  "type": "string",
+                  "examples": [
+                     "(1)",
+                     "(1,2,5)",
+                     "(1-60)",
+                     "(1-60)(61)"
+                  ],
+                  "description": "Identifies the operation of collection of operations\n from category PDBX_STRUCT_OPER_LIST.\n\n Operation expressions may have the forms:\n\n  (1)        the single operation 1\n  (1,2,5)    the operations 1, 2, 5\n  (1-4)      the operations 1,2,3 and 4\n  (1,2)(3,4) the combinations of operations\n             3 and 4 followed by 1 and 2 (i.e.\n             the cartesian product of parenthetical\n             groups applied from right to left)\n"
+               },
+               "ordinal": {
+                  "type": "integer",
+                  "description": "This data item is an ordinal index for the\n PDBX_STRUCT_ASSEMBLY category."
+               }
+            },
+            "required": [
+               "ordinal"
+            ]
+         },
          "minItems": 1,
          "uniqueItems": true
       },
       "pdbx_struct_assembly_prop": {
          "type": "array",
-         "items": [
-            {
-               "type": "object",
-               "properties": {
-                  "biol_id": {
-                     "type": "string",
-                     "description": "The identifier for the assembly used in category PDBX_STRUCT_ASSEMBLY."
-                  },
-                  "type": {
-                     "type": "string",
-                     "enum": [
-                        "ABSA (A^2)",
-                        "MORE",
-                        "SSA (A^2)"
-                     ],
-                     "description": "The property type for the assembly."
-                  },
-                  "value": {
-                     "type": "string",
-                     "description": "The value of the assembly property."
-                  }
+         "items": {
+            "type": "object",
+            "properties": {
+               "biol_id": {
+                  "type": "string",
+                  "description": "The identifier for the assembly used in category PDBX_STRUCT_ASSEMBLY."
                },
-               "required": [
-                  "biol_id",
-                  "type"
-               ]
-            }
-         ],
+               "type": {
+                  "type": "string",
+                  "enum": [
+                     "MORE",
+                     "SSA (A^2)",
+                     "ABSA (A^2)"
+                  ],
+                  "description": "The property type for the assembly."
+               },
+               "value": {
+                  "type": "string",
+                  "description": "The value of the assembly property."
+               }
+            },
+            "required": [
+               "biol_id",
+               "type"
+            ]
+         },
          "minItems": 1,
          "uniqueItems": true
       },
       "pdbx_struct_oper_list": {
          "type": "array",
-         "items": [
-            {
-               "type": "object",
-               "properties": {
-                  "id": {
-                     "type": "string",
-                     "description": "This identifier code must uniquely identify a\n record in the PDBX_STRUCT_OPER_LIST list."
-                  },
-                  "matrix_1_1": {
-                     "type": "number",
-                     "description": "The [1][1] element of the 3x3 matrix component of the\n transformation operation."
-                  },
-                  "matrix_1_2": {
-                     "type": "number",
-                     "description": "The [1][2] element of the 3x3 matrix component of the\n transformation operation."
-                  },
-                  "matrix_1_3": {
-                     "type": "number",
-                     "description": "The [1][3] element of the 3x3 matrix component of the\n transformation operation."
-                  },
-                  "matrix_2_1": {
-                     "type": "number",
-                     "description": "The [2][1] element of the 3x3 matrix component of the\n transformation operation."
-                  },
-                  "matrix_2_2": {
-                     "type": "number",
-                     "description": "The [2][2] element of the 3x3 matrix component of the\n transformation operation."
-                  },
-                  "matrix_2_3": {
-                     "type": "number",
-                     "description": "The [2][3] element of the 3x3 matrix component of the\n transformation operation."
-                  },
-                  "matrix_3_1": {
-                     "type": "number",
-                     "description": "The [3][1] element of the 3x3 matrix component of the\n transformation operation."
-                  },
-                  "matrix_3_2": {
-                     "type": "number",
-                     "description": "The [3][2] element of the 3x3 matrix component of the\n transformation operation."
-                  },
-                  "matrix_3_3": {
-                     "type": "number",
-                     "description": "The [3][3] element of the 3x3 matrix component of the\n transformation operation."
-                  },
-                  "name": {
-                     "type": "string",
-                     "examples": [
-                        "1_555",
-                        "two-fold rotation"
-                     ],
-                     "description": "A descriptive name for the transformation operation."
-                  },
-                  "symmetry_operation": {
-                     "type": "string",
-                     "examples": [
-                        "x,y,z",
-                        "x+1/2,y,-z"
-                     ],
-                     "description": "The symmetry operation corresponding to the transformation operation."
-                  },
-                  "type": {
-                     "type": "string",
-                     "enum": [
-                        "build point asymmetric unit",
-                        "identity operation",
-                        "crystal symmetry operation",
-                        "build helical asymmetric unit",
-                        "transform to crystal frame",
-                        "build 3D crystal asymmetric unit",
-                        "transform to point frame",
-                        "2D crystal symmetry operation",
-                        "transform to helical frame",
-                        "3D crystal symmetry operation",
-                        "point symmetry operation",
-                        "transform to 2D crystal frame",
-                        "build 2D crystal asymmetric unit",
-                        "helical symmetry operation",
-                        "transform to 3D crystal frame"
-                     ],
-                     "description": "A code to indicate the type of operator."
-                  },
-                  "vector_1": {
-                     "type": "number",
-                     "description": "The [1] element of the three-element vector component of the\n transformation operation."
-                  },
-                  "vector_2": {
-                     "type": "number",
-                     "description": "The [2] element of the three-element vector component of the\n transformation operation."
-                  },
-                  "vector_3": {
-                     "type": "number",
-                     "description": "The [3] element of the three-element vector component of the\n transformation operation."
-                  }
+         "items": {
+            "type": "object",
+            "properties": {
+               "id": {
+                  "type": "string",
+                  "description": "This identifier code must uniquely identify a\n record in the PDBX_STRUCT_OPER_LIST list."
                },
-               "required": [
-                  "id"
-               ]
-            }
-         ],
+               "matrix_1_1": {
+                  "type": "number",
+                  "description": "The [1][1] element of the 3x3 matrix component of the\n transformation operation."
+               },
+               "matrix_1_2": {
+                  "type": "number",
+                  "description": "The [1][2] element of the 3x3 matrix component of the\n transformation operation."
+               },
+               "matrix_1_3": {
+                  "type": "number",
+                  "description": "The [1][3] element of the 3x3 matrix component of the\n transformation operation."
+               },
+               "matrix_2_1": {
+                  "type": "number",
+                  "description": "The [2][1] element of the 3x3 matrix component of the\n transformation operation."
+               },
+               "matrix_2_2": {
+                  "type": "number",
+                  "description": "The [2][2] element of the 3x3 matrix component of the\n transformation operation."
+               },
+               "matrix_2_3": {
+                  "type": "number",
+                  "description": "The [2][3] element of the 3x3 matrix component of the\n transformation operation."
+               },
+               "matrix_3_1": {
+                  "type": "number",
+                  "description": "The [3][1] element of the 3x3 matrix component of the\n transformation operation."
+               },
+               "matrix_3_2": {
+                  "type": "number",
+                  "description": "The [3][2] element of the 3x3 matrix component of the\n transformation operation."
+               },
+               "matrix_3_3": {
+                  "type": "number",
+                  "description": "The [3][3] element of the 3x3 matrix component of the\n transformation operation."
+               },
+               "name": {
+                  "type": "string",
+                  "examples": [
+                     "1_555",
+                     "two-fold rotation"
+                  ],
+                  "description": "A descriptive name for the transformation operation."
+               },
+               "symmetry_operation": {
+                  "type": "string",
+                  "examples": [
+                     "x,y,z",
+                     "x+1/2,y,-z"
+                  ],
+                  "description": "The symmetry operation corresponding to the transformation operation."
+               },
+               "type": {
+                  "type": "string",
+                  "enum": [
+                     "2D crystal symmetry operation",
+                     "3D crystal symmetry operation",
+                     "transform to 3D crystal frame",
+                     "transform to 2D crystal frame",
+                     "build 3D crystal asymmetric unit",
+                     "point symmetry operation",
+                     "transform to point frame",
+                     "transform to helical frame",
+                     "build helical asymmetric unit",
+                     "build 2D crystal asymmetric unit",
+                     "transform to crystal frame",
+                     "crystal symmetry operation",
+                     "identity operation",
+                     "helical symmetry operation",
+                     "build point asymmetric unit"
+                  ],
+                  "description": "A code to indicate the type of operator."
+               },
+               "vector_1": {
+                  "type": "number",
+                  "description": "The [1] element of the three-element vector component of the\n transformation operation."
+               },
+               "vector_2": {
+                  "type": "number",
+                  "description": "The [2] element of the three-element vector component of the\n transformation operation."
+               },
+               "vector_3": {
+                  "type": "number",
+                  "description": "The [3] element of the three-element vector component of the\n transformation operation."
+               }
+            },
+            "required": [
+               "id"
+            ]
+         },
          "minItems": 1,
          "uniqueItems": true
       },
