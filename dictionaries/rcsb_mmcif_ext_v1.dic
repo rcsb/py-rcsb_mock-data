@@ -11,6 +11,7 @@
 #     5-Sep-2018 jdw Add preliminary identifier categories with category methods.
 #     7-Sep-2018 jdw Organize methods in execution priority order
 #    10-Sep-2018 jdw _citation.rcsb_authors and associated methods and types
+#    22-Sep-2018 jdw add _pdbx_struct_assembly.rcsb_assembly_candidate
 #
 ###########################################################################
 
@@ -125,6 +126,8 @@ rcsb_file_container                  calculate_with_helper python  'DictMethodHe
 rcsb_row_index                       calculate_with_helper python  'DictMethodHelper.setRowIndex'
 rcsb_add_deposited_assembly          calculate_with_helper python  'DictMethodHelper.addDepositedAssembly'
 rcsb_filter_assembly_details         calculate_with_helper python  'DictMethodHelper.filterAssemblyDetails'
+rcsb_filter_assembly_details         calculate_with_helper python  'DictMethodHelper.filterAssemblyDetails'
+rcsb_assembly_candidates             calculate_with_helper python  'DictMethodHelper.assignAssemblyCandidates'
 rcsb_aggregate_citation_authors      calculate_with_helper python  'DictMethodHelper.aggregateCitationAuthors'
 rcsb_entry_container_identifiers     calculate_with_helper python  'DictMethodHelper.buildContainerEntryIds'
 rcsb_entity_container_identifiers    calculate_with_helper python  'DictMethodHelper.buildContainerEntityIds'
@@ -281,6 +284,21 @@ save__pdbx_struct_assembly.rcsb_details
      #
      save_
 
+save__pdbx_struct_assembly.rcsb_candidate_assembly
+    _item_description.description
+;              A candidate biologically relevant macromolecular assembly.
+;
+    _item.name                  '_pdbx_struct_assembly.rcsb_candidate_assembly'
+    _item.category_id             'pdbx_struct_assembly'
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_examples.case          Y
+    loop_
+    _item_enumeration.value
+        'Y' 'N'
+    _item_methods.method_id     'rcsb_assembly_candidates'
+     #
+     save_
 
 #######################################
 ## RCSB_ENTITY_SEQUENCE_CLUSTER_LIST ##

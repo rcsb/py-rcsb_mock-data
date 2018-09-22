@@ -61,20 +61,20 @@
             "src_method": {
                "type": "string",
                "enum": [
+                  "man",
                   "nat",
-                  "syn",
-                  "man"
+                  "syn"
                ],
                "description": "The method by which the sample for the entity was produced.\n Entities isolated directly from natural sources (tissues, soil\n samples etc.) are expected to have further information in the\n ENTITY_SRC_NAT category. Entities isolated from genetically\n manipulated sources are expected to have further information in\n the ENTITY_SRC_GEN category."
             },
             "type": {
                "type": "string",
                "enum": [
-                  "non-polymer",
-                  "macrolide",
-                  "water",
                   "polymer",
-                  "branched"
+                  "branched",
+                  "water",
+                  "non-polymer",
+                  "macrolide"
                ],
                "description": "Defines the type of the entity.\n\n Polymer entities are expected to have corresponding\n ENTITY_POLY and associated entries.\n\n Non-polymer entities are expected to have corresponding\n CHEM_COMP and associated entries.\n\n Water entities are not expected to have corresponding\n entries in the ENTITY category."
             }
@@ -157,9 +157,9 @@
             "nstd_linkage": {
                "type": "string",
                "enum": [
-                  "no",
                   "yes",
                   "n",
+                  "no",
                   "y"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer-to-monomer link different from that implied by\n _entity_poly.type."
@@ -167,9 +167,9 @@
             "nstd_monomer": {
                "type": "string",
                "enum": [
-                  "no",
                   "yes",
                   "n",
+                  "no",
                   "y"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer that is not considered standard."
@@ -207,16 +207,16 @@
             "type": {
                "type": "string",
                "enum": [
+                  "other",
+                  "cyclic-pseudo-peptide",
+                  "polydeoxyribonucleotide",
+                  "polysaccharide(D)",
+                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
+                  "peptide nucleic acid",
+                  "polypeptide(D)",
                   "polyribonucleotide",
                   "polypeptide(L)",
-                  "polysaccharide(D)",
-                  "peptide nucleic acid",
-                  "polysaccharide(L)",
-                  "polydeoxyribonucleotide",
-                  "cyclic-pseudo-peptide",
-                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
-                  "other",
-                  "polypeptide(D)"
+                  "polysaccharide(L)"
                ],
                "description": "The type of the polymer."
             }
@@ -538,8 +538,8 @@
                   "enum": [
                      "Linker",
                      "Biological sequence",
-                     "N-terminal tag",
-                     "C-terminal tag"
+                     "C-terminal tag",
+                     "N-terminal tag"
                   ],
                   "description": "This data item povides additional information about the sequence type."
                },
@@ -926,8 +926,8 @@
                "pdbx_blank_PDB_chainid_flag": {
                   "type": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ],
                   "description": "A flag indicating that this entity was originally labeled\n with a blank PDB chain id."
                },
