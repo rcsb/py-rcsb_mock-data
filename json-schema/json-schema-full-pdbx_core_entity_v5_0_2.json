@@ -59,23 +59,35 @@
                ],
                "description": "A place holder for the number of molecules of the entity in\n the entry."
             },
+            "rcsb_multiple_source_flag": {
+               "type": "string",
+               "enum": [
+                  "N",
+                  "Y"
+               ],
+               "description": "A code indicating the entity has multiple biological sources.\n"
+            },
+            "rcsb_source_part_count": {
+               "type": "integer",
+               "description": "The number of biological sources for the entity.\n"
+            },
             "src_method": {
                "type": "string",
                "enum": [
                   "man",
-                  "nat",
-                  "syn"
+                  "syn",
+                  "nat"
                ],
                "description": "The method by which the sample for the entity was produced.\n Entities isolated directly from natural sources (tissues, soil\n samples etc.) are expected to have further information in the\n ENTITY_SRC_NAT category. Entities isolated from genetically\n manipulated sources are expected to have further information in\n the ENTITY_SRC_GEN category."
             },
             "type": {
                "type": "string",
                "enum": [
-                  "polymer",
                   "branched",
                   "water",
                   "non-polymer",
-                  "macrolide"
+                  "macrolide",
+                  "polymer"
                ],
                "description": "Defines the type of the entity.\n\n Polymer entities are expected to have corresponding\n ENTITY_POLY and associated entries.\n\n Non-polymer entities are expected to have corresponding\n CHEM_COMP and associated entries.\n\n Water entities are not expected to have corresponding\n entries in the ENTITY category."
             }
@@ -158,20 +170,20 @@
             "nstd_linkage": {
                "type": "string",
                "enum": [
-                  "yes",
-                  "n",
                   "no",
-                  "y"
+                  "yes",
+                  "y",
+                  "n"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer-to-monomer link different from that implied by\n _entity_poly.type."
             },
             "nstd_monomer": {
                "type": "string",
                "enum": [
-                  "yes",
-                  "n",
                   "no",
-                  "y"
+                  "yes",
+                  "y",
+                  "n"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer that is not considered standard."
             },
@@ -209,15 +221,15 @@
                "type": "string",
                "enum": [
                   "other",
-                  "cyclic-pseudo-peptide",
-                  "polydeoxyribonucleotide",
-                  "polysaccharide(D)",
-                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
-                  "peptide nucleic acid",
-                  "polypeptide(D)",
-                  "polyribonucleotide",
                   "polypeptide(L)",
-                  "polysaccharide(L)"
+                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
+                  "polypeptide(D)",
+                  "polysaccharide(L)",
+                  "polydeoxyribonucleotide",
+                  "peptide nucleic acid",
+                  "polysaccharide(D)",
+                  "cyclic-pseudo-peptide",
+                  "polyribonucleotide"
                ],
                "description": "The type of the polymer."
             }
@@ -537,10 +549,10 @@
                "pdbx_seq_type": {
                   "type": "string",
                   "enum": [
-                     "Linker",
                      "Biological sequence",
-                     "C-terminal tag",
-                     "N-terminal tag"
+                     "Linker",
+                     "N-terminal tag",
+                     "C-terminal tag"
                   ],
                   "description": "This data item povides additional information about the sequence type."
                },
@@ -872,6 +884,22 @@
       "rcsb_entity_container_identifiers": {
          "type": "object",
          "properties": {
+            "asym_ids": {
+               "type": "array",
+               "items": {
+                  "type": "string",
+                  "description": "Instance identifiers corresponding to copies of the entity in this container."
+               },
+               "uniqueItems": false
+            },
+            "auth_asym_ids": {
+               "type": "array",
+               "items": {
+                  "type": "string",
+                  "description": "Author instance identifiers corresponding to copies of the entity in this container."
+               },
+               "uniqueItems": false
+            },
             "entity_id": {
                "type": "string",
                "description": "Entiy identifier for the container."
@@ -882,9 +910,118 @@
             }
          },
          "required": [
+            "asym_ids",
+            "auth_asym_ids",
             "entity_id",
             "entry_id"
          ]
+      },
+      "rcsb_entity_host_organism": {
+         "type": "array",
+         "items": {
+            "type": "object",
+            "properties": {
+               "beg_seq_num": {
+                  "type": "integer",
+                  "description": "The beginning polymer sequence position for the polymer section corresponding\n to this host organism.\n\n A reference to the sequence position in the entity_poly category."
+               },
+               "common_name": {
+                  "type": "string",
+                  "description": "The common name of the host organism"
+               },
+               "end_seq_num": {
+                  "type": "integer",
+                  "description": "The ending polymer sequence position for the polymer section corresponding\n to this host organism.\n\n A reference to the sequence position in the entity_poly category."
+               },
+               "entity_id": {
+                  "type": "string",
+                  "description": "A unique identifer for the entity"
+               },
+               "ncbi_taxonomy_id": {
+                  "type": "integer",
+                  "description": "NCBI Taxonomy identifier for the host organism.\n\n Reference:\n\n Wheeler DL, Chappey C, Lash AE, Leipe DD, Madden TL, Schuler GD,\n Tatusova TA, Rapp BA (2000). Database resources of the National\n Center for Biotechnology Information. Nucleic Acids Res 2000 Jan\n 1;28(1):10-4\n\n Benson DA, Karsch-Mizrachi I, Lipman DJ, Ostell J, Rapp BA,\n Wheeler DL (2000). GenBank. Nucleic Acids Res 2000 Jan 1;28(1):15-18.\n"
+               },
+               "pdbx_src_id": {
+                  "type": "string",
+                  "description": "An identifier for an entity segment."
+               },
+               "provenance_code": {
+                  "type": "string",
+                  "enum": [
+                     "pdb-primary-data"
+                  ],
+                  "description": "A code indicating the provenance of the host organism.\n"
+               },
+               "scientific_name": {
+                  "type": "string",
+                  "description": "The scientific name of the host organism"
+               }
+            },
+            "required": [
+               "entity_id",
+               "pdbx_src_id"
+            ]
+         },
+         "minItems": 1,
+         "uniqueItems": true
+      },
+      "rcsb_entity_source_organism": {
+         "type": "array",
+         "items": {
+            "type": "object",
+            "properties": {
+               "beg_seq_num": {
+                  "type": "integer",
+                  "description": "The beginning polymer sequence position for the polymer section corresponding\n to this source.\n\n A reference to the sequence position in the entity_poly category."
+               },
+               "common_name": {
+                  "type": "string",
+                  "description": "The common name for the source organism."
+               },
+               "end_seq_num": {
+                  "type": "integer",
+                  "description": "The ending polymer sequence position for the polymer section corresponding\n to this source.\n\n A reference to the sequence position in the entity_poly category."
+               },
+               "entity_id": {
+                  "type": "string",
+                  "description": "A unique identifer for the entity"
+               },
+               "ncbi_taxonomy_id": {
+                  "type": "integer",
+                  "description": "NCBI Taxonomy identifier for the gene source organism.\n\n Reference:\n\n Wheeler DL, Chappey C, Lash AE, Leipe DD, Madden TL, Schuler GD,\n Tatusova TA, Rapp BA (2000). Database resources of the National\n Center for Biotechnology Information. Nucleic Acids Res 2000 Jan\n 1;28(1):10-4\n\n Benson DA, Karsch-Mizrachi I, Lipman DJ, Ostell J, Rapp BA,\n Wheeler DL (2000). GenBank. Nucleic Acids Res 2000 Jan 1;28(1):15-18.\n"
+               },
+               "pdbx_src_id": {
+                  "type": "string",
+                  "description": "An identifier for the entity segment."
+               },
+               "provenance_code": {
+                  "type": "string",
+                  "enum": [
+                     "pdb-primary-data"
+                  ],
+                  "description": "A code indicating the provenance of the source organism details for the entity\n"
+               },
+               "scientific_name": {
+                  "type": "string",
+                  "description": "The scientific name of the source organism."
+               },
+               "source_type": {
+                  "type": "string",
+                  "enum": [
+                     "genetically engineered",
+                     "synthetic",
+                     "natural"
+                  ],
+                  "description": "The source type for the entity\n"
+               }
+            },
+            "required": [
+               "entity_id",
+               "pdbx_src_id"
+            ]
+         },
+         "minItems": 1,
+         "uniqueItems": true
       },
       "rcsb_load_status": {
          "type": "object",
@@ -929,8 +1066,8 @@
                "pdbx_blank_PDB_chainid_flag": {
                   "type": "string",
                   "enum": [
-                     "Y",
-                     "N"
+                     "N",
+                     "Y"
                   ],
                   "description": "A flag indicating that this entity was originally labeled\n with a blank PDB chain id."
                },

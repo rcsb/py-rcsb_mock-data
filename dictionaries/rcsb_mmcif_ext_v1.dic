@@ -12,6 +12,12 @@
 #     7-Sep-2018 jdw Organize methods in execution priority order
 #    10-Sep-2018 jdw _citation.rcsb_authors and associated methods and types
 #    22-Sep-2018 jdw add _pdbx_struct_assembly.rcsb_assembly_candidate
+#    30-Sep-2019 jdw addded rcsb_repository_holdings_current, save_rcsb_repository_holdings_current,
+#                    rcsb_repository_holdings_update, rcsb_repository_holdings_removed,
+#                    rcsb_repository_holdings_unreleased, rcsb_repository_holdings_removed_audit_author,
+#                    rcsb_repository_holdings_superseded, rcsb_entity_source_organism
+#     2-Oct-2019 jdw add category rcsb_entity_source_organism, and items
+#                   _entity.rcsb_multiple_source_flag and _entity.rcsb_source_part_count
 #
 ###########################################################################
 
@@ -31,12 +37,23 @@ data_rcsb_mmcif_ext.dic
 
     _dictionary.title           rcsb_mmcif_ext.dic
     _dictionary.datablock_id    rcsb_mmcif_ext.dic
-    _dictionary.version         0.100
+    _dictionary.version         0.101
 #
      loop_
     _dictionary_history.version
     _dictionary_history.update
     _dictionary_history.revision
+  0.101   2018-10-02
+;
+  Changes (jdw):
+  + add _pdbx_struct_assembly.rcsb_assembly_candidate
+  + add categories rcsb_repository_holdings_current, save_rcsb_repository_holdings_current,
+           rcsb_repository_holdings_update, rcsb_repository_holdings_removed,
+           rcsb_repository_holdings_unreleased, rcsb_repository_holdings_removed_audit_author,
+           rcsb_repository_holdings_superseded, rcsb_entity_source_organism
+  + add category rcsb_entity_source_organism, and itemsRelease as provisional version 0.100
+;
+
   0.100   2018-06-11
 ;
   Changes (jdw):
@@ -90,6 +107,10 @@ data_rcsb_mmcif_ext.dic
                '[][ \t_(),.;:"&<>/\{}'`~!@#$%?+=*A-Za-z0-9|^-]*'
 ;              semicolon separated alpha numeric text
 ;
+               alphanum-csv      char
+               '[][ \t_(),.;:"&<>/\{}'`~!@#$%?+=*A-Za-z0-9|^-]*'
+;              comma separated alpha numeric text
+;
 
 ##################
 ## SUB_CATEGORY ##
@@ -114,7 +135,7 @@ _method_list.id
 _method_list.code
 _method_list.language
 _method_list.inline
-method_cat_size calculate python_3.6
+method_cat_size calculate python_3.7
 ;
 sys.stdout.write("Category %s\n" % self.getName())
 sys.stdout.write("Number of rows %d \n" % len(self.getRowList()))
@@ -128,11 +149,12 @@ rcsb_add_deposited_assembly          calculate_with_helper python  'DictMethodHe
 rcsb_filter_assembly_details         calculate_with_helper python  'DictMethodHelper.filterAssemblyDetails'
 rcsb_filter_assembly_details         calculate_with_helper python  'DictMethodHelper.filterAssemblyDetails'
 rcsb_assembly_candidates             calculate_with_helper python  'DictMethodHelper.assignAssemblyCandidates'
+rcsb_entity_source_organism          calculate_with_helper python  'DictMethodHelper.filterSourceOrganismDetails'
 rcsb_aggregate_citation_authors      calculate_with_helper python  'DictMethodHelper.aggregateCitationAuthors'
 rcsb_entry_container_identifiers     calculate_with_helper python  'DictMethodHelper.buildContainerEntryIds'
 rcsb_entity_container_identifiers    calculate_with_helper python  'DictMethodHelper.buildContainerEntityIds'
 rcsb_assembly_container_identifiers  calculate_with_helper python  'DictMethodHelper.buildContainerAssemblyIds'
-
+rcsb_item_method_deferred            calculate_with_helper python  'DictMethodHelper.deferredItemMethod'
 ##
 ##  Extension definitions start here -
 ##
@@ -225,6 +247,37 @@ save__citation.rcsb_authors
     _item_methods.method_id      'rcsb_aggregate_citation_authors'
      save_
 
+############
+## ENTITY ##
+############
+
+save__entity.rcsb_multiple_source_flag
+    _item_description.description
+;  A code indicating the entity has multiple biological sources.
+
+;
+    _item.name                  '_entity.rcsb_multiple_source_flag'
+    _item.category_id             entity
+    _item.mandatory_code          no
+    _item_type.code               code
+    loop_
+    _item_enumeration.value
+    'Y' 'N'
+     _item_methods.method_id     'rcsb_item_method_deferred'
+     save_
+
+save__entity.rcsb_source_part_count
+    _item_description.description
+;  The number of biological sources for the entity.
+
+;
+    _item.name                  '_entity.rcsb_source_part_count'
+    _item.category_id             entity
+    _item.mandatory_code          no
+    _item_type.code               int
+     _item_methods.method_id     'rcsb_item_method_deferred'
+     save_
+
 ##############################
 ## PDBX_STRUCT_ASSEMBLY_*   ##
 ##############################
@@ -248,7 +301,7 @@ save__pdbx_struct_assembly_gen.ordinal
     _item.category_id             pdbx_struct_assembly_gen
     _item.mandatory_code          yes
     _item_type.code               int
-    _item_methods.method_id     'rcsb_row_index'
+    _item_methods.method_id      'rcsb_row_index'
     _pdbx_item_context.type       RCSB_CATEGORY_KEY_SUBSTITION
     _pdbx_item_context.item_name  '_pdbx_struct_assembly_gen.ordinal'
      save_
@@ -539,8 +592,8 @@ save_rcsb_data_exchange_status
 ;
      loop_
      _rcsb_data_exchange_status.update_id
-     _rcsb_data_exchange_status.database
-     _rcsb_data_exchange_status.object
+     _rcsb_data_exchange_status.database_name
+     _rcsb_data_exchange_status.object_name
      _rcsb_data_exchange_status.update_status_flag
      _rcsb_data_exchange_status.update_begin_timestamp
      _rcsb_data_exchange_status.update_end_timestamp
@@ -565,22 +618,33 @@ save__rcsb_data_exchange_status.update_id
      save_
 
 
-save__rcsb_data_exchange_status.database
+save__rcsb_data_exchange_status.database_name
     _item_description.description
 ;    Name of the database container for the current data exchange status record.
 ;
-    _item.name                  '_rcsb_data_exchange_status.database'
+    _item.name                  '_rcsb_data_exchange_status.database_name'
     _item.category_id             rcsb_data_exchange_status
     _item.mandatory_code          yes
     _item_type.code               code
     _item_example.case          'chem_comp_v5'
      save_
 
-save__rcsb_data_exchange_status.status_flag
+save__rcsb_data_exchange_status.object_name
+    _item_description.description
+;    Name of the database object for the current data exchange status record.
+;
+    _item.name                  '_rcsb_data_exchange_status.object_name'
+    _item.category_id             rcsb_data_exchange_status
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          'chem_comp_v5_O_2'
+     save_
+
+save__rcsb_data_exchange_status.update_status_flag
     _item_description.description
 ;    Success status for the current data exchange status record.
 ;
-    _item.name                  '_rcsb_data_exchange_status.status_flag'
+    _item.name                  '_rcsb_data_exchange_status.update_status_flag'
     _item.category_id             rcsb_data_exchange_status
     _item.mandatory_code          yes
     _item_type.code               code
@@ -732,9 +796,11 @@ save_rcsb_entity_container_identifiers
      loop_
     _rcsb_entity_container_identifiers.entry_id
     _rcsb_entity_container_identifiers.entity_id
-    1abc  1
-    1abc  2
-    1abc  3
+    _rcsb_entity_container_identifiers.asym_ids
+    _rcsb_entity_container_identifiers.auth_asym_ids
+    1abc  1 A A
+    1abc  2 B B
+    1abc  3 C C
 
 ;
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -768,6 +834,27 @@ save__rcsb_entity_container_identifiers.entity_id
     _item_linked.parent_name      '_entity.id'
      save_
 
+save__rcsb_entity_container_identifiers.asym_ids
+    _item_description.description
+;    Instance identifiers corresponding to copies of the entity in this container.
+;
+    _item.name                  '_rcsb_entity_container_identifiers.asym_ids'
+    _item.category_id             rcsb_entity_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               alphanum-csv
+     save_
+
+save__rcsb_entity_container_identifiers.auth_asym_ids
+    _item_description.description
+;    Author instance identifiers corresponding to copies of the entity in this container.
+;
+    _item.name                  '_rcsb_entity_container_identifiers.auth_asym_ids'
+    _item.category_id             rcsb_entity_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               alphanum-csv
+     save_
+##
+##
 save_rcsb_assembly_container_identifiers
     _category.description
 ;        The rcsb_assembly_container_identifiers records identifiers relevant to the
@@ -828,3 +915,1017 @@ save__rcsb_assembly_container_identifiers.assembly_id
     _item_linked.child_name       '_rcsb_assembly_container_identifiers.assembly_id'
     _item_linked.parent_name      '_pdbx_struct_assembly.id'
      save_
+
+######################################
+## RCSB_REPOSITORY_HOLDINGS_CURRENT ##
+######################################
+
+save_rcsb_repository_holdings_current
+    _category.description
+;        The rcsb_repository_holdings_current category records the
+         accession codes and content content types with released status
+         in the PDB repository.
+;
+    _category.id                  rcsb_repository_holdings_current
+    _category.mandatory_code      no
+    loop_
+    _category_key.name          '_rcsb_repository_holdings_current.update_id'
+                                '_rcsb_repository_holdings_current.entry_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     loop_
+     _rcsb_repository_holdings_current.update_id
+     _rcsb_repository_holdings_current.entry_id
+     _rcsb_repository_holdings_current.repository_content_types
+    2018_23 1ABC 'coordinates,struture factors'
+    # ... abbreviated ...
+
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_repository_holdings_current
+     save_
+
+save__rcsb_repository_holdings_current.update_id
+    _item_description.description
+;    Identifier for the current data exchange status record.
+;
+    _item.name                  '_rcsb_repository_holdings_current.update_id'
+    _item.category_id             rcsb_repository_holdings_current
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '2018_23'
+     save_
+
+
+save__rcsb_repository_holdings_current.entry_id
+    _item_description.description
+;    The PDB entry accession code.
+;
+    _item.name                  '_rcsb_repository_holdings_current.entry_id'
+    _item.category_id             rcsb_repository_holdings_current
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '1ABC'
+     save_
+
+save__rcsb_repository_holdings_current.repository_content_types
+    _item_description.description
+;    The list of content types associated with this entry.
+;
+    _item.name                  '_rcsb_repository_holdings_current.repository_content_types'
+    _item.category_id             rcsb_repository_holdings_current
+    _item.mandatory_code          yes
+    _item_type.code               alphanum-csv
+    _item_example.case           'coordinates'
+    loop_
+    _item_enumeration.value
+    'coordinates' 'NMR restraints' 'NMR chemical shifts' 'structure factors'
+
+     save_
+
+###
+#####################################
+## RCSB_REPOSITORY_HOLDINGS_UPDATE ##
+#####################################
+
+save_rcsb_repository_holdings_update
+    _category.description
+;        The rcsb_repository_holdings_update category records the
+         accession codes and content types with released status in
+         a PDB repository update.
+;
+    _category.id                  rcsb_repository_holdings_update
+    _category.mandatory_code      no
+    loop_
+    _category_key.name          '_rcsb_repository_holdings_update.update_id'
+                                '_rcsb_repository_holdings_update.entry_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     loop_
+     _rcsb_repository_holdings_update.update_id
+     _rcsb_repository_holdings_update.entry_id
+     _rcsb_repository_holdings_update.repository_content_types
+    2018_23 7ABC 'coordinates,struture factors'
+    # ... abbreviated ...
+
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_repository_holdings_update
+     save_
+
+save__rcsb_repository_holdings_update.update_id
+    _item_description.description
+;    Identifier for the current data exchange status record.
+;
+    _item.name                  '_rcsb_repository_holdings_update.update_id'
+    _item.category_id             rcsb_repository_holdings_update
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '2018_23'
+     save_
+
+
+save__rcsb_repository_holdings_update.entry_id
+    _item_description.description
+;    The PDB entry accession code.
+;
+    _item.name                  '_rcsb_repository_holdings_update.entry_id'
+    _item.category_id             rcsb_repository_holdings_update
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '1ABC'
+     save_
+
+save__rcsb_repository_holdings_update.repository_content_types
+    _item_description.description
+;    The list of content types associated with this entry.
+;
+    _item.name                  '_rcsb_repository_holdings_update.repository_content_types'
+    _item.category_id             rcsb_repository_holdings_update
+    _item.mandatory_code          yes
+    _item_type.code               alphanum-csv
+    _item_example.case           'coordinates'
+    loop_
+    _item_enumeration.value
+    'coordinates' 'NMR restraints' 'NMR chemical shifts' 'structure factors'
+
+     save_
+
+######################################
+## RCSB_REPOSITORY_HOLDINGS_REMOVED ##
+######################################
+
+save_rcsb_repository_holdings_removed
+    _category.description
+;        The rcsb_repository_holdings_removed category records the
+         accession codes and content types with released status in
+         a PDB repository update.
+;
+    _category.id                  rcsb_repository_holdings_removed
+    _category.mandatory_code      no
+    loop_
+    _category_key.name          '_rcsb_repository_holdings_removed.update_id'
+                                '_rcsb_repository_holdings_removed.entry_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     loop_
+     _rcsb_repository_holdings_removed.update_id
+     _rcsb_repository_holdings_removed.entry_id
+     _rcsb_repository_holdings_removed.deposit_date
+     _rcsb_repository_holdings_removed.release_date
+     _rcsb_repository_holdings_removed.remove_date
+     _rcsb_repository_holdings_removed.title
+     _rcsb_repository_holdings_removed.audit_authors
+     _rcsb_repository_holdings_removed.id_codes_replaced_by
+    2018_23 1ABC 2016-07-11  2016-09-11  2017-04-11 'The structure of ...'  'Bleary, Percival R.;O'Neil, F.K.' 7ABC
+    # ... abbreviated ...
+
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_repository_holdings_removed
+     save_
+
+save__rcsb_repository_holdings_removed.update_id
+    _item_description.description
+;    Identifier for the current data exchange status record.
+;
+    _item.name                  '_rcsb_repository_holdings_removed.update_id'
+    _item.category_id             rcsb_repository_holdings_removed
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '2018_23'
+     save_
+
+
+save__rcsb_repository_holdings_removed.entry_id
+    _item_description.description
+;    The PDB entry accession code.
+;
+    _item.name                  '_rcsb_repository_holdings_removed.entry_id'
+    _item.category_id             rcsb_repository_holdings_removed
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '1ABC'
+     save_
+
+#save__rcsb_repository_holdings_removed.repository_content_types
+#    _item_description.description
+#;    The list of content types associated with this entry.
+#;
+#    _item.name                  '_rcsb_repository_holdings_removed.repository_content_types'
+#    _item.category_id             rcsb_repository_holdings_removed
+#    _item.mandatory_code          no#
+#    _item_type.code               alphanum-csv
+#    _item_example.case           'coordinates'
+#    loop_
+#    _item_enumeration.value
+#    'coordinates' 'NMR restraints' 'NMR chemical shifts' 'structure factors'
+#
+#     save_
+
+save__rcsb_repository_holdings_removed.deposit_date
+    _item_description.description
+;    The entry deposition date.
+;
+    _item.name                  '_rcsb_repository_holdings_removed.deposit_date'
+    _item.category_id             rcsb_repository_holdings_removed
+    _item.mandatory_code          no
+    _item_type.code               'yyyy-mm-dd'
+    _item_example.case            '2016-07-11'
+     save_
+
+save__rcsb_repository_holdings_removed.release_date
+    _item_description.description
+;    The initial date the entry was released in the PDB repository.
+;
+    _item.name                  '_rcsb_repository_holdings_removed.release_date'
+    _item.category_id             rcsb_repository_holdings_removed
+    _item.mandatory_code          no
+    _item_type.code               'yyyy-mm-dd'
+    _item_example.case            '2016-09-11'
+     save_
+
+save__rcsb_repository_holdings_removed.remove_date
+    _item_description.description
+;    The date the entry was removed from the PDB repository.
+;
+    _item.name                  '_rcsb_repository_holdings_removed.remove_date'
+    _item.category_id             rcsb_repository_holdings_removed
+    _item.mandatory_code          no
+    _item_type.code               'yyyy-mm-dd'
+    _item_example.case            '2018-07-11'
+     save_
+
+save__rcsb_repository_holdings_removed.title
+    _item_description.description
+;    The entry title.
+;
+    _item.name                  '_rcsb_repository_holdings_removed.title'
+    _item.category_id             rcsb_repository_holdings_removed
+    _item.mandatory_code          no
+    _item_type.code               text
+    _item_example.case            'The structure of this interesting pathogen molecule'
+     save_
+
+
+save__rcsb_repository_holdings_removed.details
+    _item_description.description
+;    The entry title.
+;
+    _item.name                  '_rcsb_repository_holdings_removed.details'
+    _item.category_id             rcsb_repository_holdings_removed
+    _item.mandatory_code          no
+    _item_type.code               text
+    _item_example.case
+; An improved ligand starting model was found to significantly improve the model
+and refinement statistics for this entry.
+;
+     save_
+
+save__rcsb_repository_holdings_removed.audit_authors
+   _item_description.description
+;              Names of the authors of the entry.
+;
+
+    _item.name                  '_rcsb_repository_holdings_removed.audit_authors'
+    _item.category_id             rcsb_repository_holdings_removed
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_examples.case          'Bleary, Percival R.;O'Neil, F.K.'
+     save_
+
+save__rcsb_repository_holdings_removed.id_codes_replaced_by
+    _item_description.description
+;    The list of superseding PDB accession codes for the removed entry.
+;
+    _item.name                  '_rcsb_repository_holdings_remove.id_codes_replaced_by'
+    _item.category_id             rcsb_repository_holdings_remove
+    _item.mandatory_code          no
+    _item_type.code               alphanum-csv
+    _item_example.case           '4ABC,3ABC'
+     save_
+
+
+
+#########################################
+## RCSB_REPOSITORY_HOLDINGS_UNRELEASED ##
+#########################################
+
+save_rcsb_repository_holdings_unreleased
+    _category.description
+;        The rcsb_repository_holdings_unreleased category records the
+         details of unreleased PDB entries.
+;
+    _category.id                  rcsb_repository_holdings_unreleased
+    _category.mandatory_code      no
+    loop_
+    _category_key.name          '_rcsb_repository_holdings_unreleased.update_id'
+                                '_rcsb_repository_holdings_unreleased.entry_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     loop_
+     _rcsb_repository_holdings_unreleased.update_id
+     _rcsb_repository_holdings_unreleased.entry_id
+     _rcsb_repository_holdings_unreleased.status_code
+     _rcsb_repository_holdings_unreleased.deposit_date
+     _rcsb_repository_holdings_unreleased.title
+     _rcsb_repository_holdings_unreleased.audit_authors
+     _rcsb_repository_holdings_unreleased.author_prerelease_sequence_status
+    2018_23 1ABC PROC 2018-08-11 'The structure of ...' 'Bleary, Percival R.;O'Neil, F.K.' 'RELEASE_IMMEDIATELY'
+    # ... abbreviated ...
+
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_repository_holdings_unreleased
+     save_
+
+save__rcsb_repository_holdings_unreleased.update_id
+    _item_description.description
+;    Identifier for the current data exchange status record.
+;
+    _item.name                  '_rcsb_repository_holdings_unreleased.update_id'
+    _item.category_id             rcsb_repository_holdings_unreleased
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '2018_23'
+     save_
+
+
+save__rcsb_repository_holdings_unreleased.entry_id
+    _item_description.description
+;    The PDB entry accession code.
+;
+    _item.name                  '_rcsb_repository_holdings_unreleased.entry_id'
+    _item.category_id             rcsb_repository_holdings_unreleased
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '1ABC'
+     save_
+
+save__rcsb_repository_holdings_unreleased.status_code
+    _item_description.description
+;    The release status for the entry.
+;
+    _item.name                  '_rcsb_repository_holdings_unreleased.status_codes'
+    _item.category_id             rcsb_repository_holdings_unreleased
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case           'HPUB'
+    loop_
+    _item_enumeration.value
+    'HPUB' 'HOLD' 'WDRN' 'PROC' 'POLC' 'REPL' 'AUTH' 'REFI' 'WAIT' 'AUCO'
+
+     save_
+
+save__rcsb_repository_holdings_unreleased.deposit_date
+    _item_description.description
+;    The entry deposition date.
+;
+    _item.name                  '_rcsb_repository_holdings_unreleased.deposit_date'
+    _item.category_id             rcsb_repository_holdings_unreleased
+    _item.mandatory_code          no
+    _item_type.code               'yyyy-mm-dd'
+    _item_example.case            '2016-07-11'
+     save_
+
+save__rcsb_repository_holdings_unreleased.deposit_date_coordinates
+    _item_description.description
+;    The deposition date of entry coordinate data.
+;
+    _item.name                  '_rcsb_repository_holdings_unreleased.deposit_date_coordinates'
+    _item.category_id             rcsb_repository_holdings_unreleased
+    _item.mandatory_code          no
+    _item_type.code               'yyyy-mm-dd'
+    _item_example.case            '2016-07-11'
+     save_
+
+save__rcsb_repository_holdings_unreleased.deposit_date_structure_factors
+    _item_description.description
+;    The deposition date of entry structure factor data.
+;
+    _item.name                  '_rcsb_repository_holdings_unreleased.deposit_date_structure_factors'
+    _item.category_id             rcsb_repository_holdings_unreleased
+    _item.mandatory_code          no
+    _item_type.code               'yyyy-mm-dd'
+    _item_example.case            '2016-07-11'
+     save_
+
+save__rcsb_repository_holdings_unreleased.deposit_date_nmr_restraints
+    _item_description.description
+;    The deposition date of entry NMR restraint data.
+;
+    _item.name                  '_rcsb_repository_holdings_unreleased.deposit_date_nmr_restraints'
+    _item.category_id             rcsb_repository_holdings_unreleased
+    _item.mandatory_code          no
+    _item_type.code               'yyyy-mm-dd'
+    _item_example.case            '2016-07-11'
+     save_
+
+save__rcsb_repository_holdings_unreleased.hold_date_coordinates
+    _item_description.description
+;    The embargo date of entry coordinate data.
+;
+    _item.name                  '_rcsb_repository_holdings_unreleased.hold_date_coordinates'
+    _item.category_id             rcsb_repository_holdings_unreleased
+    _item.mandatory_code          no
+    _item_type.code               'yyyy-mm-dd'
+    _item_example.case            '2016-07-11'
+     save_
+
+save__rcsb_repository_holdings_unreleased.hold_date_structure_factors
+    _item_description.description
+;    The embargo date of entry structure factor data.
+;
+    _item.name                  '_rcsb_repository_holdings_unreleased.hold_date_structure_factors'
+    _item.category_id             rcsb_repository_holdings_unreleased
+    _item.mandatory_code          no
+    _item_type.code               'yyyy-mm-dd'
+    _item_example.case            '2016-07-11'
+     save_
+
+save__rcsb_repository_holdings_unreleased.hold_date_nmr_restraints
+    _item_description.description
+;    The embargo date of entry NMR restraint data.
+;
+    _item.name                  '_rcsb_repository_holdings_unreleased.hold_date_nmr_restraints'
+    _item.category_id             rcsb_repository_holdings_unreleased
+    _item.mandatory_code          no
+    _item_type.code               'yyyy-mm-dd'
+    _item_example.case            '2016-07-11'
+     save_
+
+save__rcsb_repository_holdings_unreleased.release_date
+    _item_description.description
+;    The release date for the entry.
+;
+    _item.name                  '_rcsb_repository_holdings_unreleased.release_date'
+    _item.category_id             rcsb_repository_holdings_unreleased
+    _item.mandatory_code          no
+    _item_type.code               'yyyy-mm-dd'
+    _item_example.case            '2016-09-11'
+     save_
+#
+save__rcsb_repository_holdings_unreleased.title
+    _item_description.description
+;    The entry title.
+;
+    _item.name                  '_rcsb_repository_holdings_unreleased.title'
+    _item.category_id             rcsb_repository_holdings_unreleased
+    _item.mandatory_code          no
+    _item_type.code               text
+    _item_example.case            'The structure of this interesting pathogen molecule'
+     save_
+
+
+save__rcsb_repository_holdings_unreleased.audit_authors
+   _item_description.description
+;              Names of the authors of the entry.
+;
+
+    _item.name                  '_rcsb_repository_holdings_unreleased.audit_authors'
+    _item.category_id             rcsb_repository_holdings_unreleased
+    _item.mandatory_code          no
+    #_item_type.code               alphanum-scsv
+    _item_type.code               text
+    _item_examples.case          'Bleary, Percival R., O'Neil, F.K.'
+     save_
+
+save__rcsb_repository_holdings_unreleased.author_prerelease_sequence_status
+    _item_description.description
+;    The prerelease status for the molecular sequences for the entry .
+;
+    _item.name                  '_rcsb_repository_holdings_unreleased.author_prerelease_sequence_status'
+    _item.category_id             rcsb_repository_holdings_unreleased
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_example.case           'RELEASE IMMEDIATELY'
+    loop_
+    _item_enumeration.value
+    'HOLD FOR RELEASE' 'RELEASE IMMEDIATELY'
+
+     save_
+
+
+###################################################
+## RCSB_REPOSITORY_HOLDINGS_REMOVED_AUDIT_AUTHOR ##
+###################################################
+
+save_rcsb_repository_holdings_removed_audit_author
+    _category.description
+;        The rcsb_repository_holdings_removed_audit_author category records
+         audit author details for entries removed from PDB repository.
+;
+    _category.id                  rcsb_repository_holdings_removed_audit_author
+    _category.mandatory_code      no
+    loop_
+    _category_key.name          '_rcsb_repository_holdings_removed_audit_author.update_id'
+                                '_rcsb_repository_holdings_removed_audit_author.entry_id'
+                                '_rcsb_repository_holdings_removed_audit_author.ordinal_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     loop_
+     _rcsb_repository_holdings_removed_audit_author.update_id
+     _rcsb_repository_holdings_removed_audit_author.entry_id
+     _rcsb_repository_holdings_removed_audit_author.ordinal_id
+     _rcsb_repository_holdings_removed_audit_author.audit_author
+    2018_23 1ABC 1 'Bleary, Percival R.''
+    # ... abbreviated ...
+
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_repository_holdings_removed_audit_author
+     save_
+
+save__rcsb_repository_holdings_removed_audit_author.update_id
+    _item_description.description
+;    Identifier for the current data exchange status record.
+;
+    _item.name                  '_rcsb_repository_holdings_removed_audit_author.update_id'
+    _item.category_id             rcsb_repository_holdings_removed_audit_author
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '2018_23'
+     save_
+
+
+save__rcsb_repository_holdings_removed_audit_author.entry_id
+    _item_description.description
+;    The PDB entry accession code.
+;
+    _item.name                  '_rcsb_repository_holdings_removed_audit_author.entry_id'
+    _item.category_id             rcsb_repository_holdings_removed_audit_author
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '1ABC'
+     save_
+
+save__rcsb_repository_holdings_removed_audit_author.ordinal_id
+    _item_description.description
+;    An ordinal identifier for an audit author in an entry.
+;
+    _item.name                  '_rcsb_repository_holdings_removed_audit_author.ordinal_id'
+    _item.category_id             rcsb_repository_holdings_removed_audit_author
+    _item.mandatory_code          yes
+    _item_type.code               int
+    _item_example.case            1
+     save_
+
+save__rcsb_repository_holdings_removed_audit_author.audit_author
+   _item_description.description
+;              Name of the audit author of the entry.
+;
+
+    _item.name                  '_rcsb_repository_holdings_removed_audit_author.audit_author'
+    _item.category_id             rcsb_repository_holdings_removed_audit_author
+    _item.mandatory_code          no
+    _item_type.code               line
+    _item_examples.case          'Bleary, Percival R.'
+     save_
+
+###
+
+#########################################
+## RCSB_REPOSITORY_HOLDINGS_SUPERSEDED ##
+#########################################
+
+save_rcsb_repository_holdings_superseded
+    _category.description
+;        The rcsb_repository_holdings_superseded category records the
+         accession code details for superseding PDB entries.
+;
+    _category.id                  rcsb_repository_holdings_superseded
+    _category.mandatory_code      no
+    loop_
+    _category_key.name          '_rcsb_repository_holdings_superseded.update_id'
+                                '_rcsb_repository_holdings_superseded.entry_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     loop_
+     _rcsb_repository_holdings_superseded.update_id
+     _rcsb_repository_holdings_superseded.entry_id
+     _rcsb_repository_holdings_superseded.id_codes_superseded
+    2018_23 7ABC '1ABC,2ABC'
+    # ... abbreviated ...
+
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_repository_holdings_superseded
+     save_
+
+save__rcsb_repository_holdings_superseded.update_id
+    _item_description.description
+;    Identifier for the current data exchange status record.
+;
+    _item.name                  '_rcsb_repository_holdings_superseded.update_id'
+    _item.category_id             rcsb_repository_holdings_superseded
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '2018_23'
+     save_
+
+
+save__rcsb_repository_holdings_superseded.entry_id
+    _item_description.description
+;    The PDB entry accession code of a superseding entry.
+;
+    _item.name                  '_rcsb_repository_holdings_superseded.entry_id'
+    _item.category_id             rcsb_repository_holdings_superseded
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '1ABC'
+     save_
+
+save__rcsb_repository_holdings_superseded.id_codes_superseded
+    _item_description.description
+;    The PDB accesion codes supersed by this entry.
+;
+    _item.name                  '_rcsb_repository_holdings_superseded.id_codes_superseded
+    _item.category_id             rcsb_repository_holdings_superseded
+    _item.mandatory_code          yes
+    _item_type.code               alphanum-csv
+    _item_example.case           '1ABC'
+     save_
+
+
+#################################
+## RCSB_ENTITY_SOURCE_ORGANISM ##
+#################################
+#
+save_rcsb_entity_source_organism
+    _category.description
+;        Data items in the rcsb_entity_source_organism category record details of
+               the biological source from which the entity was obtained.
+;
+    _category.id                  rcsb_entity_source_organism
+    _category.mandatory_code      no
+    loop_
+    _category_key.name          '_rcsb_entity_source_organism.entity_id'
+                                '_rcsb_entity_source_organism.pdbx_src_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+    loop_
+    _rcsb_entity_source_organism.entity_id
+    _rcsb_entity_source_organism.pdbx_src_id
+    _rcsb_entity_source_organism.source_type
+    _rcsb_entity_source_organism.scientific_name
+    _rcsb_entity_source_organism.common_name
+    _rcsb_entity_source_organism.ncbi_taxonomy_id
+    _rcsb_entity_source_organism.provenance_code
+    _rcsb_entity_source_organism.beg_seq_num
+    _rcsb_entity_source_organism.end_seq_num
+    1 1 natural 'Homo sapiens' human 9606  'pdb-primary-data' 1 202
+    # ... abbreviated
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_entity_source_organism
+   _category_methods.method_id         rcsb_entity_source_organism
+    save_
+
+#
+save__rcsb_entity_source_organism.entity_id
+    _item_description.description
+;    A unique identifer for the entity
+;
+    _item.name                  '_rcsb_entity_source_organism.entity_id'
+    _item.category_id             rcsb_entity_source_organism
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_entity_source_organism.entity_id'
+    _item_linked.parent_name      '_entity.id'
+     save_
+
+save__rcsb_entity_source_organism.pdbx_src_id
+    _item_description.description
+;    An identifier for the entity segment.
+;
+    _item.name                  '_rcsb_entity_source_organism.pdbx_src_id'
+    _item.category_id             rcsb_entity_source_organism
+    _item.mandatory_code          yes
+    _item_type.code               code
+     save_
+
+save__rcsb_entity_source_organism.scientific_name
+    _item_description.description
+;    The scientific name of the source organism.
+;
+    _item.name                  '_rcsb_entity_source_organism.scientific_name'
+    _item.category_id             rcsb_entity_source_organism
+    _item.mandatory_code          no
+    _item_type.code               text
+     save_
+
+save__rcsb_entity_source_organism.common_name
+    _item_description.description
+;    The common name for the source organism.
+;
+    _item.name                  '_rcsb_entity_source_organism.common_name'
+    _item.category_id             rcsb_entity_source_organism
+    _item.mandatory_code          no
+    _item_type.code               text
+     save_
+
+save__rcsb_entity_source_organism.ncbi_taxonomy_id
+    _item_description.description
+;  NCBI Taxonomy identifier for the gene source organism.
+
+   Reference:
+
+   Wheeler DL, Chappey C, Lash AE, Leipe DD, Madden TL, Schuler GD,
+   Tatusova TA, Rapp BA (2000). Database resources of the National
+   Center for Biotechnology Information. Nucleic Acids Res 2000 Jan
+   1;28(1):10-4
+
+   Benson DA, Karsch-Mizrachi I, Lipman DJ, Ostell J, Rapp BA,
+   Wheeler DL (2000). GenBank. Nucleic Acids Res 2000 Jan 1;28(1):15-18.
+
+;
+    _item.name                  '_rcsb_entity_source_organism.ncbi_taxonomy_id'
+    _item.category_id            rcsb_entity_source_organism
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entity_source_organism.source_type
+    _item_description.description
+;  The source type for the entity
+
+;
+    _item.name                  '_rcsb_entity_source_organism.source_type'
+    _item.category_id            rcsb_entity_source_organism
+    _item.mandatory_code          no
+    _item_type.code               line
+    loop_
+    _item_enumeration.value
+    'natural' 'genetically engineered' 'synthetic'
+     save_
+
+save__rcsb_entity_source_organism.provenance_code
+    _item_description.description
+;  A code indicating the provenance of the source organism details for the entity
+
+;
+    _item.name                  '_rcsb_entity_source_organism.provenance_code'
+    _item.category_id            rcsb_entity_source_organism
+    _item.mandatory_code          no
+    _item_type.code               line
+    loop_
+    _item_enumeration.value
+    'pdb-primary-data'
+     save_
+
+save__rcsb_entity_source_organism.beg_seq_num
+    _item_description.description
+;              The beginning polymer sequence position for the polymer section corresponding
+               to this source.
+
+               A reference to the sequence position in the entity_poly category.
+;
+    _item.name                  '_rcsb_entity_source_organism.beg_seq_num'
+    _item.category_id             rcsb_entity_source_organism
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entity_source_organism.end_seq_num
+    _item_description.description
+;              The ending polymer sequence position for the polymer section corresponding
+               to this source.
+
+               A reference to the sequence position in the entity_poly category.
+;
+    _item.name                  '_rcsb_entity_source_organism.end_seq_num'
+    _item.category_id             rcsb_entity_source_organism
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+##
+
+
+
+###############################
+## RCSB_ENTITY_HOST_ORGANISM ##
+###############################
+#
+save_rcsb_entity_host_organism
+    _category.description
+;        Data items in the rcsb_entity_host_organism category record details of
+         the biological source of the host organism used to engineer the entity.
+;
+    _category.id                  rcsb_entity_host_organism
+    _category.mandatory_code      no
+    loop_
+    _category_key.name          '_rcsb_entity_host_organism.entity_id'
+                                '_rcsb_entity_host_organism.pdbx_src_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+    loop_
+    _rcsb_entity_host_organism.entity_id
+    _rcsb_entity_host_organism.pdbx_src_id
+    _rcsb_entity_host_organism.scientific_name
+    _rcsb_entity_host_organism.common_name
+    _rcsb_entity_host_organism.ncbi_taxonomy_id
+    _rcsb_entity_host_organism.provenance_code
+    _rcsb_entity_host_organism.beg_seq_num
+    _rcsb_entity_host_organism.end_seq_num
+    1 1 'Escherichia coli' 'E. coli' 562  'pdb-primary-data' 1 102
+    # ... abbreviated
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_entity_host_organism
+   _category_methods.method_id         rcsb_entity_source_organism
+    save_
+
+#
+save__rcsb_entity_host_organism.entity_id
+    _item_description.description
+;    A unique identifer for the entity
+;
+    _item.name                  '_rcsb_entity_host_organism.entity_id'
+    _item.category_id             rcsb_entity_host_organism
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_entity_host_organism.entity_id'
+    _item_linked.parent_name      '_entity.id'
+     save_
+
+save__rcsb_entity_host_organism.pdbx_src_id
+    _item_description.description
+;    An identifier for an entity segment.
+;
+    _item.name                  '_rcsb_entity_host_organism.pdbx_src_id'
+    _item.category_id             rcsb_entity_host_organism
+    _item.mandatory_code          yes
+    _item_type.code               code
+     save_
+
+save__rcsb_entity_host_organism.scientific_name
+    _item_description.description
+;    The scientific name of the host organism
+;
+    _item.name                  '_rcsb_entity_host_organism.scientific_name'
+    _item.category_id             rcsb_entity_host_organism
+    _item.mandatory_code          no
+    _item_type.code               text
+     save_
+
+save__rcsb_entity_host_organism.common_name
+    _item_description.description
+;    The common name of the host organism
+;
+    _item.name                  '_rcsb_entity_host_organism.common_name'
+    _item.category_id             rcsb_entity_host_organism
+    _item.mandatory_code          no
+    _item_type.code               text
+     save_
+
+save__rcsb_entity_host_organism.ncbi_taxonomy_id
+    _item_description.description
+;  NCBI Taxonomy identifier for the host organism.
+
+   Reference:
+
+   Wheeler DL, Chappey C, Lash AE, Leipe DD, Madden TL, Schuler GD,
+   Tatusova TA, Rapp BA (2000). Database resources of the National
+   Center for Biotechnology Information. Nucleic Acids Res 2000 Jan
+   1;28(1):10-4
+
+   Benson DA, Karsch-Mizrachi I, Lipman DJ, Ostell J, Rapp BA,
+   Wheeler DL (2000). GenBank. Nucleic Acids Res 2000 Jan 1;28(1):15-18.
+
+;
+    _item.name                  '_rcsb_entity_host_organism.ncbi_taxonomy_id'
+    _item.category_id            rcsb_entity_host_organism
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entity_host_organism.provenance_code
+    _item_description.description
+;  A code indicating the provenance of the host organism.
+
+;
+    _item.name                  '_rcsb_entity_host_organism.provenance_code'
+    _item.category_id            rcsb_entity_host_organism
+    _item.mandatory_code          no
+    _item_type.code               line
+    loop_
+    _item_enumeration.value
+    'pdb-primary-data'
+     save_
+
+save__rcsb_entity_host_organism.beg_seq_num
+    _item_description.description
+;              The beginning polymer sequence position for the polymer section corresponding
+               to this host organism.
+
+               A reference to the sequence position in the entity_poly category.
+;
+    _item.name                  '_rcsb_entity_host_organism.beg_seq_num'
+    _item.category_id             rcsb_entity_host_organism
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entity_host_organism.end_seq_num
+    _item_description.description
+;              The ending polymer sequence position for the polymer section corresponding
+               to this host organism.
+
+               A reference to the sequence position in the entity_poly category.
+;
+    _item.name                  '_rcsb_entity_host_organism.end_seq_num'
+    _item.category_id             rcsb_entity_host_organism
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+##
