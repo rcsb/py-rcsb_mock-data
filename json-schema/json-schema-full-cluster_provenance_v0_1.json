@@ -1,263 +1,180 @@
 {
-   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/", 
+   "type": "object", 
    "properties": {
-      "citation": {
+      "software": {
+         "type": "array", 
          "minItems": 1, 
+         "uniqueItems": true, 
          "items": {
+            "type": "object", 
             "properties": {
-               "id": {
-                  "description": "The value of _citation.id must uniquely identify a record in the\n CITATION list.\n\n The _citation.id 'primary' should be used to indicate the\n citation that the author(s) consider to be the most pertinent to\n the contents of the data block.\n\n Note that this item need not be a number; it can be any unique\n identifier.", 
+               "description": {
+                  "type": "string", 
                   "examples": [
-                     "primary", 
+                     "Uses method of restrained least squares"
+                  ], 
+                  "description": "Description of the software."
+               }, 
+               "compiler_version": {
+                  "type": "string", 
+                  "examples": [
+                     "3.1", 
+                     "2.1 alpha"
+                  ], 
+                  "description": "The version of the compiler used to compile the software."
+               }, 
+               "compiler_name": {
+                  "type": "string", 
+                  "examples": [
+                     "Convex Fortran", 
+                     "gcc", 
+                     "DEC C"
+                  ], 
+                  "description": "The compiler used to compile the software."
+               }, 
+               "contact_author_email": {
+                  "type": "string", 
+                  "examples": [
+                     "bourne@sdsc.edu"
+                  ], 
+                  "description": "The e-mail address of the person specified in\n _software.contact_author."
+               }, 
+               "pdbx_ordinal": {
+                  "type": "integer", 
+                  "examples": [
                      "1", 
                      "2"
                   ], 
-                  "type": "string"
+                  "description": "\nAn ordinal index for this category"
                }, 
-               "book_publisher": {
-                  "description": "The name of the publisher of the citation; relevant\n for books or book chapters.", 
+               "citation_id": {
+                  "type": "string", 
+                  "description": "This data item is a pointer to _citation.id in the CITATION\n category."
+               }, 
+               "mods": {
+                  "type": "string", 
                   "examples": [
-                     "John Wiley and Sons"
+                     "Added support for space group F432"
                   ], 
-                  "type": "string"
+                  "description": "Any noteworthy modifications to the base software, if applicable."
                }, 
-               "page_first": {
-                  "description": "The first page of the citation; relevant for journal\n articles, books and book chapters.", 
-                  "type": "string"
-               }, 
-               "rcsb_authors": {
-                  "uniqueItems": false, 
-                  "items": {
-                     "description": "Names of the authors of the citation; relevant for journal\n articles, books and book chapters.  Names are separated by semicolons.\n\n The family name(s), followed by a comma and including any\n dynastic components, precedes the first name(s) or initial(s).\n", 
-                     "examples": [
-                        "Bleary, Percival R.;O'Neil, F.K."
-                     ], 
-                     "type": "string"
-                  }, 
-                  "type": "array"
-               }, 
-               "journal_id_CSD": {
-                  "description": "The Cambridge Structural Database (CSD) code assigned to the\n journal cited; relevant for journal articles. This is also the\n system used at the Protein Data Bank (PDB).", 
+               "contact_author": {
+                  "type": "string", 
                   "examples": [
-                     "0070"
+                     "T. Alwyn Jones", 
+                     "Axel Brunger"
                   ], 
-                  "type": "string"
-               }, 
-               "book_id_ISBN": {
-                  "description": "The International Standard Book Number (ISBN) code assigned to\n the book cited; relevant for books or book chapters.", 
-                  "type": "string"
-               }, 
-               "abstract": {
-                  "description": "Abstract for the citation. This is used most when the\n citation is extracted from a bibliographic database that\n contains full text or abstract information.", 
-                  "type": "string"
-               }, 
-               "journal_issue": {
-                  "description": "Issue number of the journal cited; relevant for journal\n articles.", 
-                  "examples": [
-                     "2"
-                  ], 
-                  "type": "string"
-               }, 
-               "page_last": {
-                  "description": "The last page of the citation; relevant for journal\n articles, books and book chapters.", 
-                  "type": "string"
-               }, 
-               "book_publisher_city": {
-                  "description": "The location of the publisher of the citation; relevant\n for books or book chapters.", 
-                  "examples": [
-                     "London"
-                  ], 
-                  "type": "string"
-               }, 
-               "abstract_id_CAS": {
-                  "description": "The Chemical Abstracts Service (CAS) abstract identifier;\n relevant for journal articles.", 
-                  "type": "string"
+                  "description": "The recognized contact author of the software. This could be\n the original author, someone who has modified the code or\n someone who maintains the code.  It should be the person\n most commonly associated with the code."
                }, 
                "language": {
-                  "description": "Language in which the cited article is written.", 
-                  "examples": [
-                     "German"
-                  ], 
-                  "type": "string"
-               }, 
-               "database_id_Medline": {
-                  "minimum": 1, 
-                  "description": "Accession number used by Medline to categorize a specific\n bibliographic entry.", 
-                  "examples": [
-                     "89064067"
-                  ], 
-                  "type": "integer"
-               }, 
-               "coordinate_linkage": {
+                  "type": "string", 
+                  "description": "The major computing language in which the software is\n coded.", 
                   "enum": [
-                     "yes", 
-                     "n", 
-                     "no", 
-                     "y"
-                  ], 
-                  "description": "_citation.coordinate_linkage states whether this citation\n is concerned with precisely the set of coordinates given in the\n data block. If, for instance, the publication described the same\n structure, but the coordinates had undergone further refinement\n prior to the creation of the data block, the value of this data\n item would be 'no'.", 
-                  "type": "string"
-               }, 
-               "journal_abbrev": {
-                  "description": "Abbreviated name of the cited journal as given in the\n Chemical Abstracts Service Source Index.", 
-                  "examples": [
-                     "J. Mol. Biol."
-                  ], 
-                  "type": "string"
-               }, 
-               "year": {
-                  "description": "The year of the citation; relevant for journal articles, books\n and book chapters.", 
-                  "examples": [
-                     "1984"
-                  ], 
-                  "type": "integer"
-               }, 
-               "pdbx_database_id_PubMed": {
-                  "minimum": -1, 
-                  "description": "Ascession number used by PubMed to categorize a specific\n bibliographic entry.", 
-                  "examples": [
-                     "12627512"
-                  ], 
-                  "type": "integer"
-               }, 
-               "details": {
-                  "description": "A description of special aspects of the relationship\n of the contents of the data block to the literature item cited.", 
-                  "examples": [
-                     "citation relates to this precise\n                                  coordinate set", 
-                     "citation relates to earlier low-resolution\n                                  structure", 
-                     "citation relates to further refinement of\n                                  structure reported in citation 2"
-                  ], 
-                  "type": "string"
-               }, 
-               "country": {
-                  "description": "The country of publication; relevant for books\n and book chapters.", 
-                  "type": "string"
-               }, 
-               "journal_full": {
-                  "description": "Full name of the cited journal; relevant for journal articles.", 
-                  "examples": [
-                     "Journal of Molecular Biology"
-                  ], 
-                  "type": "string"
-               }, 
-               "unpublished_flag": {
-                  "enum": [
-                     "N", 
-                     "Y"
-                  ], 
-                  "description": "Flag to indicate that this citation will not be published.", 
-                  "type": "string"
-               }, 
-               "title": {
-                  "description": "The title of the citation; relevant for journal articles, books\n and book chapters.", 
-                  "examples": [
-                     "Structure of diferric duck ovotransferrin\n                                  at 2.35 Angstroms resolution."
-                  ], 
-                  "type": "string"
-               }, 
-               "pdbx_database_id_DOI": {
-                  "description": "Document Object Identifier used by doi.org to uniquely\n specify bibliographic entry.", 
-                  "examples": [
-                     "10.2345/S1384107697000225"
-                  ], 
-                  "type": "string"
-               }, 
-               "database_id_CSD": {
-                  "description": "Identifier ('refcode') of the database record in the Cambridge\n Structural Database that contains details of the cited structure.", 
-                  "examples": [
-                     "LEKKUH"
-                  ], 
-                  "type": "string"
-               }, 
-               "journal_id_ISSN": {
-                  "description": "The International Standard Serial Number (ISSN) code assigned to\n the journal cited; relevant for journal articles.", 
-                  "type": "string"
-               }, 
-               "journal_volume": {
-                  "description": "Volume number of the journal cited; relevant for journal\n articles.", 
-                  "examples": [
-                     "174"
-                  ], 
-                  "type": "string"
-               }, 
-               "book_title": {
-                  "description": "The title of the book in which the citation appeared; relevant\n for books or book chapters.", 
-                  "type": "string"
-               }, 
-               "journal_id_ASTM": {
-                  "description": "The American Society for Testing and Materials (ASTM) code\n assigned to the journal cited (also referred to as the CODEN\n designator of the Chemical Abstracts Service); relevant for\n journal articles.", 
-                  "type": "string"
-               }
-            }, 
-            "required": [
-               "id"
-            ], 
-            "type": "object"
-         }, 
-         "uniqueItems": true, 
-         "type": "array"
-      }, 
-      "citation_author": {
-         "minItems": 1, 
-         "items": {
-            "properties": {
-               "citation_id": {
-                  "description": "This data item is a pointer to _citation.id in the CITATION\n category.", 
-                  "type": "string"
+                     "Java", 
+                     "Perl", 
+                     "assembler", 
+                     "Ada", 
+                     "Fortran", 
+                     "Other", 
+                     "csh", 
+                     "Fortran 90", 
+                     "Python/C++", 
+                     "Python", 
+                     "Awk", 
+                     "ksh", 
+                     "Fortran 77", 
+                     "C/C++", 
+                     "Pascal", 
+                     "C", 
+                     "C++", 
+                     "Fortran_77", 
+                     "Java & Fortran", 
+                     "Basic", 
+                     "Tcl", 
+                     "sh"
+                  ]
                }, 
                "name": {
-                  "description": "Name of an author of the citation; relevant for journal\n articles, books and book chapters.\n\n The family name(s), followed by a comma and including any\n dynastic components, precedes the first name(s) or initial(s).", 
+                  "type": "string", 
                   "examples": [
-                     "Bleary, Percival R.", 
-                     "O'Neil, F.K.", 
-                     "Van den Bossche, G.", 
-                     "Yang, D.-L.", 
-                     "Simonov, Yu.A"
+                     "Merlot", 
+                     "O", 
+                     "Xengen", 
+                     "X-plor"
                   ], 
-                  "type": "string"
+                  "description": "The name of the software."
                }, 
-               "ordinal": {
-                  "description": "This data item defines the order of the author's name in the\n list of authors of a citation.", 
-                  "type": "integer"
-               }, 
-               "identifier_ORCID": {
-                  "description": "The Open Researcher and Contributor ID (ORCID).", 
+               "location": {
+                  "type": "string", 
                   "examples": [
-                     "0000-0002-6686-5475"
+                     "http://rosebud.sdsc.edu/projects/pb/IUCr/software.html", 
+                     "ftp://ftp.sdsc.edu/pub/sdsc/biology/"
                   ], 
-                  "type": "string"
-               }
-            }, 
-            "required": [
-               "citation_id", 
-               "name", 
-               "ordinal"
-            ], 
-            "type": "object"
-         }, 
-         "uniqueItems": true, 
-         "type": "array"
-      }, 
-      "software": {
-         "minItems": 1, 
-         "items": {
-            "properties": {
-               "citation_id": {
-                  "description": "This data item is a pointer to _citation.id in the CITATION\n category.", 
-                  "type": "string"
+                  "description": "The URL for an Internet address at which\n details of the software can be found."
+               }, 
+               "hardware": {
+                  "type": "string", 
+                  "examples": [
+                     "Sun Sparc 10 model 41", 
+                     "Dec Alpha 3000 model 500S", 
+                     "Silicon Graphics Elan", 
+                     "Compaq PC 486/66"
+                  ], 
+                  "description": "The hardware upon which the software was run."
+               }, 
+               "os_version": {
+                  "type": "string", 
+                  "examples": [
+                     "3.1", 
+                     "4.2.1"
+                  ], 
+                  "description": "The version of the operating system under which the software\n runs."
                }, 
                "version": {
-                  "description": "The version of the software.", 
+                  "type": "string", 
                   "examples": [
                      "v1.0", 
                      "beta", 
                      "3.1-2", 
                      "unknown"
                   ], 
-                  "type": "string"
+                  "description": "The version of the software."
+               }, 
+               "type": {
+                  "type": "string", 
+                  "description": "The classification of the software according to the most\n common types.", 
+                  "enum": [
+                     "package", 
+                     "library", 
+                     "program", 
+                     "filter", 
+                     "jiffy", 
+                     "other"
+                  ]
+               }, 
+               "classification": {
+                  "type": "string", 
+                  "examples": [
+                     "data collection", 
+                     "data reduction", 
+                     "phasing", 
+                     "model building", 
+                     "refinement", 
+                     "validation", 
+                     "other"
+                  ], 
+                  "description": "The classification of the program according to its\n major function."
+               }, 
+               "date": {
+                  "type": "string", 
+                  "examples": [
+                     "1991-10-01", 
+                     "1990-04-30"
+                  ], 
+                  "description": "The date the software was released."
                }, 
                "os": {
-                  "description": "The name of the operating system under which the software\n runs.", 
+                  "type": "string", 
                   "examples": [
                      "Ultrix", 
                      "OpenVMS", 
@@ -268,179 +185,262 @@
                      "HPUX", 
                      "DEC Unix"
                   ], 
-                  "type": "string"
-               }, 
-               "mods": {
-                  "description": "Any noteworthy modifications to the base software, if applicable.", 
-                  "examples": [
-                     "Added support for space group F432"
-                  ], 
-                  "type": "string"
-               }, 
-               "hardware": {
-                  "description": "The hardware upon which the software was run.", 
-                  "examples": [
-                     "Sun Sparc 10 model 41", 
-                     "Dec Alpha 3000 model 500S", 
-                     "Silicon Graphics Elan", 
-                     "Compaq PC 486/66"
-                  ], 
-                  "type": "string"
-               }, 
-               "classification": {
-                  "description": "The classification of the program according to its\n major function.", 
-                  "examples": [
-                     "data collection", 
-                     "data reduction", 
-                     "phasing", 
-                     "model building", 
-                     "refinement", 
-                     "validation", 
-                     "other"
-                  ], 
-                  "type": "string"
-               }, 
-               "compiler_version": {
-                  "description": "The version of the compiler used to compile the software.", 
-                  "examples": [
-                     "3.1", 
-                     "2.1 alpha"
-                  ], 
-                  "type": "string"
-               }, 
-               "date": {
-                  "description": "The date the software was released.", 
-                  "examples": [
-                     "1991-10-01", 
-                     "1990-04-30"
-                  ], 
-                  "type": "string"
-               }, 
-               "description": {
-                  "description": "Description of the software.", 
-                  "examples": [
-                     "Uses method of restrained least squares"
-                  ], 
-                  "type": "string"
-               }, 
-               "pdbx_ordinal": {
-                  "description": "\nAn ordinal index for this category", 
-                  "examples": [
-                     "1", 
-                     "2"
-                  ], 
-                  "type": "integer"
-               }, 
-               "type": {
-                  "enum": [
-                     "other", 
-                     "program", 
-                     "jiffy", 
-                     "library", 
-                     "package", 
-                     "filter"
-                  ], 
-                  "description": "The classification of the software according to the most\n common types.", 
-                  "type": "string"
-               }, 
-               "os_version": {
-                  "description": "The version of the operating system under which the software\n runs.", 
-                  "examples": [
-                     "3.1", 
-                     "4.2.1"
-                  ], 
-                  "type": "string"
+                  "description": "The name of the operating system under which the software\n runs."
                }, 
                "dependencies": {
-                  "description": "Any prerequisite software required to run _software.name.", 
+                  "type": "string", 
                   "examples": [
                      "PDBlib class library"
                   ], 
-                  "type": "string"
-               }, 
-               "compiler_name": {
-                  "description": "The compiler used to compile the software.", 
-                  "examples": [
-                     "Convex Fortran", 
-                     "gcc", 
-                     "DEC C"
-                  ], 
-                  "type": "string"
-               }, 
-               "contact_author_email": {
-                  "description": "The e-mail address of the person specified in\n _software.contact_author.", 
-                  "examples": [
-                     "bourne@sdsc.edu"
-                  ], 
-                  "type": "string"
-               }, 
-               "name": {
-                  "description": "The name of the software.", 
-                  "examples": [
-                     "Merlot", 
-                     "O", 
-                     "Xengen", 
-                     "X-plor"
-                  ], 
-                  "type": "string"
-               }, 
-               "language": {
-                  "enum": [
-                     "Python", 
-                     "Fortran 77", 
-                     "C++", 
-                     "Basic", 
-                     "Java", 
-                     "csh", 
-                     "ksh", 
-                     "Fortran 90", 
-                     "Pascal", 
-                     "Other", 
-                     "sh", 
-                     "C/C++", 
-                     "Perl", 
-                     "C", 
-                     "assembler", 
-                     "Java & Fortran", 
-                     "Ada", 
-                     "Python/C++", 
-                     "Fortran_77", 
-                     "Awk", 
-                     "Tcl", 
-                     "Fortran"
-                  ], 
-                  "description": "The major computing language in which the software is\n coded.", 
-                  "type": "string"
-               }, 
-               "contact_author": {
-                  "description": "The recognized contact author of the software. This could be\n the original author, someone who has modified the code or\n someone who maintains the code.  It should be the person\n most commonly associated with the code.", 
-                  "examples": [
-                     "T. Alwyn Jones", 
-                     "Axel Brunger"
-                  ], 
-                  "type": "string"
-               }, 
-               "location": {
-                  "description": "The URL for an Internet address at which\n details of the software can be found.", 
-                  "examples": [
-                     "http://rosebud.sdsc.edu/projects/pb/IUCr/software.html", 
-                     "ftp://ftp.sdsc.edu/pub/sdsc/biology/"
-                  ], 
-                  "type": "string"
+                  "description": "Any prerequisite software required to run _software.name."
                }
             }, 
             "required": [
                "classification", 
                "name", 
                "pdbx_ordinal"
-            ], 
-            "type": "object"
-         }, 
+            ]
+         }
+      }, 
+      "citation_author": {
+         "type": "array", 
+         "minItems": 1, 
          "uniqueItems": true, 
-         "type": "array"
+         "items": {
+            "type": "object", 
+            "properties": {
+               "name": {
+                  "type": "string", 
+                  "examples": [
+                     "Bleary, Percival R.", 
+                     "O'Neil, F.K.", 
+                     "Van den Bossche, G.", 
+                     "Yang, D.-L.", 
+                     "Simonov, Yu.A"
+                  ], 
+                  "description": "Name of an author of the citation; relevant for journal\n articles, books and book chapters.\n\n The family name(s), followed by a comma and including any\n dynastic components, precedes the first name(s) or initial(s)."
+               }, 
+               "citation_id": {
+                  "type": "string", 
+                  "description": "This data item is a pointer to _citation.id in the CITATION\n category."
+               }, 
+               "ordinal": {
+                  "type": "integer", 
+                  "description": "This data item defines the order of the author's name in the\n list of authors of a citation."
+               }, 
+               "identifier_ORCID": {
+                  "type": "string", 
+                  "examples": [
+                     "0000-0002-6686-5475"
+                  ], 
+                  "description": "The Open Researcher and Contributor ID (ORCID)."
+               }
+            }, 
+            "required": [
+               "citation_id", 
+               "name", 
+               "ordinal"
+            ]
+         }
+      }, 
+      "citation": {
+         "type": "array", 
+         "minItems": 1, 
+         "uniqueItems": true, 
+         "items": {
+            "type": "object", 
+            "properties": {
+               "abstract": {
+                  "type": "string", 
+                  "description": "Abstract for the citation. This is used most when the\n citation is extracted from a bibliographic database that\n contains full text or abstract information."
+               }, 
+               "abstract_id_CAS": {
+                  "type": "string", 
+                  "description": "The Chemical Abstracts Service (CAS) abstract identifier;\n relevant for journal articles."
+               }, 
+               "journal_volume": {
+                  "type": "string", 
+                  "examples": [
+                     "174"
+                  ], 
+                  "description": "Volume number of the journal cited; relevant for journal\n articles."
+               }, 
+               "journal_id_ISSN": {
+                  "type": "string", 
+                  "description": "The International Standard Serial Number (ISSN) code assigned to\n the journal cited; relevant for journal articles."
+               }, 
+               "database_id_Medline": {
+                  "type": "integer", 
+                  "examples": [
+                     "89064067"
+                  ], 
+                  "minimum": 1, 
+                  "description": "Accession number used by Medline to categorize a specific\n bibliographic entry."
+               }, 
+               "id": {
+                  "type": "string", 
+                  "examples": [
+                     "primary", 
+                     "1", 
+                     "2"
+                  ], 
+                  "description": "The value of _citation.id must uniquely identify a record in the\n CITATION list.\n\n The _citation.id 'primary' should be used to indicate the\n citation that the author(s) consider to be the most pertinent to\n the contents of the data block.\n\n Note that this item need not be a number; it can be any unique\n identifier."
+               }, 
+               "journal_id_ASTM": {
+                  "type": "string", 
+                  "description": "The American Society for Testing and Materials (ASTM) code\n assigned to the journal cited (also referred to as the CODEN\n designator of the Chemical Abstracts Service); relevant for\n journal articles."
+               }, 
+               "unpublished_flag": {
+                  "type": "string", 
+                  "description": "Flag to indicate that this citation will not be published.", 
+                  "enum": [
+                     "N", 
+                     "Y"
+                  ]
+               }, 
+               "book_publisher_city": {
+                  "type": "string", 
+                  "examples": [
+                     "London"
+                  ], 
+                  "description": "The location of the publisher of the citation; relevant\n for books or book chapters."
+               }, 
+               "coordinate_linkage": {
+                  "type": "string", 
+                  "description": "_citation.coordinate_linkage states whether this citation\n is concerned with precisely the set of coordinates given in the\n data block. If, for instance, the publication described the same\n structure, but the coordinates had undergone further refinement\n prior to the creation of the data block, the value of this data\n item would be 'no'.", 
+                  "enum": [
+                     "y", 
+                     "no", 
+                     "n", 
+                     "yes"
+                  ]
+               }, 
+               "database_id_CSD": {
+                  "type": "string", 
+                  "examples": [
+                     "LEKKUH"
+                  ], 
+                  "description": "Identifier ('refcode') of the database record in the Cambridge\n Structural Database that contains details of the cited structure."
+               }, 
+               "book_title": {
+                  "type": "string", 
+                  "description": "The title of the book in which the citation appeared; relevant\n for books or book chapters."
+               }, 
+               "details": {
+                  "type": "string", 
+                  "examples": [
+                     "citation relates to this precise\n                                  coordinate set", 
+                     "citation relates to earlier low-resolution\n                                  structure", 
+                     "citation relates to further refinement of\n                                  structure reported in citation 2"
+                  ], 
+                  "description": "A description of special aspects of the relationship\n of the contents of the data block to the literature item cited."
+               }, 
+               "rcsb_authors": {
+                  "type": "array", 
+                  "uniqueItems": false, 
+                  "items": {
+                     "type": "string", 
+                     "examples": [
+                        "Bleary, Percival R.;O'Neil, F.K."
+                     ], 
+                     "description": "Names of the authors of the citation; relevant for journal\n articles, books and book chapters.  Names are separated by semicolons.\n\n The family name(s), followed by a comma and including any\n dynastic components, precedes the first name(s) or initial(s).\n"
+                  }
+               }, 
+               "journal_full": {
+                  "type": "string", 
+                  "examples": [
+                     "Journal of Molecular Biology"
+                  ], 
+                  "description": "Full name of the cited journal; relevant for journal articles."
+               }, 
+               "journal_issue": {
+                  "type": "string", 
+                  "examples": [
+                     "2"
+                  ], 
+                  "description": "Issue number of the journal cited; relevant for journal\n articles."
+               }, 
+               "book_id_ISBN": {
+                  "type": "string", 
+                  "description": "The International Standard Book Number (ISBN) code assigned to\n the book cited; relevant for books or book chapters."
+               }, 
+               "book_publisher": {
+                  "type": "string", 
+                  "examples": [
+                     "John Wiley and Sons"
+                  ], 
+                  "description": "The name of the publisher of the citation; relevant\n for books or book chapters."
+               }, 
+               "journal_id_CSD": {
+                  "type": "string", 
+                  "examples": [
+                     "0070"
+                  ], 
+                  "description": "The Cambridge Structural Database (CSD) code assigned to the\n journal cited; relevant for journal articles. This is also the\n system used at the Protein Data Bank (PDB)."
+               }, 
+               "pdbx_database_id_PubMed": {
+                  "type": "integer", 
+                  "examples": [
+                     "12627512"
+                  ], 
+                  "minimum": -1, 
+                  "description": "Ascession number used by PubMed to categorize a specific\n bibliographic entry."
+               }, 
+               "title": {
+                  "type": "string", 
+                  "examples": [
+                     "Structure of diferric duck ovotransferrin\n                                  at 2.35 Angstroms resolution."
+                  ], 
+                  "description": "The title of the citation; relevant for journal articles, books\n and book chapters."
+               }, 
+               "page_last": {
+                  "type": "string", 
+                  "description": "The last page of the citation; relevant for journal\n articles, books and book chapters."
+               }, 
+               "language": {
+                  "type": "string", 
+                  "examples": [
+                     "German"
+                  ], 
+                  "description": "Language in which the cited article is written."
+               }, 
+               "journal_abbrev": {
+                  "type": "string", 
+                  "examples": [
+                     "J. Mol. Biol."
+                  ], 
+                  "description": "Abbreviated name of the cited journal as given in the\n Chemical Abstracts Service Source Index."
+               }, 
+               "pdbx_database_id_DOI": {
+                  "type": "string", 
+                  "examples": [
+                     "10.2345/S1384107697000225"
+                  ], 
+                  "description": "Document Object Identifier used by doi.org to uniquely\n specify bibliographic entry."
+               }, 
+               "page_first": {
+                  "type": "string", 
+                  "description": "The first page of the citation; relevant for journal\n articles, books and book chapters."
+               }, 
+               "country": {
+                  "type": "string", 
+                  "description": "The country of publication; relevant for books\n and book chapters."
+               }, 
+               "year": {
+                  "type": "integer", 
+                  "examples": [
+                     "1984"
+                  ], 
+                  "description": "The year of the citation; relevant for journal articles, books\n and book chapters."
+               }
+            }, 
+            "required": [
+               "id"
+            ]
+         }
       }
    }, 
-   "$schema": "http://json-schema.org/draft-04/schema#", 
    "title": "Schema for content type entity_sequence_clusters collection cluster_provenance_v0_1", 
-   "type": "object"
+   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/", 
+   "$schema": "http://json-schema.org/draft-04/schema#"
 }

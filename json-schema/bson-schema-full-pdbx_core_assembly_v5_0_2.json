@@ -1,164 +1,6 @@
 {
-   "bsonType": "object", 
    "properties": {
-      "pdbx_struct_assembly_auth_evidence": {
-         "bsonType": "array", 
-         "minItems": 1, 
-         "items": {
-            "bsonType": "object", 
-            "properties": {
-               "experimental_support": {
-                  "bsonType": "string", 
-                  "enum": [
-                     "mass spectrometry", 
-                     "homology", 
-                     "fluorescence resonance energy transfer", 
-                     "gel filtration", 
-                     "SAXS", 
-                     "microscopy", 
-                     "immunoprecipitation", 
-                     "light scattering", 
-                     "scanning transmission electron microscopy", 
-                     "none", 
-                     "assay for oligomerization", 
-                     "equilibrium centrifugation", 
-                     "isothermal titration calorimetry", 
-                     "cross-linking", 
-                     "surface plasmon resonance", 
-                     "native gel electrophoresis"
-                  ]
-               }, 
-               "assembly_id": {
-                  "bsonType": "string"
-               }, 
-               "details": {
-                  "bsonType": "string"
-               }, 
-               "id": {
-                  "bsonType": "string"
-               }
-            }, 
-            "required": [
-               "assembly_id", 
-               "experimental_support", 
-               "id"
-            ]
-         }, 
-         "uniqueItems": true
-      }, 
-      "pdbx_struct_oper_list": {
-         "bsonType": "array", 
-         "minItems": 1, 
-         "items": {
-            "bsonType": "object", 
-            "properties": {
-               "matrix_1_2": {
-                  "bsonType": "double"
-               }, 
-               "matrix_1_3": {
-                  "bsonType": "double"
-               }, 
-               "id": {
-                  "bsonType": "string"
-               }, 
-               "matrix_2_2": {
-                  "bsonType": "double"
-               }, 
-               "type": {
-                  "bsonType": "string", 
-                  "enum": [
-                     "transform to helical frame", 
-                     "crystal symmetry operation", 
-                     "transform to 2D crystal frame", 
-                     "transform to 3D crystal frame", 
-                     "point symmetry operation", 
-                     "transform to crystal frame", 
-                     "build point asymmetric unit", 
-                     "2D crystal symmetry operation", 
-                     "transform to point frame", 
-                     "build helical asymmetric unit", 
-                     "build 2D crystal asymmetric unit", 
-                     "build 3D crystal asymmetric unit", 
-                     "helical symmetry operation", 
-                     "3D crystal symmetry operation", 
-                     "identity operation"
-                  ]
-               }, 
-               "symmetry_operation": {
-                  "bsonType": "string"
-               }, 
-               "matrix_1_1": {
-                  "bsonType": "double"
-               }, 
-               "matrix_2_1": {
-                  "bsonType": "double"
-               }, 
-               "vector_3": {
-                  "bsonType": "double"
-               }, 
-               "matrix_2_3": {
-                  "bsonType": "double"
-               }, 
-               "vector_1": {
-                  "bsonType": "double"
-               }, 
-               "vector_2": {
-                  "bsonType": "double"
-               }, 
-               "name": {
-                  "bsonType": "string"
-               }, 
-               "matrix_3_1": {
-                  "bsonType": "double"
-               }, 
-               "matrix_3_2": {
-                  "bsonType": "double"
-               }, 
-               "matrix_3_3": {
-                  "bsonType": "double"
-               }
-            }, 
-            "required": [
-               "id", 
-               "type"
-            ]
-         }, 
-         "uniqueItems": true
-      }, 
-      "pdbx_struct_assembly_gen": {
-         "bsonType": "array", 
-         "minItems": 1, 
-         "items": {
-            "bsonType": "object", 
-            "properties": {
-               "assembly_id": {
-                  "bsonType": "string"
-               }, 
-               "asym_id_list": {
-                  "bsonType": "array", 
-                  "uniqueItems": false, 
-                  "items": {
-                     "bsonType": "string"
-                  }
-               }, 
-               "oper_expression": {
-                  "bsonType": "string"
-               }, 
-               "ordinal": {
-                  "bsonType": "int"
-               }
-            }, 
-            "required": [
-               "assembly_id", 
-               "asym_id_list", 
-               "oper_expression", 
-               "ordinal"
-            ]
-         }, 
-         "uniqueItems": true
-      }, 
       "rcsb_load_status": {
-         "bsonType": "object", 
          "properties": {
             "datablock_name": {
                "bsonType": "string"
@@ -170,6 +12,7 @@
                "bsonType": "string"
             }
          }, 
+         "bsonType": "object", 
          "required": [
             "datablock_name", 
             "load_date", 
@@ -177,17 +20,8 @@
          ]
       }, 
       "pdbx_struct_assembly": {
-         "bsonType": "object", 
          "properties": {
-            "rcsb_details": {
-               "bsonType": "string", 
-               "enum": [
-                  "software_defined_assembly", 
-                  "author_and_software_defined_assembly", 
-                  "author_defined_assembly"
-               ]
-            }, 
-            "details": {
+            "method_details": {
                "bsonType": "string"
             }, 
             "rcsb_candidate_assembly": {
@@ -196,6 +30,9 @@
                   "N", 
                   "Y"
                ]
+            }, 
+            "details": {
+               "bsonType": "string"
             }, 
             "oligomeric_details": {
                "bsonType": "string"
@@ -206,57 +43,220 @@
             "id": {
                "bsonType": "string"
             }, 
-            "method_details": {
-               "bsonType": "string"
+            "rcsb_details": {
+               "bsonType": "string", 
+               "enum": [
+                  "software_defined_assembly", 
+                  "author_and_software_defined_assembly", 
+                  "author_defined_assembly"
+               ]
             }
          }, 
+         "bsonType": "object", 
          "required": [
             "id"
          ]
       }, 
       "pdbx_struct_assembly_prop": {
-         "bsonType": "array", 
          "minItems": 1, 
+         "bsonType": "array", 
+         "uniqueItems": true, 
          "items": {
-            "bsonType": "object", 
             "properties": {
-               "value": {
-                  "bsonType": "string"
+               "type": {
+                  "bsonType": "string", 
+                  "enum": [
+                     "SSA (A^2)", 
+                     "ABSA (A^2)", 
+                     "MORE"
+                  ]
                }, 
                "biol_id": {
                   "bsonType": "string"
                }, 
-               "type": {
-                  "bsonType": "string", 
-                  "enum": [
-                     "MORE", 
-                     "SSA (A^2)", 
-                     "ABSA (A^2)"
-                  ]
+               "value": {
+                  "bsonType": "string"
                }
             }, 
+            "bsonType": "object", 
             "required": [
                "biol_id", 
                "type", 
                "value"
             ]
-         }, 
-         "uniqueItems": true
+         }
+      }, 
+      "pdbx_struct_assembly_gen": {
+         "minItems": 1, 
+         "bsonType": "array", 
+         "uniqueItems": true, 
+         "items": {
+            "properties": {
+               "assembly_id": {
+                  "bsonType": "string"
+               }, 
+               "ordinal": {
+                  "bsonType": "int"
+               }, 
+               "asym_id_list": {
+                  "bsonType": "array", 
+                  "uniqueItems": false, 
+                  "items": {
+                     "bsonType": "string"
+                  }
+               }, 
+               "oper_expression": {
+                  "bsonType": "string"
+               }
+            }, 
+            "bsonType": "object", 
+            "required": [
+               "assembly_id", 
+               "asym_id_list", 
+               "oper_expression", 
+               "ordinal"
+            ]
+         }
       }, 
       "rcsb_assembly_container_identifiers": {
-         "bsonType": "object", 
          "properties": {
-            "assembly_id": {
+            "entry_id": {
                "bsonType": "string"
             }, 
-            "entry_id": {
+            "assembly_id": {
                "bsonType": "string"
             }
          }, 
+         "bsonType": "object", 
          "required": [
             "assembly_id", 
             "entry_id"
          ]
+      }, 
+      "pdbx_struct_assembly_auth_evidence": {
+         "minItems": 1, 
+         "bsonType": "array", 
+         "uniqueItems": true, 
+         "items": {
+            "properties": {
+               "details": {
+                  "bsonType": "string"
+               }, 
+               "experimental_support": {
+                  "bsonType": "string", 
+                  "enum": [
+                     "SAXS", 
+                     "homology", 
+                     "surface plasmon resonance", 
+                     "light scattering", 
+                     "gel filtration", 
+                     "scanning transmission electron microscopy", 
+                     "microscopy", 
+                     "fluorescence resonance energy transfer", 
+                     "equilibrium centrifugation", 
+                     "isothermal titration calorimetry", 
+                     "mass spectrometry", 
+                     "immunoprecipitation", 
+                     "assay for oligomerization", 
+                     "native gel electrophoresis", 
+                     "none", 
+                     "cross-linking"
+                  ]
+               }, 
+               "assembly_id": {
+                  "bsonType": "string"
+               }, 
+               "id": {
+                  "bsonType": "string"
+               }
+            }, 
+            "bsonType": "object", 
+            "required": [
+               "assembly_id", 
+               "experimental_support", 
+               "id"
+            ]
+         }
+      }, 
+      "pdbx_struct_oper_list": {
+         "minItems": 1, 
+         "bsonType": "array", 
+         "uniqueItems": true, 
+         "items": {
+            "properties": {
+               "name": {
+                  "bsonType": "string"
+               }, 
+               "matrix_3_2": {
+                  "bsonType": "double"
+               }, 
+               "matrix_1_1": {
+                  "bsonType": "double"
+               }, 
+               "matrix_1_2": {
+                  "bsonType": "double"
+               }, 
+               "matrix_1_3": {
+                  "bsonType": "double"
+               }, 
+               "matrix_2_3": {
+                  "bsonType": "double"
+               }, 
+               "matrix_2_2": {
+                  "bsonType": "double"
+               }, 
+               "symmetry_operation": {
+                  "bsonType": "string"
+               }, 
+               "matrix_2_1": {
+                  "bsonType": "double"
+               }, 
+               "id": {
+                  "bsonType": "string"
+               }, 
+               "type": {
+                  "bsonType": "string", 
+                  "enum": [
+                     "transform to crystal frame", 
+                     "3D crystal symmetry operation", 
+                     "point symmetry operation", 
+                     "build point asymmetric unit", 
+                     "transform to 3D crystal frame", 
+                     "build 3D crystal asymmetric unit", 
+                     "2D crystal symmetry operation", 
+                     "crystal symmetry operation", 
+                     "transform to helical frame", 
+                     "identity operation", 
+                     "helical symmetry operation", 
+                     "transform to point frame", 
+                     "build helical asymmetric unit", 
+                     "transform to 2D crystal frame", 
+                     "build 2D crystal asymmetric unit"
+                  ]
+               }, 
+               "matrix_3_3": {
+                  "bsonType": "double"
+               }, 
+               "matrix_3_1": {
+                  "bsonType": "double"
+               }, 
+               "vector_1": {
+                  "bsonType": "double"
+               }, 
+               "vector_2": {
+                  "bsonType": "double"
+               }, 
+               "vector_3": {
+                  "bsonType": "double"
+               }
+            }, 
+            "bsonType": "object", 
+            "required": [
+               "id", 
+               "type"
+            ]
+         }
       }
-   }
+   }, 
+   "bsonType": "object"
 }

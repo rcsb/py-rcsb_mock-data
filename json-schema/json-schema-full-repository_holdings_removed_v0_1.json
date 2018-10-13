@@ -1,62 +1,62 @@
 {
-   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/", 
+   "title": "Schema for content type repository_holdings collection repository_holdings_removed_v0_1", 
+   "type": "object", 
    "properties": {
-      "remove_date": {
-         "format": "date", 
-         "description": "The date the entry was removed from the PDB repository.", 
-         "type": "string"
-      }, 
       "entry_id": {
-         "description": "The PDB entry accession code.", 
-         "type": "string"
+         "type": "string", 
+         "description": "The PDB entry accession code."
       }, 
-      "details": {
-         "description": "The entry title.", 
-         "type": "string"
-      }, 
-      "update_id": {
-         "description": "Identifier for the current data exchange status record.", 
-         "type": "string"
-      }, 
-      "id_codes_replaced_by": {
-         "uniqueItems": false, 
-         "items": {
-            "description": "The list of superseding PDB accession codes for the removed entry.", 
-            "type": "string"
-         }, 
-         "type": "array"
-      }, 
-      "deposit_date": {
-         "format": "date", 
-         "description": "The entry deposition date.", 
-         "type": "string"
-      }, 
-      "release_date": {
-         "format": "date", 
-         "description": "The initial date the entry was released in the PDB repository.", 
-         "type": "string"
+      "title": {
+         "type": "string", 
+         "description": "The entry title."
       }, 
       "audit_authors": {
+         "type": "array", 
          "uniqueItems": false, 
          "items": {
-            "description": "Names of the authors of the entry.", 
+            "type": "string", 
             "examples": [
                "Bleary, Percival R.;O'Neil, F.K."
             ], 
-            "type": "string"
-         }, 
-         "type": "array"
+            "description": "Names of the authors of the entry."
+         }
       }, 
-      "title": {
-         "description": "The entry title.", 
-         "type": "string"
+      "remove_date": {
+         "type": "string", 
+         "description": "The date the entry was removed from the PDB repository.", 
+         "format": "date"
+      }, 
+      "deposit_date": {
+         "type": "string", 
+         "description": "The entry deposition date.", 
+         "format": "date"
+      }, 
+      "release_date": {
+         "type": "string", 
+         "description": "The initial date the entry was released in the PDB repository.", 
+         "format": "date"
+      }, 
+      "update_id": {
+         "type": "string", 
+         "description": "Identifier for the current data exchange status record."
+      }, 
+      "details": {
+         "type": "string", 
+         "description": "The entry title."
+      }, 
+      "id_codes_replaced_by": {
+         "type": "array", 
+         "uniqueItems": false, 
+         "items": {
+            "type": "string", 
+            "description": "The list of superseding PDB accession codes for the removed entry."
+         }
       }
    }, 
+   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/", 
    "$schema": "http://json-schema.org/draft-04/schema#", 
    "required": [
       "entry_id", 
       "update_id"
-   ], 
-   "title": "Schema for content type repository_holdings collection repository_holdings_removed_v0_1", 
-   "type": "object"
+   ]
 }

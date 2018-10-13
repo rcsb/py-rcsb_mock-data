@@ -1,35 +1,35 @@
 {
-   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/", 
+   "title": "Schema for content type repository_holdings collection repository_holdings_current_v0_1", 
+   "type": "object", 
    "properties": {
       "entry_id": {
-         "description": "The PDB entry accession code.", 
-         "type": "string"
-      }, 
-      "repository_content_types": {
-         "uniqueItems": false, 
-         "items": {
-            "enum": [
-               "coordinates", 
-               "NMR chemical shifts", 
-               "structure factors", 
-               "NMR restraints"
-            ], 
-            "description": "The list of content types associated with this entry.", 
-            "type": "string"
-         }, 
-         "type": "array"
+         "type": "string", 
+         "description": "The PDB entry accession code."
       }, 
       "update_id": {
-         "description": "Identifier for the current data exchange status record.", 
-         "type": "string"
+         "type": "string", 
+         "description": "Identifier for the current data exchange status record."
+      }, 
+      "repository_content_types": {
+         "type": "array", 
+         "uniqueItems": false, 
+         "items": {
+            "type": "string", 
+            "description": "The list of content types associated with this entry.", 
+            "enum": [
+               "NMR restraints", 
+               "coordinates", 
+               "structure factors", 
+               "NMR chemical shifts"
+            ]
+         }
       }
    }, 
+   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/", 
    "$schema": "http://json-schema.org/draft-04/schema#", 
    "required": [
       "entry_id", 
       "repository_content_types", 
       "update_id"
-   ], 
-   "title": "Schema for content type repository_holdings collection repository_holdings_current_v0_1", 
-   "type": "object"
+   ]
 }

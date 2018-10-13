@@ -1,43 +1,43 @@
 {
-   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/", 
+   "title": "Schema for content type entity_sequence_clusters collection entity_members_v0_1", 
+   "type": "object", 
    "properties": {
-      "entity_id": {
-         "description": "Polymer entity identifier.", 
-         "type": "string"
+      "entry_id": {
+         "type": "string", 
+         "description": "Structure entry identifier."
       }, 
       "cluster_membership": {
+         "type": "array", 
          "uniqueItems": true, 
          "items": {
+            "type": "object", 
             "properties": {
                "cluster_id": {
-                  "description": "Identiier for a cluster at the specified level of sequence identity within the cluster data set.", 
-                  "type": "integer"
+                  "type": "integer", 
+                  "description": "Identiier for a cluster at the specified level of sequence identity within the cluster data set."
                }, 
                "identity": {
-                  "description": "Sequence identity expressed as an integer percent value.", 
-                  "type": "integer"
+                  "type": "integer", 
+                  "description": "Sequence identity expressed as an integer percent value."
                }
-            }, 
-            "type": "object"
-         }, 
-         "type": "array"
-      }, 
-      "entry_id": {
-         "description": "Structure entry identifier.", 
-         "type": "string"
+            }
+         }
       }, 
       "data_set_id": {
-         "description": "Identifier for the cluster data set.", 
-         "type": "string"
+         "type": "string", 
+         "description": "Identifier for the cluster data set."
+      }, 
+      "entity_id": {
+         "type": "string", 
+         "description": "Polymer entity identifier."
       }
    }, 
+   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/", 
    "$schema": "http://json-schema.org/draft-04/schema#", 
    "required": [
       "data_set_id", 
       "entity_id", 
       "entry_id", 
       "cluster_membership"
-   ], 
-   "title": "Schema for content type entity_sequence_clusters collection entity_members_v0_1", 
-   "type": "object"
+   ]
 }

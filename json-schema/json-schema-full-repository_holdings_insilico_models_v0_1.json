@@ -1,64 +1,64 @@
 {
-   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/", 
+   "title": "Schema for content type repository_holdings collection repository_holdings_insilico_models_v0_1", 
+   "type": "object", 
    "properties": {
-      "remove_date": {
-         "format": "date", 
-         "description": "The removal date for the entry.", 
-         "type": "string"
+      "entry_id": {
+         "type": "string", 
+         "description": "The PDB entry accession code."
+      }, 
+      "title": {
+         "type": "string", 
+         "description": "The entry title."
       }, 
       "audit_authors": {
-         "description": "Names of the authors of the entry.", 
+         "type": "string", 
          "examples": [
             "Bleary, Percival R., O'Neil, F.K."
          ], 
-         "type": "string"
+         "description": "Names of the authors of the entry."
       }, 
-      "entry_id": {
-         "description": "The PDB entry accession code.", 
-         "type": "string"
-      }, 
-      "update_id": {
-         "description": "Identifier for the current data exchange status record.", 
-         "type": "string"
-      }, 
-      "status_code": {
-         "enum": [
-            "WDRN", 
-            "OBS", 
-            "TRSF"
-         ], 
-         "description": "The release status for the entry.", 
-         "type": "string"
+      "remove_date": {
+         "type": "string", 
+         "description": "The removal date for the entry.", 
+         "format": "date"
       }, 
       "deposit_date": {
-         "format": "date", 
+         "type": "string", 
          "description": "The entry deposition date.", 
-         "type": "string"
+         "format": "date"
       }, 
       "release_date": {
-         "format": "date", 
+         "type": "string", 
          "description": "The release date for the entry.", 
-         "type": "string"
+         "format": "date"
+      }, 
+      "status_code": {
+         "type": "string", 
+         "description": "The release status for the entry.", 
+         "enum": [
+            "OBS", 
+            "TRSF", 
+            "WDRN"
+         ]
+      }, 
+      "update_id": {
+         "type": "string", 
+         "description": "Identifier for the current data exchange status record."
       }, 
       "id_codes_replaced_by": {
+         "type": "array", 
          "uniqueItems": false, 
          "items": {
-            "description": "The list of superseding PDB accession codes for the removed insilico model entry.", 
-            "type": "string"
-         }, 
-         "type": "array"
-      }, 
-      "title": {
-         "description": "The entry title.", 
-         "type": "string"
+            "type": "string", 
+            "description": "The list of superseding PDB accession codes for the removed insilico model entry."
+         }
       }
    }, 
+   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/", 
    "$schema": "http://json-schema.org/draft-04/schema#", 
    "required": [
       "entry_id", 
       "status_code", 
       "update_id"
-   ], 
-   "title": "Schema for content type repository_holdings collection repository_holdings_insilico_models_v0_1", 
-   "type": "object"
+   ]
 }
