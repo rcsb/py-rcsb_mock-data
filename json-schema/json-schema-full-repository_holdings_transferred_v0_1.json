@@ -1,67 +1,67 @@
 {
-   "type": "object",
+   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/", 
    "properties": {
-      "audit_authors": {
-         "type": "string",
-         "examples": [
-            "Bleary, Percival R., O'Neil, F.K."
-         ],
-         "description": "Names of the authors of the entry."
-      },
-      "deposit_date": {
-         "type": "string",
-         "format": "date",
-         "description": "The entry deposition date."
-      },
-      "entry_id": {
-         "type": "string",
-         "description": "The PDB entry accession code."
-      },
-      "release_date": {
-         "type": "string",
-         "format": "date",
-         "description": "The release date for the entry."
-      },
-      "remote_accession_code": {
-         "type": "string",
-         "description": "The prerelease status for the molecular sequences for the entry ."
-      },
       "repository_content_types": {
-         "type": "array",
+         "uniqueItems": false, 
          "items": {
-            "type": "string",
             "enum": [
-               "structure factors",
-               "NMR chemical shifts",
-               "coordinates",
+               "coordinates", 
+               "NMR chemical shifts", 
+               "structure factors", 
                "NMR restraints"
-            ],
-            "description": "The types of transferred content."
-         },
-         "uniqueItems": false
-      },
+            ], 
+            "description": "The types of transferred content.", 
+            "type": "string"
+         }, 
+         "type": "array"
+      }, 
+      "entry_id": {
+         "description": "The PDB entry accession code.", 
+         "type": "string"
+      }, 
+      "update_id": {
+         "description": "Identifier for the current data exchange status record.", 
+         "type": "string"
+      }, 
       "status_code": {
-         "type": "string",
          "enum": [
             "TRSF"
-         ],
-         "description": "The release status for the entry."
-      },
+         ], 
+         "description": "The release status for the entry.", 
+         "type": "string"
+      }, 
+      "deposit_date": {
+         "format": "date", 
+         "description": "The entry deposition date.", 
+         "type": "string"
+      }, 
+      "release_date": {
+         "format": "date", 
+         "description": "The release date for the entry.", 
+         "type": "string"
+      }, 
+      "audit_authors": {
+         "description": "Names of the authors of the entry.", 
+         "examples": [
+            "Bleary, Percival R., O'Neil, F.K."
+         ], 
+         "type": "string"
+      }, 
       "title": {
-         "type": "string",
-         "description": "The entry title."
-      },
-      "update_id": {
-         "type": "string",
-         "description": "Identifier for the current data exchange status record."
+         "description": "The entry title.", 
+         "type": "string"
+      }, 
+      "remote_accession_code": {
+         "description": "The prerelease status for the molecular sequences for the entry .", 
+         "type": "string"
       }
-   },
+   }, 
+   "$schema": "http://json-schema.org/draft-04/schema#", 
    "required": [
-      "entry_id",
-      "status_code",
+      "entry_id", 
+      "status_code", 
       "update_id"
-   ],
-   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/",
-   "$schema": "http://json-schema.org/draft-04/schema#",
-   "title": "Schema for content type repository_holdings collection repository_holdings_transferred_v0_1"
+   ], 
+   "title": "Schema for content type repository_holdings collection repository_holdings_transferred_v0_1", 
+   "type": "object"
 }

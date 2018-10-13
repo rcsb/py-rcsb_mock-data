@@ -1,1813 +1,1814 @@
 {
-   "type": "object",
+   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/", 
    "properties": {
-      "entry": {
-         "type": "object",
-         "properties": {
-            "id": {
-               "type": "string",
-               "description": "The value of _entry.id identifies the data block.\n\n Note that this item need not be a number; it can be any unique\n identifier."
-            }
-         },
-         "required": [
-            "id"
-         ]
-      },
-      "ndb_struct_conf_na": {
-         "type": "array",
+      "pdbx_validate_planes": {
+         "minItems": 1, 
          "items": {
-            "type": "object",
             "properties": {
-               "entry_id": {
-                  "type": "string",
-                  "description": "This data item is a pointer to _entry.id in the\n ENTRY category."
-               },
-               "feature": {
-                  "type": "string",
+               "id": {
+                  "description": "The value of _pdbx_validate_planes.id must uniquely identify\n each item in the PDBX_VALIDATE_PLANES list.\n\n This is an integer serial number.", 
+                  "type": "integer"
+               }, 
+               "label_alt_id": {
+                  "description": "Optional identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_seq_id": {
+                  "description": "Part of the identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_comp_id": {
+                  "description": "Part of the identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_model_num": {
+                  "description": "The model number for the given angle\n\n This data item is a pointer to _atom_site.pdbx_PDB_model_num in the\n ATOM_SITE category.", 
+                  "type": "integer"
+               }, 
+               "PDB_ins_code": {
+                  "description": "Optional identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "type": {
                   "enum": [
-                     "z-form double helix",
-                     "internal loop",
-                     "hairpin loop",
-                     "a-form double helix",
-                     "parallel strands",
-                     "b-form double helix",
-                     "two-way junction",
-                     "mismatched base pair",
-                     "four-way junction",
-                     "quadruple helix",
-                     "double helix",
-                     "triple helix",
-                     "three-way junction",
-                     "bulge loop",
-                     "tetraloop",
-                     "other right-handed double helix"
-                  ],
-                  "description": "This data item identifies a secondary structure\n feature of this entry."
+                     "MAIN CHAIN", 
+                     "MAIN_CHAIN", 
+                     "SIDE_CHAIN", 
+                     "SIDE CHAIN"
+                  ], 
+                  "description": "The type of plane - MAIN CHAIN or SIDE CHAIN atoms", 
+                  "type": "string"
+               }, 
+               "rmsd": {
+                  "description": "The value of the overall deviation from ideal plane for the atoms\n defining the plane.", 
+                  "type": "number"
+               }, 
+               "auth_asym_id": {
+                  "description": "Part of the identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
                }
-            },
+            }, 
             "required": [
-               "entry_id",
-               "feature"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
+               "PDB_model_num", 
+               "auth_asym_id", 
+               "auth_comp_id", 
+               "auth_seq_id", 
+               "id", 
+               "rmsd", 
+               "type"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
       "ndb_struct_na_base_pair": {
-         "type": "array",
+         "minItems": 1, 
          "items": {
-            "type": "object",
             "properties": {
-               "buckle": {
-                  "type": "number",
-                  "description": "\nThe value of the base pair buckle parameter."
-               },
-               "hbond_type_12": {
-                  "type": "integer",
-                  "description": "\nBase pair classification of Westhoff and Leontis."
-               },
-               "hbond_type_28": {
-                  "type": "integer",
-                  "description": "\nBase pair classification of Saenger"
-               },
                "i_PDB_ins_code": {
-                  "type": "string",
-                  "description": "\nDescribes the PDB insertion code of the i-th base in the base pair.\n\nThis data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\nATOM_SITE category."
-               },
-               "i_auth_asym_id": {
-                  "type": "string",
-                  "description": "\nDescribes the asym id of the i-th base in the base pair.\n\nThis data item is a pointer to _atom_site.auth_asym_id in the\nATOM_SITE category."
-               },
-               "i_auth_seq_id": {
-                  "type": "string",
-                  "description": "\nDescribes the sequence number of the i-th base in the base pair.\n\nThis data item is a pointer to _atom_site.auth_seq_id in the\nATOM_SITE category."
-               },
-               "i_label_asym_id": {
-                  "type": "string",
-                  "description": "\nDescribes the asym id of the i-th base in the base pair.\n\nThis data item is a pointer to _atom_site.label_asym_id in the\nATOM_SITE category."
-               },
-               "i_label_comp_id": {
-                  "type": "string",
-                  "description": "\nDescribes the component id of the i-th base in the base pair.\n\nThis data item is a pointer to _atom_site.label_comp_id in the\nATOM_SITE category."
-               },
-               "i_label_seq_id": {
-                  "type": "integer",
-                  "description": "\nDescribes the sequence number of the i-th base in the base pair.\n\nThis data item is a pointer to _atom_site.label_seq_id in the\nATOM_SITE category."
-               },
-               "i_symmetry": {
-                  "type": "string",
-                  "examples": [
-                     "4",
-                     "7_645"
-                  ],
-                  "description": "Describes the symmetry operation that should be applied to the\n coordinates of the i-th base to generate the first partner\n in the base pair."
-               },
-               "j_PDB_ins_code": {
-                  "type": "string",
-                  "description": "\nDescribes the PDB insertion code of the j-th base in the base pair.\n\nThis data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\nATOM_SITE category."
-               },
-               "j_auth_asym_id": {
-                  "type": "string",
-                  "description": "\nDescribes the asym id of the j-th base in the base pair.\n\nThis data item is a pointer to _atom_site.auth_asym_id in the\nATOM_SITE category."
-               },
+                  "description": "\nDescribes the PDB insertion code of the i-th base in the base pair.\n\nThis data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
                "j_auth_seq_id": {
-                  "type": "string",
-                  "description": "\nDescribes the sequence number of the j-th base in the base pair.\n\nThis data item is a pointer to _atom_site.auth_seq_id in the\nATOM_SITE category."
-               },
-               "j_label_asym_id": {
-                  "type": "string",
-                  "description": "\nDescribes the asym id of the j-th base in the base pair.\n\nThis data item is a pointer to _atom_site.label_asym_id in the\nATOM_SITE category."
-               },
-               "j_label_comp_id": {
-                  "type": "string",
-                  "description": "\nDescribes the component id of the j-th base in the base pair.\n\nThis data item is a pointer to _atom_site.label_comp_id in the\nATOM_SITE category."
-               },
-               "j_label_seq_id": {
-                  "type": "integer",
-                  "description": "\nDescribes the sequence number of the j-th base in the base pair.\n\nThis data item is a pointer to _atom_site.label_seq_id in the\nATOM_SITE category."
-               },
-               "j_symmetry": {
-                  "type": "string",
-                  "examples": [
-                     "4",
-                     "7_645"
-                  ],
-                  "description": "Describes the symmetry operation that should be applied to the\n coordinates of the j-th base to generate the second partner\n in the base pair."
-               },
-               "model_number": {
-                  "type": "integer",
-                  "description": "\nDescribes the model number of the the base pair.\n\nThis data item is a pointer to _atom_site.pdbx_PDB_model_num in the\nATOM_SITE category."
-               },
-               "opening": {
-                  "type": "number",
-                  "description": "\nThe value of the base pair opening parameter."
-               },
+                  "description": "\nDescribes the sequence number of the j-th base in the base pair.\n\nThis data item is a pointer to _atom_site.auth_seq_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "i_label_comp_id": {
+                  "description": "\nDescribes the component id of the i-th base in the base pair.\n\nThis data item is a pointer to _atom_site.label_comp_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
                "pair_name": {
-                  "type": "string",
-                  "description": "\nText label for this base pair."
-               },
-               "pair_number": {
-                  "type": "integer",
-                  "description": "\nSequential number of pair in the pair sequence."
-               },
+                  "description": "\nText label for this base pair.", 
+                  "type": "string"
+               }, 
+               "j_label_asym_id": {
+                  "description": "\nDescribes the asym id of the j-th base in the base pair.\n\nThis data item is a pointer to _atom_site.label_asym_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
                "propeller": {
-                  "type": "number",
-                  "description": "\nThe value of the base pair propeller parameter."
-               },
-               "shear": {
-                  "type": "number",
-                  "description": "\nThe value of the base pair shear parameter."
-               },
+                  "description": "\nThe value of the base pair propeller parameter.", 
+                  "type": "number"
+               }, 
+               "hbond_type_12": {
+                  "description": "\nBase pair classification of Westhoff and Leontis.", 
+                  "type": "integer"
+               }, 
+               "buckle": {
+                  "description": "\nThe value of the base pair buckle parameter.", 
+                  "type": "number"
+               }, 
+               "j_symmetry": {
+                  "description": "Describes the symmetry operation that should be applied to the\n coordinates of the j-th base to generate the second partner\n in the base pair.", 
+                  "examples": [
+                     "4", 
+                     "7_645"
+                  ], 
+                  "type": "string"
+               }, 
+               "pair_number": {
+                  "description": "\nSequential number of pair in the pair sequence.", 
+                  "type": "integer"
+               }, 
+               "i_label_asym_id": {
+                  "description": "\nDescribes the asym id of the i-th base in the base pair.\n\nThis data item is a pointer to _atom_site.label_asym_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "opening": {
+                  "description": "\nThe value of the base pair opening parameter.", 
+                  "type": "number"
+               }, 
                "stagger": {
-                  "type": "number",
-                  "description": "\nThe value of the base pair stagger parameter."
-               },
+                  "description": "\nThe value of the base pair stagger parameter.", 
+                  "type": "number"
+               }, 
+               "i_auth_asym_id": {
+                  "description": "\nDescribes the asym id of the i-th base in the base pair.\n\nThis data item is a pointer to _atom_site.auth_asym_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
                "stretch": {
-                  "type": "number",
-                  "description": "\nThe value of the base pair stretch parameter."
+                  "description": "\nThe value of the base pair stretch parameter.", 
+                  "type": "number"
+               }, 
+               "j_PDB_ins_code": {
+                  "description": "\nDescribes the PDB insertion code of the j-th base in the base pair.\n\nThis data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "i_symmetry": {
+                  "description": "Describes the symmetry operation that should be applied to the\n coordinates of the i-th base to generate the first partner\n in the base pair.", 
+                  "examples": [
+                     "4", 
+                     "7_645"
+                  ], 
+                  "type": "string"
+               }, 
+               "j_label_seq_id": {
+                  "description": "\nDescribes the sequence number of the j-th base in the base pair.\n\nThis data item is a pointer to _atom_site.label_seq_id in the\nATOM_SITE category.", 
+                  "type": "integer"
+               }, 
+               "i_label_seq_id": {
+                  "description": "\nDescribes the sequence number of the i-th base in the base pair.\n\nThis data item is a pointer to _atom_site.label_seq_id in the\nATOM_SITE category.", 
+                  "type": "integer"
+               }, 
+               "hbond_type_28": {
+                  "description": "\nBase pair classification of Saenger", 
+                  "type": "integer"
+               }, 
+               "model_number": {
+                  "description": "\nDescribes the model number of the the base pair.\n\nThis data item is a pointer to _atom_site.pdbx_PDB_model_num in the\nATOM_SITE category.", 
+                  "type": "integer"
+               }, 
+               "j_label_comp_id": {
+                  "description": "\nDescribes the component id of the j-th base in the base pair.\n\nThis data item is a pointer to _atom_site.label_comp_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "j_auth_asym_id": {
+                  "description": "\nDescribes the asym id of the j-th base in the base pair.\n\nThis data item is a pointer to _atom_site.auth_asym_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "shear": {
+                  "description": "\nThe value of the base pair shear parameter.", 
+                  "type": "number"
+               }, 
+               "i_auth_seq_id": {
+                  "description": "\nDescribes the sequence number of the i-th base in the base pair.\n\nThis data item is a pointer to _atom_site.auth_seq_id in the\nATOM_SITE category.", 
+                  "type": "string"
                }
-            },
+            }, 
             "required": [
-               "i_auth_asym_id",
-               "i_auth_seq_id",
-               "i_label_asym_id",
-               "i_label_comp_id",
-               "i_label_seq_id",
-               "i_symmetry",
-               "j_auth_asym_id",
-               "j_auth_seq_id",
-               "j_label_asym_id",
-               "j_label_comp_id",
-               "j_label_seq_id",
-               "j_symmetry",
-               "model_number",
-               "pair_name",
+               "i_auth_asym_id", 
+               "i_auth_seq_id", 
+               "i_label_asym_id", 
+               "i_label_comp_id", 
+               "i_label_seq_id", 
+               "i_symmetry", 
+               "j_auth_asym_id", 
+               "j_auth_seq_id", 
+               "j_label_asym_id", 
+               "j_label_comp_id", 
+               "j_label_seq_id", 
+               "j_symmetry", 
+               "model_number", 
+               "pair_name", 
                "pair_number"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "ndb_struct_na_base_pair_step": {
-         "type": "array",
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "pdbx_validate_peptide_omega": {
+         "minItems": 1, 
          "items": {
-            "type": "object",
+            "properties": {
+               "auth_seq_id_1": {
+                  "description": "Part of the identifier of the first residue in the bond\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_seq_id_2": {
+                  "description": "Part of the identifier of the second residue in the bond\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "id": {
+                  "description": "The value of _pdbx_validate_peptide_omega.id must\n uniquely identify each item in the PDBX_VALIDATE_PEPTIDE_OMEGA list.\n This is an integer serial number.", 
+                  "type": "integer"
+               }, 
+               "label_alt_id_2": {
+                  "description": "Optional identifier of the second residue in the torsion angle\nThis data item is a pointer to _atom_site.label_alt_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "label_alt_id_1": {
+                  "description": "Optional identifier of the first residue in the torsion angle\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_asym_id_2": {
+                  "description": "Part of the identifier of the second residue in the bond\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_asym_id_1": {
+                  "description": "Part of the identifier of the first residue in the bond\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_model_num": {
+                  "description": "The model number for the given residue\n\n This data item is a pointer to _atom_site.pdbx_PDB_model_num in the\n ATOM_SITE category.", 
+                  "type": "integer"
+               }, 
+               "auth_comp_id_1": {
+                  "description": "Part of the identifier of the first residue in the bond\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_comp_id_2": {
+                  "description": "Part of the identifier of the second residue in the bond\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_ins_code_1": {
+                  "description": "Optional identifier of the first residue in the bond\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_ins_code_2": {
+                  "description": "Optional identifier of the second residue in the bond\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "omega": {
+                  "minimum": -180.0, 
+                  "description": "The value of the OMEGA angle for the peptide linkage between\n the two defined residues", 
+                  "type": "number", 
+                  "maximum": 180.0
+               }
+            }, 
+            "required": [
+               "PDB_model_num", 
+               "auth_asym_id_1", 
+               "auth_asym_id_2", 
+               "auth_comp_id_1", 
+               "auth_comp_id_2", 
+               "auth_seq_id_1", 
+               "auth_seq_id_2", 
+               "id", 
+               "omega"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "struct_sheet_range": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "end_label_seq_id": {
+                  "description": "A component of the identifier for the residue at which the\n beta-sheet range ends.\n\n This data item is a pointer to _atom_site.label_seq_id in the\n ATOM_SITE category.", 
+                  "type": "integer"
+               }, 
+               "id": {
+                  "description": "The value of _struct_sheet_range.id must uniquely identify a\n range in a given sheet in the STRUCT_SHEET_RANGE list.\n\n Note that this item need not be a number; it can be any unique\n identifier.", 
+                  "type": "string"
+               }, 
+               "end_label_comp_id": {
+                  "description": "A component of the identifier for the residue at which the\n beta-sheet range ends.\n\n This data item is a pointer to _chem_comp.id in the CHEM_COMP\n category.", 
+                  "type": "string"
+               }, 
+               "beg_label_seq_id": {
+                  "description": "A component of the identifier for the residue at which the\n beta-sheet range begins.\n\n This data item is a pointer to _atom_site.label_seq_id in the\n ATOM_SITE category.", 
+                  "type": "integer"
+               }, 
+               "beg_label_asym_id": {
+                  "description": "A component of the identifier for the residue at which the\n beta-sheet range begins.\n\n This data item is a pointer to _struct_asym.id in the\n STRUCT_ASYM category.", 
+                  "type": "string"
+               }, 
+               "beg_auth_asym_id": {
+                  "description": "A component of the identifier for the residue at which the\n beta-sheet range begins.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "beg_auth_comp_id": {
+                  "description": "A component of the identifier for the residue at which the\n beta-sheet range begins.\n\n This data item is a pointer to _atom_site.auth_comp_id in\n the ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "beg_auth_seq_id": {
+                  "description": "A component of the identifier for the residue at which the\n beta-sheet range begins.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "end_auth_seq_id": {
+                  "description": "A component of the identifier for the residue at which the\n beta-sheet range ends.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "sheet_id": {
+                  "description": "This data item is a pointer to _struct_sheet.id in the\n STRUCT_SHEET category.", 
+                  "type": "string"
+               }, 
+               "end_auth_comp_id": {
+                  "description": "A component of the identifier for the residue at which the\n beta-sheet range ends.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "beg_label_comp_id": {
+                  "description": "A component of the identifier for the residue at which the\n beta-sheet range begins.\n\n This data item is a pointer to _chem_comp.id in the CHEM_COMP\n category.", 
+                  "type": "string"
+               }, 
+               "end_label_asym_id": {
+                  "description": "A component of the identifier for the residue at which the\n beta-sheet range ends.\n\n This data item is a pointer to _struct_asym.id in the\n STRUCT_ASYM category.", 
+                  "type": "string"
+               }, 
+               "pdbx_end_PDB_ins_code": {
+                  "description": "A component of the identifier for the residue at which the\n beta sheet range ends. Insertion code.", 
+                  "type": "string"
+               }, 
+               "pdbx_beg_PDB_ins_code": {
+                  "description": "A component of the identifier for the residue at which the\n beta sheet range begins.  Insertion code.", 
+                  "type": "string"
+               }, 
+               "end_auth_asym_id": {
+                  "description": "A component of the identifier for the residue at which the\n beta-sheet range ends.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.\n", 
+                  "type": "string"
+               }
+            }, 
+            "required": [
+               "beg_label_asym_id", 
+               "beg_label_comp_id", 
+               "beg_label_seq_id", 
+               "end_label_asym_id", 
+               "end_label_comp_id", 
+               "end_label_seq_id", 
+               "id", 
+               "sheet_id"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "pdbx_validate_polymer_linkage": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "auth_seq_id_1": {
+                  "description": "Part of the identifier of the first of the two atom sites that\n define the linkage.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_seq_id_2": {
+                  "description": "Part of the identifier of the second of the two atom sites\n that define the linkage.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "id": {
+                  "description": "The value of _pdbx_validate_polymer_linkage.id must uniquely identify\n each item in the PDBX_VALIDATE_POLYMER_LINKAGE list.\n\n This is an integer serial number.", 
+                  "type": "integer"
+               }, 
+               "auth_asym_id_2": {
+                  "description": "Part of the identifier of the second of the two atom sites\n that define the linkage.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "label_alt_id_2": {
+                  "description": "An optional identifier of the second of the two atoms that\n define the linkage.\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "label_alt_id_1": {
+                  "description": "An optional identifier of the first of the two atoms that\n define the linkage.\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "dist": {
+                  "description": "The value of the polymer linkage for the two atoms defined.", 
+                  "type": "number"
+               }, 
+               "auth_asym_id_1": {
+                  "description": "Part of the identifier of the first of the two atom sites that\n define the linkage.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_model_num": {
+                  "description": "The model number for the given linkage", 
+                  "type": "integer"
+               }, 
+               "auth_comp_id_1": {
+                  "description": "Part of the identifier of the first of the two atom sites that\n define the linkage.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_atom_id_2": {
+                  "description": "Part of the identifier of the second of the two atom sites\n that define the linkage.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_atom_id_1": {
+                  "description": "Part of the identifier of the first of the two atom sites that\n define the linkage.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_comp_id_2": {
+                  "description": "Part of the identifier of the second of the two atom sites\n that define the linkage.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_ins_code_1": {
+                  "description": "Optional identifier of the first of the two atom sites that\n define the linkage.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_ins_code_2": {
+                  "description": "Optional identifier of the second of the two atom sites that\n define the linkage.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }
+            }, 
+            "required": [
+               "PDB_model_num", 
+               "auth_asym_id_1", 
+               "auth_asym_id_2", 
+               "auth_atom_id_1", 
+               "auth_atom_id_2", 
+               "auth_comp_id_1", 
+               "auth_comp_id_2", 
+               "auth_seq_id_1", 
+               "auth_seq_id_2", 
+               "dist", 
+               "id"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "ndb_struct_na_base_pair_step": {
+         "minItems": 1, 
+         "items": {
             "properties": {
                "helical_rise": {
-                  "type": "number",
-                  "description": "\nThe value of the base pair step helical rise parameter."
-               },
-               "helical_twist": {
-                  "type": "number",
-                  "description": "\nThe value of the base pair step helical twist parameter."
-               },
-               "i_PDB_ins_code_1": {
-                  "type": "string",
-                  "description": "\nDescribes the PDB insertion code of the i-th base in the\nfirst base pair of the step.\n\nThis data item is a pointer to _atom_site.pdbx_PDB_ins_code in\nthe ATOM_SITE category."
-               },
-               "i_PDB_ins_code_2": {
-                  "type": "string",
-                  "description": "\nDescribes the PDB insertion code of the i-th base in the\nsecond base pair of the step.\n\nThis data item is a pointer to _atom_site.pdbx_PDB_ins_code in\nthe ATOM_SITE category."
-               },
-               "i_auth_asym_id_1": {
-                  "type": "string",
-                  "description": "\nDescribes the author's asym id of the i-th base in the first\nbase pair of the step.\n\nThis data item is a pointer to _atom_site.auth_asym_id in the\nATOM_SITE category."
-               },
-               "i_auth_asym_id_2": {
-                  "type": "string",
-                  "description": "\nDescribes the author's asym id of the i-th base in the second\nbase pair of the step.\n\nThis data item is a pointer to _atom_site.auth_asym_id in the\nATOM_SITE category."
-               },
-               "i_auth_seq_id_1": {
-                  "type": "string",
-                  "description": "\nDescribes the author's sequence number of the i-th base in the\nfirst base pair of the step.\n\nThis data item is a pointer to _atom_site.auth_seq_id in the\nATOM_SITE category."
-               },
-               "i_auth_seq_id_2": {
-                  "type": "string",
-                  "description": "\nDescribes the author's sequence number of the i-th base in the\nsecond base pair of the step.\n\nThis data item is a pointer to _atom_site.auth_seq_id in the\nATOM_SITE category."
-               },
-               "i_label_asym_id_1": {
-                  "type": "string",
-                  "description": "\nDescribes the asym id of the i-th base in the first base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_asym_id in the\nATOM_SITE category."
-               },
-               "i_label_asym_id_2": {
-                  "type": "string",
-                  "description": "\nDescribes the asym id of the i-th base in the second base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_asym_id in the\nATOM_SITE category."
-               },
-               "i_label_comp_id_1": {
-                  "type": "string",
-                  "description": "\nDescribes the component id of the i-th base in the first base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_comp_id in the\nATOM_SITE category."
-               },
-               "i_label_comp_id_2": {
-                  "type": "string",
-                  "description": "\nDescribes the component id of the i-th base in the second base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_comp_id in the\nATOM_SITE category."
-               },
-               "i_label_seq_id_1": {
-                  "type": "integer",
-                  "description": "\nDescribes the sequence number of the i-th base in the first base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_seq_id in the\nATOM_SITE category."
-               },
-               "i_label_seq_id_2": {
-                  "type": "integer",
-                  "description": "\nDescribes the sequence number of the i-th base in the second base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_seq_id in the\nATOM_SITE category."
-               },
-               "i_symmetry_1": {
-                  "type": "string",
-                  "examples": [
-                     "4",
-                     "7_645"
-                  ],
-                  "description": "Describes the symmetry operation that should be applied to the\n coordinates of the i-th base to generate the first partner\n in the first base pair of the step."
-               },
-               "i_symmetry_2": {
-                  "type": "string",
-                  "examples": [
-                     "4",
-                     "7_645"
-                  ],
-                  "description": "Describes the symmetry operation that should be applied to the\n coordinates of the i-th base to generate the first partner\n in the second base pair of the step."
-               },
-               "inclination": {
-                  "type": "number",
-                  "description": "\nThe value of the base pair step inclination parameter."
-               },
-               "j_PDB_ins_code_1": {
-                  "type": "string",
-                  "description": "\nDescribes the PDB insertion code of the j-th base in the\nfirst base pair of the step.\n\nThis data item is a pointer to _atom_site.pdbx_PDB_ins_code in\nthe ATOM_SITE category."
-               },
-               "j_PDB_ins_code_2": {
-                  "type": "string",
-                  "description": "\nDescribes the PDB insertion code of the j-th base in the\nsecond base pair of the step.\n\nThis data item is a pointer to _atom_site.pdbx_PDB_ins_code in\nthe ATOM_SITE category."
-               },
-               "j_auth_asym_id_1": {
-                  "type": "string",
-                  "description": "\nDescribes the author's asym id of the j-th base in the first\nbase pair of the step.\n\nThis data item is a pointer to _atom_site.auth_asym_id in the\nATOM_SITE category."
-               },
-               "j_auth_asym_id_2": {
-                  "type": "string",
-                  "description": "\nDescribes the author's asym id of the j-th base in the second\nbase pair of the step.\n\nThis data item is a pointer to _atom_site.auth_asym_id in the\nATOM_SITE category."
-               },
-               "j_auth_seq_id_1": {
-                  "type": "string",
-                  "description": "\nDescribes the author's sequence number of the j-th base in the\nfirst base pair of the step.\n\nThis data item is a pointer to _atom_site.auth_seq_id in the\nATOM_SITE category."
-               },
-               "j_auth_seq_id_2": {
-                  "type": "string",
-                  "description": "\nDescribes the author's sequence number of the j-th base in the\nsecond base pair of the step.\n\nThis data item is a pointer to _atom_site.auth_seq_id in the\nATOM_SITE category."
-               },
-               "j_label_asym_id_1": {
-                  "type": "string",
-                  "description": "\nDescribes the asym id of the j-th base in the first base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_asym_id in the\nATOM_SITE category."
-               },
-               "j_label_asym_id_2": {
-                  "type": "string",
-                  "description": "\nDescribes the asym id of the j-th base in the second base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_asym_id in the\nATOM_SITE category."
-               },
-               "j_label_comp_id_1": {
-                  "type": "string",
-                  "description": "\nDescribes the component id of the j-th base in the first base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_comp_id in the\nATOM_SITE category."
-               },
-               "j_label_comp_id_2": {
-                  "type": "string",
-                  "description": "\nDescribes the component id of the j-th base in the second base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_comp_id in the\nATOM_SITE category."
-               },
+                  "description": "\nThe value of the base pair step helical rise parameter.", 
+                  "type": "number"
+               }, 
                "j_label_seq_id_1": {
-                  "type": "integer",
-                  "description": "\nDescribes the sequence number of the j-th base in the first base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_seq_id in the\nATOM_SITE category."
-               },
+                  "description": "\nDescribes the sequence number of the j-th base in the first base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_seq_id in the\nATOM_SITE category.", 
+                  "type": "integer"
+               }, 
                "j_label_seq_id_2": {
-                  "type": "integer",
-                  "description": "\nDescribes the sequence number of the j-th base in the second base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_seq_id in the\nATOM_SITE category."
-               },
-               "j_symmetry_1": {
-                  "type": "string",
-                  "examples": [
-                     "4",
-                     "7_645"
-                  ],
-                  "description": "Describes the symmetry operation that should be applied to the\n coordinates of the j-th base to generate the second partner\n in the first base pair of the step."
-               },
-               "j_symmetry_2": {
-                  "type": "string",
-                  "examples": [
-                     "4",
-                     "7_645"
-                  ],
-                  "description": "Describes the symmetry operation that should be applied to the\n coordinates of the j-th base to generate the second partner\n in the second base pair of the step."
-               },
-               "model_number": {
-                  "type": "integer",
-                  "description": "\nDescribes the model number of the the base pair step.\n\nThis data item is a pointer to _atom_site.pdbx_PDB_model_num in the\nATOM_SITE category."
-               },
-               "rise": {
-                  "type": "number",
-                  "description": "\nThe value of the base pair step rise parameter."
-               },
-               "roll": {
-                  "type": "number",
-                  "description": "\nThe value of the base pair step roll parameter."
-               },
-               "shift": {
-                  "type": "number",
-                  "description": "\nThe value of the base pair step shift parameter."
-               },
-               "slide": {
-                  "type": "number",
-                  "description": "\nThe value of the base pair step slide parameter."
-               },
-               "step_name": {
-                  "type": "string",
-                  "description": "\nThe text name of this step."
-               },
-               "step_number": {
-                  "type": "integer",
-                  "description": "\nThe sequence number of this step in the step sequence."
-               },
+                  "description": "\nDescribes the sequence number of the j-th base in the second base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_seq_id in the\nATOM_SITE category.", 
+                  "type": "integer"
+               }, 
                "tilt": {
-                  "type": "number",
-                  "description": "\nThe value of the base pair step tilt parameter."
-               },
-               "tip": {
-                  "type": "number",
-                  "description": "\nThe value of the base pair step twist parameter."
-               },
-               "twist": {
-                  "type": "number",
-                  "description": "\nThe value of the base pair step twist parameter."
-               },
-               "x_displacement": {
-                  "type": "number",
-                  "description": "\nThe value of the base pair step X displacement parameter."
-               },
+                  "description": "\nThe value of the base pair step tilt parameter.", 
+                  "type": "number"
+               }, 
+               "i_label_asym_id_2": {
+                  "description": "\nDescribes the asym id of the i-th base in the second base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_asym_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "i_label_asym_id_1": {
+                  "description": "\nDescribes the asym id of the i-th base in the first base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_asym_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "shift": {
+                  "description": "\nThe value of the base pair step shift parameter.", 
+                  "type": "number"
+               }, 
+               "i_auth_seq_id_2": {
+                  "description": "\nDescribes the author's sequence number of the i-th base in the\nsecond base pair of the step.\n\nThis data item is a pointer to _atom_site.auth_seq_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "i_auth_seq_id_1": {
+                  "description": "\nDescribes the author's sequence number of the i-th base in the\nfirst base pair of the step.\n\nThis data item is a pointer to _atom_site.auth_seq_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "slide": {
+                  "description": "\nThe value of the base pair step slide parameter.", 
+                  "type": "number"
+               }, 
+               "j_label_asym_id_1": {
+                  "description": "\nDescribes the asym id of the j-th base in the first base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_asym_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "j_label_asym_id_2": {
+                  "description": "\nDescribes the asym id of the j-th base in the second base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_asym_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "i_label_comp_id_2": {
+                  "description": "\nDescribes the component id of the i-th base in the second base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_comp_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
                "y_displacement": {
-                  "type": "number",
-                  "description": "\nThe value of the base pair step Y displacement parameter."
+                  "description": "\nThe value of the base pair step Y displacement parameter.", 
+                  "type": "number"
+               }, 
+               "i_label_comp_id_1": {
+                  "description": "\nDescribes the component id of the i-th base in the first base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_comp_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "i_label_seq_id_2": {
+                  "description": "\nDescribes the sequence number of the i-th base in the second base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_seq_id in the\nATOM_SITE category.", 
+                  "type": "integer"
+               }, 
+               "i_PDB_ins_code_2": {
+                  "description": "\nDescribes the PDB insertion code of the i-th base in the\nsecond base pair of the step.\n\nThis data item is a pointer to _atom_site.pdbx_PDB_ins_code in\nthe ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "tip": {
+                  "description": "\nThe value of the base pair step twist parameter.", 
+                  "type": "number"
+               }, 
+               "i_PDB_ins_code_1": {
+                  "description": "\nDescribes the PDB insertion code of the i-th base in the\nfirst base pair of the step.\n\nThis data item is a pointer to _atom_site.pdbx_PDB_ins_code in\nthe ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "helical_twist": {
+                  "description": "\nThe value of the base pair step helical twist parameter.", 
+                  "type": "number"
+               }, 
+               "roll": {
+                  "description": "\nThe value of the base pair step roll parameter.", 
+                  "type": "number"
+               }, 
+               "j_auth_asym_id_2": {
+                  "description": "\nDescribes the author's asym id of the j-th base in the second\nbase pair of the step.\n\nThis data item is a pointer to _atom_site.auth_asym_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "j_auth_asym_id_1": {
+                  "description": "\nDescribes the author's asym id of the j-th base in the first\nbase pair of the step.\n\nThis data item is a pointer to _atom_site.auth_asym_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "j_symmetry_1": {
+                  "description": "Describes the symmetry operation that should be applied to the\n coordinates of the j-th base to generate the second partner\n in the first base pair of the step.", 
+                  "examples": [
+                     "4", 
+                     "7_645"
+                  ], 
+                  "type": "string"
+               }, 
+               "j_symmetry_2": {
+                  "description": "Describes the symmetry operation that should be applied to the\n coordinates of the j-th base to generate the second partner\n in the second base pair of the step.", 
+                  "examples": [
+                     "4", 
+                     "7_645"
+                  ], 
+                  "type": "string"
+               }, 
+               "step_name": {
+                  "description": "\nThe text name of this step.", 
+                  "type": "string"
+               }, 
+               "j_auth_seq_id_1": {
+                  "description": "\nDescribes the author's sequence number of the j-th base in the\nfirst base pair of the step.\n\nThis data item is a pointer to _atom_site.auth_seq_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "rise": {
+                  "description": "\nThe value of the base pair step rise parameter.", 
+                  "type": "number"
+               }, 
+               "twist": {
+                  "description": "\nThe value of the base pair step twist parameter.", 
+                  "type": "number"
+               }, 
+               "j_auth_seq_id_2": {
+                  "description": "\nDescribes the author's sequence number of the j-th base in the\nsecond base pair of the step.\n\nThis data item is a pointer to _atom_site.auth_seq_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "model_number": {
+                  "description": "\nDescribes the model number of the the base pair step.\n\nThis data item is a pointer to _atom_site.pdbx_PDB_model_num in the\nATOM_SITE category.", 
+                  "type": "integer"
+               }, 
+               "i_label_seq_id_1": {
+                  "description": "\nDescribes the sequence number of the i-th base in the first base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_seq_id in the\nATOM_SITE category.", 
+                  "type": "integer"
+               }, 
+               "j_PDB_ins_code_2": {
+                  "description": "\nDescribes the PDB insertion code of the j-th base in the\nsecond base pair of the step.\n\nThis data item is a pointer to _atom_site.pdbx_PDB_ins_code in\nthe ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "j_PDB_ins_code_1": {
+                  "description": "\nDescribes the PDB insertion code of the j-th base in the\nfirst base pair of the step.\n\nThis data item is a pointer to _atom_site.pdbx_PDB_ins_code in\nthe ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "j_label_comp_id_1": {
+                  "description": "\nDescribes the component id of the j-th base in the first base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_comp_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "j_label_comp_id_2": {
+                  "description": "\nDescribes the component id of the j-th base in the second base pair\nof the step.\n\nThis data item is a pointer to _atom_site.label_comp_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "inclination": {
+                  "description": "\nThe value of the base pair step inclination parameter.", 
+                  "type": "number"
+               }, 
+               "step_number": {
+                  "description": "\nThe sequence number of this step in the step sequence.", 
+                  "type": "integer"
+               }, 
+               "i_symmetry_1": {
+                  "description": "Describes the symmetry operation that should be applied to the\n coordinates of the i-th base to generate the first partner\n in the first base pair of the step.", 
+                  "examples": [
+                     "4", 
+                     "7_645"
+                  ], 
+                  "type": "string"
+               }, 
+               "x_displacement": {
+                  "description": "\nThe value of the base pair step X displacement parameter.", 
+                  "type": "number"
+               }, 
+               "i_symmetry_2": {
+                  "description": "Describes the symmetry operation that should be applied to the\n coordinates of the i-th base to generate the first partner\n in the second base pair of the step.", 
+                  "examples": [
+                     "4", 
+                     "7_645"
+                  ], 
+                  "type": "string"
+               }, 
+               "i_auth_asym_id_2": {
+                  "description": "\nDescribes the author's asym id of the i-th base in the second\nbase pair of the step.\n\nThis data item is a pointer to _atom_site.auth_asym_id in the\nATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "i_auth_asym_id_1": {
+                  "description": "\nDescribes the author's asym id of the i-th base in the first\nbase pair of the step.\n\nThis data item is a pointer to _atom_site.auth_asym_id in the\nATOM_SITE category.", 
+                  "type": "string"
                }
-            },
+            }, 
             "required": [
-               "i_auth_asym_id_1",
-               "i_auth_asym_id_2",
-               "i_auth_seq_id_1",
-               "i_auth_seq_id_2",
-               "i_label_asym_id_1",
-               "i_label_asym_id_2",
-               "i_label_comp_id_1",
-               "i_label_comp_id_2",
-               "i_label_seq_id_1",
-               "i_label_seq_id_2",
-               "i_symmetry_1",
-               "i_symmetry_2",
-               "j_auth_asym_id_1",
-               "j_auth_asym_id_2",
-               "j_auth_seq_id_1",
-               "j_auth_seq_id_2",
-               "j_label_asym_id_1",
-               "j_label_asym_id_2",
-               "j_label_comp_id_1",
-               "j_label_comp_id_2",
-               "j_label_seq_id_1",
-               "j_label_seq_id_2",
-               "j_symmetry_1",
-               "j_symmetry_2",
-               "model_number",
-               "step_name",
+               "i_auth_asym_id_1", 
+               "i_auth_asym_id_2", 
+               "i_auth_seq_id_1", 
+               "i_auth_seq_id_2", 
+               "i_label_asym_id_1", 
+               "i_label_asym_id_2", 
+               "i_label_comp_id_1", 
+               "i_label_comp_id_2", 
+               "i_label_seq_id_1", 
+               "i_label_seq_id_2", 
+               "i_symmetry_1", 
+               "i_symmetry_2", 
+               "j_auth_asym_id_1", 
+               "j_auth_asym_id_2", 
+               "j_auth_seq_id_1", 
+               "j_auth_seq_id_2", 
+               "j_label_asym_id_1", 
+               "j_label_asym_id_2", 
+               "j_label_comp_id_1", 
+               "j_label_comp_id_2", 
+               "j_label_seq_id_1", 
+               "j_label_seq_id_2", 
+               "j_symmetry_1", 
+               "j_symmetry_2", 
+               "model_number", 
+               "step_name", 
                "step_number"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "pdbx_validate_chiral": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "PDB_ins_code": {
-                  "type": "string",
-                  "description": "Optional identifier of the residue\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
-               },
-               "PDB_model_num": {
-                  "type": "integer",
-                  "description": "The model number for the given residue\n\n This data item is a pointer to _atom_site.pdbx_PDB_model_num in the\n ATOM_SITE category."
-               },
-               "auth_asym_id": {
-                  "type": "string",
-                  "description": "Part of the identifier of the residue\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "auth_atom_id": {
-                  "type": "string",
-                  "description": "Part of the identifier of the residue\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category."
-               },
-               "auth_comp_id": {
-                  "type": "string",
-                  "description": "Part of the identifier of the residue\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "auth_seq_id": {
-                  "type": "string",
-                  "description": "Part of the identifier of the residue\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "details": {
-                  "type": "string",
-                  "description": "A description of the outlier angle  e.g. ALPHA-CARBON"
-               },
-               "id": {
-                  "type": "integer",
-                  "description": "The value of _pdbx_validate_chiral.id must\n uniquely identify each item in the PDBX_VALIDATE_CHIRAL list.\n This is an integer serial number."
-               },
-               "label_alt_id": {
-                  "type": "string",
-                  "description": "Part of the identifier of the residue\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category."
-               }
-            },
-            "required": [
-               "PDB_model_num",
-               "auth_asym_id",
-               "auth_comp_id",
-               "auth_seq_id",
-               "id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "pdbx_validate_close_contact": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "PDB_ins_code_1": {
-                  "type": "string",
-                  "description": "Optional identifier of the first of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
-               },
-               "PDB_ins_code_2": {
-                  "type": "string",
-                  "description": "Optional identifier of the second of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
-               },
-               "PDB_model_num": {
-                  "type": "integer",
-                  "description": "The model number for the given contact"
-               },
-               "auth_asym_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "auth_asym_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the two atom sites\n that define the close contact.\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "auth_atom_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the two atom sites that\n define the close contact.\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category."
-               },
-               "auth_atom_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the two atom sites\n that define the close contact.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category."
-               },
-               "auth_comp_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "auth_comp_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the two atom sites\n that define the close contact.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "auth_seq_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "auth_seq_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the two atom sites\n that define the close contact.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "dist": {
-                  "type": "number",
-                  "description": "The value of the close contact for the two atoms defined."
-               },
-               "id": {
-                  "type": "integer",
-                  "description": "The value of _pdbx_validate_close_contact.id must uniquely identify\n each item in the PDBX_VALIDATE_CLOSE_CONTACT list.\n This is an integer serial number."
-               },
-               "label_alt_id_1": {
-                  "type": "string",
-                  "description": "An optional identifier of the first of the two atoms that\n define the close contact.\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category."
-               },
-               "label_alt_id_2": {
-                  "type": "string",
-                  "description": "An optional identifier of the second of the two atoms that\n define the close contact.\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category."
-               }
-            },
-            "required": [
-               "PDB_model_num",
-               "auth_asym_id_1",
-               "auth_asym_id_2",
-               "auth_atom_id_1",
-               "auth_atom_id_2",
-               "auth_comp_id_1",
-               "auth_comp_id_2",
-               "auth_seq_id_1",
-               "auth_seq_id_2",
-               "dist",
-               "id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "pdbx_validate_main_chain_plane": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "PDB_ins_code": {
-                  "type": "string",
-                  "description": "Optional identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
-               },
-               "PDB_model_num": {
-                  "type": "integer",
-                  "description": "The model number for the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.pdbx_PDB_model_num in the\n ATOM_SITE category."
-               },
-               "auth_asym_id": {
-                  "type": "string",
-                  "description": "Part of the identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "auth_comp_id": {
-                  "type": "string",
-                  "description": "Part of the identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "auth_seq_id": {
-                  "type": "string",
-                  "description": "Part of the identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "id": {
-                  "type": "integer",
-                  "description": "The value of _pdbx_validate_main_chain_plane.id must uniquely identify\n each item in the PDBX_VALIDATE_MAIN_CHAIN_PLANE list.\n\n This is an integer serial number."
-               },
-               "improper_torsion_angle": {
-                  "type": "number",
-                  "description": "The value for the torsion angle  C(i-1) - CA(i-1) - N(i) - O(i-1)"
-               },
-               "label_alt_id": {
-                  "type": "string",
-                  "description": "Optional identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category."
-               }
-            },
-            "required": [
-               "PDB_model_num",
-               "auth_asym_id",
-               "auth_comp_id",
-               "auth_seq_id",
-               "id",
-               "improper_torsion_angle"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "pdbx_validate_peptide_omega": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "PDB_ins_code_1": {
-                  "type": "string",
-                  "description": "Optional identifier of the first residue in the bond\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
-               },
-               "PDB_ins_code_2": {
-                  "type": "string",
-                  "description": "Optional identifier of the second residue in the bond\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
-               },
-               "PDB_model_num": {
-                  "type": "integer",
-                  "description": "The model number for the given residue\n\n This data item is a pointer to _atom_site.pdbx_PDB_model_num in the\n ATOM_SITE category."
-               },
-               "auth_asym_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first residue in the bond\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "auth_asym_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second residue in the bond\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "auth_comp_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first residue in the bond\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "auth_comp_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second residue in the bond\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "auth_seq_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first residue in the bond\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "auth_seq_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second residue in the bond\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "id": {
-                  "type": "integer",
-                  "description": "The value of _pdbx_validate_peptide_omega.id must\n uniquely identify each item in the PDBX_VALIDATE_PEPTIDE_OMEGA list.\n This is an integer serial number."
-               },
-               "label_alt_id_1": {
-                  "type": "string",
-                  "description": "Optional identifier of the first residue in the torsion angle\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category."
-               },
-               "label_alt_id_2": {
-                  "type": "string",
-                  "description": "Optional identifier of the second residue in the torsion angle\nThis data item is a pointer to _atom_site.label_alt_id in the\nATOM_SITE category."
-               },
-               "omega": {
-                  "type": "number",
-                  "minimum": -180.0,
-                  "maximum": 180.0,
-                  "description": "The value of the OMEGA angle for the peptide linkage between\n the two defined residues"
-               }
-            },
-            "required": [
-               "PDB_model_num",
-               "auth_asym_id_1",
-               "auth_asym_id_2",
-               "auth_comp_id_1",
-               "auth_comp_id_2",
-               "auth_seq_id_1",
-               "auth_seq_id_2",
-               "id",
-               "omega"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "pdbx_validate_planes": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "PDB_ins_code": {
-                  "type": "string",
-                  "description": "Optional identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
-               },
-               "PDB_model_num": {
-                  "type": "integer",
-                  "description": "The model number for the given angle\n\n This data item is a pointer to _atom_site.pdbx_PDB_model_num in the\n ATOM_SITE category."
-               },
-               "auth_asym_id": {
-                  "type": "string",
-                  "description": "Part of the identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "auth_comp_id": {
-                  "type": "string",
-                  "description": "Part of the identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "auth_seq_id": {
-                  "type": "string",
-                  "description": "Part of the identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "id": {
-                  "type": "integer",
-                  "description": "The value of _pdbx_validate_planes.id must uniquely identify\n each item in the PDBX_VALIDATE_PLANES list.\n\n This is an integer serial number."
-               },
-               "label_alt_id": {
-                  "type": "string",
-                  "description": "Optional identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category."
-               },
-               "rmsd": {
-                  "type": "number",
-                  "description": "The value of the overall deviation from ideal plane for the atoms\n defining the plane."
-               },
-               "type": {
-                  "type": "string",
-                  "enum": [
-                     "SIDE_CHAIN",
-                     "MAIN CHAIN",
-                     "MAIN_CHAIN",
-                     "SIDE CHAIN"
-                  ],
-                  "description": "The type of plane - MAIN CHAIN or SIDE CHAIN atoms"
-               }
-            },
-            "required": [
-               "PDB_model_num",
-               "auth_asym_id",
-               "auth_comp_id",
-               "auth_seq_id",
-               "id",
-               "rmsd",
-               "type"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "pdbx_validate_polymer_linkage": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "PDB_ins_code_1": {
-                  "type": "string",
-                  "description": "Optional identifier of the first of the two atom sites that\n define the linkage.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
-               },
-               "PDB_ins_code_2": {
-                  "type": "string",
-                  "description": "Optional identifier of the second of the two atom sites that\n define the linkage.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
-               },
-               "PDB_model_num": {
-                  "type": "integer",
-                  "description": "The model number for the given linkage"
-               },
-               "auth_asym_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the two atom sites that\n define the linkage.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "auth_asym_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the two atom sites\n that define the linkage.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "auth_atom_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the two atom sites that\n define the linkage.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category."
-               },
-               "auth_atom_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the two atom sites\n that define the linkage.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category."
-               },
-               "auth_comp_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the two atom sites that\n define the linkage.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "auth_comp_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the two atom sites\n that define the linkage.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "auth_seq_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the two atom sites that\n define the linkage.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "auth_seq_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the two atom sites\n that define the linkage.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "dist": {
-                  "type": "number",
-                  "description": "The value of the polymer linkage for the two atoms defined."
-               },
-               "id": {
-                  "type": "integer",
-                  "description": "The value of _pdbx_validate_polymer_linkage.id must uniquely identify\n each item in the PDBX_VALIDATE_POLYMER_LINKAGE list.\n\n This is an integer serial number."
-               },
-               "label_alt_id_1": {
-                  "type": "string",
-                  "description": "An optional identifier of the first of the two atoms that\n define the linkage.\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category."
-               },
-               "label_alt_id_2": {
-                  "type": "string",
-                  "description": "An optional identifier of the second of the two atoms that\n define the linkage.\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category."
-               }
-            },
-            "required": [
-               "PDB_model_num",
-               "auth_asym_id_1",
-               "auth_asym_id_2",
-               "auth_atom_id_1",
-               "auth_atom_id_2",
-               "auth_comp_id_1",
-               "auth_comp_id_2",
-               "auth_seq_id_1",
-               "auth_seq_id_2",
-               "dist",
-               "id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "pdbx_validate_rmsd_angle": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "PDB_ins_code_1": {
-                  "type": "string",
-                  "description": "Optional identifier of the first of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
-               },
-               "PDB_ins_code_2": {
-                  "type": "string",
-                  "description": "Optional identifier of the second of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
-               },
-               "PDB_ins_code_3": {
-                  "type": "string",
-                  "description": "Optional identifier of the third of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
-               },
-               "PDB_model_num": {
-                  "type": "integer",
-                  "description": "The model number for the given angle"
-               },
-               "angle_deviation": {
-                  "type": "number",
-                  "description": "Value of the deviation (in degrees)  from 6*REBI for the angle bounded\n by the three sites from the expected dictionary value."
-               },
-               "angle_standard_deviation": {
-                  "type": "number",
-                  "minimum": 0.0,
-                  "description": "The uncertainty in the target value of the bond angle expressed as a standard deviation."
-               },
-               "angle_target_value": {
-                  "type": "number",
-                  "description": "The target value of the bond angle"
-               },
-               "angle_value": {
-                  "type": "number",
-                  "description": "The value of the bond angle"
-               },
-               "auth_asym_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "auth_asym_id_2": {
-                  "type": "string",
-                  "description": "identifier of the second of the three atom sites\n that define the angle.\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "auth_asym_id_3": {
-                  "type": "string",
-                  "description": "Part of the identifier of the third of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "auth_atom_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category."
-               },
-               "auth_atom_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the three atom sites\n that define the angle.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category."
-               },
-               "auth_atom_id_3": {
-                  "type": "string",
-                  "description": "Part of the identifier of the third of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category."
-               },
-               "auth_comp_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "auth_comp_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the three atom sites\n that define the angle.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "auth_comp_id_3": {
-                  "type": "string",
-                  "description": "Part of the identifier of the third of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "auth_seq_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "auth_seq_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the three atom sites\n that define the angle.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "auth_seq_id_3": {
-                  "type": "string",
-                  "description": "Part of the identifier of the third of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "id": {
-                  "type": "integer",
-                  "description": "The value of _pdbx_validate_rmsd_angle.id must uniquely identify\n each item in the PDBX_VALIDATE_RMSD_ANGLE list.\n This is an integer serial number."
-               },
-               "label_alt_id_1": {
-                  "type": "string",
-                  "description": "An optional identifier of the first of the three atoms that\n define the covalent angle.\n\n This data item is a pointer to _atom_site.label_alt.id in the\n ATOM_SITE category."
-               },
-               "label_alt_id_2": {
-                  "type": "string",
-                  "description": "An optional identifier of the second of the three atoms that\n define the covalent angle.\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category."
-               },
-               "label_alt_id_3": {
-                  "type": "string",
-                  "description": "An optional identifier of the third of the three atoms that\n define the covalent angle.\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category."
-               },
-               "linker_flag": {
-                  "type": "string",
-                  "description": "A flag to indicate if the angle is between two residues"
-               }
-            },
-            "required": [
-               "PDB_model_num",
-               "angle_deviation",
-               "auth_asym_id_1",
-               "auth_asym_id_2",
-               "auth_asym_id_3",
-               "auth_atom_id_1",
-               "auth_atom_id_2",
-               "auth_atom_id_3",
-               "auth_comp_id_1",
-               "auth_comp_id_2",
-               "auth_comp_id_3",
-               "auth_seq_id_1",
-               "auth_seq_id_2",
-               "auth_seq_id_3",
-               "id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "pdbx_validate_rmsd_bond": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "PDB_ins_code_1": {
-                  "type": "string",
-                  "description": "Optional identifier of the first of the two atom sites that\n define the covalent bond.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
-               },
-               "PDB_ins_code_2": {
-                  "type": "string",
-                  "description": "Optional identifier of the second of the two atom sites that\n define the covalent bond.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
-               },
-               "PDB_model_num": {
-                  "type": "integer",
-                  "description": "The model number for the given bond"
-               },
-               "auth_asym_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the two atom sites that\n define the covalent bond.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "auth_asym_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the two atom sites\n that define the covalent bond.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "auth_atom_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the two atom sites that\n define the covalent bond.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category."
-               },
-               "auth_atom_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the two atom sites\n that define the covalent bond.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category."
-               },
-               "auth_comp_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the two atom sites that\n define the covalent bond.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "auth_comp_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the two atom sites\n that define the covalent bond.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "auth_seq_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the two atom sites that\n define the covalent bond.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "auth_seq_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the two atom sites\n that define the covalent bond.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "bond_deviation": {
-                  "type": "number",
-                  "description": "The value of the deviation from ideal for the defined covalent\n bond for the two atoms defined."
-               },
-               "bond_standard_deviation": {
-                  "type": "number",
-                  "minimum": 0.0,
-                  "description": "The uncertaintiy in target value of the bond length expressed as a standard deviation."
-               },
-               "bond_target_value": {
-                  "type": "number",
-                  "minimum": 0.0,
-                  "description": "The target value of the bond length"
-               },
-               "bond_value": {
-                  "type": "number",
-                  "minimum": 0.0,
-                  "description": "The value of the bond length"
-               },
-               "id": {
-                  "type": "integer",
-                  "description": "The value of _pdbx_validate_rmsd_bond.id must uniquely identify\n each item in the PDBX_VALIDATE_RMSD_BOND list.\n This is an integer serial number."
-               },
-               "label_alt_id_1": {
-                  "type": "string",
-                  "description": "An optional identifier of the first of the two atoms that\n define the covalent bond.\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category."
-               },
-               "label_alt_id_2": {
-                  "type": "string",
-                  "description": "An optional identifier of the second of the two atoms that\n define the covalent bond.\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category."
-               },
-               "linker_flag": {
-                  "type": "string",
-                  "description": "A flag to indicate if the bond is between two residues"
-               }
-            },
-            "required": [
-               "PDB_model_num",
-               "auth_asym_id_1",
-               "auth_asym_id_2",
-               "auth_atom_id_1",
-               "auth_atom_id_2",
-               "auth_comp_id_1",
-               "auth_comp_id_2",
-               "auth_seq_id_1",
-               "auth_seq_id_2",
-               "bond_deviation",
-               "id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "pdbx_validate_symm_contact": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "PDB_ins_code_1": {
-                  "type": "string",
-                  "description": "Optional identifier of the first of the two atom sites that\n define the close contact."
-               },
-               "PDB_ins_code_2": {
-                  "type": "string",
-                  "description": "Optional identifier of the second of the two atom sites that\n define the close contact."
-               },
-               "PDB_model_num": {
-                  "type": "integer",
-                  "description": "The model number for the given angle"
-               },
-               "auth_asym_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "auth_asym_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the two atom sites\n that define the close contact.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "auth_atom_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category."
-               },
-               "auth_atom_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the two atom sites\n that define the close contact.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category."
-               },
-               "auth_comp_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "auth_comp_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the two atom sites\n that define the close contact.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "auth_seq_id_1": {
-                  "type": "string",
-                  "description": "Part of the identifier of the first of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "auth_seq_id_2": {
-                  "type": "string",
-                  "description": "Part of the identifier of the second of the two atom sites\n that define the close contact.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "dist": {
-                  "type": "number",
-                  "description": "The value of the close contact for the two atoms defined."
-               },
-               "id": {
-                  "type": "integer",
-                  "description": "The value of _pdbx_validate_symm_contact.id must uniquely identify\n each item in the PDBX_VALIDATE_SYMM_CONTACT list.\n This is an integer serial number."
-               },
-               "label_alt_id_1": {
-                  "type": "string",
-                  "description": "An optional identifier of the first of the two atoms that\n define the close contact.\n\n This data item is a pointer to _atom_site.label_alt.id in the\n ATOM_SITE category."
-               },
-               "label_alt_id_2": {
-                  "type": "string",
-                  "description": "An optional identifier of the second of the two atoms that\n define the close contact.\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category."
-               },
-               "site_symmetry_1": {
-                  "type": "string",
-                  "description": "The symmetry of the first of the two atoms define the close contact.\n Symmetry defined in ORTEP style of 555 equal to unit cell with translations\n  +-1 from 555 as 000"
-               },
-               "site_symmetry_2": {
-                  "type": "string",
-                  "description": "The symmetry of the second of the two atoms define the close contact.\n Symmetry defined in ORTEP style of 555 equal to unit cell with translations\n  +-1 from 555 as 000"
-               }
-            },
-            "required": [
-               "PDB_model_num",
-               "auth_asym_id_1",
-               "auth_asym_id_2",
-               "auth_atom_id_1",
-               "auth_atom_id_2",
-               "auth_comp_id_1",
-               "auth_comp_id_2",
-               "auth_seq_id_1",
-               "auth_seq_id_2",
-               "dist",
-               "id",
-               "site_symmetry_1",
-               "site_symmetry_2"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "pdbx_validate_torsion": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "PDB_ins_code": {
-                  "type": "string",
-                  "description": "Optional identifier of the residue\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
-               },
-               "PDB_model_num": {
-                  "type": "integer",
-                  "description": "The model number for the given residue\n\n This data item is a pointer to _atom_site.pdbx_PDB_model_num in the\n ATOM_SITE category."
-               },
-               "auth_asym_id": {
-                  "type": "string",
-                  "description": "Part of the identifier of the residue\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "auth_comp_id": {
-                  "type": "string",
-                  "description": "Part of the identifier of the residue\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "auth_seq_id": {
-                  "type": "string",
-                  "description": "Part of the identifier of the residue\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "id": {
-                  "type": "integer",
-                  "description": "The value of _pdbx_validate_torsion.id must\n uniquely identify each item in the PDBX_VALIDATE_TORSION list.\n This is an integer serial number."
-               },
-               "label_alt_id": {
-                  "type": "string",
-                  "description": "Optional identifier of the residue\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category."
-               },
-               "phi": {
-                  "type": "number",
-                  "minimum": -180.0,
-                  "maximum": 180.0,
-                  "description": "The Phi value that for the residue that lies outside normal limits\n (in combination with the Psi value) with regards to the rammachandran plot"
-               },
-               "psi": {
-                  "type": "number",
-                  "minimum": -180.0,
-                  "maximum": 180.0,
-                  "description": "The Psi value that for the residue that lies outside normal limits\n (in combination with the Phi value) with regards to the rammachandran plot"
-               }
-            },
-            "required": [
-               "PDB_model_num",
-               "auth_asym_id",
-               "auth_comp_id",
-               "auth_seq_id",
-               "id",
-               "phi",
-               "psi"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
       "rcsb_load_status": {
-         "type": "object",
          "properties": {
             "datablock_name": {
-               "type": "string",
-               "description": "Source data block containing the loaded data set"
-            },
+               "description": "Source data block containing the loaded data set", 
+               "type": "string"
+            }, 
             "load_date": {
-               "type": "string",
-               "description": "Time stamp of data load"
-            },
+               "format": "date-time", 
+               "description": "Time stamp of data load", 
+               "type": "string"
+            }, 
             "locator": {
-               "type": "string",
-               "description": "Locator of file containing loaded data"
+               "description": "Locator of file containing loaded data", 
+               "type": "string"
             }
-         },
+         }, 
          "required": [
-            "datablock_name",
-            "load_date",
+            "datablock_name", 
+            "load_date", 
             "locator"
-         ]
-      },
-      "struct_conf": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "beg_auth_asym_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n conformation segment begins.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "beg_auth_comp_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n conformation segment begins.\n\n This data item is a pointer to _atom_site.auth_comp_id in\n the ATOM_SITE category."
-               },
-               "beg_auth_seq_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n conformation segment begins.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "beg_label_asym_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n conformation segment begins.\n\n This data item is a pointer to _atom_site.label_asym_id in the\n ATOM_SITE category."
-               },
-               "beg_label_comp_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n conformation segment begins.\n\n This data item is a pointer to _atom_site.label_comp_id in\n the ATOM_SITE category."
-               },
-               "beg_label_seq_id": {
-                  "type": "integer",
-                  "description": "A component of the identifier for the residue at which the\n conformation segment begins.\n\n This data item is a pointer to _atom_site.label_seq_id in the\n ATOM_SITE category."
-               },
-               "conf_type_id": {
-                  "type": "string",
-                  "description": "This data item is a pointer to _struct_conf_type.id in the\n STRUCT_CONF_TYPE category."
-               },
-               "details": {
-                  "type": "string",
-                  "description": "A description of special aspects of the conformation assignment."
-               },
-               "end_auth_asym_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n conformation segment ends.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "end_auth_comp_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n conformation segment ends.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "end_auth_seq_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n conformation segment ends.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "end_label_asym_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n conformation segment ends.\n\n This data item is a pointer to _atom_site.label_asym_id in the\n ATOM_SITE category."
-               },
-               "end_label_comp_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n conformation segment ends.\n\n This data item is a pointer to _atom_site.label_comp_id in the\n ATOM_SITE category."
-               },
-               "end_label_seq_id": {
-                  "type": "integer",
-                  "description": "A component of the identifier for the residue at which the\n conformation segment ends.\n\n This data item is a pointer to _atom_site.label_seq_id in the\n ATOM_SITE category."
-               },
-               "id": {
-                  "type": "string",
-                  "description": "The value of _struct_conf.id must uniquely identify a record in\n the STRUCT_CONF list.\n\n Note that this item need not be a number; it can be any unique\n identifier."
-               },
-               "pdbx_PDB_helix_class": {
-                  "type": "string",
-                  "description": "This item is a place holder for the helix class used in the PDB\n HELIX record."
-               },
-               "pdbx_PDB_helix_id": {
-                  "type": "string",
-                  "description": "\nA placeholder for the helix identifier of the PDB\nHELIX record."
-               },
-               "pdbx_PDB_helix_length": {
-                  "type": "integer",
-                  "description": "\nA placeholder for the lengths of the helix of the PDB\nHELIX record."
-               },
-               "pdbx_beg_PDB_ins_code": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n conformation segment starts.\n"
-               },
-               "pdbx_end_PDB_ins_code": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n conformation segment ends.\n"
-               }
-            },
-            "required": [
-               "beg_label_asym_id",
-               "beg_label_comp_id",
-               "beg_label_seq_id",
-               "conf_type_id",
-               "end_label_asym_id",
-               "end_label_comp_id",
-               "end_label_seq_id",
-               "id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
+         ], 
+         "type": "object"
+      }, 
       "struct_conf_type": {
-         "type": "array",
+         "minItems": 1, 
          "items": {
-            "type": "object",
             "properties": {
                "id": {
-                  "type": "string",
                   "enum": [
-                     "TURN_TY1P_P",
-                     "TURN_TY3_P",
-                     "HELX_RH_P",
-                     "HELX_LH_P",
-                     "HELX_LH_OM_P",
-                     "HELX_LH_B_N",
-                     "HELX_LH_N",
-                     "STRN",
-                     "HELX_LH_A_N",
-                     "HELX_LH_Z_N",
-                     "HELX_OT_P",
-                     "HELX_RH_B_N",
-                     "HELX_RH_PI_P",
-                     "HELX_RH_PP_P",
-                     "HELX_OT_N",
-                     "HELX_N",
-                     "HELX_RH_A_N",
-                     "HELX_RH_27_P",
-                     "TURN_TY1_P",
-                     "HELX_RH_N",
-                     "HELX_LH_PP_P",
-                     "HELX_RH_GA_P",
-                     "HELX_RH_Z_N",
-                     "TURN_OT_P",
-                     "TURN_P",
-                     "TURN_TY3P_P",
-                     "HELX_P",
-                     "HELX_RH_OT_P",
-                     "HELX_LH_AL_P",
-                     "HELX_RH_OT_N",
-                     "HELX_RH_AL_P",
-                     "HELX_LH_GA_P",
-                     "HELX_RH_OM_P",
-                     "HELX_RH_3T_P",
-                     "HELX_LH_PI_P",
-                     "HELX_LH_OT_P",
-                     "HELX_LH_OT_N",
-                     "HELX_LH_3T_P",
-                     "TURN_TY2_P",
-                     "HELX_LH_27_P",
-                     "TURN_TY2P_P"
-                  ],
-                  "description": "The descriptor that categorizes the type of the conformation\n of the backbone of the polymer (whether protein or nucleic acid).\n Explicit values for the torsion angles that define each\n conformation are not given here, but it is expected that the\n author would provide such information in either the\n _struct_conf_type.criteria or _struct_conf_type.reference data\n items, or both."
+                     "HELX_OT_N", 
+                     "TURN_TY1P_P", 
+                     "HELX_RH_27_P", 
+                     "HELX_LH_27_P", 
+                     "HELX_RH_PP_P", 
+                     "HELX_RH_PI_P", 
+                     "HELX_RH_OM_P", 
+                     "HELX_LH_P", 
+                     "HELX_OT_P", 
+                     "HELX_LH_Z_N", 
+                     "HELX_LH_N", 
+                     "HELX_RH_B_N", 
+                     "HELX_RH_OT_P", 
+                     "HELX_RH_OT_N", 
+                     "HELX_RH_GA_P", 
+                     "TURN_TY2_P", 
+                     "TURN_OT_P", 
+                     "HELX_LH_OM_P", 
+                     "HELX_LH_GA_P", 
+                     "STRN", 
+                     "HELX_P", 
+                     "TURN_TY2P_P", 
+                     "HELX_LH_OT_N", 
+                     "HELX_RH_A_N", 
+                     "TURN_TY3_P", 
+                     "HELX_LH_PP_P", 
+                     "TURN_TY1_P", 
+                     "HELX_LH_AL_P", 
+                     "TURN_P", 
+                     "HELX_N", 
+                     "HELX_RH_3T_P", 
+                     "TURN_TY3P_P", 
+                     "HELX_LH_PI_P", 
+                     "HELX_RH_P", 
+                     "HELX_LH_3T_P", 
+                     "HELX_RH_AL_P", 
+                     "HELX_RH_N", 
+                     "HELX_RH_Z_N", 
+                     "HELX_LH_A_N", 
+                     "HELX_LH_OT_P", 
+                     "HELX_LH_B_N"
+                  ], 
+                  "description": "The descriptor that categorizes the type of the conformation\n of the backbone of the polymer (whether protein or nucleic acid).\n Explicit values for the torsion angles that define each\n conformation are not given here, but it is expected that the\n author would provide such information in either the\n _struct_conf_type.criteria or _struct_conf_type.reference data\n items, or both.", 
+                  "type": "string"
                }
-            },
+            }, 
             "required": [
                "id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "struct_conn": {
-         "type": "array",
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "pdbx_validate_rmsd_bond": {
+         "minItems": 1, 
          "items": {
-            "type": "object",
             "properties": {
-               "conn_type_id": {
-                  "type": "string",
-                  "description": "This data item is a pointer to _struct_conn_type.id in the\n STRUCT_CONN_TYPE category."
-               },
+               "bond_standard_deviation": {
+                  "minimum": 0.0, 
+                  "description": "The uncertaintiy in target value of the bond length expressed as a standard deviation.", 
+                  "type": "number"
+               }, 
+               "auth_seq_id_1": {
+                  "description": "Part of the identifier of the first of the two atom sites that\n define the covalent bond.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_seq_id_2": {
+                  "description": "Part of the identifier of the second of the two atom sites\n that define the covalent bond.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "id": {
+                  "description": "The value of _pdbx_validate_rmsd_bond.id must uniquely identify\n each item in the PDBX_VALIDATE_RMSD_BOND list.\n This is an integer serial number.", 
+                  "type": "integer"
+               }, 
+               "bond_target_value": {
+                  "minimum": 0.0, 
+                  "description": "The target value of the bond length", 
+                  "type": "number"
+               }, 
+               "label_alt_id_2": {
+                  "description": "An optional identifier of the second of the two atoms that\n define the covalent bond.\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "label_alt_id_1": {
+                  "description": "An optional identifier of the first of the two atoms that\n define the covalent bond.\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_comp_id_2": {
+                  "description": "Part of the identifier of the second of the two atom sites\n that define the covalent bond.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_asym_id_2": {
+                  "description": "Part of the identifier of the second of the two atom sites\n that define the covalent bond.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_asym_id_1": {
+                  "description": "Part of the identifier of the first of the two atom sites that\n define the covalent bond.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_model_num": {
+                  "description": "The model number for the given bond", 
+                  "type": "integer"
+               }, 
+               "auth_comp_id_1": {
+                  "description": "Part of the identifier of the first of the two atom sites that\n define the covalent bond.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_atom_id_2": {
+                  "description": "Part of the identifier of the second of the two atom sites\n that define the covalent bond.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_atom_id_1": {
+                  "description": "Part of the identifier of the first of the two atom sites that\n define the covalent bond.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "linker_flag": {
+                  "description": "A flag to indicate if the bond is between two residues", 
+                  "type": "string"
+               }, 
+               "PDB_ins_code_1": {
+                  "description": "Optional identifier of the first of the two atom sites that\n define the covalent bond.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_ins_code_2": {
+                  "description": "Optional identifier of the second of the two atom sites that\n define the covalent bond.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "bond_deviation": {
+                  "description": "The value of the deviation from ideal for the defined covalent\n bond for the two atoms defined.", 
+                  "type": "number"
+               }, 
+               "bond_value": {
+                  "minimum": 0.0, 
+                  "description": "The value of the bond length", 
+                  "type": "number"
+               }
+            }, 
+            "required": [
+               "PDB_model_num", 
+               "auth_asym_id_1", 
+               "auth_asym_id_2", 
+               "auth_atom_id_1", 
+               "auth_atom_id_2", 
+               "auth_comp_id_1", 
+               "auth_comp_id_2", 
+               "auth_seq_id_1", 
+               "auth_seq_id_2", 
+               "bond_deviation", 
+               "id"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "entry": {
+         "properties": {
+            "id": {
+               "description": "The value of _entry.id identifies the data block.\n\n Note that this item need not be a number; it can be any unique\n identifier.", 
+               "type": "string"
+            }
+         }, 
+         "required": [
+            "id"
+         ], 
+         "type": "object"
+      }, 
+      "pdbx_validate_rmsd_angle": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "id": {
+                  "description": "The value of _pdbx_validate_rmsd_angle.id must uniquely identify\n each item in the PDBX_VALIDATE_RMSD_ANGLE list.\n This is an integer serial number.", 
+                  "type": "integer"
+               }, 
+               "angle_standard_deviation": {
+                  "minimum": 0.0, 
+                  "description": "The uncertainty in the target value of the bond angle expressed as a standard deviation.", 
+                  "type": "number"
+               }, 
+               "PDB_model_num": {
+                  "description": "The model number for the given angle", 
+                  "type": "integer"
+               }, 
+               "auth_comp_id_1": {
+                  "description": "Part of the identifier of the first of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_comp_id_3": {
+                  "description": "Part of the identifier of the third of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_comp_id_2": {
+                  "description": "Part of the identifier of the second of the three atom sites\n that define the angle.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "angle_target_value": {
+                  "description": "The target value of the bond angle", 
+                  "type": "number"
+               }, 
+               "angle_value": {
+                  "description": "The value of the bond angle", 
+                  "type": "number"
+               }, 
+               "auth_atom_id_3": {
+                  "description": "Part of the identifier of the third of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_atom_id_2": {
+                  "description": "Part of the identifier of the second of the three atom sites\n that define the angle.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_atom_id_1": {
+                  "description": "Part of the identifier of the first of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "linker_flag": {
+                  "description": "A flag to indicate if the angle is between two residues", 
+                  "type": "string"
+               }, 
+               "PDB_ins_code_1": {
+                  "description": "Optional identifier of the first of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_ins_code_2": {
+                  "description": "Optional identifier of the second of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_ins_code_3": {
+                  "description": "Optional identifier of the third of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_seq_id_1": {
+                  "description": "Part of the identifier of the first of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_seq_id_2": {
+                  "description": "Part of the identifier of the second of the three atom sites\n that define the angle.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_seq_id_3": {
+                  "description": "Part of the identifier of the third of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "label_alt_id_3": {
+                  "description": "An optional identifier of the third of the three atoms that\n define the covalent angle.\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "label_alt_id_2": {
+                  "description": "An optional identifier of the second of the three atoms that\n define the covalent angle.\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "label_alt_id_1": {
+                  "description": "An optional identifier of the first of the three atoms that\n define the covalent angle.\n\n This data item is a pointer to _atom_site.label_alt.id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_asym_id_1": {
+                  "description": "Part of the identifier of the first of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_asym_id_2": {
+                  "description": "identifier of the second of the three atom sites\n that define the angle.\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_asym_id_3": {
+                  "description": "Part of the identifier of the third of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "angle_deviation": {
+                  "description": "Value of the deviation (in degrees)  from 6*REBI for the angle bounded\n by the three sites from the expected dictionary value.", 
+                  "type": "number"
+               }
+            }, 
+            "required": [
+               "PDB_model_num", 
+               "angle_deviation", 
+               "auth_asym_id_1", 
+               "auth_asym_id_2", 
+               "auth_asym_id_3", 
+               "auth_atom_id_1", 
+               "auth_atom_id_2", 
+               "auth_atom_id_3", 
+               "auth_comp_id_1", 
+               "auth_comp_id_2", 
+               "auth_comp_id_3", 
+               "auth_seq_id_1", 
+               "auth_seq_id_2", 
+               "auth_seq_id_3", 
+               "id"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "struct_conf": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "end_label_seq_id": {
+                  "description": "A component of the identifier for the residue at which the\n conformation segment ends.\n\n This data item is a pointer to _atom_site.label_seq_id in the\n ATOM_SITE category.", 
+                  "type": "integer"
+               }, 
+               "pdbx_PDB_helix_class": {
+                  "description": "This item is a place holder for the helix class used in the PDB\n HELIX record.", 
+                  "type": "string"
+               }, 
+               "end_label_comp_id": {
+                  "description": "A component of the identifier for the residue at which the\n conformation segment ends.\n\n This data item is a pointer to _atom_site.label_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "beg_label_asym_id": {
+                  "description": "A component of the identifier for the residue at which the\n conformation segment begins.\n\n This data item is a pointer to _atom_site.label_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "beg_auth_asym_id": {
+                  "description": "A component of the identifier for the residue at which the\n conformation segment begins.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
                "details": {
-                  "type": "string",
+                  "description": "A description of special aspects of the conformation assignment.", 
+                  "type": "string"
+               }, 
+               "beg_auth_seq_id": {
+                  "description": "A component of the identifier for the residue at which the\n conformation segment begins.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "end_auth_seq_id": {
+                  "description": "A component of the identifier for the residue at which the\n conformation segment ends.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "pdbx_PDB_helix_id": {
+                  "description": "\nA placeholder for the helix identifier of the PDB\nHELIX record.", 
+                  "type": "string"
+               }, 
+               "beg_label_seq_id": {
+                  "description": "A component of the identifier for the residue at which the\n conformation segment begins.\n\n This data item is a pointer to _atom_site.label_seq_id in the\n ATOM_SITE category.", 
+                  "type": "integer"
+               }, 
+               "pdbx_PDB_helix_length": {
+                  "description": "\nA placeholder for the lengths of the helix of the PDB\nHELIX record.", 
+                  "type": "integer"
+               }, 
+               "conf_type_id": {
+                  "description": "This data item is a pointer to _struct_conf_type.id in the\n STRUCT_CONF_TYPE category.", 
+                  "type": "string"
+               }, 
+               "beg_auth_comp_id": {
+                  "description": "A component of the identifier for the residue at which the\n conformation segment begins.\n\n This data item is a pointer to _atom_site.auth_comp_id in\n the ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "id": {
+                  "description": "The value of _struct_conf.id must uniquely identify a record in\n the STRUCT_CONF list.\n\n Note that this item need not be a number; it can be any unique\n identifier.", 
+                  "type": "string"
+               }, 
+               "beg_label_comp_id": {
+                  "description": "A component of the identifier for the residue at which the\n conformation segment begins.\n\n This data item is a pointer to _atom_site.label_comp_id in\n the ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "end_label_asym_id": {
+                  "description": "A component of the identifier for the residue at which the\n conformation segment ends.\n\n This data item is a pointer to _atom_site.label_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "pdbx_end_PDB_ins_code": {
+                  "description": "A component of the identifier for the residue at which the\n conformation segment ends.\n", 
+                  "type": "string"
+               }, 
+               "end_auth_comp_id": {
+                  "description": "A component of the identifier for the residue at which the\n conformation segment ends.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "pdbx_beg_PDB_ins_code": {
+                  "description": "A component of the identifier for the residue at which the\n conformation segment starts.\n", 
+                  "type": "string"
+               }, 
+               "end_auth_asym_id": {
+                  "description": "A component of the identifier for the residue at which the\n conformation segment ends.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }
+            }, 
+            "required": [
+               "beg_label_asym_id", 
+               "beg_label_comp_id", 
+               "beg_label_seq_id", 
+               "conf_type_id", 
+               "end_label_asym_id", 
+               "end_label_comp_id", 
+               "end_label_seq_id", 
+               "id"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "ndb_struct_conf_na": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "entry_id": {
+                  "description": "This data item is a pointer to _entry.id in the\n ENTRY category.", 
+                  "type": "string"
+               }, 
+               "feature": {
+                  "enum": [
+                     "internal loop", 
+                     "triple helix", 
+                     "hairpin loop", 
+                     "three-way junction", 
+                     "quadruple helix", 
+                     "bulge loop", 
+                     "z-form double helix", 
+                     "double helix", 
+                     "parallel strands", 
+                     "b-form double helix", 
+                     "two-way junction", 
+                     "mismatched base pair", 
+                     "a-form double helix", 
+                     "tetraloop", 
+                     "other right-handed double helix", 
+                     "four-way junction"
+                  ], 
+                  "description": "This data item identifies a secondary structure\n feature of this entry.", 
+                  "type": "string"
+               }
+            }, 
+            "required": [
+               "entry_id", 
+               "feature"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "struct_conn": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "pdbx_ptnr1_label_alt_id": {
+                  "description": "\nA component of the identifier for partner 1 of the\nstructure connection. This data item is a pointer to\n_atom_site.label_alt_id in the ATOM_SITE category.", 
+                  "examples": [
+                     "A", 
+                     "B"
+                  ], 
+                  "type": "string"
+               }, 
+               "id": {
+                  "description": "The value of _struct_conn.id must uniquely identify a record in\n the STRUCT_CONN list.\n\n Note that this item need not be a number; it can be any unique\n identifier.", 
+                  "type": "string"
+               }, 
+               "pdbx_ptnr1_PDB_ins_code": {
+                  "description": "A component of the identifier for partner 1 of the structure\n connection.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category.", 
+                  "examples": [
+                     "1", 
+                     "2"
+                  ], 
+                  "type": "string"
+               }, 
+               "ptnr2_label_asym_id": {
+                  "description": "A component of the identifier for partner 2 of the structure\n connection.\n\n This data item is a pointer to _atom_site.label_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "ptnr1_auth_asym_id": {
+                  "description": "A component of the identifier for partner 1 of the structure\n connection.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "ptnr2_auth_comp_id": {
+                  "description": "A component of the identifier for partner 2 of the structure\n connection.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "pdbx_ptnr2_PDB_ins_code": {
+                  "description": "A component of the identifier for partner 1 of the structure\n connection.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category.", 
+                  "examples": [
+                     "1", 
+                     "2"
+                  ], 
+                  "type": "string"
+               }, 
+               "ptnr2_label_atom_id": {
+                  "description": "A component of the identifier for partner 2 of the structure\n connection.\n\n This data item is a pointer to _chem_comp_atom.atom_id in the\n CHEM_COMP_ATOM category.", 
+                  "type": "string"
+               }, 
+               "ptnr2_label_seq_id": {
+                  "description": "A component of the identifier for partner 2 of the structure\n connection.\n\n This data item is a pointer to _atom_site.label_seq_id in the\n ATOM_SITE category.", 
+                  "type": "integer"
+               }, 
+               "ptnr1_auth_comp_id": {
+                  "description": "A component of the identifier for partner 1 of the structure\n connection.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "ptnr2_symmetry": {
+                  "description": "Describes the symmetry operation that should be applied to the\n atom set specified by _struct_conn.ptnr2_label* to generate the\n second partner in the structure connection.", 
+                  "examples": [
+                     "4", 
+                     "7_645"
+                  ], 
+                  "type": "string"
+               }, 
+               "ptnr2_label_comp_id": {
+                  "description": "A component of the identifier for partner 2 of the structure\n connection.\n\n This data item is a pointer to _atom_site.label_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "pdbx_value_order": {
+                  "enum": [
+                     "quad", 
+                     "trip", 
+                     "doub", 
+                     "sing"
+                  ], 
+                  "description": "The chemical bond order associated with the specified atoms in\n this contact.", 
+                  "type": "string"
+               }, 
+               "pdbx_dist_value": {
+                  "description": "Distance value for this contact.", 
+                  "type": "number"
+               }, 
+               "conn_type_id": {
+                  "description": "This data item is a pointer to _struct_conn_type.id in the\n STRUCT_CONN_TYPE category.", 
+                  "type": "string"
+               }, 
+               "ptnr1_label_atom_id": {
+                  "description": "A component of the identifier for partner 1 of the structure\n connection.\n\n This data item is a pointer to _chem_comp_atom.atom_id in the\n CHEM_COMP_ATOM category.", 
+                  "type": "string"
+               }, 
+               "ptnr1_auth_seq_id": {
+                  "description": "A component of the identifier for partner 1 of the structure\n connection.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "ptnr1_label_asym_id": {
+                  "description": "A component of the identifier for partner 1 of the structure\n connection.\n\n This data item is a pointer to _atom_site.label_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "details": {
+                  "description": "A description of special aspects of the connection.", 
                   "examples": [
                      "disulfide bridge C-S-S-C is highly distorted"
-                  ],
-                  "description": "A description of special aspects of the connection."
-               },
-               "id": {
-                  "type": "string",
-                  "description": "The value of _struct_conn.id must uniquely identify a record in\n the STRUCT_CONN list.\n\n Note that this item need not be a number; it can be any unique\n identifier."
-               },
-               "pdbx_dist_value": {
-                  "type": "number",
-                  "description": "Distance value for this contact."
-               },
-               "pdbx_leaving_atom_flag": {
-                  "type": "string",
-                  "enum": [
-                     "both",
-                     "none",
-                     "one"
-                  ],
-                  "description": "This data item identifies if the linkage has displaced leaving atoms\n on both, one or none of the connected atoms forming the linkage.\n Leaving atoms are defined within their chemical defintions of each\n connected component."
-               },
-               "pdbx_ptnr1_PDB_ins_code": {
-                  "type": "string",
-                  "examples": [
-                     "1",
-                     "2"
-                  ],
-                  "description": "A component of the identifier for partner 1 of the structure\n connection.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
-               },
-               "pdbx_ptnr1_label_alt_id": {
-                  "type": "string",
-                  "examples": [
-                     "A",
-                     "B"
-                  ],
-                  "description": "\nA component of the identifier for partner 1 of the\nstructure connection. This data item is a pointer to\n_atom_site.label_alt_id in the ATOM_SITE category."
-               },
-               "pdbx_ptnr2_PDB_ins_code": {
-                  "type": "string",
-                  "examples": [
-                     "1",
-                     "2"
-                  ],
-                  "description": "A component of the identifier for partner 1 of the structure\n connection.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
-               },
-               "pdbx_ptnr2_label_alt_id": {
-                  "type": "string",
-                  "examples": [
-                     "A",
-                     "B"
-                  ],
-                  "description": "\nA component of the identifier for partner 2 of the\nstructure connection. This data item is a pointer to\n_atom_site.label_alt_id in the ATOM_SITE category."
-               },
-               "pdbx_value_order": {
-                  "type": "string",
-                  "enum": [
-                     "quad",
-                     "trip",
-                     "sing",
-                     "doub"
-                  ],
-                  "description": "The chemical bond order associated with the specified atoms in\n this contact."
-               },
-               "ptnr1_auth_asym_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for partner 1 of the structure\n connection.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "ptnr1_auth_comp_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for partner 1 of the structure\n connection.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "ptnr1_auth_seq_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for partner 1 of the structure\n connection.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "ptnr1_label_asym_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for partner 1 of the structure\n connection.\n\n This data item is a pointer to _atom_site.label_asym_id in the\n ATOM_SITE category."
-               },
-               "ptnr1_label_atom_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for partner 1 of the structure\n connection.\n\n This data item is a pointer to _chem_comp_atom.atom_id in the\n CHEM_COMP_ATOM category."
-               },
-               "ptnr1_label_comp_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for partner 1 of the structure\n connection.\n\n This data item is a pointer to _atom_site.label_comp_id in the\n ATOM_SITE category."
-               },
-               "ptnr1_label_seq_id": {
-                  "type": "integer",
-                  "description": "A component of the identifier for partner 1 of the structure\n connection.\n\n This data item is a pointer to _atom_site.label_seq_id in the\n ATOM_SITE category."
-               },
-               "ptnr1_symmetry": {
-                  "type": "string",
-                  "examples": [
-                     "4",
-                     "7_645"
-                  ],
-                  "description": "Describes the symmetry operation that should be applied to the\n atom set specified by _struct_conn.ptnr1_label* to generate the\n first partner in the structure connection."
-               },
+                  ], 
+                  "type": "string"
+               }, 
                "ptnr2_auth_asym_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for partner 2 of the structure\n connection.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "ptnr2_auth_comp_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for partner 2 of the structure\n connection.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
+                  "description": "A component of the identifier for partner 2 of the structure\n connection.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
                "ptnr2_auth_seq_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for partner 2 of the structure\n connection.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "ptnr2_label_asym_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for partner 2 of the structure\n connection.\n\n This data item is a pointer to _atom_site.label_asym_id in the\n ATOM_SITE category."
-               },
-               "ptnr2_label_atom_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for partner 2 of the structure\n connection.\n\n This data item is a pointer to _chem_comp_atom.atom_id in the\n CHEM_COMP_ATOM category."
-               },
-               "ptnr2_label_comp_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for partner 2 of the structure\n connection.\n\n This data item is a pointer to _atom_site.label_comp_id in the\n ATOM_SITE category."
-               },
-               "ptnr2_label_seq_id": {
-                  "type": "integer",
-                  "description": "A component of the identifier for partner 2 of the structure\n connection.\n\n This data item is a pointer to _atom_site.label_seq_id in the\n ATOM_SITE category."
-               },
-               "ptnr2_symmetry": {
-                  "type": "string",
+                  "description": "A component of the identifier for partner 2 of the structure\n connection.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "ptnr1_symmetry": {
+                  "description": "Describes the symmetry operation that should be applied to the\n atom set specified by _struct_conn.ptnr1_label* to generate the\n first partner in the structure connection.", 
                   "examples": [
-                     "4",
+                     "4", 
                      "7_645"
-                  ],
-                  "description": "Describes the symmetry operation that should be applied to the\n atom set specified by _struct_conn.ptnr2_label* to generate the\n second partner in the structure connection."
+                  ], 
+                  "type": "string"
+               }, 
+               "pdbx_leaving_atom_flag": {
+                  "enum": [
+                     "none", 
+                     "one", 
+                     "both"
+                  ], 
+                  "description": "This data item identifies if the linkage has displaced leaving atoms\n on both, one or none of the connected atoms forming the linkage.\n Leaving atoms are defined within their chemical defintions of each\n connected component.", 
+                  "type": "string"
+               }, 
+               "ptnr1_label_comp_id": {
+                  "description": "A component of the identifier for partner 1 of the structure\n connection.\n\n This data item is a pointer to _atom_site.label_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "pdbx_ptnr2_label_alt_id": {
+                  "description": "\nA component of the identifier for partner 2 of the\nstructure connection. This data item is a pointer to\n_atom_site.label_alt_id in the ATOM_SITE category.", 
+                  "examples": [
+                     "A", 
+                     "B"
+                  ], 
+                  "type": "string"
+               }, 
+               "ptnr1_label_seq_id": {
+                  "description": "A component of the identifier for partner 1 of the structure\n connection.\n\n This data item is a pointer to _atom_site.label_seq_id in the\n ATOM_SITE category.", 
+                  "type": "integer"
                }
-            },
+            }, 
             "required": [
-               "conn_type_id",
-               "id",
-               "ptnr1_label_asym_id",
-               "ptnr1_label_comp_id",
-               "ptnr1_label_seq_id",
-               "ptnr2_label_asym_id",
-               "ptnr2_label_comp_id",
+               "conn_type_id", 
+               "id", 
+               "ptnr1_label_asym_id", 
+               "ptnr1_label_comp_id", 
+               "ptnr1_label_seq_id", 
+               "ptnr2_label_asym_id", 
+               "ptnr2_label_comp_id", 
                "ptnr2_label_seq_id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "pdbx_validate_chiral": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "id": {
+                  "description": "The value of _pdbx_validate_chiral.id must\n uniquely identify each item in the PDBX_VALIDATE_CHIRAL list.\n This is an integer serial number.", 
+                  "type": "integer"
+               }, 
+               "label_alt_id": {
+                  "description": "Part of the identifier of the residue\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "details": {
+                  "description": "A description of the outlier angle  e.g. ALPHA-CARBON", 
+                  "type": "string"
+               }, 
+               "auth_comp_id": {
+                  "description": "Part of the identifier of the residue\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_model_num": {
+                  "description": "The model number for the given residue\n\n This data item is a pointer to _atom_site.pdbx_PDB_model_num in the\n ATOM_SITE category.", 
+                  "type": "integer"
+               }, 
+               "PDB_ins_code": {
+                  "description": "Optional identifier of the residue\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_seq_id": {
+                  "description": "Part of the identifier of the residue\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_atom_id": {
+                  "description": "Part of the identifier of the residue\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_asym_id": {
+                  "description": "Part of the identifier of the residue\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }
+            }, 
+            "required": [
+               "PDB_model_num", 
+               "auth_asym_id", 
+               "auth_comp_id", 
+               "auth_seq_id", 
+               "id"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "pdbx_validate_torsion": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "psi": {
+                  "minimum": -180.0, 
+                  "description": "The Psi value that for the residue that lies outside normal limits\n (in combination with the Phi value) with regards to the rammachandran plot", 
+                  "type": "number", 
+                  "maximum": 180.0
+               }, 
+               "id": {
+                  "description": "The value of _pdbx_validate_torsion.id must\n uniquely identify each item in the PDBX_VALIDATE_TORSION list.\n This is an integer serial number.", 
+                  "type": "integer"
+               }, 
+               "label_alt_id": {
+                  "description": "Optional identifier of the residue\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_seq_id": {
+                  "description": "Part of the identifier of the residue\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "phi": {
+                  "minimum": -180.0, 
+                  "description": "The Phi value that for the residue that lies outside normal limits\n (in combination with the Psi value) with regards to the rammachandran plot", 
+                  "type": "number", 
+                  "maximum": 180.0
+               }, 
+               "auth_comp_id": {
+                  "description": "Part of the identifier of the residue\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_model_num": {
+                  "description": "The model number for the given residue\n\n This data item is a pointer to _atom_site.pdbx_PDB_model_num in the\n ATOM_SITE category.", 
+                  "type": "integer"
+               }, 
+               "PDB_ins_code": {
+                  "description": "Optional identifier of the residue\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_asym_id": {
+                  "description": "Part of the identifier of the residue\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }
+            }, 
+            "required": [
+               "PDB_model_num", 
+               "auth_asym_id", 
+               "auth_comp_id", 
+               "auth_seq_id", 
+               "id", 
+               "phi", 
+               "psi"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "pdbx_validate_main_chain_plane": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "id": {
+                  "description": "The value of _pdbx_validate_main_chain_plane.id must uniquely identify\n each item in the PDBX_VALIDATE_MAIN_CHAIN_PLANE list.\n\n This is an integer serial number.", 
+                  "type": "integer"
+               }, 
+               "label_alt_id": {
+                  "description": "Optional identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_seq_id": {
+                  "description": "Part of the identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "improper_torsion_angle": {
+                  "description": "The value for the torsion angle  C(i-1) - CA(i-1) - N(i) - O(i-1)", 
+                  "type": "number"
+               }, 
+               "auth_comp_id": {
+                  "description": "Part of the identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_model_num": {
+                  "description": "The model number for the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.pdbx_PDB_model_num in the\n ATOM_SITE category.", 
+                  "type": "integer"
+               }, 
+               "PDB_ins_code": {
+                  "description": "Optional identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_asym_id": {
+                  "description": "Part of the identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }
+            }, 
+            "required": [
+               "PDB_model_num", 
+               "auth_asym_id", 
+               "auth_comp_id", 
+               "auth_seq_id", 
+               "id", 
+               "improper_torsion_angle"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "pdbx_validate_symm_contact": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "site_symmetry_2": {
+                  "description": "The symmetry of the second of the two atoms define the close contact.\n Symmetry defined in ORTEP style of 555 equal to unit cell with translations\n  +-1 from 555 as 000", 
+                  "type": "string"
+               }, 
+               "auth_seq_id_1": {
+                  "description": "Part of the identifier of the first of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_seq_id_2": {
+                  "description": "Part of the identifier of the second of the two atom sites\n that define the close contact.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "id": {
+                  "description": "The value of _pdbx_validate_symm_contact.id must uniquely identify\n each item in the PDBX_VALIDATE_SYMM_CONTACT list.\n This is an integer serial number.", 
+                  "type": "integer"
+               }, 
+               "auth_asym_id_2": {
+                  "description": "Part of the identifier of the second of the two atom sites\n that define the close contact.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "label_alt_id_2": {
+                  "description": "An optional identifier of the second of the two atoms that\n define the close contact.\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "label_alt_id_1": {
+                  "description": "An optional identifier of the first of the two atoms that\n define the close contact.\n\n This data item is a pointer to _atom_site.label_alt.id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "dist": {
+                  "description": "The value of the close contact for the two atoms defined.", 
+                  "type": "number"
+               }, 
+               "auth_asym_id_1": {
+                  "description": "Part of the identifier of the first of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_model_num": {
+                  "description": "The model number for the given angle", 
+                  "type": "integer"
+               }, 
+               "site_symmetry_1": {
+                  "description": "The symmetry of the first of the two atoms define the close contact.\n Symmetry defined in ORTEP style of 555 equal to unit cell with translations\n  +-1 from 555 as 000", 
+                  "type": "string"
+               }, 
+               "auth_comp_id_1": {
+                  "description": "Part of the identifier of the first of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_atom_id_2": {
+                  "description": "Part of the identifier of the second of the two atom sites\n that define the close contact.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_atom_id_1": {
+                  "description": "Part of the identifier of the first of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_comp_id_2": {
+                  "description": "Part of the identifier of the second of the two atom sites\n that define the close contact.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_ins_code_1": {
+                  "description": "Optional identifier of the first of the two atom sites that\n define the close contact.", 
+                  "type": "string"
+               }, 
+               "PDB_ins_code_2": {
+                  "description": "Optional identifier of the second of the two atom sites that\n define the close contact.", 
+                  "type": "string"
+               }
+            }, 
+            "required": [
+               "PDB_model_num", 
+               "auth_asym_id_1", 
+               "auth_asym_id_2", 
+               "auth_atom_id_1", 
+               "auth_atom_id_2", 
+               "auth_comp_id_1", 
+               "auth_comp_id_2", 
+               "auth_seq_id_1", 
+               "auth_seq_id_2", 
+               "dist", 
+               "id", 
+               "site_symmetry_1", 
+               "site_symmetry_2"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
       "struct_conn_type": {
-         "type": "array",
+         "minItems": 1, 
          "items": {
-            "type": "object",
             "properties": {
                "id": {
-                  "type": "string",
                   "enum": [
-                     "mismat",
-                     "hydrog",
-                     "modres",
-                     "covale_base",
-                     "covale_sugar",
-                     "saltbr",
-                     "covale",
-                     "metalc",
-                     "covale_phosphate",
-                     "disulf"
-                  ],
-                  "description": "The chemical or structural type of the interaction."
+                     "metalc", 
+                     "covale_base", 
+                     "disulf", 
+                     "saltbr", 
+                     "covale", 
+                     "mismat", 
+                     "hydrog", 
+                     "modres", 
+                     "covale_sugar", 
+                     "covale_phosphate"
+                  ], 
+                  "description": "The chemical or structural type of the interaction.", 
+                  "type": "string"
                }
-            },
+            }, 
             "required": [
                "id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
       "struct_sheet": {
-         "type": "array",
+         "minItems": 1, 
          "items": {
-            "type": "object",
             "properties": {
-               "id": {
-                  "type": "string",
-                  "description": "The value of _struct_sheet.id must uniquely identify a record in\n the STRUCT_SHEET list.\n\n Note that this item need not be a number; it can be any unique\n identifier."
-               },
                "number_strands": {
-                  "type": "integer",
-                  "description": "The number of strands in the sheet. If a given range of residues\n bulges out from the strands, it is still counted as one strand.\n If a strand is composed of two different regions of polypeptide,\n it is still counted as one strand, as long as the proper hydrogen-\n bonding connections are made to adjacent strands."
+                  "description": "The number of strands in the sheet. If a given range of residues\n bulges out from the strands, it is still counted as one strand.\n If a strand is composed of two different regions of polypeptide,\n it is still counted as one strand, as long as the proper hydrogen-\n bonding connections are made to adjacent strands.", 
+                  "type": "integer"
+               }, 
+               "id": {
+                  "description": "The value of _struct_sheet.id must uniquely identify a record in\n the STRUCT_SHEET list.\n\n Note that this item need not be a number; it can be any unique\n identifier.", 
+                  "type": "string"
                }
-            },
+            }, 
             "required": [
                "id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "struct_sheet_hbond": {
-         "type": "array",
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "pdbx_validate_close_contact": {
+         "minItems": 1, 
          "items": {
-            "type": "object",
             "properties": {
-               "pdbx_range_1_beg_PDB_ins_code": {
-                  "type": "string",
-                  "description": "Pointer to _atom_site.pdbx_PDB_ins_code."
-               },
-               "pdbx_range_1_beg_auth_asym_id": {
-                  "type": "string",
-                  "description": "Pointer to _atom_site.auth_asym_id."
-               },
-               "pdbx_range_1_beg_auth_comp_id": {
-                  "type": "string",
-                  "description": "Pointer to _atom_site.auth_comp_id"
-               },
-               "pdbx_range_1_beg_label_asym_id": {
-                  "type": "string",
-                  "description": "Pointer to _atom_site.label_asym_id."
-               },
-               "pdbx_range_1_beg_label_comp_id": {
-                  "type": "string",
-                  "description": "Pointer to _atom_site.label_comp_id"
-               },
-               "pdbx_range_1_end_auth_asym_id": {
-                  "type": "string",
-                  "description": "Pointer to _atom_site.auth_comp_id."
-               },
-               "pdbx_range_1_end_auth_comp_id": {
-                  "type": "string",
-                  "description": "Pointer to _atom_site.auth_comp_id."
-               },
-               "pdbx_range_1_end_label_asym_id": {
-                  "type": "string",
-                  "description": "Pointer to _atom_site.label_asym_id."
-               },
-               "pdbx_range_1_end_label_comp_id": {
-                  "type": "string",
-                  "description": "Pointer to _atom_site.label_comp_id."
-               },
-               "range_1_beg_auth_seq_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue for the first\n partner of the first hydrogen bond between two residue ranges\n in a sheet.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "range_1_beg_label_atom_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue for the first\n partner of the first hydrogen bond between two residue ranges\n in a sheet.\n\n This data item is a pointer to _atom_site.label_atom_id in the\n ATOM_SITE category."
-               },
-               "range_1_beg_label_seq_id": {
-                  "type": "integer",
-                  "description": "A component of the identifier for the residue for the first\n partner of the first hydrogen bond between two residue ranges\n in a sheet.\n\n This data item is a pointer to _atom_site.label_seq_id in the\n ATOM_SITE category."
-               },
-               "range_1_end_auth_seq_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue for the first\n partner of the last hydrogen bond between two residue ranges in\n a sheet.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "range_1_end_label_atom_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue for the first\n partner of the last hydrogen bond between two residue ranges in\n a sheet.\n\n This data item is a pointer to _atom_site.label_atom_id in the\n ATOM_SITE category."
-               },
-               "range_1_end_label_seq_id": {
-                  "type": "integer",
-                  "description": "A component of the identifier for the residue for the first\n partner of the last hydrogen bond between two residue ranges in\n a sheet.\n\n This data item is a pointer to _atom_site.label_seq_id in the\n ATOM_SITE category."
-               },
-               "range_2_end_label_atom_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue for the second\n partner of the last hydrogen bond between two residue ranges in\n a sheet.\n\n This data item is a pointer to _atom_site.label_atom_id in the\n ATOM_SITE category."
-               },
-               "range_id_1": {
-                  "type": "string",
-                  "description": "This data item is a pointer to _struct_sheet_range.id in\n the STRUCT_SHEET_RANGE category."
-               },
-               "sheet_id": {
-                  "type": "string",
-                  "description": "This data item is a pointer to _struct_sheet.id in the\n STRUCT_SHEET category."
-               }
-            },
-            "required": [
-               "range_1_beg_label_atom_id",
-               "range_1_beg_label_seq_id",
-               "range_1_end_label_atom_id",
-               "range_1_end_label_seq_id",
-               "range_2_end_label_atom_id",
-               "range_id_1",
-               "sheet_id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "struct_sheet_order": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "range_id_1": {
-                  "type": "string",
-                  "description": "This data item is a pointer to _struct_sheet_range.id in\n the STRUCT_SHEET_RANGE category."
-               },
-               "range_id_2": {
-                  "type": "string",
-                  "description": "This data item is a pointer to _struct_sheet_range.id in\n the STRUCT_SHEET_RANGE category."
-               },
-               "sense": {
-                  "type": "string",
-                  "enum": [
-                     "anti-parallel",
-                     "parallel"
-                  ],
-                  "description": "A flag to indicate whether the two designated residue ranges are\n parallel or antiparallel to one another."
-               },
-               "sheet_id": {
-                  "type": "string",
-                  "description": "This data item is a pointer to _struct_sheet.id in the\n STRUCT_SHEET category."
-               }
-            },
-            "required": [
-               "range_id_1",
-               "range_id_2",
-               "sheet_id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "struct_sheet_range": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "beg_auth_asym_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n beta-sheet range begins.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
-               },
-               "beg_auth_comp_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n beta-sheet range begins.\n\n This data item is a pointer to _atom_site.auth_comp_id in\n the ATOM_SITE category."
-               },
-               "beg_auth_seq_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n beta-sheet range begins.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "beg_label_asym_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n beta-sheet range begins.\n\n This data item is a pointer to _struct_asym.id in the\n STRUCT_ASYM category."
-               },
-               "beg_label_comp_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n beta-sheet range begins.\n\n This data item is a pointer to _chem_comp.id in the CHEM_COMP\n category."
-               },
-               "beg_label_seq_id": {
-                  "type": "integer",
-                  "description": "A component of the identifier for the residue at which the\n beta-sheet range begins.\n\n This data item is a pointer to _atom_site.label_seq_id in the\n ATOM_SITE category."
-               },
-               "end_auth_asym_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n beta-sheet range ends.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.\n"
-               },
-               "end_auth_comp_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n beta-sheet range ends.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category."
-               },
-               "end_auth_seq_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n beta-sheet range ends.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category."
-               },
-               "end_label_asym_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n beta-sheet range ends.\n\n This data item is a pointer to _struct_asym.id in the\n STRUCT_ASYM category."
-               },
-               "end_label_comp_id": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n beta-sheet range ends.\n\n This data item is a pointer to _chem_comp.id in the CHEM_COMP\n category."
-               },
-               "end_label_seq_id": {
-                  "type": "integer",
-                  "description": "A component of the identifier for the residue at which the\n beta-sheet range ends.\n\n This data item is a pointer to _atom_site.label_seq_id in the\n ATOM_SITE category."
-               },
+               "auth_seq_id_1": {
+                  "description": "Part of the identifier of the first of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_seq_id_2": {
+                  "description": "Part of the identifier of the second of the two atom sites\n that define the close contact.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
                "id": {
-                  "type": "string",
-                  "description": "The value of _struct_sheet_range.id must uniquely identify a\n range in a given sheet in the STRUCT_SHEET_RANGE list.\n\n Note that this item need not be a number; it can be any unique\n identifier."
-               },
-               "pdbx_beg_PDB_ins_code": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n beta sheet range begins.  Insertion code."
-               },
-               "pdbx_end_PDB_ins_code": {
-                  "type": "string",
-                  "description": "A component of the identifier for the residue at which the\n beta sheet range ends. Insertion code."
-               },
-               "sheet_id": {
-                  "type": "string",
-                  "description": "This data item is a pointer to _struct_sheet.id in the\n STRUCT_SHEET category."
+                  "description": "The value of _pdbx_validate_close_contact.id must uniquely identify\n each item in the PDBX_VALIDATE_CLOSE_CONTACT list.\n This is an integer serial number.", 
+                  "type": "integer"
+               }, 
+               "auth_asym_id_2": {
+                  "description": "Part of the identifier of the second of the two atom sites\n that define the close contact.\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "label_alt_id_2": {
+                  "description": "An optional identifier of the second of the two atoms that\n define the close contact.\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "label_alt_id_1": {
+                  "description": "An optional identifier of the first of the two atoms that\n define the close contact.\n\n This data item is a pointer to _atom_site.label_alt_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "dist": {
+                  "description": "The value of the close contact for the two atoms defined.", 
+                  "type": "number"
+               }, 
+               "auth_asym_id_1": {
+                  "description": "Part of the identifier of the first of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_model_num": {
+                  "description": "The model number for the given contact", 
+                  "type": "integer"
+               }, 
+               "auth_comp_id_1": {
+                  "description": "Part of the identifier of the first of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_atom_id_2": {
+                  "description": "Part of the identifier of the second of the two atom sites\n that define the close contact.\n\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_atom_id_1": {
+                  "description": "Part of the identifier of the first of the two atom sites that\n define the close contact.\n This data item is a pointer to _atom_site.auth_atom_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "auth_comp_id_2": {
+                  "description": "Part of the identifier of the second of the two atom sites\n that define the close contact.\n\n This data item is a pointer to _atom_site.auth_comp_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_ins_code_1": {
+                  "description": "Optional identifier of the first of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "PDB_ins_code_2": {
+                  "description": "Optional identifier of the second of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category.", 
+                  "type": "string"
                }
-            },
+            }, 
             "required": [
-               "beg_label_asym_id",
-               "beg_label_comp_id",
-               "beg_label_seq_id",
-               "end_label_asym_id",
-               "end_label_comp_id",
-               "end_label_seq_id",
-               "id",
+               "PDB_model_num", 
+               "auth_asym_id_1", 
+               "auth_asym_id_2", 
+               "auth_atom_id_1", 
+               "auth_atom_id_2", 
+               "auth_comp_id_1", 
+               "auth_comp_id_2", 
+               "auth_seq_id_1", 
+               "auth_seq_id_2", 
+               "dist", 
+               "id"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "struct_sheet_hbond": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "pdbx_range_1_beg_auth_comp_id": {
+                  "description": "Pointer to _atom_site.auth_comp_id", 
+                  "type": "string"
+               }, 
+               "pdbx_range_1_beg_label_asym_id": {
+                  "description": "Pointer to _atom_site.label_asym_id.", 
+                  "type": "string"
+               }, 
+               "pdbx_range_1_end_auth_comp_id": {
+                  "description": "Pointer to _atom_site.auth_comp_id.", 
+                  "type": "string"
+               }, 
+               "range_1_beg_label_seq_id": {
+                  "description": "A component of the identifier for the residue for the first\n partner of the first hydrogen bond between two residue ranges\n in a sheet.\n\n This data item is a pointer to _atom_site.label_seq_id in the\n ATOM_SITE category.", 
+                  "type": "integer"
+               }, 
+               "range_1_beg_auth_seq_id": {
+                  "description": "A component of the identifier for the residue for the first\n partner of the first hydrogen bond between two residue ranges\n in a sheet.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "pdbx_range_1_end_label_comp_id": {
+                  "description": "Pointer to _atom_site.label_comp_id.", 
+                  "type": "string"
+               }, 
+               "sheet_id": {
+                  "description": "This data item is a pointer to _struct_sheet.id in the\n STRUCT_SHEET category.", 
+                  "type": "string"
+               }, 
+               "range_2_end_label_atom_id": {
+                  "description": "A component of the identifier for the residue for the second\n partner of the last hydrogen bond between two residue ranges in\n a sheet.\n\n This data item is a pointer to _atom_site.label_atom_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "range_1_end_auth_seq_id": {
+                  "description": "A component of the identifier for the residue for the first\n partner of the last hydrogen bond between two residue ranges in\n a sheet.\n\n This data item is a pointer to _atom_site.auth_seq_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "range_1_end_label_seq_id": {
+                  "description": "A component of the identifier for the residue for the first\n partner of the last hydrogen bond between two residue ranges in\n a sheet.\n\n This data item is a pointer to _atom_site.label_seq_id in the\n ATOM_SITE category.", 
+                  "type": "integer"
+               }, 
+               "pdbx_range_1_beg_PDB_ins_code": {
+                  "description": "Pointer to _atom_site.pdbx_PDB_ins_code.", 
+                  "type": "string"
+               }, 
+               "pdbx_range_1_beg_label_comp_id": {
+                  "description": "Pointer to _atom_site.label_comp_id", 
+                  "type": "string"
+               }, 
+               "range_1_end_label_atom_id": {
+                  "description": "A component of the identifier for the residue for the first\n partner of the last hydrogen bond between two residue ranges in\n a sheet.\n\n This data item is a pointer to _atom_site.label_atom_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "pdbx_range_1_end_label_asym_id": {
+                  "description": "Pointer to _atom_site.label_asym_id.", 
+                  "type": "string"
+               }, 
+               "pdbx_range_1_end_auth_asym_id": {
+                  "description": "Pointer to _atom_site.auth_comp_id.", 
+                  "type": "string"
+               }, 
+               "pdbx_range_1_beg_auth_asym_id": {
+                  "description": "Pointer to _atom_site.auth_asym_id.", 
+                  "type": "string"
+               }, 
+               "range_1_beg_label_atom_id": {
+                  "description": "A component of the identifier for the residue for the first\n partner of the first hydrogen bond between two residue ranges\n in a sheet.\n\n This data item is a pointer to _atom_site.label_atom_id in the\n ATOM_SITE category.", 
+                  "type": "string"
+               }, 
+               "range_id_1": {
+                  "description": "This data item is a pointer to _struct_sheet_range.id in\n the STRUCT_SHEET_RANGE category.", 
+                  "type": "string"
+               }
+            }, 
+            "required": [
+               "range_1_beg_label_atom_id", 
+               "range_1_beg_label_seq_id", 
+               "range_1_end_label_atom_id", 
+               "range_1_end_label_seq_id", 
+               "range_2_end_label_atom_id", 
+               "range_id_1", 
                "sheet_id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "struct_sheet_order": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "range_id_1": {
+                  "description": "This data item is a pointer to _struct_sheet_range.id in\n the STRUCT_SHEET_RANGE category.", 
+                  "type": "string"
+               }, 
+               "range_id_2": {
+                  "description": "This data item is a pointer to _struct_sheet_range.id in\n the STRUCT_SHEET_RANGE category.", 
+                  "type": "string"
+               }, 
+               "sheet_id": {
+                  "description": "This data item is a pointer to _struct_sheet.id in the\n STRUCT_SHEET category.", 
+                  "type": "string"
+               }, 
+               "sense": {
+                  "enum": [
+                     "anti-parallel", 
+                     "parallel"
+                  ], 
+                  "description": "A flag to indicate whether the two designated residue ranges are\n parallel or antiparallel to one another.", 
+                  "type": "string"
+               }
+            }, 
+            "required": [
+               "range_id_1", 
+               "range_id_2", 
+               "sheet_id"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
       }
-   },
-   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/",
-   "$schema": "http://json-schema.org/draft-04/schema#",
-   "title": "Schema for content type pdbx collection pdbx_ext_v5_0_2"
+   }, 
+   "$schema": "http://json-schema.org/draft-04/schema#", 
+   "title": "Schema for content type pdbx collection pdbx_ext_v5_0_2", 
+   "type": "object"
 }

@@ -1,553 +1,554 @@
 {
-   "type": "object",
+   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/", 
    "properties": {
       "citation": {
-         "type": "array",
+         "minItems": 1, 
          "items": {
-            "type": "object",
             "properties": {
                "id": {
-                  "type": "string",
+                  "description": "The value of _citation.id must uniquely identify a record in the\n CITATION list.\n\n The _citation.id 'primary' should be used to indicate the\n citation that the author(s) consider to be the most pertinent to\n the contents of the data block.\n\n Note that this item need not be a number; it can be any unique\n identifier.", 
                   "examples": [
-                     "primary",
-                     "1",
+                     "primary", 
+                     "1", 
                      "2"
-                  ],
-                  "description": "The value of _citation.id must uniquely identify a record in the\n CITATION list.\n\n The _citation.id 'primary' should be used to indicate the\n citation that the author(s) consider to be the most pertinent to\n the contents of the data block.\n\n Note that this item need not be a number; it can be any unique\n identifier."
-               },
+                  ], 
+                  "type": "string"
+               }, 
                "journal_abbrev": {
-                  "type": "string",
+                  "description": "Abbreviated name of the cited journal as given in the\n Chemical Abstracts Service Source Index.", 
                   "examples": [
                      "J. Mol. Biol."
-                  ],
-                  "description": "Abbreviated name of the cited journal as given in the\n Chemical Abstracts Service Source Index."
-               },
-               "journal_volume": {
-                  "type": "string",
-                  "examples": [
-                     "174"
-                  ],
-                  "description": "Volume number of the journal cited; relevant for journal\n articles."
-               },
-               "page_first": {
-                  "type": "string",
-                  "description": "The first page of the citation; relevant for journal\n articles, books and book chapters."
-               },
-               "page_last": {
-                  "type": "string",
-                  "description": "The last page of the citation; relevant for journal\n articles, books and book chapters."
-               },
-               "pdbx_database_id_DOI": {
-                  "type": "string",
-                  "examples": [
-                     "10.2345/S1384107697000225"
-                  ],
-                  "description": "Document Object Identifier used by doi.org to uniquely\n specify bibliographic entry."
-               },
-               "pdbx_database_id_PubMed": {
-                  "type": "integer",
-                  "minimum": -1,
-                  "examples": [
-                     "12627512"
-                  ],
-                  "description": "Ascession number used by PubMed to categorize a specific\n bibliographic entry."
-               },
-               "title": {
-                  "type": "string",
-                  "examples": [
-                     "Structure of diferric duck ovotransferrin\n                                  at 2.35 Angstroms resolution."
-                  ],
-                  "description": "The title of the citation; relevant for journal articles, books\n and book chapters."
-               },
+                  ], 
+                  "type": "string"
+               }, 
                "year": {
-                  "type": "integer",
+                  "description": "The year of the citation; relevant for journal articles, books\n and book chapters.", 
                   "examples": [
                      "1984"
-                  ],
-                  "description": "The year of the citation; relevant for journal articles, books\n and book chapters."
+                  ], 
+                  "type": "integer"
+               }, 
+               "pdbx_database_id_DOI": {
+                  "description": "Document Object Identifier used by doi.org to uniquely\n specify bibliographic entry.", 
+                  "examples": [
+                     "10.2345/S1384107697000225"
+                  ], 
+                  "type": "string"
+               }, 
+               "page_first": {
+                  "description": "The first page of the citation; relevant for journal\n articles, books and book chapters.", 
+                  "type": "string"
+               }, 
+               "page_last": {
+                  "description": "The last page of the citation; relevant for journal\n articles, books and book chapters.", 
+                  "type": "string"
+               }, 
+               "journal_volume": {
+                  "description": "Volume number of the journal cited; relevant for journal\n articles.", 
+                  "examples": [
+                     "174"
+                  ], 
+                  "type": "string"
+               }, 
+               "pdbx_database_id_PubMed": {
+                  "minimum": -1, 
+                  "description": "Ascession number used by PubMed to categorize a specific\n bibliographic entry.", 
+                  "examples": [
+                     "12627512"
+                  ], 
+                  "type": "integer"
+               }, 
+               "title": {
+                  "description": "The title of the citation; relevant for journal articles, books\n and book chapters.", 
+                  "examples": [
+                     "Structure of diferric duck ovotransferrin\n                                  at 2.35 Angstroms resolution."
+                  ], 
+                  "type": "string"
                }
-            },
+            }, 
             "required": [
                "id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "citation_author": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "citation_id": {
-                  "type": "string",
-                  "description": "This data item is a pointer to _citation.id in the CITATION\n category."
-               },
-               "name": {
-                  "type": "string",
-                  "examples": [
-                     "Bleary, Percival R.",
-                     "O'Neil, F.K.",
-                     "Van den Bossche, G.",
-                     "Yang, D.-L.",
-                     "Simonov, Yu.A"
-                  ],
-                  "description": "Name of an author of the citation; relevant for journal\n articles, books and book chapters.\n\n The family name(s), followed by a comma and including any\n dynastic components, precedes the first name(s) or initial(s)."
-               },
-               "ordinal": {
-                  "type": "integer",
-                  "description": "This data item defines the order of the author's name in the\n list of authors of a citation."
-               }
-            },
-            "required": [
-               "citation_id",
-               "name",
-               "ordinal"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
       "pdbx_family_prd_audit": {
-         "type": "array",
+         "minItems": 1, 
          "items": {
-            "type": "object",
             "properties": {
-               "action_type": {
-                  "type": "string",
-                  "enum": [
-                     "Modify molecule details",
-                     "Modify related structures",
-                     "Modify feature",
-                     "Obsolete family",
-                     "Other modification",
-                     "Remove PRD",
-                     "Modify sequence",
-                     "Create family",
-                     "Add PRD",
-                     "Modify citation",
-                     "Obsolete familyt",
-                     "Initial release",
-                     "Modify synonyms",
-                     "Modify family name",
-                     "Modify family classification",
-                     "Modify annotation"
-                  ],
-                  "description": "The action associated with this audit record."
-               },
-               "annotator": {
-                  "type": "string",
+               "processing_site": {
+                  "description": "An identifier for the wwPDB site creating or modifying the family.", 
                   "examples": [
-                     "JO",
-                     "SJ",
+                     "RCSB", 
+                     "PDBE", 
+                     "PDBJ", 
+                     "BMRB"
+                  ], 
+                  "type": "string"
+               }, 
+               "family_prd_id": {
+                  "description": "              This data item is a pointer to _pdbx_reference_molecule_family.family_prd_id in the\n\t       pdbx_reference_molecule category.", 
+                  "type": "string"
+               }, 
+               "annotator": {
+                  "description": "The initials of the annotator creating of modifying the family.", 
+                  "examples": [
+                     "JO", 
+                     "SJ", 
                      "KB"
-                  ],
-                  "description": "The initials of the annotator creating of modifying the family."
-               },
+                  ], 
+                  "type": "string"
+               }, 
+               "action_type": {
+                  "enum": [
+                     "Create family", 
+                     "Add PRD", 
+                     "Remove PRD", 
+                     "Modify family classification", 
+                     "Modify annotation", 
+                     "Modify family name", 
+                     "Modify feature", 
+                     "Modify synonyms", 
+                     "Initial release", 
+                     "Obsolete familyt", 
+                     "Modify sequence", 
+                     "Modify molecule details", 
+                     "Modify citation", 
+                     "Other modification", 
+                     "Modify related structures", 
+                     "Obsolete family"
+                  ], 
+                  "description": "The action associated with this audit record.", 
+                  "type": "string"
+               }, 
                "date": {
-                  "type": "string",
-                  "format": "date",
-                  "description": "The date associated with this audit record."
-               },
+                  "format": "date", 
+                  "description": "The date associated with this audit record.", 
+                  "type": "string"
+               }, 
                "details": {
-                  "type": "string",
+                  "description": "Additional details decribing this change.", 
                   "examples": [
                      "Revise molecule sequence."
-                  ],
-                  "description": "Additional details decribing this change."
-               },
-               "family_prd_id": {
-                  "type": "string",
-                  "description": "              This data item is a pointer to _pdbx_reference_molecule_family.family_prd_id in the\n\t       pdbx_reference_molecule category."
-               },
-               "processing_site": {
-                  "type": "string",
-                  "examples": [
-                     "RCSB",
-                     "PDBE",
-                     "PDBJ",
-                     "BMRB"
-                  ],
-                  "description": "An identifier for the wwPDB site creating or modifying the family."
+                  ], 
+                  "type": "string"
                }
-            },
+            }, 
             "required": [
-               "action_type",
-               "date",
+               "action_type", 
+               "date", 
                "family_prd_id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "pdbx_reference_molecule_annotation": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "chem_comp_id": {
-                  "type": "string",
-                  "examples": [
-                     "0Z3",
-                     "CD9"
-                  ],
-                  "description": "For entities represented as single molecules, the identifier\n corresponding to the chemical definition for the molecule."
-               },
-               "family_prd_id": {
-                  "type": "string",
-                  "description": "The value of _pdbx_reference_molecule_annotation.family_prd_id is a reference to\n _pdbx_reference_molecule_list.family_prd_id in category PDBX_REFERENCE_MOLECULE_FAMILY_LIST."
-               },
-               "ordinal": {
-                  "type": "integer",
-                  "description": "This data item distinguishes anotations for this entity."
-               },
-               "prd_id": {
-                  "type": "string",
-                  "description": "This data item is a pointer to _pdbx_reference_molecule.prd_id in the\n PDB_REFERENCE_MOLECULE category."
-               },
-               "source": {
-                  "type": "string",
-                  "examples": [
-                     "depositor provided",
-                     "from UniProt Entry P200311"
-                  ],
-                  "description": "The source of the annoation for this entity."
-               },
-               "text": {
-                  "type": "string",
-                  "examples": [
-                     "antigen binding",
-                     "glucose transporter activity"
-                  ],
-                  "description": "Text describing the annotation for this entity."
-               },
-               "type": {
-                  "type": "string",
-                  "examples": [
-                     "Function",
-                     "Use",
-                     "Pharmacology",
-                     "Mechanism_of_Action",
-                     "Biological_Activity",
-                     "Inhibitor_Class",
-                     "Therapeutic_Category",
-                     "Research_Use",
-                     "Other_annotation"
-                  ],
-                  "description": "Type of annotation for this entity."
-               }
-            },
-            "required": [
-               "family_prd_id",
-               "ordinal",
-               "source",
-               "text",
-               "type"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "pdbx_reference_molecule_details": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "family_prd_id": {
-                  "type": "string",
-                  "description": "The value of _pdbx_reference_molecule_details.family_prd_id is a reference to\n _pdbx_reference_molecule_list.family_prd_id' in category PDBX_REFERENCE_MOLECULE_FAMILY."
-               },
-               "ordinal": {
-                  "type": "integer",
-                  "description": "The value of _pdbx_reference_molecule_details.ordinal is an ordinal that\n distinguishes each descriptive text for this entity.\n"
-               },
-               "prd_id": {
-                  "type": "string",
-                  "description": "The value of _pdbx_reference_molecule_details.prd_id is a reference to\n _pdbx_reference_molecule.prd_id in the  PDBX_REFERENCE_MOLECULE category.\n"
-               },
-               "source": {
-                  "type": "string",
-                  "description": "A data source of this information (e.g. PubMed, Merck Index)"
-               },
-               "source_id": {
-                  "type": "string",
-                  "description": "A identifier within the data source for this information."
-               },
-               "text": {
-                  "type": "string",
-                  "description": "The text of the description of special aspects of the entity."
-               }
-            },
-            "required": [
-               "family_prd_id",
-               "ordinal",
-               "text"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "pdbx_reference_molecule_family": {
-         "type": "object",
-         "properties": {
-            "family_prd_id": {
-               "type": "string",
-               "description": "The value of _pdbx_reference_entity.family_prd_id must uniquely identify a record in the\n PDBX_REFERENCE_MOLECULE_FAMILY list.\n\n By convention this ID uniquely identifies the reference family in\n in the PDB reference dictionary.\n\n The ID has the template form FAM_dddddd (e.g. FAM_000001)\n"
-            },
-            "name": {
-               "type": "string",
-               "examples": [
-                  "actinomycin",
-                  "adriamycin"
-               ],
-               "description": "The entity family name."
-            },
-            "release_status": {
-               "type": "string",
-               "enum": [
-                  "REL",
-                  "OBS",
-                  "WAIT",
-                  "HOLD"
-               ],
-               "description": "Assigns the current PDB release status for this family."
-            },
-            "replaced_by": {
-               "type": "string",
-               "description": "Assigns the identifier of the family that has replaced this component."
-            },
-            "replaces": {
-               "type": "string",
-               "description": "Assigns the identifier for the family which have been replaced by this family.\n Multiple family identifier codes should be separated by commas."
-            }
-         },
-         "required": [
-            "family_prd_id"
-         ]
-      },
-      "pdbx_reference_molecule_features": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "chem_comp_id": {
-                  "type": "string",
-                  "examples": [
-                     "0Z3",
-                     "CD9"
-                  ],
-                  "description": "For entities represented as single molecules, the identifier\n corresponding to the chemical definition for the molecule."
-               },
-               "family_prd_id": {
-                  "type": "string",
-                  "description": "The value of _pdbx_reference_molecule_features.family_prd_id is a reference to\n _pdbx_reference_molecule_list.family_prd_id in category PDBX_REFERENCE_MOLECULE_FAMILY_LIST."
-               },
-               "ordinal": {
-                  "type": "integer",
-                  "description": "              The value of _pdbx_reference_molecule_features.ordinal distinguishes\n\t       each feature for this entity."
-               },
-               "prd_id": {
-                  "type": "string",
-                  "description": "              The value of _pdbx_reference_molecule_features.prd_id is a reference\n\t       _pdbx_reference_molecule.prd_id in the  PDBX_REFERENCE_MOLECULE category."
-               },
-               "source": {
-                  "type": "string",
-                  "examples": [
-                     "PDB",
-                     "CHEBI",
-                     "DRUGBANK",
-                     "PUBCHEM"
-                  ],
-                  "description": "The information source for the component feature."
-               },
-               "source_ordinal": {
-                  "type": "integer",
-                  "description": "              The value of _pdbx_reference_molecule_features.source_ordinal provides\n\t       the priority order of features from a particular source or database."
-               },
-               "type": {
-                  "type": "string",
-                  "examples": [
-                     "FUNCTION",
-                     "ENZYME INHIBITED",
-                     "STRUCTURE IMAGE URL"
-                  ],
-                  "description": "The entity feature type."
-               },
-               "value": {
-                  "type": "string",
-                  "description": "The entity feature value."
-               }
-            },
-            "required": [
-               "family_prd_id",
-               "ordinal",
-               "prd_id",
-               "source",
-               "type",
-               "value"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "pdbx_reference_molecule_list": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "family_prd_id": {
-                  "type": "string",
-                  "description": "The value of _pdbx_reference_molecule_list.family_prd_id is a reference to\n _pdbx_reference_molecule_family.family_prd_id' in category PDBX_REFERENCE_MOLECULE_FAMILY."
-               },
-               "prd_id": {
-                  "type": "string",
-                  "description": "The value of _pdbx_reference_molecule_list.prd_id is the unique identifier\n for the reference molecule in this family.\n\n By convention this ID uniquely identifies the reference molecule in\n in the PDB reference dictionary.\n\n The ID has the template form PRD_dddddd (e.g. PRD_000001)"
-               }
-            },
-            "required": [
-               "family_prd_id",
-               "prd_id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "pdbx_reference_molecule_related_structures": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "citation_id": {
-                  "type": "string",
-                  "description": "A link to related reference information in the citation category."
-               },
-               "db_accession": {
-                  "type": "string",
-                  "examples": [
-                     "143108"
-                  ],
-                  "description": "The database accession code for the related structure reference."
-               },
-               "db_code": {
-                  "type": "string",
-                  "examples": [
-                     "QEFHUE"
-                  ],
-                  "description": "The database identifier code for the related structure reference."
-               },
-               "db_name": {
-                  "type": "string",
-                  "examples": [
-                     "CCDC"
-                  ],
-                  "description": "The database name for the related structure reference."
-               },
-               "family_prd_id": {
-                  "type": "string",
-                  "description": "The value of _pdbx_reference_molecule_related_structures.family_prd_id is a reference to\n _pdbx_reference_molecule_list.family_prd_id in category PDBX_REFERENCE_MOLECULE_FAMILY_LIST."
-               },
-               "formula": {
-                  "type": "string",
-                  "examples": [
-                     "C18 H19 N7 O8 S"
-                  ],
-                  "description": "The formula for the reference entity. Formulae are written\n according to the rules:\n\n 1. Only recognised element symbols may be used.\n\n 2. Each element symbol is followed by a 'count' number. A count\n    of '1' may be omitted.\n\n 3. A space or parenthesis must separate each element symbol and\n    its count, but in general parentheses are not used.\n\n 4. The order of elements depends on whether or not carbon is\n    present. If carbon is present, the order should be: C, then\n    H, then the other elements in alphabetical order of their\n    symbol. If carbon is not present, the elements are listed\n    purely in alphabetic order of their symbol. This is the\n    'Hill' system used by Chemical Abstracts."
-               },
-               "name": {
-                  "type": "string",
-                  "examples": [
-                     "actinomycn"
-                  ],
-                  "description": "The chemical name for the structure entry in the related database"
-               },
-               "ordinal": {
-                  "type": "integer",
-                  "description": "The value of _pdbx_reference_molecule_related_structures.ordinal distinguishes\n related structural data for each entity."
-               }
-            },
-            "required": [
-               "family_prd_id",
-               "ordinal"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "pdbx_reference_molecule_synonyms": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "chem_comp_id": {
-                  "type": "string",
-                  "examples": [
-                     "0Z3",
-                     "CD9"
-                  ],
-                  "description": "For entities represented as single molecules, the identifier\n corresponding to the chemical definition for the molecule."
-               },
-               "family_prd_id": {
-                  "type": "string",
-                  "description": "The value of _pdbx_reference_molecule_synonyms.family_prd_id is a reference to\n _pdbx_reference_molecule_list.family_prd_id in category PDBX_REFERENCE_MOLECULE_FAMILY_LIST."
-               },
-               "name": {
-                  "type": "string",
-                  "examples": [
-                     "thiostrepton"
-                  ],
-                  "description": "A synonym name for the entity."
-               },
-               "ordinal": {
-                  "type": "integer",
-                  "description": "              The value of _pdbx_reference_molecule_synonyms.ordinal is an ordinal\n\t       to distinguish synonyms for this entity."
-               },
-               "prd_id": {
-                  "type": "string",
-                  "description": "              The value of _pdbx_reference_molecule_synonyms.prd_id is a reference\n\t       _pdbx_reference_molecule.prd_id in the  PDBX_REFERENCE_MOLECULE category."
-               },
-               "source": {
-                  "type": "string",
-                  "examples": [
-                     "CAS"
-                  ],
-                  "description": "The source of this synonym name for the entity."
-               }
-            },
-            "required": [
-               "family_prd_id",
-               "name",
-               "ordinal",
-               "prd_id",
-               "source"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
       "rcsb_load_status": {
-         "type": "object",
          "properties": {
             "datablock_name": {
-               "type": "string",
-               "description": "Source data block containing the loaded data set"
-            },
+               "description": "Source data block containing the loaded data set", 
+               "type": "string"
+            }, 
             "load_date": {
-               "type": "string",
-               "description": "Time stamp of data load"
-            },
+               "format": "date-time", 
+               "description": "Time stamp of data load", 
+               "type": "string"
+            }, 
             "locator": {
-               "type": "string",
-               "description": "Locator of file containing loaded data"
+               "description": "Locator of file containing loaded data", 
+               "type": "string"
             }
-         },
+         }, 
          "required": [
-            "datablock_name",
-            "load_date",
+            "datablock_name", 
+            "load_date", 
             "locator"
-         ]
+         ], 
+         "type": "object"
+      }, 
+      "pdbx_reference_molecule_features": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "value": {
+                  "description": "The entity feature value.", 
+                  "type": "string"
+               }, 
+               "family_prd_id": {
+                  "description": "The value of _pdbx_reference_molecule_features.family_prd_id is a reference to\n _pdbx_reference_molecule_list.family_prd_id in category PDBX_REFERENCE_MOLECULE_FAMILY_LIST.", 
+                  "type": "string"
+               }, 
+               "ordinal": {
+                  "description": "              The value of _pdbx_reference_molecule_features.ordinal distinguishes\n\t       each feature for this entity.", 
+                  "type": "integer"
+               }, 
+               "prd_id": {
+                  "description": "              The value of _pdbx_reference_molecule_features.prd_id is a reference\n\t       _pdbx_reference_molecule.prd_id in the  PDBX_REFERENCE_MOLECULE category.", 
+                  "type": "string"
+               }, 
+               "type": {
+                  "description": "The entity feature type.", 
+                  "examples": [
+                     "FUNCTION", 
+                     "ENZYME INHIBITED", 
+                     "STRUCTURE IMAGE URL"
+                  ], 
+                  "type": "string"
+               }, 
+               "source_ordinal": {
+                  "description": "              The value of _pdbx_reference_molecule_features.source_ordinal provides\n\t       the priority order of features from a particular source or database.", 
+                  "type": "integer"
+               }, 
+               "source": {
+                  "description": "The information source for the component feature.", 
+                  "examples": [
+                     "PDB", 
+                     "CHEBI", 
+                     "DRUGBANK", 
+                     "PUBCHEM"
+                  ], 
+                  "type": "string"
+               }, 
+               "chem_comp_id": {
+                  "description": "For entities represented as single molecules, the identifier\n corresponding to the chemical definition for the molecule.", 
+                  "examples": [
+                     "0Z3", 
+                     "CD9"
+                  ], 
+                  "type": "string"
+               }
+            }, 
+            "required": [
+               "family_prd_id", 
+               "ordinal", 
+               "prd_id", 
+               "source", 
+               "type", 
+               "value"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "pdbx_reference_molecule_details": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "family_prd_id": {
+                  "description": "The value of _pdbx_reference_molecule_details.family_prd_id is a reference to\n _pdbx_reference_molecule_list.family_prd_id' in category PDBX_REFERENCE_MOLECULE_FAMILY.", 
+                  "type": "string"
+               }, 
+               "ordinal": {
+                  "description": "The value of _pdbx_reference_molecule_details.ordinal is an ordinal that\n distinguishes each descriptive text for this entity.\n", 
+                  "type": "integer"
+               }, 
+               "prd_id": {
+                  "description": "The value of _pdbx_reference_molecule_details.prd_id is a reference to\n _pdbx_reference_molecule.prd_id in the  PDBX_REFERENCE_MOLECULE category.\n", 
+                  "type": "string"
+               }, 
+               "text": {
+                  "description": "The text of the description of special aspects of the entity.", 
+                  "type": "string"
+               }, 
+               "source": {
+                  "description": "A data source of this information (e.g. PubMed, Merck Index)", 
+                  "type": "string"
+               }, 
+               "source_id": {
+                  "description": "A identifier within the data source for this information.", 
+                  "type": "string"
+               }
+            }, 
+            "required": [
+               "family_prd_id", 
+               "ordinal", 
+               "text"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "citation_author": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "citation_id": {
+                  "description": "This data item is a pointer to _citation.id in the CITATION\n category.", 
+                  "type": "string"
+               }, 
+               "name": {
+                  "description": "Name of an author of the citation; relevant for journal\n articles, books and book chapters.\n\n The family name(s), followed by a comma and including any\n dynastic components, precedes the first name(s) or initial(s).", 
+                  "examples": [
+                     "Bleary, Percival R.", 
+                     "O'Neil, F.K.", 
+                     "Van den Bossche, G.", 
+                     "Yang, D.-L.", 
+                     "Simonov, Yu.A"
+                  ], 
+                  "type": "string"
+               }, 
+               "ordinal": {
+                  "description": "This data item defines the order of the author's name in the\n list of authors of a citation.", 
+                  "type": "integer"
+               }
+            }, 
+            "required": [
+               "citation_id", 
+               "name", 
+               "ordinal"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "pdbx_reference_molecule_list": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "prd_id": {
+                  "description": "The value of _pdbx_reference_molecule_list.prd_id is the unique identifier\n for the reference molecule in this family.\n\n By convention this ID uniquely identifies the reference molecule in\n in the PDB reference dictionary.\n\n The ID has the template form PRD_dddddd (e.g. PRD_000001)", 
+                  "type": "string"
+               }, 
+               "family_prd_id": {
+                  "description": "The value of _pdbx_reference_molecule_list.family_prd_id is a reference to\n _pdbx_reference_molecule_family.family_prd_id' in category PDBX_REFERENCE_MOLECULE_FAMILY.", 
+                  "type": "string"
+               }
+            }, 
+            "required": [
+               "family_prd_id", 
+               "prd_id"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "pdbx_reference_molecule_annotation": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "family_prd_id": {
+                  "description": "The value of _pdbx_reference_molecule_annotation.family_prd_id is a reference to\n _pdbx_reference_molecule_list.family_prd_id in category PDBX_REFERENCE_MOLECULE_FAMILY_LIST.", 
+                  "type": "string"
+               }, 
+               "ordinal": {
+                  "description": "This data item distinguishes anotations for this entity.", 
+                  "type": "integer"
+               }, 
+               "prd_id": {
+                  "description": "This data item is a pointer to _pdbx_reference_molecule.prd_id in the\n PDB_REFERENCE_MOLECULE category.", 
+                  "type": "string"
+               }, 
+               "text": {
+                  "description": "Text describing the annotation for this entity.", 
+                  "examples": [
+                     "antigen binding", 
+                     "glucose transporter activity"
+                  ], 
+                  "type": "string"
+               }, 
+               "type": {
+                  "description": "Type of annotation for this entity.", 
+                  "examples": [
+                     "Function", 
+                     "Use", 
+                     "Pharmacology", 
+                     "Mechanism_of_Action", 
+                     "Biological_Activity", 
+                     "Inhibitor_Class", 
+                     "Therapeutic_Category", 
+                     "Research_Use", 
+                     "Other_annotation"
+                  ], 
+                  "type": "string"
+               }, 
+               "source": {
+                  "description": "The source of the annoation for this entity.", 
+                  "examples": [
+                     "depositor provided", 
+                     "from UniProt Entry P200311"
+                  ], 
+                  "type": "string"
+               }, 
+               "chem_comp_id": {
+                  "description": "For entities represented as single molecules, the identifier\n corresponding to the chemical definition for the molecule.", 
+                  "examples": [
+                     "0Z3", 
+                     "CD9"
+                  ], 
+                  "type": "string"
+               }
+            }, 
+            "required": [
+               "family_prd_id", 
+               "ordinal", 
+               "source", 
+               "text", 
+               "type"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "pdbx_reference_molecule_related_structures": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "citation_id": {
+                  "description": "A link to related reference information in the citation category.", 
+                  "type": "string"
+               }, 
+               "ordinal": {
+                  "description": "The value of _pdbx_reference_molecule_related_structures.ordinal distinguishes\n related structural data for each entity.", 
+                  "type": "integer"
+               }, 
+               "family_prd_id": {
+                  "description": "The value of _pdbx_reference_molecule_related_structures.family_prd_id is a reference to\n _pdbx_reference_molecule_list.family_prd_id in category PDBX_REFERENCE_MOLECULE_FAMILY_LIST.", 
+                  "type": "string"
+               }, 
+               "db_name": {
+                  "description": "The database name for the related structure reference.", 
+                  "examples": [
+                     "CCDC"
+                  ], 
+                  "type": "string"
+               }, 
+               "db_code": {
+                  "description": "The database identifier code for the related structure reference.", 
+                  "examples": [
+                     "QEFHUE"
+                  ], 
+                  "type": "string"
+               }, 
+               "db_accession": {
+                  "description": "The database accession code for the related structure reference.", 
+                  "examples": [
+                     "143108"
+                  ], 
+                  "type": "string"
+               }, 
+               "formula": {
+                  "description": "The formula for the reference entity. Formulae are written\n according to the rules:\n\n 1. Only recognised element symbols may be used.\n\n 2. Each element symbol is followed by a 'count' number. A count\n    of '1' may be omitted.\n\n 3. A space or parenthesis must separate each element symbol and\n    its count, but in general parentheses are not used.\n\n 4. The order of elements depends on whether or not carbon is\n    present. If carbon is present, the order should be: C, then\n    H, then the other elements in alphabetical order of their\n    symbol. If carbon is not present, the elements are listed\n    purely in alphabetic order of their symbol. This is the\n    'Hill' system used by Chemical Abstracts.", 
+                  "examples": [
+                     "C18 H19 N7 O8 S"
+                  ], 
+                  "type": "string"
+               }, 
+               "name": {
+                  "description": "The chemical name for the structure entry in the related database", 
+                  "examples": [
+                     "actinomycn"
+                  ], 
+                  "type": "string"
+               }
+            }, 
+            "required": [
+               "family_prd_id", 
+               "ordinal"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "pdbx_reference_molecule_synonyms": {
+         "minItems": 1, 
+         "items": {
+            "properties": {
+               "chem_comp_id": {
+                  "description": "For entities represented as single molecules, the identifier\n corresponding to the chemical definition for the molecule.", 
+                  "examples": [
+                     "0Z3", 
+                     "CD9"
+                  ], 
+                  "type": "string"
+               }, 
+               "family_prd_id": {
+                  "description": "The value of _pdbx_reference_molecule_synonyms.family_prd_id is a reference to\n _pdbx_reference_molecule_list.family_prd_id in category PDBX_REFERENCE_MOLECULE_FAMILY_LIST.", 
+                  "type": "string"
+               }, 
+               "ordinal": {
+                  "description": "              The value of _pdbx_reference_molecule_synonyms.ordinal is an ordinal\n\t       to distinguish synonyms for this entity.", 
+                  "type": "integer"
+               }, 
+               "prd_id": {
+                  "description": "              The value of _pdbx_reference_molecule_synonyms.prd_id is a reference\n\t       _pdbx_reference_molecule.prd_id in the  PDBX_REFERENCE_MOLECULE category.", 
+                  "type": "string"
+               }, 
+               "source": {
+                  "description": "The source of this synonym name for the entity.", 
+                  "examples": [
+                     "CAS"
+                  ], 
+                  "type": "string"
+               }, 
+               "name": {
+                  "description": "A synonym name for the entity.", 
+                  "examples": [
+                     "thiostrepton"
+                  ], 
+                  "type": "string"
+               }
+            }, 
+            "required": [
+               "family_prd_id", 
+               "name", 
+               "ordinal", 
+               "prd_id", 
+               "source"
+            ], 
+            "type": "object"
+         }, 
+         "uniqueItems": true, 
+         "type": "array"
+      }, 
+      "pdbx_reference_molecule_family": {
+         "properties": {
+            "release_status": {
+               "enum": [
+                  "HOLD", 
+                  "OBS", 
+                  "REL", 
+                  "WAIT"
+               ], 
+               "description": "Assigns the current PDB release status for this family.", 
+               "type": "string"
+            }, 
+            "replaces": {
+               "description": "Assigns the identifier for the family which have been replaced by this family.\n Multiple family identifier codes should be separated by commas.", 
+               "type": "string"
+            }, 
+            "name": {
+               "description": "The entity family name.", 
+               "examples": [
+                  "actinomycin", 
+                  "adriamycin"
+               ], 
+               "type": "string"
+            }, 
+            "replaced_by": {
+               "description": "Assigns the identifier of the family that has replaced this component.", 
+               "type": "string"
+            }, 
+            "family_prd_id": {
+               "description": "The value of _pdbx_reference_entity.family_prd_id must uniquely identify a record in the\n PDBX_REFERENCE_MOLECULE_FAMILY list.\n\n By convention this ID uniquely identifies the reference family in\n in the PDB reference dictionary.\n\n The ID has the template form FAM_dddddd (e.g. FAM_000001)\n", 
+               "type": "string"
+            }
+         }, 
+         "required": [
+            "family_prd_id"
+         ], 
+         "type": "object"
       }
-   },
-   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/",
-   "$schema": "http://json-schema.org/draft-04/schema#",
-   "title": "Schema for content type bird_family collection family_v5_0_2"
+   }, 
+   "$schema": "http://json-schema.org/draft-04/schema#", 
+   "title": "Schema for content type bird_family collection family_v5_0_2", 
+   "type": "object"
 }
