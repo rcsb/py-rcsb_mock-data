@@ -19,7 +19,9 @@
 #     2-Oct-2018 jdw add category rcsb_entity_source_organism, and items
 #                   _entity.rcsb_multiple_source_flag and _entity.rcsb_source_part_count
 #    11-Oct-2018 jdw added rcsb_repository_holdings_transferred and rcsb_repository_holdings_insilico_models
-#
+#    26-Oct-2018 jdw add rcsb_accession_info
+#    28-Oct-2018 jdw make audit_authors an iterable type in categories rcsb_repository_holdings_transferred,
+#                    rcsb_repository_holdings_insilico_models, and rcsb_repository_holdings_unreleased
 #
 ###########################################################################
 
@@ -39,12 +41,19 @@ data_rcsb_mmcif_ext.dic
 
     _dictionary.title           rcsb_mmcif_ext.dic
     _dictionary.datablock_id    rcsb_mmcif_ext.dic
-    _dictionary.version         0.101
+    _dictionary.version         0.102
 #
      loop_
     _dictionary_history.version
     _dictionary_history.update
     _dictionary_history.revision
+  0.102  2018-10-28
+;
+  Changes (jdw):
+  + add category rcsb_accession_info
+  + make audit_authors an iterable type in categories rcsb_repository_holdings_transferred,
+    rcsb_repository_holdings_insilico_models, and rcsb_repository_holdings_unreleased
+;
   0.101   2018-10-02
 ;
   Changes (jdw):
@@ -153,6 +162,7 @@ rcsb_filter_assembly_details         calculate_with_helper python  'DictMethodHe
 rcsb_assembly_candidates             calculate_with_helper python  'DictMethodHelper.assignAssemblyCandidates'
 rcsb_entity_source_organism          calculate_with_helper python  'DictMethodHelper.filterSourceOrganismDetails'
 rcsb_aggregate_citation_authors      calculate_with_helper python  'DictMethodHelper.aggregateCitationAuthors'
+rcsb_consolidate_accession_info      calculate_with_helper python  'DictMethodHelper.consolidateAccessionDetails'
 rcsb_entry_container_identifiers     calculate_with_helper python  'DictMethodHelper.buildContainerEntryIds'
 rcsb_entity_container_identifiers    calculate_with_helper python  'DictMethodHelper.buildContainerEntityIds'
 rcsb_assembly_container_identifiers  calculate_with_helper python  'DictMethodHelper.buildContainerAssemblyIds'
@@ -1431,9 +1441,9 @@ save__rcsb_repository_holdings_unreleased.audit_authors
     _item.name                  '_rcsb_repository_holdings_unreleased.audit_authors'
     _item.category_id             rcsb_repository_holdings_unreleased
     _item.mandatory_code          no
-    #_item_type.code               alphanum-scsv
-    _item_type.code               text
-    _item_examples.case          'Bleary, Percival R., O'Neil, F.K.'
+    _item_type.code               alphanum-scsv
+    #_item_type.code               text
+    _item_examples.case          'Bleary, Percival R.; O'Neil, F.K.'
      save_
 
 save__rcsb_repository_holdings_unreleased.author_prerelease_sequence_status
@@ -1651,7 +1661,7 @@ save_rcsb_repository_holdings_insilico_models
      _rcsb_repository_holdings_insilico_models.audit_authors
      _rcsb_repository_holdings_insilico_models.remove_date
      _rcsb_repository_holdings_insilico_models.id_codes_replaced_by
-    2018_21 1DX2 TRSF 1999-12-16 2000-12-15  'Tumour Targetting Human ...'  'Beiboer, S.H.W., Reurs, A., ...' .
+    2018_21 1DX2 TRSF 1999-12-16 2000-12-15  'Tumour Targetting Human ...'  'Beiboer, S.H.W.; Reurs, A.; ...' .
     # ... abbreviated ...
 
 ;
@@ -1751,9 +1761,9 @@ save__rcsb_repository_holdings_insilico_models.audit_authors
     _item.name                  '_rcsb_repository_holdings_insilico_models.audit_authors'
     _item.category_id             rcsb_repository_holdings_insilico_models
     _item.mandatory_code          no
-    #_item_type.code               alphanum-scsv
-    _item_type.code               text
-    _item_examples.case          'Bleary, Percival R., O'Neil, F.K.'
+    _item_type.code               alphanum-scsv
+    #_item_type.code               text
+    _item_examples.case          'Bleary, Percival R.; O'Neil, F.K.'
      save_
 
 save__rcsb_repository_holdings_insilico_models.id_codes_replaced_by
@@ -1805,7 +1815,7 @@ save_rcsb_repository_holdings_transferred
      _rcsb_repository_holdings_transferred.remote_accession_code
      _rcsb_repository_holdings_transferred.remote_repository_name
      _rcsb_repository_holdings_transferred.repository_content_types
-    2018_21 1DX2 TRSF 1999-12-16 2000-12-15  'Tumour Targetting Human ...'  'Beiboer, S.H.W., Reurs, A., ...' ma-czyyf 'Model Archive' coordinates
+    2018_21 1DX2 TRSF 1999-12-16 2000-12-15  'Tumour Targetting Human ...'  'Beiboer, S.H.W.; Reurs, A.; ...' ma-czyyf 'Model Archive' coordinates
     # ... abbreviated ...
 
 ;
@@ -1894,8 +1904,8 @@ save__rcsb_repository_holdings_transferred.audit_authors
     _item.name                  '_rcsb_repository_holdings_transferred.audit_authors'
     _item.category_id             rcsb_repository_holdings_transferred
     _item.mandatory_code          no
-    #_item_type.code               alphanum-scsv
-    _item_type.code               text
+    _item_type.code               alphanum-scsv
+    #_item_type.code               text
     _item_examples.case          'Bleary, Percival R., O'Neil, F.K.'
      save_
 
@@ -2252,5 +2262,131 @@ save__rcsb_entity_host_organism.end_seq_num
     _item.mandatory_code          no
     _item_type.code               int
      save_
+
+#########################
+## RCSB_ACCESSION_INFO ##
+#########################
+
+save_rcsb_accession_info
+    _category.description
+;        The rcsb_accession_info category records the
+         key acession milestones for PDB entries.
+;
+    _category.id                  rcsb_accession_info
+    _category.mandatory_code      no
+    loop_
+    _category_key.name           '_rcsb_accession_info.entry_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     _rcsb_accession_info.entry_id                1ABC
+     _rcsb_accession_info.status_code             REL
+     _rcsb_accession_info.deposit_date            2018-01-11
+     _rcsb_accession_info.initial_release_date    2018-03-23
+     _rcsb_accession_info.major_revision          1
+     _rcsb_accession_info.minor_revision          2
+     _rcsb_accession_info.revision_date           2018-10-25
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_accession_info
+   #
+   _category_methods.method_id   'rcsb_consolidate_accession_info'
+     save_
+
+save__rcsb_accession_info.entry_id
+    _item_description.description
+;    The PDB entry accession code.
+;
+    _item.name                  '_rcsb_accession_info.entry_id'
+    _item.category_id             rcsb_accession_info
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '1ABC'
+    _item_linked.child_name       '_rcsb_accession_info.entry_id'
+    _item_linked.parent_name      '_entry.id'
+     save_
+
+save__rcsb_accession_info.status_code
+    _item_description.description
+;    The release status for the entry.
+;
+    _item.name                  '_rcsb_accession_info.status_codes'
+    _item.category_id             rcsb_accession_info
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case           'REL'
+    loop_
+    _item_enumeration.value
+    'REL' HPUB' 'HOLD' 'WDRN' 'PROC' 'POLC' 'REPL' 'AUTH' 'REFI' 'WAIT' 'AUCO'
+
+     save_
+
+save__rcsb_accession_info.deposit_date
+    _item_description.description
+;    The entry deposition date.
+;
+    _item.name                  '_rcsb_accession_info.deposit_date'
+    _item.category_id             rcsb_accession_info
+    _item.mandatory_code          no
+    _item_type.code               'yyyy-mm-dd'
+    _item_example.case            '2018-07-11'
+     save_
+
+save__rcsb_accession_info.initial_release_date
+    _item_description.description
+;    The entry initial release date.
+;
+    _item.name                  '_rcsb_accession_info.initial_release_date'
+    _item.category_id             rcsb_accession_info
+    _item.mandatory_code          no
+    _item_type.code               'yyyy-mm-dd'
+    _item_example.case            '2018-08-23'
+     save_
+
+
+save__rcsb_accession_info.revision_date
+    _item_description.description
+;    The latest entry revision date.
+;
+    _item.name                  '_rcsb_accession_info.revision_date'
+    _item.category_id             rcsb_accession_info
+    _item.mandatory_code          no
+    _item_type.code               'yyyy-mm-dd'
+    _item_example.case            '2018-10-23'
+     save_
+
+
+save__rcsb_accession_info.major_revision
+    _item_description.description
+;    The latest entry major revision number.
+;
+    _item.name                  '_rcsb_accession_info.major_revision'
+    _item.category_id             rcsb_accession_info
+    _item.mandatory_code          no
+    _item_type.code               int
+    _item_example.case            1
+     save_
+
+save__rcsb_accession_info.minor_revision
+    _item_description.description
+;    The latest entry minor revision number.
+;
+    _item.name                  '_rcsb_accession_info.minor_revision'
+    _item.category_id             rcsb_accession_info
+    _item.mandatory_code          no
+    _item_type.code               int
+    _item_example.case            3
+     save_
+
 
 ##

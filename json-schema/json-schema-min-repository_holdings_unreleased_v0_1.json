@@ -1,95 +1,99 @@
 {
-   "title": "Schema for content type repository_holdings collection repository_holdings_unreleased_v0_1", 
-   "type": "object", 
+   "type": "object",
    "properties": {
-      "deposit_date_structure_factors": {
-         "type": "string", 
-         "description": "The deposition date of entry structure factor data.", 
-         "format": "date"
-      }, 
-      "entry_id": {
-         "type": "string", 
-         "description": "The PDB entry accession code."
-      }, 
-      "title": {
-         "type": "string", 
-         "description": "The entry title."
-      }, 
-      "hold_date_nmr_restraints": {
-         "type": "string", 
-         "description": "The embargo date of entry NMR restraint data.", 
-         "format": "date"
-      }, 
-      "author_prerelease_sequence_status": {
-         "type": "string", 
-         "description": "The prerelease status for the molecular sequences for the entry .", 
-         "enum": [
-            "HOLD FOR RELEASE", 
-            "RELEASE IMMEDIATELY"
-         ]
-      }, 
       "audit_authors": {
-         "type": "string", 
-         "examples": [
-            "Bleary, Percival R., O'Neil, F.K."
-         ], 
-         "description": "Names of the authors of the entry."
-      }, 
-      "deposit_date": {
-         "type": "string", 
-         "description": "The entry deposition date.", 
-         "format": "date"
-      }, 
-      "deposit_date_nmr_restraints": {
-         "type": "string", 
-         "description": "The deposition date of entry NMR restraint data.", 
-         "format": "date"
-      }, 
-      "status_code": {
-         "type": "string", 
-         "description": "The release status for the entry.", 
+         "type": "array",
+         "items": {
+            "type": "string",
+            "examples": [
+               "Bleary, Percival R.; O'Neil, F.K."
+            ],
+            "description": "Names of the authors of the entry."
+         },
+         "uniqueItems": false
+      },
+      "author_prerelease_sequence_status": {
+         "type": "string",
          "enum": [
-            "HPUB", 
-            "AUTH", 
-            "AUCO", 
-            "POLC", 
-            "REFI", 
-            "REPL", 
-            "PROC", 
-            "WAIT", 
-            "WDRN", 
-            "HOLD"
-         ]
-      }, 
-      "update_id": {
-         "type": "string", 
-         "description": "Identifier for the current data exchange status record."
-      }, 
-      "hold_date_structure_factors": {
-         "type": "string", 
-         "description": "The embargo date of entry structure factor data.", 
-         "format": "date"
-      }, 
+            "HOLD FOR RELEASE",
+            "RELEASE IMMEDIATELY"
+         ],
+         "description": "The prerelease status for the molecular sequences for the entry ."
+      },
+      "deposit_date": {
+         "type": "string",
+         "format": "date",
+         "description": "The entry deposition date."
+      },
       "deposit_date_coordinates": {
-         "type": "string", 
-         "description": "The deposition date of entry coordinate data.", 
-         "format": "date"
-      }, 
-      "release_date": {
-         "type": "string", 
-         "description": "The release date for the entry.", 
-         "format": "date"
-      }, 
+         "type": "string",
+         "format": "date",
+         "description": "The deposition date of entry coordinate data."
+      },
+      "deposit_date_nmr_restraints": {
+         "type": "string",
+         "format": "date",
+         "description": "The deposition date of entry NMR restraint data."
+      },
+      "deposit_date_structure_factors": {
+         "type": "string",
+         "format": "date",
+         "description": "The deposition date of entry structure factor data."
+      },
+      "entry_id": {
+         "type": "string",
+         "description": "The PDB entry accession code."
+      },
       "hold_date_coordinates": {
-         "type": "string", 
-         "description": "The embargo date of entry coordinate data.", 
-         "format": "date"
+         "type": "string",
+         "format": "date",
+         "description": "The embargo date of entry coordinate data."
+      },
+      "hold_date_nmr_restraints": {
+         "type": "string",
+         "format": "date",
+         "description": "The embargo date of entry NMR restraint data."
+      },
+      "hold_date_structure_factors": {
+         "type": "string",
+         "format": "date",
+         "description": "The embargo date of entry structure factor data."
+      },
+      "release_date": {
+         "type": "string",
+         "format": "date",
+         "description": "The release date for the entry."
+      },
+      "status_code": {
+         "type": "string",
+         "enum": [
+            "REFI",
+            "WAIT",
+            "AUTH",
+            "AUCO",
+            "REPL",
+            "WDRN",
+            "HPUB",
+            "PROC",
+            "HOLD",
+            "POLC"
+         ],
+         "description": "The release status for the entry."
+      },
+      "title": {
+         "type": "string",
+         "description": "The entry title."
+      },
+      "update_id": {
+         "type": "string",
+         "description": "Identifier for the current data exchange status record."
       }
-   }, 
-   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/", 
-   "$schema": "http://json-schema.org/draft-04/schema#", 
+   },
    "required": [
-      "entry_id", 
+      "entry_id",
       "update_id"
-   ]
+   ],
+   "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/",
+   "$schema": "http://json-schema.org/draft-04/schema#",
+   "title": "Schema for content type repository_holdings collection repository_holdings_unreleased_v0_1"
 }
