@@ -22,6 +22,9 @@
 #    26-Oct-2018 jdw add rcsb_accession_info
 #    28-Oct-2018 jdw make audit_authors an iterable type in categories rcsb_repository_holdings_transferred,
 #                    rcsb_repository_holdings_insilico_models, and rcsb_repository_holdings_unreleased
+#    30-Oct-2018 jdw add rcsb_chem_comp_info, rcsb_chem_comp_synonyms, rcsb_chem_comp_descriptor,
+#                    rcsb_entry_info, and rcsb_chem_comp_target
+#    12-Nov-2018 jdw add rcsb_file_block_by_method
 #
 ###########################################################################
 
@@ -41,13 +44,25 @@ data_rcsb_mmcif_ext.dic
 
     _dictionary.title           rcsb_mmcif_ext.dic
     _dictionary.datablock_id    rcsb_mmcif_ext.dic
-    _dictionary.version         0.102
+    _dictionary.version         0.104
 #
      loop_
     _dictionary_history.version
     _dictionary_history.update
     _dictionary_history.revision
-  0.102  2018-10-28
+  0.104  2018-11-12
+;
+Changes (jdw):
+  + add rcsb_file_block_by_method
+;
+
+  0.103  2018-10-30
+;
+Changes (jdw):
+  + add rcsb_chem_comp_info, rcsb_chem_comp_synonyms, rcsb_chem_comp_descriptor, rcsb_chem_comp_related,
+    rcsb_entry_info, and rcsb_chem_comp_target
+;
+   0.102  2018-10-28
 ;
   Changes (jdw):
   + add category rcsb_accession_info
@@ -137,9 +152,14 @@ data_rcsb_mmcif_ext.dic
 ;              Items specifying the sequence members of a particular sequence cluster.
 ;
 
+
 #################
 ## METHOD_LIST ##
 #################
+
+loop_
+_datablock_methods.method_id
+    'rcsb_file_block_by_method'
 
 loop_
 _method_list.id
@@ -151,11 +171,13 @@ method_cat_size calculate python_3.7
 sys.stdout.write("Category %s\n" % self.getName())
 sys.stdout.write("Number of rows %d \n" % len(self.getRowList()))
 ;
-
+# Methods for primary structure data files
+#
 rcsb_this_block                      calculate_with_helper python  'DictMethodHelper.setDatablockId'
 rcsb_timestamp                       calculate_with_helper python  'DictMethodHelper.setLoadDateTime'
 rcsb_file_container                  calculate_with_helper python  'DictMethodHelper.setLocator'
 rcsb_row_index                       calculate_with_helper python  'DictMethodHelper.setRowIndex'
+rcsb_add_entry_info                  calculate_with_helper python  'DictMethodHelper.addEntryInfo'
 rcsb_add_deposited_assembly          calculate_with_helper python  'DictMethodHelper.addDepositedAssembly'
 rcsb_filter_assembly_details         calculate_with_helper python  'DictMethodHelper.filterAssemblyDetails'
 rcsb_filter_assembly_details         calculate_with_helper python  'DictMethodHelper.filterAssemblyDetails'
@@ -167,6 +189,18 @@ rcsb_entry_container_identifiers     calculate_with_helper python  'DictMethodHe
 rcsb_entity_container_identifiers    calculate_with_helper python  'DictMethodHelper.buildContainerEntityIds'
 rcsb_assembly_container_identifiers  calculate_with_helper python  'DictMethodHelper.buildContainerAssemblyIds'
 rcsb_item_method_deferred            calculate_with_helper python  'DictMethodHelper.deferredItemMethod'
+#rcsb_category_method_deferred        calculate_with_helper python  'DictMethodHelper.deferredCategoryMethod'
+#
+# Methods for chemical reference data
+#
+rcsb_add_chem_comp_targets           calculate_with_helper python  'DictMethodHelper.addChemCompTargets'
+rcsb_add_chem_comp_synonyms          calculate_with_helper python  'DictMethodHelper.addChemCompSynonyms'
+rcsb_add_chem_comp_info              calculate_with_helper python  'DictMethodHelper.addChemCompInfo'
+rcsb_add_chem_comp_descriptor        calculate_with_helper python  'DictMethodHelper.addChemCompDescriptor'
+rcsb_add_chem_comp_related           calculate_with_helper python  'DictMethodHelper.addChemCompRelated'
+
+rcsb_file_block_by_method            calculate_with_helper python  'DictMethodHelper.filterBlockByMethod'
+
 ##
 ##  Extension definitions start here -
 ##
@@ -275,7 +309,7 @@ save__entity.rcsb_multiple_source_flag
     loop_
     _item_enumeration.value
     'Y' 'N'
-     _item_methods.method_id     'rcsb_item_method_deferred'
+    _item_methods.method_id     'rcsb_item_method_deferred'
      save_
 
 save__entity.rcsb_source_part_count
@@ -288,6 +322,31 @@ save__entity.rcsb_source_part_count
     _item.mandatory_code          no
     _item_type.code               int
      _item_methods.method_id     'rcsb_item_method_deferred'
+     save_
+
+#################
+## ENTITY_POLY ##
+#################
+
+save__entity_poly.rcsb_entity_polymer_type
+    _item_description.description
+;  A coarse-grained polymer entity type.
+;
+    _item.name                  '_entity_poly.rcsb_entity_polymer_type'
+    _item.category_id             entity
+    _item.mandatory_code          no
+    _item_type.code               line
+    #
+     loop_
+    _item_enumeration.value
+    _item_enumeration.detail
+    'Protein'   'polypeptide(D) or polypeptide(L)'
+    'DNA'       'polydeoxyribonucleotide'
+    'RNA'       'polyribonucleotide'
+    'NA-hybrid' 'polydeoxyribonucleotide/polyribonucleotide hybrid'
+    'Other'      'polysaccharide(D), polysaccharide(L), cyclic-pseudo-peptide, peptide nucleic acid, or other'
+    #
+    _item_methods.method_id     'rcsb_item_method_deferred'
      save_
 
 ##############################
@@ -1984,7 +2043,7 @@ save_rcsb_entity_source_organism
     _rcsb_entity_source_organism.provenance_code
     _rcsb_entity_source_organism.beg_seq_num
     _rcsb_entity_source_organism.end_seq_num
-    1 1 natural 'Homo sapiens' human 9606  'pdb-primary-data' 1 202
+    1 1 natural 'Homo sapiens' human 9606  'PDB Primary Data' 1 202
     # ... abbreviated
 ;
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -2082,7 +2141,7 @@ save__rcsb_entity_source_organism.provenance_code
     _item_type.code               line
     loop_
     _item_enumeration.value
-    'pdb-primary-data'
+    'PDB Primary Data'
      save_
 
 save__rcsb_entity_source_organism.beg_seq_num
@@ -2150,7 +2209,7 @@ save_rcsb_entity_host_organism
     _rcsb_entity_host_organism.provenance_code
     _rcsb_entity_host_organism.beg_seq_num
     _rcsb_entity_host_organism.end_seq_num
-    1 1 'Escherichia coli' 'E. coli' 562  'pdb-primary-data' 1 102
+    1 1 'Escherichia coli' 'E. coli' 562  'PDB Primary Data' 1 102
     # ... abbreviated
 ;
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -2234,7 +2293,7 @@ save__rcsb_entity_host_organism.provenance_code
     _item_type.code               line
     loop_
     _item_enumeration.value
-    'pdb-primary-data'
+    'PDB Primary Data'
      save_
 
 save__rcsb_entity_host_organism.beg_seq_num
@@ -2389,4 +2448,799 @@ save__rcsb_accession_info.minor_revision
      save_
 
 
+#############################
+## RCSB_CHEM_COMP_SYNONYMS ##
+#############################
+
+save_rcsb_chem_comp_synonyms
+   #
+   _category.description
+; RCSB_CHEM_COMP_SYNONYMS holds chemical names and synonyms associated with the chemical component.
+;
+   _category.id              rcsb_chem_comp_synonyms
+   _category.mandatory_code  no
+   #
+   loop_
+   _category_key.name
+     '_rcsb_chem_comp_synonyms.comp_id'
+     '_rcsb_chem_comp_synonyms.ordinal'
+   #
+   loop_
+   _category_group.id
+     inclusive_group
+     rcsb_group
+     chem_comp_group
+   #
+loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     loop_
+     _rcsb_chem_comp_synonyms.comp_id
+     _rcsb_chem_comp_synonyms.ordinal
+     _rcsb_chem_comp_synonyms.name
+     _rcsb_chem_comp_synonyms.provenance_code
+    ATP 1 "adenosine 5'-(tetrahydrogen triphosphate)"  'PDB Reference Data'
+    ATP 2 "Adenosine 5'-triphosphate"  'PDB Reference Data'
+    ATP 3 Atriphos  DrugBank
+    ATP 4 Striadyne DrugBank
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_chem_comp_synonyms
+   #
+    _category_methods.method_id   'rcsb_add_chem_comp_synonyms'
+   #
+save_
+#
+save__rcsb_chem_comp_synonyms.ordinal
+    _item_description.description
+;              This data item is an ordinal index for the
+               RCSB_CHEM_COMP_SYNONYMS category.
+;
+    _item.name                  '_rcsb_chem_comp_synonyms.ordinal'
+    _item.category_id             rcsb_chem_comp_synonyms
+    _item.mandatory_code          yes
+    _item_type.code               int
+    #_item_methods.method_id      'rcsb_row_index'
+    #_pdbx_item_context.type       RCSB_CATEGORY_KEY_SUBSTITION
+    #_pdbx_item_context.item_name  '_rcsb_chem_comp_synonyms.ordinal'
+     save_
+
+save__rcsb_chem_comp_synonyms.name
+   #
+   _item_description.description  'The synonym of this particular chemical component.'
+   #
+   _item.name            '_rcsb_chem_comp_synonyms.name'
+   _item.category_id     rcsb_chem_comp_synonyms
+   _item.mandatory_code  yes
+   #
+   _item_type.code  text
+   #
+save_
+#
+save__rcsb_chem_comp_synonyms.comp_id
+   #
+   _item_description.description  'The chemical component to which this synonym applies.'
+   #
+   _item.name                    '_rcsb_chem_comp_synonyms.comp_id'
+   _item.category_id             rcsb_chem_comp_synonyms
+   _item.mandatory_code          yes
+   _item_type.code               ucode
+   _item_linked.child_name       '_rcsb_chem_comp_synonyms.comp_id'
+   _item_linked.parent_name      '_chem_comp.id'
+   #
+save_
+
+save__rcsb_chem_comp_synonyms.provenance_code
+   #
+   _item_description.description  'The provenance of this synonym.'
+   #
+   _item.name                    '_rcsb_chem_comp_synonyms.provenance_code'
+   _item.category_id             rcsb_chem_comp_synonyms
+   _item.mandatory_code          no
+   _item_type.code               line
+    loop_
+    _item_enumeration.value
+    _item_enumeration.detail      'PDB Reference Data'    .
+                                  DrugBank  .
+                                  ChEBI     .
+                                  ChEMBL    .
+                                  PubChem   .
+                                  ACDLabs   .
+                                  'OpenEye OEToolkits'  .
+save_
+
+#########################
+## RCSB_CHEM_COMP_INFO ##
+#########################
+
+save_rcsb_chem_comp_info
+   _category.description
+; RCSB_CHEM_COMP_INFO holds selected summary information about a chemical component.
+;
+   _category.id              rcsb_chem_comp_info
+   _category.mandatory_code  no
+   #
+   _category_key.name        '_rcsb_chem_comp_info.comp_id'
+   #
+   loop_
+    _category_group.id
+     inclusive_group
+     rcsb_group
+     chem_comp_group
+   #
+    loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     _rcsb_chem_comp_info.comp_id                 BNZ
+     _rcsb_chem_comp_info.atom_count              12
+     _rcsb_chem_comp_info.atom_count_chiral        0
+     _rcsb_chem_comp_info.bond_count              12
+     _rcsb_chem_comp_info.bond_count_aromatic      6
+     _rcsb_chem_comp_info.atom_count_heavy         6
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_chem_comp_info
+   #
+    _category_methods.method_id   'rcsb_add_chem_comp_info'
+   #
+save_
+#
+#
+save__rcsb_chem_comp_info.comp_id
+   #
+   _item_description.description
+; The chemical component identifier.
+;
+   #
+   _item.name                    '_rcsb_chem_comp_info.comp_id'
+   _item.category_id             rcsb_chem_comp_info
+   _item.mandatory_code          yes
+   _item_type.code               ucode
+   _item_linked.child_name       '_rcsb_chem_comp_info.comp_id'
+   _item_linked.parent_name      '_chem_comp.id'
+   #
+save_
+
+save__rcsb_chem_comp_info.atom_count
+   #
+   _item_description.description
+; Chemical component total atom count
+;
+   #
+   _item.name            '_rcsb_chem_comp_info.atom_count
+   _item.category_id     rcsb_chem_comp_info
+   _item.mandatory_code  no
+   _item_type.code       int
+   _item_range.maximum    .
+   _item_range.minimum    0
+save_
+
+save__rcsb_chem_comp_info.bond_count
+   #
+   _item_description.description
+; Chemical component total bond count
+;
+   #
+   _item.name            '_rcsb_chem_comp_info.bond_count'
+   _item.category_id     rcsb_chem_comp_info
+   _item.mandatory_code  no
+   _item_type.code       int
+    #
+    loop_
+    _item_range.maximum
+    _item_range.minimum            .    0
+                                   0    0
+save_
+
+
+save__rcsb_chem_comp_info.bond_count_aromatic
+   #
+   _item_description.description
+; Chemical component aromatic bond count
+;
+   #
+   _item.name            '_rcsb_chem_comp_info.bond_count_aromatic'
+   _item.category_id     rcsb_chem_comp_info
+   _item.mandatory_code  no
+   _item_type.code       int
+
+    loop_
+    _item_range.maximum
+    _item_range.minimum            .    0
+                                   0    0
+save_
+
+save__rcsb_chem_comp_info.atom_count_chiral
+   #
+   _item_description.description
+; Chemical component chiral atom count
+;
+   #
+   _item.name            '_rcsb_chem_comp_info.atom_count_chiral'
+   _item.category_id     rcsb_chem_comp_info
+   _item.mandatory_code  no
+   _item_type.code       int
+   loop_
+    _item_range.maximum
+    _item_range.minimum            .    0
+                                   0    0
+save_
+
+save__rcsb_chem_comp_info.atom_count_heavy
+   #
+   _item_description.description
+; Chemical component heavy atom count
+;
+   #
+   _item.name            '_rcsb_chem_comp_info.atom_count_heavy'
+   _item.category_id     rcsb_chem_comp_info
+   _item.mandatory_code  no
+   _item_type.code       int
+   _item_range.maximum    .
+   _item_range.minimum    0
+save_
+
+###############################
+## RCSB_CHEM_COMP_DESCRIPTOR ##
+###############################
+
+save_rcsb_chem_comp_descriptor
+   _category.description
+; rcsb_chem_comp_descriptor holds selected descriptors for the chemical component.
+;
+   _category.id              rcsb_chem_comp_descriptor
+   _category.mandatory_code  no
+   #
+   _category_key.name       '_rcsb_chem_comp_descriptor.comp_id'
+   #
+   loop_
+   _category_group.id
+     inclusive_group
+     rcsb_group
+     chem_comp_group
+   #
+    loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     _rcsb_chem_comp_descriptor.comp_id                 ATP
+     _rcsb_chem_comp_descriptor.SMILES                  'Nc1ncnc2n(cnc12)[CH]3O[CH](CO[P](O)(=O)O[P](O)(=O)O[P](O)(O)=O)[CH](O)[CH]3O'
+     _rcsb_chem_comp_descriptor.SMILES_stereo           'Nc1ncnc2n(cnc12)[C@@H]3O[C@H](CO[P@](O)(=O)O[P@@](O)(=O)O[P](O)(O)=O)[C@@H](O)[C@H]3O'
+     _rcsb_chem_comp_descriptor.InChI                   'InChI=1S/C10H16N5O13P3/c11-8-5-9(13-2-12-8)15(3-14-5)10-7(17)6(16)4(26-10)1-25-30(21,22)28-31(23,24)27-29(18,19)20/h2-4,6-7,10,16-17H,1H2,(H,21,22)(H,23,24)(H2,11,12,13)(H2,18,19,20)/t4-,6-,7-,10-/m1/s1'
+     _rcsb_chem_comp_descriptor.InChIKey                'ZKHQWZAMYRWXGA-KQYNXXCUSA-N'
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_chem_comp_descriptor
+   #
+   _category_methods.method_id   'rcsb_add_chem_comp_descriptor'
+save_
+#
+#
+save__rcsb_chem_comp_descriptor.comp_id
+   #
+   _item_description.description
+; The chemical component identifier.
+;
+   #
+   _item.name                    '_rcsb_chem_comp_descriptor.comp_id'
+   _item.category_id             rcsb_chem_comp_descriptor
+   _item.mandatory_code          yes
+   _item_type.code               ucode
+   _item_linked.child_name       '_rcsb_chem_comp_descriptor.comp_id'
+   _item_linked.parent_name      '_chem_comp.id'
+   #
+save_
+
+save__rcsb_chem_comp_descriptor.SMILES
+   #
+   _item_description.description
+; Simplified molecular-input line-entry system (SMILES) descriptor for the chemical component.
+
+    Weininger D (February 1988). "SMILES, a chemical language and information system. 1.
+    Introduction to methodology and encoding rules". Journal of Chemical Information and Modeling. 28 (1): 31-6.
+
+    Weininger D, Weininger A, Weininger JL (May 1989).
+    "SMILES. 2. Algorithm for generation of unique SMILES notation",
+    Journal of Chemical Information and Modeling. 29 (2): 97-101.
+
+;
+   #
+   _item.name            '_rcsb_chem_comp_descriptor.SMILES
+   _item.category_id     rcsb_chem_comp_descriptor
+   _item.mandatory_code  no
+   _item_type.code       text
+   #
+save_
+
+save__rcsb_chem_comp_descriptor.SMILES_stereo
+   #
+   _item_description.description
+;   Simplified molecular-input line-entry system (SMILES) descriptor for the chemical
+    component including stereochemical features.
+
+    Weininger D (February 1988). "SMILES, a chemical language and information system. 1.
+    Introduction to methodology and encoding rules".
+    Journal of Chemical Information and Modeling. 28 (1): 31-6.
+
+    Weininger D, Weininger A, Weininger JL (May 1989).
+    "SMILES. 2. Algorithm for generation of unique SMILES notation".
+    Journal of Chemical Information and Modeling. 29 (2): 97-101.
+;
+   #
+   _item.name            '_rcsb_chem_comp_descriptor.SMILES_stereo'
+   _item.category_id     rcsb_chem_comp_descriptor
+   _item.mandatory_code  no
+   _item_type.code       text
+save_
+
+save__rcsb_chem_comp_descriptor.InChI
+   #
+   _item_description.description
+; Standard IUPAC International Chemical Identifier (InChI) descriptor for the chemical component.
+
+    InChI, the IUPAC International Chemical Identifier,
+    by Stephen R Heller, Alan McNaught, Igor Pletnev, Stephen Stein and Dmitrii Tchekhovskoi,
+    Journal of Cheminformatics, 2015, 7:23;
+;
+   #
+   _item.name            '_rcsb_chem_comp_descriptor.InChI'
+   _item.category_id     rcsb_chem_comp_descriptor
+   _item.mandatory_code  no
+   _item_type.code       text
+   #
+save_
+
+save__rcsb_chem_comp_descriptor.InChIKey
+   #
+   _item_description.description
+;   Standard IUPAC International Chemical Identifier (InChI) descriptor key
+    for the chemical component
+
+    InChI, the IUPAC International Chemical Identifier,
+    by Stephen R Heller, Alan McNaught, Igor Pletnev, Stephen Stein and Dmitrii Tchekhovskoi,
+    Journal of Cheminformatics, 2015, 7:23
+;
+   _item.name            '_rcsb_chem_comp_descriptor.InChIKey'
+   _item.category_id     rcsb_chem_comp_descriptor
+   _item.mandatory_code  no
+   _item_type.code       line
+   #
+save_
+
+
+############################
+## RCSB_CHEM_COMP_RELATED ##
+############################
+
+save_rcsb_chem_comp_related
+    _category.description
+;              Data items in the rcsb_chem_comp_related category record
+               details of examples chemical component molecules in related
+               databases.
+;
+    _category.id                  rcsb_chem_comp_related
+    _category.mandatory_code      no
+     loop_
+    _category_key.name          '_rcsb_chem_comp_related.comp_id'
+                                '_rcsb_chem_comp_related.ordinal'
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+                                 'chem_comp_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 - ATP
+;
+;
+     loop_
+     _rcsb_chem_comp_related.comp_id
+     _rcsb_chem_comp_related.ordinal
+     _rcsb_chem_comp_related.resource_name
+     _rcsb_chem_comp_related.resource_accession_code
+     _rcsb_chem_comp_related.related_mapping_method
+     ATP 1 DrugBank DB00171 'assigned by resource'
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_chem_comp_related
+   #
+   _category_methods.method_id   'rcsb_add_chem_comp_related'
+   #
+save_
+
+save__rcsb_chem_comp_related.comp_id
+    _item_description.description
+;              The value of _rcsb_chem_comp_related.comp_id is a reference to
+               a chemical component definition.
+;
+    _item.name                  '_rcsb_chem_comp_related.comp_id'
+    _item.category_id             rcsb_chem_comp_related
+    _item.mandatory_code          yes
+    _item_type.code               ucode
+    _item_linked.child_name       '_rcsb_chem_comp_related.comp_id'
+    _item_linked.parent_name      '_chem_comp.id'
+save_
+
+save__rcsb_chem_comp_related.ordinal
+    _item_description.description
+;              The value of _rcsb_chem_comp_related.ordinal distinguishes
+               related examples for each chemical component.
+;
+
+    _item.name                  '_rcsb_chem_comp_related.ordinal'
+    _item.category_id             rcsb_chem_comp_related
+    _item.mandatory_code          yes
+    _item_type.code               int
+save_
+
+save__rcsb_chem_comp_related.resource_name
+    _item_description.description
+;              The resource name for the related chemical reference.
+;
+    _item.name                  '_rcsb_chem_comp_related.resource_name'
+    _item.category_id             rcsb_chem_comp_related
+    _item.mandatory_code          no
+    _item_type.code               line
+     loop_
+    _item_examples.case        'CCDC/CSD'
+    loop_
+    _item_enumeration.value
+    _item_enumeration.detail
+    'CCDC/CSD' .
+    'PubChem' .
+    'DrugBank' .
+    'ChEBI' .
+    'ChEMBL' .
+save_
+
+save__rcsb_chem_comp_related.resource_accession_code
+    _item_description.description
+;              The resource identifier code for the related chemical reference.
+;
+    _item.name                  '_rcsb_chem_comp_related.resource_accession_code'
+    _item.category_id             rcsb_chem_comp_related
+    _item.mandatory_code          no
+    _item_type.code               text
+     loop_
+    _item_examples.case        '124832'
+save_
+
+save__rcsb_chem_comp_related.related_mapping_method
+    _item_description.description
+;              The method used to establish the resource correspondence.
+;
+    _item.name                  '_rcsb_chem_comp_related.related_mapping_method'
+    _item.category_id             rcsb_chem_comp_related
+    _item.mandatory_code          no
+    _item_type.code               line
+     loop_
+     _item_examples.case        'assigned by resource'
+    loop_
+    _item_enumeration.value
+    _item_enumeration.detail
+      'assigned by resource' 'Correspondence assigned by related resource'
+      'assigned by PDB'      'Correspondence assigned by PDB'
+      'matching InChIKey'     'Correspondence established by matching InChIKey'
+      'matching InChIKey-prefix' 'Correspondence established by matching InChIKey prefix'
+save_
+
+###########################
+## RCSB_CHEM_COMP_TARGET ##
+###########################
+
+save_rcsb_chem_comp_target
+    _category.description
+;              Data items in the rcsb_chem_comp_target category record
+               details of examples chemical component target interactions
+               and associated references in related databases.
+;
+    _category.id                  rcsb_chem_comp_target
+    _category.mandatory_code      no
+     loop_
+    _category_key.name          '_rcsb_chem_comp_target.comp_id'
+                                '_rcsb_chem_comp_target.ordinal'
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+                                 'chem_comp_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 - ATP
+;
+;
 ##
+##
+     loop_
+     _rcsb_chem_comp_target.comp_id
+     _rcsb_chem_comp_target.ordinal
+     _rcsb_chem_comp_target.name
+     _rcsb_chem_comp_target.interaction_type
+     _rcsb_chem_comp_target.target_actions
+     _rcsb_chem_comp_target.organism_common_name
+     _rcsb_chem_comp_target.reference_database_name
+     _rcsb_chem_comp_target.reference_database_accession_code
+     _rcsb_chem_comp_target.provenance_code
+     ATP 1 "O-phosphoseryl-tRNA(Sec) selenium transferase" target cofactor Human UniProt Q9HD40 DrugBank
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_chem_comp_target
+   #
+   _category_methods.method_id   'rcsb_add_chem_comp_targets'
+   #
+save_
+
+save__rcsb_chem_comp_target.comp_id
+    _item_description.description
+;              The value of _rcsb_chem_comp_target.comp_id is a reference to
+               a chemical component definition.
+;
+    _item.name                  '_rcsb_chem_comp_target.comp_id'
+    _item.category_id             rcsb_chem_comp_target
+    _item.mandatory_code          yes
+    _item_type.code               ucode
+    _item_linked.child_name       '_rcsb_chem_comp_target.comp_id'
+    _item_linked.parent_name      '_chem_comp.id'
+save_
+
+save__rcsb_chem_comp_target.ordinal
+    _item_description.description
+;              The value of _rcsb_chem_comp_target.ordinal distinguishes
+               related examples for each chemical component.
+;
+
+    _item.name                  '_rcsb_chem_comp_target.ordinal'
+    _item.category_id             rcsb_chem_comp_target
+    _item.mandatory_code          yes
+    _item_type.code               int
+save_
+
+save__rcsb_chem_comp_target.reference_database_name
+    _item_description.description
+;              The reference database name for the target interaction.
+;
+    _item.name                  '_rcsb_chem_comp_target.reference_database_name'
+    _item.category_id             rcsb_chem_comp_target
+    _item.mandatory_code          no
+    _item_type.code               line
+     loop_
+    _item_examples.case        'UniProt'
+    loop_
+    _item_enumeration.value
+    _item_enumeration.detail
+    'UniProt' .
+save_
+
+save__rcsb_chem_comp_target.reference_database_accession_code
+    _item_description.description
+;              The reference identifier code for the target interaction reference.
+;
+    _item.name                  '_rcsb_chem_comp_target.reference_database_accession_code'
+    _item.category_id             rcsb_chem_comp_target
+    _item.mandatory_code          no
+    _item_type.code               text
+     loop_
+    _item_examples.case        'Q9HD40'
+save_
+
+save__rcsb_chem_comp_target.provenance_code
+    _item_description.description
+;  A code indicating the provenance of the target interaction assignment
+
+;
+    _item.name                  '_rcsb_chem_comp_target.provenance_code'
+    _item.category_id            rcsb_chem_comp_target
+    _item.mandatory_code          no
+    _item_type.code               line
+    loop_
+    _item_enumeration.value
+    'PDB Primary Data'
+    'DrugBank'
+     save_
+
+save__rcsb_chem_comp_target.name
+    _item_description.description
+;              The target name.
+;
+    _item.name                  '_rcsb_chem_comp_target.name'
+    _item.category_id             rcsb_chem_comp_target
+    _item.mandatory_code          no
+    _item_type.code               text
+    save_
+
+save__rcsb_chem_comp_target.interaction_type
+    _item_description.description
+;              The type of target interaction.
+;
+    _item.name                  '_rcsb_chem_comp_target.interaction_type'
+    _item.category_id             rcsb_chem_comp_target
+    _item.mandatory_code          no
+    _item_type.code               text
+    save_
+
+save__rcsb_chem_comp_target.target_actions
+    _item_description.description
+;              The actions of the target interaction.
+;
+    _item.name                  '_rcsb_chem_comp_target.target_actions'
+    _item.category_id             rcsb_chem_comp_target
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    save_
+
+
+#####################
+## RCSB_ENTRY_INFO ##
+#####################
+
+save_rcsb_entry_info
+    _category.description
+;        The rcsb_entry_info category records the
+         selected features of PDB entries.
+;
+    _category.id                  rcsb_entry_info
+    _category.mandatory_code      no
+    loop_
+    _category_key.name           '_rcsb_entry_info.entry_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     _rcsb_entry_info.entry_id                      1ABC
+     _rcsb_entry_info.polymer_composition           'heteromeric protein'
+     _rcsb_entry_info.experimental_method           'multiple methods'
+     _rcsb_entry_info.experimental_method_count     2
+     _rcsb_entry_info.polymer_entity_count          2
+     _rcsb_entry_info.entity_count                  2
+     _rcsb_entry_info.nonpolymer_entity_count       2
+     _rcsb_entry_info.branched_entity_count         0
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_entry_info
+   #
+   _category_methods.method_id   'rcsb_add_entry_info'
+     save_
+
+save__rcsb_entry_info.entry_id
+    _item_description.description
+;    The PDB entry accession code.
+;
+    _item.name                  '_rcsb_entry_info.entry_id'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '1ABC'
+    _item_linked.child_name       '_rcsb_entry_info.entry_id'
+    _item_linked.parent_name      '_entry.id'
+     save_
+
+save__rcsb_entry_info.polymer_composition
+    _item_description.description
+;    Polymer entity composition of the entry.
+;
+    _item.name                  '_rcsb_entry_info.polymer_composition'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               line
+    _item_example.case           'homomeric protein'
+    loop_
+    _item_enumeration.value
+    _item_enumeration.detail
+    'homomeric protein' 'single protein entity'
+    'heteromeric protein' 'multiple protein entities'
+    'DNA' 'DNA entity/entities only'
+    'RNA' 'RNA entity/entities only'
+    'protein/NA' 'Both protein and nucleic acid polymer entities'
+    'DNA/RNA' 'Both DNA and RNA polymer entities'
+    'oligosaccharide' 'One of more oligosaccharide entities'
+    'protein/oligosaccharide' 'Both protein and oligosaccharide entities'
+    'NA/oligosaccharide' 'Both NA and oligosaccharide entities'
+    'other' 'Neither a protein, nucleic acid polymer nor oligosaccharide entity'
+    'other type pair' 'Other combinations of 2 polymer types'
+    'other type composition' 'Other combinations of 3 or more polymer types'
+     save_
+
+save__rcsb_entry_info.experimental_method
+    _item_description.description
+;    The category of experimental method(s) used to determine the structure entry.
+;
+    _item.name                  '_rcsb_entry_info.experimental_method'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               line
+    _item_example.case           'X-ray'
+    loop_
+    _item_enumeration.value
+    _item_enumeration.detail
+    'X-ray'            'X-RAY DIFFRACTION, FIBER DIFFRACTION, or POWDER DIFFRACTION'
+    'NMR'              'SOLUTION NMR or SOLID-STATE NMR'
+    'EM'               'ELECTRON MICROSCOPY or ELECTRON CRYSTALLOGRAPHY or ELECTRON TOMOGRAPH'
+    'Neutron'          'NEUTRON DIFFRACTION'
+    'Multiple methods' 'Multiple experimental methods'
+    'Other'            'SOLUTION SCATTERING, EPR, THEORETICAL MODEL, INFRARED SPECTROSCOPY or FLUORESCENCE TRANSFER'
+    #
+     save_
+
+save__rcsb_entry_info.experimental_method_count
+    _item_description.description
+;  The number of experimental methods contributing data to the structure determination.
+;
+    _item.name                  '_rcsb_entry_info.experimental_method_count'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entry_info.polymer_entity_count
+    _item_description.description
+;  The number of distinct polymer entities in the structure entry.
+;
+    _item.name                  '_rcsb_entry_info.polymer_entity_count'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entry_info.nonpolymer_entity_count
+    _item_description.description
+;  The number of distinct non-polymer entities exclusive of solvent in the structure entry.
+;
+    _item.name                  '_rcsb_entry_info.nonpolymer_method_count'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entry_info.branched_entity_count
+    _item_description.description
+;  The number of distinct branched entities in the structure entry.
+;
+    _item.name                  '_rcsb_entry_info.branched_method_count'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entry_info.entity_count
+    _item_description.description
+;  The number of distinct polymer, non-polymer and branched molecular entities exclusive of solvent in the structure entry.
+;
+    _item.name                  '_rcsb_entry_info.entity_count'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+#

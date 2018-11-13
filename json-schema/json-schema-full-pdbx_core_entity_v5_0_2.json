@@ -62,8 +62,8 @@
             "rcsb_multiple_source_flag": {
                "type": "string",
                "enum": [
-                  "Y",
-                  "N"
+                  "N",
+                  "Y"
                ],
                "description": "A code indicating the entity has multiple biological sources.\n"
             },
@@ -85,9 +85,9 @@
                "enum": [
                   "polymer",
                   "macrolide",
-                  "branched",
+                  "non-polymer",
                   "water",
-                  "non-polymer"
+                  "branched"
                ],
                "description": "Defines the type of the entity.\n\n Polymer entities are expected to have corresponding\n ENTITY_POLY and associated entries.\n\n Non-polymer entities are expected to have corresponding\n CHEM_COMP and associated entries.\n\n Water entities are not expected to have corresponding\n entries in the ENTITY category."
             }
@@ -170,20 +170,20 @@
             "nstd_linkage": {
                "type": "string",
                "enum": [
+                  "n",
                   "yes",
                   "no",
-                  "y",
-                  "n"
+                  "y"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer-to-monomer link different from that implied by\n _entity_poly.type."
             },
             "nstd_monomer": {
                "type": "string",
                "enum": [
+                  "n",
                   "yes",
                   "no",
-                  "y",
-                  "n"
+                  "y"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer that is not considered standard."
             },
@@ -217,19 +217,30 @@
                ],
                "description": "For Structural Genomics entries, the sequence's target identifier registered at the TargetTrack database."
             },
+            "rcsb_entity_polymer_type": {
+               "type": "string",
+               "enum": [
+                  "NA-hybrid",
+                  "RNA",
+                  "Other",
+                  "Protein",
+                  "DNA"
+               ],
+               "description": "A coarse-grained polymer entity type."
+            },
             "type": {
                "type": "string",
                "enum": [
                   "polyribonucleotide",
-                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
-                  "polydeoxyribonucleotide",
-                  "other",
-                  "cyclic-pseudo-peptide",
-                  "polypeptide(L)",
-                  "peptide nucleic acid",
                   "polysaccharide(L)",
+                  "polypeptide(D)",
                   "polysaccharide(D)",
-                  "polypeptide(D)"
+                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
+                  "peptide nucleic acid",
+                  "other",
+                  "polydeoxyribonucleotide",
+                  "cyclic-pseudo-peptide",
+                  "polypeptide(L)"
                ],
                "description": "The type of the polymer."
             }
@@ -339,8 +350,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "sample",
-                     "model"
+                     "model",
+                     "sample"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -549,10 +560,10 @@
                "pdbx_seq_type": {
                   "type": "string",
                   "enum": [
-                     "Linker",
                      "C-terminal tag",
-                     "Biological sequence",
-                     "N-terminal tag"
+                     "N-terminal tag",
+                     "Linker",
+                     "Biological sequence"
                   ],
                   "description": "This data item povides additional information about the sequence type."
                },
@@ -615,8 +626,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "sample",
-                     "model"
+                     "model",
+                     "sample"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -822,8 +833,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "sample",
-                     "model"
+                     "model",
+                     "sample"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -948,7 +959,7 @@
                "provenance_code": {
                   "type": "string",
                   "enum": [
-                     "pdb-primary-data"
+                     "PDB Primary Data"
                   ],
                   "description": "A code indicating the provenance of the host organism.\n"
                },
@@ -997,7 +1008,7 @@
                "provenance_code": {
                   "type": "string",
                   "enum": [
-                     "pdb-primary-data"
+                     "PDB Primary Data"
                   ],
                   "description": "A code indicating the provenance of the source organism details for the entity\n"
                },
@@ -1008,9 +1019,9 @@
                "source_type": {
                   "type": "string",
                   "enum": [
+                     "synthetic",
                      "genetically engineered",
-                     "natural",
-                     "synthetic"
+                     "natural"
                   ],
                   "description": "The source type for the entity\n"
                }
@@ -1067,8 +1078,8 @@
                "pdbx_blank_PDB_chainid_flag": {
                   "type": "string",
                   "enum": [
-                     "Y",
-                     "N"
+                     "N",
+                     "Y"
                   ],
                   "description": "A flag indicating that this entity was originally labeled\n with a blank PDB chain id."
                },
