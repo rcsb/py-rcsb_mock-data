@@ -22,16 +22,16 @@
             "rcsb_candidate_assembly": {
                "bsonType": "string",
                "enum": [
-                  "N",
-                  "Y"
+                  "Y",
+                  "N"
                ]
             },
             "rcsb_details": {
                "bsonType": "string",
                "enum": [
-                  "author_defined_assembly",
                   "software_defined_assembly",
-                  "author_and_software_defined_assembly"
+                  "author_and_software_defined_assembly",
+                  "author_defined_assembly"
                ]
             }
          },
@@ -53,22 +53,22 @@
                "experimental_support": {
                   "bsonType": "string",
                   "enum": [
-                     "homology",
-                     "assay for oligomerization",
                      "cross-linking",
-                     "fluorescence resonance energy transfer",
-                     "equilibrium centrifugation",
-                     "mass spectrometry",
-                     "immunoprecipitation",
-                     "isothermal titration calorimetry",
-                     "microscopy",
-                     "native gel electrophoresis",
-                     "SAXS",
-                     "surface plasmon resonance",
-                     "gel filtration",
                      "light scattering",
+                     "SAXS",
+                     "native gel electrophoresis",
+                     "fluorescence resonance energy transfer",
+                     "assay for oligomerization",
+                     "microscopy",
                      "none",
-                     "scanning transmission electron microscopy"
+                     "immunoprecipitation",
+                     "scanning transmission electron microscopy",
+                     "isothermal titration calorimetry",
+                     "equilibrium centrifugation",
+                     "homology",
+                     "gel filtration",
+                     "surface plasmon resonance",
+                     "mass spectrometry"
                   ]
                },
                "id": {
@@ -123,8 +123,8 @@
                "type": {
                   "bsonType": "string",
                   "enum": [
-                     "MORE",
                      "ABSA (A^2)",
+                     "MORE",
                      "SSA (A^2)"
                   ]
                },
@@ -185,20 +185,20 @@
                   "bsonType": "string",
                   "enum": [
                      "identity operation",
-                     "2D crystal symmetry operation",
-                     "transform to 2D crystal frame",
-                     "build point asymmetric unit",
-                     "transform to point frame",
-                     "helical symmetry operation",
-                     "build 2D crystal asymmetric unit",
                      "crystal symmetry operation",
-                     "transform to helical frame",
-                     "point symmetry operation",
-                     "build helical asymmetric unit",
+                     "2D crystal symmetry operation",
+                     "transform to 3D crystal frame",
+                     "build 2D crystal asymmetric unit",
                      "transform to crystal frame",
-                     "3D crystal symmetry operation",
+                     "build point asymmetric unit",
                      "build 3D crystal asymmetric unit",
-                     "transform to 3D crystal frame"
+                     "transform to 2D crystal frame",
+                     "transform to point frame",
+                     "point symmetry operation",
+                     "3D crystal symmetry operation",
+                     "build helical asymmetric unit",
+                     "transform to helical frame",
+                     "helical symmetry operation"
                   ]
                },
                "vector_1": {
@@ -249,6 +249,16 @@
          "required": [
             "datablock_name"
          ]
+      },
+      "__entry_id": {
+         "bsonType": "string"
+      },
+      "__assembly_id": {
+         "bsonType": "string"
       }
-   }
+   },
+   "required": [
+      "__entry_id",
+      "__assembly_id"
+   ]
 }

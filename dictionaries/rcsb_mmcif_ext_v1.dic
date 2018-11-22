@@ -25,6 +25,7 @@
 #    30-Oct-2018 jdw add rcsb_chem_comp_info, rcsb_chem_comp_synonyms, rcsb_chem_comp_descriptor,
 #                    rcsb_entry_info, and rcsb_chem_comp_target
 #    12-Nov-2018 jdw add rcsb_file_block_by_method
+#    21-Nov-2018 jdw add pdbx_chem_comp_audit.ordinal to replace the key for this category
 #
 ###########################################################################
 
@@ -44,12 +45,17 @@ data_rcsb_mmcif_ext.dic
 
     _dictionary.title           rcsb_mmcif_ext.dic
     _dictionary.datablock_id    rcsb_mmcif_ext.dic
-    _dictionary.version         0.104
+    _dictionary.version         0.105
 #
      loop_
     _dictionary_history.version
     _dictionary_history.update
     _dictionary_history.revision
+  0.105  2018-11-21
+;
+Changes (jdw):
+  + add pdbx_chem_comp_audit.ordinal
+;
   0.104  2018-11-12
 ;
 Changes (jdw):
@@ -2447,6 +2453,23 @@ save__rcsb_accession_info.minor_revision
     _item_example.case            3
      save_
 
+##########################
+## PDBX_CHEM_COMP_AUDIT ##
+##########################
+
+save__pdbx_chem_comp_audit.ordinal
+    _item_description.description
+;              This data item is an ordinal index for the
+               PDBX_CHEM_COMP_AUDIT category.
+;
+    _item.name                  '_pdbx_chem_comp_audit.ordinal'
+    _item.category_id             pdbx_chem_comp_audit
+    _item.mandatory_code          yes
+    _item_type.code               int
+    _item_methods.method_id      'rcsb_row_index'
+    _pdbx_item_context.type       RCSB_CATEGORY_KEY_SUBSTITION
+    _pdbx_item_context.item_name  '_pdbx_chem_comp_audit.ordinal'
+     save_
 
 #############################
 ## RCSB_CHEM_COMP_SYNONYMS ##
@@ -3163,12 +3186,13 @@ save__rcsb_entry_info.polymer_composition
     'heteromeric protein' 'multiple protein entities'
     'DNA' 'DNA entity/entities only'
     'RNA' 'RNA entity/entities only'
+    'NA-hybrid' 'DNA/RNA hybrid entity/entities only'
     'protein/NA' 'Both protein and nucleic acid polymer entities'
     'DNA/RNA' 'Both DNA and RNA polymer entities'
     'oligosaccharide' 'One of more oligosaccharide entities'
     'protein/oligosaccharide' 'Both protein and oligosaccharide entities'
     'NA/oligosaccharide' 'Both NA and oligosaccharide entities'
-    'other' 'Neither a protein, nucleic acid polymer nor oligosaccharide entity'
+    'other' 'Neither an individual protein, nucleic acid polymer nor oligosaccharide entity'
     'other type pair' 'Other combinations of 2 polymer types'
     'other type composition' 'Other combinations of 3 or more polymer types'
      save_

@@ -5,6 +5,8 @@
 #
 #  4-Nov-2018 jdw add schemadef_helper/excluded_attributes
 # 11-Nov-2018 jdw add DRUGBANK_MAPPING_LOCATOR, and CCDC_MAPPING_LOCATOR and chem_comp_core schema
+# 18-Nov-2018 jdw add PRIVATE_KEY_NAME to collection_attributes_names
+# 20-Nov-2018 jdw add pdbx_chem_comp_audit.ordinal
 #
 # Master Pinelands configuration file example
 ---
@@ -511,6 +513,9 @@ dictionary_helper:
                       - datablock_name
                       - load_date
                       - locator
+                - CATEGORY_NAME: pdbx_chem_comp_audit
+                  ATTRIBUTE_NAME_LIST:
+                      - ordinal
         ?       - GENERATED_CONTENT
                 - chem_comp_core
         :       - CATEGORY_NAME: rcsb_load_status
@@ -557,6 +562,9 @@ dictionary_helper:
                       - reference_database_name
                       - reference_database_accession_code
                       - provenance_code
+                - CATEGORY_NAME: pdbx_chem_comp_audit
+                  ATTRIBUTE_NAME_LIST:
+                      - ordinal
         ?       - GENERATED_CONTENT
                 - bird_chem_comp
         :       - CATEGORY_NAME: rcsb_load_status
@@ -564,6 +572,9 @@ dictionary_helper:
                       - datablock_name
                       - load_date
                       - locator
+                - CATEGORY_NAME: pdbx_chem_comp_audit
+                  ATTRIBUTE_NAME_LIST:
+                      - ordinal
         ?       - GENERATED_CONTENT
                 - bird_chem_comp_core
         :       - CATEGORY_NAME: rcsb_load_status
@@ -610,6 +621,9 @@ dictionary_helper:
                       - reference_database_name
                       - reference_database_accession_code
                       - provenance_code
+                - CATEGORY_NAME: pdbx_chem_comp_audit
+                  ATTRIBUTE_NAME_LIST:
+                      - ordinal
         ?       - GENERATED_CONTENT
                 - bird
         :       - CATEGORY_NAME: rcsb_load_status
@@ -1171,6 +1185,40 @@ document_helper:
                 - rcsb_data_exchange_status
             EXCLUDE: []
             SLICE:
+    collection_private_keys:
+        pdbx_core_entity_v5_0_2:
+            - NAME: entry.id
+              CATEGORY_NAME: rcsb_entity_container_identifiers
+              ATTRIBUTE_NAME: entry_id
+              PRIVATE_DOCUMENT_NAME: __entry_id
+            - NAME: entity.id
+              CATEGORY_NAME: entity
+              ATTRIBUTE_NAME: id
+              PRIVATE_DOCUMENT_NAME: __entity_id
+        pdbx_core_assembly_v5_0_2:
+            - NAME: entry.id
+              CATEGORY_NAME: rcsb_assembly_container_identifiers
+              ATTRIBUTE_NAME: entry_id
+              PRIVATE_DOCUMENT_NAME: __entry_id
+            - NAME: pdbx_struct_assembly.id
+              CATEGORY_NAME: pdbx_struct_assembly
+              ATTRIBUTE_NAME: id
+              PRIVATE_DOCUMENT_NAME: __assembly_id
+        pdbx_core_entry_v5_0_2:
+            - NAME: entry.id
+              CATEGORY_NAME: entry
+              ATTRIBUTE_NAME: id
+              PRIVATE_DOCUMENT_NAME: __entry_id
+        chem_comp_core_v5_0_2:
+            - NAME: chem_comp.id
+              CATEGORY_NAME: chem_comp
+              ATTRIBUTE_NAME: id
+              PRIVATE_DOCUMENT_NAME: __comp_id
+        bird_chem_comp_core_v5_0_2:
+            - NAME: chem_comp.id
+              CATEGORY_NAME: chem_comp
+              ATTRIBUTE_NAME: id
+              PRIVATE_DOCUMENT_NAME: __comp_id
     collection_attribute_names:
         pdbx_v5_0_2:
             - entry.id

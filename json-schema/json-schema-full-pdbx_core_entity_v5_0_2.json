@@ -62,8 +62,8 @@
             "rcsb_multiple_source_flag": {
                "type": "string",
                "enum": [
-                  "N",
-                  "Y"
+                  "Y",
+                  "N"
                ],
                "description": "A code indicating the entity has multiple biological sources.\n"
             },
@@ -75,19 +75,19 @@
                "type": "string",
                "enum": [
                   "syn",
-                  "man",
-                  "nat"
+                  "nat",
+                  "man"
                ],
                "description": "The method by which the sample for the entity was produced.\n Entities isolated directly from natural sources (tissues, soil\n samples etc.) are expected to have further information in the\n ENTITY_SRC_NAT category. Entities isolated from genetically\n manipulated sources are expected to have further information in\n the ENTITY_SRC_GEN category."
             },
             "type": {
                "type": "string",
                "enum": [
+                  "branched",
                   "polymer",
-                  "macrolide",
                   "non-polymer",
                   "water",
-                  "branched"
+                  "macrolide"
                ],
                "description": "Defines the type of the entity.\n\n Polymer entities are expected to have corresponding\n ENTITY_POLY and associated entries.\n\n Non-polymer entities are expected to have corresponding\n CHEM_COMP and associated entries.\n\n Water entities are not expected to have corresponding\n entries in the ENTITY category."
             }
@@ -171,9 +171,9 @@
                "type": "string",
                "enum": [
                   "n",
-                  "yes",
+                  "y",
                   "no",
-                  "y"
+                  "yes"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer-to-monomer link different from that implied by\n _entity_poly.type."
             },
@@ -181,9 +181,9 @@
                "type": "string",
                "enum": [
                   "n",
-                  "yes",
+                  "y",
                   "no",
-                  "y"
+                  "yes"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer that is not considered standard."
             },
@@ -220,26 +220,26 @@
             "rcsb_entity_polymer_type": {
                "type": "string",
                "enum": [
-                  "NA-hybrid",
+                  "DNA",
                   "RNA",
-                  "Other",
+                  "NA-hybrid",
                   "Protein",
-                  "DNA"
+                  "Other"
                ],
                "description": "A coarse-grained polymer entity type."
             },
             "type": {
                "type": "string",
                "enum": [
-                  "polyribonucleotide",
-                  "polysaccharide(L)",
-                  "polypeptide(D)",
-                  "polysaccharide(D)",
-                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
-                  "peptide nucleic acid",
-                  "other",
                   "polydeoxyribonucleotide",
                   "cyclic-pseudo-peptide",
+                  "polyribonucleotide",
+                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
+                  "polysaccharide(D)",
+                  "other",
+                  "peptide nucleic acid",
+                  "polypeptide(D)",
+                  "polysaccharide(L)",
                   "polypeptide(L)"
                ],
                "description": "The type of the polymer."
@@ -350,8 +350,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "model",
-                     "sample"
+                     "sample",
+                     "model"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -560,8 +560,8 @@
                "pdbx_seq_type": {
                   "type": "string",
                   "enum": [
-                     "C-terminal tag",
                      "N-terminal tag",
+                     "C-terminal tag",
                      "Linker",
                      "Biological sequence"
                   ],
@@ -626,8 +626,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "model",
-                     "sample"
+                     "sample",
+                     "model"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -833,8 +833,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "model",
-                     "sample"
+                     "sample",
+                     "model"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -1019,9 +1019,9 @@
                "source_type": {
                   "type": "string",
                   "enum": [
-                     "synthetic",
                      "genetically engineered",
-                     "natural"
+                     "natural",
+                     "synthetic"
                   ],
                   "description": "The source type for the entity\n"
                }
@@ -1078,8 +1078,8 @@
                "pdbx_blank_PDB_chainid_flag": {
                   "type": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ],
                   "description": "A flag indicating that this entity was originally labeled\n with a blank PDB chain id."
                },
@@ -1168,8 +1168,20 @@
          },
          "minItems": 1,
          "uniqueItems": true
+      },
+      "__entry_id": {
+         "type": "string",
+         "description": "Entry identifier for the container."
+      },
+      "__entity_id": {
+         "type": "string",
+         "description": "The value of _entity.id must uniquely identify a record in the\n ENTITY list.\n\n Note that this item need not be a number; it can be any unique\n identifier."
       }
    },
+   "required": [
+      "__entry_id",
+      "__entity_id"
+   ],
    "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/",
    "$schema": "http://json-schema.org/draft-04/schema#",
    "title": "Schema for content type pdbx_core collection pdbx_core_entity_v5_0_2"

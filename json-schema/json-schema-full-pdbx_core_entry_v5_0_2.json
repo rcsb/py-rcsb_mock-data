@@ -137,9 +137,9 @@
                   "type": "string",
                   "enum": [
                      "n",
-                     "yes",
+                     "y",
                      "no",
-                     "y"
+                     "yes"
                   ],
                   "description": "_citation.coordinate_linkage states whether this citation\n is concerned with precisely the set of coordinates given in the\n data block. If, for instance, the publication described the same\n structure, but the coordinates had undergone further refinement\n prior to the creation of the data block, the value of this data\n item would be 'no'."
                },
@@ -243,8 +243,8 @@
                "unpublished_flag": {
                   "type": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ],
                   "description": "Flag to indicate that this citation will not be published."
                },
@@ -447,8 +447,8 @@
                "pdbx_monochromatic_or_laue_m_l": {
                   "type": "string",
                   "enum": [
-                     "L",
-                     "M"
+                     "M",
+                     "L"
                   ],
                   "examples": [
                      "M",
@@ -459,9 +459,9 @@
                "pdbx_scattering_type": {
                   "type": "string",
                   "enum": [
-                     "x-ray",
+                     "electron",
                      "neutron",
-                     "electron"
+                     "x-ray"
                   ],
                   "description": "The radiation scattering type for this diffraction data set."
                },
@@ -600,23 +600,23 @@
                "space_group_name_H_M": {
                   "type": "string",
                   "enum": [
-                     "P 3 2 1",
-                     "P 6",
-                     "P 4 21 2",
-                     "P 4",
-                     "P 4 2 2",
-                     "P 3",
+                     "P 2 21 21",
                      "P 1 21",
+                     "P 4",
                      "C 1 2",
                      "P 1 2",
-                     "P 2 2 2",
                      "P 2 2 21",
                      "P 3 1 2",
+                     "P 4 2 2",
+                     "P 3",
+                     "P 3 2 1",
                      "P 6 2 2",
-                     "P 2 21 21",
+                     "P 2 2 2",
+                     "P 2",
+                     "P 4 21 2",
+                     "P 6",
                      "C 2 2 2",
-                     "P 1",
-                     "P 2"
+                     "P 1"
                   ],
                   "description": "There are 17 plane groups classified as oblique, rectangular, square, and hexagonal.\n To describe the symmetry of 2D crystals of biological molecules,\n plane groups are expanded to equivalent noncentrosymmetric space groups.\n The 2D crystal plane corresponds to the 'ab' plane of the space group.\n\n Enumerated space group descriptions include the plane group number in parentheses,\n the H-M plane group symbol, and the plane group class."
                }
@@ -757,9 +757,9 @@
                   "type": "string",
                   "enum": [
                      "FLEXIBLE FIT",
+                     "RIGID BODY FIT",
                      "BACKBONE TRACE",
                      "OTHER",
-                     "RIGID BODY FIT",
                      "AB INITIO MODEL"
                   ],
                   "examples": [
@@ -865,11 +865,11 @@
                "refinement_type": {
                   "type": "string",
                   "enum": [
+                     "HALF-MAPS REFINED AGAINST SAME DATA",
+                     "HALF-MAPS REFINED WITH FREQUENCY RANGE OMITTED",
                      "HALF-MAPS REFINED INDEPENDENTLY WITH FREQUENCY RANGE OMITTED",
                      "OTHER",
-                     "HALF-MAPS REFINED INDEPENDENTLY",
-                     "HALF-MAPS REFINED AGAINST SAME DATA",
-                     "HALF-MAPS REFINED WITH FREQUENCY RANGE OMITTED"
+                     "HALF-MAPS REFINED INDEPENDENTLY"
                   ],
                   "examples": [
                      "HALF-MAPS REFINED INDEPENDENTLY"
@@ -896,8 +896,8 @@
                   "enum": [
                      "POINT",
                      "2D CRYSTAL",
-                     "HELICAL",
-                     "3D CRYSTAL"
+                     "3D CRYSTAL",
+                     "HELICAL"
                   ],
                   "description": "The type of symmetry applied to the reconstruction"
                }
@@ -995,9 +995,9 @@
                "source": {
                   "type": "string",
                   "enum": [
-                     "NATURAL",
+                     "RECOMBINANT",
                      "MULTIPLE SOURCES",
-                     "RECOMBINANT"
+                     "NATURAL"
                   ],
                   "description": "The assembly type."
                },
@@ -1029,12 +1029,12 @@
                "type": "string",
                "enum": [
                   "PARTICLE",
-                  "CELL",
+                  "HELICAL ARRAY",
                   "TISSUE",
                   "3D ARRAY",
+                  "CELL",
                   "2D ARRAY",
-                  "FILAMENT",
-                  "HELICAL ARRAY"
+                  "FILAMENT"
                ],
                "description": "The aggregation/assembly state of the imaged specimen."
             },
@@ -1053,11 +1053,11 @@
             "reconstruction_method": {
                "type": "string",
                "enum": [
-                  "HELICAL",
                   "CRYSTALLOGRAPHY",
                   "SUBTOMOGRAM AVERAGING",
+                  "SINGLE PARTICLE",
                   "TOMOGRAPHY",
-                  "SINGLE PARTICLE"
+                  "HELICAL"
                ],
                "description": "The reconstruction method used in the EM experiment."
             }
@@ -1165,10 +1165,10 @@
                "detector_mode": {
                   "type": "string",
                   "enum": [
-                     "OTHER",
                      "COUNTING",
+                     "SUPER-RESOLUTION",
                      "INTEGRATING",
-                     "SUPER-RESOLUTION"
+                     "OTHER"
                   ],
                   "description": "The detector mode used during image recording."
                },
@@ -1223,9 +1223,9 @@
                   "type": "string",
                   "enum": [
                      "ZEMLIN TABLEAU",
+                     "BASIC",
                      "OTHER",
                      "NONE",
-                     "BASIC",
                      "COMA FREE"
                   ],
                   "description": "microscope alignment procedure"
@@ -1268,8 +1268,8 @@
                "cryogen": {
                   "type": "string",
                   "enum": [
-                     "NITROGEN",
-                     "HELIUM"
+                     "HELIUM",
+                     "NITROGEN"
                   ],
                   "description": "Cryogen type used to maintain the specimen stage temperature during imaging\n in the microscope."
                },
@@ -1312,78 +1312,78 @@
                   "type": "string",
                   "enum": [
                      "FLOOD BEAM",
-                     "OTHER",
-                     "SPOT SCAN"
+                     "SPOT SCAN",
+                     "OTHER"
                   ],
                   "description": "The mode of illumination."
                },
                "microscope_model": {
                   "type": "string",
                   "enum": [
-                     "FEI TECNAI SPIRIT",
-                     "JEOL 2100F",
-                     "FEI TECNAI SPHERA",
-                     "FEI TECNAI 12",
-                     "JEOL 1200",
-                     "JEOL 2010HT",
-                     "JEOL 2010UHR",
-                     "FEI TECNAI ARCTICA",
-                     "JEOL 100B",
-                     "FEI/PHILIPS CM300FEG/HE",
-                     "HITACHI H7600",
-                     "HITACHI HF2000",
-                     "JEOL 3200FSC",
-                     "ZEISS LEO912",
-                     "ZEISS LIBRA120PLUS",
-                     "FEI TITAN",
                      "FEI/PHILIPS EM400",
-                     "JEOL 1200EXII",
-                     "HITACHI H-9500SD",
-                     "JEOL 2000EX",
-                     "JEOL 2011",
-                     "JEOL CRYO ARM 200",
-                     "FEI TECNAI 20",
-                     "HITACHI HF3000",
-                     "FEI MORGAGNI",
-                     "FEI/PHILIPS CM200FEG/UT",
-                     "FEI/PHILIPS CM12",
-                     "JEOL 3200FS",
-                     "FEI TECNAI F20",
-                     "JEOL 3100FEF",
-                     "FEI/PHILIPS CM200FEG/ST",
-                     "FEI TALOS ARCTICA",
-                     "JEOL 2000EXII",
-                     "JEOL 2010HC",
-                     "JEOL 2010",
-                     "FEI TECNAI F30",
-                     "FEI/PHILIPS CM200FEG",
-                     "JEOL 2100",
-                     "FEI/PHILIPS CM200FEG/SOPHIE",
-                     "JEOL 4000EX",
-                     "SIEMENS SULEIKA",
-                     "HITACHI EF2000",
-                     "FEI TECNAI 10",
-                     "FEI/PHILIPS CM300FEG/ST",
-                     "JEOL CRYO ARM 300",
-                     "JEOL 3000SFF",
-                     "JEOL 2010F",
-                     "FEI/PHILIPS EM420",
-                     "FEI/PHILIPS CM10",
-                     "JEOL 1200EX",
-                     "JEOL 1010",
-                     "JEOL 4000",
-                     "JEOL 3100FFC",
-                     "HITACHI EF3000",
-                     "JEOL 1400",
-                     "JEOL 2200FSC",
-                     "FEI POLARA 300",
-                     "JEOL KYOTO-3000SFF",
-                     "JEOL 2200FS",
-                     "FEI/PHILIPS CM300FEG/T",
-                     "FEI/PHILIPS CM200T",
-                     "JEOL 100CX",
-                     "FEI TITAN KRIOS",
+                     "JEOL 100B",
+                     "JEOL 1200",
+                     "FEI TITAN",
+                     "FEI TECNAI SPIRIT",
                      "JEOL 1230",
+                     "FEI TALOS ARCTICA",
+                     "FEI/PHILIPS CM200FEG/ST",
+                     "FEI/PHILIPS CM300FEG/T",
+                     "HITACHI HF2000",
+                     "JEOL 1200EXII",
+                     "JEOL 3100FFC",
+                     "FEI TECNAI 10",
+                     "JEOL CRYO ARM 300",
+                     "ZEISS LEO912",
+                     "FEI TECNAI 20",
+                     "FEI/PHILIPS CM10",
+                     "FEI TECNAI SPHERA",
+                     "JEOL 2010HC",
+                     "FEI/PHILIPS CM200FEG/SOPHIE",
+                     "JEOL 3200FS",
+                     "FEI/PHILIPS EM420",
+                     "JEOL 1200EX",
+                     "FEI/PHILIPS CM200FEG/UT",
+                     "HITACHI EF3000",
+                     "FEI/PHILIPS CM200T",
+                     "JEOL 2011",
+                     "JEOL 2010HT",
+                     "JEOL 3000SFF",
+                     "JEOL 3100FEF",
+                     "JEOL KYOTO-3000SFF",
+                     "FEI POLARA 300",
+                     "FEI TECNAI F20",
+                     "FEI TITAN KRIOS",
+                     "HITACHI EF2000",
+                     "FEI TECNAI 12",
+                     "FEI/PHILIPS CM12",
+                     "HITACHI HF3000",
+                     "HITACHI H-9500SD",
+                     "SIEMENS SULEIKA",
+                     "JEOL 2100",
+                     "JEOL 2200FSC",
+                     "JEOL 2000EX",
+                     "JEOL 4000EX",
+                     "FEI MORGAGNI",
+                     "JEOL 2200FS",
+                     "JEOL 2010UHR",
+                     "JEOL 2000EXII",
+                     "FEI TECNAI F30",
+                     "ZEISS LIBRA120PLUS",
+                     "JEOL 2100F",
+                     "FEI TECNAI ARCTICA",
+                     "JEOL 1010",
+                     "JEOL 2010",
+                     "JEOL 1400",
+                     "FEI/PHILIPS CM300FEG/HE",
+                     "JEOL 3200FSC",
+                     "FEI/PHILIPS CM300FEG/ST",
+                     "HITACHI H7600",
+                     "JEOL 2010F",
+                     "JEOL 4000",
+                     "JEOL CRYO ARM 200",
+                     "FEI/PHILIPS CM200FEG",
+                     "JEOL 100CX",
                      "FEI/PHILIPS CM120T"
                   ],
                   "description": "The name of the model of microscope."
@@ -1392,9 +1392,9 @@
                   "type": "string",
                   "enum": [
                      "OTHER",
-                     "BRIGHT FIELD",
                      "DIFFRACTION",
-                     "DARK FIELD"
+                     "DARK FIELD",
+                     "BRIGHT FIELD"
                   ],
                   "description": "The mode of imaging."
                },
@@ -1455,30 +1455,30 @@
                "specimen_holder_model": {
                   "type": "string",
                   "enum": [
-                     "GATAN HC 3500 SINGLE TILT HEATING/NITROGEN COOLING HOLDER",
-                     "GATAN UHRST 3500 SINGLE TILT ULTRA HIGH RESOLUTION NITROGEN COOLING HOLDER",
-                     "GATAN LIQUID NITROGEN",
-                     "HOME BUILD",
-                     "JEOL 3200FSC CRYOHOLDER",
-                     "GATAN HELIUM",
-                     "GATAN HCHST 3008 SINGLE TILT HIGH RESOLUTION HELIUM COOLING HOLDER",
-                     "FISCHIONE INSTRUMENTS DUAL AXIS TOMOGRAPHY HOLDER",
-                     "GATAN 915 DOUBLE TILT LIQUID NITROGEN CRYO TRANSFER HOLDER",
-                     "SIDE ENTRY, EUCENTRIC",
-                     "GATAN 626 SINGLE TILT LIQUID NITROGEN CRYO TRANSFER HOLDER",
-                     "GATAN CHDT 3504 DOUBLE TILT HIGH RESOLUTION NITROGEN COOLING HOLDER",
-                     "GATAN ULTDT ULTRA LOW TEMPERATURE DOUBLE TILT HELIUM COOLING HOLDER",
                      "GATAN ULTST ULTRA LOW TEMPERATURE SINGLE TILT HELIUM COOLING HOLDER",
-                     "PHILIPS ROTATION HOLDER",
-                     "JEOL CRYOSPECPORTER",
                      "GATAN CT3500TR SINGLE TILT ROTATION LIQUID NITROGEN CRYO TRANSFER HOLDER",
-                     "OTHER",
-                     "FEI TITAN KRIOS AUTOGRID HOLDER",
-                     "JEOL",
-                     "GATAN CT3500 SINGLE TILT LIQUID NITROGEN CRYO TRANSFER HOLDER",
+                     "JEOL CRYOSPECPORTER",
+                     "GATAN UHRST 3500 SINGLE TILT ULTRA HIGH RESOLUTION NITROGEN COOLING HOLDER",
+                     "GATAN HC 3500 SINGLE TILT HEATING/NITROGEN COOLING HOLDER",
+                     "PHILIPS ROTATION HOLDER",
+                     "HOME BUILD",
+                     "GATAN HELIUM",
+                     "GATAN LIQUID NITROGEN",
                      "GATAN HCHDT 3010 DOUBLE TILT HIGH RESOLUTION HELIUM COOLING HOLDER",
+                     "OTHER",
+                     "FISCHIONE INSTRUMENTS DUAL AXIS TOMOGRAPHY HOLDER",
+                     "GATAN 914 HIGH TILT LIQUID NITROGEN CRYO TRANSFER TOMOGRAPHY HOLDER",
+                     "GATAN CHDT 3504 DOUBLE TILT HIGH RESOLUTION NITROGEN COOLING HOLDER",
+                     "SIDE ENTRY, EUCENTRIC",
+                     "GATAN ULTDT ULTRA LOW TEMPERATURE DOUBLE TILT HELIUM COOLING HOLDER",
+                     "GATAN 626 SINGLE TILT LIQUID NITROGEN CRYO TRANSFER HOLDER",
+                     "GATAN HCHST 3008 SINGLE TILT HIGH RESOLUTION HELIUM COOLING HOLDER",
+                     "JEOL 3200FSC CRYOHOLDER",
+                     "GATAN 915 DOUBLE TILT LIQUID NITROGEN CRYO TRANSFER HOLDER",
+                     "FEI TITAN KRIOS AUTOGRID HOLDER",
                      "GATAN 910 MULTI-SPECIMEN SINGLE TILT CRYO TRANSFER HOLDER",
-                     "GATAN 914 HIGH TILT LIQUID NITROGEN CRYO TRANSFER TOMOGRAPHY HOLDER"
+                     "GATAN CT3500 SINGLE TILT LIQUID NITROGEN CRYO TRANSFER HOLDER",
+                     "JEOL"
                   ],
                   "description": "The name of the model of specimen holder used during imaging."
                },
@@ -1566,24 +1566,24 @@
                "category": {
                   "type": "string",
                   "enum": [
-                     "LAYERLINE INDEXING",
-                     "MASKING",
-                     "MODEL REFINEMENT",
-                     "SERIES ALIGNMENT",
-                     "CLASSIFICATION",
-                     "DIFFRACTION INDEXING",
-                     "OTHER",
-                     "MOLECULAR REPLACEMENT",
-                     "LATTICE DISTORTION CORRECTION",
                      "FINAL EULER ASSIGNMENT",
-                     "CTF CORRECTION",
-                     "MODEL FITTING",
-                     "CRYSTALLOGRAPHY MERGING",
-                     "RECONSTRUCTION",
-                     "INITIAL EULER ASSIGNMENT",
-                     "PARTICLE SELECTION",
+                     "LATTICE DISTORTION CORRECTION",
+                     "CLASSIFICATION",
                      "IMAGE ACQUISITION",
                      "SYMMETRY DETERMINATION",
+                     "LAYERLINE INDEXING",
+                     "MODEL FITTING",
+                     "INITIAL EULER ASSIGNMENT",
+                     "DIFFRACTION INDEXING",
+                     "SERIES ALIGNMENT",
+                     "MASKING",
+                     "MODEL REFINEMENT",
+                     "CRYSTALLOGRAPHY MERGING",
+                     "PARTICLE SELECTION",
+                     "RECONSTRUCTION",
+                     "OTHER",
+                     "MOLECULAR REPLACEMENT",
+                     "CTF CORRECTION",
                      "VOLUME SELECTION"
                   ],
                   "description": "The purpose of the software."
@@ -1778,15 +1778,15 @@
                "cryogen_name": {
                   "type": "string",
                   "enum": [
-                     "ETHANE-PROPANE",
-                     "HELIUM",
+                     "FREON 22",
                      "FREON 12",
+                     "ETHANE",
+                     "HELIUM",
                      "OTHER",
                      "NITROGEN",
-                     "FREON 22",
                      "PROPANE",
-                     "METHANE",
-                     "ETHANE"
+                     "ETHANE-PROPANE",
+                     "METHANE"
                   ],
                   "description": "This is the name of the cryogen."
                },
@@ -1817,20 +1817,20 @@
                "instrument": {
                   "type": "string",
                   "enum": [
-                     "EMS-002 RAPID IMMERSION FREEZER",
-                     "FEI VITROBOT MARK III",
-                     "LEICA PLUNGER",
-                     "LEICA KF80",
-                     "FEI VITROBOT MARK II",
+                     "SPOTITON",
                      "GATAN CRYOPLUNGE 3",
                      "REICHERT-JUNG PLUNGER",
+                     "LEICA EM CPC",
+                     "FEI VITROBOT MARK III",
+                     "LEICA KF80",
+                     "LEICA PLUNGER",
                      "FEI VITROBOT MARK IV",
                      "HOMEMADE PLUNGER",
-                     "LEICA EM CPC",
-                     "SPOTITON",
-                     "FEI VITROBOT MARK I",
+                     "LEICA EM GP",
                      "ZEISS PLUNGE FREEZER CRYOBOX",
-                     "LEICA EM GP"
+                     "EMS-002 RAPID IMMERSION FREEZER",
+                     "FEI VITROBOT MARK I",
+                     "FEI VITROBOT MARK II"
                   ],
                   "description": "The type of instrument used in the vitrification process."
                },
@@ -1902,19 +1902,19 @@
                "method": {
                   "type": "string",
                   "enum": [
-                     "ELECTRON MICROSCOPY",
-                     "SOLUTION NMR",
-                     "ELECTRON CRYSTALLOGRAPHY",
                      "EPR",
+                     "SOLUTION NMR",
+                     "SOLUTION SCATTERING",
                      "INFRARED SPECTROSCOPY",
-                     "THEORETICAL MODEL",
-                     "FIBER DIFFRACTION",
-                     "X-RAY DIFFRACTION",
+                     "NEUTRON DIFFRACTION",
                      "SOLID-STATE NMR",
                      "FLUORESCENCE TRANSFER",
-                     "SOLUTION SCATTERING",
-                     "NEUTRON DIFFRACTION",
-                     "POWDER DIFFRACTION"
+                     "X-RAY DIFFRACTION",
+                     "ELECTRON CRYSTALLOGRAPHY",
+                     "POWDER DIFFRACTION",
+                     "THEORETICAL MODEL",
+                     "FIBER DIFFRACTION",
+                     "ELECTRON MICROSCOPY"
                   ],
                   "examples": [
                      "X-RAY DIFFRACTION",
@@ -2025,64 +2025,64 @@
                "full_name_of_center": {
                   "type": "string",
                   "enum": [
-                     "Israel Structural Proteomics Center",
-                     "Integrated Center for Structure and Function Innovation",
-                     "Mitochondrial Protein Partnership",
-                     "Northeast Structural Genomics Consortium",
-                     "South Africa Structural Targets Annotation Database",
-                     "New York Structural GenomiX Research Consortium",
+                     "Structural Genomics Consortium for Research on Gene Expression",
+                     "New York Structural Genomics Research Consortium",
+                     "TB Structural Genomics Consortium",
+                     "Bacterial targets at IGS-CNRS, France",
                      "Protein Structure Factory",
+                     "Mitochondrial Protein Partnership",
+                     "Integrated Center for Structure and Function Innovation",
+                     "Berkeley Structural Genomics Center",
+                     "Transmembrane Protein Center",
+                     "South Africa Structural Targets Annotation Database",
+                     "Structural Genomics Consortium",
+                     "New York Structural GenomiX Research Consortium",
+                     "Center for High-Throughput Structural Biology",
+                     "Structural Genomics of Pathogenic Protozoa Consortium",
+                     "Structure 2 Function Project",
+                     "Marseilles Structural Genomics Program @ AFMB",
+                     "Medical Structural Genomics of Pathogenic Protozoa",
+                     "Assembly, Dynamics and Evolution of Cell-Cell and Cell-Matrix Adhesions",
+                     "Program for the Characterization of Secreted Effector Proteins",
+                     "Structural Proteomics in Europe",
+                     "Structure, Dynamics and Activation Mechanisms of Chemokine Receptors",
+                     "Structure-Function Analysis of Polymorphic CDI Toxin-Immunity Protein Complexes",
+                     "Chaperone-Enabled Studies of Epigenetic Regulation Enzymes",
+                     "Structures of Mtb Proteins Conferring Susceptibility to Known Mtb Inhibitors",
+                     "Midwest Center for Structural Genomics",
+                     "Enzyme Discovery for Natural Product Biosynthesis",
+                     "Center for Structures of Membrane Proteins",
+                     "Joint Center for Structural Genomics",
+                     "Partnership for Nuclear Receptor Signaling Code Biology",
+                     "Northeast Structural Genomics Consortium",
+                     "Seattle Structural Genomics Center for Infectious Disease",
+                     "Partnership for T-Cell Biology",
+                     "Montreal-Kingston Bacterial Structural Genomics Initiative",
+                     "Membrane Protein Structures by Solution NMR",
+                     "Mycobacterium Tuberculosis Structural Proteomics Project",
+                     "Oxford Protein Production Facility",
+                     "Transcontinental EM Initiative for Membrane Protein Structure",
+                     "Center for Eukaryotic Structural Genomics",
+                     "Center for Structural Genomics of Infectious Diseases",
                      "Accelerated Technologies Center for Gene to 3D Structure",
                      "RIKEN Structural Genomics/Proteomics Initiative",
-                     "Structure-Function Analysis of Polymorphic CDI Toxin-Immunity Protein Complexes",
-                     "Partnership for Stem Cell Biology",
-                     "Membrane Protein Structures by Solution NMR",
-                     "Structural Proteomics in Europe",
-                     "Southeast Collaboratory for Structural Genomics",
-                     "Oxford Protein Production Facility",
-                     "Center for Structures of Membrane Proteins",
-                     "GPCR Network",
-                     "Scottish Structural Proteomics Facility",
-                     "Partnership for T-Cell Biology",
-                     "Nucleocytoplasmic Transport: a Target for Cellular Control",
-                     "Structural Genomics of Pathogenic Protozoa Consortium",
-                     "Chaperone-Enabled Studies of Epigenetic Regulation Enzymes",
-                     "Structure 2 Function Project",
-                     "TB Structural Genomics Consortium",
-                     "Transcontinental EM Initiative for Membrane Protein Structure",
-                     "Structural Genomics Consortium",
-                     "Center for Eukaryotic Structural Genomics",
-                     "Medical Structural Genomics of Pathogenic Protozoa",
-                     "Enzyme Discovery for Natural Product Biosynthesis",
-                     "Center for High-Throughput Structural Biology",
-                     "Membrane Protein Structural Biology Consortium",
-                     "Seattle Structural Genomics Center for Infectious Disease",
-                     "Center for Structural Genomics of Infectious Diseases",
-                     "Structure-Function Studies of Tight Junction Membrane Proteins",
-                     "Midwest Center for Structural Genomics",
-                     "Partnership for Nuclear Receptor Signaling Code Biology",
-                     "Ontario Centre for Structural Proteomics",
                      "Paris-Sud Yeast Structural Genomics",
-                     "Transmembrane Protein Center",
-                     "Structures of Mtb Proteins Conferring Susceptibility to Known Mtb Inhibitors",
-                     "Mycobacterium Tuberculosis Structural Proteomics Project",
-                     "New York SGX Research Center for Structural Genomics",
-                     "Atoms-to-Animals: The Immune Function Network",
-                     "Program for the Characterization of Secreted Effector Proteins",
-                     "Center for the X-ray Structure Determination of Human Transporters",
-                     "Structural Genomics Consortium for Research on Gene Expression",
-                     "Structural Proteomics in Europe 2",
-                     "Bacterial targets at IGS-CNRS, France",
-                     "Structure, Dynamics and Activation Mechanisms of Chemokine Receptors",
-                     "New York Structural Genomics Research Consortium",
-                     "Assembly, Dynamics and Evolution of Cell-Cell and Cell-Matrix Adhesions",
-                     "Marseilles Structural Genomics Program @ AFMB",
-                     "Joint Center for Structural Genomics",
-                     "Berkeley Structural Genomics Center",
-                     "Center for Membrane Proteins of Infectious Diseases",
+                     "Israel Structural Proteomics Center",
+                     "Membrane Protein Structural Biology Consortium",
                      "New York Consortium on Membrane Protein Structure",
-                     "Montreal-Kingston Bacterial Structural Genomics Initiative",
-                     "Midwest Center for Macromolecular Research"
+                     "Center for the X-ray Structure Determination of Human Transporters",
+                     "GPCR Network",
+                     "Center for Membrane Proteins of Infectious Diseases",
+                     "Midwest Center for Macromolecular Research",
+                     "Southeast Collaboratory for Structural Genomics",
+                     "Structural Proteomics in Europe 2",
+                     "Atoms-to-Animals: The Immune Function Network",
+                     "Nucleocytoplasmic Transport: a Target for Cellular Control",
+                     "Scottish Structural Proteomics Facility",
+                     "Ontario Centre for Structural Proteomics",
+                     "Partnership for Stem Cell Biology",
+                     "New York SGX Research Center for Structural Genomics",
+                     "Structure-Function Studies of Tight Junction Membrane Proteins"
                   ],
                   "examples": [
                      "Midwest Center for Structural Genomics"
@@ -2092,16 +2092,16 @@
                "id": {
                   "type": "integer",
                   "enum": [
-                     10,
+                     1,
                      2,
-                     4,
-                     3,
-                     6,
-                     8,
-                     7,
-                     5,
                      9,
-                     1
+                     10,
+                     8,
+                     6,
+                     4,
+                     5,
+                     3,
+                     7
                   ],
                   "examples": [
                      "1 2 3"
@@ -2111,63 +2111,63 @@
                "initial_of_center": {
                   "type": "string",
                   "enum": [
-                     "CSMP",
-                     "TMPC",
-                     "MPSBC",
-                     "MSGP",
-                     "MTBI",
-                     "TEMIMPS",
-                     "S2F",
-                     "NYSGRC",
-                     "SGPP",
-                     "CELLMAT",
-                     "SPINE-2",
-                     "MCSG",
-                     "STEMCELL",
-                     "MPID",
-                     "MPP",
-                     "BSGI",
-                     "CHSAM",
-                     "CESG",
-                     "PCSEP",
-                     "CSGID",
-                     "MSGPP",
-                     "SECSG",
-                     "SSGCID",
-                     "MCMR",
-                     "TCELL",
-                     "BIGS",
-                     "IFN",
-                     "SASTAD",
-                     "CHTSB",
-                     "ATCG3D",
-                     "NPCXstals",
-                     "OCSP",
-                     "SSPF",
-                     "MPSbyNMR",
-                     "CEBS",
-                     "NatPro",
-                     "TBSGC",
-                     "NYSGXRC",
                      "TJMP",
-                     "SPINE",
-                     "SGCGES",
-                     "TransportPDB",
-                     "JCSG",
-                     "SGC",
-                     "UC4CDI",
-                     "RSGI",
-                     "NHRs",
-                     "BSGC",
-                     "YSG",
-                     "NYCOMPS",
-                     "NESG",
-                     "XMTB",
-                     "OPPF",
+                     "MCMR",
                      "ISPC",
-                     "GPCR",
+                     "NPCXstals",
+                     "RSGI",
+                     "PCSEP",
+                     "OCSP",
+                     "TEMIMPS",
+                     "CELLMAT",
+                     "TCELL",
+                     "SGPP",
+                     "MTBI",
+                     "SECSG",
+                     "SSPF",
+                     "TransportPDB",
+                     "CSMP",
+                     "SPINE-2",
+                     "STEMCELL",
+                     "BSGC",
+                     "BIGS",
+                     "CESG",
+                     "NYSGRC",
+                     "NYSGXRC",
+                     "XMTB",
+                     "NatPro",
+                     "NHRs",
+                     "CHSAM",
+                     "MPID",
+                     "IFN",
+                     "MCSG",
+                     "MSGP",
+                     "ATCG3D",
+                     "SGCGES",
+                     "OPPF",
+                     "MPSBC",
+                     "SSGCID",
+                     "SASTAD",
                      "PSF",
-                     "ISFI"
+                     "UC4CDI",
+                     "CEBS",
+                     "MPSbyNMR",
+                     "GPCR",
+                     "BSGI",
+                     "SGC",
+                     "JCSG",
+                     "CHTSB",
+                     "NESG",
+                     "SPINE",
+                     "TBSGC",
+                     "TMPC",
+                     "MPP",
+                     "YSG",
+                     "S2F",
+                     "MSGPP",
+                     "CSGID",
+                     "ISFI",
+                     "NYCOMPS"
                   ],
                   "examples": [
                      "JCSG"
@@ -2177,11 +2177,11 @@
                "project_name": {
                   "type": "string",
                   "enum": [
-                     "NPPSFA, National Project on Protein Structural and Functional Analyses",
-                     "PSI, Protein Structure Initiative",
                      "PSI:Biology",
                      "NIAID, National Institute of Allergy and Infectious Diseases",
-                     "Enzyme Function Initiative"
+                     "PSI, Protein Structure Initiative",
+                     "Enzyme Function Initiative",
+                     "NPPSFA, National Project on Protein Structural and Functional Analyses"
                   ],
                   "examples": [
                      "PSI, Protein Structure Initiative"
@@ -2205,9 +2205,9 @@
                   "type": "string",
                   "enum": [
                      "Structure model",
+                     "NMR restraints",
                      "Structure factors",
-                     "NMR shifts",
-                     "NMR restraints"
+                     "NMR shifts"
                   ],
                   "examples": [
                      "Structure model"
@@ -2224,8 +2224,8 @@
                "provider": {
                   "type": "string",
                   "enum": [
-                     "author",
-                     "repository"
+                     "repository",
+                     "author"
                   ],
                   "examples": [
                      "repository"
@@ -2242,9 +2242,9 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "Coordinate replacement",
+                     "Initial release",
                      "Obsolete",
-                     "Initial release"
+                     "Coordinate replacement"
                   ],
                   "examples": [
                      "Initial release"
@@ -2270,9 +2270,9 @@
                   "type": "string",
                   "enum": [
                      "Structure model",
+                     "NMR restraints",
                      "Structure factors",
-                     "NMR shifts",
-                     "NMR restraints"
+                     "NMR shifts"
                   ],
                   "examples": [
                      "Structure model"
@@ -2379,8 +2379,8 @@
                "id": {
                   "type": "string",
                   "enum": [
-                     "SPRSDE",
-                     "OBSLTE"
+                     "OBSLTE",
+                     "SPRSDE"
                   ],
                   "examples": [
                      "OBSLTE"
@@ -2418,8 +2418,8 @@
             "SG_entry": {
                "type": "string",
                "enum": [
-                  "N",
-                  "Y"
+                  "Y",
+                  "N"
                ],
                "examples": [
                   "Y"
@@ -2429,11 +2429,11 @@
             "deposit_site": {
                "type": "string",
                "enum": [
-                  "PDBE",
-                  "RCSB",
-                  "BNL",
                   "PDBJ",
+                  "RCSB",
+                  "PDBE",
                   "BMRB",
+                  "BNL",
                   "NDB"
                ],
                "examples": [
@@ -2456,13 +2456,13 @@
             "methods_development_category": {
                "type": "string",
                "enum": [
-                  "CASP",
-                  "D3R",
                   "GPCR Dock",
                   "CAPRI",
                   "RNA-Puzzles",
+                  "D3R",
+                  "FoldIt",
                   "CASD-NMR",
-                  "FoldIt"
+                  "CASP"
                ],
                "examples": [
                   "CASP",
@@ -2473,8 +2473,8 @@
             "pdb_format_compatible": {
                "type": "string",
                "enum": [
-                  "N",
-                  "Y"
+                  "Y",
+                  "N"
                ],
                "examples": [
                   "Y"
@@ -2484,10 +2484,10 @@
             "process_site": {
                "type": "string",
                "enum": [
-                  "PDBE",
-                  "RCSB",
-                  "BNL",
                   "PDBJ",
+                  "RCSB",
+                  "PDBE",
+                  "BNL",
                   "NDB"
                ],
                "examples": [
@@ -2511,23 +2511,23 @@
                "type": "string",
                "enum": [
                   "REPL",
-                  "WAIT",
-                  "TRSF",
-                  "UPD",
-                  "PROC",
-                  "OBS",
                   "BIB",
-                  "WDRN",
-                  "AUTH",
-                  "HOLD",
                   "DEL",
-                  "HPUB",
-                  "RMVD",
-                  "AUCO",
-                  "POLC",
+                  "REL",
                   "REFI",
+                  "AUTH",
                   "REV",
-                  "REL"
+                  "HOLD",
+                  "RMVD",
+                  "WAIT",
+                  "PROC",
+                  "UPD",
+                  "HPUB",
+                  "POLC",
+                  "OBS",
+                  "WDRN",
+                  "TRSF",
+                  "AUCO"
                ],
                "examples": [
                   "REL",
@@ -2539,16 +2539,16 @@
                "type": "string",
                "enum": [
                   "REPL",
+                  "AUTH",
+                  "REL",
+                  "HOLD",
+                  "RMVD",
                   "WAIT",
                   "PROC",
-                  "OBS",
-                  "AUTH",
-                  "WDRN",
-                  "HOLD",
                   "HPUB",
-                  "RMVD",
                   "POLC",
-                  "REL"
+                  "OBS",
+                  "WDRN"
                ],
                "examples": [
                   "PROC  = Processing in progress\n     WAIT  = Awaiting author approval\n     REL   = Release\n     HOLD  = On hold until yyyy-mm-dd\n     HPUB  = On hold until publication\n     OBS   = Entry has been obsoleted and replaced by another entry\n     WDRN  = Entry has been withdrawn by depositor"
@@ -2559,16 +2559,16 @@
                "type": "string",
                "enum": [
                   "REPL",
-                  "WAIT",
-                  "PROC",
-                  "OBS",
-                  "WDRN",
+                  "REL",
                   "AUTH",
                   "HOLD",
-                  "HPUB",
                   "RMVD",
+                  "WAIT",
+                  "PROC",
+                  "HPUB",
                   "POLC",
-                  "REL"
+                  "OBS",
+                  "WDRN"
                ],
                "examples": [
                   "PROC  = To be processed\n     REL   = Release\n     HOLD  = On hold until yyyy-mm-dd\n     HPUB  = On hold until publication\n     OBS   = Entry has been obsoleted and replaced by another entry\n     WDRN  = Entry has been withdrawn by depositor\n     WAIT  = Awaiting author approval"
@@ -2579,16 +2579,16 @@
                "type": "string",
                "enum": [
                   "REPL",
-                  "WAIT",
-                  "PROC",
-                  "OBS",
-                  "WDRN",
+                  "REL",
                   "AUTH",
                   "HOLD",
-                  "HPUB",
                   "RMVD",
+                  "WAIT",
+                  "PROC",
+                  "HPUB",
                   "POLC",
-                  "REL"
+                  "OBS",
+                  "WDRN"
                ],
                "examples": [
                   "PROC  = To be processed\n     REL   = Released\n     HOLD  = On hold until yyyy-mm-dd\n     HPUB  = On hold until publication\n     OBS   = Entry has been obsoleted and replaced by another entry\n     WDRN  = Entry has been withdrawn by depositor\n     WAIT  = Awaiting author approval"
@@ -2621,9 +2621,9 @@
                "group_type": {
                   "type": "string",
                   "enum": [
+                     "ground state",
                      "changed state",
-                     "undefined",
-                     "ground state"
+                     "undefined"
                   ],
                   "description": "Text to describe a grouping of entries in multiple collections"
                }
@@ -2674,44 +2674,44 @@
                "class": {
                   "type": "string",
                   "enum": [
-                     "Inhibitor",
-                     "Antineoplastic",
-                     "Antiviral",
-                     "Antifungal",
-                     "Antibiotic, Anthelmintic",
-                     "Toxin",
-                     "Anthelmintic",
-                     "Antibiotic, Antimicrobial",
-                     "Chaperone binding",
-                     "Anticancer",
-                     "Thrombin inhibitor",
-                     "Metabolism",
-                     "Transport activator",
-                     "Metal transport",
-                     "Antiretroviral",
-                     "Antiinflammatory",
-                     "Growth factor",
-                     "Unknown",
+                     "Lantibiotic",
                      "Oxidation-reduction",
-                     "Antibiotic",
-                     "Antagonist",
-                     "Antimicrobial, Antiretroviral",
-                     "Anticoagulant",
+                     "Transport activator",
                      "Antiparasitic",
+                     "Enzyme inhibitor",
+                     "Antimicrobial",
+                     "Thrombin inhibitor, Trypsin inhibitor",
+                     "CASPASE inhibitor",
+                     "Antineoplastic",
+                     "Anticancer",
                      "Receptor",
                      "Anticoagulant, Antithrombotic",
-                     "Lantibiotic",
-                     "Immunosuppressant",
-                     "Antibiotic, Antineoplastic",
-                     "Antitumor",
-                     "Enzyme inhibitor",
-                     "Antimicrobial, Antiparasitic, Antibiotic",
+                     "Antifungal",
                      "Trypsin inhibitor",
-                     "Antimicrobial",
-                     "CASPASE inhibitor",
+                     "Antimicrobial, Antiretroviral",
+                     "Metabolism",
+                     "Antiretroviral",
+                     "Antibiotic",
+                     "Anticoagulant",
+                     "Chaperone binding",
+                     "Growth factor",
+                     "Thrombin inhibitor",
+                     "Metal transport",
                      "Antimicrobial, Antitumor",
-                     "Thrombin inhibitor, Trypsin inhibitor",
-                     "Antithrombotic"
+                     "Antibiotic, Anthelmintic",
+                     "Antithrombotic",
+                     "Antibiotic, Antineoplastic",
+                     "Antiviral",
+                     "Antibiotic, Antimicrobial",
+                     "Antiinflammatory",
+                     "Antitumor",
+                     "Antimicrobial, Antiparasitic, Antibiotic",
+                     "Antagonist",
+                     "Toxin",
+                     "Inhibitor",
+                     "Unknown",
+                     "Immunosuppressant",
+                     "Anthelmintic"
                   ],
                   "description": "Broadly defines the function of the molecule."
                },
@@ -2733,38 +2733,38 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "Cyclic peptide",
-                     "Polypeptide",
                      "Ansamycin",
-                     "Anthracycline",
-                     "Keto acid",
-                     "Nucleoside",
-                     "Thiolactone",
-                     "Thiopeptide",
-                     "Imino sugar",
-                     "Oligosaccharide",
-                     "Peptaibol",
-                     "Chromophore",
-                     "Glycopeptide",
-                     "Aminoglycoside",
-                     "Polysaccharide",
-                     "Unknown",
-                     "Chalkophore",
-                     "Cyclic depsipeptide",
-                     "Non-polymer",
-                     "Oligopeptide",
-                     "Lipopeptide",
-                     "Lipoglycopeptide",
-                     "Macrolide",
-                     "Cyclic lipopeptide",
-                     "Amino acid",
-                     "Anthraquinone",
-                     "Heterocyclic",
-                     "Siderophore",
-                     "Peptide-like",
-                     "Chalkophore, Polypeptide",
                      "Quinolone",
-                     "Polycyclic"
+                     "Nucleoside",
+                     "Chalkophore",
+                     "Heterocyclic",
+                     "Polypeptide",
+                     "Siderophore",
+                     "Polycyclic",
+                     "Lipopeptide",
+                     "Polysaccharide",
+                     "Keto acid",
+                     "Lipoglycopeptide",
+                     "Thiopeptide",
+                     "Cyclic peptide",
+                     "Anthraquinone",
+                     "Amino acid",
+                     "Chromophore",
+                     "Anthracycline",
+                     "Chalkophore, Polypeptide",
+                     "Oligosaccharide",
+                     "Aminoglycoside",
+                     "Imino sugar",
+                     "Cyclic lipopeptide",
+                     "Peptaibol",
+                     "Non-polymer",
+                     "Peptide-like",
+                     "Cyclic depsipeptide",
+                     "Glycopeptide",
+                     "Macrolide",
+                     "Thiolactone",
+                     "Unknown",
+                     "Oligopeptide"
                   ],
                   "examples": [
                      "Peptide-like",
@@ -2952,8 +2952,8 @@
                "sample_state": {
                   "type": "string",
                   "enum": [
-                     "isotropic",
-                     "anisotropic"
+                     "anisotropic",
+                     "isotropic"
                   ],
                   "examples": [
                      "isotropic"
@@ -3038,8 +3038,8 @@
                   "type": "string",
                   "enum": [
                      "Not defined",
-                     "mM",
-                     "M"
+                     "M",
+                     "mM"
                   ],
                   "examples": [
                      "M"
@@ -3071,9 +3071,9 @@
                "pH_units": {
                   "type": "string",
                   "enum": [
-                     "pH",
                      "pH*",
                      "Not defined",
+                     "pH",
                      "pD"
                   ],
                   "examples": [
@@ -3122,8 +3122,8 @@
                "temperature_units": {
                   "type": "string",
                   "enum": [
-                     "Not defined",
                      "K",
+                     "Not defined",
                      "C"
                   ],
                   "examples": [
@@ -3220,23 +3220,23 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "emulsion",
-                     "filamentous virus",
-                     "liposome",
-                     "membrane",
-                     "solution",
-                     "fiber",
-                     "micelle",
-                     "gel solution",
-                     "fibrous protein",
-                     "lyophilized powder",
-                     "oriented membrane film",
-                     "single crystal",
-                     "bicelle",
                      "polycrystalline powder",
+                     "bicelle",
+                     "membrane",
+                     "liposome",
+                     "gel solution",
                      "solid",
                      "gel solid",
-                     "reverse micelle"
+                     "single crystal",
+                     "emulsion",
+                     "filamentous virus",
+                     "oriented membrane film",
+                     "solution",
+                     "lyophilized powder",
+                     "micelle",
+                     "fiber",
+                     "reverse micelle",
+                     "fibrous protein"
                   ],
                   "examples": [
                      "bicelle"
@@ -3893,15 +3893,15 @@
                "enum": [
                   "HPUB'",
                   "REPL",
+                  "REL",
+                  "AUTH",
+                  "REFI",
+                  "HOLD",
                   "WAIT",
                   "PROC",
-                  "WDRN",
-                  "AUTH",
-                  "HOLD",
-                  "AUCO",
                   "POLC",
-                  "REFI",
-                  "REL"
+                  "WDRN",
+                  "AUCO"
                ],
                "description": "The release status for the entry."
             }
@@ -3974,12 +3974,12 @@
             "experimental_method": {
                "type": "string",
                "enum": [
-                  "NMR",
                   "Neutron",
-                  "Other",
-                  "Multiple methods",
                   "EM",
-                  "X-ray"
+                  "X-ray",
+                  "NMR",
+                  "Other",
+                  "Multiple methods"
                ],
                "description": "The category of experimental method(s) used to determine the structure entry."
             },
@@ -3994,18 +3994,19 @@
             "polymer_composition": {
                "type": "string",
                "enum": [
-                  "RNA",
-                  "oligosaccharide",
-                  "DNA/RNA",
-                  "heteromeric protein",
-                  "protein/oligosaccharide",
-                  "NA/oligosaccharide",
-                  "DNA",
-                  "other type composition",
-                  "other",
                   "protein/NA",
+                  "DNA",
+                  "oligosaccharide",
+                  "other type pair",
+                  "RNA",
+                  "NA-hybrid",
+                  "NA/oligosaccharide",
+                  "heteromeric protein",
                   "homomeric protein",
-                  "other type pair"
+                  "other",
+                  "protein/oligosaccharide",
+                  "DNA/RNA",
+                  "other type composition"
                ],
                "description": "Polymer entity composition of the entry."
             },
@@ -4153,12 +4154,12 @@
                "ls_matrix_type": {
                   "type": "string",
                   "enum": [
-                     "userblock",
-                     "atomblock",
                      "diagonal",
-                     "fullcycle",
+                     "atomblock",
+                     "sparse",
                      "full",
-                     "sparse"
+                     "userblock",
+                     "fullcycle"
                   ],
                   "description": "Type of matrix used to accumulate the least-squares derivatives."
                },
@@ -5134,28 +5135,28 @@
                "language": {
                   "type": "string",
                   "enum": [
-                     "Awk",
+                     "Fortran",
+                     "Fortran 77",
+                     "C++",
+                     "csh",
+                     "Basic",
                      "Tcl",
+                     "Java & Fortran",
                      "Ada",
                      "ksh",
-                     "Basic",
-                     "Perl",
-                     "Fortran",
-                     "Python",
                      "Python/C++",
-                     "Java",
-                     "C++",
-                     "sh",
-                     "Fortran_77",
-                     "Java & Fortran",
                      "assembler",
-                     "Pascal",
-                     "Fortran 77",
-                     "Other",
-                     "C/C++",
                      "C",
-                     "csh",
-                     "Fortran 90"
+                     "Pascal",
+                     "Java",
+                     "sh",
+                     "Python",
+                     "Fortran_77",
+                     "Other",
+                     "Awk",
+                     "Perl",
+                     "Fortran 90",
+                     "C/C++"
                   ],
                   "description": "The major computing language in which the software is\n coded."
                },
@@ -5202,12 +5203,12 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "program",
                      "library",
+                     "filter",
                      "jiffy",
-                     "package",
                      "other",
-                     "filter"
+                     "package",
+                     "program"
                   ],
                   "description": "The classification of the software according to the most\n common types."
                },
@@ -5241,8 +5242,8 @@
             "pdbx_CASP_flag": {
                "type": "string",
                "enum": [
-                  "N",
-                  "Y"
+                  "Y",
+                  "N"
                ],
                "examples": [
                   "Y"
@@ -5333,14 +5334,14 @@
             "cell_setting": {
                "type": "string",
                "enum": [
-                  "monoclinic",
-                  "trigonal",
-                  "cubic",
-                  "orthorhombic",
-                  "hexagonal",
                   "rhombohedral",
+                  "hexagonal",
+                  "trigonal",
+                  "monoclinic",
                   "tetragonal",
-                  "triclinic"
+                  "orthorhombic",
+                  "triclinic",
+                  "cubic"
                ],
                "description": "The cell settings for this space-group symmetry."
             },
@@ -5468,8 +5469,15 @@
          "required": [
             "entry_id"
          ]
+      },
+      "__entry_id": {
+         "type": "string",
+         "description": "The value of _entry.id identifies the data block.\n\n Note that this item need not be a number; it can be any unique\n identifier."
       }
    },
+   "required": [
+      "__entry_id"
+   ],
    "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/",
    "$schema": "http://json-schema.org/draft-04/schema#",
    "title": "Schema for content type pdbx_core collection pdbx_core_entry_v5_0_2"

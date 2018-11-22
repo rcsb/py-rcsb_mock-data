@@ -40,8 +40,8 @@
             "rcsb_candidate_assembly": {
                "type": "string",
                "enum": [
-                  "N",
-                  "Y"
+                  "Y",
+                  "N"
                ],
                "examples": [
                   "Y"
@@ -51,9 +51,9 @@
             "rcsb_details": {
                "type": "string",
                "enum": [
-                  "author_defined_assembly",
                   "software_defined_assembly",
-                  "author_and_software_defined_assembly"
+                  "author_and_software_defined_assembly",
+                  "author_defined_assembly"
                ],
                "examples": [
                   "author_and_software_defined_assembly"
@@ -81,22 +81,22 @@
                "experimental_support": {
                   "type": "string",
                   "enum": [
-                     "homology",
-                     "assay for oligomerization",
                      "cross-linking",
-                     "fluorescence resonance energy transfer",
-                     "equilibrium centrifugation",
-                     "mass spectrometry",
-                     "immunoprecipitation",
-                     "isothermal titration calorimetry",
-                     "microscopy",
-                     "native gel electrophoresis",
-                     "SAXS",
-                     "surface plasmon resonance",
-                     "gel filtration",
                      "light scattering",
+                     "SAXS",
+                     "native gel electrophoresis",
+                     "fluorescence resonance energy transfer",
+                     "assay for oligomerization",
+                     "microscopy",
                      "none",
-                     "scanning transmission electron microscopy"
+                     "immunoprecipitation",
+                     "scanning transmission electron microscopy",
+                     "isothermal titration calorimetry",
+                     "equilibrium centrifugation",
+                     "homology",
+                     "gel filtration",
+                     "surface plasmon resonance",
+                     "mass spectrometry"
                   ],
                   "description": "Provides the experimental method to determine the state of this assembly"
                },
@@ -164,8 +164,8 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "MORE",
                      "ABSA (A^2)",
+                     "MORE",
                      "SSA (A^2)"
                   ],
                   "description": "The property type for the assembly."
@@ -248,20 +248,20 @@
                   "type": "string",
                   "enum": [
                      "identity operation",
-                     "2D crystal symmetry operation",
-                     "transform to 2D crystal frame",
-                     "build point asymmetric unit",
-                     "transform to point frame",
-                     "helical symmetry operation",
-                     "build 2D crystal asymmetric unit",
                      "crystal symmetry operation",
-                     "transform to helical frame",
-                     "point symmetry operation",
-                     "build helical asymmetric unit",
+                     "2D crystal symmetry operation",
+                     "transform to 3D crystal frame",
+                     "build 2D crystal asymmetric unit",
                      "transform to crystal frame",
-                     "3D crystal symmetry operation",
+                     "build point asymmetric unit",
                      "build 3D crystal asymmetric unit",
-                     "transform to 3D crystal frame"
+                     "transform to 2D crystal frame",
+                     "transform to point frame",
+                     "point symmetry operation",
+                     "3D crystal symmetry operation",
+                     "build helical asymmetric unit",
+                     "transform to helical frame",
+                     "helical symmetry operation"
                   ],
                   "description": "A code to indicate the type of operator."
                },
@@ -322,8 +322,20 @@
          "required": [
             "datablock_name"
          ]
+      },
+      "__entry_id": {
+         "type": "string",
+         "description": "Entry identifier for the container."
+      },
+      "__assembly_id": {
+         "type": "string",
+         "description": "The value of _pdbx_struct_assembly.id must uniquely identify a record in\n the PDBX_STRUCT_ASSEMBLY list."
       }
    },
+   "required": [
+      "__entry_id",
+      "__assembly_id"
+   ],
    "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/",
    "$schema": "http://json-schema.org/draft-04/schema#",
    "title": "Schema for content type pdbx_core collection pdbx_core_assembly_v5_0_2"
