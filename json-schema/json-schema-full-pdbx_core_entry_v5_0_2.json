@@ -136,10 +136,10 @@
                "coordinate_linkage": {
                   "type": "string",
                   "enum": [
-                     "n",
                      "y",
-                     "no",
-                     "yes"
+                     "n",
+                     "yes",
+                     "no"
                   ],
                   "description": "_citation.coordinate_linkage states whether this citation\n is concerned with precisely the set of coordinates given in the\n data block. If, for instance, the publication described the same\n structure, but the coordinates had undergone further refinement\n prior to the creation of the data block, the value of this data\n item would be 'no'."
                },
@@ -243,8 +243,8 @@
                "unpublished_flag": {
                   "type": "string",
                   "enum": [
-                     "Y",
-                     "N"
+                     "N",
+                     "Y"
                   ],
                   "description": "Flag to indicate that this citation will not be published."
                },
@@ -309,8 +309,7 @@
                },
                "ambient_temp": {
                   "type": "number",
-                  "minimum": 80,
-                  "maximum": 300,
+                  "minimum": 0.0,
                   "description": "The mean temperature in kelvins at which the intensities were\n measured."
                },
                "ambient_temp_details": {
@@ -447,8 +446,8 @@
                "pdbx_monochromatic_or_laue_m_l": {
                   "type": "string",
                   "enum": [
-                     "M",
-                     "L"
+                     "L",
+                     "M"
                   ],
                   "examples": [
                      "M",
@@ -459,9 +458,9 @@
                "pdbx_scattering_type": {
                   "type": "string",
                   "enum": [
-                     "electron",
                      "neutron",
-                     "x-ray"
+                     "x-ray",
+                     "electron"
                   ],
                   "description": "The radiation scattering type for this diffraction data set."
                },
@@ -600,23 +599,23 @@
                "space_group_name_H_M": {
                   "type": "string",
                   "enum": [
-                     "P 2 21 21",
-                     "P 1 21",
-                     "P 4",
-                     "C 1 2",
-                     "P 1 2",
+                     "P 1",
                      "P 2 2 21",
-                     "P 3 1 2",
-                     "P 4 2 2",
+                     "P 4",
+                     "P 4 21 2",
                      "P 3",
                      "P 3 2 1",
-                     "P 6 2 2",
+                     "P 1 2",
+                     "C 2 2 2",
+                     "P 6",
                      "P 2 2 2",
                      "P 2",
-                     "P 4 21 2",
-                     "P 6",
-                     "C 2 2 2",
-                     "P 1"
+                     "C 1 2",
+                     "P 4 2 2",
+                     "P 6 2 2",
+                     "P 2 21 21",
+                     "P 3 1 2",
+                     "P 1 21"
                   ],
                   "description": "There are 17 plane groups classified as oblique, rectangular, square, and hexagonal.\n To describe the symmetry of 2D crystals of biological molecules,\n plane groups are expanded to equivalent noncentrosymmetric space groups.\n The 2D crystal plane corresponds to the 'ab' plane of the space group.\n\n Enumerated space group descriptions include the plane group number in parentheses,\n the H-M plane group symbol, and the plane group class."
                }
@@ -756,10 +755,10 @@
                "ref_protocol": {
                   "type": "string",
                   "enum": [
-                     "FLEXIBLE FIT",
-                     "RIGID BODY FIT",
                      "BACKBONE TRACE",
+                     "FLEXIBLE FIT",
                      "OTHER",
+                     "RIGID BODY FIT",
                      "AB INITIO MODEL"
                   ],
                   "examples": [
@@ -770,8 +769,8 @@
                "ref_space": {
                   "type": "string",
                   "enum": [
-                     "RECIPROCAL",
-                     "REAL"
+                     "REAL",
+                     "RECIPROCAL"
                   ],
                   "description": "A flag to indicate whether fitting was carried out in real\n or reciprocal refinement space."
                },
@@ -865,11 +864,11 @@
                "refinement_type": {
                   "type": "string",
                   "enum": [
-                     "HALF-MAPS REFINED AGAINST SAME DATA",
                      "HALF-MAPS REFINED WITH FREQUENCY RANGE OMITTED",
-                     "HALF-MAPS REFINED INDEPENDENTLY WITH FREQUENCY RANGE OMITTED",
                      "OTHER",
-                     "HALF-MAPS REFINED INDEPENDENTLY"
+                     "HALF-MAPS REFINED AGAINST SAME DATA",
+                     "HALF-MAPS REFINED INDEPENDENTLY",
+                     "HALF-MAPS REFINED INDEPENDENTLY WITH FREQUENCY RANGE OMITTED"
                   ],
                   "examples": [
                      "HALF-MAPS REFINED INDEPENDENTLY"
@@ -894,10 +893,10 @@
                "symmetry_type": {
                   "type": "string",
                   "enum": [
-                     "POINT",
                      "2D CRYSTAL",
+                     "HELICAL",
                      "3D CRYSTAL",
-                     "HELICAL"
+                     "POINT"
                   ],
                   "description": "The type of symmetry applied to the reconstruction"
                }
@@ -1028,13 +1027,13 @@
             "aggregation_state": {
                "type": "string",
                "enum": [
-                  "PARTICLE",
-                  "HELICAL ARRAY",
                   "TISSUE",
                   "3D ARRAY",
+                  "PARTICLE",
                   "CELL",
                   "2D ARRAY",
-                  "FILAMENT"
+                  "FILAMENT",
+                  "HELICAL ARRAY"
                ],
                "description": "The aggregation/assembly state of the imaged specimen."
             },
@@ -1053,11 +1052,11 @@
             "reconstruction_method": {
                "type": "string",
                "enum": [
-                  "CRYSTALLOGRAPHY",
-                  "SUBTOMOGRAM AVERAGING",
-                  "SINGLE PARTICLE",
                   "TOMOGRAPHY",
-                  "HELICAL"
+                  "HELICAL",
+                  "SINGLE PARTICLE",
+                  "SUBTOMOGRAM AVERAGING",
+                  "CRYSTALLOGRAPHY"
                ],
                "description": "The reconstruction method used in the EM experiment."
             }
@@ -1135,9 +1134,9 @@
             "properties": {
                "average_exposure_time": {
                   "type": "number",
-                  "minimum": 0,
+                  "minimum": 0.0,
                   "exclusiveMinimum": true,
-                  "maximum": 180,
+                  "maximum": 240.0,
                   "exclusiveMaximum": true,
                   "examples": [
                      "2.0"
@@ -1146,10 +1145,8 @@
                },
                "avg_electron_dose_per_image": {
                   "type": "number",
-                  "minimum": 1,
+                  "minimum": 0.0,
                   "exclusiveMinimum": true,
-                  "maximum": 50,
-                  "exclusiveMaximum": true,
                   "examples": [
                      "0.9"
                   ],
@@ -1165,10 +1162,10 @@
                "detector_mode": {
                   "type": "string",
                   "enum": [
-                     "COUNTING",
                      "SUPER-RESOLUTION",
-                     "INTEGRATING",
-                     "OTHER"
+                     "OTHER",
+                     "COUNTING",
+                     "INTEGRATING"
                   ],
                   "description": "The detector mode used during image recording."
                },
@@ -1222,11 +1219,11 @@
                "alignment_procedure": {
                   "type": "string",
                   "enum": [
-                     "ZEMLIN TABLEAU",
-                     "BASIC",
                      "OTHER",
                      "NONE",
-                     "COMA FREE"
+                     "COMA FREE",
+                     "BASIC",
+                     "ZEMLIN TABLEAU"
                   ],
                   "description": "microscope alignment procedure"
                },
@@ -1311,80 +1308,80 @@
                "illumination_mode": {
                   "type": "string",
                   "enum": [
-                     "FLOOD BEAM",
+                     "OTHER",
                      "SPOT SCAN",
-                     "OTHER"
+                     "FLOOD BEAM"
                   ],
                   "description": "The mode of illumination."
                },
                "microscope_model": {
                   "type": "string",
                   "enum": [
+                     "FEI TECNAI ARCTICA",
+                     "JEOL 2200FS",
+                     "JEOL 2010HC",
+                     "JEOL 2010",
                      "FEI/PHILIPS EM400",
+                     "FEI/PHILIPS CM300FEG/ST",
+                     "JEOL 3000SFF",
+                     "JEOL 2100",
+                     "HITACHI EF2000",
+                     "JEOL 3200FS",
+                     "FEI TECNAI SPHERA",
+                     "HITACHI EF3000",
+                     "FEI/PHILIPS CM200FEG/UT",
+                     "FEI/PHILIPS CM120T",
+                     "FEI/PHILIPS CM300FEG/T",
                      "JEOL 100B",
+                     "JEOL 100CX",
+                     "FEI/PHILIPS CM10",
+                     "JEOL 2010F",
+                     "FEI/PHILIPS CM300FEG/HE",
+                     "FEI TECNAI 20",
+                     "JEOL 1400",
+                     "JEOL 1200EXII",
+                     "JEOL 1230",
+                     "JEOL 2200FSC",
+                     "JEOL 4000EX",
+                     "FEI POLARA 300",
+                     "JEOL 2010HT",
+                     "FEI TECNAI 10",
+                     "HITACHI HF3000",
+                     "HITACHI H7600",
+                     "FEI TECNAI F20",
+                     "JEOL 3100FFC",
+                     "ZEISS LEO912",
+                     "HITACHI HF2000",
+                     "FEI TECNAI F30",
+                     "JEOL 2010UHR",
+                     "JEOL 2011",
+                     "JEOL CRYO ARM 200",
+                     "FEI MORGAGNI",
+                     "SIEMENS SULEIKA",
+                     "FEI/PHILIPS CM12",
+                     "JEOL 4000",
+                     "FEI TECNAI 12",
+                     "FEI TECNAI SPIRIT",
+                     "FEI/PHILIPS CM200T",
+                     "HITACHI H-9500SD",
+                     "FEI/PHILIPS CM200FEG",
+                     "JEOL 1200EX",
                      "JEOL 1200",
                      "FEI TITAN",
-                     "FEI TECNAI SPIRIT",
-                     "JEOL 1230",
-                     "FEI TALOS ARCTICA",
-                     "FEI/PHILIPS CM200FEG/ST",
-                     "FEI/PHILIPS CM300FEG/T",
-                     "HITACHI HF2000",
-                     "JEOL 1200EXII",
-                     "JEOL 3100FFC",
-                     "FEI TECNAI 10",
                      "JEOL CRYO ARM 300",
-                     "ZEISS LEO912",
-                     "FEI TECNAI 20",
-                     "FEI/PHILIPS CM10",
-                     "FEI TECNAI SPHERA",
-                     "JEOL 2010HC",
-                     "FEI/PHILIPS CM200FEG/SOPHIE",
-                     "JEOL 3200FS",
-                     "FEI/PHILIPS EM420",
-                     "JEOL 1200EX",
-                     "FEI/PHILIPS CM200FEG/UT",
-                     "HITACHI EF3000",
-                     "FEI/PHILIPS CM200T",
-                     "JEOL 2011",
-                     "JEOL 2010HT",
-                     "JEOL 3000SFF",
-                     "JEOL 3100FEF",
-                     "JEOL KYOTO-3000SFF",
-                     "FEI POLARA 300",
-                     "FEI TECNAI F20",
-                     "FEI TITAN KRIOS",
-                     "HITACHI EF2000",
-                     "FEI TECNAI 12",
-                     "FEI/PHILIPS CM12",
-                     "HITACHI HF3000",
-                     "HITACHI H-9500SD",
-                     "SIEMENS SULEIKA",
-                     "JEOL 2100",
-                     "JEOL 2200FSC",
-                     "JEOL 2000EX",
-                     "JEOL 4000EX",
-                     "FEI MORGAGNI",
-                     "JEOL 2200FS",
-                     "JEOL 2010UHR",
-                     "JEOL 2000EXII",
-                     "FEI TECNAI F30",
-                     "ZEISS LIBRA120PLUS",
                      "JEOL 2100F",
-                     "FEI TECNAI ARCTICA",
-                     "JEOL 1010",
-                     "JEOL 2010",
-                     "JEOL 1400",
-                     "FEI/PHILIPS CM300FEG/HE",
+                     "FEI TITAN KRIOS",
+                     "JEOL 3100FEF",
                      "JEOL 3200FSC",
-                     "FEI/PHILIPS CM300FEG/ST",
-                     "HITACHI H7600",
-                     "JEOL 2010F",
-                     "JEOL 4000",
-                     "JEOL CRYO ARM 200",
-                     "FEI/PHILIPS CM200FEG",
-                     "JEOL 100CX",
-                     "FEI/PHILIPS CM120T"
+                     "JEOL KYOTO-3000SFF",
+                     "FEI/PHILIPS CM200FEG/SOPHIE",
+                     "JEOL 1010",
+                     "FEI TALOS ARCTICA",
+                     "FEI/PHILIPS EM420",
+                     "JEOL 2000EX",
+                     "ZEISS LIBRA120PLUS",
+                     "FEI/PHILIPS CM200FEG/ST",
+                     "JEOL 2000EXII"
                   ],
                   "description": "The name of the model of microscope."
                },
@@ -1409,10 +1406,6 @@
                },
                "nominal_defocus_max": {
                   "type": "number",
-                  "minimum": -20000,
-                  "exclusiveMinimum": true,
-                  "maximum": 20000,
-                  "exclusiveMaximum": true,
                   "examples": [
                      "5000"
                   ],
@@ -1420,10 +1413,6 @@
                },
                "nominal_defocus_min": {
                   "type": "number",
-                  "minimum": -20000,
-                  "exclusiveMinimum": true,
-                  "maximum": 20000,
-                  "exclusiveMaximum": true,
                   "examples": [
                      "1200"
                   ],
@@ -1455,30 +1444,30 @@
                "specimen_holder_model": {
                   "type": "string",
                   "enum": [
-                     "GATAN ULTST ULTRA LOW TEMPERATURE SINGLE TILT HELIUM COOLING HOLDER",
-                     "GATAN CT3500TR SINGLE TILT ROTATION LIQUID NITROGEN CRYO TRANSFER HOLDER",
-                     "JEOL CRYOSPECPORTER",
-                     "GATAN UHRST 3500 SINGLE TILT ULTRA HIGH RESOLUTION NITROGEN COOLING HOLDER",
-                     "GATAN HC 3500 SINGLE TILT HEATING/NITROGEN COOLING HOLDER",
-                     "PHILIPS ROTATION HOLDER",
-                     "HOME BUILD",
-                     "GATAN HELIUM",
-                     "GATAN LIQUID NITROGEN",
-                     "GATAN HCHDT 3010 DOUBLE TILT HIGH RESOLUTION HELIUM COOLING HOLDER",
-                     "OTHER",
-                     "FISCHIONE INSTRUMENTS DUAL AXIS TOMOGRAPHY HOLDER",
-                     "GATAN 914 HIGH TILT LIQUID NITROGEN CRYO TRANSFER TOMOGRAPHY HOLDER",
-                     "GATAN CHDT 3504 DOUBLE TILT HIGH RESOLUTION NITROGEN COOLING HOLDER",
                      "SIDE ENTRY, EUCENTRIC",
-                     "GATAN ULTDT ULTRA LOW TEMPERATURE DOUBLE TILT HELIUM COOLING HOLDER",
-                     "GATAN 626 SINGLE TILT LIQUID NITROGEN CRYO TRANSFER HOLDER",
                      "GATAN HCHST 3008 SINGLE TILT HIGH RESOLUTION HELIUM COOLING HOLDER",
-                     "JEOL 3200FSC CRYOHOLDER",
-                     "GATAN 915 DOUBLE TILT LIQUID NITROGEN CRYO TRANSFER HOLDER",
                      "FEI TITAN KRIOS AUTOGRID HOLDER",
-                     "GATAN 910 MULTI-SPECIMEN SINGLE TILT CRYO TRANSFER HOLDER",
+                     "PHILIPS ROTATION HOLDER",
+                     "GATAN HCHDT 3010 DOUBLE TILT HIGH RESOLUTION HELIUM COOLING HOLDER",
+                     "GATAN UHRST 3500 SINGLE TILT ULTRA HIGH RESOLUTION NITROGEN COOLING HOLDER",
+                     "GATAN LIQUID NITROGEN",
+                     "GATAN HC 3500 SINGLE TILT HEATING/NITROGEN COOLING HOLDER",
+                     "OTHER",
+                     "GATAN CHDT 3504 DOUBLE TILT HIGH RESOLUTION NITROGEN COOLING HOLDER",
                      "GATAN CT3500 SINGLE TILT LIQUID NITROGEN CRYO TRANSFER HOLDER",
-                     "JEOL"
+                     "GATAN ULTST ULTRA LOW TEMPERATURE SINGLE TILT HELIUM COOLING HOLDER",
+                     "JEOL CRYOSPECPORTER",
+                     "HOME BUILD",
+                     "FISCHIONE INSTRUMENTS DUAL AXIS TOMOGRAPHY HOLDER",
+                     "GATAN HELIUM",
+                     "GATAN 915 DOUBLE TILT LIQUID NITROGEN CRYO TRANSFER HOLDER",
+                     "GATAN ULTDT ULTRA LOW TEMPERATURE DOUBLE TILT HELIUM COOLING HOLDER",
+                     "GATAN 914 HIGH TILT LIQUID NITROGEN CRYO TRANSFER TOMOGRAPHY HOLDER",
+                     "GATAN 910 MULTI-SPECIMEN SINGLE TILT CRYO TRANSFER HOLDER",
+                     "JEOL 3200FSC CRYOHOLDER",
+                     "GATAN 626 SINGLE TILT LIQUID NITROGEN CRYO TRANSFER HOLDER",
+                     "JEOL",
+                     "GATAN CT3500TR SINGLE TILT ROTATION LIQUID NITROGEN CRYO TRANSFER HOLDER"
                   ],
                   "description": "The name of the model of specimen holder used during imaging."
                },
@@ -1566,25 +1555,25 @@
                "category": {
                   "type": "string",
                   "enum": [
-                     "FINAL EULER ASSIGNMENT",
-                     "LATTICE DISTORTION CORRECTION",
-                     "CLASSIFICATION",
-                     "IMAGE ACQUISITION",
+                     "RECONSTRUCTION",
+                     "PARTICLE SELECTION",
+                     "SERIES ALIGNMENT",
                      "SYMMETRY DETERMINATION",
-                     "LAYERLINE INDEXING",
+                     "OTHER",
+                     "CRYSTALLOGRAPHY MERGING",
+                     "VOLUME SELECTION",
+                     "FINAL EULER ASSIGNMENT",
+                     "CLASSIFICATION",
+                     "MODEL REFINEMENT",
+                     "MOLECULAR REPLACEMENT",
+                     "IMAGE ACQUISITION",
                      "MODEL FITTING",
                      "INITIAL EULER ASSIGNMENT",
-                     "DIFFRACTION INDEXING",
-                     "SERIES ALIGNMENT",
-                     "MASKING",
-                     "MODEL REFINEMENT",
-                     "CRYSTALLOGRAPHY MERGING",
-                     "PARTICLE SELECTION",
-                     "RECONSTRUCTION",
-                     "OTHER",
-                     "MOLECULAR REPLACEMENT",
                      "CTF CORRECTION",
-                     "VOLUME SELECTION"
+                     "DIFFRACTION INDEXING",
+                     "LAYERLINE INDEXING",
+                     "MASKING",
+                     "LATTICE DISTORTION CORRECTION"
                   ],
                   "description": "The purpose of the software."
                },
@@ -1666,8 +1655,8 @@
                "embedding_applied": {
                   "type": "string",
                   "enum": [
-                     "NO",
-                     "YES"
+                     "YES",
+                     "NO"
                   ],
                   "description": "'YES' indicates that the specimen has been embedded."
                },
@@ -1682,24 +1671,24 @@
                "shadowing_applied": {
                   "type": "string",
                   "enum": [
-                     "NO",
-                     "YES"
+                     "YES",
+                     "NO"
                   ],
                   "description": "'YES' indicates that the specimen has been shadowed."
                },
                "staining_applied": {
                   "type": "string",
                   "enum": [
-                     "NO",
-                     "YES"
+                     "YES",
+                     "NO"
                   ],
                   "description": "'YES' indicates that the specimen has been stained."
                },
                "vitrification_applied": {
                   "type": "string",
                   "enum": [
-                     "NO",
-                     "YES"
+                     "YES",
+                     "NO"
                   ],
                   "description": "'YES' indicates that the specimen was vitrified by cryopreservation."
                }
@@ -1778,15 +1767,15 @@
                "cryogen_name": {
                   "type": "string",
                   "enum": [
-                     "FREON 22",
-                     "FREON 12",
-                     "ETHANE",
-                     "HELIUM",
-                     "OTHER",
-                     "NITROGEN",
-                     "PROPANE",
                      "ETHANE-PROPANE",
-                     "METHANE"
+                     "PROPANE",
+                     "FREON 12",
+                     "OTHER",
+                     "HELIUM",
+                     "ETHANE",
+                     "FREON 22",
+                     "METHANE",
+                     "NITROGEN"
                   ],
                   "description": "This is the name of the cryogen."
                },
@@ -1817,20 +1806,20 @@
                "instrument": {
                   "type": "string",
                   "enum": [
-                     "SPOTITON",
                      "GATAN CRYOPLUNGE 3",
-                     "REICHERT-JUNG PLUNGER",
-                     "LEICA EM CPC",
-                     "FEI VITROBOT MARK III",
-                     "LEICA KF80",
-                     "LEICA PLUNGER",
-                     "FEI VITROBOT MARK IV",
-                     "HOMEMADE PLUNGER",
-                     "LEICA EM GP",
+                     "FEI VITROBOT MARK II",
                      "ZEISS PLUNGE FREEZER CRYOBOX",
-                     "EMS-002 RAPID IMMERSION FREEZER",
+                     "LEICA PLUNGER",
+                     "HOMEMADE PLUNGER",
                      "FEI VITROBOT MARK I",
-                     "FEI VITROBOT MARK II"
+                     "LEICA EM GP",
+                     "REICHERT-JUNG PLUNGER",
+                     "SPOTITON",
+                     "EMS-002 RAPID IMMERSION FREEZER",
+                     "LEICA KF80",
+                     "LEICA EM CPC",
+                     "FEI VITROBOT MARK IV",
+                     "FEI VITROBOT MARK III"
                   ],
                   "description": "The type of instrument used in the vitrification process."
                },
@@ -1902,19 +1891,19 @@
                "method": {
                   "type": "string",
                   "enum": [
+                     "SOLUTION SCATTERING",
+                     "ELECTRON MICROSCOPY",
+                     "POWDER DIFFRACTION",
                      "EPR",
                      "SOLUTION NMR",
-                     "SOLUTION SCATTERING",
-                     "INFRARED SPECTROSCOPY",
-                     "NEUTRON DIFFRACTION",
-                     "SOLID-STATE NMR",
-                     "FLUORESCENCE TRANSFER",
                      "X-RAY DIFFRACTION",
-                     "ELECTRON CRYSTALLOGRAPHY",
-                     "POWDER DIFFRACTION",
                      "THEORETICAL MODEL",
                      "FIBER DIFFRACTION",
-                     "ELECTRON MICROSCOPY"
+                     "NEUTRON DIFFRACTION",
+                     "ELECTRON CRYSTALLOGRAPHY",
+                     "SOLID-STATE NMR",
+                     "INFRARED SPECTROSCOPY",
+                     "FLUORESCENCE TRANSFER"
                   ],
                   "examples": [
                      "X-RAY DIFFRACTION",
@@ -1976,8 +1965,7 @@
                },
                "pH": {
                   "type": "number",
-                  "minimum": 0,
-                  "maximum": 14,
+                  "minimum": 0.0,
                   "examples": [
                      "7.4",
                      "7.6",
@@ -2001,8 +1989,7 @@
                },
                "temp": {
                   "type": "number",
-                  "minimum": 277,
-                  "maximum": 316,
+                  "minimum": 0.0,
                   "description": "The temperature in kelvins at which the crystal was grown.\n If more than one temperature was employed during the\n crystallization process, the final temperature should be noted\n here and the protocol  involving multiple temperatures should be\n described in _exptl_crystal_grow.details."
                },
                "temp_details": {
@@ -2025,64 +2012,64 @@
                "full_name_of_center": {
                   "type": "string",
                   "enum": [
-                     "Structural Genomics Consortium for Research on Gene Expression",
-                     "New York Structural Genomics Research Consortium",
-                     "TB Structural Genomics Consortium",
-                     "Bacterial targets at IGS-CNRS, France",
-                     "Protein Structure Factory",
-                     "Mitochondrial Protein Partnership",
-                     "Integrated Center for Structure and Function Innovation",
-                     "Berkeley Structural Genomics Center",
-                     "Transmembrane Protein Center",
-                     "South Africa Structural Targets Annotation Database",
-                     "Structural Genomics Consortium",
-                     "New York Structural GenomiX Research Consortium",
-                     "Center for High-Throughput Structural Biology",
-                     "Structural Genomics of Pathogenic Protozoa Consortium",
-                     "Structure 2 Function Project",
-                     "Marseilles Structural Genomics Program @ AFMB",
-                     "Medical Structural Genomics of Pathogenic Protozoa",
-                     "Assembly, Dynamics and Evolution of Cell-Cell and Cell-Matrix Adhesions",
-                     "Program for the Characterization of Secreted Effector Proteins",
-                     "Structural Proteomics in Europe",
-                     "Structure, Dynamics and Activation Mechanisms of Chemokine Receptors",
-                     "Structure-Function Analysis of Polymorphic CDI Toxin-Immunity Protein Complexes",
-                     "Chaperone-Enabled Studies of Epigenetic Regulation Enzymes",
-                     "Structures of Mtb Proteins Conferring Susceptibility to Known Mtb Inhibitors",
-                     "Midwest Center for Structural Genomics",
-                     "Enzyme Discovery for Natural Product Biosynthesis",
-                     "Center for Structures of Membrane Proteins",
-                     "Joint Center for Structural Genomics",
-                     "Partnership for Nuclear Receptor Signaling Code Biology",
-                     "Northeast Structural Genomics Consortium",
-                     "Seattle Structural Genomics Center for Infectious Disease",
-                     "Partnership for T-Cell Biology",
-                     "Montreal-Kingston Bacterial Structural Genomics Initiative",
-                     "Membrane Protein Structures by Solution NMR",
-                     "Mycobacterium Tuberculosis Structural Proteomics Project",
-                     "Oxford Protein Production Facility",
-                     "Transcontinental EM Initiative for Membrane Protein Structure",
-                     "Center for Eukaryotic Structural Genomics",
-                     "Center for Structural Genomics of Infectious Diseases",
-                     "Accelerated Technologies Center for Gene to 3D Structure",
-                     "RIKEN Structural Genomics/Proteomics Initiative",
-                     "Paris-Sud Yeast Structural Genomics",
-                     "Israel Structural Proteomics Center",
-                     "Membrane Protein Structural Biology Consortium",
                      "New York Consortium on Membrane Protein Structure",
+                     "Northeast Structural Genomics Consortium",
+                     "Transcontinental EM Initiative for Membrane Protein Structure",
+                     "Structural Genomics Consortium for Research on Gene Expression",
                      "Center for the X-ray Structure Determination of Human Transporters",
-                     "GPCR Network",
-                     "Center for Membrane Proteins of Infectious Diseases",
-                     "Midwest Center for Macromolecular Research",
-                     "Southeast Collaboratory for Structural Genomics",
-                     "Structural Proteomics in Europe 2",
-                     "Atoms-to-Animals: The Immune Function Network",
-                     "Nucleocytoplasmic Transport: a Target for Cellular Control",
+                     "Assembly, Dynamics and Evolution of Cell-Cell and Cell-Matrix Adhesions",
+                     "Center for High-Throughput Structural Biology",
+                     "Paris-Sud Yeast Structural Genomics",
+                     "Structure, Dynamics and Activation Mechanisms of Chemokine Receptors",
                      "Scottish Structural Proteomics Facility",
+                     "Program for the Characterization of Secreted Effector Proteins",
+                     "Structures of Mtb Proteins Conferring Susceptibility to Known Mtb Inhibitors",
+                     "Partnership for Nuclear Receptor Signaling Code Biology",
+                     "Structural Proteomics in Europe 2",
+                     "Marseilles Structural Genomics Program @ AFMB",
+                     "Nucleocytoplasmic Transport: a Target for Cellular Control",
+                     "Partnership for T-Cell Biology",
+                     "Oxford Protein Production Facility",
+                     "Membrane Protein Structural Biology Consortium",
+                     "Medical Structural Genomics of Pathogenic Protozoa",
+                     "South Africa Structural Targets Annotation Database",
                      "Ontario Centre for Structural Proteomics",
-                     "Partnership for Stem Cell Biology",
                      "New York SGX Research Center for Structural Genomics",
-                     "Structure-Function Studies of Tight Junction Membrane Proteins"
+                     "Center for Membrane Proteins of Infectious Diseases",
+                     "Structural Genomics Consortium",
+                     "Accelerated Technologies Center for Gene to 3D Structure",
+                     "Chaperone-Enabled Studies of Epigenetic Regulation Enzymes",
+                     "Structural Proteomics in Europe",
+                     "Mycobacterium Tuberculosis Structural Proteomics Project",
+                     "Structure-Function Analysis of Polymorphic CDI Toxin-Immunity Protein Complexes",
+                     "Partnership for Stem Cell Biology",
+                     "Membrane Protein Structures by Solution NMR",
+                     "Center for Structures of Membrane Proteins",
+                     "Southeast Collaboratory for Structural Genomics",
+                     "Berkeley Structural Genomics Center",
+                     "Structure 2 Function Project",
+                     "Structure-Function Studies of Tight Junction Membrane Proteins",
+                     "Israel Structural Proteomics Center",
+                     "New York Structural GenomiX Research Consortium",
+                     "Integrated Center for Structure and Function Innovation",
+                     "Atoms-to-Animals: The Immune Function Network",
+                     "Midwest Center for Macromolecular Research",
+                     "GPCR Network",
+                     "Center for Structural Genomics of Infectious Diseases",
+                     "Montreal-Kingston Bacterial Structural Genomics Initiative",
+                     "New York Structural Genomics Research Consortium",
+                     "Center for Eukaryotic Structural Genomics",
+                     "Midwest Center for Structural Genomics",
+                     "Joint Center for Structural Genomics",
+                     "Enzyme Discovery for Natural Product Biosynthesis",
+                     "RIKEN Structural Genomics/Proteomics Initiative",
+                     "TB Structural Genomics Consortium",
+                     "Seattle Structural Genomics Center for Infectious Disease",
+                     "Bacterial targets at IGS-CNRS, France",
+                     "Mitochondrial Protein Partnership",
+                     "Structural Genomics of Pathogenic Protozoa Consortium",
+                     "Transmembrane Protein Center",
+                     "Protein Structure Factory"
                   ],
                   "examples": [
                      "Midwest Center for Structural Genomics"
@@ -2092,16 +2079,16 @@
                "id": {
                   "type": "integer",
                   "enum": [
-                     1,
+                     3,
+                     10,
+                     5,
                      2,
                      9,
-                     10,
                      8,
                      6,
-                     4,
-                     5,
-                     3,
-                     7
+                     1,
+                     7,
+                     4
                   ],
                   "examples": [
                      "1 2 3"
@@ -2111,63 +2098,63 @@
                "initial_of_center": {
                   "type": "string",
                   "enum": [
-                     "TJMP",
-                     "MCMR",
-                     "ISPC",
-                     "NPCXstals",
-                     "RSGI",
-                     "PCSEP",
-                     "OCSP",
-                     "TEMIMPS",
-                     "CELLMAT",
-                     "TCELL",
-                     "SGPP",
-                     "MTBI",
-                     "SECSG",
-                     "SSPF",
-                     "TransportPDB",
-                     "CSMP",
-                     "SPINE-2",
-                     "STEMCELL",
-                     "BSGC",
-                     "BIGS",
-                     "CESG",
-                     "NYSGRC",
-                     "NYSGXRC",
-                     "XMTB",
-                     "NatPro",
-                     "NHRs",
-                     "CHSAM",
-                     "MPID",
-                     "IFN",
-                     "MCSG",
-                     "MSGP",
-                     "ATCG3D",
-                     "SGCGES",
-                     "OPPF",
-                     "MPSBC",
-                     "SSGCID",
-                     "SASTAD",
-                     "PSF",
-                     "UC4CDI",
-                     "CEBS",
-                     "MPSbyNMR",
-                     "GPCR",
-                     "BSGI",
-                     "SGC",
-                     "JCSG",
                      "CHTSB",
-                     "NESG",
-                     "SPINE",
-                     "TBSGC",
-                     "TMPC",
-                     "MPP",
-                     "YSG",
+                     "NatPro",
+                     "SGC",
+                     "CEBS",
+                     "NYSGXRC",
                      "S2F",
+                     "MPSbyNMR",
+                     "SSPF",
+                     "TBSGC",
+                     "MCMR",
+                     "BIGS",
+                     "BSGC",
+                     "TransportPDB",
+                     "IFN",
+                     "STEMCELL",
+                     "CESG",
+                     "NHRs",
+                     "MTBI",
                      "MSGPP",
-                     "CSGID",
+                     "ISPC",
+                     "PCSEP",
+                     "SGPP",
                      "ISFI",
-                     "NYCOMPS"
+                     "BSGI",
+                     "NYCOMPS",
+                     "NYSGRC",
+                     "MPSBC",
+                     "TCELL",
+                     "TMPC",
+                     "TEMIMPS",
+                     "CSMP",
+                     "NESG",
+                     "YSG",
+                     "CHSAM",
+                     "TJMP",
+                     "MCSG",
+                     "JCSG",
+                     "OPPF",
+                     "SGCGES",
+                     "MPP",
+                     "MSGP",
+                     "RSGI",
+                     "GPCR",
+                     "XMTB",
+                     "CELLMAT",
+                     "NPCXstals",
+                     "CSGID",
+                     "UC4CDI",
+                     "SSGCID",
+                     "OCSP",
+                     "PSF",
+                     "SECSG",
+                     "SPINE-2",
+                     "MPID",
+                     "SASTAD",
+                     "ATCG3D",
+                     "SPINE"
                   ],
                   "examples": [
                      "JCSG"
@@ -2177,11 +2164,11 @@
                "project_name": {
                   "type": "string",
                   "enum": [
-                     "PSI:Biology",
-                     "NIAID, National Institute of Allergy and Infectious Diseases",
+                     "NPPSFA, National Project on Protein Structural and Functional Analyses",
                      "PSI, Protein Structure Initiative",
                      "Enzyme Function Initiative",
-                     "NPPSFA, National Project on Protein Structural and Functional Analyses"
+                     "NIAID, National Institute of Allergy and Infectious Diseases",
+                     "PSI:Biology"
                   ],
                   "examples": [
                      "PSI, Protein Structure Initiative"
@@ -2205,9 +2192,9 @@
                   "type": "string",
                   "enum": [
                      "Structure model",
-                     "NMR restraints",
                      "Structure factors",
-                     "NMR shifts"
+                     "NMR shifts",
+                     "NMR restraints"
                   ],
                   "examples": [
                      "Structure model"
@@ -2224,8 +2211,8 @@
                "provider": {
                   "type": "string",
                   "enum": [
-                     "repository",
-                     "author"
+                     "author",
+                     "repository"
                   ],
                   "examples": [
                      "repository"
@@ -2270,9 +2257,9 @@
                   "type": "string",
                   "enum": [
                      "Structure model",
-                     "NMR restraints",
                      "Structure factors",
-                     "NMR shifts"
+                     "NMR shifts",
+                     "NMR restraints"
                   ],
                   "examples": [
                      "Structure model"
@@ -2379,8 +2366,8 @@
                "id": {
                   "type": "string",
                   "enum": [
-                     "OBSLTE",
-                     "SPRSDE"
+                     "SPRSDE",
+                     "OBSLTE"
                   ],
                   "examples": [
                      "OBSLTE"
@@ -2418,8 +2405,8 @@
             "SG_entry": {
                "type": "string",
                "enum": [
-                  "Y",
-                  "N"
+                  "N",
+                  "Y"
                ],
                "examples": [
                   "Y"
@@ -2429,12 +2416,12 @@
             "deposit_site": {
                "type": "string",
                "enum": [
-                  "PDBJ",
-                  "RCSB",
-                  "PDBE",
-                  "BMRB",
                   "BNL",
-                  "NDB"
+                  "PDBE",
+                  "PDBJ",
+                  "NDB",
+                  "RCSB",
+                  "BMRB"
                ],
                "examples": [
                   "NDB",
@@ -2457,11 +2444,11 @@
                "type": "string",
                "enum": [
                   "GPCR Dock",
-                  "CAPRI",
-                  "RNA-Puzzles",
-                  "D3R",
                   "FoldIt",
                   "CASD-NMR",
+                  "RNA-Puzzles",
+                  "CAPRI",
+                  "D3R",
                   "CASP"
                ],
                "examples": [
@@ -2473,8 +2460,8 @@
             "pdb_format_compatible": {
                "type": "string",
                "enum": [
-                  "Y",
-                  "N"
+                  "N",
+                  "Y"
                ],
                "examples": [
                   "Y"
@@ -2484,11 +2471,11 @@
             "process_site": {
                "type": "string",
                "enum": [
-                  "PDBJ",
-                  "RCSB",
-                  "PDBE",
                   "BNL",
-                  "NDB"
+                  "PDBE",
+                  "PDBJ",
+                  "NDB",
+                  "RCSB"
                ],
                "examples": [
                   "NDB",
@@ -2510,24 +2497,24 @@
             "status_code": {
                "type": "string",
                "enum": [
-                  "REPL",
-                  "BIB",
-                  "DEL",
-                  "REL",
                   "REFI",
-                  "AUTH",
-                  "REV",
-                  "HOLD",
-                  "RMVD",
-                  "WAIT",
-                  "PROC",
-                  "UPD",
-                  "HPUB",
+                  "WDRN",
                   "POLC",
                   "OBS",
-                  "WDRN",
+                  "RMVD",
+                  "AUCO",
+                  "WAIT",
+                  "REPL",
+                  "UPD",
+                  "PROC",
+                  "HPUB",
+                  "AUTH",
+                  "REV",
+                  "REL",
                   "TRSF",
-                  "AUCO"
+                  "BIB",
+                  "DEL",
+                  "HOLD"
                ],
                "examples": [
                   "REL",
@@ -2538,17 +2525,17 @@
             "status_code_cs": {
                "type": "string",
                "enum": [
-                  "REPL",
-                  "AUTH",
-                  "REL",
+                  "POLC",
                   "HOLD",
+                  "WDRN",
+                  "OBS",
                   "RMVD",
                   "WAIT",
                   "PROC",
                   "HPUB",
-                  "POLC",
-                  "OBS",
-                  "WDRN"
+                  "AUTH",
+                  "REL",
+                  "REPL"
                ],
                "examples": [
                   "PROC  = Processing in progress\n     WAIT  = Awaiting author approval\n     REL   = Release\n     HOLD  = On hold until yyyy-mm-dd\n     HPUB  = On hold until publication\n     OBS   = Entry has been obsoleted and replaced by another entry\n     WDRN  = Entry has been withdrawn by depositor"
@@ -2558,17 +2545,17 @@
             "status_code_mr": {
                "type": "string",
                "enum": [
-                  "REPL",
-                  "REL",
-                  "AUTH",
-                  "HOLD",
+                  "POLC",
+                  "WDRN",
+                  "OBS",
                   "RMVD",
                   "WAIT",
+                  "REPL",
                   "PROC",
                   "HPUB",
-                  "POLC",
-                  "OBS",
-                  "WDRN"
+                  "AUTH",
+                  "REL",
+                  "HOLD"
                ],
                "examples": [
                   "PROC  = To be processed\n     REL   = Release\n     HOLD  = On hold until yyyy-mm-dd\n     HPUB  = On hold until publication\n     OBS   = Entry has been obsoleted and replaced by another entry\n     WDRN  = Entry has been withdrawn by depositor\n     WAIT  = Awaiting author approval"
@@ -2578,17 +2565,17 @@
             "status_code_sf": {
                "type": "string",
                "enum": [
-                  "REPL",
-                  "REL",
-                  "AUTH",
-                  "HOLD",
+                  "POLC",
+                  "WDRN",
+                  "OBS",
                   "RMVD",
                   "WAIT",
+                  "REPL",
                   "PROC",
                   "HPUB",
-                  "POLC",
-                  "OBS",
-                  "WDRN"
+                  "AUTH",
+                  "REL",
+                  "HOLD"
                ],
                "examples": [
                   "PROC  = To be processed\n     REL   = Released\n     HOLD  = On hold until yyyy-mm-dd\n     HPUB  = On hold until publication\n     OBS   = Entry has been obsoleted and replaced by another entry\n     WDRN  = Entry has been withdrawn by depositor\n     WAIT  = Awaiting author approval"
@@ -2674,44 +2661,44 @@
                "class": {
                   "type": "string",
                   "enum": [
-                     "Lantibiotic",
-                     "Oxidation-reduction",
-                     "Transport activator",
-                     "Antiparasitic",
-                     "Enzyme inhibitor",
-                     "Antimicrobial",
-                     "Thrombin inhibitor, Trypsin inhibitor",
+                     "Antiinflammatory",
                      "CASPASE inhibitor",
-                     "Antineoplastic",
-                     "Anticancer",
-                     "Receptor",
-                     "Anticoagulant, Antithrombotic",
-                     "Antifungal",
-                     "Trypsin inhibitor",
-                     "Antimicrobial, Antiretroviral",
+                     "Thrombin inhibitor",
+                     "Antibiotic, Anthelmintic",
+                     "Chaperone binding",
+                     "Oxidation-reduction",
                      "Metabolism",
+                     "Unknown",
+                     "Antiparasitic",
+                     "Inhibitor",
+                     "Antimicrobial, Antiretroviral",
+                     "Toxin",
+                     "Antibiotic, Antimicrobial",
+                     "Antimicrobial, Antiparasitic, Antibiotic",
+                     "Trypsin inhibitor",
+                     "Antagonist",
+                     "Antimicrobial, Antitumor",
+                     "Antitumor",
+                     "Anthelmintic",
+                     "Transport activator",
+                     "Growth factor",
                      "Antiretroviral",
                      "Antibiotic",
-                     "Anticoagulant",
-                     "Chaperone binding",
-                     "Growth factor",
-                     "Thrombin inhibitor",
-                     "Metal transport",
-                     "Antimicrobial, Antitumor",
-                     "Antibiotic, Anthelmintic",
-                     "Antithrombotic",
-                     "Antibiotic, Antineoplastic",
-                     "Antiviral",
-                     "Antibiotic, Antimicrobial",
-                     "Antiinflammatory",
-                     "Antitumor",
-                     "Antimicrobial, Antiparasitic, Antibiotic",
-                     "Antagonist",
-                     "Toxin",
-                     "Inhibitor",
-                     "Unknown",
+                     "Antimicrobial",
+                     "Receptor",
                      "Immunosuppressant",
-                     "Anthelmintic"
+                     "Antifungal",
+                     "Anticancer",
+                     "Antibiotic, Antineoplastic",
+                     "Lantibiotic",
+                     "Anticoagulant",
+                     "Antineoplastic",
+                     "Metal transport",
+                     "Enzyme inhibitor",
+                     "Thrombin inhibitor, Trypsin inhibitor",
+                     "Antithrombotic",
+                     "Antiviral",
+                     "Anticoagulant, Antithrombotic"
                   ],
                   "description": "Broadly defines the function of the molecule."
                },
@@ -2733,38 +2720,38 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "Ansamycin",
-                     "Quinolone",
                      "Nucleoside",
-                     "Chalkophore",
-                     "Heterocyclic",
-                     "Polypeptide",
-                     "Siderophore",
-                     "Polycyclic",
-                     "Lipopeptide",
-                     "Polysaccharide",
-                     "Keto acid",
-                     "Lipoglycopeptide",
-                     "Thiopeptide",
                      "Cyclic peptide",
-                     "Anthraquinone",
-                     "Amino acid",
-                     "Chromophore",
-                     "Anthracycline",
-                     "Chalkophore, Polypeptide",
-                     "Oligosaccharide",
-                     "Aminoglycoside",
-                     "Imino sugar",
-                     "Cyclic lipopeptide",
+                     "Chalkophore",
                      "Peptaibol",
-                     "Non-polymer",
-                     "Peptide-like",
-                     "Cyclic depsipeptide",
-                     "Glycopeptide",
+                     "Chalkophore, Polypeptide",
                      "Macrolide",
-                     "Thiolactone",
+                     "Polysaccharide",
+                     "Lipoglycopeptide",
+                     "Chromophore",
+                     "Ansamycin",
                      "Unknown",
-                     "Oligopeptide"
+                     "Oligosaccharide",
+                     "Lipopeptide",
+                     "Thiolactone",
+                     "Anthracycline",
+                     "Peptide-like",
+                     "Aminoglycoside",
+                     "Non-polymer",
+                     "Imino sugar",
+                     "Heterocyclic",
+                     "Keto acid",
+                     "Cyclic lipopeptide",
+                     "Polypeptide",
+                     "Anthraquinone",
+                     "Oligopeptide",
+                     "Glycopeptide",
+                     "Amino acid",
+                     "Thiopeptide",
+                     "Quinolone",
+                     "Polycyclic",
+                     "Siderophore",
+                     "Cyclic depsipeptide"
                   ],
                   "examples": [
                      "Peptide-like",
@@ -2952,8 +2939,8 @@
                "sample_state": {
                   "type": "string",
                   "enum": [
-                     "anisotropic",
-                     "isotropic"
+                     "isotropic",
+                     "anisotropic"
                   ],
                   "examples": [
                      "isotropic"
@@ -3037,9 +3024,9 @@
                "ionic_strength_units": {
                   "type": "string",
                   "enum": [
+                     "mM",
                      "Not defined",
-                     "M",
-                     "mM"
+                     "M"
                   ],
                   "examples": [
                      "M"
@@ -3072,8 +3059,8 @@
                   "type": "string",
                   "enum": [
                      "pH*",
-                     "Not defined",
                      "pH",
+                     "Not defined",
                      "pD"
                   ],
                   "examples": [
@@ -3123,8 +3110,8 @@
                   "type": "string",
                   "enum": [
                      "K",
-                     "Not defined",
-                     "C"
+                     "C",
+                     "Not defined"
                   ],
                   "examples": [
                      "K"
@@ -3220,23 +3207,23 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "polycrystalline powder",
-                     "bicelle",
-                     "membrane",
+                     "oriented membrane film",
                      "liposome",
+                     "membrane",
                      "gel solution",
-                     "solid",
+                     "lyophilized powder",
+                     "emulsion",
                      "gel solid",
                      "single crystal",
-                     "emulsion",
-                     "filamentous virus",
-                     "oriented membrane film",
-                     "solution",
-                     "lyophilized powder",
-                     "micelle",
-                     "fiber",
+                     "polycrystalline powder",
+                     "solid",
+                     "bicelle",
                      "reverse micelle",
-                     "fibrous protein"
+                     "filamentous virus",
+                     "solution",
+                     "fiber",
+                     "fibrous protein",
+                     "micelle"
                   ],
                   "examples": [
                      "bicelle"
@@ -3654,8 +3641,8 @@
                "method": {
                   "type": "string",
                   "enum": [
-                     "fixed target",
-                     "injection"
+                     "injection",
+                     "fixed target"
                   ],
                   "description": "The description of the mechanism by which the specimen in placed in the path\n of the source."
                }
@@ -3891,17 +3878,17 @@
             "status_code": {
                "type": "string",
                "enum": [
-                  "HPUB'",
-                  "REPL",
-                  "REL",
-                  "AUTH",
-                  "REFI",
-                  "HOLD",
-                  "WAIT",
-                  "PROC",
                   "POLC",
                   "WDRN",
-                  "AUCO"
+                  "REFI",
+                  "AUCO",
+                  "WAIT",
+                  "HPUB'",
+                  "REPL",
+                  "PROC",
+                  "AUTH",
+                  "REL",
+                  "HOLD"
                ],
                "description": "The release status for the entry."
             }
@@ -3974,12 +3961,12 @@
             "experimental_method": {
                "type": "string",
                "enum": [
-                  "Neutron",
-                  "EM",
-                  "X-ray",
+                  "Multiple methods",
                   "NMR",
+                  "EM",
                   "Other",
-                  "Multiple methods"
+                  "X-ray",
+                  "Neutron"
                ],
                "description": "The category of experimental method(s) used to determine the structure entry."
             },
@@ -3994,19 +3981,19 @@
             "polymer_composition": {
                "type": "string",
                "enum": [
-                  "protein/NA",
-                  "DNA",
-                  "oligosaccharide",
-                  "other type pair",
                   "RNA",
                   "NA-hybrid",
-                  "NA/oligosaccharide",
-                  "heteromeric protein",
-                  "homomeric protein",
                   "other",
+                  "other type pair",
+                  "heteromeric protein",
                   "protein/oligosaccharide",
+                  "homomeric protein",
+                  "protein/NA",
+                  "DNA",
+                  "other type composition",
                   "DNA/RNA",
-                  "other type composition"
+                  "NA/oligosaccharide",
+                  "oligosaccharide"
                ],
                "description": "Polymer entity composition of the entry."
             },
@@ -4053,8 +4040,6 @@
                },
                "B_iso_mean": {
                   "type": "number",
-                  "minimum": 5,
-                  "maximum": 70,
                   "description": "The mean isotropic displacement parameter (B value)\n for the coordinate set."
                },
                "B_iso_min": {
@@ -4087,14 +4072,10 @@
                },
                "correlation_coeff_Fo_to_Fc": {
                   "type": "number",
-                  "minimum": 0,
-                  "maximum": 1,
                   "description": "            The correlation coefficient between the observed and\n             calculated structure factors for reflections included in\n             the refinement.\n\n             The correlation coefficient is scale-independent and gives\n             an idea of the quality of the refined model.\n\n                          sum~i~(Fo~i~ Fc~i~ - <Fo><Fc>)\nR~corr~ = ------------------------------------------------------------\n          SQRT{sum~i~(Fo~i~)^2^-<Fo>^2^} SQRT{sum~i~(Fc~i~)^2^-<Fc>^2^}\n\n             Fo = observed structure factors\n             Fc = calculated structure factors\n             <>   denotes average value\n\n             summation is over reflections included in the refinement"
                },
                "correlation_coeff_Fo_to_Fc_free": {
                   "type": "number",
-                  "minimum": 0,
-                  "maximum": 1,
                   "description": "            The correlation coefficient between the observed and\n             calculated structure factors for reflections not included\n             in the refinement (free reflections).\n\n              The correlation coefficient is scale-independent and gives\n              an idea of the quality of the refined model.\n\n                          sum~i~(Fo~i~ Fc~i~ - <Fo><Fc>)\nR~corr~ = ------------------------------------------------------------\n          SQRT{sum~i~(Fo~i~)^2^-<Fo>^2^} SQRT{sum~i~(Fc~i~)^2^-<Fc>^2^}\n\n              Fo  = observed structure factors\n              Fc  = calculated structure factors\n              <>    denotes average value\n\n              summation is over reflections not included\n              in the refinement (free reflections)"
                },
                "details": {
@@ -4107,14 +4088,11 @@
                },
                "ls_R_factor_R_free": {
                   "type": "number",
-                  "minimum": 0,
-                  "maximum": 1,
+                  "minimum": 0.0,
                   "description": "Residual factor R for reflections that satisfy the resolution\n limits established by _refine.ls_d_res_high and\n _refine.ls_d_res_low and the observation limit established by\n _reflns.observed_criterion, and that were used as the test\n reflections (i.e. were excluded from the refinement) when the\n refinement included the calculation of a 'free' R factor.\n Details of how reflections were assigned to the working and\n test sets are given in _reflns.R_free_details.\n\n     sum|F~obs~ - F~calc~|\n R = ---------------------\n          sum|F~obs~|\n\n F~obs~  = the observed structure-factor amplitudes\n F~calc~ = the calculated structure-factor amplitudes\n\n sum is taken over the specified reflections"
                },
                "ls_R_factor_R_free_error": {
                   "type": "number",
-                  "minimum": 0.01,
-                  "maximum": 0.03,
                   "description": "The estimated error in _refine.ls_R_factor_R_free.\n The method used to estimate the error is described in the\n item _refine.ls_R_factor_R_free_error_details."
                },
                "ls_R_factor_R_free_error_details": {
@@ -4123,43 +4101,38 @@
                },
                "ls_R_factor_R_work": {
                   "type": "number",
-                  "minimum": 0.1,
-                  "maximum": 0.3,
+                  "minimum": 0.0,
                   "description": "Residual factor R for reflections that satisfy the resolution\n limits established by _refine.ls_d_res_high and\n _refine.ls_d_res_low and the observation limit established by\n _reflns.observed_criterion, and that were used as the working\n reflections (i.e. were included in the refinement)  when the\n refinement included the calculation of a 'free' R factor.\n Details of how reflections were assigned to the working and\n test sets are given in _reflns.R_free_details.\n\n _refine.ls_R_factor_obs should not be confused with\n _refine.ls_R_factor_R_work; the former reports the results of a\n refinement in which all observed reflections were used, the\n latter a refinement in which a subset of the observed\n reflections were excluded from refinement for the calculation\n of a 'free' R factor. However, it would be meaningful to quote\n both values if a 'free' R factor were calculated for most of\n the refinement, but all of the observed reflections were used\n in the final rounds of refinement; such a protocol should be\n explained in _refine.details.\n\n     sum|F~obs~ - F~calc~|\n R = ---------------------\n          sum|F~obs~|\n\n F~obs~  = the observed structure-factor amplitudes\n F~calc~ = the calculated structure-factor amplitudes\n\n sum is taken over the specified reflections"
                },
                "ls_R_factor_all": {
                   "type": "number",
-                  "minimum": 0,
-                  "maximum": 1,
+                  "minimum": 0.0,
                   "description": "Residual factor R for all reflections that satisfy the resolution\n limits established by _refine.ls_d_res_high and\n _refine.ls_d_res_low.\n\n     sum|F~obs~ - F~calc~|\n R = ---------------------\n          sum|F~obs~|\n\n F~obs~  = the observed structure-factor amplitudes\n F~calc~ = the calculated structure-factor amplitudes\n\n sum is taken over the specified reflections"
                },
                "ls_R_factor_obs": {
                   "type": "number",
-                  "minimum": 0,
-                  "maximum": 1,
+                  "minimum": 0.0,
                   "description": "Residual factor R for reflections that satisfy the resolution\n limits established by _refine.ls_d_res_high and\n _refine.ls_d_res_low and the observation limit established by\n _reflns.observed_criterion.\n\n _refine.ls_R_factor_obs should not be confused with\n _refine.ls_R_factor_R_work; the former reports the results of a\n refinement in which all observed reflections were used, the\n latter a refinement in which a subset of the observed\n reflections were excluded from refinement for the calculation\n of a 'free' R factor. However, it would be meaningful to quote\n both values if a 'free' R factor were calculated for most of\n the refinement, but all of the observed reflections were used\n in the final rounds of refinement; such a protocol should be\n explained in _refine.details.\n\n     sum|F~obs~ - F~calc~|\n R = ---------------------\n          sum|F~obs~|\n\n F~obs~  = the observed structure-factor amplitudes\n F~calc~ = the calculated structure-factor amplitudes\n\n sum is taken over the specified reflections"
                },
                "ls_d_res_high": {
                   "type": "number",
-                  "minimum": 0.5,
-                  "maximum": 8,
+                  "minimum": 0.0,
                   "description": "The smallest value for the interplanar spacings for the\n reflection data used in the refinement in angstroms. This is\n called the highest resolution."
                },
                "ls_d_res_low": {
                   "type": "number",
-                  "minimum": 5,
-                  "maximum": 200,
+                  "minimum": 0.0,
                   "description": "The largest value for the interplanar spacings for\n the reflection data used in the refinement in angstroms.\n This is called the lowest resolution."
                },
                "ls_matrix_type": {
                   "type": "string",
                   "enum": [
-                     "diagonal",
-                     "atomblock",
                      "sparse",
-                     "full",
                      "userblock",
-                     "fullcycle"
+                     "full",
+                     "fullcycle",
+                     "atomblock",
+                     "diagonal"
                   ],
                   "description": "Type of matrix used to accumulate the least-squares derivatives."
                },
@@ -4170,8 +4143,7 @@
                },
                "ls_number_reflns_R_free": {
                   "type": "integer",
-                  "minimum": 40,
-                  "maximum": 16000,
+                  "minimum": 0,
                   "description": "The number of reflections that satisfy the resolution limits\n established by _refine.ls_d_res_high and _refine.ls_d_res_low\n and the observation limit established by\n _reflns.observed_criterion, and that were used as the test\n reflections (i.e. were excluded from the refinement) when the\n refinement included the calculation of a 'free' R factor.\n Details of how reflections were assigned to the working and\n test sets are given in _reflns.R_free_details."
                },
                "ls_number_reflns_R_work": {
@@ -4181,14 +4153,12 @@
                },
                "ls_number_reflns_all": {
                   "type": "integer",
-                  "minimum": 1000,
-                  "maximum": 300000,
+                  "minimum": 0,
                   "description": "The number of reflections that satisfy the resolution limits\n established by _refine.ls_d_res_high and _refine.ls_d_res_low."
                },
                "ls_number_reflns_obs": {
                   "type": "integer",
-                  "minimum": 1000,
-                  "maximum": 300000,
+                  "minimum": 0,
                   "description": "The number of reflections that satisfy the resolution limits\n established by _refine.ls_d_res_high and _refine.ls_d_res_low\n and the observation limit established by\n _reflns.observed_criterion."
                },
                "ls_number_restraints": {
@@ -4198,14 +4168,10 @@
                },
                "ls_percent_reflns_R_free": {
                   "type": "number",
-                  "minimum": 1,
-                  "maximum": 12,
                   "description": "The number of reflections that satisfy the resolution limits\n established by _refine.ls_d_res_high and _refine.ls_d_res_low\n and the observation limit established by\n _reflns.observed_criterion, and that were used as the test\n reflections (i.e. were excluded from the refinement) when the\n refinement included the calculation of a 'free' R factor,\n expressed as a percentage of the number of geometrically\n observable reflections that satisfy the resolution limits."
                },
                "ls_percent_reflns_obs": {
                   "type": "number",
-                  "minimum": 50,
-                  "maximum": 100,
                   "description": "The number of reflections that satisfy the resolution limits\n established by _refine.ls_d_res_high and _refine.ls_d_res_low\n and the observation limit established by\n _reflns.observed_criterion, expressed as a percentage of the\n number of geometrically observable reflections that satisfy\n the resolution limits."
                },
                "ls_redundancy_reflns_all": {
@@ -4246,26 +4212,18 @@
                },
                "overall_SU_B": {
                   "type": "number",
-                  "minimum": 0.1,
-                  "maximum": 42,
                   "description": "          The overall standard uncertainty (estimated standard deviation)\n           of the displacement parameters based on a maximum-likelihood\n           residual.\n\n           The overall standard uncertainty (sigma~B~)^2^ gives an idea\n           of the uncertainty in the B values of averagely defined\n           atoms (atoms with B values equal to the average B value).\n\n                                         N~a~\n(sigma~B~)^2^ = 8 ----------------------------------------------\n                  sum~i~ {[1/Sigma - (E~o~)^2^ (1-m^2^)](SUM_AS)s^4^}\n\n           N~a~           = number of atoms\n           E~o~           = normalized structure factors\n           m              = figure of merit of phases of reflections\n                            included in the summation\n           s              = reciprocal-space vector\n\n           SUM_AS         = (sigma~A~)^2^/Sigma^2^\n           Sigma          = (sigma~{E;exp}~)^2^ + epsilon [1-(sigma~A~)^2^]\n           sigma~{E;exp}~  = experimental uncertainties of normalized\n                            structure factors\n           sigma~A~        = <cos 2 pi s delta~x~> SQRT(Sigma~P~/Sigma~N~)\n                            estimated using maximum likelihood\n           Sigma~P~        = sum~{atoms in model}~ f^2^\n           Sigma~N~        = sum~{atoms in crystal}~ f^2^\n           f               = atom form factor\n           delta~x~        = expected error\n           epsilon         = multiplicity of diffracting plane\n\n           summation is over all reflections included in refinement\n\n           Ref: (sigma~A~ estimation) \"Refinement of macromolecular\n                structures by the maximum-likelihood method\",\n                Murshudov, G. N., Vagin, A. A. & Dodson, E. J. (1997).\n                Acta Cryst. D53, 240-255.\n\n                (SU B estimation) Murshudov, G. N. & Dodson,\n                E. J. (1997). Simplified error estimation a la\n                Cruickshank in macromolecular crystallography.\n                CCP4 Newsletter on Protein Crystallography, No. 33,\n                January 1997, pp. 31-39.\n\n               http://www.ccp4.ac.uk/newsletters/newsletter33/murshudov.html"
                },
                "overall_SU_ML": {
                   "type": "number",
-                  "minimum": 0,
-                  "maximum": 0.6,
                   "description": "          The overall standard uncertainty (estimated standard deviation)\n           of the positional parameters based on a maximum likelihood\n           residual.\n\n           The overall standard uncertainty (sigma~X~)^2^ gives an\n           idea of the uncertainty in the position of averagely\n           defined atoms (atoms with B values equal to average B value)\n\n                 3                         N~a~\n(sigma~X~)^2^  = ---------------------------------------------------------\n                 8 pi^2^ sum~i~ {[1/Sigma - (E~o~)^2^ (1-m^2^)](SUM_AS)s^2^}\n\n           N~a~           = number of atoms\n           E~o~           = normalized structure factors\n           m              = figure of merit of phases of reflections\n                            included in the summation\n           s              = reciprocal-space vector\n\n           SUM_AS         = (sigma~A~)^2^/Sigma^2^\n           Sigma          = (sigma~{E;exp}~)^2^ + epsilon [1-(sigma~A~)^2^]\n           sigma~{E;exp}~  = experimental uncertainties of normalized\n                            structure factors\n           sigma~A~        = <cos 2 pi s delta~x~> SQRT(Sigma~P~/Sigma~N~)\n                            estimated using maximum likelihood\n           Sigma~P~        = sum~{atoms in model}~ f^2^\n           Sigma~N~        = sum~{atoms in crystal}~ f^2^\n           f               = atom form factor\n           delta~x~        = expected error\n           epsilon         = multiplicity of diffracting plane\n\n           summation is over all reflections included in refinement\n\n           Ref: (sigma_A estimation) \"Refinement of macromolecular\n                structures by the maximum-likelihood method\",\n                Murshudov, G. N., Vagin, A. A. & Dodson, E. J. (1997).\n                Acta Cryst. D53, 240-255.\n\n                (SU ML estimation) Murshudov, G. N. & Dodson,\n                E. J. (1997). Simplified error estimation a la\n                Cruickshank in macromolecular crystallography.\n                CCP4 Newsletter on Protein Crystallography, No. 33,\n                January 1997, pp. 31-39.\n\n               http://www.ccp4.ac.uk/newsletters/newsletter33/murshudov.html"
                },
                "overall_SU_R_Cruickshank_DPI": {
                   "type": "number",
-                  "minimum": 0,
-                  "maximum": 0.7,
                   "description": "The overall standard uncertainty (estimated standard deviation)\n of the displacement parameters based on the crystallographic\n R value, expressed in a formalism known as the dispersion\n precision indicator (DPI).\n\n The overall standard uncertainty (sigma~B~) gives an idea\n of the uncertainty in the B values of averagely defined\n atoms (atoms with B values equal to the average B value).\n\n                        N~a~\n (sigma~B~)^2^ = 0.65 ---------- (R~value~)^2^ (D~min~)^2^ C^-2/3^\n                      (N~o~-N~p~)\n\n\n N~a~     = number of atoms included in refinement\n N~o~     = number of observations\n N~p~     = number of parameters refined\n R~value~ = conventional crystallographic R value\n D~min~   = maximum resolution\n C        = completeness of data\n\n Ref: Cruickshank, D. W. J. (1999). Acta Cryst. D55, 583-601.\n\n      Murshudov, G. N. & Dodson,\n      E. J. (1997). Simplified error estimation a la\n      Cruickshank in macromolecular crystallography.\n      CCP4 Newsletter on Protein Crystallography, No. 33,\n      January 1997, pp. 31-39.\n\n     http://www.ccp4.ac.uk/newsletters/newsletter33/murshudov.html\n"
                },
                "overall_SU_R_free": {
                   "type": "number",
-                  "minimum": 0,
-                  "maximum": 0.45,
                   "description": "The overall standard uncertainty (estimated standard deviation)\n of the displacement parameters based on the free R value.\n\n The overall standard uncertainty (sigma~B~) gives an idea\n of the uncertainty in the B values of averagely defined\n atoms (atoms with B values equal to the average B value).\n\n                        N~a~\n (sigma~B~)^2^ = 0.65 ---------- (R~free~)^2^ (D~min~)^2^ C^-2/3^\n                      (N~o~-N~p~)\n\n\n N~a~     = number of atoms included in refinement\n N~o~     = number of observations\n N~p~     = number of parameters refined\n R~free~  = conventional free crystallographic R value calculated\n          using reflections not included in refinement\n D~min~   = maximum resolution\n C        = completeness of data\n\n Ref: Cruickshank, D. W. J. (1999). Acta Cryst. D55, 583-601.\n\n      Murshudov, G. N. & Dodson,\n      E. J. (1997). Simplified error estimation a la\n      Cruickshank in macromolecular crystallography.\n      CCP4 Newsletter on Protein Crystallography, No. 33,\n      January 1997, pp. 31-39.\n\n     http://www.ccp4.ac.uk/newsletters/newsletter33/murshudov.html"
                },
                "pdbx_R_Free_selection_details": {
@@ -4278,8 +4236,8 @@
                "pdbx_TLS_residual_ADP_flag": {
                   "type": "string",
                   "enum": [
-                     "UNVERIFIED",
-                     "LIKELY RESIDUAL"
+                     "LIKELY RESIDUAL",
+                     "UNVERIFIED"
                   ],
                   "description": "A flag for TLS refinements identifying the type of atomic displacement parameters stored\n in _atom_site.B_iso_or_equiv."
                },
@@ -4370,14 +4328,10 @@
                },
                "pdbx_overall_ESU_R": {
                   "type": "number",
-                  "minimum": 0,
-                  "maximum": 1.2,
                   "description": "Overall estimated standard uncertainties of positional\n parameters based on R value."
                },
                "pdbx_overall_ESU_R_Free": {
                   "type": "number",
-                  "minimum": 0,
-                  "maximum": 0.7,
                   "description": "Overall estimated standard uncertainties of positional parameters based on R free value."
                },
                "pdbx_overall_SU_R_Blow_DPI": {
@@ -4436,14 +4390,10 @@
                },
                "solvent_model_param_bsol": {
                   "type": "number",
-                  "minimum": 5,
-                  "maximum": 300,
                   "description": "The value of the BSOL solvent-model parameter describing\n the average isotropic displacement parameter of disordered\n solvent atoms.\n\n This is one of the two parameters (the other is\n _refine.solvent_model_param_ksol) in Tronrud's method of\n modelling the contribution of bulk solvent to the\n scattering. The standard scale factor is modified according\n to the expression\n\n     k0 exp(-B0 * s^2^)[1-KSOL * exp(-BSOL * s^2^)]\n\n where k0 and B0 are the scale factors for the protein.\n\n Ref: Tronrud, D. E. (1997). Methods Enzymol. 277, 243-268."
                },
                "solvent_model_param_ksol": {
                   "type": "number",
-                  "minimum": 0.1,
-                  "maximum": 1,
                   "description": "The value of the KSOL solvent-model parameter describing\n the ratio of the electron density in the bulk solvent to the\n electron density in the molecular solute.\n\n This is one of the two parameters (the other is\n _refine.solvent_model_param_bsol) in Tronrud's method of\n modelling the contribution of bulk solvent to the\n scattering. The standard scale factor is modified according\n to the expression\n\n     k0 exp(-B0 * s^2^)[1-KSOL * exp(-BSOL * s^2^)]\n\n where k0 and B0 are the scale factors for the protein.\n\n Ref: Tronrud, D. E. (1997). Methods Enzymol. 277, 243-268."
                }
             },
@@ -4680,8 +4630,6 @@
             "properties": {
                "B_iso_Wilson_estimate": {
                   "type": "number",
-                  "minimum": 5,
-                  "maximum": 80,
                   "description": "The value of the overall isotropic displacement parameter\n estimated from the slope of the Wilson plot."
                },
                "R_free_details": {
@@ -4703,14 +4651,12 @@
                },
                "d_resolution_high": {
                   "type": "number",
-                  "minimum": 0.5,
-                  "maximum": 8,
+                  "minimum": 0.0,
                   "description": "The smallest value for the interplanar spacings for\n the reflection data. This is called the highest resolution."
                },
                "d_resolution_low": {
                   "type": "number",
-                  "minimum": 5,
-                  "maximum": 200,
+                  "minimum": 0.0,
                   "description": "The largest value for the interplanar spacings for the\n reflection data. This is called the lowest resolution."
                },
                "data_reduction_details": {
@@ -4798,8 +4744,6 @@
                },
                "observed_criterion_sigma_I": {
                   "type": "number",
-                  "minimum": -3,
-                  "maximum": 4,
                   "description": "The criterion used to classify a reflection as 'observed'\n expressed as a multiple of the value of sigma(I)."
                },
                "pdbx_CC_half": {
@@ -4810,37 +4754,27 @@
                },
                "pdbx_R_split": {
                   "type": "number",
-                  "minimum": 0.0,
-                  "maximum": 0.3,
-                  "exclusiveMaximum": true,
+                  "minimum": 0,
                   "description": "             R split measures the agreement between the sets of intensities created by merging\n              odd- and even-numbered images  from the overall data.\n\n\t      Ref: T. A. White, R. A. Kirian, A. V. Martin, A. Aquila, K. Nass, A. Barty\n              and H. N. Chapman (2012), J. Appl. Cryst. 45, 335-341\n"
                },
                "pdbx_Rmerge_I_obs": {
                   "type": "number",
-                  "minimum": 0.01,
-                  "maximum": 0.2,
                   "description": "The R value for merging intensities satisfying the observed\n criteria in this data set."
                },
                "pdbx_Rpim_I_all": {
                   "type": "number",
-                  "minimum": 0,
+                  "minimum": 0.0,
                   "exclusiveMinimum": true,
-                  "maximum": 0.173,
-                  "exclusiveMaximum": true,
                   "description": "The precision-indicating merging R factor value Rpim,\n for merging all intensities in this data set.\n\n        sum~i~ [1/(N~i~ - 1)]1/2^ sum~j~ | I~j~ - <I~i~> |\n Rpim = --------------------------------------------------\n                      sum~i~ ( sum~j~ I~j~ )\n\n I~j~   = the intensity of the jth observation of reflection i\n <I~i~> = the mean of the intensities of all observations\n          of reflection i\n N~i~   = the redundancy (the number of times reflection i\n          has been measured).\n\n sum~i~ is taken over all reflections\n sum~j~ is taken over all observations of each reflection.\n\n Ref: Diederichs, K. & Karplus, P. A. (1997). Nature Struct.\n      Biol. 4, 269-275.\n      Weiss, M. S. & Hilgenfeld, R. (1997). J. Appl. Cryst.\n      30, 203-205.\n      Weiss, M. S. (2001). J. Appl. Cryst. 34, 130-135."
                },
                "pdbx_Rrim_I_all": {
                   "type": "number",
-                  "minimum": 0,
+                  "minimum": 0.0,
                   "exclusiveMinimum": true,
-                  "maximum": 0.435,
-                  "exclusiveMaximum": true,
                   "description": "             The redundancy-independent merging R factor value Rrim,\n              also denoted Rmeas, for merging all intensities in this\n              data set.\n\n                     sum~i~ [N~i~/(N~i~ - 1)]1/2^ sum~j~ | I~j~ - <I~i~> |\n              Rrim = ----------------------------------------------------\n                                  sum~i~ ( sum~j~ I~j~ )\n\n              I~j~   = the intensity of the jth observation of reflection i\n              <I~i~> = the mean of the intensities of all observations of\n                       reflection i\n\t       N~i~   = the redundancy (the number of times reflection i\n                       has been measured).\n\n              sum~i~ is taken over all reflections\n              sum~j~ is taken over all observations of each reflection.\n\n              Ref: Diederichs, K. & Karplus, P. A. (1997). Nature Struct.\n                   Biol. 4, 269-275.\n                   Weiss, M. S. & Hilgenfeld, R. (1997). J. Appl. Cryst.\n                   30, 203-205.\n                   Weiss, M. S. (2001). J. Appl. Cryst. 34, 130-135."
                },
                "pdbx_Rsym_value": {
                   "type": "number",
-                  "minimum": 0.01,
-                  "maximum": 0.2,
                   "examples": [
                      "0.02"
                   ],
@@ -4860,8 +4794,6 @@
                },
                "pdbx_netI_over_av_sigmaI": {
                   "type": "number",
-                  "minimum": 0.05,
-                  "maximum": 50,
                   "description": "The ratio of the average intensity to the average uncertainty,\n <I>/<sigma(I)>.\n"
                },
                "pdbx_netI_over_sigmaI": {
@@ -4882,8 +4814,6 @@
                },
                "pdbx_redundancy": {
                   "type": "number",
-                  "minimum": 1,
-                  "maximum": 20,
                   "description": "Overall redundancy for this data set (%)."
                },
                "pdbx_scaling_rejects": {
@@ -4892,8 +4822,8 @@
                },
                "percent_possible_obs": {
                   "type": "number",
-                  "minimum": 0,
-                  "maximum": 100,
+                  "minimum": 0.0,
+                  "maximum": 100.0,
                   "description": "The percentage of geometrically possible reflections represented\n by reflections that satisfy the resolution limits established\n by _reflns.d_resolution_high and _reflns.d_resolution_low and\n the observation limit established by\n _reflns.observed_criterion."
                },
                "phase_calculation_details": {
@@ -4941,20 +4871,17 @@
                },
                "Rmerge_I_obs": {
                   "type": "number",
-                  "minimum": 0.01,
-                  "maximum": 0.8,
+                  "minimum": 0.0,
                   "description": "The value of Rmerge(I) for reflections classified as 'observed'\n (see _reflns.observed_criterion) in a given shell.\n\n             sum~i~(sum~j~|I~j~ - <I>|)\n Rmerge(I) = --------------------------\n                 sum~i~(sum~j~<I>)\n\n I~j~ = the intensity of the jth observation of reflection i\n <I>  = the mean of the intensities of all observations of\n        reflection i\n\n sum~i~ is taken over all reflections\n sum~j~ is taken over all observations of each reflection"
                },
                "d_res_high": {
                   "type": "number",
-                  "minimum": 0.5,
-                  "maximum": 8,
+                  "minimum": 0.0,
                   "description": "The smallest value in angstroms for the interplanar spacings\n for the reflections in this shell. This is called the highest\n resolution."
                },
                "d_res_low": {
                   "type": "number",
-                  "minimum": 0.5,
-                  "maximum": 10,
+                  "minimum": 0.0,
                   "description": "The highest value in angstroms for the interplanar spacings\n for the reflections in this shell. This is called the lowest\n resolution."
                },
                "meanI_over_sigI_all": {
@@ -4963,8 +4890,6 @@
                },
                "meanI_over_sigI_obs": {
                   "type": "number",
-                  "minimum": 0.05,
-                  "maximum": 20,
                   "description": "The ratio of the mean of the intensities of the reflections\n classified as 'observed' (see _reflns.observed_criterion) in\n this shell to the mean of the standard uncertainties of the\n intensities of the 'observed' reflections in this\n shell."
                },
                "meanI_over_uI_all": {
@@ -4986,8 +4911,6 @@
                },
                "number_unique_all": {
                   "type": "integer",
-                  "minimum": 5,
-                  "maximum": 30000,
                   "description": "The total number of measured reflections which are symmetry-\n unique after merging for this shell."
                },
                "number_unique_obs": {
@@ -5002,31 +4925,24 @@
                },
                "pdbx_R_split": {
                   "type": "number",
-                  "minimum": 0.0,
-                  "maximum": 3.2,
-                  "exclusiveMaximum": true,
+                  "minimum": 0,
                   "description": "\n              R split measures the agreement between the sets of intensities created by merging\n              odd- and even-numbered images from the data within the resolution shell.\n\n\t      Ref: T. A. White, R. A. Kirian, A. V. Martin, A. Aquila, K. Nass,\n\t      A. Barty and H. N. Chapman (2012), J. Appl. Cryst. 45, 335-341\n"
                },
                "pdbx_Rpim_I_all": {
                   "type": "number",
-                  "minimum": 0,
+                  "minimum": 0.0,
                   "exclusiveMinimum": true,
-                  "maximum": 1.0,
-                  "exclusiveMaximum": true,
                   "description": "The precision-indicating merging R factor value Rpim,\n for merging all intensities in a given shell.\n\n        sum~i~ [1/(N~i~ - 1)]1/2^ sum~j~ | I~j~ - <I~i~> |\n Rpim = --------------------------------------------------\n                      sum~i~ ( sum~j~ I~j~ )\n\n I~j~   = the intensity of the jth observation of reflection i\n <I~i~> = the mean of the intensities of all observations of\n          reflection i\n N~i~   = the redundancy (the number of times reflection i\n          has been measured).\n\n sum~i~ is taken over all reflections\n sum~j~ is taken over all observations of each reflection.\n\n Ref: Diederichs, K. & Karplus, P. A. (1997). Nature Struct.\n      Biol. 4, 269-275.\n      Weiss, M. S. & Hilgenfeld, R. (1997). J. Appl. Cryst.\n      30, 203-205.\n      Weiss, M. S. (2001). J. Appl. Cryst. 34, 130-135.\n"
                },
                "pdbx_Rrim_I_all": {
                   "type": "number",
-                  "minimum": 0,
+                  "minimum": 0.0,
                   "exclusiveMinimum": true,
-                  "maximum": 1.0,
-                  "exclusiveMaximum": true,
                   "description": "             The redundancy-independent merging R factor value Rrim,\n              also denoted Rmeas, for merging all intensities in a\n              given shell.\n\n                     sum~i~ [N~i~ /( N~i~ - 1)]1/2^ sum~j~ | I~j~ - <I~i~> |\n              Rrim = --------------------------------------------------------\n                                   sum~i~ ( sum~j~ I~j~ )\n\n              I~j~   = the intensity of the jth observation of reflection i\n              <I~i~> = the mean of the intensities of all observations of\n                       reflection i\n\t      N~i~   = the redundancy (the number of times reflection i\n                       has been measured).\n\n              sum~i~ is taken over all reflections\n              sum~j~ is taken over all observations of each reflection.\n\n              Ref: Diederichs, K. & Karplus, P. A. (1997). Nature Struct.\n                   Biol. 4, 269-275.\n                   Weiss, M. S. & Hilgenfeld, R. (1997). J. Appl. Cryst.\n                   30, 203-205.\n                   Weiss, M. S. (2001). J. Appl. Cryst. 34, 130-135."
                },
                "pdbx_Rsym_value": {
                   "type": "number",
-                  "minimum": 0.01,
-                  "maximum": 0.8,
+                  "minimum": 0.0,
                   "description": "R sym value in percent."
                },
                "pdbx_chi_squared": {
@@ -5055,8 +4971,6 @@
                },
                "pdbx_redundancy": {
                   "type": "number",
-                  "minimum": 1,
-                  "maximum": 15,
                   "description": "Redundancy for the current shell."
                },
                "pdbx_rejects": {
@@ -5065,14 +4979,13 @@
                },
                "percent_possible_all": {
                   "type": "number",
-                  "minimum": 20,
-                  "maximum": 100,
+                  "minimum": 0.0,
                   "description": "The percentage of geometrically possible reflections represented\n by all reflections measured for this shell."
                },
                "percent_possible_obs": {
                   "type": "number",
-                  "minimum": 20,
-                  "maximum": 100,
+                  "minimum": 0.0,
+                  "maximum": 100.0,
                   "description": "The percentage of geometrically possible reflections represented\n by reflections classified as 'observed' (see\n _reflns.observed_criterion) for this shell."
                }
             },
@@ -5136,26 +5049,26 @@
                   "type": "string",
                   "enum": [
                      "Fortran",
-                     "Fortran 77",
-                     "C++",
-                     "csh",
-                     "Basic",
-                     "Tcl",
-                     "Java & Fortran",
-                     "Ada",
-                     "ksh",
-                     "Python/C++",
-                     "assembler",
-                     "C",
-                     "Pascal",
-                     "Java",
-                     "sh",
-                     "Python",
-                     "Fortran_77",
-                     "Other",
-                     "Awk",
                      "Perl",
+                     "Fortran_77",
                      "Fortran 90",
+                     "Awk",
+                     "Other",
+                     "Tcl",
+                     "C++",
+                     "assembler",
+                     "Basic",
+                     "Pascal",
+                     "Python",
+                     "Ada",
+                     "sh",
+                     "Python/C++",
+                     "ksh",
+                     "Java & Fortran",
+                     "C",
+                     "Fortran 77",
+                     "csh",
+                     "Java",
                      "C/C++"
                   ],
                   "description": "The major computing language in which the software is\n coded."
@@ -5203,12 +5116,12 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "library",
-                     "filter",
+                     "program",
                      "jiffy",
-                     "other",
                      "package",
-                     "program"
+                     "library",
+                     "other",
+                     "filter"
                   ],
                   "description": "The classification of the software according to the most\n common types."
                },
@@ -5242,8 +5155,8 @@
             "pdbx_CASP_flag": {
                "type": "string",
                "enum": [
-                  "Y",
-                  "N"
+                  "N",
+                  "Y"
                ],
                "examples": [
                   "Y"
@@ -5334,14 +5247,14 @@
             "cell_setting": {
                "type": "string",
                "enum": [
-                  "rhombohedral",
+                  "cubic",
                   "hexagonal",
-                  "trigonal",
-                  "monoclinic",
-                  "tetragonal",
                   "orthorhombic",
+                  "monoclinic",
                   "triclinic",
-                  "cubic"
+                  "rhombohedral",
+                  "trigonal",
+                  "tetragonal"
                ],
                "description": "The cell settings for this space-group symmetry."
             },

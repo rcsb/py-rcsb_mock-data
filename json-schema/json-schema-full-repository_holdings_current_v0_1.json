@@ -1,6 +1,14 @@
 {
    "type": "object",
    "properties": {
+      "assembly_ids": {
+         "type": "array",
+         "items": {
+            "type": "string",
+            "description": "The assembly id codes."
+         },
+         "uniqueItems": false
+      },
       "entry_id": {
          "type": "string",
          "description": "The PDB entry accession code."
@@ -10,10 +18,20 @@
          "items": {
             "type": "string",
             "enum": [
-               "structure factors",
+               "entry PDBML",
+               "assembly PDB",
                "NMR chemical shifts",
+               "entry PDB bundle",
                "NMR restraints",
-               "coordinates"
+               "2fo-fc Map",
+               "assembly mmCIF",
+               "entry mmCIF",
+               "structure factors",
+               "FASTA sequence",
+               "validation report",
+               "Map Coefficients",
+               "entry PDB",
+               "fo-fc Map"
             ],
             "description": "The list of content types associated with this entry."
          },

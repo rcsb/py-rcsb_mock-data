@@ -26,6 +26,7 @@
 #                    rcsb_entry_info, and rcsb_chem_comp_target
 #    12-Nov-2018 jdw add rcsb_file_block_by_method
 #    21-Nov-2018 jdw add pdbx_chem_comp_audit.ordinal to replace the key for this category
+#    23-Nov-2018 jdw add _rcsb_repository_holdings_prerelease.seq_one_letter_code
 #
 ###########################################################################
 
@@ -45,16 +46,21 @@ data_rcsb_mmcif_ext.dic
 
     _dictionary.title           rcsb_mmcif_ext.dic
     _dictionary.datablock_id    rcsb_mmcif_ext.dic
-    _dictionary.version         0.105
+    _dictionary.version         0.106
 #
      loop_
     _dictionary_history.version
     _dictionary_history.update
     _dictionary_history.revision
+  0.106  2018-11-23
+;
+Changes (jdw):
+  + add _rcsb_repository_holdings_prerelease.seq_one_letter_code
+;
   0.105  2018-11-21
 ;
 Changes (jdw):
-  + add pdbx_chem_comp_audit.ordinal
+  + add _pdbx_chem_comp_audit.ordinal
 ;
   0.104  2018-11-12
 ;
@@ -156,6 +162,9 @@ Changes (jdw):
 ;
               'sequence_membership'
 ;              Items specifying the sequence members of a particular sequence cluster.
+;
+              'entity_feature'
+;              Items specifying the features of an entity.
 ;
 
 
@@ -1056,6 +1065,17 @@ save__rcsb_repository_holdings_current.entry_id
     _item_example.case          '1ABC'
      save_
 
+save__rcsb_repository_holdings_current.assembly_ids
+    _item_description.description
+;    The assembly id codes.
+;
+    _item.name                  '_rcsb_repository_holdings_current.assembly_ids'
+    _item.category_id             rcsb_repository_holdings_current
+    _item.mandatory_code          no
+    _item_type.code                alphanum-csv
+    _item_example.case           '1,2,3'
+     save_
+
 save__rcsb_repository_holdings_current.repository_content_types
     _item_description.description
 ;    The list of content types associated with this entry.
@@ -1064,11 +1084,23 @@ save__rcsb_repository_holdings_current.repository_content_types
     _item.category_id             rcsb_repository_holdings_current
     _item.mandatory_code          yes
     _item_type.code               alphanum-csv
-    _item_example.case           'coordinates'
+    _item_example.case           'entry mmCIF'
     loop_
     _item_enumeration.value
-    'coordinates' 'NMR restraints' 'NMR chemical shifts' 'structure factors'
-
+    'entry PDB'
+    'entry PDB bundle'
+    'entry mmCIF'
+    'entry PDBML'
+    'assembly PDB'
+    'assembly mmCIF'
+    'NMR restraints'
+    'NMR chemical shifts'
+    'structure factors'
+    'validation report'
+    '2fo-fc Map'
+    'fo-fc Map'
+    'Map Coefficients'
+    'FASTA sequence'
      save_
 
 ###
@@ -1315,8 +1347,6 @@ save__rcsb_repository_holdings_removed.id_codes_replaced_by
     _item_example.case           '4ABC,3ABC'
      save_
 
-
-
 #########################################
 ## RCSB_REPOSITORY_HOLDINGS_UNRELEASED ##
 #########################################
@@ -1500,7 +1530,7 @@ save__rcsb_repository_holdings_unreleased.title
 
 save__rcsb_repository_holdings_unreleased.audit_authors
    _item_description.description
-;              Names of the authors of the entry.
+;    Names of the authors of the entry.
 ;
 
     _item.name                  '_rcsb_repository_holdings_unreleased.audit_authors'
@@ -1526,6 +1556,84 @@ save__rcsb_repository_holdings_unreleased.author_prerelease_sequence_status
 
      save_
 
+#########################################
+## RCSB_REPOSITORY_HOLDINGS_PRERELEASE ##
+#########################################
+
+save_rcsb_repository_holdings_prerelease
+    _category.description
+;        The rcsb_repository_holdings_prerelease category records the
+         details of prerelease PDB entry information.
+;
+    _category.id                  rcsb_repository_holdings_prerelease
+    _category.mandatory_code      no
+    loop_
+    _category_key.name          '_rcsb_repository_holdings_prerelease.update_id'
+                                '_rcsb_repository_holdings_prerelease.entry_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     loop_
+     _rcsb_repository_holdings_prerelease.update_id
+     _rcsb_repository_holdings_prerelease.entry_id
+     _rcsb_repository_holdings_prerelease.seq_one_letter_code
+    2018_23 1ABC  'HHHH(MSE)AKQRSG...'
+    # ... abbreviated ...
+
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_repository_holdings_prerelease
+     save_
+
+save__rcsb_repository_holdings_prerelease.update_id
+    _item_description.description
+;    Identifier for the current data exchange status record.
+;
+    _item.name                  '_rcsb_repository_holdings_prerelease.update_id'
+    _item.category_id             rcsb_repository_holdings_prerelease
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '2018_23'
+     save_
+
+
+save__rcsb_repository_holdings_prerelease.entry_id
+    _item_description.description
+;    The PDB entry accession code.
+;
+    _item.name                  '_rcsb_repository_holdings_prerelease.entry_id'
+    _item.category_id             rcsb_repository_holdings_prerelease
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '1ABC'
+     save_
+
+
+
+save__rcsb_repository_holdings_prerelease.seq_one_letter_code
+   _item_description.description
+;   Chemical sequence expressed as string of one-letter amino acid codes.
+    Modifications and non-standard amino acids are represented parenthetically
+    as 3-letter codes.
+;
+
+    _item.name                  '_rcsb_repository_holdings_prerelease.prerelease_seq_one_letter_code'
+    _item.category_id             rcsb_repository_holdings_prerelease
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    loop_
+    _item_examples.case          'HHHH(MSE)AKQRSG...' 'AUCGGAAU...' '(DG}(DA)(DT)(DA)(DT)...'
+     save_
 
 ###################################################
 ## RCSB_REPOSITORY_HOLDINGS_REMOVED_AUDIT_AUTHOR ##

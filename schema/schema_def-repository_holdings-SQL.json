@@ -15,6 +15,7 @@
          ],
          "SCHEMA_MANDATORY": false,
          "ATTRIBUTES": {
+            "ASSEMBLY_IDS": "assembly_ids",
             "ENTRY_ID": "entry_id",
             "REPOSITORY_CONTENT_TYPES": "repository_content_types",
             "UPDATE_ID": "update_id"
@@ -29,6 +30,12 @@
             "UPDATE_ID": {
                "CATEGORY": "rcsb_repository_holdings_current",
                "ATTRIBUTE": "update_id",
+               "METHOD_NAME": null,
+               "ARGUMENTS": null
+            },
+            "ASSEMBLY_IDS": {
+               "CATEGORY": "rcsb_repository_holdings_current",
+               "ATTRIBUTE": "assembly_ids",
                "METHOD_NAME": null,
                "ARGUMENTS": null
             },
@@ -70,8 +77,21 @@
                   "REPO_HOLDINGS_CONTENT"
                ]
             },
-            "REPOSITORY_CONTENT_TYPES": {
+            "ASSEMBLY_IDS": {
                "ORDER": 3,
+               "NULLABLE": true,
+               "PRECISION": 0,
+               "PRIMARY_KEY": false,
+               "APP_TYPE": "char",
+               "WIDTH": 10,
+               "ITERABLE_DELIMITER": ",",
+               "FILTER_TYPES": [],
+               "IS_CHAR_TYPE": true,
+               "ENUMERATION": {},
+               "CONTENT_CLASSES": []
+            },
+            "REPOSITORY_CONTENT_TYPES": {
+               "ORDER": 4,
                "NULLABLE": false,
                "PRECISION": 0,
                "PRIMARY_KEY": false,
@@ -81,10 +101,20 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "structure factors": "structure factors",
+                  "entry pdbml": "entry PDBML",
+                  "assembly pdb": "assembly PDB",
                   "nmr chemical shifts": "NMR chemical shifts",
+                  "entry pdb bundle": "entry PDB bundle",
                   "nmr restraints": "NMR restraints",
-                  "coordinates": "coordinates"
+                  "2fo-fc map": "2fo-fc Map",
+                  "assembly mmcif": "assembly mmCIF",
+                  "entry mmcif": "entry mmCIF",
+                  "structure factors": "structure factors",
+                  "fasta sequence": "FASTA sequence",
+                  "validation report": "validation report",
+                  "map coefficients": "Map Coefficients",
+                  "entry pdb": "entry PDB",
+                  "fo-fc map": "fo-fc Map"
                },
                "CONTENT_CLASSES": [
                   "REPO_HOLDINGS_CONTENT"
@@ -355,6 +385,116 @@
          },
          "MAP_MERGE_INDICES": {
             "rcsb_repository_holdings_insilico_models": {
+               "ATTRIBUTES": [
+                  "entry_id",
+                  "update_id"
+               ],
+               "TYPE": "EQUI-JOIN"
+            }
+         },
+         "SLICE_ATTRIBUTES": {},
+         "SLICE_UNIT_CARDINALITY": {},
+         "SLICE_CATEGORY_EXTRAS": {}
+      },
+      "RCSB_REPOSITORY_HOLDINGS_PRERELEASE": {
+         "SCHEMA_ID": "RCSB_REPOSITORY_HOLDINGS_PRERELEASE",
+         "SCHEMA_NAME": "rcsb_repository_holdings_prerelease",
+         "SCHEMA_TYPE": "transactional",
+         "SCHEMA_UNIT_CARDINALITY": false,
+         "SCHEMA_CONTENT_CLASSES": [
+            "REPO_HOLDINGS_CONTENT"
+         ],
+         "SCHEMA_MANDATORY": false,
+         "ATTRIBUTES": {
+            "ENTRY_ID": "entry_id",
+            "SEQ_ONE_LETTER_CODE": "seq_one_letter_code",
+            "UPDATE_ID": "update_id"
+         },
+         "ATTRIBUTE_MAP": {
+            "ENTRY_ID": {
+               "CATEGORY": "rcsb_repository_holdings_prerelease",
+               "ATTRIBUTE": "entry_id",
+               "METHOD_NAME": null,
+               "ARGUMENTS": null
+            },
+            "UPDATE_ID": {
+               "CATEGORY": "rcsb_repository_holdings_prerelease",
+               "ATTRIBUTE": "update_id",
+               "METHOD_NAME": null,
+               "ARGUMENTS": null
+            },
+            "SEQ_ONE_LETTER_CODE": {
+               "CATEGORY": "rcsb_repository_holdings_prerelease",
+               "ATTRIBUTE": "seq_one_letter_code",
+               "METHOD_NAME": null,
+               "ARGUMENTS": null
+            }
+         },
+         "ATTRIBUTE_INFO": {
+            "ENTRY_ID": {
+               "ORDER": 1,
+               "NULLABLE": false,
+               "PRECISION": 0,
+               "PRIMARY_KEY": true,
+               "APP_TYPE": "char",
+               "WIDTH": 10,
+               "ITERABLE_DELIMITER": null,
+               "FILTER_TYPES": [],
+               "IS_CHAR_TYPE": true,
+               "ENUMERATION": {},
+               "CONTENT_CLASSES": [
+                  "REPO_HOLDINGS_CONTENT"
+               ]
+            },
+            "UPDATE_ID": {
+               "ORDER": 2,
+               "NULLABLE": false,
+               "PRECISION": 0,
+               "PRIMARY_KEY": true,
+               "APP_TYPE": "char",
+               "WIDTH": 10,
+               "ITERABLE_DELIMITER": null,
+               "FILTER_TYPES": [],
+               "IS_CHAR_TYPE": true,
+               "ENUMERATION": {},
+               "CONTENT_CLASSES": [
+                  "REPO_HOLDINGS_CONTENT"
+               ]
+            },
+            "SEQ_ONE_LETTER_CODE": {
+               "ORDER": 3,
+               "NULLABLE": true,
+               "PRECISION": 0,
+               "PRIMARY_KEY": false,
+               "APP_TYPE": "char",
+               "WIDTH": 10,
+               "ITERABLE_DELIMITER": ",",
+               "FILTER_TYPES": [],
+               "IS_CHAR_TYPE": true,
+               "ENUMERATION": {},
+               "CONTENT_CLASSES": [
+                  "REPO_HOLDINGS_CONTENT"
+               ]
+            }
+         },
+         "SCHEMA_DELETE_ATTRIBUTE": null,
+         "INDICES": {
+            "p1": {
+               "TYPE": "UNIQUE",
+               "ATTRIBUTES": [
+                  "ENTRY_ID",
+                  "UPDATE_ID"
+               ]
+            },
+            "s1": {
+               "TYPE": "SEARCH",
+               "ATTRIBUTES": [
+                  null
+               ]
+            }
+         },
+         "MAP_MERGE_INDICES": {
+            "rcsb_repository_holdings_prerelease": {
                "ATTRIBUTES": [
                   "entry_id",
                   "update_id"
@@ -1030,10 +1170,10 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "structure factors": "structure factors",
-                  "nmr chemical shifts": "NMR chemical shifts",
                   "nmr restraints": "NMR restraints",
-                  "coordinates": "coordinates"
+                  "nmr chemical shifts": "NMR chemical shifts",
+                  "coordinates": "coordinates",
+                  "structure factors": "structure factors"
                },
                "CONTENT_CLASSES": [
                   "REPO_HOLDINGS_CONTENT"
@@ -1407,16 +1547,16 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "repl": "REPL",
-                  "auth": "AUTH",
-                  "refi": "REFI",
-                  "hold": "HOLD",
-                  "wait": "WAIT",
-                  "proc": "PROC",
-                  "hpub": "HPUB",
                   "polc": "POLC",
                   "wdrn": "WDRN",
-                  "auco": "AUCO"
+                  "refi": "REFI",
+                  "auco": "AUCO",
+                  "wait": "WAIT",
+                  "repl": "REPL",
+                  "proc": "PROC",
+                  "hpub": "HPUB",
+                  "auth": "AUTH",
+                  "hold": "HOLD"
                },
                "CONTENT_CLASSES": [
                   "REPO_HOLDINGS_CONTENT"
@@ -1543,10 +1683,10 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "structure factors": "structure factors",
-                  "nmr chemical shifts": "NMR chemical shifts",
                   "nmr restraints": "NMR restraints",
-                  "coordinates": "coordinates"
+                  "nmr chemical shifts": "NMR chemical shifts",
+                  "coordinates": "coordinates",
+                  "structure factors": "structure factors"
                },
                "CONTENT_CLASSES": [
                   "REPO_HOLDINGS_CONTENT"
@@ -1589,6 +1729,7 @@
             "repository_holdings_update_v0_1",
             "repository_holdings_current_v0_1",
             "repository_holdings_unreleased_v0_1",
+            "repository_holdings_prerelease_v0_1",
             "repository_holdings_removed_v0_1",
             "repository_holdings_removed_audit_authors_v0_1",
             "repository_holdings_superseded_v0_1",
@@ -1604,6 +1745,9 @@
             "update_id"
          ],
          "repository_holdings_unreleased_v0_1": [
+            "update_id"
+         ],
+         "repository_holdings_prerelease_v0_1": [
             "update_id"
          ],
          "repository_holdings_removed_v0_1": [
@@ -1624,6 +1768,7 @@
          "repository_holdings_update_v0_1": [],
          "repository_holdings_current_v0_1": [],
          "repository_holdings_unreleased_v0_1": [],
+         "repository_holdings_prerelease_v0_1": [],
          "repository_holdings_removed_v0_1": [],
          "repository_holdings_removed_audit_authors_v0_1": [],
          "repository_holdings_superseded_v0_1": [],
@@ -1648,6 +1793,13 @@
          "repository_holdings_unreleased_v0_1": {
             "INCLUDE": [
                "RCSB_REPOSITORY_HOLDINGS_UNRELEASED"
+            ],
+            "EXCLUDE": [],
+            "SLICE_FILTER": null
+         },
+         "repository_holdings_prerelease_v0_1": {
+            "INCLUDE": [
+               "RCSB_REPOSITORY_HOLDINGS_PRERELEASE"
             ],
             "EXCLUDE": [],
             "SLICE_FILTER": null

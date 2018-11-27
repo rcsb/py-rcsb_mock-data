@@ -7,6 +7,7 @@
 # 11-Nov-2018 jdw add DRUGBANK_MAPPING_LOCATOR, and CCDC_MAPPING_LOCATOR and chem_comp_core schema
 # 18-Nov-2018 jdw add PRIVATE_KEY_NAME to collection_attributes_names
 # 20-Nov-2018 jdw add pdbx_chem_comp_audit.ordinal
+# 23-Nov-2018 jdw add rcsb_repository_holdings_prerelease
 #
 # Master Pinelands configuration file example
 ---
@@ -109,6 +110,7 @@ repository_holdings:
     COLLECTION_HOLDINGS_UPDATE: repository_holdings_update
     COLLECTION_HOLDINGS_CURRENT: repository_holdings_current
     COLLECTION_HOLDINGS_UNRELEASED: repository_holdings_unreleased
+    COLLECTION_HOLDINGS_PRERELEASE: repository_holdings_prerelease
     COLLECTION_HOLDINGS_REMOVED: repository_holdings_removed
     COLLECTION_HOLDINGS_REMOVED_AUTHORS: repository_holdings_removed_audit_authors
     COLLECTION_HOLDINGS_SUPERSEDED: repository_holdings_superseded
@@ -188,6 +190,10 @@ repository_holdings_unreleased_v0_1:
     SCHEMA_NAME: repository_holdings
     BSON_SCHEMA_FULL_LOCATOR: json-schema/bson-schema-full-repository_holdings_unreleased_v0_1.json
     BSON_SCHEMA_MIN_LOCATOR: json-schema/bson-schema-min-repository_holdings_unreleased_v0_1.json
+repository_holdings_prerelease_v0_1:
+    SCHEMA_NAME: repository_holdings
+    BSON_SCHEMA_FULL_LOCATOR: json-schema/bson-schema-full-repository_holdings_prerelease_v0_1.json
+    BSON_SCHEMA_MIN_LOCATOR: json-schema/bson-schema-min-repository_holdings_prerelease_v0_1.json
 repository_holdings_removed_audit_authors_v0_1:
     SCHEMA_NAME: repository_holdings
     BSON_SCHEMA_FULL_LOCATOR: json-schema/bson-schema-full-repository_holdings_removed_audit_authors_v0_1.json
@@ -678,6 +684,11 @@ dictionary_helper:
                       - title
                       - audit_authors
                       - author_prerelease_sequence_status
+                - CATEGORY_NAME: rcsb_repository_holdings_prerelease
+                  ATTRIBUTE_NAME_LIST:
+                      - update_id
+                      - entry_id
+                      - seq_one_letter_code
                 - CATEGORY_NAME: rcsb_repository_holdings_removed_audit_author
                   ATTRIBUTE_NAME_LIST:
                       - update_id
@@ -781,6 +792,7 @@ schemadef_helper:
                 - rcsb_repository_holdings_update
                 - rcsb_repository_holdings_current
                 - rcsb_repository_holdings_unreleased
+                - rcsb_repository_holdings_prerelease
                 - rcsb_repository_holdings_removed
                 - rcsb_repository_holdings_removed_audit_author
                 - rcsb_repository_holdings_superseded
@@ -951,6 +963,7 @@ document_helper:
             - repository_holdings_update_v0_1
             - repository_holdings_current_v0_1
             - repository_holdings_unreleased_v0_1
+            - repository_holdings_prerelease_v0_1
             - repository_holdings_removed_v0_1
             - repository_holdings_removed_audit_authors_v0_1
             - repository_holdings_superseded_v0_1
@@ -1138,6 +1151,11 @@ document_helper:
                 - rcsb_repository_holdings_unreleased
             EXCLUDE: []
             SLICE:
+        repository_holdings_prerelease_v0_1:
+            INCLUDE:
+                - rcsb_repository_holdings_prerelease
+            EXCLUDE: []
+            SLICE:
         repository_holdings_removed_v0_1:
             INCLUDE:
                 - rcsb_repository_holdings_removed
@@ -1249,6 +1267,8 @@ document_helper:
         repository_holdings_current_v0_1:
             - update_id
         repository_holdings_unreleased_v0_1:
+            - update_id
+        repository_holdings_prerelease_v0_1:
             - update_id
         repository_holdings_removed_v0_1:
             - update_id
