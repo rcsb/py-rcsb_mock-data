@@ -8,6 +8,7 @@
 # 18-Nov-2018 jdw add PRIVATE_KEY_NAME to collection_attributes_names
 # 20-Nov-2018 jdw add pdbx_chem_comp_audit.ordinal
 # 23-Nov-2018 jdw add rcsb_repository_holdings_prerelease
+# 30-Nov-2018 jdw add CONSOLIDATE_BIRD_CONTENT content class for bird_chem_comp_core collection
 #
 # Master Pinelands configuration file example
 ---
@@ -739,6 +740,187 @@ dictionary_helper:
                       - instance_id
                       - cluster_id
                       - identity
+        ?       - CONSOLIDATED_BIRD_CONTENT
+                - bird_chem_comp_core
+        :       - CATEGORY_NAME: chem_comp
+                  ATTRIBUTE_NAME_LIST:
+                       - id
+                       - name
+                       - formula
+                       - formula_weight
+                       - pdbx_release_status
+                       - type
+                - CATEGORY_NAME: pdbx_chem_comp_descriptor
+                  ATTRIBUTE_NAME_LIST:
+                       - comp_id
+                       - type
+                       - program
+                       - program_version
+                       - descriptor
+                - CATEGORY_NAME: pdbx_chem_comp_identifier
+                  ATTRIBUTE_NAME_LIST:
+                       - comp_id
+                       - type
+                       - program
+                       - program_version
+                       - identifier
+                - CATEGORY_NAME: pdbx_reference_molecule
+                  ATTRIBUTE_NAME_LIST:
+                       - prd_id
+                       - name
+                       - represent_as
+                       - type
+                       - type_evidence_code
+                       - class
+                       - class_evidence_code
+                       - formula
+                       - formula_weight
+                       - chem_comp_id
+                       - release_status
+                       - replaces
+                       - replaced_by
+                       - compound_details
+                       - description
+                       - representative_PDB_id_code
+                - CATEGORY_NAME: pdbx_reference_entity_list
+                  ATTRIBUTE_NAME_LIST:
+                       - prd_id
+                       - ref_entity_id
+                       - component_id
+                       - type
+                       - details
+                - CATEGORY_NAME: pdbx_reference_entity_poly_link
+                  ATTRIBUTE_NAME_LIST:
+                       - prd_id
+                       - ref_entity_id
+                       - link_id
+                       - atom_id_1
+                       - comp_id_1
+                       - entity_seq_num_1
+                       - atom_id_2
+                       - comp_id_2
+                       - entity_seq_num_2
+                       - value_order
+                       - component_id
+                - CATEGORY_NAME: pdbx_reference_entity_poly
+                  ATTRIBUTE_NAME_LIST:
+                       - prd_id
+                       - ref_entity_id
+                       - db_code
+                       - db_name
+                       - type
+                - CATEGORY_NAME: pdbx_reference_entity_sequence
+                  ATTRIBUTE_NAME_LIST:
+                       - prd_id
+                       - ref_entity_id
+                       - type
+                       - NRP_flag
+                       - one_letter_codes
+                - CATEGORY_NAME: pdbx_reference_entity_poly_seq
+                  ATTRIBUTE_NAME_LIST:
+                       - prd_id
+                       - ref_entity_id
+                       - num
+                       - mon_id
+                       - parent_mon_id
+                       - hetero
+                       - observed
+                - CATEGORY_NAME: pdbx_reference_entity_src_nat
+                  ATTRIBUTE_NAME_LIST:
+                       - prd_id
+                       - ref_entity_id
+                       - ordinal
+                       - taxid
+                       - organism_scientific
+                       - source
+                       - source_id
+                       - atcc
+                       - db_code
+                       - db_name
+                - CATEGORY_NAME: pdbx_prd_audit
+                  ATTRIBUTE_NAME_LIST:
+                       - prd_id
+                       - date
+                       - processing_site
+                       - action_type
+                       - annotator
+                       - details
+                - CATEGORY_NAME: pdbx_reference_molecule_family
+                  ATTRIBUTE_NAME_LIST:
+                       - family_prd_id
+                       - name
+                       - release_status
+                       - replaces
+                       - replaced_by
+                - CATEGORY_NAME: pdbx_reference_molecule_list
+                  ATTRIBUTE_NAME_LIST:
+                       - family_prd_id
+                       - prd_id
+                - CATEGORY_NAME: pdbx_reference_molecule_related_structures
+                  ATTRIBUTE_NAME_LIST:
+                       - family_prd_id
+                       - ordinal
+                       - citation_id
+                       - db_name
+                       - db_accession
+                       - db_code
+                       - name
+                       - formula
+                - CATEGORY_NAME: pdbx_reference_molecule_synonyms
+                  ATTRIBUTE_NAME_LIST:
+                       - family_prd_id
+                       - prd_id
+                       - ordinal
+                       - source
+                       - name
+                - CATEGORY_NAME: pdbx_reference_molecule_annotation
+                  ATTRIBUTE_NAME_LIST:
+                       - family_prd_id
+                       - prd_id
+                       - ordinal
+                       - source
+                       - type
+                       - text
+                - CATEGORY_NAME: pdbx_reference_molecule_features
+                  ATTRIBUTE_NAME_LIST:
+                       - family_prd_id
+                       - prd_id
+                       - ordinal
+                       - source_ordinal
+                       - source
+                       - type
+                       - value
+                - CATEGORY_NAME: pdbx_reference_molecule_details
+                  ATTRIBUTE_NAME_LIST:
+                       - family_prd_id
+                       - ordinal
+                       - source
+                       - source_id
+                       - text
+                - CATEGORY_NAME: citation
+                  ATTRIBUTE_NAME_LIST:
+                       - id
+                       - year
+                       - journal_volume
+                       - page_first
+                       - page_last
+                       - pdbx_database_id_DOI
+                       - pdbx_database_id_PubMed
+                       - journal_abbrev
+                       - title
+                - CATEGORY_NAME: citation_author
+                  ATTRIBUTE_NAME_LIST:
+                       - citation_id
+                       - ordinal
+                       - name
+                - CATEGORY_NAME: pdbx_family_prd_audit
+                  ATTRIBUTE_NAME_LIST:
+                       - family_prd_id
+                       - date
+                       - processing_site
+                       - action_type
+                       - annotator
+                       - details
     slice_parent_items:
         ?       - ENTITY
                 - pdbx_core
@@ -1085,7 +1267,11 @@ document_helper:
                 - PDBX_AUDIT_REVISION_DETAILS
                 - PDBX_AUDIT_REVISION_HISTORY
                 - PDBX_AUDIT_SUPPORT
+                - PDBX_AUDIT_REVISION_GROUP
+                - PDBX_AUDIT_REVISION_CATEGORY
+                - PDBX_AUDIT_REVISION_ITEM
                 - PDBX_DATABASE_PDB_OBS_SPR
+                - pDBX_DATABASE_RELATED
                 - PDBX_DATABASE_STATUS
                 - PDBX_DEPOSIT_GROUP
                 - PDBX_MOLECULE
@@ -1095,6 +1281,7 @@ document_helper:
                 - PDBX_NMR_EXPTL
                 - PDBX_NMR_EXPTL_SAMPLE_CONDITIONS
                 - PDBX_NMR_REFINE
+                - PDBX_NMR_REPRESENTATIVE
                 - PDBX_NMR_SAMPLE_DETAILS
                 - PDBX_NMR_SOFTWARE
                 - PDBX_NMR_SPECTROMETER
