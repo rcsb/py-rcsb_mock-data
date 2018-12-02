@@ -57,47 +57,47 @@
             "pdbx_release_status": {
                "type": "string",
                "enum": [
+                  "REL",
                   "DEL",
                   "HOLD",
-                  "REF_ONLY",
-                  "REL",
                   "HPUB",
-                  "OBS"
+                  "OBS",
+                  "REF_ONLY"
                ],
                "description": "This data item holds the current release status for the component."
             },
             "type": {
                "type": "string",
                "enum": [
-                  "L-beta-peptide, C-gamma linking",
-                  "RNA OH 5 prime terminus",
-                  "D-saccharide",
-                  "L-peptide NH3 amino terminus",
-                  "DNA OH 3 prime terminus",
-                  "RNA linking",
-                  "peptide-like",
-                  "peptide linking",
-                  "D-saccharide 1,4 and 1,4 linking",
-                  "D-peptide COOH carboxy terminus",
-                  "DNA linking",
-                  "L-DNA linking",
-                  "RNA OH 3 prime terminus",
-                  "saccharide",
-                  "non-polymer",
-                  "L-saccharide 1,4 and 1,4 linking",
-                  "D-saccharide 1,4 and 1,6 linking",
-                  "other",
-                  "D-gamma-peptide, C-delta linking",
-                  "DNA OH 5 prime terminus",
-                  "L-RNA linking",
                   "D-beta-peptide, C-gamma linking",
-                  "L-peptide linking",
-                  "L-peptide COOH carboxy terminus",
+                  "RNA OH 3 prime terminus",
+                  "L-saccharide 1,4 and 1,4 linking",
                   "L-gamma-peptide, C-delta linking",
-                  "L-saccharide 1,4 and 1,6 linking",
+                  "D-saccharide",
+                  "peptide linking",
+                  "L-RNA linking",
+                  "RNA OH 5 prime terminus",
                   "D-peptide linking",
+                  "D-saccharide 1,4 and 1,6 linking",
+                  "D-gamma-peptide, C-delta linking",
                   "L-saccharide",
-                  "D-peptide NH3 amino terminus"
+                  "D-peptide NH3 amino terminus",
+                  "L-beta-peptide, C-gamma linking",
+                  "L-peptide COOH carboxy terminus",
+                  "L-saccharide 1,4 and 1,6 linking",
+                  "DNA OH 5 prime terminus",
+                  "RNA linking",
+                  "DNA linking",
+                  "L-peptide NH3 amino terminus",
+                  "D-saccharide 1,4 and 1,4 linking",
+                  "L-peptide linking",
+                  "DNA OH 3 prime terminus",
+                  "non-polymer",
+                  "other",
+                  "L-DNA linking",
+                  "D-peptide COOH carboxy terminus",
+                  "saccharide",
+                  "peptide-like"
                ],
                "description": "For standard polymer components, the type of the monomer.\n Note that monomers that will form polymers are of three types:\n linking monomers, monomers with some type of N-terminal (or 5')\n cap and monomers with some type of C-terminal (or 3') cap."
             }
@@ -222,31 +222,31 @@
                "action_type": {
                   "type": "string",
                   "enum": [
-                     "Modify identifier",
-                     "Modify linking type",
-                     "Modify synonyms",
-                     "Modify internal type",
-                     "Modify component comp_id",
-                     "Other modification",
+                     "Modify processing site",
+                     "Modify one letter code",
                      "Modify value order",
+                     "Modify internal type",
+                     "Modify model coordinates code",
+                     "Initial release",
+                     "Modify component atom id",
+                     "Modify leaving atom flag",
+                     "Other modification",
+                     "Modify name",
+                     "Modify identifier",
+                     "Obsolete component",
+                     "Modify component comp_id",
+                     "Modify synonyms",
+                     "Modify linking type",
+                     "Modify descriptor",
+                     "Modify subcomponent list",
+                     "Create component",
+                     "Modify parent residue",
+                     "Modify formula",
                      "Modify atom id",
                      "Modify aromatic_flag",
-                     "Modify processing site",
+                     "Modify coordinates",
                      "Modify charge",
-                     "Modify one letter code",
-                     "Modify name",
-                     "Create component",
-                     "Obsolete component",
-                     "Modify parent residue",
-                     "Modify formal charge",
-                     "Modify component atom id",
-                     "Modify formula",
-                     "Modify descriptor",
-                     "Initial release",
-                     "Modify subcomponent list",
-                     "Modify model coordinates code",
-                     "Modify leaving atom flag",
-                     "Modify coordinates"
+                     "Modify formal charge"
                   ],
                   "description": "The action associated with this audit record."
                },
@@ -304,19 +304,19 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "InChI_MAIN_FORMULA",
+                     "SMILES_CANONICAL",
                      "InChI_CHARGE",
                      "InChIKey",
-                     "InChI_ISOTOPE",
-                     "InChI_MAIN_HATOM",
-                     "InChI_STEREO",
                      "InChI_FIXEDH",
-                     "SMILES_CANONICAL",
-                     "SMILES",
                      "InChI_MAIN_CONNECT",
+                     "InChI_STEREO",
+                     "InChI",
+                     "InChI_MAIN_FORMULA",
                      "SMILES_CANNONICAL",
                      "InChI_RECONNECT",
-                     "InChI",
+                     "InChI_ISOTOPE",
+                     "SMILES",
+                     "InChI_MAIN_HATOM",
                      "InChI_MAIN"
                   ],
                   "description": "This data item contains the descriptor type."
@@ -367,14 +367,14 @@
                "type": {
                   "type": "string",
                   "enum": [
+                     "SYNONYM",
+                     "CONDENSED IUPAC CARB NAME",
                      "SYSTEMATIC NAME",
                      "COMMON NAME",
                      "CAS REGISTRY NUMBER",
-                     "SYNONYM",
-                     "IUPAC CARB NAME",
-                     "MDL Identifier",
                      "PUBCHEM Identifier",
-                     "CONDENSED IUPAC CARB NAME"
+                     "MDL Identifier",
+                     "IUPAC CARB NAME"
                   ],
                   "description": "This data item contains the identifier type."
                }
@@ -398,21 +398,21 @@
                "action_type": {
                   "type": "string",
                   "enum": [
-                     "Obsolete family",
-                     "Modify family classification",
-                     "Modify molecule details",
-                     "Remove PRD",
-                     "Modify synonyms",
-                     "Modify related structures",
-                     "Initial release",
-                     "Modify citation",
-                     "Modify annotation",
-                     "Modify sequence",
-                     "Obsolete familyt",
-                     "Other modification",
+                     "Add PRD",
                      "Create family",
                      "Modify feature",
-                     "Add PRD",
+                     "Other modification",
+                     "Obsolete family",
+                     "Remove PRD",
+                     "Modify citation",
+                     "Modify annotation",
+                     "Obsolete familyt",
+                     "Modify family classification",
+                     "Modify molecule details",
+                     "Modify related structures",
+                     "Modify synonyms",
+                     "Modify sequence",
+                     "Initial release",
                      "Modify family name"
                   ],
                   "description": "The action associated with this audit record."
@@ -471,17 +471,17 @@
                   "type": "string",
                   "enum": [
                      "Modify taxonomy organism",
-                     "Modify audit",
-                     "Obsolete molecule",
-                     "Modify linkage",
-                     "Modify representation",
-                     "Create molecule",
-                     "Modify sequence",
-                     "Initial release",
+                     "Other modification",
+                     "Modify class",
                      "Modify molecule name",
                      "Modify type",
-                     "Other modification",
-                     "Modify class"
+                     "Modify audit",
+                     "Obsolete molecule",
+                     "Modify representation",
+                     "Modify linkage",
+                     "Create molecule",
+                     "Modify sequence",
+                     "Initial release"
                   ],
                   "description": "The action associated with this audit record."
                },
@@ -594,9 +594,9 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "polysaccharide-like",
                      "nucleic-acid-like",
-                     "peptide-like"
+                     "peptide-like",
+                     "polysaccharide-like"
                   ],
                   "examples": [
                      "peptide-like"
@@ -660,14 +660,14 @@
                "value_order": {
                   "type": "string",
                   "enum": [
-                     "arom",
                      "pi",
-                     "trip",
-                     "poly",
                      "sing",
-                     "delo",
                      "quad",
-                     "doub"
+                     "arom",
+                     "trip",
+                     "doub",
+                     "delo",
+                     "poly"
                   ],
                   "description": "The bond order target for the non-standard linkage."
                }
@@ -694,8 +694,8 @@
                "hetero": {
                   "type": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ],
                   "examples": [
                      "N"
@@ -713,8 +713,8 @@
                "observed": {
                   "type": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ],
                   "examples": [
                      "Y"
@@ -753,8 +753,8 @@
                "NRP_flag": {
                   "type": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ],
                   "examples": [
                      "Y"
@@ -867,43 +867,43 @@
                "class": {
                   "type": "string",
                   "enum": [
-                     "Receptor",
                      "Antibiotic, Antineoplastic",
-                     "Lantibiotic",
-                     "Toxin",
-                     "Anticancer",
-                     "Antibiotic",
-                     "Antiinflammatory",
-                     "Inhibitor",
-                     "Oxidation-reduction",
-                     "Enzyme inhibitor",
-                     "Metal transport",
-                     "Antibiotic, Antimicrobial",
-                     "Chaperone binding",
+                     "Growth factor",
+                     "Antimicrobial, Antitumor",
+                     "Antithrombotic",
                      "Antagonist",
                      "Metabolism",
-                     "Anticoagulant, Antithrombotic",
-                     "Growth factor",
-                     "Antineoplastic",
-                     "Anthelmintic",
-                     "Unknown",
-                     "Antimicrobial, Antiparasitic, Antibiotic",
-                     "Antibiotic, Anthelmintic",
-                     "Antifungal",
-                     "Antithrombotic",
-                     "Thrombin inhibitor, Trypsin inhibitor",
-                     "CASPASE inhibitor",
                      "Antimicrobial",
-                     "Immunosuppressant",
-                     "Antimicrobial, Antiretroviral",
-                     "Antitumor",
-                     "Thrombin inhibitor",
-                     "Antimicrobial, Antitumor",
-                     "Antiviral",
-                     "Trypsin inhibitor",
-                     "Antiparasitic",
+                     "Antiinflammatory",
+                     "Oxidation-reduction",
                      "Antiretroviral",
-                     "Anticoagulant"
+                     "Anthelmintic",
+                     "Toxin",
+                     "Chaperone binding",
+                     "Anticoagulant",
+                     "Antitumor",
+                     "Immunosuppressant",
+                     "Anticoagulant, Antithrombotic",
+                     "Enzyme inhibitor",
+                     "Anticancer",
+                     "Antiviral",
+                     "Antifungal",
+                     "Receptor",
+                     "Antibiotic, Antimicrobial",
+                     "Antiparasitic",
+                     "Antibiotic",
+                     "Antibiotic, Anthelmintic",
+                     "Inhibitor",
+                     "Antimicrobial, Antiparasitic, Antibiotic",
+                     "Antineoplastic",
+                     "Thrombin inhibitor",
+                     "Metal transport",
+                     "Thrombin inhibitor, Trypsin inhibitor",
+                     "Lantibiotic",
+                     "CASPASE inhibitor",
+                     "Trypsin inhibitor",
+                     "Unknown",
+                     "Antimicrobial, Antiretroviral"
                   ],
                   "description": "Broadly defines the function of the entity."
                },
@@ -945,10 +945,10 @@
                "release_status": {
                   "type": "string",
                   "enum": [
-                     "REL",
-                     "WAIT",
+                     "OBS",
                      "HOLD",
-                     "OBS"
+                     "WAIT",
+                     "REL"
                   ],
                   "description": "Defines the current PDB release status for this molecule definition."
                },
@@ -975,38 +975,38 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "Aminoglycoside",
-                     "Peptaibol",
-                     "Ansamycin",
-                     "Cyclic peptide",
-                     "Heterocyclic",
-                     "Chalkophore",
-                     "Amino acid",
-                     "Chalkophore, Polypeptide",
-                     "Anthraquinone",
-                     "Chromophore",
-                     "Polypeptide",
-                     "Peptide-like",
-                     "Oligopeptide",
-                     "Polycyclic",
-                     "Glycopeptide",
-                     "Macrolide",
-                     "Lipopeptide",
-                     "Keto acid",
-                     "Thiolactone",
-                     "Quinolone",
-                     "Unknown",
                      "Oligosaccharide",
-                     "Polysaccharide",
-                     "Cyclic depsipeptide",
                      "Lipoglycopeptide",
-                     "Siderophore",
-                     "Nucleoside",
                      "Cyclic lipopeptide",
                      "Non-polymer",
+                     "Keto acid",
+                     "Lipopeptide",
+                     "Peptide-like",
+                     "Aminoglycoside",
+                     "Polypeptide",
+                     "Thiolactone",
+                     "Nucleoside",
+                     "Polysaccharide",
+                     "Siderophore",
+                     "Heterocyclic",
+                     "Ansamycin",
+                     "Quinolone",
+                     "Chromophore",
+                     "Polycyclic",
+                     "Chalkophore, Polypeptide",
+                     "Peptaibol",
+                     "Chalkophore",
+                     "Anthraquinone",
+                     "Cyclic peptide",
+                     "Glycopeptide",
+                     "Oligopeptide",
+                     "Cyclic depsipeptide",
                      "Imino sugar",
+                     "Unknown",
+                     "Amino acid",
+                     "Thiopeptide",
                      "Anthracycline",
-                     "Thiopeptide"
+                     "Macrolide"
                   ],
                   "examples": [
                      "Peptide-like",
@@ -1141,10 +1141,10 @@
                "release_status": {
                   "type": "string",
                   "enum": [
-                     "REL",
-                     "WAIT",
+                     "OBS",
                      "HOLD",
-                     "OBS"
+                     "WAIT",
+                     "REL"
                   ],
                   "description": "Assigns the current PDB release status for this family."
                },
@@ -1430,10 +1430,10 @@
                "related_mapping_method": {
                   "type": "string",
                   "enum": [
-                     "matching InChIKey-prefix",
                      "matching InChIKey",
-                     "assigned by resource",
-                     "assigned by PDB"
+                     "assigned by PDB",
+                     "matching InChIKey-prefix",
+                     "assigned by resource"
                   ],
                   "examples": [
                      "assigned by resource"
@@ -1450,11 +1450,11 @@
                "resource_name": {
                   "type": "string",
                   "enum": [
-                     "DrugBank",
                      "PubChem",
                      "ChEBI",
+                     "ChEMBL",
                      "CCDC/CSD",
-                     "ChEMBL"
+                     "DrugBank"
                   ],
                   "examples": [
                      "CCDC/CSD"
@@ -1490,13 +1490,13 @@
                "provenance_code": {
                   "type": "string",
                   "enum": [
-                     "DrugBank",
-                     "ACDLabs",
                      "PubChem",
+                     "OpenEye OEToolkits",
+                     "PDB Reference Data",
+                     "ACDLabs",
                      "ChEBI",
                      "ChEMBL",
-                     "PDB Reference Data",
-                     "OpenEye OEToolkits"
+                     "DrugBank"
                   ],
                   "description": "The provenance of this synonym."
                }

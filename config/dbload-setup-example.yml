@@ -9,6 +9,7 @@
 # 20-Nov-2018 jdw add pdbx_chem_comp_audit.ordinal
 # 23-Nov-2018 jdw add rcsb_repository_holdings_prerelease
 # 30-Nov-2018 jdw add CONSOLIDATE_BIRD_CONTENT content class for bird_chem_comp_core collection
+#  1-Dec-2018 jdw add NCBI_TAXONOMY_LOCATOR: NCBI/taxonomy_names.pic
 #
 # Master Pinelands configuration file example
 ---
@@ -31,6 +32,7 @@ site_info:
     DICT_METHOD_HELPER_MODULE: rcsb.db.helpers.DictMethodRunnerHelper
     DRUGBANK_MAPPING_LOCATOR: DrugBank/drugbank_pdb_mapping.json
     CCDC_MAPPING_LOCATOR: chem_comp_models/ccdc_pdb_mapping.json
+    NCBI_TAXONOMY_LOCATOR: NCBI/taxonomy_names.pic
 site_server_info:
     MONGO_DB_HOST: localhost
     MONGO_DB_PORT: '27017'
@@ -330,10 +332,14 @@ dictionary_helper:
                       - OBS
     type_code_classes:
         iterable:
-            - ucode-alphanum-csv
-            - id_list
-            - alphanum-scsv
-            - alphanum-csv
+            - TYPE_CODE: ucode-alphanum-csv
+              DELIMITER: ","
+            - TYPE_CODE: id_list
+              DELIMITER: ","
+            - TYPE_CODE: alphanum-scsv
+              DELIMITER: ";"
+            - TYPE_CODE: alphanum-csv
+              DELIMITER: ","
     query_string_selectors:
         iterable:
             - comma separate
@@ -400,6 +406,8 @@ dictionary_helper:
                       - provenance_code
                       - beg_seq_num
                       - end_seq_num
+                      - ncbi_scientific_name
+                      - ncbi_common_names
                 - CATEGORY_NAME: rcsb_entity_host_organism
                   ATTRIBUTE_NAME_LIST:
                       - entity_id
@@ -410,6 +418,8 @@ dictionary_helper:
                       - provenance_code
                       - beg_seq_num
                       - end_seq_num
+                      - ncbi_scientific_name
+                      - ncbi_common_names
                 - CATEGORY_NAME: entity
                   ATTRIBUTE_NAME_LIST:
                       - rcsb_multiple_source_flag
