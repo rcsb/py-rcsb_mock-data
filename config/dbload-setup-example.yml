@@ -10,6 +10,7 @@
 # 23-Nov-2018 jdw add rcsb_repository_holdings_prerelease
 # 30-Nov-2018 jdw add CONSOLIDATE_BIRD_CONTENT content class for bird_chem_comp_core collection
 #  1-Dec-2018 jdw add NCBI_TAXONOMY_LOCATOR: NCBI/taxonomy_names.pic
+#  4-Dec-2018 jdw add indices and private keys
 #
 # Master Pinelands configuration file example
 ---
@@ -599,6 +600,9 @@ dictionary_helper:
                       - datablock_name
                       - load_date
                       - locator
+                - CATEGORY_NAME: citation
+                  ATTRIBUTE_NAME_LIST:
+                      - rcsb_authors
                 - CATEGORY_NAME: rcsb_chem_comp_synonyms
                   ATTRIBUTE_NAME_LIST:
                       - comp_id
@@ -1178,6 +1182,7 @@ document_helper:
             EXCLUDE:
                 - CHEM_COMP_ATOM
                 - CHEM_COMP_BOND
+                - CITATION_AUTHOR
         pdbx_v5_0_2:
             INCLUDE: []
             EXCLUDE:
@@ -1281,7 +1286,7 @@ document_helper:
                 - PDBX_AUDIT_REVISION_CATEGORY
                 - PDBX_AUDIT_REVISION_ITEM
                 - PDBX_DATABASE_PDB_OBS_SPR
-                - pDBX_DATABASE_RELATED
+                - PDBX_DATABASE_RELATED
                 - PDBX_DATABASE_STATUS
                 - PDBX_DEPOSIT_GROUP
                 - PDBX_MOLECULE
@@ -1406,87 +1411,201 @@ document_helper:
               CATEGORY_NAME: rcsb_entity_container_identifiers
               ATTRIBUTE_NAME: entry_id
               PRIVATE_DOCUMENT_NAME: __entry_id
+              MANDATORY: True
             - NAME: entity.id
               CATEGORY_NAME: entity
               ATTRIBUTE_NAME: id
               PRIVATE_DOCUMENT_NAME: __entity_id
+              MANDATORY: True
+            - NAME: chem_comp.id
+              CATEGORY_NAME: pdbx_entity_nonpoly
+              ATTRIBUTE_NAME: comp_id
+              PRIVATE_DOCUMENT_NAME: __comp_id
+              MANDATORY: False
         pdbx_core_assembly_v5_0_2:
             - NAME: entry.id
               CATEGORY_NAME: rcsb_assembly_container_identifiers
               ATTRIBUTE_NAME: entry_id
               PRIVATE_DOCUMENT_NAME: __entry_id
+              MANDATORY: True
             - NAME: pdbx_struct_assembly.id
               CATEGORY_NAME: pdbx_struct_assembly
               ATTRIBUTE_NAME: id
               PRIVATE_DOCUMENT_NAME: __assembly_id
+              MANDATORY: True
         pdbx_core_entry_v5_0_2:
             - NAME: entry.id
               CATEGORY_NAME: entry
               ATTRIBUTE_NAME: id
               PRIVATE_DOCUMENT_NAME: __entry_id
+              MANDATORY: True
         chem_comp_core_v5_0_2:
             - NAME: chem_comp.id
               CATEGORY_NAME: chem_comp
               ATTRIBUTE_NAME: id
               PRIVATE_DOCUMENT_NAME: __comp_id
+              MANDATORY: True
         bird_chem_comp_core_v5_0_2:
             - NAME: chem_comp.id
               CATEGORY_NAME: chem_comp
               ATTRIBUTE_NAME: id
               PRIVATE_DOCUMENT_NAME: __comp_id
-    collection_attribute_names:
+              MANDATORY: True
+            - NAME: pdbx_reference_molecul.prd_id
+              CATEGORY_NAME: chem_comp
+              ATTRIBUTE_NAME: id
+              PRIVATE_DOCUMENT_NAME: __prd_id
+              MANDATORY: True
+    collection_indices:
         pdbx_v5_0_2:
-            - entry.id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - entry.id
         pdbx_ext_v5_0_2:
-            - entry.id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - entry.id
         pdbx_core_entity_v5_0_2:
-            - entry.id
-            - entity.id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - entry.id
+              - entity.id
+            - INDEX_NAME: search_1
+              ATTRIBUTE_NAMES:
+              - rcsb_entity_container_identifiers.entry_id.entity_id
+              - rcsb_entity_container_identifiers.entry_id.asym_id
+            - INDEX_NAME: search_2
+              ATTRIBUTE_NAMES:
+              - rcsb_entity_container_identifiers.entry_id
+              - rcsb_entity_container_identifiers.entity_id
+              - rcsb_entity_container_identifiers.asym_ids
+            - INDEX_NAME: search_3
+              ATTRIBUTE_NAMES:
+              - rcsb_entity_container_identifiers.entry_id
+              - rcsb_entity_container_identifiers.entity_id
+              - rcsb_entity_container_identifiers.auth_asym_ids
+            - INDEX_NAME: search_4
+              ATTRIBUTE_NAMES:
+              - __entry_id
+              - __entity_id
+            - INDEX_NAME: search_5
+              ATTRIBUTE_NAMES:
+              - __entry_id
+              - __comp_id
         pdbx_core_assembly_v5_0_2:
-            - entry.id
-            - pdbx_struct_assembly.id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - entry.id
+              - pdbx_struct_assembly.id
+            - INDEX_NAME: search_1
+              ATTRIBUTE_NAMES:
+              - rcsb_assembly_container_identifiers.entry_id
+              - rcsb_assembly_container_identifiers.assembly_id
+            - INDEX_NAME: search_2
+              ATTRIBUTE_NAMES:
+              - __entry_id
+              - __assembly_id
         pdbx_core_entry_v5_0_2:
-            - entry.id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - entry.id
+            - INDEX_NAME: search_1
+              ATTRIBUTE_NAMES:
+              - rcsb_entry_container_identifiers.entry_id
+              - rcsb_entry_container_identifiers.entity_ids
+            - INDEX_NAME: search_2
+              ATTRIBUTE_NAMES:
+              - rcsb_entry_container_identifiers.entry_id
+              - rcsb_entry_container_identifiers.polymer_entity_ids
+            - INDEX_NAME: search_3
+              ATTRIBUTE_NAMES:
+              - rcsb_entry_container_identifiers.entry_id
+              - rcsb_entry_container_identifiers.non_polymer_entity_ids
+            - INDEX_NAME: search_4
+              ATTRIBUTE_NAMES:
+              - rcsb_entry_container_identifiers.entry_id
+              - rcsb_entry_container_identifiers.assembly_ids
+            - INDEX_NAME: search_5
+              ATTRIBUTE_NAMES:
+              - __entry_id
         bird_v5_0_2:
-            - pdbx_reference_molecule.prd_id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - pdbx_reference_molecule.prd_id
         family_v5_0_2:
-            - pdbx_reference_molecule_family.family_prd_id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - pdbx_reference_molecule_family.family_prd_id
         chem_comp_v5_0_2:
-            - chem_comp.component_id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - chem_comp.component_id
         chem_comp_core_v5_0_2:
-            - chem_comp.id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - chem_comp.id
         bird_chem_comp_v5_0_2:
-            - chem_comp.component_id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - chem_comp.component_id
         bird_chem_comp_core_v5_0_2:
-            - chem_comp.id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - chem_comp.id
         repository_holdings_update_v0_1:
-            - update_id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - update_id
         repository_holdings_current_v0_1:
-            - update_id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - update_id
         repository_holdings_unreleased_v0_1:
-            - update_id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - update_id
         repository_holdings_prerelease_v0_1:
-            - update_id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - update_id
         repository_holdings_removed_v0_1:
-            - update_id
-        repository_holdings_removed_audit_authors:
-            - update_id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - update_id
+        repository_holdings_removed_audit_authors_v0_1:
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - update_id
         repository_holdings_superseded_v0_1:
-            - update_id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - update_id
         repository_holdings_transferred_v0_1:
-            - update_id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - update_id
         repository_holdings_insilico_models_v0_1:
-            - update_id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - update_id
         cluster_members_v0_1:
-            - update_id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - update_id
         cluster_provenance_v0_1:
-            - software.name
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - software.name
         entity_members_v0_1:
-            - update_id
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - update_id
         rcsb_data_exchange_status_v0_1:
-            - update_id
-            - database_name
-            - object_name
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - update_id
+              - database_name
+              - object_name
     collection_subcategory_aggregates:
         cluster_members_v0_1:
             - sequence_membership
