@@ -29,6 +29,7 @@
 #    23-Nov-2018 jdw add _rcsb_repository_holdings_prerelease.seq_one_letter_code
 #    29-Nov-2018 jdw update enumerations for _rcsb_repository_holdings_current.repository_content_types
 #     1-Dec-2018 jdw add _rcsb_entity_source_organism.ncbi_scientific_name and _rcsb_entity_source_organism.ncbi_common_names
+#     4-Dec-2018 jdw add drugbank_info and drugbank_target
 #
 ###########################################################################
 
@@ -3464,3 +3465,311 @@ save__rcsb_entry_info.entity_count
     _item_type.code               int
      save_
 #
+#####################
+## DRUGBANK_TARGET ##
+#####################
+
+save_drugbank_target
+    _category.description
+;              Data items in the drugbank_target category record
+               details target interactions annotated by DrugBank.
+;
+    _category.id                  drugbank_target
+    _category.mandatory_code      no
+     loop_
+    _category_key.name           '_drugbank_target.ordinal'
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+                                 'chem_comp_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+##
+##
+     loop_
+     _drugbank_target.ordinal
+     _drugbank_target.name
+     _drugbank_target.interaction_type
+     _drugbank_target.target_actions
+     _drugbank_target.organism_common_name
+     _drugbank_target.reference_database_name
+     _drugbank_target.reference_database_accession_code
+     _drugbank_target.seq_one_letter_code
+      1 "O-phosphoseryl-tRNA(Sec) selenium transferase" target cofactor Human UniProt Q9HD40 'MTRRA...
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  drugbank_target
+   #
+
+save_
+
+save__drugbank_target.ordinal
+    _item_description.description
+;              The value of _drugbank_target.ordinal distinguishes
+               related examples for each chemical component.
+;
+
+    _item.name                  '_drugbank_target.ordinal'
+    _item.category_id             drugbank_target
+    _item.mandatory_code          yes
+    _item_type.code               int
+save_
+
+save__drugbank_target.reference_database_name
+    _item_description.description
+;              The reference database name for the target interaction.
+;
+    _item.name                  '_drugbank_target.reference_database_name'
+    _item.category_id             drugbank_target
+    _item.mandatory_code          no
+    _item_type.code               line
+     loop_
+    _item_examples.case        'UniProt'
+    loop_
+    _item_enumeration.value
+    _item_enumeration.detail
+    'UniProt' .
+save_
+
+save__drugbank_target.reference_database_accession_code
+    _item_description.description
+;              The reference identifier code for the target interaction reference.
+;
+    _item.name                  '_drugbank_target.reference_database_accession_code'
+    _item.category_id             drugbank_target
+    _item.mandatory_code          no
+    _item_type.code               text
+     loop_
+    _item_examples.case        'Q9HD40'
+save_
+
+save__drugbank_target.name
+    _item_description.description
+;              The target name.
+;
+    _item.name                  '_drugbank_target.name'
+    _item.category_id             drugbank_target
+    _item.mandatory_code          no
+    _item_type.code               text
+    save_
+
+save__drugbank_target.interaction_type
+    _item_description.description
+;              The type of target interaction.
+;
+    _item.name                  '_drugbank_target.interaction_type'
+    _item.category_id             drugbank_target
+    _item.mandatory_code          no
+    _item_type.code               text
+    save_
+
+save__drugbank_target.target_actions
+    _item_description.description
+;              The actions of the target interaction.
+;
+    _item.name                  '_drugbank_target.target_actions'
+    _item.category_id             drugbank_target
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    save_
+
+save__drugbank_target.seq_one_letter_code
+   _item_description.description
+;   Target sequence expressed as string of one-letter amino acid codes.
+;
+
+    _item.name                  '_drugbank_target.seq_one_letter_code'
+    _item.category_id             drugbank_target
+    _item.mandatory_code          no
+    _item_type.code               text
+    _item_examples.case          'MAKQRSG...'
+     save_
+
+
+###################
+## DRUGBANK_INFO ##
+###################
+
+save_drugbank_info
+    _category.description
+;              Data items in the drugbank_info category record
+               details selected drug annotations provided by DrugBank.
+;
+    _category.id                  drugbank_info
+    _category.mandatory_code      no
+     loop_
+    _category_key.name           '_drugbank_info.drugbank_id'
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+                                 'chem_comp_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 - DrugBank annotation for ATP
+;
+;
+##
+##
+     loop_
+     _drugbank_info.drugbank_id
+     _drugbank_info.name
+     _drugbank_info.description
+     _drugbank_info.synonyms
+     _drugbank_info.brand_names
+     _drugbank_info.affected_organism
+     _drugbank_info.indication
+     _drugbank_info.pharmacology
+     _drugbank_info.mechanism_of_action
+     _drugbank_info.cas_number
+     _drugbank_info.drug_categories
+     _drugbank_info.drug_groups
+      DB00171  'Adenosine triphosphate' 'An adenine nucleotide containing ...' 'ATP;...' 'Atriphos;...' ...
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  drugbank_info
+   #
+
+save__drugbank_info.drugbank_id
+    _item_description.description
+;              The DrugBank accession code
+;
+
+    _item.name                  '_drugbank_info.drugbank_id'
+    _item.category_id             drugbank_info
+    _item.mandatory_code          yes
+    _item_type.code               code
+save_
+
+save__drugbank_info.name
+    _item_description.description
+;              The DrugBank drug name.
+;
+    _item.name                  '_drugbank_info.name'
+    _item.category_id             drugbank_info
+    _item.mandatory_code          no
+    _item_type.code               text
+    save_
+
+
+save__drugbank_info.description
+    _item_description.description
+;              The DrugBank drug description.
+;
+    _item.name                  '_drugbank_info.description'
+    _item.category_id             drugbank_info
+    _item.mandatory_code          no
+    _item_type.code               text
+    save_
+
+save__drugbank_info.synonyms
+    _item_description.description
+;              DrugBank drug name synonyms.
+;
+    _item.name                  '_drugbank_info.synonyms'
+    _item.category_id             drugbank_info
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_examples.case           'Adenosine-5'-triphosphate; ATP'
+    save_
+
+save__drugbank_info.brand_names
+    _item_description.description
+;              DrugBank drug brand names.
+;
+    _item.name                  '_drugbank_info.brand_names'
+    _item.category_id             drugbank_info
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_examples.case           'Atriphos; Striadyne'
+    save_
+
+save__drugbank_info.affected_organism
+    _item_description.description
+;              The DrugBank drug affected organism.
+;
+    _item.name                  '_drugbank_info.affected_organism'
+    _item.category_id             drugbank_info
+    _item.mandatory_code          no
+    _item_type.code               text
+    _item_examples.case          'Humans and other mammals'
+    save_
+
+save__drugbank_info.indication
+    _item_description.description
+;              The DrugBank drug indication.
+;
+    _item.name                  '_drugbank_info.indication'
+    _item.category_id             drugbank_info
+    _item.mandatory_code          no
+    _item_type.code               text
+    _item_examples.case          'For nutritional supplementation, also for treating dietary shortage or imbalance'
+    save_
+
+save__drugbank_info.mechanism_of_action
+    _item_description.description
+;              The DrugBank drug mechanism of actions.
+;
+    _item.name                  '_drugbank_info.mechanism_of_action'
+    _item.category_id             drugbank_info
+    _item.mandatory_code          no
+    _item_type.code               text
+     _item_examples.case         'ATP is able to store and transport chemical energy within cells.'
+    save_
+
+save__drugbank_info.pharmacology
+    _item_description.description
+;              The DrugBank drug pharmacology.
+;
+    _item.name                  '_drugbank_info.pharmacology'
+    _item.category_id             drugbank_info
+    _item.mandatory_code          no
+    _item_type.code               text
+     _item_examples.case
+;Adenosine triphosphate (ATP) is the nucleotide known in biochemistry as the "molecular currency" of intracellular energy transfer; that is, ATP is able to store and transport chemical energy within cells. ATP also plays an important role in the synthesis of nucleic acids. The total quantity of ATP in the human body is about 0.1 mole. The energy used by human cells requires the hydrolysis of 200 to 300 moles of ATP daily. This means that each ATP molecule is recycled 2000 to 3000 times during a single day. ATP cannot be stored, hence its consumption must closely follow its synthesis.
+;
+    save_
+
+
+save__drugbank_info.drug_categories
+    _item_description.description
+;              The DrugBank drug categories.
+;
+    _item.name                  '_drugbank_info.drug_categories'
+    _item.category_id             drugbank_info
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+     _item_examples.case         'Adenine Nucleotides;Carbohydrates;Dietary Supplements'
+    save_
+
+save__drugbank_info.drug_groups
+    _item_description.description
+;              The DrugBank drug drug groups.
+;
+    _item.name                  '_drugbank_info.drug_groups'
+    _item.category_id             drugbank_info
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_examples.case         'approved;nutraceutical'
+    save_
+
+save__drugbank_info.cas_number
+    _item_description.description
+;              The DrugBank assigned Chemical Abstracts Service identifier.
+;
+    _item.name                  '_drugbank_info.cas_number'
+    _item.category_id             drugbank_info
+    _item.mandatory_code          no
+    _item_type.code               code
+     _item_examples.case         '56-65-5'
+    save_

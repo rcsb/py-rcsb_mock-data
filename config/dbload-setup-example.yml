@@ -10,7 +10,8 @@
 # 23-Nov-2018 jdw add rcsb_repository_holdings_prerelease
 # 30-Nov-2018 jdw add CONSOLIDATE_BIRD_CONTENT content class for bird_chem_comp_core collection
 #  1-Dec-2018 jdw add NCBI_TAXONOMY_LOCATOR: NCBI/taxonomy_names.pic
-#  4-Dec-2018 jdw add indices, add private keys for chemical components, and align citation object
+#  4-Dec-2018 jdw add indices, add private keys for chemical components, align citation schema, and
+#                 add DrugBank core collection details
 #
 # Master Pinelands configuration file example
 ---
@@ -230,6 +231,10 @@ rcsb_data_exchange_status_v0_1:
     SCHEMA_NAME: data_exchange
     BSON_SCHEMA_FULL_LOCATOR: json-schema/bson-schema-full-rcsb_data_exchange_status_v0_1.json
     BSON_SCHEMA_MIN_LOCATOR: json-schema/bson-schema-min-rcsb_data_exchange_status_v0_1.json
+drugbank_core_v0_1:
+    SCHEMA_NAME: drugbank_core
+    BSON_SCHEMA_FULL_LOCATOR: json-schema/bson-schema-full-drugbank_core_v0_1.json
+    BSON_SCHEMA_MIN_LOCATOR: json-schema/bson-schema-min-drugbank_core_v0_1.json
 dictionary_helper:
     item_transformers:
         STRIP_WS:
@@ -948,6 +953,32 @@ dictionary_helper:
                        - action_type
                        - annotator
                        - details
+        ?       - INTEGRATED_CONTENT
+                - drugbank_core
+        :       - CATEGORY_NAME: drugbank_info
+                  ATTRIBUTE_NAME_LIST:
+                      - drugbank_id
+                      - name
+                      - description
+                      - synonyms
+                      - brand_names
+                      - affected_organism
+                      - indication
+                      - pharmacology
+                      - mechanism_of_action
+                      - cas_number
+                      - drug_categories
+                      - drug_groups
+                - CATEGORY_NAME: drugbank_target
+                  ATTRIBUTE_NAME_LIST:
+                      - ordinal
+                      - name
+                      - interaction_type
+                      - target_actions
+                      - organism_common_name
+                      - reference_database_name
+                      - reference_database_accession_code
+                      - seq_one_letter_code
     slice_parent_items:
         ?       - ENTITY
                 - pdbx_core
@@ -1020,6 +1051,11 @@ schemadef_helper:
             INCLUDE:
                 - rcsb_data_exchange_status
             EXCLUDE: []
+        drugbank_core:
+            INCLUDE:
+                - drugbank_info
+                - drugbank_target
+            EXCLUDE: []
     block_attributes:
         pdbx:
             ATTRIBUTE_NAME: structure_id
@@ -1088,6 +1124,9 @@ schemadef_helper:
         data_exchange:
             NAME: data_exchange
             VERSION: v5
+        drugbank_core:
+            NAME: chem_comp_v5
+            VERSION: '0_1'
     exclude_attributes:
         pdbx_core:
             - CATEGORY_NAME: cell
@@ -1184,6 +1223,8 @@ document_helper:
             - entity_members_v0_1
         data_exchange:
             - rcsb_data_exchange_status_v0_1
+        drugbank_core:
+            - drugbank_core_v0_1
     schema_content_filters:
         chem_comp_core_v5_0_2:
             INCLUDE: []
@@ -1418,6 +1459,12 @@ document_helper:
                 - rcsb_data_exchange_status
             EXCLUDE: []
             SLICE:
+        drugbank_core_v0_1:
+            INCLUDE:
+                - drugbank_info
+                - drugbank_target
+            EXCLUDE: []
+            SLICE:
     collection_private_keys:
         pdbx_core_entity_v5_0_2:
             - NAME: entry.id
@@ -1468,6 +1515,12 @@ document_helper:
               CATEGORY_NAME: chem_comp
               ATTRIBUTE_NAME: id
               PRIVATE_DOCUMENT_NAME: __prd_id
+              MANDATORY: True
+        drugbank_core_v0_1:
+            - NAME: drugbank_info.drugbank_id
+              CATEGORY_NAME: drugbank_info
+              ATTRIBUTE_NAME: drugbank_id
+              PRIVATE_DOCUMENT_NAME: __drugbank_id
               MANDATORY: True
     collection_indices:
         pdbx_v5_0_2:
@@ -1619,6 +1672,10 @@ document_helper:
               - update_id
               - database_name
               - object_name
+        drugbank_core_v0_1:
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - drugbank_info.drugbank_id
     collection_subcategory_aggregates:
         cluster_members_v0_1:
             - sequence_membership
