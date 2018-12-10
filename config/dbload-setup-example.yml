@@ -12,6 +12,7 @@
 #  1-Dec-2018 jdw add NCBI_TAXONOMY_LOCATOR: NCBI/taxonomy_names.pic
 #  4-Dec-2018 jdw add indices, add private keys for chemical components, align citation schema, and
 #                 add DrugBank core collection details
+#  6-Dec-2018 jdw revised DrugBank core collection details
 #
 # Master Pinelands configuration file example
 ---
@@ -33,6 +34,7 @@ site_info:
     DOCUMENT_HELPER_MODULE: rcsb.db.helpers.SchemaDocumentHelper
     DICT_METHOD_HELPER_MODULE: rcsb.db.helpers.DictMethodRunnerHelper
     DRUGBANK_MAPPING_LOCATOR: DrugBank/drugbank_pdb_mapping.json
+    DRUGBANK_DATA_LOCATOR: DrugBank/full_database.xml.gz
     CCDC_MAPPING_LOCATOR: chem_comp_models/ccdc_pdb_mapping.json
     NCBI_TAXONOMY_LOCATOR: NCBI/taxonomy_names.pic
 site_server_info:
@@ -135,6 +137,15 @@ data_exchange:
     SCHEMA_DEF_LOCATOR_SQL: schema/schema_def-data_exchange-SQL.json
     SCHEMA_DEF_LOCATOR_ANY: schema/schema_def-data_exchange-ANY.json
     INSTANCE_DATA_TYPE_INFO_LOCATOR: data_type_info/scan-data_exchange-type-map.json
+drugbank_core:
+    DATABASE_NAME: chem_comp
+    SCHEMA_NAME: drugbank_core
+    DATABASE_VERSION_STRING: v5
+    COLLECTION_DRUGBANK_CORE: drugbank_core
+    COLLECTION_VERSION_STRING: v0_1
+    SCHEMA_DEF_LOCATOR_SQL: schema/schema_def-drugbank_core-SQL.json
+    SCHEMA_DEF_LOCATOR_ANY: schema/schema_def-drugbank_core-ANY.json
+    INSTANCE_DATA_TYPE_INFO_LOCATOR: data_type_info/scan-drugbank_core-type-map.json
 pdbx_v5_0_2:
     SCHEMA_NAME: pdbx
     BSON_SCHEMA_FULL_LOCATOR: json-schema/bson-schema-full-pdbx_v5_0_2.json
@@ -277,6 +288,9 @@ dictionary_helper:
             ATTRIBUTE_NAME: id
     cardinality_category_extras:
         - rcsb_load_status
+        - pdbx_reference_molecule
+        - pdbx_reference_molecule_family
+        - drugbank_info
     selection_filters:
         ?       - PUBLIC_RELEASE
                 - pdbx
@@ -316,12 +330,11 @@ dictionary_helper:
                       - REF_ONLY
         ?       - PUBLIC_RELEASE
                 - bird_chem_comp_core
-        :       - CATEGORY_NAME: chem_comp
-                  ATTRIBUTE_NAME: pdbx_release_status
+        :       - CATEGORY_NAME: pdbx_reference_molecule
+                  ATTRIBUTE_NAME: release_status
                   VALUES:
                       - REL
                       - OBS
-                      - REF_ONLY
         ?       - PUBLIC_RELEASE
                 - bird
         :       - CATEGORY_NAME: pdbx_reference_molecule
@@ -352,10 +365,10 @@ dictionary_helper:
     iterable_delimiters:
         - CATEGORY_NAME: chem_comp
           ATTRIBUTE_NAME: pdbx_synonyms
-          DELIMITER: ;
+          DELIMITER: ";"
         - CATEGORY_NAME: citation
           ATTRIBUTE_NAME: rcsb_authors
-          DELIMITER: ;
+          DELIMITER: ";"
     content_classes:
         ?       - GENERATED_CONTENT
                 - pdbx
@@ -440,6 +453,7 @@ dictionary_helper:
                       - entity_count
                       - nonpolymer_entity_count
                       - branched_entity_count
+                      - solvent_entity_count
                 - CATEGORY_NAME: entity_poly
                   ATTRIBUTE_NAME_LIST:
                       - rcsb_entity_polymer_type
@@ -998,6 +1012,7 @@ dictionary_helper:
                       - non-polymer
                       - macrolide
                       - branched
+                      - water
     slice_cardinality_category_extras:
         ?       - ENTITY
                 - pdbx_core
@@ -1506,14 +1521,14 @@ document_helper:
               PRIVATE_DOCUMENT_NAME: __comp_id
               MANDATORY: True
         bird_chem_comp_core_v5_0_2:
-            - NAME: chem_comp.id
-              CATEGORY_NAME: chem_comp
-              ATTRIBUTE_NAME: id
+            - NAME: pdbx_reference_molecule.chem_comp_id
+              CATEGORY_NAME: pdbx_reference_molecule
+              ATTRIBUTE_NAME: chem_comp_id
               PRIVATE_DOCUMENT_NAME: __comp_id
-              MANDATORY: True
-            - NAME: pdbx_reference_molecul.prd_id
-              CATEGORY_NAME: chem_comp
-              ATTRIBUTE_NAME: id
+              MANDATORY: False
+            - NAME: pdbx_reference_molecule.prd_id
+              CATEGORY_NAME: pdbx_reference_molecule
+              ATTRIBUTE_NAME: prd_id
               PRIVATE_DOCUMENT_NAME: __prd_id
               MANDATORY: True
         drugbank_core_v0_1:

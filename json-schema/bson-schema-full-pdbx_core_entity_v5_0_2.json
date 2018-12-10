@@ -42,8 +42,8 @@
             "src_method": {
                "bsonType": "string",
                "enum": [
-                  "man",
                   "syn",
+                  "man",
                   "nat"
                ]
             },
@@ -51,9 +51,9 @@
                "bsonType": "string",
                "enum": [
                   "macrolide",
-                  "non-polymer",
-                  "branched",
                   "polymer",
+                  "branched",
+                  "non-polymer",
                   "water"
                ]
             }
@@ -113,19 +113,19 @@
             "nstd_linkage": {
                "bsonType": "string",
                "enum": [
-                  "n",
+                  "y",
                   "yes",
                   "no",
-                  "y"
+                  "n"
                ]
             },
             "nstd_monomer": {
                "bsonType": "string",
                "enum": [
-                  "n",
+                  "y",
                   "yes",
                   "no",
-                  "y"
+                  "n"
                ]
             },
             "pdbx_seq_one_letter_code": {
@@ -143,26 +143,26 @@
             "rcsb_entity_polymer_type": {
                "bsonType": "string",
                "enum": [
+                  "Other",
+                  "DNA",
                   "NA-hybrid",
                   "Protein",
-                  "RNA",
-                  "DNA",
-                  "Other"
+                  "RNA"
                ]
             },
             "type": {
                "bsonType": "string",
                "enum": [
+                  "cyclic-pseudo-peptide",
+                  "polydeoxyribonucleotide",
+                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
                   "peptide nucleic acid",
                   "polysaccharide(D)",
                   "polyribonucleotide",
-                  "cyclic-pseudo-peptide",
-                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
-                  "polypeptide(D)",
-                  "polydeoxyribonucleotide",
-                  "other",
                   "polypeptide(L)",
-                  "polysaccharide(L)"
+                  "polysaccharide(L)",
+                  "polypeptide(D)",
+                  "other"
                ]
             }
          },
@@ -217,8 +217,8 @@
                "pdbx_alt_source_flag": {
                   "bsonType": "string",
                   "enum": [
-                     "model",
-                     "sample"
+                     "sample",
+                     "model"
                   ]
                },
                "pdbx_beg_seq_num": {
@@ -314,10 +314,10 @@
                "pdbx_seq_type": {
                   "bsonType": "string",
                   "enum": [
-                     "Biological sequence",
-                     "C-terminal tag",
                      "Linker",
-                     "N-terminal tag"
+                     "Biological sequence",
+                     "N-terminal tag",
+                     "C-terminal tag"
                   ]
                },
                "pdbx_src_id": {
@@ -358,8 +358,8 @@
                "pdbx_alt_source_flag": {
                   "bsonType": "string",
                   "enum": [
-                     "model",
-                     "sample"
+                     "sample",
+                     "model"
                   ]
                },
                "pdbx_atcc": {
@@ -471,8 +471,8 @@
                "pdbx_alt_source_flag": {
                   "bsonType": "string",
                   "enum": [
-                     "model",
-                     "sample"
+                     "sample",
+                     "model"
                   ]
                },
                "pdbx_beg_seq_num": {
@@ -488,6 +488,30 @@
             "required": [
                "entity_id",
                "pdbx_src_id"
+            ]
+         },
+         "minItems": 1,
+         "uniqueItems": true
+      },
+      "pdbx_molecule": {
+         "bsonType": "array",
+         "items": {
+            "bsonType": "object",
+            "properties": {
+               "asym_id": {
+                  "bsonType": "string"
+               },
+               "instance_id": {
+                  "bsonType": "int"
+               },
+               "prd_id": {
+                  "bsonType": "string"
+               }
+            },
+            "required": [
+               "asym_id",
+               "instance_id",
+               "prd_id"
             ]
          },
          "minItems": 1,
@@ -635,9 +659,9 @@
                "source_type": {
                   "bsonType": "string",
                   "enum": [
-                     "natural",
+                     "genetically engineered",
                      "synthetic",
-                     "genetically engineered"
+                     "natural"
                   ]
                }
             },

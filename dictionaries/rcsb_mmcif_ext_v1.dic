@@ -217,7 +217,10 @@ rcsb_consolidate_accession_info      calculate_with_helper python  'DictMethodHe
 rcsb_entry_container_identifiers     calculate_with_helper python  'DictMethodHelper.buildContainerEntryIds'
 rcsb_entity_container_identifiers    calculate_with_helper python  'DictMethodHelper.buildContainerEntityIds'
 rcsb_assembly_container_identifiers  calculate_with_helper python  'DictMethodHelper.buildContainerAssemblyIds'
+rcsb_add_bird_entity_identifiers     calculate_with_helper python  'DictMethodHelper.addBirdEntityIds'
 rcsb_item_method_deferred            calculate_with_helper python  'DictMethodHelper.deferredItemMethod'
+#
+rcsb_filter_enum                     calculate_with_helper python  'DictMethodHelper.filterEnumerations'
 #rcsb_category_method_deferred        calculate_with_helper python  'DictMethodHelper.deferredCategoryMethod'
 #
 # Methods for chemical reference data
@@ -233,6 +236,156 @@ rcsb_file_block_by_method            calculate_with_helper python  'DictMethodHe
 ##
 ##  Extension definitions start here -
 ##
+
+save__pdbx_molecule.rcsb_entity_id
+    _item_description.description
+;  The entity_id for the BIRD instance.
+
+;
+    _item.name                  '_pdbx_molecule.rcsb_entity_id'
+    _item.category_id             pdbx_molecule
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_example.case.          '1'
+    _item_methods.method_id      'rcsb_add_bird_entity_identifiers'
+    _item_linked.child_name       '_pdbx_molecule.rcsb_entity_id'
+    _item_linked.parent_name      '_entity.id'
+     save_
+
+save__pdbx_molecule.rcsb_comp_id
+    _item_description.description
+;  For non-polymer molecules the chemical component identifer for the BIRD instance.
+
+;
+    _item.name                  '_pdbx_molecule.rcsb_entity_id'
+    _item.category_id             pdbx_molecule
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_example.case.          '838'
+    _item_methods.method_id      'rcsb_item_method_deferred'
+    _item_linked.child_name       '_pdbx_molecule.rcsb_comp_id'
+    _item_linked.parent_name      '_chem_comp.id'
+     save_
+
+save__pdbx_entity_nonpoly.rcsb_prd_id
+    _item_description.description
+;  For non-polymer BIRD molecules the BIRD identifer for the entity.
+
+;
+    _item.name                  '_pdbx_entity_nonpoly.rcsb_prd_id'
+    _item.category_id             pdbx_entity_nonpoly
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_example.case.          'PRD_002240'
+    _item_methods.method_id      'rcsb_item_method_deferred'
+    _item_linked.child_name       '_pdbx_entity_nonpoly.rcsb_prd_id'
+    _item_linked.parent_name      '_pdbx_molecule.prd_id'
+     save_
+
+# revised to fix bazaar enumeration issues
+save__pdbx_reference_molecule.class
+    _item_description.description
+;              Broadly defines the function of the entity.
+;
+    _item.name                  '_pdbx_reference_molecule.class'
+    _item.category_id             pdbx_reference_molecule
+    _item.mandatory_code          no
+    _item_type.code               alphanum-csv
+     loop_
+    _item_enumeration.value
+  Antagonist
+  Antibiotic
+  Anticancer
+  Anticoagulant
+  Antifungal
+  Antiinflammatory
+  Antimicrobial
+  Antineoplastic
+  Antiparasitic
+  Antiretroviral
+  Anthelmintic
+  Antithrombotic
+  Antitumor
+  Antiviral
+  'CASPASE inhibitor'
+  'Chaperone binding'
+  'Enzyme inhibitor'
+  'Growth factor'
+  Immunosuppressant
+  Inhibitor
+   Lantibiotic
+   Metabolism
+  'Metal transport'
+  'Oxidation-reduction'
+   Receptor
+  'Thrombin inhibitor'
+  'Trypsin inhibitor'
+   Toxin
+   Unknown
+ 'RNA synthesis Inhibitor'
+'Transport activator'
+'Transition state mimetic'
+'Synthetic opioid'
+    #
+    loop_
+    _item_examples.case
+    Anticancer
+    Anticoagulant
+    Antifungal
+    #
+     _item_methods.method_id     'rcsb_filter_enum'
+     save_
+#
+save__pdbx_reference_molecule.type
+    _item_description.description
+;              Defines the structural classification of the entity.
+;
+    _item.name                  '_pdbx_reference_molecule.type'
+    _item.category_id             pdbx_reference_molecule
+    _item.mandatory_code          no
+    _item_type.code               alphanum-csv
+     loop_
+    _item_enumeration.value
+ 'Amino acid'
+  Aminoglycoside
+  Anthracycline
+  Anthraquinone
+  Ansamycin
+  Chalkophore
+  Chromophore
+  Glycopeptide
+ 'Cyclic depsipeptide'
+ 'Cyclic lipopeptide'
+ 'Cyclic peptide'
+  Heterocyclic
+ 'Imino sugar'
+ 'Keto acid'
+ 'Lipoglycopeptide'
+  Lipopeptide
+  Macrolide
+ 'Non-polymer'
+ 'Nucleoside'
+  Oligopeptide
+  Oligosaccharide
+ 'Peptaibol'
+ 'Peptide-like'
+  Polycyclic
+  Polypeptide
+  Polysaccharide
+  Quinolone
+  Thiolactone
+  Thiopeptide
+  Siderophore
+  Unknown
+ 'Chalkophore, Polypeptide'
+ 'Tricyclic pentaglycosidic antineoplastic antibiotic'
+
+     loop_
+    _item_examples.case
+                                'Peptide-like'
+                                'Macrolide'
+
+     save_
 
 save_rcsb_load_status
     _category.description
@@ -2108,15 +2261,15 @@ save__rcsb_repository_holdings_transferred.remote_accession_code
     _item_example.case           'ma-czyyf'
      save_
 
-save__rcsb_repository_holdings_transferred.remote_accession_code
+save__rcsb_repository_holdings_transferred.remote_repository_name
     _item_description.description
-;    For the transferred content, the accession code in the remote repository.
+;    For the transferred content, the remote repository name.
 ;
-    _item.name                  '_rcsb_repository_holdings_transferred.remote_accession_code'
+    _item.name                  '_rcsb_repository_holdings_transferred.remote_repository_name'
     _item.category_id             rcsb_repository_holdings_transferred
     _item.mandatory_code          no
     _item_type.code               line
-    _item_example.case           'ma-czyyf'
+    _item_example.case           'Model Archive'
      save_
 
 
@@ -2738,7 +2891,7 @@ save__rcsb_chem_comp_synonyms.name
    #
    _item.name            '_rcsb_chem_comp_synonyms.name'
    _item.category_id     rcsb_chem_comp_synonyms
-   _item.mandatory_code  yes
+   _item.mandatory_code  no
    #
    _item_type.code  text
    #
@@ -2773,6 +2926,9 @@ save__rcsb_chem_comp_synonyms.provenance_code
                                   ChEMBL    .
                                   PubChem   .
                                   ACDLabs   .
+                                  'ACD-LABS'   .
+                                  'OpenEye/Lexichem' .
+                                  'Lexichem' .
                                   'OpenEye OEToolkits'  .
 save_
 
@@ -3345,6 +3501,7 @@ save_rcsb_entry_info
      _rcsb_entry_info.polymer_entity_count          2
      _rcsb_entry_info.entity_count                  2
      _rcsb_entry_info.nonpolymer_entity_count       2
+     _rcsb_entry_info.solvent_entity_count          1
      _rcsb_entry_info.branched_entity_count         0
 ;
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -3437,7 +3594,7 @@ save__rcsb_entry_info.polymer_entity_count
 
 save__rcsb_entry_info.nonpolymer_entity_count
     _item_description.description
-;  The number of distinct non-polymer entities exclusive of solvent in the structure entry.
+;  The number of distinct non-polymer entities in the structure entry.
 ;
     _item.name                  '_rcsb_entry_info.nonpolymer_method_count'
     _item.category_id             rcsb_entry_info
@@ -3455,9 +3612,19 @@ save__rcsb_entry_info.branched_entity_count
     _item_type.code               int
      save_
 
+save__rcsb_entry_info.solvent_entity_count
+    _item_description.description
+;  The number of distinct solvent entities in the structure entry.
+;
+    _item.name                  '_rcsb_entry_info.solvent_method_count'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
 save__rcsb_entry_info.entity_count
     _item_description.description
-;  The number of distinct polymer, non-polymer and branched molecular entities exclusive of solvent in the structure entry.
+;  The number of distinct polymer, non-polymer, branched molecular, and solvent entities in the structure entry.
 ;
     _item.name                  '_rcsb_entry_info.entity_count'
     _item.category_id             rcsb_entry_info
@@ -3694,14 +3861,14 @@ save__drugbank_info.brand_names
     _item_examples.case           'Atriphos; Striadyne'
     save_
 
-save__drugbank_info.affected_organism
+save__drugbank_info.affected_organisms
     _item_description.description
-;              The DrugBank drug affected organism.
+;              The DrugBank drug affected organisms.
 ;
-    _item.name                  '_drugbank_info.affected_organism'
+    _item.name                  '_drugbank_info.affected_organisms'
     _item.category_id             drugbank_info
     _item.mandatory_code          no
-    _item_type.code               text
+    _item_type.code               alphanum-scsv
     _item_examples.case          'Humans and other mammals'
     save_
 

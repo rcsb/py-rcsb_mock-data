@@ -74,8 +74,8 @@
             "src_method": {
                "type": "string",
                "enum": [
-                  "man",
                   "syn",
+                  "man",
                   "nat"
                ],
                "description": "The method by which the sample for the entity was produced.\n Entities isolated directly from natural sources (tissues, soil\n samples etc.) are expected to have further information in the\n ENTITY_SRC_NAT category. Entities isolated from genetically\n manipulated sources are expected to have further information in\n the ENTITY_SRC_GEN category."
@@ -84,9 +84,9 @@
                "type": "string",
                "enum": [
                   "macrolide",
-                  "non-polymer",
-                  "branched",
                   "polymer",
+                  "branched",
+                  "non-polymer",
                   "water"
                ],
                "description": "Defines the type of the entity.\n\n Polymer entities are expected to have corresponding\n ENTITY_POLY and associated entries.\n\n Non-polymer entities are expected to have corresponding\n CHEM_COMP and associated entries.\n\n Water entities are not expected to have corresponding\n entries in the ENTITY category."
@@ -170,20 +170,20 @@
             "nstd_linkage": {
                "type": "string",
                "enum": [
-                  "n",
+                  "y",
                   "yes",
                   "no",
-                  "y"
+                  "n"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer-to-monomer link different from that implied by\n _entity_poly.type."
             },
             "nstd_monomer": {
                "type": "string",
                "enum": [
-                  "n",
+                  "y",
                   "yes",
                   "no",
-                  "y"
+                  "n"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer that is not considered standard."
             },
@@ -220,27 +220,27 @@
             "rcsb_entity_polymer_type": {
                "type": "string",
                "enum": [
+                  "Other",
+                  "DNA",
                   "NA-hybrid",
                   "Protein",
-                  "RNA",
-                  "DNA",
-                  "Other"
+                  "RNA"
                ],
                "description": "A coarse-grained polymer entity type."
             },
             "type": {
                "type": "string",
                "enum": [
+                  "cyclic-pseudo-peptide",
+                  "polydeoxyribonucleotide",
+                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
                   "peptide nucleic acid",
                   "polysaccharide(D)",
                   "polyribonucleotide",
-                  "cyclic-pseudo-peptide",
-                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
-                  "polypeptide(D)",
-                  "polydeoxyribonucleotide",
-                  "other",
                   "polypeptide(L)",
-                  "polysaccharide(L)"
+                  "polysaccharide(L)",
+                  "polypeptide(D)",
+                  "other"
                ],
                "description": "The type of the polymer."
             }
@@ -350,8 +350,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "model",
-                     "sample"
+                     "sample",
+                     "model"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -560,10 +560,10 @@
                "pdbx_seq_type": {
                   "type": "string",
                   "enum": [
-                     "Biological sequence",
-                     "C-terminal tag",
                      "Linker",
-                     "N-terminal tag"
+                     "Biological sequence",
+                     "N-terminal tag",
+                     "C-terminal tag"
                   ],
                   "description": "This data item povides additional information about the sequence type."
                },
@@ -626,8 +626,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "model",
-                     "sample"
+                     "sample",
+                     "model"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -833,8 +833,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "model",
-                     "sample"
+                     "sample",
+                     "model"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -854,6 +854,37 @@
             "required": [
                "entity_id",
                "pdbx_src_id"
+            ]
+         },
+         "minItems": 1,
+         "uniqueItems": true
+      },
+      "pdbx_molecule": {
+         "type": "array",
+         "items": {
+            "type": "object",
+            "properties": {
+               "asym_id": {
+                  "type": "string",
+                  "examples": [
+                     "A",
+                     "B"
+                  ],
+                  "description": "A reference to _struct_asym.id in the STRUCT_ASYM category."
+               },
+               "instance_id": {
+                  "type": "integer",
+                  "description": "              The value of _pdbx_molecule.instance_id is identifies a particular molecule\n\t       in the molecule list."
+               },
+               "prd_id": {
+                  "type": "string",
+                  "description": "The value of _pdbx_molecule.prd_id is the PDB accession code for this\n reference molecule."
+               }
+            },
+            "required": [
+               "asym_id",
+               "instance_id",
+               "prd_id"
             ]
          },
          "minItems": 1,
@@ -1035,9 +1066,9 @@
                "source_type": {
                   "type": "string",
                   "enum": [
-                     "natural",
+                     "genetically engineered",
                      "synthetic",
-                     "genetically engineered"
+                     "natural"
                   ],
                   "description": "The source type for the entity\n"
                }
