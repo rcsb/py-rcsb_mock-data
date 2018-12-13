@@ -33,6 +33,8 @@
 #     9-Dec-2018 jdw Add _pdbx_reference_molecule.class, _pdbx_reference_molecule.type, Add categories drugbank_info
 #                    and drugbank_targetm, add method rcsb_add_bird_entity_identifiers, add  _rcsb_entry_info.solvent_entity_count
 #                    and adjust counts to include solvent.
+#    12-Dec-2018 jdw Add rcsb_entity_id identifiers in categories struct_ref_seq and struct_ref_seq_dif
+#                    Add category rcsb_entity_poly_info
 #
 ###########################################################################
 
@@ -52,12 +54,18 @@ data_rcsb_mmcif_ext.dic
 
     _dictionary.title           rcsb_mmcif_ext.dic
     _dictionary.datablock_id    rcsb_mmcif_ext.dic
-    _dictionary.version         0.109
+    _dictionary.version         0.110
 #
      loop_
     _dictionary_history.version
     _dictionary_history.update
     _dictionary_history.revision
+ 0.110 2018-12-12
+;
+Changes (jdw):
+ + Add rcsb_entity_id identifiers in categories struct_ref_seq and struct_ref_seq_dif
+ + Add category rcsb_entity_poly_info
+;
  0.109  2018-12-09
 ;
 Changes (jdw):
@@ -230,8 +238,10 @@ rcsb_entry_container_identifiers     calculate_with_helper python  'DictMethodHe
 rcsb_entity_container_identifiers    calculate_with_helper python  'DictMethodHelper.buildContainerEntityIds'
 rcsb_assembly_container_identifiers  calculate_with_helper python  'DictMethodHelper.buildContainerAssemblyIds'
 rcsb_add_bird_entity_identifiers     calculate_with_helper python  'DictMethodHelper.addBirdEntityIds'
+rcsb_add_struct_ref_seq_entity_identifiers calculate_with_helper python  'DictMethodHelper.addStructRefSeqEntityIds'
 rcsb_item_method_deferred            calculate_with_helper python  'DictMethodHelper.deferredItemMethod'
 #
+rcsb_entity_poly_info                 calculate_with_helper python  'DictMethodHelper.buildEntityPolyInfo'
 rcsb_filter_enum                     calculate_with_helper python  'DictMethodHelper.filterEnumerations'
 #rcsb_category_method_deferred        calculate_with_helper python  'DictMethodHelper.deferredCategoryMethod'
 #
@@ -247,6 +257,123 @@ rcsb_file_block_by_method            calculate_with_helper python  'DictMethodHe
 
 ##
 ##  Extension definitions start here -
+##
+
+####################
+## STRUCT_REF_SEQ ##
+####################
+
+save_struct_ref_seq
+    _category.description
+;              Data items in the STRUCT_REF_SEQ category provide a mechanism
+               for indicating and annotating a region (or regions) of alignment
+               between the sequence of an entity or biological unit described
+               in the data block and the sequence in the referenced database
+               entry.
+;
+    _category.id                  struct_ref_seq
+    _category.mandatory_code      no
+    _category_key.name          '_struct_ref_seq.align_id'
+    loop_
+    _category_group.id           'inclusive_group'
+                                 'struct_group'
+    loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 - based on the sequence alignment of CHER from M. xantus
+                (36 to 288) and CHER from S. typhimurium (18 to 276).
+;
+;
+    _struct_ref_seq.align_id          alg1
+    _struct_ref_seq.ref_id            seqdb1
+    _struct_ref_seq.seq_align_beg     36
+    _struct_ref_seq.seq_align_end     288
+    _struct_ref_seq.db_align_beg      18
+    _struct_ref_seq.db_align_end      276
+    _struct_ref_seq.rcsb_entity_id     1
+    _struct_ref_seq.details
+    ; The alignment contains 3 gaps larger than 2 residues
+    ;
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     save_
+
+save__struct_ref_seq.rcsb_entity_id
+    _item_description.description
+;  The entity_id for polymer sequence in the alignment record.
+;
+    _item.name                  '_struct_ref_seq.rcsb_entity_id'
+    _item.category_id             struct_ref_seq
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_example.case           '1'
+    _item_methods.method_id      'rcsb_add_struct_ref_seq_entity_identifiers'
+    _item_linked.child_name       '_struct_ref_seq.rcsb_entity_id'
+    _item_linked.parent_name      '_entity.id'
+     save_
+
+########################
+## STRUCT_REF_SEQ_DIF ##
+########################
+
+save_struct_ref_seq_dif
+    _category.description
+;              Data items in the STRUCT_REF_SEQ_DIF category provide a
+               mechanism for indicating and annotating point differences
+               between the sequence of the entity or biological unit described
+               in the data block and the sequence of the referenced database
+               entry.
+;
+    _category.id                  struct_ref_seq_dif
+    _category.mandatory_code      no
+    _category_key.name          '_struct_ref_seq_dif.pdbx_ordinal'
+#
+#    loop_
+#    _category_key.name          '_struct_ref_seq_dif.align_id'
+#                                '_struct_ref_seq_dif.seq_num'
+    loop_
+    _category_group.id           'inclusive_group'
+                                 'struct_group'
+    loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 - based on laboratory records for CAP-DNA complex.
+;
+;
+    _struct_ref_seq_dif.pdbx_ordinal 1
+    _struct_ref_seq_dif.align_id    algn2
+    _struct_ref_seq_dif.seq_num     181
+    _struct_ref_seq_dif.db_mon_id   GLU
+    _struct_ref_seq_dif.mon_id      PHE
+    _struct_ref_seq_dif.rcsb_entity_id 1
+    _struct_ref_seq_dif.details
+    ; A point mutation was introduced in the CAP at position 181
+      substituting PHE for GLU.
+    ;
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+     save_
+
+
+save__struct_ref_seq_dif.rcsb_entity_id
+    _item_description.description
+;  The entity_id for polymer sequence difference in the alignment record.
+
+;
+    _item.name                  '_struct_ref_seq_dif.rcsb_entity_id'
+    _item.category_id             struct_ref_seq_dif
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_example.case.          '1'
+    _item_methods.method_id      'rcsb_item_method_deferred'
+    _item_linked.child_name       '_struct_ref_seq_dif.rcsb_entity_id'
+    _item_linked.parent_name      '_entity.id'
+     save_
+
 ##
 
 save__pdbx_molecule.rcsb_entity_id
@@ -3952,3 +4079,164 @@ save__drugbank_info.cas_number
     _item_type.code               code
      _item_examples.case         '56-65-5'
     save_
+
+##########################
+## rcsb_entity_poly_info ##
+##########################
+
+save_rcsb_entity_poly_info
+    _category.description
+;        The rcsb_entity_poly_info category provides residue level nomenclature
+         for polymer entities.
+;
+    _category.id                  rcsb_entity_poly_info
+    _category.mandatory_code      no
+     loop_
+    _category_key.name          '_rcsb_entity_poly_info.ordinal_id'
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 - based on NDB entry DDFB25
+;
+;
+     loop_
+    _rcsb_entity_poly_info.ordinal_id
+    _rcsb_entity_poly_info.entry_id
+    _rcsb_entity_poly_info.entity_id
+    _rcsb_entity_poly_info.seq_num
+    _rcsb_entity_poly_info.comp_id
+    _rcsb_entity_poly_info.is_modified
+    _rcsb_entity_poly_info.is_heterogeneous
+    1 1ABC 1 1 MSE Y N
+    2 1ABC 1 2 TRP N N
+    # ... abbreviated ...
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_entity_poly_info
+   _category_methods.method_id         'rcsb_entity_poly_info'
+     save_
+
+save__rcsb_entity_poly_info.ordinal_id
+    _item_description.description
+;    An ordinal identifier for a polymer component.
+;
+    _item.name                  '_rcsb_entity_poly_info.ordinal_id'
+    _item.category_id             rcsb_entity_poly_info
+    _item.mandatory_code          yes
+    _item_type.code               int
+    _item_example.case            1
+     save_
+
+save__rcsb_entity_poly_info.entry_id
+    _item_description.description
+;    The entry identifier containing the polymer entity.
+;
+    _item.name                  '_rcsb_entity_poly_info.entry_id'
+    _item.category_id             rcsb_entity_poly_info
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_poly_info.entry_id'
+    _item_linked.parent_name    '_entry.id'
+     save_
+
+
+save__rcsb_entity_poly_info.entity_id
+    _item_description.description
+;    The entity identifier for the polymer entity containing the monomer.
+;
+    _item.name                  '_rcsb_entity_poly_info.entity_id'
+    _item.category_id             rcsb_entity_poly_info
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_poly_info.entity_id'
+    _item_linked.parent_name    '_entity_poly_seq.entity_id'
+     save_
+
+
+save__rcsb_entity_poly_info.comp_id
+    _item_description.description
+;     The component identifier for the monomer in the polymer sequence.
+;
+    _item.name                  '_rcsb_entity_poly_info.comp_id'
+    _item.category_id             rcsb_entity_poly_info
+    _item.mandatory_code          yes
+    _item_type.code               ucode
+    _item_linked.child_name      '_rcsb_entity_poly_info.comp_id'
+    #_item_linked.parent_name    '_entity_poly_seq.mon_id'
+    _item_linked.parent_name     '_chem_comp.id'
+
+     save_
+
+save__rcsb_entity_poly_info.chem_comp_count
+    _item_description.description
+;    The number of the particular chemical components in the polymer entity.
+;
+    _item.name                  '_rcsb_entity_poly_info.chem_comp_count'
+    _item.category_id             rcsb_entity_poly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+    save_
+
+save__rcsb_entity_poly_info.entity_sequence_length
+    _item_description.description
+;    The number of the monones in the polymer entity sequence.
+;
+    _item.name                  '_rcsb_entity_poly_info.entity_sequence_length'
+    _item.category_id             rcsb_entity_poly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+
+     save_
+
+#save__rcsb_entity_poly_info.seq_num
+#   _item_description.description
+#    The position in polymer entity sequence.
+#
+#   _item.name                  '_rcsb_entity_poly_info.seq_num'
+#   _item.category_id             rcsb_entity_poly_info
+#   _item.mandatory_code          yes
+#   _item_type.code               int
+
+#   _item_linked.child_name     '_rcsb_entity_poly_info.seq_num'
+#   _item_linked.parent_name    '_entity_poly_seq.num'
+
+#    save_
+
+#save__rcsb_entity_poly_info.is_heterogeneous
+#   _item_description.description
+#    Flag to indicate the compositional heterogeneity at this sequence poisiton.
+#
+#   _item.name                  '_rcsb_entity_poly_info.is_heterogeneous'
+#   _item.category_id             rcsb_entity_poly_info
+#   _item.mandatory_code          no
+
+#   _item_default.value           no
+#   _item_type.code               ucode
+#   loop_
+#   _item_enumeration.value
+#    Y N
+#    save_
+
+save__rcsb_entity_poly_info.is_modified
+    _item_description.description
+;    Flag to indicate a non-standard monomer.
+;
+    _item.name                  '_rcsb_entity_poly_info.is_modified'
+    _item.category_id             rcsb_entity_poly_info
+    _item.mandatory_code          no
+
+    _item_default.value           no
+    _item_type.code               ucode
+    loop_
+    _item_enumeration.value
+                                  Y N
+     save_
+
+

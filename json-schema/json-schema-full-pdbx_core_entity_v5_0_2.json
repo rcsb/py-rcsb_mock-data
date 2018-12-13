@@ -83,11 +83,11 @@
             "type": {
                "type": "string",
                "enum": [
-                  "polymer",
                   "branched",
                   "non-polymer",
                   "water",
-                  "macrolide"
+                  "macrolide",
+                  "polymer"
                ],
                "description": "Defines the type of the entity.\n\n Polymer entities are expected to have corresponding\n ENTITY_POLY and associated entries.\n\n Non-polymer entities are expected to have corresponding\n CHEM_COMP and associated entries.\n\n Water entities are not expected to have corresponding\n entries in the ENTITY category."
             }
@@ -170,20 +170,20 @@
             "nstd_linkage": {
                "type": "string",
                "enum": [
-                  "no",
                   "yes",
+                  "y",
                   "n",
-                  "y"
+                  "no"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer-to-monomer link different from that implied by\n _entity_poly.type."
             },
             "nstd_monomer": {
                "type": "string",
                "enum": [
-                  "no",
                   "yes",
+                  "y",
                   "n",
-                  "y"
+                  "no"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer that is not considered standard."
             },
@@ -220,26 +220,26 @@
             "rcsb_entity_polymer_type": {
                "type": "string",
                "enum": [
-                  "NA-hybrid",
-                  "DNA",
+                  "Other",
                   "RNA",
+                  "DNA",
                   "Protein",
-                  "Other"
+                  "NA-hybrid"
                ],
                "description": "A coarse-grained polymer entity type."
             },
             "type": {
                "type": "string",
                "enum": [
-                  "polysaccharide(L)",
-                  "polypeptide(L)",
-                  "cyclic-pseudo-peptide",
-                  "polypeptide(D)",
-                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
-                  "peptide nucleic acid",
                   "polysaccharide(D)",
-                  "other",
+                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
+                  "polypeptide(L)",
                   "polydeoxyribonucleotide",
+                  "cyclic-pseudo-peptide",
+                  "other",
+                  "polypeptide(D)",
+                  "peptide nucleic acid",
+                  "polysaccharide(L)",
                   "polyribonucleotide"
                ],
                "description": "The type of the polymer."
@@ -561,9 +561,9 @@
                   "type": "string",
                   "enum": [
                      "Linker",
-                     "N-terminal tag",
                      "C-terminal tag",
-                     "Biological sequence"
+                     "Biological sequence",
+                     "N-terminal tag"
                   ],
                   "description": "This data item povides additional information about the sequence type."
                },
@@ -784,6 +784,10 @@
             "name": {
                "type": "string",
                "description": "A name for the non-polymer entity"
+            },
+            "rcsb_prd_id": {
+               "type": "string",
+               "description": "For non-polymer BIRD molecules the BIRD identifer for the entity.\n"
             }
          },
          "required": [
@@ -879,6 +883,14 @@
                "prd_id": {
                   "type": "string",
                   "description": "The value of _pdbx_molecule.prd_id is the PDB accession code for this\n reference molecule."
+               },
+               "rcsb_comp_id": {
+                  "type": "string",
+                  "description": "For non-polymer molecules the chemical component identifer for the BIRD instance.\n"
+               },
+               "rcsb_entity_id": {
+                  "type": "string",
+                  "description": "The entity_id for the BIRD instance.\n"
                }
             },
             "required": [
@@ -1066,9 +1078,9 @@
                "source_type": {
                   "type": "string",
                   "enum": [
-                     "natural",
                      "synthetic",
-                     "genetically engineered"
+                     "genetically engineered",
+                     "natural"
                   ],
                   "description": "The source type for the entity\n"
                }
@@ -1211,6 +1223,216 @@
                "db_name",
                "entity_id",
                "id"
+            ]
+         },
+         "minItems": 1,
+         "uniqueItems": true
+      },
+      "struct_ref_seq": {
+         "type": "array",
+         "items": {
+            "type": "object",
+            "properties": {
+               "align_id": {
+                  "type": "string",
+                  "description": "The value of _struct_ref_seq.align_id must uniquely identify a\n record in the STRUCT_REF_SEQ list.\n\n Note that this item need not be a number; it can be any unique\n identifier."
+               },
+               "db_align_beg": {
+                  "type": "integer",
+                  "description": "The sequence position in the referenced database entry\n at which the alignment begins."
+               },
+               "db_align_end": {
+                  "type": "integer",
+                  "description": "The sequence position in the referenced database entry\n at which the alignment ends."
+               },
+               "pdbx_PDB_id_code": {
+                  "type": "string",
+                  "examples": [
+                     "1BBP"
+                  ],
+                  "description": "The PDB code of the structure.\n"
+               },
+               "pdbx_auth_seq_align_beg": {
+                  "type": "string",
+                  "examples": [
+                     "1",
+                     "2"
+                  ],
+                  "description": "\nInitial position in the PDB sequence segment."
+               },
+               "pdbx_auth_seq_align_end": {
+                  "type": "string",
+                  "examples": [
+                     "1",
+                     "2"
+                  ],
+                  "description": "\nEnding position in the PDB sequence segment"
+               },
+               "pdbx_db_accession": {
+                  "type": "string",
+                  "examples": [
+                     "P07617"
+                  ],
+                  "description": "Accession code of the reference database."
+               },
+               "pdbx_db_align_beg_ins_code": {
+                  "type": "string",
+                  "examples": [
+                     "1",
+                     "2"
+                  ],
+                  "description": "\nInitial insertion code of the sequence segment of the\nreference database."
+               },
+               "pdbx_db_align_end_ins_code": {
+                  "type": "string",
+                  "examples": [
+                     "1",
+                     "2"
+                  ],
+                  "description": "\nEnding insertion code of the sequence segment of the\nreference database."
+               },
+               "pdbx_seq_align_beg_ins_code": {
+                  "type": "string",
+                  "examples": [
+                     "1",
+                     "2"
+                  ],
+                  "description": "\nInitial insertion code of the PDB sequence segment."
+               },
+               "pdbx_seq_align_end_ins_code": {
+                  "type": "string",
+                  "examples": [
+                     "1",
+                     "2"
+                  ],
+                  "description": "\nEnding insertion code of the sequence segment"
+               },
+               "pdbx_strand_id": {
+                  "type": "string",
+                  "examples": [
+                     "A",
+                     "B"
+                  ],
+                  "description": "The PDB strand/chain ID ."
+               },
+               "rcsb_entity_id": {
+                  "type": "string",
+                  "description": "The entity_id for polymer sequence in the alignment record."
+               },
+               "ref_id": {
+                  "type": "string",
+                  "description": "This data item is a pointer to _struct_ref.id in the\n STRUCT_REF category."
+               },
+               "seq_align_beg": {
+                  "type": "integer",
+                  "description": "The sequence position in the entity or biological unit described\n  in the data block at which the alignment begins.\n\n This data item is a pointer to _entity_poly_seq.num in the\n ENTITY_POLY_SEQ category."
+               },
+               "seq_align_end": {
+                  "type": "integer",
+                  "description": "The sequence position in the entity or biological unit described\n in the data block at which the alignment ends.\n\n This data item is a pointer to _entity_poly_seq.num in the\n ENTITY_POLY_SEQ category."
+               }
+            },
+            "required": [
+               "align_id",
+               "db_align_beg",
+               "db_align_end",
+               "ref_id",
+               "seq_align_beg",
+               "seq_align_end"
+            ]
+         },
+         "minItems": 1,
+         "uniqueItems": true
+      },
+      "struct_ref_seq_dif": {
+         "type": "array",
+         "items": {
+            "type": "object",
+            "properties": {
+               "align_id": {
+                  "type": "string",
+                  "description": "This data item is a pointer to _struct_ref_seq.align_id in\n the STRUCT_REF_SEQ  category."
+               },
+               "db_mon_id": {
+                  "type": "string",
+                  "description": "The monomer type found at this position in the referenced\n database entry.\n\n This data item is a pointer to _chem_comp.id in the CHEM_COMP\n category."
+               },
+               "details": {
+                  "type": "string",
+                  "description": "A description of special aspects of the point differences\n between the sequence of the entity or biological unit described\n in the data block and that in the referenced database entry."
+               },
+               "mon_id": {
+                  "type": "string",
+                  "description": "The monomer type found at this position in the sequence of\n the entity or biological unit described in this data block.\n\n This data item is a pointer to _chem_comp.id in the CHEM_COMP\n category."
+               },
+               "pdbx_auth_seq_num": {
+                  "type": "string",
+                  "examples": [
+                     "1",
+                     "2"
+                  ],
+                  "description": "Insertion code in PDB sequence\n"
+               },
+               "pdbx_ordinal": {
+                  "type": "integer",
+                  "description": "A synthetic integer primary key for this category."
+               },
+               "pdbx_pdb_id_code": {
+                  "type": "string",
+                  "examples": [
+                     "1BBP"
+                  ],
+                  "description": "\nThe PDB ID code."
+               },
+               "pdbx_pdb_ins_code": {
+                  "type": "string",
+                  "examples": [
+                     "1",
+                     "2"
+                  ],
+                  "description": "Insertion code in PDB sequence\n"
+               },
+               "pdbx_pdb_strand_id": {
+                  "type": "string",
+                  "examples": [
+                     "A",
+                     "B"
+                  ],
+                  "description": "PDB strand/chain id."
+               },
+               "pdbx_seq_db_accession_code": {
+                  "type": "string",
+                  "examples": [
+                     "P07617"
+                  ],
+                  "description": "Sequence database accession number."
+               },
+               "pdbx_seq_db_name": {
+                  "type": "string",
+                  "examples": [
+                     "SWS"
+                  ],
+                  "description": "Sequence database name.\n"
+               },
+               "pdbx_seq_db_seq_num": {
+                  "type": "string",
+                  "examples": [
+                     "142"
+                  ],
+                  "description": "Sequence database sequence number.\n"
+               },
+               "rcsb_entity_id": {
+                  "type": "string",
+                  "description": "The entity_id for polymer sequence difference in the alignment record.\n"
+               },
+               "seq_num": {
+                  "type": "integer",
+                  "description": "This data item is a pointer to _entity_poly_seq.num in the\n ENTITY_POLY_SEQ category."
+               }
+            },
+            "required": [
+               "align_id",
+               "pdbx_ordinal"
             ]
          },
          "minItems": 1,

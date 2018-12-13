@@ -49,11 +49,11 @@
             "type": {
                "bsonType": "string",
                "enum": [
-                  "polymer",
                   "branched",
                   "non-polymer",
                   "water",
-                  "macrolide"
+                  "macrolide",
+                  "polymer"
                ]
             }
          },
@@ -112,19 +112,19 @@
             "nstd_linkage": {
                "bsonType": "string",
                "enum": [
-                  "no",
                   "yes",
+                  "y",
                   "n",
-                  "y"
+                  "no"
                ]
             },
             "nstd_monomer": {
                "bsonType": "string",
                "enum": [
-                  "no",
                   "yes",
+                  "y",
                   "n",
-                  "y"
+                  "no"
                ]
             },
             "pdbx_seq_one_letter_code": {
@@ -142,25 +142,25 @@
             "rcsb_entity_polymer_type": {
                "bsonType": "string",
                "enum": [
-                  "NA-hybrid",
-                  "DNA",
+                  "Other",
                   "RNA",
+                  "DNA",
                   "Protein",
-                  "Other"
+                  "NA-hybrid"
                ]
             },
             "type": {
                "bsonType": "string",
                "enum": [
-                  "polysaccharide(L)",
-                  "polypeptide(L)",
-                  "cyclic-pseudo-peptide",
-                  "polypeptide(D)",
-                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
-                  "peptide nucleic acid",
                   "polysaccharide(D)",
-                  "other",
+                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
+                  "polypeptide(L)",
                   "polydeoxyribonucleotide",
+                  "cyclic-pseudo-peptide",
+                  "other",
+                  "polypeptide(D)",
+                  "peptide nucleic acid",
+                  "polysaccharide(L)",
                   "polyribonucleotide"
                ]
             }
@@ -314,9 +314,9 @@
                   "bsonType": "string",
                   "enum": [
                      "Linker",
-                     "N-terminal tag",
                      "C-terminal tag",
-                     "Biological sequence"
+                     "Biological sequence",
+                     "N-terminal tag"
                   ]
                },
                "pdbx_src_id": {
@@ -441,6 +441,9 @@
             },
             "name": {
                "bsonType": "string"
+            },
+            "rcsb_prd_id": {
+               "bsonType": "string"
             }
          },
          "required": [
@@ -504,6 +507,12 @@
                   "bsonType": "int"
                },
                "prd_id": {
+                  "bsonType": "string"
+               },
+               "rcsb_comp_id": {
+                  "bsonType": "string"
+               },
+               "rcsb_entity_id": {
                   "bsonType": "string"
                }
             },
@@ -656,9 +665,9 @@
                "source_type": {
                   "bsonType": "string",
                   "enum": [
-                     "natural",
                      "synthetic",
-                     "genetically engineered"
+                     "genetically engineered",
+                     "natural"
                   ]
                }
             },
@@ -748,6 +757,122 @@
             },
             "required": [
                "id"
+            ]
+         },
+         "minItems": 1,
+         "uniqueItems": true
+      },
+      "struct_ref_seq": {
+         "bsonType": "array",
+         "items": {
+            "bsonType": "object",
+            "properties": {
+               "align_id": {
+                  "bsonType": "string"
+               },
+               "db_align_beg": {
+                  "bsonType": "int"
+               },
+               "db_align_end": {
+                  "bsonType": "int"
+               },
+               "pdbx_PDB_id_code": {
+                  "bsonType": "string"
+               },
+               "pdbx_auth_seq_align_beg": {
+                  "bsonType": "string"
+               },
+               "pdbx_auth_seq_align_end": {
+                  "bsonType": "string"
+               },
+               "pdbx_db_accession": {
+                  "bsonType": "string"
+               },
+               "pdbx_db_align_beg_ins_code": {
+                  "bsonType": "string"
+               },
+               "pdbx_db_align_end_ins_code": {
+                  "bsonType": "string"
+               },
+               "pdbx_seq_align_beg_ins_code": {
+                  "bsonType": "string"
+               },
+               "pdbx_seq_align_end_ins_code": {
+                  "bsonType": "string"
+               },
+               "pdbx_strand_id": {
+                  "bsonType": "string"
+               },
+               "rcsb_entity_id": {
+                  "bsonType": "string"
+               },
+               "ref_id": {
+                  "bsonType": "string"
+               },
+               "seq_align_beg": {
+                  "bsonType": "int"
+               },
+               "seq_align_end": {
+                  "bsonType": "int"
+               }
+            },
+            "required": [
+               "align_id"
+            ]
+         },
+         "minItems": 1,
+         "uniqueItems": true
+      },
+      "struct_ref_seq_dif": {
+         "bsonType": "array",
+         "items": {
+            "bsonType": "object",
+            "properties": {
+               "align_id": {
+                  "bsonType": "string"
+               },
+               "db_mon_id": {
+                  "bsonType": "string"
+               },
+               "details": {
+                  "bsonType": "string"
+               },
+               "mon_id": {
+                  "bsonType": "string"
+               },
+               "pdbx_auth_seq_num": {
+                  "bsonType": "string"
+               },
+               "pdbx_ordinal": {
+                  "bsonType": "int"
+               },
+               "pdbx_pdb_id_code": {
+                  "bsonType": "string"
+               },
+               "pdbx_pdb_ins_code": {
+                  "bsonType": "string"
+               },
+               "pdbx_pdb_strand_id": {
+                  "bsonType": "string"
+               },
+               "pdbx_seq_db_accession_code": {
+                  "bsonType": "string"
+               },
+               "pdbx_seq_db_name": {
+                  "bsonType": "string"
+               },
+               "pdbx_seq_db_seq_num": {
+                  "bsonType": "string"
+               },
+               "rcsb_entity_id": {
+                  "bsonType": "string"
+               },
+               "seq_num": {
+                  "bsonType": "int"
+               }
+            },
+            "required": [
+               "pdbx_ordinal"
             ]
          },
          "minItems": 1,
