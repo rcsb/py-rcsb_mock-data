@@ -41,21 +41,21 @@
             "pdbx_processing_site": {
                "bsonType": "string",
                "enum": [
-                  "PDBE",
-                  "EBI",
+                  "PDBJ",
                   "RCSB",
-                  "PDBJ"
+                  "PDBE",
+                  "EBI"
                ]
             },
             "pdbx_release_status": {
                "bsonType": "string",
                "enum": [
+                  "DEL",
+                  "REF_ONLY",
+                  "HOLD",
                   "REL",
                   "HPUB",
-                  "HOLD",
-                  "OBS",
-                  "DEL",
-                  "REF_ONLY"
+                  "OBS"
                ]
             },
             "pdbx_replaced_by": {
@@ -73,35 +73,35 @@
             "type": {
                "bsonType": "string",
                "enum": [
-                  "D-peptide linking",
-                  "L-peptide linking",
-                  "DNA OH 3 prime terminus",
-                  "D-saccharide 1,4 and 1,6 linking",
-                  "D-saccharide 1,4 and 1,4 linking",
-                  "L-peptide COOH carboxy terminus",
                   "L-saccharide 1,4 and 1,4 linking",
-                  "L-saccharide",
-                  "D-saccharide",
-                  "L-saccharide 1,4 and 1,6 linking",
-                  "other",
-                  "DNA OH 5 prime terminus",
-                  "D-peptide NH3 amino terminus",
-                  "L-DNA linking",
-                  "L-beta-peptide, C-gamma linking",
-                  "RNA OH 3 prime terminus",
-                  "saccharide",
                   "L-RNA linking",
-                  "D-peptide COOH carboxy terminus",
-                  "non-polymer",
+                  "L-peptide COOH carboxy terminus",
+                  "peptide-like",
+                  "DNA linking",
+                  "saccharide",
+                  "other",
+                  "L-saccharide",
+                  "L-beta-peptide, C-gamma linking",
+                  "D-peptide linking",
+                  "L-DNA linking",
+                  "D-saccharide 1,4 and 1,6 linking",
                   "D-gamma-peptide, C-delta linking",
-                  "D-beta-peptide, C-gamma linking",
+                  "D-saccharide 1,4 and 1,4 linking",
                   "L-peptide NH3 amino terminus",
                   "RNA OH 5 prime terminus",
+                  "DNA OH 5 prime terminus",
                   "peptide linking",
-                  "DNA linking",
+                  "RNA OH 3 prime terminus",
+                  "D-beta-peptide, C-gamma linking",
+                  "D-saccharide",
+                  "non-polymer",
                   "L-gamma-peptide, C-delta linking",
+                  "L-saccharide 1,4 and 1,6 linking",
                   "RNA linking",
-                  "peptide-like"
+                  "L-peptide linking",
+                  "DNA OH 3 prime terminus",
+                  "D-peptide COOH carboxy terminus",
+                  "D-peptide NH3 amino terminus"
                ]
             }
          },
@@ -176,8 +176,8 @@
                "pdbx_polymer_type": {
                   "bsonType": "string",
                   "enum": [
-                     "non-polymer",
-                     "polymer"
+                     "polymer",
+                     "non-polymer"
                   ]
                },
                "pdbx_residue_numbering": {
@@ -186,8 +186,8 @@
                "pdbx_stereo_config": {
                   "bsonType": "string",
                   "enum": [
-                     "N",
                      "R",
+                     "N",
                      "S"
                   ]
                },
@@ -238,13 +238,13 @@
                "value_order": {
                   "bsonType": "string",
                   "enum": [
-                     "sing",
-                     "arom",
-                     "delo",
-                     "pi",
                      "poly",
                      "trip",
+                     "pi",
+                     "arom",
+                     "sing",
                      "doub",
+                     "delo",
                      "quad"
                   ]
                }
@@ -266,31 +266,31 @@
                "action_type": {
                   "bsonType": "string",
                   "enum": [
-                     "Modify aromatic_flag",
                      "Modify charge",
-                     "Modify name",
-                     "Initial release",
-                     "Modify parent residue",
-                     "Modify atom id",
                      "Modify coordinates",
-                     "Modify component atom id",
-                     "Modify internal type",
-                     "Create component",
                      "Modify formal charge",
-                     "Modify identifier",
-                     "Modify linking type",
-                     "Other modification",
-                     "Modify processing site",
-                     "Modify component comp_id",
-                     "Modify leaving atom flag",
-                     "Modify descriptor",
                      "Modify value order",
-                     "Modify synonyms",
-                     "Obsolete component",
                      "Modify formula",
+                     "Modify synonyms",
+                     "Create component",
+                     "Modify processing site",
+                     "Modify aromatic_flag",
+                     "Modify subcomponent list",
+                     "Other modification",
+                     "Initial release",
                      "Modify one letter code",
+                     "Modify parent residue",
+                     "Obsolete component",
+                     "Modify leaving atom flag",
+                     "Modify component atom id",
                      "Modify model coordinates code",
-                     "Modify subcomponent list"
+                     "Modify internal type",
+                     "Modify identifier",
+                     "Modify name",
+                     "Modify component comp_id",
+                     "Modify linking type",
+                     "Modify atom id",
+                     "Modify descriptor"
                   ]
                },
                "comp_id": {
@@ -333,20 +333,20 @@
                "type": {
                   "bsonType": "string",
                   "enum": [
-                     "InChI_MAIN_FORMULA",
-                     "InChI_MAIN_HATOM",
-                     "SMILES_CANONICAL",
-                     "InChI_FIXEDH",
                      "SMILES",
-                     "InChI_MAIN",
-                     "InChI_CHARGE",
-                     "SMILES_CANNONICAL",
+                     "InChI_MAIN_FORMULA",
                      "InChIKey",
-                     "InChI_MAIN_CONNECT",
-                     "InChI_RECONNECT",
-                     "InChI_STEREO",
+                     "InChI_MAIN_HATOM",
                      "InChI_ISOTOPE",
-                     "InChI"
+                     "InChI",
+                     "SMILES_CANONICAL",
+                     "InChI_MAIN_CONNECT",
+                     "InChI_CHARGE",
+                     "InChI_MAIN",
+                     "SMILES_CANNONICAL",
+                     "InChI_FIXEDH",
+                     "InChI_STEREO",
+                     "InChI_RECONNECT"
                   ]
                }
             },
@@ -408,14 +408,14 @@
                "type": {
                   "bsonType": "string",
                   "enum": [
-                     "COMMON NAME",
-                     "PUBCHEM Identifier",
-                     "CONDENSED IUPAC CARB NAME",
-                     "SYSTEMATIC NAME",
-                     "SYNONYM",
                      "CAS REGISTRY NUMBER",
-                     "IUPAC CARB NAME",
-                     "MDL Identifier"
+                     "PUBCHEM Identifier",
+                     "COMMON NAME",
+                     "MDL Identifier",
+                     "SYNONYM",
+                     "SYSTEMATIC NAME",
+                     "CONDENSED IUPAC CARB NAME",
+                     "IUPAC CARB NAME"
                   ]
                }
             },

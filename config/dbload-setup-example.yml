@@ -13,6 +13,8 @@
 #  4-Dec-2018 jdw add indices, add private keys for chemical components, align citation schema, and
 #                 add DrugBank core collection details
 #  6-Dec-2018 jdw revised DrugBank core collection details
+# 13-Dec-2018 jdw includes core_entity_monomer collection
+# 13-Dec-2018 jdw includes ihm_dev collection
 #
 # Master Pinelands configuration file example
 ---
@@ -24,9 +26,12 @@ site_info:
     CHEM_COMP_REPO_PATH: MOCK_CHEM_COMP_REPO
     PDBX_REPO_PATH: MOCK_PDBX_SANDBOX
     RCSB_EXCHANGE_SANDBOX_PATH: MOCK_EXCHANGE_SANDBOX
+    IHM_DEV_REPO_PATH: MOCK_IHM_REPO
     RCSB_SEQUENCE_CLUSTER_DATA_PATH: cluster_data/mmseqs-20180608
     PDBX_DICT_LOCATOR: dictionaries/mmcif_pdbx_v5_next.dic
     RCSB_DICT_LOCATOR: dictionaries/rcsb_mmcif_ext_v1.dic
+    IHMDEV_DICT_LOCATOR: dictionaries/ihm-extension.dic
+    FLR_DICT_LOCATOR: dictionaries/flr-extension.dic
     PROVENANCE_INFO_LOCATOR: provenance/rcsb_extend_provenance_info.json
     APP_DATA_TYPE_INFO_LOCATOR: data_type_info/app_data_type_mapping.cif
     DICT_HELPER_MODULE: rcsb.db.helpers.DictInfoHelper
@@ -53,6 +58,11 @@ site_server_info:
     COCKROACH_DB_PORT: '26257'
     COCKROACH_DB_NAME: system
     COCKROACH_DB_USER_NAME: root
+ihm_dev:
+    SCHEMA_NAME: ihm_dev
+    SCHEMA_DEF_LOCATOR_SQL: schema/schema_def-ihm_dev-SQL.json
+    SCHEMA_DEF_LOCATOR_ANY: schema/schema_def-ihm_dev-ANY.json
+    INSTANCE_DATA_TYPE_INFO_LOCATOR: data_type_info/scan-ihm_dev-type-map.json
 pdbx:
     SCHEMA_NAME: pdbx
     SCHEMA_DEF_LOCATOR_SQL: schema/schema_def-pdbx-SQL.json
@@ -146,6 +156,11 @@ drugbank_core:
     SCHEMA_DEF_LOCATOR_SQL: schema/schema_def-drugbank_core-SQL.json
     SCHEMA_DEF_LOCATOR_ANY: schema/schema_def-drugbank_core-ANY.json
     INSTANCE_DATA_TYPE_INFO_LOCATOR: data_type_info/scan-drugbank_core-type-map.json
+#
+ihm_dev_v1_0_1:
+    SCHEMA_NAME: ihm_dev
+    BSON_SCHEMA_FULL_LOCATOR: json-schema/bson-schema-full-ihm_dev_v1_0_1.json
+    BSON_SCHEMA_MIN_LOCATOR: json-schema/bson-schema-min-ihm_dev_v1_0_1.json
 pdbx_v5_0_2:
     SCHEMA_NAME: pdbx
     BSON_SCHEMA_FULL_LOCATOR: json-schema/bson-schema-full-pdbx_v5_0_2.json
@@ -266,6 +281,9 @@ dictionary_helper:
             - CATEGORY_NAME: struct_ref
               ATTRIBUTE_NAME: pdbx_seq_one_letter_code
     cardinality_parent_items:
+        ihm_dev:
+            CATEGORY_NAME: entry
+            ATTRIBUTE_NAME: id
         bird:
             CATEGORY_NAME: pdbx_reference_molecule
             ATTRIBUTE_NAME: prd_id
@@ -1065,6 +1083,14 @@ dictionary_helper:
                 - pdbx_struct_oper_list
 schemadef_helper:
     schema_content_filters:
+        ihm_dev:
+            INCLUDE: []
+            EXCLUDE:
+                - atom_site
+                - atom_site_anisotrop
+                - pdbx_poly_seq_scheme
+                - ihm_starting_model_coord
+                - ihm_sphere_obj_site
         pdbx:
             INCLUDE: []
             EXCLUDE:
@@ -1105,6 +1131,11 @@ schemadef_helper:
                 - drugbank_target
             EXCLUDE: []
     block_attributes:
+        ihm_dev:
+            ATTRIBUTE_NAME: structure_id
+            CIF_TYPE_CODE: code
+            MAX_WIDTH: 16
+            METHOD: datablockid()
         pdbx:
             ATTRIBUTE_NAME: structure_id
             CIF_TYPE_CODE: code
@@ -1136,6 +1167,9 @@ schemadef_helper:
             MAX_WIDTH: 12
             METHOD: datablockid()
     database_names:
+        ihm_dev:
+          NAME: ihm_dev_v1
+          VERSION: '0_1'
         pdbx:
             NAME: pdbx_v5
             VERSION: '0_2'
@@ -1235,6 +1269,8 @@ schemadef_helper:
               ATTRIBUTE_NAME: annotator
 document_helper:
     schema_collection_names:
+        ihm_dev:
+            - ihm_dev_v1_0_1
         pdbx:
             - pdbx_v5_0_2
             - pdbx_ext_v5_0_2
@@ -1275,6 +1311,10 @@ document_helper:
         drugbank_core:
             - drugbank_core_v0_1
     schema_content_filters:
+        ihm_dev_v1_0_1:
+            INCLUDE: []
+            EXCLUDE:
+                - ATOM_SITE
         chem_comp_core_v5_0_2:
             INCLUDE: []
             EXCLUDE:
@@ -1519,6 +1559,12 @@ document_helper:
             EXCLUDE: []
             SLICE:
     collection_private_keys:
+        ihm_dev_v1_0_1:
+            - NAME: entry.id
+              CATEGORY_NAME: entry
+              ATTRIBUTE_NAME: id
+              PRIVATE_DOCUMENT_NAME: __entry_id
+              MANDATORY: True
         pdbx_core_entity_v5_0_2:
             - NAME: entry.id
               CATEGORY_NAME: rcsb_entity_container_identifiers
@@ -1592,6 +1638,10 @@ document_helper:
               PRIVATE_DOCUMENT_NAME: __drugbank_id
               MANDATORY: True
     collection_indices:
+        ihm_dev_v1_0_1:
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - entry.id
         pdbx_v5_0_2:
             - INDEX_NAME: primary
               ATTRIBUTE_NAMES:
