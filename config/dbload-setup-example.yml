@@ -15,6 +15,8 @@
 #  6-Dec-2018 jdw revised DrugBank core collection details
 # 13-Dec-2018 jdw includes core_entity_monomer collection
 # 13-Dec-2018 jdw includes ihm_dev collection
+# 18-Dec-2018 jdw add entity private BIRD key based on either _pdbx_entity_nonpoly.rcsb_prd_id
+#                 _entity_poly.rcsb_prd_id
 #
 # Master Pinelands configuration file example
 ---
@@ -501,6 +503,7 @@ dictionary_helper:
                 - CATEGORY_NAME: entity_poly
                   ATTRIBUTE_NAME_LIST:
                       - rcsb_entity_polymer_type
+                      - rcsb_prd_id
                 - CATEGORY_NAME: rcsb_accession_info
                   ATTRIBUTE_NAME_LIST:
                       - entry_id
@@ -1580,6 +1583,16 @@ document_helper:
               CATEGORY_NAME: pdbx_entity_nonpoly
               ATTRIBUTE_NAME: comp_id
               PRIVATE_DOCUMENT_NAME: __comp_id
+              MANDATORY: False
+            - NAME: _pdbx_entity_nonpoly.rcsb_prd_id
+              CATEGORY_NAME: pdbx_entity_nonpoly
+              ATTRIBUTE_NAME: rcsb_prd_id
+              PRIVATE_DOCUMENT_NAME: __prd_id
+              MANDATORY: False
+            - NAME: _entity_poly.rcsb_prd_id
+              CATEGORY_NAME: entity_poly
+              ATTRIBUTE_NAME: rcsb_prd_id
+              PRIVATE_DOCUMENT_NAME: __prd_id
               MANDATORY: False
         pdbx_core_entity_monomer_v5_0_2:
             - NAME: entry.id

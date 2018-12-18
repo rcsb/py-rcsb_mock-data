@@ -35,6 +35,7 @@
 #                    and adjust counts to include solvent.
 #    12-Dec-2018 jdw Add rcsb_entity_id identifiers in categories struct_ref_seq and struct_ref_seq_dif
 #                    Add category rcsb_entity_poly_info
+#    18-Dec-2018 jdw Add _entity_poly.rcsb_prd_id
 #
 ###########################################################################
 
@@ -54,12 +55,17 @@ data_rcsb_mmcif_ext.dic
 
     _dictionary.title           rcsb_mmcif_ext.dic
     _dictionary.datablock_id    rcsb_mmcif_ext.dic
-    _dictionary.version         0.110
+    _dictionary.version         0.111
 #
      loop_
     _dictionary_history.version
     _dictionary_history.update
     _dictionary_history.revision
+ 0.111 2018-12-18
+;
+Changes (jdw):
+ + Add _entity_poly.rcsb_prd_id
+;
  0.110 2018-12-12
 ;
 Changes (jdw):
@@ -668,6 +674,21 @@ save__entity_poly.rcsb_entity_polymer_type
     'Other'      'polysaccharide(D), polysaccharide(L), cyclic-pseudo-peptide, peptide nucleic acid, or other'
     #
     _item_methods.method_id     'rcsb_item_method_deferred'
+     save_
+
+save__entity_poly.rcsb_prd_id
+    _item_description.description
+;  For polymer BIRD molecules the BIRD identifer for the entity.
+
+;
+    _item.name                  '_entity_poly.rcsb_prd_id'
+    _item.category_id             entity_poly
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_example.case.          'PRD_002240'
+    _item_methods.method_id      'rcsb_item_method_deferred'
+    _item_linked.child_name       '_entity_poly.rcsb_prd_id'
+    _item_linked.parent_name      '_pdbx_molecule.prd_id'
      save_
 
 ##############################
@@ -4086,8 +4107,8 @@ save__drugbank_info.cas_number
 
 save_rcsb_entity_poly_info
     _category.description
-;        The rcsb_entity_poly_info category provides residue level nomenclature
-         for polymer entities.
+;        The rcsb_entity_poly_info category provides unique residue level composition
+         and statistics for polymer entities.
 ;
     _category.id                  rcsb_entity_poly_info
     _category.mandatory_code      no
@@ -4101,19 +4122,19 @@ save_rcsb_entity_poly_info
     _category_examples.case
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ;
-    Example 1 - based on NDB entry DDFB25
+    Example 1 -
 ;
 ;
      loop_
     _rcsb_entity_poly_info.ordinal_id
     _rcsb_entity_poly_info.entry_id
     _rcsb_entity_poly_info.entity_id
-    _rcsb_entity_poly_info.seq_num
     _rcsb_entity_poly_info.comp_id
+    _rcsb_entity_poly_info.chem_comp_count
+    _rcsb_entity_poly_info.entity_sequence_length
     _rcsb_entity_poly_info.is_modified
-    _rcsb_entity_poly_info.is_heterogeneous
-    1 1ABC 1 1 MSE Y N
-    2 1ABC 1 2 TRP N N
+    1 1ABC 1  MSE  1 121 Y
+    2 1ABC 1  TRP  5 121 N
     # ... abbreviated ...
 ;
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -4156,7 +4177,7 @@ save__rcsb_entity_poly_info.entity_id
     _item.mandatory_code          yes
     _item_type.code               code
     _item_linked.child_name     '_rcsb_entity_poly_info.entity_id'
-    _item_linked.parent_name    '_entity_poly_seq.entity_id'
+    _item_linked.parent_name    '_entity.id'
      save_
 
 

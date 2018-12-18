@@ -75,19 +75,19 @@
                "type": "string",
                "enum": [
                   "nat",
-                  "syn",
-                  "man"
+                  "man",
+                  "syn"
                ],
                "description": "The method by which the sample for the entity was produced.\n Entities isolated directly from natural sources (tissues, soil\n samples etc.) are expected to have further information in the\n ENTITY_SRC_NAT category. Entities isolated from genetically\n manipulated sources are expected to have further information in\n the ENTITY_SRC_GEN category."
             },
             "type": {
                "type": "string",
                "enum": [
-                  "macrolide",
                   "polymer",
-                  "water",
                   "branched",
-                  "non-polymer"
+                  "non-polymer",
+                  "water",
+                  "macrolide"
                ],
                "description": "Defines the type of the entity.\n\n Polymer entities are expected to have corresponding\n ENTITY_POLY and associated entries.\n\n Non-polymer entities are expected to have corresponding\n CHEM_COMP and associated entries.\n\n Water entities are not expected to have corresponding\n entries in the ENTITY category."
             }
@@ -170,20 +170,20 @@
             "nstd_linkage": {
                "type": "string",
                "enum": [
-                  "y",
-                  "yes",
+                  "n",
                   "no",
-                  "n"
+                  "y",
+                  "yes"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer-to-monomer link different from that implied by\n _entity_poly.type."
             },
             "nstd_monomer": {
                "type": "string",
                "enum": [
-                  "y",
-                  "yes",
+                  "n",
                   "no",
-                  "n"
+                  "y",
+                  "yes"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer that is not considered standard."
             },
@@ -220,27 +220,31 @@
             "rcsb_entity_polymer_type": {
                "type": "string",
                "enum": [
+                  "NA-hybrid",
                   "Other",
-                  "DNA",
-                  "RNA",
                   "Protein",
-                  "NA-hybrid"
+                  "DNA",
+                  "RNA"
                ],
                "description": "A coarse-grained polymer entity type."
+            },
+            "rcsb_prd_id": {
+               "type": "string",
+               "description": "For polymer BIRD molecules the BIRD identifer for the entity.\n"
             },
             "type": {
                "type": "string",
                "enum": [
-                  "peptide nucleic acid",
-                  "other",
                   "polysaccharide(L)",
-                  "polysaccharide(D)",
-                  "polypeptide(L)",
-                  "polypeptide(D)",
-                  "cyclic-pseudo-peptide",
-                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
                   "polyribonucleotide",
-                  "polydeoxyribonucleotide"
+                  "polydeoxyribonucleotide",
+                  "polypeptide(L)",
+                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
+                  "polypeptide(D)",
+                  "peptide nucleic acid",
+                  "polysaccharide(D)",
+                  "cyclic-pseudo-peptide",
+                  "other"
                ],
                "description": "The type of the polymer."
             }
@@ -350,8 +354,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "sample",
-                     "model"
+                     "model",
+                     "sample"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -560,8 +564,8 @@
                "pdbx_seq_type": {
                   "type": "string",
                   "enum": [
-                     "N-terminal tag",
                      "Linker",
+                     "N-terminal tag",
                      "Biological sequence",
                      "C-terminal tag"
                   ],
@@ -626,8 +630,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "sample",
-                     "model"
+                     "model",
+                     "sample"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -837,8 +841,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "sample",
-                     "model"
+                     "model",
+                     "sample"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -1023,6 +1027,54 @@
          "minItems": 1,
          "uniqueItems": true
       },
+      "rcsb_entity_poly_info": {
+         "type": "array",
+         "items": {
+            "type": "object",
+            "properties": {
+               "chem_comp_count": {
+                  "type": "integer",
+                  "description": "The number of the particular chemical components in the polymer entity."
+               },
+               "comp_id": {
+                  "type": "string",
+                  "description": "The component identifier for the monomer in the polymer sequence."
+               },
+               "entity_id": {
+                  "type": "string",
+                  "description": "The entity identifier for the polymer entity containing the monomer."
+               },
+               "entity_sequence_length": {
+                  "type": "integer",
+                  "description": "The number of the monones in the polymer entity sequence."
+               },
+               "entry_id": {
+                  "type": "string",
+                  "description": "The entry identifier containing the polymer entity."
+               },
+               "is_modified": {
+                  "type": "string",
+                  "enum": [
+                     "Y",
+                     "N"
+                  ],
+                  "description": "Flag to indicate a non-standard monomer."
+               },
+               "ordinal_id": {
+                  "type": "integer",
+                  "description": "An ordinal identifier for a polymer component."
+               }
+            },
+            "required": [
+               "comp_id",
+               "entity_id",
+               "entry_id",
+               "ordinal_id"
+            ]
+         },
+         "minItems": 1,
+         "uniqueItems": true
+      },
       "rcsb_entity_source_organism": {
          "type": "array",
          "items": {
@@ -1078,8 +1130,8 @@
                "source_type": {
                   "type": "string",
                   "enum": [
-                     "synthetic",
                      "natural",
+                     "synthetic",
                      "genetically engineered"
                   ],
                   "description": "The source type for the entity\n"
@@ -1449,6 +1501,10 @@
       "__comp_id": {
          "type": "string",
          "description": "This data item is a pointer to _chem_comp.id in the CHEM_COMP category."
+      },
+      "__prd_id": {
+         "type": "string",
+         "description": "For polymer BIRD molecules the BIRD identifer for the entity.\n"
       }
    },
    "required": [

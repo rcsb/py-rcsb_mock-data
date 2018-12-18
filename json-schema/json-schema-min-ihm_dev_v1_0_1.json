@@ -113,10 +113,10 @@
                "mon_nstd_flag": {
                   "type": "string",
                   "enum": [
-                     "y",
-                     "yes",
+                     "n",
                      "no",
-                     "n"
+                     "y",
+                     "yes"
                   ],
                   "description": "'yes' indicates that this is a 'standard' monomer, 'no'\n indicates that it is 'nonstandard'. Nonstandard monomers\n should be described in more detail using the\n _chem_comp.mon_nstd_parent, _chem_comp.mon_nstd_class and\n _chem_comp.mon_nstd_details data items."
                },
@@ -133,35 +133,35 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "D-beta-peptide, C-gamma linking",
-                     "RNA OH 5 prime terminus",
-                     "D-saccharide 1,4 and 1,6 linking",
-                     "L-saccharide 1,4 and 1,4 linking",
-                     "DNA OH 5 prime terminus",
-                     "saccharide",
-                     "peptide-like",
-                     "L-DNA linking",
-                     "L-peptide linking",
-                     "other",
-                     "D-peptide linking",
-                     "L-gamma-peptide, C-delta linking",
-                     "peptide linking",
-                     "D-gamma-peptide, C-delta linking",
-                     "D-peptide NH3 amino terminus",
-                     "DNA linking",
                      "DNA OH 3 prime terminus",
-                     "D-saccharide 1,4 and 1,4 linking",
-                     "L-saccharide 1,4 and 1,6 linking",
-                     "D-peptide COOH carboxy terminus",
-                     "non-polymer",
-                     "L-saccharide",
+                     "D-peptide NH3 amino terminus",
                      "L-peptide COOH carboxy terminus",
-                     "D-saccharide",
+                     "DNA linking",
+                     "other",
+                     "D-beta-peptide, C-gamma linking",
+                     "D-peptide linking",
+                     "L-saccharide 1,4 and 1,4 linking",
+                     "L-saccharide 1,4 and 1,6 linking",
                      "RNA OH 3 prime terminus",
-                     "L-peptide NH3 amino terminus",
+                     "DNA OH 5 prime terminus",
+                     "peptide-like",
+                     "D-saccharide 1,4 and 1,6 linking",
+                     "D-gamma-peptide, C-delta linking",
+                     "RNA OH 5 prime terminus",
                      "L-RNA linking",
+                     "D-peptide COOH carboxy terminus",
+                     "D-saccharide",
+                     "RNA linking",
+                     "non-polymer",
+                     "L-DNA linking",
                      "L-beta-peptide, C-gamma linking",
-                     "RNA linking"
+                     "L-peptide NH3 amino terminus",
+                     "saccharide",
+                     "L-peptide linking",
+                     "peptide linking",
+                     "D-saccharide 1,4 and 1,4 linking",
+                     "L-gamma-peptide, C-delta linking",
+                     "L-saccharide"
                   ],
                   "description": "For standard polymer components, the type of the monomer.\n Note that monomers that will form polymers are of three types:\n linking monomers, monomers with some type of N-terminal (or 5')\n cap and monomers with some type of C-terminal (or 3') cap."
                }
@@ -337,19 +337,19 @@
                   "type": "string",
                   "enum": [
                      "nat",
-                     "syn",
-                     "man"
+                     "man",
+                     "syn"
                   ],
                   "description": "The method by which the sample for the entity was produced.\n Entities isolated directly from natural sources (tissues, soil\n samples etc.) are expected to have further information in the\n ENTITY_SRC_NAT category. Entities isolated from genetically\n manipulated sources are expected to have further information in\n the ENTITY_SRC_GEN category."
                },
                "type": {
                   "type": "string",
                   "enum": [
-                     "macrolide",
                      "polymer",
-                     "water",
                      "branched",
-                     "non-polymer"
+                     "non-polymer",
+                     "water",
+                     "macrolide"
                   ],
                   "description": "Defines the type of the entity.\n\n Polymer entities are expected to have corresponding\n ENTITY_POLY and associated entries.\n\n Non-polymer entities are expected to have corresponding\n CHEM_COMP and associated entries.\n\n Water entities are not expected to have corresponding\n entries in the ENTITY category."
                }
@@ -426,30 +426,30 @@
                "nstd_chirality": {
                   "type": "string",
                   "enum": [
-                     "y",
-                     "yes",
+                     "n",
                      "no",
-                     "n"
+                     "y",
+                     "yes"
                   ],
                   "description": "A flag to indicate whether the polymer contains at least\n one monomer unit with chirality different from that specified in\n _entity_poly.type."
                },
                "nstd_linkage": {
                   "type": "string",
                   "enum": [
-                     "y",
-                     "yes",
+                     "n",
                      "no",
-                     "n"
+                     "y",
+                     "yes"
                   ],
                   "description": "A flag to indicate whether the polymer contains at least\n one monomer-to-monomer link different from that implied by\n _entity_poly.type."
                },
                "nstd_monomer": {
                   "type": "string",
                   "enum": [
-                     "y",
-                     "yes",
+                     "n",
                      "no",
-                     "n"
+                     "y",
+                     "yes"
                   ],
                   "description": "A flag to indicate whether the polymer contains at least\n one monomer that is not considered standard."
                },
@@ -470,8 +470,8 @@
                "pdbx_sequence_evidence_code": {
                   "type": "string",
                   "enum": [
-                     "depositor provided",
-                     "derived from coordinates"
+                     "derived from coordinates",
+                     "depositor provided"
                   ],
                   "description": "Evidence for the assignment of the polymer sequence."
                },
@@ -487,16 +487,16 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "peptide nucleic acid",
-                     "other",
                      "polysaccharide(L)",
-                     "polysaccharide(D)",
-                     "polypeptide(L)",
-                     "polypeptide(D)",
-                     "cyclic-pseudo-peptide",
-                     "polydeoxyribonucleotide/polyribonucleotide hybrid",
                      "polyribonucleotide",
-                     "polydeoxyribonucleotide"
+                     "polydeoxyribonucleotide",
+                     "polypeptide(L)",
+                     "polydeoxyribonucleotide/polyribonucleotide hybrid",
+                     "polypeptide(D)",
+                     "peptide nucleic acid",
+                     "polysaccharide(D)",
+                     "cyclic-pseudo-peptide",
+                     "other"
                   ],
                   "description": "The type of the polymer."
                }
@@ -520,10 +520,10 @@
                "hetero": {
                   "type": "string",
                   "enum": [
-                     "y",
-                     "yes",
+                     "n",
                      "no",
-                     "n"
+                     "y",
+                     "yes"
                   ],
                   "description": "A flag to indicate whether this monomer in the polymer is\n heterogeneous in sequence."
                },
@@ -575,8 +575,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "sample",
-                     "model"
+                     "model",
+                     "sample"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -709,8 +709,8 @@
                "image_segment_flag": {
                   "type": "string",
                   "enum": [
-                     "YES",
-                     "NO"
+                     "NO",
+                     "YES"
                   ],
                   "description": "A flag that indicates whether or not the 2DEM class average image is segmented i.e.,\n whether the whole image is used or only a portion of it is used (by masking \n or by other means) as restraint in the modeling."
                },
@@ -834,15 +834,15 @@
                   "type": "string",
                   "enum": [
                      "BS3",
-                     "BS2G",
-                     "DST",
                      "EGS",
                      "Other",
                      "DSSO",
-                     "DSS",
+                     "EDC",
+                     "DST",
                      "sulfo-SMCC",
-                     "sulfo-SDA",
-                     "EDC"
+                     "BS2G",
+                     "DSS",
+                     "sulfo-SDA"
                   ],
                   "description": "The type of crosslinker used."
                },
@@ -894,8 +894,8 @@
                "conditional_crosslink_flag": {
                   "type": "string",
                   "enum": [
-                     "ANY",
-                     "ALL"
+                     "ALL",
+                     "ANY"
                   ],
                   "description": "The cross link conditionality."
                },
@@ -923,8 +923,8 @@
                   "type": "string",
                   "enum": [
                      "by-feature",
-                     "by-residue",
-                     "by-atom"
+                     "by-atom",
+                     "by-residue"
                   ],
                   "description": "The coarse-graining information for the crosslink implementation."
                },
@@ -935,9 +935,9 @@
                "restraint_type": {
                   "type": "string",
                   "enum": [
+                     "upper bound",
                      "harmonic",
-                     "lower bound",
-                     "upper bound"
+                     "lower bound"
                   ],
                   "description": "The type of the cross link restraint applied."
                },
@@ -1060,34 +1060,34 @@
                "data_type": {
                   "type": "string",
                   "enum": [
-                     "Predicted contacts",
-                     "Mutagenesis data",
-                     "3DEM volume",
-                     "2DEM class average",
-                     "NMR data",
-                     "DNA footprinting data",
-                     "Yeast two-hybrid screening data",
-                     "Mass Spectrometry data",
-                     "Other",
-                     "H/D exchange data",
-                     "Integrative model",
                      "CX-MS data",
-                     "EPR data",
-                     "SAS data",
-                     "EM raw micrographs",
-                     "Hydroxyl radical footprinting data",
                      "Single molecule FRET data",
-                     "Experimental model",
+                     "H/D exchange data",
+                     "DNA footprinting data",
+                     "Comparative model",
+                     "NMR data",
+                     "Predicted contacts",
+                     "Other",
+                     "Mutagenesis data",
+                     "Mass Spectrometry data",
+                     "Hydroxyl radical footprinting data",
+                     "2DEM class average",
+                     "SAS data",
                      "De Novo model",
-                     "Comparative model"
+                     "EM raw micrographs",
+                     "Integrative model",
+                     "Yeast two-hybrid screening data",
+                     "3DEM volume",
+                     "Experimental model",
+                     "EPR data"
                   ],
                   "description": "The type of data held in the dataset."
                },
                "database_hosted": {
                   "type": "string",
                   "enum": [
-                     "YES",
-                     "NO"
+                     "NO",
+                     "YES"
                   ],
                   "description": "A flag that indicates whether the dataset is archived in \n an IHM related database or elsewhere."
                },
@@ -1132,16 +1132,16 @@
                "db_name": {
                   "type": "string",
                   "enum": [
-                     "EMDB",
+                     "PRIDE",
+                     "BMRB",
+                     "MASSIVE",
                      "BioGRID",
-                     "SASBDB",
                      "MODEL ARCHIVE",
                      "EMPIAR",
                      "Other",
-                     "PRIDE",
-                     "PDB",
-                     "BMRB",
-                     "MASSIVE"
+                     "SASBDB",
+                     "EMDB",
+                     "PDB"
                   ],
                   "description": "The name of the database containing the dataset entry."
                },
@@ -1192,8 +1192,8 @@
                "group_conditionality": {
                   "type": "string",
                   "enum": [
-                     "ANY",
-                     "ALL"
+                     "ALL",
+                     "ANY"
                   ],
                   "description": "If a group of atoms or residues are restrained, this data item defines \n the conditionality based on which the restraint is applied in the modeling."
                },
@@ -1212,8 +1212,8 @@
                "restraint_type": {
                   "type": "string",
                   "enum": [
-                     "lower bound",
                      "lower and upper bound",
+                     "lower bound",
                      "upper bound"
                   ],
                   "description": "The type of distance restraint applied."
@@ -1244,8 +1244,8 @@
                   "type": "string",
                   "enum": [
                      "Partitioning (k-means)",
-                     "Hierarchical",
-                     "Other"
+                     "Other",
+                     "Hierarchical"
                   ],
                   "description": "The clustering method used to obtain the ensemble, if applicable."
                },
@@ -1305,11 +1305,11 @@
                "content_type": {
                   "type": "string",
                   "enum": [
-                     "Visualization script",
-                     "Other",
+                     "Input data or restraints",
                      "Modeling workflow or script",
+                     "Other",
                      "Modeling or post-processing output",
-                     "Input data or restraints"
+                     "Visualization script"
                   ],
                   "description": "The type of content in the file."
                },
@@ -1325,25 +1325,25 @@
                "file_format": {
                   "type": "string",
                   "enum": [
-                     "A2M",
-                     "CIF",
-                     "HDF5",
-                     "Other",
-                     "PGM",
                      "CLUSTALW",
-                     "FASTA",
-                     "PNG",
-                     "MRC",
-                     "PIR/NBRF",
-                     "GIF",
-                     "PDB",
-                     "A3M",
-                     "DCD",
-                     "TXT",
                      "JPG",
-                     "PDF",
+                     "PNG",
+                     "A3M",
+                     "PIR/NBRF",
+                     "Other",
                      "CCP4",
-                     "TIF"
+                     "TIF",
+                     "MRC",
+                     "PGM",
+                     "CIF",
+                     "PDB",
+                     "FASTA",
+                     "TXT",
+                     "PDF",
+                     "GIF",
+                     "A2M",
+                     "HDF5",
+                     "DCD"
                   ],
                   "description": "Format of the external file."
                },
@@ -1409,18 +1409,18 @@
                "reference_type": {
                   "type": "string",
                   "enum": [
-                     "Supplementary Files",
-                     "DOI"
+                     "DOI",
+                     "Supplementary Files"
                   ],
                   "description": "The type of external reference. \n Currently, only Digital Object Identifiers (DOIs) and supplementary files \n stored locally are supported."
                },
                "refers_to": {
                   "type": "string",
                   "enum": [
-                     "Archive",
                      "Publication",
-                     "File",
-                     "Other"
+                     "Archive",
+                     "Other",
+                     "File"
                   ],
                   "description": "The type of object that the external reference points to, usually\n a single file or an archive."
                }
@@ -1448,10 +1448,10 @@
                "feature_type": {
                   "type": "string",
                   "enum": [
-                     "residue range",
+                     "ligand",
                      "residue",
                      "atom",
-                     "ligand"
+                     "residue range"
                   ],
                   "description": "The type of feature."
                }
@@ -1538,8 +1538,8 @@
                "group_conditionality": {
                   "type": "string",
                   "enum": [
-                     "ANY",
-                     "ALL"
+                     "ALL",
+                     "ANY"
                   ],
                   "description": "If a group of atoms or residues are restrained, this data item defines\n the conditionality based on which the restraint is applied in the modeling."
                },
@@ -1554,12 +1554,12 @@
                "object_characteristic": {
                   "type": "string",
                   "enum": [
+                     "plane",
                      "axis",
-                     "other",
                      "inner surface",
+                     "other",
                      "center",
-                     "outer surface",
-                     "plane"
+                     "outer surface"
                   ],
                   "description": "The characteristic of the geometric object used in the restraint."
                },
@@ -1570,11 +1570,11 @@
                "restraint_type": {
                   "type": "string",
                   "enum": [
-                     "other",
                      "harmonic",
                      "lower and upper bound",
+                     "upper bound",
                      "lower bound",
-                     "upper bound"
+                     "other"
                   ],
                   "description": "The type of restraint applied."
                }
@@ -1598,9 +1598,9 @@
                "section": {
                   "type": "string",
                   "enum": [
+                     "other",
                      "inner half",
-                     "outer half",
-                     "other"
+                     "outer half"
                   ],
                   "description": "The section of the torus representing the half-torus."
                },
@@ -1635,12 +1635,12 @@
                "object_type": {
                   "type": "string",
                   "enum": [
-                     "axis",
-                     "other",
-                     "half-torus",
-                     "sphere",
+                     "plane",
                      "torus",
-                     "plane"
+                     "axis",
+                     "sphere",
+                     "other",
+                     "half-torus"
                   ],
                   "description": "The type of geomtric object."
                }
@@ -1664,9 +1664,9 @@
                "plane_type": {
                   "type": "string",
                   "enum": [
-                     "xz-plane",
                      "xy-plane",
-                     "yz-plane"
+                     "yz-plane",
+                     "xz-plane"
                   ],
                   "description": "The type of plane."
                }
@@ -1900,8 +1900,8 @@
                   "type": "string",
                   "enum": [
                      "by-feature",
-                     "by-residue",
                      "by-atom",
+                     "by-residue",
                      "multi-residue"
                   ],
                   "description": "The level of detail at which model primitive objects are applied to the structure."
@@ -1909,8 +1909,8 @@
                "model_mode": {
                   "type": "string",
                   "enum": [
-                     "rigid",
-                     "flexible"
+                     "flexible",
+                     "rigid"
                   ],
                   "description": "The manner in which the segment is modeled."
                },
@@ -1921,10 +1921,10 @@
                "model_object_primitive": {
                   "type": "string",
                   "enum": [
-                     "sphere",
                      "atomistic",
                      "other",
-                     "gaussian"
+                     "gaussian",
+                     "sphere"
                   ],
                   "description": "The primitive object used to model this segment."
                },
@@ -1980,15 +1980,15 @@
                "selection_criteria": {
                   "type": "string",
                   "enum": [
-                     "centroid",
-                     "minimized average structure",
-                     "medoid",
-                     "lowest energy",
-                     "other selction criteria",
                      "closest to the average",
+                     "other selction criteria",
+                     "medoid",
                      "fewest violations",
+                     "minimized average structure",
                      "best scoring model",
-                     "target function"
+                     "target function",
+                     "centroid",
+                     "lowest energy"
                   ],
                   "description": "The selection criteria based on which the representative is chosen."
                }
@@ -2016,11 +2016,11 @@
                "feature": {
                   "type": "string",
                   "enum": [
-                     "other",
+                     "dRMSD",
+                     "energy/score",
                      "RMSD",
                      "none",
-                     "energy/score",
-                     "dRMSD"
+                     "other"
                   ],
                   "description": "The parameter/feature used in the post modeling analysis."
                },
@@ -2063,12 +2063,12 @@
                "type": {
                   "type": "string",
                   "enum": [
+                     "validation",
+                     "none",
+                     "filter",
                      "rescore",
                      "other",
-                     "cluster",
-                     "validation",
-                     "filter",
-                     "none"
+                     "cluster"
                   ],
                   "description": "The type of post modeling analysis being carried out."
                }
@@ -2092,16 +2092,16 @@
                "multi_scale_flag": {
                   "type": "string",
                   "enum": [
-                     "YES",
-                     "NO"
+                     "NO",
+                     "YES"
                   ],
                   "description": "A flag to indicate if the modeling is multi scale."
                },
                "multi_state_flag": {
                   "type": "string",
                   "enum": [
-                     "YES",
-                     "NO"
+                     "NO",
+                     "YES"
                   ],
                   "description": "A flag to indicate if the modeling is multi state."
                },
@@ -2116,8 +2116,8 @@
                "ordered_flag": {
                   "type": "string",
                   "enum": [
-                     "YES",
-                     "NO"
+                     "NO",
+                     "YES"
                   ],
                   "description": "A flag to indicate if the modeling involves an ensemble ordered by time or other order."
                },
@@ -2410,8 +2410,8 @@
                   "type": "string",
                   "enum": [
                      "by-feature",
-                     "by-residue",
-                     "by-atom"
+                     "by-atom",
+                     "by-residue"
                   ],
                   "description": "The granularity of the predicted contact as applied to the multi-scale model."
                },
@@ -2422,8 +2422,8 @@
                "restraint_type": {
                   "type": "string",
                   "enum": [
-                     "lower bound",
                      "lower and upper bound",
+                     "lower bound",
                      "upper bound"
                   ],
                   "description": "The type of distance restraint applied."
@@ -2509,8 +2509,8 @@
                "fitting_state": {
                   "type": "string",
                   "enum": [
-                     "Single",
-                     "Multiple"
+                     "Multiple",
+                     "Single"
                   ],
                   "description": "An indicator to single or multiple state fitting."
                },
@@ -2525,8 +2525,8 @@
                "profile_segment_flag": {
                   "type": "string",
                   "enum": [
-                     "YES",
-                     "NO"
+                     "NO",
+                     "YES"
                   ],
                   "description": "A flag that indicates whether or not the SAS profile is segmented i.e.,\n whether the whole SAS profile is used or only a portion of it is used \n (by masking or by other means) as restraint in the modeling."
                },
@@ -2598,11 +2598,11 @@
                "template_sequence_identity_denominator": {
                   "type": "integer",
                   "enum": [
-                     2,
+                     4,
+                     5,
                      3,
                      1,
-                     5,
-                     4
+                     2
                   ],
                   "description": "The denominator used while calculating the sequence identity provided in \n _ihm_starting_comparative_models.template_sequence_identity."
                }
@@ -2683,10 +2683,10 @@
                "starting_model_source": {
                   "type": "string",
                   "enum": [
-                     "comparative model",
-                     "other",
                      "integrative model",
                      "experimental model",
+                     "comparative model",
+                     "other",
                      "ab initio model"
                   ],
                   "description": "The source of the starting model."
@@ -3096,8 +3096,8 @@
                "occupancy_flag": {
                   "type": "integer",
                   "enum": [
-                     0,
-                     1
+                     1,
+                     0
                   ],
                   "description": "The value of occupancy flag indicates whether the atom is\n either unobserved (=1) or has zero occupancy (=0)"
                },
@@ -3157,8 +3157,8 @@
                "occupancy_flag": {
                   "type": "integer",
                   "enum": [
-                     0,
-                     1
+                     1,
+                     0
                   ],
                   "description": "The value of occupancy flag indicates whether the residue\n is unobserved (= 1) or the coordinates have an occupancy of zero (=0)"
                },
@@ -3236,12 +3236,12 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "other",
-                     "program",
                      "library",
-                     "filter",
+                     "program",
                      "package",
-                     "jiffy"
+                     "jiffy",
+                     "filter",
+                     "other"
                   ],
                   "description": "The classification of the software according to the most\n common types."
                },
@@ -3350,14 +3350,14 @@
                "pdbx_type": {
                   "type": "string",
                   "enum": [
-                     "HETAS",
-                     "HETAIN",
-                     "ATOMS",
                      "ATOMN",
+                     "HETAIN",
+                     "HETIC",
                      "ATOMP",
                      "HETAC",
                      "HETAD",
-                     "HETIC",
+                     "ATOMS",
+                     "HETAS",
                      "HETAI"
                   ],
                   "description": "This data item describes the general type of the structural elements\n in the ATOM_SITE category."
