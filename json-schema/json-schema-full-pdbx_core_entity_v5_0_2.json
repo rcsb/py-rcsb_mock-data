@@ -74,20 +74,20 @@
             "src_method": {
                "type": "string",
                "enum": [
+                  "nat",
                   "man",
-                  "syn",
-                  "nat"
+                  "syn"
                ],
                "description": "The method by which the sample for the entity was produced.\n Entities isolated directly from natural sources (tissues, soil\n samples etc.) are expected to have further information in the\n ENTITY_SRC_NAT category. Entities isolated from genetically\n manipulated sources are expected to have further information in\n the ENTITY_SRC_GEN category."
             },
             "type": {
                "type": "string",
                "enum": [
+                  "polymer",
                   "non-polymer",
                   "water",
-                  "macrolide",
                   "branched",
-                  "polymer"
+                  "macrolide"
                ],
                "description": "Defines the type of the entity.\n\n Polymer entities are expected to have corresponding\n ENTITY_POLY and associated entries.\n\n Non-polymer entities are expected to have corresponding\n CHEM_COMP and associated entries.\n\n Water entities are not expected to have corresponding\n entries in the ENTITY category."
             }
@@ -170,20 +170,20 @@
             "nstd_linkage": {
                "type": "string",
                "enum": [
-                  "no",
                   "yes",
+                  "y",
                   "n",
-                  "y"
+                  "no"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer-to-monomer link different from that implied by\n _entity_poly.type."
             },
             "nstd_monomer": {
                "type": "string",
                "enum": [
-                  "no",
                   "yes",
+                  "y",
                   "n",
-                  "y"
+                  "no"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer that is not considered standard."
             },
@@ -220,11 +220,11 @@
             "rcsb_entity_polymer_type": {
                "type": "string",
                "enum": [
-                  "Protein",
-                  "NA-hybrid",
-                  "DNA",
                   "Other",
-                  "RNA"
+                  "RNA",
+                  "NA-hybrid",
+                  "Protein",
+                  "DNA"
                ],
                "description": "A coarse-grained polymer entity type."
             },
@@ -235,16 +235,16 @@
             "type": {
                "type": "string",
                "enum": [
-                  "polysaccharide(D)",
-                  "polypeptide(L)",
-                  "polydeoxyribonucleotide",
-                  "peptide nucleic acid",
-                  "cyclic-pseudo-peptide",
-                  "polyribonucleotide",
                   "polypeptide(D)",
                   "polydeoxyribonucleotide/polyribonucleotide hybrid",
+                  "polysaccharide(L)",
+                  "polydeoxyribonucleotide",
+                  "polysaccharide(D)",
+                  "polyribonucleotide",
+                  "cyclic-pseudo-peptide",
+                  "peptide nucleic acid",
                   "other",
-                  "polysaccharide(L)"
+                  "polypeptide(L)"
                ],
                "description": "The type of the polymer."
             }
@@ -564,10 +564,10 @@
                "pdbx_seq_type": {
                   "type": "string",
                   "enum": [
-                     "C-terminal tag",
-                     "Biological sequence",
+                     "N-terminal tag",
                      "Linker",
-                     "N-terminal tag"
+                     "Biological sequence",
+                     "C-terminal tag"
                   ],
                   "description": "This data item povides additional information about the sequence type."
                },
