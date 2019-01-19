@@ -61,8 +61,8 @@
             "rcsb_multiple_source_flag": {
                "type": "string",
                "enum": [
-                  "Y",
-                  "N"
+                  "N",
+                  "Y"
                ],
                "description": "A code indicating the entity has multiple biological sources.\n"
             },
@@ -73,8 +73,8 @@
             "src_method": {
                "type": "string",
                "enum": [
-                  "nat",
                   "man",
+                  "nat",
                   "syn"
                ],
                "description": "The method by which the sample for the entity was produced.\n Entities isolated directly from natural sources (tissues, soil\n samples etc.) are expected to have further information in the\n ENTITY_SRC_NAT category. Entities isolated from genetically\n manipulated sources are expected to have further information in\n the ENTITY_SRC_GEN category."
@@ -82,11 +82,11 @@
             "type": {
                "type": "string",
                "enum": [
+                  "macrolide",
                   "polymer",
                   "non-polymer",
-                  "water",
                   "branched",
-                  "macrolide"
+                  "water"
                ],
                "description": "Defines the type of the entity.\n\n Polymer entities are expected to have corresponding\n ENTITY_POLY and associated entries.\n\n Non-polymer entities are expected to have corresponding\n CHEM_COMP and associated entries.\n\n Water entities are not expected to have corresponding\n entries in the ENTITY category."
             }
@@ -170,9 +170,9 @@
                "type": "string",
                "enum": [
                   "yes",
-                  "y",
+                  "no",
                   "n",
-                  "no"
+                  "y"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer-to-monomer link different from that implied by\n _entity_poly.type."
             },
@@ -180,9 +180,9 @@
                "type": "string",
                "enum": [
                   "yes",
-                  "y",
+                  "no",
                   "n",
-                  "no"
+                  "y"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer that is not considered standard."
             },
@@ -220,10 +220,10 @@
                "type": "string",
                "enum": [
                   "Other",
-                  "RNA",
+                  "DNA",
                   "NA-hybrid",
                   "Protein",
-                  "DNA"
+                  "RNA"
                ],
                "description": "A coarse-grained polymer entity type."
             },
@@ -234,16 +234,16 @@
             "type": {
                "type": "string",
                "enum": [
-                  "polypeptide(D)",
+                  "cyclic-pseudo-peptide",
                   "polydeoxyribonucleotide/polyribonucleotide hybrid",
                   "polysaccharide(L)",
-                  "polydeoxyribonucleotide",
+                  "polypeptide(L)",
                   "polysaccharide(D)",
-                  "polyribonucleotide",
-                  "cyclic-pseudo-peptide",
-                  "peptide nucleic acid",
+                  "polypeptide(D)",
+                  "polydeoxyribonucleotide",
                   "other",
-                  "polypeptide(L)"
+                  "peptide nucleic acid",
+                  "polyribonucleotide"
                ],
                "description": "The type of the polymer."
             }
@@ -353,8 +353,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "model",
-                     "sample"
+                     "sample",
+                     "model"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -563,10 +563,10 @@
                "pdbx_seq_type": {
                   "type": "string",
                   "enum": [
-                     "N-terminal tag",
+                     "C-terminal tag",
                      "Linker",
                      "Biological sequence",
-                     "C-terminal tag"
+                     "N-terminal tag"
                   ],
                   "description": "This data item povides additional information about the sequence type."
                },
@@ -629,8 +629,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "model",
-                     "sample"
+                     "sample",
+                     "model"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -840,8 +840,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "model",
-                     "sample"
+                     "sample",
+                     "model"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -1052,8 +1052,8 @@
                "is_modified": {
                   "type": "string",
                   "enum": [
-                     "Y",
-                     "N"
+                     "N",
+                     "Y"
                   ],
                   "description": "Flag to indicate a non-standard monomer."
                },
@@ -1124,9 +1124,9 @@
                "source_type": {
                   "type": "string",
                   "enum": [
-                     "synthetic",
                      "natural",
-                     "genetically engineered"
+                     "genetically engineered",
+                     "synthetic"
                   ],
                   "description": "The source type for the entity\n"
                }
@@ -1181,8 +1181,8 @@
                "pdbx_blank_PDB_chainid_flag": {
                   "type": "string",
                   "enum": [
-                     "Y",
-                     "N"
+                     "N",
+                     "Y"
                   ],
                   "description": "A flag indicating that this entity was originally labeled\n with a blank PDB chain id."
                },
@@ -1472,26 +1472,26 @@
          "minItems": 1,
          "uniqueItems": true
       },
-      "__entry_id": {
+      "_entry_id": {
          "type": "string",
          "description": "Entry identifier for the container."
       },
-      "__entity_id": {
+      "_entity_id": {
          "type": "string",
          "description": "The value of _entity.id must uniquely identify a record in the\n ENTITY list.\n\n Note that this item need not be a number; it can be any unique\n identifier."
       },
-      "__comp_id": {
+      "_comp_id": {
          "type": "string",
          "description": "This data item is a pointer to _chem_comp.id in the CHEM_COMP category."
       },
-      "__prd_id": {
+      "_prd_id": {
          "type": "string",
          "description": "For polymer BIRD molecules the BIRD identifer for the entity.\n"
       }
    },
    "required": [
-      "__entry_id",
-      "__entity_id"
+      "_entry_id",
+      "_entity_id"
    ],
    "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/",
    "$schema": "http://json-schema.org/draft-04/schema#",

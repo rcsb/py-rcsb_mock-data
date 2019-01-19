@@ -40,8 +40,8 @@
             "rcsb_candidate_assembly": {
                "type": "string",
                "enum": [
-                  "Y",
-                  "N"
+                  "N",
+                  "Y"
                ],
                "examples": [
                   "Y"
@@ -51,9 +51,9 @@
             "rcsb_details": {
                "type": "string",
                "enum": [
+                  "author_defined_assembly",
                   "software_defined_assembly",
-                  "author_and_software_defined_assembly",
-                  "author_defined_assembly"
+                  "author_and_software_defined_assembly"
                ],
                "examples": [
                   "author_and_software_defined_assembly"
@@ -81,22 +81,22 @@
                "experimental_support": {
                   "type": "string",
                   "enum": [
-                     "immunoprecipitation",
-                     "isothermal titration calorimetry",
-                     "native gel electrophoresis",
-                     "microscopy",
-                     "mass spectrometry",
+                     "gel filtration",
                      "cross-linking",
+                     "none",
+                     "mass spectrometry",
+                     "homology",
+                     "microscopy",
+                     "light scattering",
                      "assay for oligomerization",
                      "surface plasmon resonance",
-                     "scanning transmission electron microscopy",
-                     "none",
-                     "homology",
                      "SAXS",
+                     "isothermal titration calorimetry",
+                     "scanning transmission electron microscopy",
                      "fluorescence resonance energy transfer",
-                     "equilibrium centrifugation",
-                     "gel filtration",
-                     "light scattering"
+                     "native gel electrophoresis",
+                     "immunoprecipitation",
+                     "equilibrium centrifugation"
                   ],
                   "description": "Provides the experimental method to determine the state of this assembly"
                },
@@ -165,8 +165,8 @@
                   "type": "string",
                   "enum": [
                      "MORE",
-                     "ABSA (A^2)",
-                     "SSA (A^2)"
+                     "SSA (A^2)",
+                     "ABSA (A^2)"
                   ],
                   "description": "The property type for the assembly."
                },
@@ -247,21 +247,21 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "identity operation",
                      "transform to helical frame",
                      "transform to 2D crystal frame",
-                     "helical symmetry operation",
-                     "build helical asymmetric unit",
-                     "2D crystal symmetry operation",
-                     "build 2D crystal asymmetric unit",
-                     "3D crystal symmetry operation",
-                     "crystal symmetry operation",
-                     "transform to 3D crystal frame",
-                     "point symmetry operation",
-                     "build point asymmetric unit",
                      "build 3D crystal asymmetric unit",
+                     "2D crystal symmetry operation",
+                     "point symmetry operation",
+                     "transform to crystal frame",
+                     "build point asymmetric unit",
+                     "crystal symmetry operation",
+                     "3D crystal symmetry operation",
+                     "identity operation",
+                     "build helical asymmetric unit",
+                     "transform to 3D crystal frame",
+                     "build 2D crystal asymmetric unit",
                      "transform to point frame",
-                     "transform to crystal frame"
+                     "helical symmetry operation"
                   ],
                   "description": "A code to indicate the type of operator."
                },
@@ -323,18 +323,18 @@
             "datablock_name"
          ]
       },
-      "__entry_id": {
+      "_entry_id": {
          "type": "string",
          "description": "Entry identifier for the container."
       },
-      "__assembly_id": {
+      "_assembly_id": {
          "type": "string",
          "description": "The value of _pdbx_struct_assembly.id must uniquely identify a record in\n the PDBX_STRUCT_ASSEMBLY list."
       }
    },
    "required": [
-      "__entry_id",
-      "__assembly_id"
+      "_entry_id",
+      "_assembly_id"
    ],
    "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/",
    "$schema": "http://json-schema.org/draft-04/schema#",

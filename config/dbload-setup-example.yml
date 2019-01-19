@@ -20,6 +20,7 @@
 #  1-Jan-2019 jdw restore exptl_crystal in pdbx_core_entry
 #  7-Jan-2019 jdw broad pruning and consolidation of site specific sections
 # 17-Jan-2019 jdw add a separate set of document attributes for replacing documents in collections built from slices.
+# 18-Jan-2019 jdw replace __ with _ in collection private keys
 #
 #
 # Master Pinelands configuration file example
@@ -1469,89 +1470,89 @@ document_helper:
             - NAME: entry.id
               CATEGORY_NAME: entry
               ATTRIBUTE_NAME: id
-              PRIVATE_DOCUMENT_NAME: __entry_id
+              PRIVATE_DOCUMENT_NAME: _entry_id
               MANDATORY: True
         pdbx_core_entity_v5_0_2:
             - NAME: entry.id
               CATEGORY_NAME: rcsb_entity_container_identifiers
               ATTRIBUTE_NAME: entry_id
-              PRIVATE_DOCUMENT_NAME: __entry_id
+              PRIVATE_DOCUMENT_NAME: _entry_id
               MANDATORY: True
             - NAME: entity.id
               CATEGORY_NAME: entity
               ATTRIBUTE_NAME: id
-              PRIVATE_DOCUMENT_NAME: __entity_id
+              PRIVATE_DOCUMENT_NAME: _entity_id
               MANDATORY: True
             - NAME: chem_comp.id
               CATEGORY_NAME: pdbx_entity_nonpoly
               ATTRIBUTE_NAME: comp_id
-              PRIVATE_DOCUMENT_NAME: __comp_id
+              PRIVATE_DOCUMENT_NAME: _comp_id
               MANDATORY: False
             - NAME: _pdbx_entity_nonpoly.rcsb_prd_id
               CATEGORY_NAME: pdbx_entity_nonpoly
               ATTRIBUTE_NAME: rcsb_prd_id
-              PRIVATE_DOCUMENT_NAME: __prd_id
+              PRIVATE_DOCUMENT_NAME: _prd_id
               MANDATORY: False
             - NAME: _entity_poly.rcsb_prd_id
               CATEGORY_NAME: entity_poly
               ATTRIBUTE_NAME: rcsb_prd_id
-              PRIVATE_DOCUMENT_NAME: __prd_id
+              PRIVATE_DOCUMENT_NAME: _prd_id
               MANDATORY: False
         pdbx_core_entity_monomer_v5_0_2:
             - NAME: entry.id
               CATEGORY_NAME: rcsb_entity_poly_info
               ATTRIBUTE_NAME: entry_id
-              PRIVATE_DOCUMENT_NAME: __entry_id
+              PRIVATE_DOCUMENT_NAME: _entry_id
               MANDATORY: True
             - NAME: entity.id
               CATEGORY_NAME: rcsb_entity_poly_info
               ATTRIBUTE_NAME: entity_id
-              PRIVATE_DOCUMENT_NAME: __entity_id
+              PRIVATE_DOCUMENT_NAME: _entity_id
               MANDATORY: True
             - NAME: chem_comp.id
               CATEGORY_NAME: rcsb_entity_poly_info
               ATTRIBUTE_NAME: comp_id
-              PRIVATE_DOCUMENT_NAME: __comp_id
+              PRIVATE_DOCUMENT_NAME: _comp_id
               MANDATORY: True
         pdbx_core_assembly_v5_0_2:
             - NAME: entry.id
               CATEGORY_NAME: rcsb_assembly_container_identifiers
               ATTRIBUTE_NAME: entry_id
-              PRIVATE_DOCUMENT_NAME: __entry_id
+              PRIVATE_DOCUMENT_NAME: _entry_id
               MANDATORY: True
             - NAME: pdbx_struct_assembly.id
               CATEGORY_NAME: pdbx_struct_assembly
               ATTRIBUTE_NAME: id
-              PRIVATE_DOCUMENT_NAME: __assembly_id
+              PRIVATE_DOCUMENT_NAME: _assembly_id
               MANDATORY: True
         pdbx_core_entry_v5_0_2:
             - NAME: entry.id
               CATEGORY_NAME: entry
               ATTRIBUTE_NAME: id
-              PRIVATE_DOCUMENT_NAME: __entry_id
+              PRIVATE_DOCUMENT_NAME: _entry_id
               MANDATORY: True
         chem_comp_core_v5_0_2:
             - NAME: chem_comp.id
               CATEGORY_NAME: chem_comp
               ATTRIBUTE_NAME: id
-              PRIVATE_DOCUMENT_NAME: __comp_id
+              PRIVATE_DOCUMENT_NAME: _comp_id
               MANDATORY: True
         bird_chem_comp_core_v5_0_2:
             - NAME: pdbx_reference_molecule.chem_comp_id
               CATEGORY_NAME: pdbx_reference_molecule
               ATTRIBUTE_NAME: chem_comp_id
-              PRIVATE_DOCUMENT_NAME: __comp_id
+              PRIVATE_DOCUMENT_NAME: _comp_id
               MANDATORY: False
             - NAME: pdbx_reference_molecule.prd_id
               CATEGORY_NAME: pdbx_reference_molecule
               ATTRIBUTE_NAME: prd_id
-              PRIVATE_DOCUMENT_NAME: __prd_id
+              PRIVATE_DOCUMENT_NAME: _prd_id
               MANDATORY: True
         drugbank_core_v0_1:
             - NAME: drugbank_info.drugbank_id
               CATEGORY_NAME: drugbank_info
               ATTRIBUTE_NAME: drugbank_id
-              PRIVATE_DOCUMENT_NAME: __drugbank_id
+              PRIVATE_DOCUMENT_NAME: _drugbank_id
               MANDATORY: True
     collection_indices:
         ihm_dev_v1_0_1:
@@ -1587,15 +1588,15 @@ document_helper:
               - rcsb_entity_container_identifiers.auth_asym_ids
             - INDEX_NAME: search_4
               ATTRIBUTE_NAMES:
-              - __entry_id
-              - __entity_id
+              - _entry_id
+              - _entity_id
             - INDEX_NAME: search_5
               ATTRIBUTE_NAMES:
-              - __entry_id
-              - __comp_id
+              - _entry_id
+              - _comp_id
             - INDEX_NAME: replace
               ATTRIBUTE_NAMES:
-              - __entry_id
+              - _entry_id
         pdbx_core_entity_monomer_v5_0_2:
             - INDEX_NAME: primary
               ATTRIBUTE_NAMES:
@@ -1619,15 +1620,15 @@ document_helper:
               - rcsb_entity_container_identifiers.is_heterogeneous
             - INDEX_NAME: search_4
               ATTRIBUTE_NAMES:
-              - __entry_id
-              - __entity_id
+              - _entry_id
+              - _entity_id
             - INDEX_NAME: search_5
               ATTRIBUTE_NAMES:
-              - __entry_id
-              - __comp_id
+              - _entry_id
+              - _comp_id
             - INDEX_NAME: replace
               ATTRIBUTE_NAMES:
-              - __entry_id
+              - _entry_id
         pdbx_core_assembly_v5_0_2:
             - INDEX_NAME: primary
               ATTRIBUTE_NAMES:
@@ -1639,11 +1640,11 @@ document_helper:
               - rcsb_assembly_container_identifiers.assembly_id
             - INDEX_NAME: search_2
               ATTRIBUTE_NAMES:
-              - __entry_id
-              - __assembly_id
+              - _entry_id
+              - _assembly_id
             - INDEX_NAME: replace
               ATTRIBUTE_NAMES:
-              - __entry_id
+              - _entry_id
         pdbx_core_entry_v5_0_2:
             - INDEX_NAME: primary
               ATTRIBUTE_NAMES:
@@ -1666,7 +1667,7 @@ document_helper:
               - rcsb_entry_container_identifiers.assembly_ids
             - INDEX_NAME: search_5
               ATTRIBUTE_NAMES:
-              - __entry_id
+              - _entry_id
             - INDEX_NAME: primary
               ATTRIBUTE_NAMES:
               - entry.id
