@@ -21,6 +21,7 @@
 #  7-Jan-2019 jdw broad pruning and consolidation of site specific sections
 # 17-Jan-2019 jdw add a separate set of document attributes for replacing documents in collections built from slices.
 # 18-Jan-2019 jdw replace __ with _ in collection private keys
+#  2-Feb-2019 jdw adding validation report content to pdbx_core schema
 #
 #
 # Master Pinelands configuration file example
@@ -37,11 +38,16 @@ site_info:
     PDBX_REPO_PATH: MOCK_PDBX_SANDBOX
     RCSB_EXCHANGE_SANDBOX_PATH: MOCK_EXCHANGE_SANDBOX
     IHM_DEV_REPO_PATH: MOCK_IHM_REPO
+    VRPT_REPO_PATH: MOCK_VALIDATION_REPORTS
+    #
     RCSB_SEQUENCE_CLUSTER_DATA_PATH: cluster_data/mmseqs-20180608
     PDBX_DICT_LOCATOR: dictionaries/mmcif_pdbx_v5_next.dic
     RCSB_DICT_LOCATOR: dictionaries/rcsb_mmcif_ext_v1.dic
     IHMDEV_DICT_LOCATOR: dictionaries/ihm-extension.dic
     FLR_DICT_LOCATOR: dictionaries/flr-extension.dic
+    #
+    VRPT_DICT_LOCATOR: dictionaries/vrpt_mmcif_ext.dic
+    #
     PROVENANCE_INFO_LOCATOR: provenance/rcsb_extend_provenance_info.json
     APP_DATA_TYPE_INFO_LOCATOR: data_type_info/app_data_type_mapping.cif
     DICT_HELPER_MODULE: rcsb.db.helpers.DictInfoHelper
@@ -397,6 +403,33 @@ dictionary_helper:
                       - major_revision
                       - minor_revision
                       - revision_date
+                - CATEGORY_NAME: pdbx_vrpt_summary
+                - CATEGORY_NAME: pdbx_vrpt_summary
+                - CATEGORY_NAME: pdbx_vrpt_model_list
+                - CATEGORY_NAME: pdbx_vrpt_instance_results
+                - CATEGORY_NAME: pdbx_vrpt_cyrange_domain
+                - CATEGORY_NAME: pdbx_vrpt_entity_instance_results
+                - CATEGORY_NAME: pdbx_vrpt_chemical_shift_list
+                - CATEGORY_NAME: pdbx_vrpt_unmapped_chemical_shift
+                - CATEGORY_NAME: pdbx_vrpt_unparsed_chemical_shift
+                - CATEGORY_NAME: pdbx_vrpt_missing_nmrstar_tags
+                - CATEGORY_NAME: pdbx_vrpt_random_coil_index
+                - CATEGORY_NAME: pdbx_vrpt_chemical_shift_outlier
+                - CATEGORY_NAME: pdbx_vrpt_referencing_offset
+                - CATEGORY_NAME: pdbx_vrpt_assign_compl_well_defined
+                - CATEGORY_NAME: pdbx_vrpt_assign_compl_full_length
+                - CATEGORY_NAME: pdbx_vrpt_software
+                - CATEGORY_NAME: pdbx_vrpt_bond_outliers
+                - CATEGORY_NAME: pdbx_vrpt_angle_outliers
+                - CATEGORY_NAME: pdbx_vrpt_stereo_outliers
+                - CATEGORY_NAME: pdbx_vrpt_plane_outliers
+                - CATEGORY_NAME: pdbx_vrpt_clashes
+                - CATEGORY_NAME: pdbx_vrpt_symmetry_clashes
+                - CATEGORY_NAME: pdbx_vrpt_mogul_bond_outliers
+                - CATEGORY_NAME: pdbx_vrpt_mogul_angle_outliers
+                - CATEGORY_NAME: pdbx_vrpt_mogul_torsion_outliers
+                - CATEGORY_NAME: pdbx_vrpt_mogul_ring_outliers
+                #
         ?       - GENERATED_CONTENT
                 - data_exchange
         :       - CATEGORY_NAME: rcsb_data_exchange_status
@@ -937,6 +970,10 @@ dictionary_helper:
                 - pdbx_core
         :       - CATEGORY_NAME: rcsb_entity_poly_info
                   ATTRIBUTE_NAME: ordinal_id
+        ?       - ENTITY_INSTANCE
+                - pdbx_core
+        :       - CATEGORY_NAME: struct_asym
+                  ATTRIBUTE_NAME: id
     slice_parent_filters:
         ?       - ENTITY
                 - pdbx_core
@@ -1185,6 +1222,7 @@ document_helper:
             - pdbx_core_entry_v5_0_2
             - pdbx_core_assembly_v5_0_2
             - pdbx_core_entity_monomer_v5_0_2
+            - pdbx_core_entity_instance_v5_0_2
         bird:
             - bird_v5_0_2
         bird_family:
@@ -1390,8 +1428,13 @@ document_helper:
                 - PDBX_SERIAL_CRYSTALLOGRAPHY_SAMPLE_DELIVERY_INJECTION
                 - PDBX_SERIAL_CRYSTALLOGRAPHY_SAMPLE_DELIVERY_FIXED_TARGET
                 - PDBX_SERIAL_CRYSTALLOGRAPHY_DATA_REDUCTION
+                - PDBX_VRPT_SUMMARY
             EXCLUDE: []
             SLICE:
+        pdbx_core_entity_instance_v5_0_2:
+            INCLUDE: []
+            EXCLUDE: []
+            SLICE: ENTITY_INSTANCE
         repository_holdings_update_v0_1:
             INCLUDE:
                 - rcsb_repository_holdings_update
@@ -1671,6 +1714,10 @@ document_helper:
             - INDEX_NAME: primary
               ATTRIBUTE_NAMES:
               - entry.id
+        pdbx_core_entity_instance_v5_0_2:
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - struct_asym.id
         bird_v5_0_2:
             - INDEX_NAME: primary
               ATTRIBUTE_NAMES:
