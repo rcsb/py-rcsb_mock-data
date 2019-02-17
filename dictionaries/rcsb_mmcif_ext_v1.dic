@@ -36,6 +36,8 @@
 #    12-Dec-2018 jdw Add rcsb_entity_id identifiers in categories struct_ref_seq and struct_ref_seq_dif
 #                    Add category rcsb_entity_poly_info
 #    18-Dec-2018 jdw Add _entity_poly.rcsb_prd_id
+#    16-Feb-2019 jdw Add rcsb_entity_instance_container_identifiers, rcsb_entity_monomer_container_identifiers,
+#                        rcsb_chem_comp_container_identifers, drugbank_container_identifiers
 #
 ###########################################################################
 
@@ -55,12 +57,19 @@ data_rcsb_mmcif_ext.dic
 
     _dictionary.title           rcsb_mmcif_ext.dic
     _dictionary.datablock_id    rcsb_mmcif_ext.dic
-    _dictionary.version         0.111
+    _dictionary.version         0.1112
 #
      loop_
     _dictionary_history.version
     _dictionary_history.update
     _dictionary_history.revision
+ 0.112 2019-02-16
+;
+Changes (jdw):
+ + Add rcsb_entity_instance_container_identifiers, rcsb_entity_monomer_container_identifiers,
+   rcsb_chem_comp_container_identifers, drugbank_container_identifiers
+;
+
  0.111 2018-12-18
 ;
 Changes (jdw):
@@ -251,14 +260,15 @@ rcsb_aggregate_citation_authors      calculate_with_helper python  'DictMethodHe
 rcsb_consolidate_accession_info      calculate_with_helper python  'DictMethodHelper.consolidateAccessionDetails'
 rcsb_entry_container_identifiers     calculate_with_helper python  'DictMethodHelper.buildContainerEntryIds'
 rcsb_entity_container_identifiers    calculate_with_helper python  'DictMethodHelper.buildContainerEntityIds'
+rcsb_entity_instance_container_identifiers calculate_with_helper python  'DictMethodHelper.buildContainerEntityInstanceIds'
 rcsb_assembly_container_identifiers  calculate_with_helper python  'DictMethodHelper.buildContainerAssemblyIds'
 rcsb_add_bird_entity_identifiers     calculate_with_helper python  'DictMethodHelper.addBirdEntityIds'
 rcsb_add_struct_ref_seq_entity_identifiers calculate_with_helper python  'DictMethodHelper.addStructRefSeqEntityIds'
 rcsb_item_method_deferred            calculate_with_helper python  'DictMethodHelper.deferredItemMethod'
 #
-rcsb_entity_poly_info                 calculate_with_helper python  'DictMethodHelper.buildEntityPolyInfo'
-rcsb_filter_enum                     calculate_with_helper python  'DictMethodHelper.filterEnumerations'
-#rcsb_category_method_deferred        calculate_with_helper python  'DictMethodHelper.deferredCategoryMethod'
+rcsb_entity_poly_info                        calculate_with_helper python  'DictMethodHelper.buildEntityPolyInfo'
+rcsb_filter_enum                             calculate_with_helper python  'DictMethodHelper.filterEnumerations'
+#rcsb_category_method_deferred               calculate_with_helper python  'DictMethodHelper.deferredCategoryMethod'
 #
 # Methods for chemical reference data
 #
@@ -1283,8 +1293,232 @@ save__rcsb_entity_container_identifiers.auth_asym_ids
     _item.mandatory_code          yes
     _item_type.code               alphanum-csv
      save_
+
 ##
 ##
+
+save_rcsb_entity_instance_container_identifiers
+    _category.description
+;        The rcsb_entity_instance_container_identifiers records identifiers relevant to the
+         container of entity instance information.
+;
+    _category.id                  rcsb_entity_instance_container_identifiers
+    _category.mandatory_code      no
+    loop_
+    _category_key.name          '_rcsb_entity_instance_container_identifiers.entry_id'
+                                '_rcsb_entity_instance_container_identifiers.asym_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     loop_
+    _rcsb_entity_instance_container_identifiers.entry_id
+    _rcsb_entity_instance_container_identifiers.entity_id
+    _rcsb_entity_instance_container_identifiers.entity_type
+    _rcsb_entity_instance_container_identifiers.asym_id
+    _rcsb_entity_instance_container_identifiers.auth_asym_id
+    _rcsb_entity_instance_container_identifiers.comp_id
+    _rcsb_entity_instance_container_identifiers.auth_seq_id
+    1abc  1 'polymer' A A . .
+    1abc  2 'polymer' B B . .
+    1abc  3 'polymer' C C . .
+
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_entity_instance_container_identifiers
+   _category_methods.method_id         'rcsb_entity_instance_container_identifiers'
+     save_
+
+save__rcsb_entity_instance_container_identifiers.entry_id
+    _item_description.description
+;    Entry identifier for the container.
+;
+    _item.name                  '_rcsb_entity_instance_container_identifiers.entry_id'
+    _item.category_id             rcsb_entity_instance_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_entity_instance_container_identifiers.entry_id'
+    _item_linked.parent_name      '_entry.id'
+
+     save_
+
+save__rcsb_entity_instance_container_identifiers.entity_id
+    _item_description.description
+;    Entiy identifier for the container.
+;
+    _item.name                  '_rcsb_entity_instance_container_identifiers.entity_id'
+    _item.category_id             rcsb_entity_instance_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_entity_instance_container_identifiers.entity_id'
+    _item_linked.parent_name      '_entity.id'
+     save_
+
+save__rcsb_entity_instance_container_identifiers.asym_id
+    _item_description.description
+;    Instance identifier for this container.
+;
+    _item.name                  '_rcsb_entity_instance_container_identifiers.asym_id'
+    _item.category_id             rcsb_entity_instance_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_entity_instance_container_identifiers.asym_id'
+    _item_linked.parent_name      '_struct_asym.id'
+     save_
+
+save__rcsb_entity_instance_container_identifiers.auth_asym_id
+    _item_description.description
+;    Author instance identifier for this container.
+;
+    _item.name                  '_rcsb_entity_instance_container_identifiers.auth_asym_id'
+    _item.category_id             rcsb_entity_instance_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_entity_instance_container_identifiers.auth_asym_id'
+    _item_linked.parent_name      '_atom_site.auth_asym_id'
+     save_
+
+save__rcsb_entity_instance_container_identifiers.comp_id
+    _item_description.description
+;    Component identifier for non-polymer entity instance.
+;
+    _item.name                  '_rcsb_entity_instance_container_identifiers.comp_id'
+    _item.category_id             rcsb_entity_instance_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_entity_instance_container_identifiers.comp_id'
+    _item_linked.parent_name      '_chem_comp.id'
+     save_
+
+save__rcsb_entity_instance_container_identifiers.auth_seq_id
+    _item_description.description
+;    Residue number for non-polymer entity instance.
+;
+    _item.name                  '_rcsb_entity_instance_container_identifiers.auth_seq_id'
+    _item.category_id             rcsb_entity_instance_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    #_item_linked.child_name       '_rcsb_entity_instance_container_identifiers.auth_seq_id'
+    #_item_linked.parent_name      '_chem_comp.id'
+     save_
+
+save__rcsb_entity_instance_container_identifiers.entity_type
+    _item_description.description
+;              Defines the type of the entity.
+;
+    _item.name                  '_rcsb_entity_instance_container_identifiers.entity_type'
+    _item.category_id             rcsb_entity_instance_container_identifiers
+    _item.mandatory_code          no
+    _item_type.code               ucode
+    loop_
+    _item_enumeration.value
+    _item_enumeration.detail      polymer      'entity is a polymer'
+                                  non-polymer  'entity is not a polymer'
+                                  macrolide    'entity is a macrolide'
+                                  water        'water in the solvent model'
+                                  branched     'entity is branched'
+     save_
+##
+##
+##
+
+save_rcsb_entity_monomer_container_identifiers
+    _category.description
+;        The rcsb_entity_monomer_container_identifiers records identifiers relevant to the
+         container of entity monomer information.
+;
+    _category.id                  rcsb_entity_monomer_container_identifiers
+    _category.mandatory_code      no
+    loop_
+    _category_key.name          '_rcsb_entity_monomer_container_identifiers.ordinal_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     loop_
+    _rcsb_entity_monomer_container_identifiers.ordinal_id
+    _rcsb_entity_monomer_container_identifiers.entry_id
+    _rcsb_entity_monomer_container_identifiers.entity_id
+    _rcsb_entity_monomer_container_identifiers.comp_id
+    1 1abc  1 LYS
+    2 1abc  1 TYR
+    3 1abc  1 ALA
+
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_entity_monomer_container_identifiers
+   #_category_methods.method_id         'rcsb_entity_monomer_container_identifiers'
+     save_
+
+save__rcsb_entity_monomer_container_identifiers.ordinal_id
+    _item_description.description
+;    An ordinal identifier for an entity monomer component.
+;
+    _item.name                  '_rcsb_entity_monomer_container_identifiers.ordinal_id'
+    _item.category_id             rcsb_entity_monomer_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               int
+    _item_example.case            1
+    _item_linked.child_name       '_rcsb_entity_monomer_container_identifiers.ordinal_id'
+    _item_linked.parent_name      '_rcsb_entity_poly_info.ordinal_id'
+     save_
+
+save__rcsb_entity_monomer_container_identifiers.entry_id
+    _item_description.description
+;    Entry identifier for the container.
+;
+    _item.name                  '_rcsb_entity_monomer_container_identifiers.entry_id'
+    _item.category_id             rcsb_entity_monomer_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_entity_monomer_container_identifiers.entry_id'
+    _item_linked.parent_name      '_entry.id'
+
+     save_
+
+save__rcsb_entity_monomer_container_identifiers.entity_id
+    _item_description.description
+;    Entity identifier for the container.
+;
+    _item.name                  '_rcsb_entity_monomer_container_identifiers.entity_id'
+    _item.category_id             rcsb_entity_monomer_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_entity_monomer_container_identifiers.entity_id'
+    _item_linked.parent_name      '_entity.id'
+     save_
+
+save__rcsb_entity_monomer_container_identifiers.comp_id
+    _item_description.description
+;    Component identifier for entity monomer.
+;
+    _item.name                  '_rcsb_entity_monomer_container_identifiers.comp_id'
+    _item.category_id             rcsb_entity_monomer_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_entity_monomer_container_identifiers.comp_id'
+    _item_linked.parent_name      '_chem_comp.id'
+     save_
+
+
 save_rcsb_assembly_container_identifiers
     _category.description
 ;        The rcsb_assembly_container_identifiers records identifiers relevant to the
@@ -3109,6 +3343,59 @@ save__rcsb_chem_comp_synonyms.provenance_code
                                   'OpenEye OEToolkits'  .
 save_
 
+##########################################
+## RCSB_CHEM_COMP_CONTAINER_IDENTIFIERS ##
+##########################################
+
+save_rcsb_chem_comp_container_identifiers
+   _category.description
+; rcsb_chem_comp_container_identifiers records identifiers for the chemical component container.
+;
+   _category.id              rcsb_chem_comp_container_identifiers
+   _category.mandatory_code  no
+   #
+   _category_key.name        '_rcsb_chem_comp_container_identifiers.comp_id'
+   #
+   loop_
+    _category_group.id
+     inclusive_group
+     rcsb_group
+     chem_comp_group
+   #
+    loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     _rcsb_chem_comp_container_identifiers.comp_id                 BNZ
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_chem_comp_container_identifiers
+   #
+   # _category_methods.method_id   'rcsb_add_chem_comp_info'
+   #
+save_
+#
+#
+save__rcsb_chem_comp_container_identifiers.comp_id
+   #
+   _item_description.description
+; The chemical component identifier.
+;
+   #
+   _item.name                    '_rcsb_chem_comp_container_identifiers.comp_id'
+   _item.category_id             rcsb_chem_comp_container_identifiers
+   _item.mandatory_code          yes
+   _item_type.code               ucode
+   _item_linked.child_name       '_rcsb_chem_comp_container_identifiers.comp_id'
+   _item_linked.parent_name      '_chem_comp.id'
+   #
+save_
+
 #########################
 ## RCSB_CHEM_COMP_INFO ##
 #########################
@@ -3936,6 +4223,51 @@ save__drugbank_target.seq_one_letter_code
     _item_examples.case          'MAKQRSG...'
      save_
 
+####################################
+## DRUGBANK_CONTAINER_IDENTIFIERS ##
+####################################
+
+save_drugbank_container_identifiers
+    _category.description
+;              Data items in the drugbank_container_identifiers category record
+               identifiers for the Drugbank core container.
+;
+    _category.id                  drugbank_container_identifiers
+    _category.mandatory_code      no
+     loop_
+    _category_key.name           '_drugbank_container_identifiers.drugbank_id'
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+                                 'chem_comp_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 - DrugBank annotation for ATP
+;
+;
+##
+##
+     _drugbank_container_identifiers.drugbank_id DB00171
+
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  drugbank_container_identifiers
+   #
+
+save__drugbank_container_identifiers.drugbank_id
+    _item_description.description
+;              The DrugBank accession code
+;
+
+    _item.name                  '_drugbank_container_identifiers.drugbank_id'
+    _item.category_id             drugbank_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+save_
 
 ###################
 ## DRUGBANK_INFO ##
@@ -4118,9 +4450,9 @@ save__drugbank_info.cas_number
      _item_examples.case         '56-65-5'
     save_
 
-##########################
+###########################
 ## rcsb_entity_poly_info ##
-##########################
+###########################
 
 save_rcsb_entity_poly_info
     _category.description

@@ -124,9 +124,9 @@
                   "type": "string",
                   "enum": [
                      "yes",
+                     "y",
                      "no",
-                     "n",
-                     "y"
+                     "n"
                   ],
                   "description": "_citation.coordinate_linkage states whether this citation\n is concerned with precisely the set of coordinates given in the\n data block. If, for instance, the publication described the same\n structure, but the coordinates had undergone further refinement\n prior to the creation of the data block, the value of this data\n item would be 'no'."
                },
@@ -229,8 +229,8 @@
                "unpublished_flag": {
                   "type": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ],
                   "description": "Flag to indicate that this citation will not be published."
                },
@@ -427,8 +427,8 @@
                "pdbx_monochromatic_or_laue_m_l": {
                   "type": "string",
                   "enum": [
-                     "L",
-                     "M"
+                     "M",
+                     "L"
                   ],
                   "examples": [
                      "M",
@@ -439,9 +439,9 @@
                "pdbx_scattering_type": {
                   "type": "string",
                   "enum": [
+                     "x-ray",
                      "neutron",
-                     "electron",
-                     "x-ray"
+                     "electron"
                   ],
                   "description": "The radiation scattering type for this diffraction data set."
                },
@@ -568,23 +568,23 @@
                "space_group_name_H_M": {
                   "type": "string",
                   "enum": [
+                     "P 2 21 21",
+                     "P 1 2",
                      "P 1",
                      "P 2 2 2",
-                     "P 2 21 21",
-                     "P 1 21",
-                     "P 3 1 2",
                      "C 1 2",
-                     "P 4 21 2",
-                     "P 2 2 21",
-                     "P 3 2 1",
-                     "P 6 2 2",
-                     "P 4",
-                     "C 2 2 2",
-                     "P 4 2 2",
-                     "P 2",
                      "P 3",
-                     "P 1 2",
-                     "P 6"
+                     "P 3 1 2",
+                     "P 3 2 1",
+                     "P 4 21 2",
+                     "P 6",
+                     "P 1 21",
+                     "P 4",
+                     "P 2",
+                     "P 6 2 2",
+                     "P 4 2 2",
+                     "C 2 2 2",
+                     "P 2 2 21"
                   ],
                   "description": "There are 17 plane groups classified as oblique, rectangular, square, and hexagonal.\n To describe the symmetry of 2D crystals of biological molecules,\n plane groups are expanded to equivalent noncentrosymmetric space groups.\n The 2D crystal plane corresponds to the 'ab' plane of the space group.\n\n Enumerated space group descriptions include the plane group number in parentheses,\n the H-M plane group symbol, and the plane group class."
                }
@@ -691,10 +691,10 @@
                "ref_protocol": {
                   "type": "string",
                   "enum": [
-                     "FLEXIBLE FIT",
-                     "RIGID BODY FIT",
-                     "BACKBONE TRACE",
                      "AB INITIO MODEL",
+                     "FLEXIBLE FIT",
+                     "BACKBONE TRACE",
+                     "RIGID BODY FIT",
                      "OTHER"
                   ],
                   "examples": [
@@ -705,8 +705,8 @@
                "ref_space": {
                   "type": "string",
                   "enum": [
-                     "REAL",
-                     "RECIPROCAL"
+                     "RECIPROCAL",
+                     "REAL"
                   ],
                   "description": "A flag to indicate whether fitting was carried out in real\n or reciprocal refinement space."
                },
@@ -797,10 +797,10 @@
                   "type": "string",
                   "enum": [
                      "HALF-MAPS REFINED INDEPENDENTLY",
-                     "HALF-MAPS REFINED WITH FREQUENCY RANGE OMITTED",
                      "HALF-MAPS REFINED INDEPENDENTLY WITH FREQUENCY RANGE OMITTED",
                      "HALF-MAPS REFINED AGAINST SAME DATA",
-                     "OTHER"
+                     "OTHER",
+                     "HALF-MAPS REFINED WITH FREQUENCY RANGE OMITTED"
                   ],
                   "examples": [
                      "HALF-MAPS REFINED INDEPENDENTLY"
@@ -825,9 +825,9 @@
                "symmetry_type": {
                   "type": "string",
                   "enum": [
+                     "3D CRYSTAL",
                      "2D CRYSTAL",
                      "POINT",
-                     "3D CRYSTAL",
                      "HELICAL"
                   ],
                   "description": "The type of symmetry applied to the reconstruction"
@@ -954,13 +954,13 @@
             "aggregation_state": {
                "type": "string",
                "enum": [
-                  "3D ARRAY",
                   "HELICAL ARRAY",
-                  "FILAMENT",
-                  "2D ARRAY",
                   "CELL",
+                  "PARTICLE",
+                  "2D ARRAY",
+                  "3D ARRAY",
                   "TISSUE",
-                  "PARTICLE"
+                  "FILAMENT"
                ],
                "description": "The aggregation/assembly state of the imaged specimen."
             },
@@ -980,10 +980,10 @@
                "type": "string",
                "enum": [
                   "HELICAL",
-                  "TOMOGRAPHY",
+                  "SUBTOMOGRAM AVERAGING",
                   "SINGLE PARTICLE",
-                  "CRYSTALLOGRAPHY",
-                  "SUBTOMOGRAM AVERAGING"
+                  "TOMOGRAPHY",
+                  "CRYSTALLOGRAPHY"
                ],
                "description": "The reconstruction method used in the EM experiment."
             }
@@ -1073,10 +1073,10 @@
                "detector_mode": {
                   "type": "string",
                   "enum": [
-                     "COUNTING",
-                     "OTHER",
                      "INTEGRATING",
-                     "SUPER-RESOLUTION"
+                     "OTHER",
+                     "SUPER-RESOLUTION",
+                     "COUNTING"
                   ],
                   "description": "The detector mode used during image recording."
                },
@@ -1128,10 +1128,10 @@
                "alignment_procedure": {
                   "type": "string",
                   "enum": [
-                     "NONE",
-                     "BASIC",
                      "ZEMLIN TABLEAU",
+                     "BASIC",
                      "COMA FREE",
+                     "NONE",
                      "OTHER"
                   ],
                   "description": "microscope alignment procedure"
@@ -1142,7 +1142,7 @@
                },
                "c2_aperture_diameter": {
                   "type": "number",
-                  "description": "C2 lens aperture diameter, in mm"
+                  "description": "The open diameter of the c2 condenser lens,\n in microns."
                },
                "calibrated_defocus_max": {
                   "type": "number",
@@ -1220,81 +1220,81 @@
                "microscope_model": {
                   "type": "string",
                   "enum": [
-                     "JEOL 1400",
-                     "JEOL 1200EX",
-                     "JEOL 2000EX",
-                     "FEI/PHILIPS CM120T",
-                     "JEOL KYOTO-3000SFF",
-                     "FEI/PHILIPS CM200FEG/SOPHIE",
-                     "JEOL 100B",
-                     "FEI/PHILIPS CM300FEG/HE",
-                     "JEOL 3200FSC",
-                     "HITACHI EF3000",
-                     "FEI TECNAI SPIRIT",
-                     "ZEISS LIBRA120PLUS",
-                     "FEI POLARA 300",
-                     "JEOL 2000EXII",
-                     "FEI/PHILIPS CM200FEG/UT",
-                     "FEI/PHILIPS CM300FEG/T",
-                     "JEOL 2010",
-                     "JEOL 1200",
                      "HITACHI H-9500SD",
-                     "JEOL 4000",
                      "HITACHI H7600",
-                     "JEOL CRYO ARM 200",
-                     "JEOL 2011",
-                     "FEI TECNAI F30",
-                     "JEOL 2010F",
-                     "FEI/PHILIPS CM300FEG/ST",
-                     "FEI/PHILIPS CM12",
+                     "JEOL 1200",
                      "FEI/PHILIPS CM200FEG",
-                     "FEI/PHILIPS CM200T",
-                     "FEI/PHILIPS EM400",
-                     "FEI TECNAI 10",
-                     "HITACHI HF2000",
-                     "FEI TECNAI F20",
-                     "FEI TITAN KRIOS",
-                     "JEOL 1200EXII",
-                     "FEI/PHILIPS CM200FEG/ST",
-                     "JEOL 2200FSC",
-                     "JEOL 1230",
-                     "JEOL 3100FEF",
-                     "FEI TECNAI ARCTICA",
-                     "JEOL 2010HC",
-                     "FEI MORGAGNI",
-                     "JEOL 2100",
-                     "FEI/PHILIPS EM420",
+                     "ZEISS LEO912",
+                     "FEI TALOS ARCTICA",
+                     "JEOL 1400",
+                     "FEI TECNAI 20",
+                     "JEOL 3200FSC",
+                     "FEI/PHILIPS CM12",
+                     "JEOL 2010UHR",
+                     "JEOL 2010",
                      "JEOL 3000SFF",
                      "JEOL 3200FS",
-                     "JEOL 4000EX",
-                     "FEI TECNAI 20",
-                     "FEI TECNAI SPHERA",
-                     "HITACHI EF2000",
-                     "JEOL CRYO ARM 300",
-                     "ZEISS LEO912",
-                     "JEOL 2200FS",
-                     "FEI TITAN",
-                     "SIEMENS SULEIKA",
-                     "FEI TALOS ARCTICA",
-                     "JEOL 2100F",
-                     "FEI TECNAI 12",
+                     "JEOL CRYO ARM 200",
+                     "JEOL 1200EX",
+                     "FEI/PHILIPS CM120T",
                      "JEOL 1010",
-                     "HITACHI HF3000",
-                     "JEOL 2010UHR",
-                     "JEOL 3100FFC",
+                     "JEOL 2010F",
+                     "FEI TECNAI F30",
                      "FEI/PHILIPS CM10",
+                     "JEOL 2011",
+                     "JEOL CRYO ARM 300",
+                     "JEOL 2000EXII",
+                     "JEOL 3100FEF",
+                     "FEI/PHILIPS CM200FEG/UT",
+                     "FEI TECNAI SPIRIT",
+                     "HITACHI HF3000",
+                     "JEOL KYOTO-3000SFF",
+                     "FEI POLARA 300",
+                     "FEI TECNAI SPHERA",
+                     "JEOL 2100",
                      "JEOL 2010HT",
-                     "JEOL 100CX"
+                     "JEOL 1230",
+                     "ZEISS LIBRA120PLUS",
+                     "JEOL 3100FFC",
+                     "FEI TECNAI 12",
+                     "HITACHI EF3000",
+                     "JEOL 4000",
+                     "JEOL 4000EX",
+                     "JEOL 100CX",
+                     "FEI TITAN",
+                     "FEI/PHILIPS EM400",
+                     "SIEMENS SULEIKA",
+                     "FEI/PHILIPS CM300FEG/HE",
+                     "JEOL 2100F",
+                     "FEI/PHILIPS CM300FEG/ST",
+                     "JEOL 1200EXII",
+                     "FEI/PHILIPS CM200FEG/ST",
+                     "FEI TECNAI ARCTICA",
+                     "JEOL 2200FS",
+                     "FEI/PHILIPS EM420",
+                     "JEOL 2200FSC",
+                     "FEI/PHILIPS CM200T",
+                     "FEI/PHILIPS CM300FEG/T",
+                     "FEI TECNAI 10",
+                     "FEI MORGAGNI",
+                     "FEI TITAN KRIOS",
+                     "FEI TECNAI F20",
+                     "HITACHI EF2000",
+                     "JEOL 2000EX",
+                     "FEI/PHILIPS CM200FEG/SOPHIE",
+                     "HITACHI HF2000",
+                     "JEOL 100B",
+                     "JEOL 2010HC"
                   ],
                   "description": "The name of the model of microscope."
                },
                "mode": {
                   "type": "string",
                   "enum": [
-                     "OTHER",
-                     "DARK FIELD",
                      "DIFFRACTION",
-                     "BRIGHT FIELD"
+                     "OTHER",
+                     "BRIGHT FIELD",
+                     "DARK FIELD"
                   ],
                   "description": "The mode of imaging."
                },
@@ -1341,30 +1341,30 @@
                "specimen_holder_model": {
                   "type": "string",
                   "enum": [
-                     "JEOL CRYOSPECPORTER",
-                     "GATAN 626 SINGLE TILT LIQUID NITROGEN CRYO TRANSFER HOLDER",
-                     "SIDE ENTRY, EUCENTRIC",
-                     "JEOL 3200FSC CRYOHOLDER",
-                     "GATAN UHRST 3500 SINGLE TILT ULTRA HIGH RESOLUTION NITROGEN COOLING HOLDER",
-                     "GATAN ULTDT ULTRA LOW TEMPERATURE DOUBLE TILT HELIUM COOLING HOLDER",
                      "GATAN 910 MULTI-SPECIMEN SINGLE TILT CRYO TRANSFER HOLDER",
-                     "GATAN CHDT 3504 DOUBLE TILT HIGH RESOLUTION NITROGEN COOLING HOLDER",
-                     "GATAN 915 DOUBLE TILT LIQUID NITROGEN CRYO TRANSFER HOLDER",
-                     "GATAN ULTST ULTRA LOW TEMPERATURE SINGLE TILT HELIUM COOLING HOLDER",
-                     "GATAN HELIUM",
-                     "HOME BUILD",
-                     "FISCHIONE INSTRUMENTS DUAL AXIS TOMOGRAPHY HOLDER",
-                     "GATAN HCHDT 3010 DOUBLE TILT HIGH RESOLUTION HELIUM COOLING HOLDER",
-                     "JEOL",
-                     "GATAN CT3500 SINGLE TILT LIQUID NITROGEN CRYO TRANSFER HOLDER",
-                     "GATAN LIQUID NITROGEN",
                      "FEI TITAN KRIOS AUTOGRID HOLDER",
-                     "GATAN CT3500TR SINGLE TILT ROTATION LIQUID NITROGEN CRYO TRANSFER HOLDER",
-                     "GATAN HCHST 3008 SINGLE TILT HIGH RESOLUTION HELIUM COOLING HOLDER",
+                     "JEOL",
+                     "HOME BUILD",
                      "GATAN HC 3500 SINGLE TILT HEATING/NITROGEN COOLING HOLDER",
+                     "GATAN CHDT 3504 DOUBLE TILT HIGH RESOLUTION NITROGEN COOLING HOLDER",
+                     "SIDE ENTRY, EUCENTRIC",
+                     "GATAN LIQUID NITROGEN",
+                     "GATAN ULTDT ULTRA LOW TEMPERATURE DOUBLE TILT HELIUM COOLING HOLDER",
+                     "GATAN CT3500 SINGLE TILT LIQUID NITROGEN CRYO TRANSFER HOLDER",
+                     "JEOL 3200FSC CRYOHOLDER",
+                     "OTHER",
+                     "GATAN CT3500TR SINGLE TILT ROTATION LIQUID NITROGEN CRYO TRANSFER HOLDER",
+                     "GATAN ULTST ULTRA LOW TEMPERATURE SINGLE TILT HELIUM COOLING HOLDER",
+                     "GATAN UHRST 3500 SINGLE TILT ULTRA HIGH RESOLUTION NITROGEN COOLING HOLDER",
+                     "GATAN HCHDT 3010 DOUBLE TILT HIGH RESOLUTION HELIUM COOLING HOLDER",
+                     "GATAN 626 SINGLE TILT LIQUID NITROGEN CRYO TRANSFER HOLDER",
                      "PHILIPS ROTATION HOLDER",
-                     "GATAN 914 HIGH TILT LIQUID NITROGEN CRYO TRANSFER TOMOGRAPHY HOLDER",
-                     "OTHER"
+                     "GATAN HELIUM",
+                     "GATAN 915 DOUBLE TILT LIQUID NITROGEN CRYO TRANSFER HOLDER",
+                     "FISCHIONE INSTRUMENTS DUAL AXIS TOMOGRAPHY HOLDER",
+                     "JEOL CRYOSPECPORTER",
+                     "GATAN HCHST 3008 SINGLE TILT HIGH RESOLUTION HELIUM COOLING HOLDER",
+                     "GATAN 914 HIGH TILT LIQUID NITROGEN CRYO TRANSFER TOMOGRAPHY HOLDER"
                   ],
                   "description": "The name of the model of specimen holder used during imaging."
                },
@@ -1447,25 +1447,25 @@
                "category": {
                   "type": "string",
                   "enum": [
-                     "LAYERLINE INDEXING",
-                     "LATTICE DISTORTION CORRECTION",
-                     "MODEL REFINEMENT",
                      "SYMMETRY DETERMINATION",
-                     "MODEL FITTING",
-                     "SERIES ALIGNMENT",
-                     "INITIAL EULER ASSIGNMENT",
-                     "CRYSTALLOGRAPHY MERGING",
-                     "PARTICLE SELECTION",
-                     "CLASSIFICATION",
                      "FINAL EULER ASSIGNMENT",
-                     "MASKING",
                      "RECONSTRUCTION",
                      "VOLUME SELECTION",
+                     "CRYSTALLOGRAPHY MERGING",
+                     "MODEL REFINEMENT",
+                     "SERIES ALIGNMENT",
+                     "MASKING",
                      "DIFFRACTION INDEXING",
-                     "IMAGE ACQUISITION",
                      "CTF CORRECTION",
+                     "MODEL FITTING",
+                     "PARTICLE SELECTION",
+                     "OTHER",
+                     "IMAGE ACQUISITION",
+                     "LATTICE DISTORTION CORRECTION",
                      "MOLECULAR REPLACEMENT",
-                     "OTHER"
+                     "CLASSIFICATION",
+                     "INITIAL EULER ASSIGNMENT",
+                     "LAYERLINE INDEXING"
                   ],
                   "description": "The purpose of the software."
                },
@@ -1621,8 +1621,8 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "POSITIVE",
                      "NEGATIVE",
+                     "POSITIVE",
                      "NONE"
                   ],
                   "description": "type of staining"
@@ -1650,15 +1650,15 @@
                "cryogen_name": {
                   "type": "string",
                   "enum": [
-                     "ETHANE",
-                     "METHANE",
-                     "FREON 22",
-                     "HELIUM",
                      "FREON 12",
-                     "ETHANE-PROPANE",
+                     "OTHER",
+                     "FREON 22",
                      "PROPANE",
                      "NITROGEN",
-                     "OTHER"
+                     "ETHANE-PROPANE",
+                     "METHANE",
+                     "ETHANE",
+                     "HELIUM"
                   ],
                   "description": "This is the name of the cryogen."
                },
@@ -1687,20 +1687,20 @@
                "instrument": {
                   "type": "string",
                   "enum": [
-                     "FEI VITROBOT MARK III",
-                     "GATAN CRYOPLUNGE 3",
-                     "FEI VITROBOT MARK I",
                      "LEICA PLUNGER",
-                     "HOMEMADE PLUNGER",
                      "LEICA KF80",
+                     "HOMEMADE PLUNGER",
+                     "LEICA EM GP",
+                     "FEI VITROBOT MARK IV",
+                     "SPOTITON",
+                     "GATAN CRYOPLUNGE 3",
+                     "FEI VITROBOT MARK III",
+                     "LEICA EM CPC",
+                     "FEI VITROBOT MARK I",
                      "ZEISS PLUNGE FREEZER CRYOBOX",
                      "FEI VITROBOT MARK II",
-                     "FEI VITROBOT MARK IV",
-                     "EMS-002 RAPID IMMERSION FREEZER",
-                     "LEICA EM GP",
-                     "LEICA EM CPC",
                      "REICHERT-JUNG PLUNGER",
-                     "SPOTITON"
+                     "EMS-002 RAPID IMMERSION FREEZER"
                   ],
                   "description": "The type of instrument used in the vitrification process."
                },
@@ -1770,19 +1770,19 @@
                "method": {
                   "type": "string",
                   "enum": [
-                     "FIBER DIFFRACTION",
-                     "FLUORESCENCE TRANSFER",
                      "POWDER DIFFRACTION",
                      "SOLUTION NMR",
-                     "SOLUTION SCATTERING",
-                     "THEORETICAL MODEL",
-                     "ELECTRON CRYSTALLOGRAPHY",
                      "EPR",
-                     "ELECTRON MICROSCOPY",
                      "INFRARED SPECTROSCOPY",
-                     "SOLID-STATE NMR",
+                     "SOLUTION SCATTERING",
+                     "ELECTRON CRYSTALLOGRAPHY",
+                     "NEUTRON DIFFRACTION",
                      "X-RAY DIFFRACTION",
-                     "NEUTRON DIFFRACTION"
+                     "FIBER DIFFRACTION",
+                     "ELECTRON MICROSCOPY",
+                     "SOLID-STATE NMR",
+                     "FLUORESCENCE TRANSFER",
+                     "THEORETICAL MODEL"
                   ],
                   "examples": [
                      "X-RAY DIFFRACTION",
@@ -1848,7 +1848,7 @@
                },
                "pdbx_mosaicity": {
                   "type": "number",
-                  "description": "\nThe of the distribution of mis-orientation angles specified in degrees\nof all the unit cells in the crystal. Lower mosaicity indicates better\nordered crystals."
+                  "description": "\nThe of the distribution of mis-orientation angles specified in degrees\nof all the unit cells in the crystal. Lower mosaicity indicates better \nordered crystals."
                },
                "pdbx_mosaicity_esd": {
                   "type": "number",
@@ -1944,64 +1944,64 @@
                "full_name_of_center": {
                   "type": "string",
                   "enum": [
-                     "Bacterial targets at IGS-CNRS, France",
-                     "TB Structural Genomics Consortium",
-                     "Mycobacterium Tuberculosis Structural Proteomics Project",
-                     "Partnership for T-Cell Biology",
-                     "Structural Proteomics in Europe",
-                     "RIKEN Structural Genomics/Proteomics Initiative",
-                     "Structural Genomics Consortium for Research on Gene Expression",
-                     "Nucleocytoplasmic Transport: a Target for Cellular Control",
-                     "Berkeley Structural Genomics Center",
-                     "Structures of Mtb Proteins Conferring Susceptibility to Known Mtb Inhibitors",
-                     "Partnership for Stem Cell Biology",
-                     "Structure, Dynamics and Activation Mechanisms of Chemokine Receptors",
-                     "New York Structural GenomiX Research Consortium",
-                     "Structural Genomics of Pathogenic Protozoa Consortium",
-                     "South Africa Structural Targets Annotation Database",
-                     "Oxford Protein Production Facility",
-                     "Midwest Center for Structural Genomics",
-                     "Marseilles Structural Genomics Program @ AFMB",
-                     "New York Consortium on Membrane Protein Structure",
-                     "Partnership for Nuclear Receptor Signaling Code Biology",
-                     "Medical Structural Genomics of Pathogenic Protozoa",
-                     "Membrane Protein Structures by Solution NMR",
-                     "Structural Genomics Consortium",
-                     "Transcontinental EM Initiative for Membrane Protein Structure",
-                     "Chaperone-Enabled Studies of Epigenetic Regulation Enzymes",
-                     "Center for Membrane Proteins of Infectious Diseases",
-                     "Israel Structural Proteomics Center",
-                     "Southeast Collaboratory for Structural Genomics",
-                     "Atoms-to-Animals: The Immune Function Network",
-                     "GPCR Network",
-                     "Integrated Center for Structure and Function Innovation",
-                     "Center for Structures of Membrane Proteins",
-                     "Structure-Function Studies of Tight Junction Membrane Proteins",
-                     "Program for the Characterization of Secreted Effector Proteins",
-                     "Membrane Protein Structural Biology Consortium",
-                     "Midwest Center for Macromolecular Research",
                      "Mitochondrial Protein Partnership",
-                     "Center for Structural Genomics of Infectious Diseases",
                      "Structure-Function Analysis of Polymorphic CDI Toxin-Immunity Protein Complexes",
+                     "New York Consortium on Membrane Protein Structure",
                      "Ontario Centre for Structural Proteomics",
-                     "Seattle Structural Genomics Center for Infectious Disease",
-                     "Center for the X-ray Structure Determination of Human Transporters",
+                     "Partnership for Stem Cell Biology",
+                     "New York SGX Research Center for Structural Genomics",
+                     "Berkeley Structural Genomics Center",
+                     "TB Structural Genomics Consortium",
+                     "Center for Structural Genomics of Infectious Diseases",
+                     "Membrane Protein Structures by Solution NMR",
+                     "Transcontinental EM Initiative for Membrane Protein Structure",
                      "Structure 2 Function Project",
+                     "Paris-Sud Yeast Structural Genomics",
+                     "Atoms-to-Animals: The Immune Function Network",
                      "Center for Eukaryotic Structural Genomics",
                      "Assembly, Dynamics and Evolution of Cell-Cell and Cell-Matrix Adhesions",
                      "Northeast Structural Genomics Consortium",
+                     "Structures of Mtb Proteins Conferring Susceptibility to Known Mtb Inhibitors",
+                     "Seattle Structural Genomics Center for Infectious Disease",
+                     "Mycobacterium Tuberculosis Structural Proteomics Project",
                      "Center for High-Throughput Structural Biology",
-                     "Protein Structure Factory",
-                     "Paris-Sud Yeast Structural Genomics",
-                     "Enzyme Discovery for Natural Product Biosynthesis",
-                     "New York Structural Genomics Research Consortium",
-                     "Accelerated Technologies Center for Gene to 3D Structure",
-                     "Transmembrane Protein Center",
-                     "Scottish Structural Proteomics Facility",
-                     "Joint Center for Structural Genomics",
+                     "Marseilles Structural Genomics Program @ AFMB",
+                     "Medical Structural Genomics of Pathogenic Protozoa",
+                     "Southeast Collaboratory for Structural Genomics",
+                     "Structural Genomics of Pathogenic Protozoa Consortium",
+                     "Structural Genomics Consortium",
                      "Montreal-Kingston Bacterial Structural Genomics Initiative",
+                     "Nucleocytoplasmic Transport: a Target for Cellular Control",
                      "Structural Proteomics in Europe 2",
-                     "New York SGX Research Center for Structural Genomics"
+                     "Protein Structure Factory",
+                     "Structural Proteomics in Europe",
+                     "Structure-Function Studies of Tight Junction Membrane Proteins",
+                     "Center for Structures of Membrane Proteins",
+                     "GPCR Network",
+                     "Oxford Protein Production Facility",
+                     "Structure, Dynamics and Activation Mechanisms of Chemokine Receptors",
+                     "Center for Membrane Proteins of Infectious Diseases",
+                     "Accelerated Technologies Center for Gene to 3D Structure",
+                     "New York Structural Genomics Research Consortium",
+                     "Transmembrane Protein Center",
+                     "Israel Structural Proteomics Center",
+                     "Joint Center for Structural Genomics",
+                     "Chaperone-Enabled Studies of Epigenetic Regulation Enzymes",
+                     "Center for the X-ray Structure Determination of Human Transporters",
+                     "Partnership for Nuclear Receptor Signaling Code Biology",
+                     "Midwest Center for Macromolecular Research",
+                     "Midwest Center for Structural Genomics",
+                     "Membrane Protein Structural Biology Consortium",
+                     "Program for the Characterization of Secreted Effector Proteins",
+                     "Enzyme Discovery for Natural Product Biosynthesis",
+                     "Partnership for T-Cell Biology",
+                     "South Africa Structural Targets Annotation Database",
+                     "New York Structural GenomiX Research Consortium",
+                     "RIKEN Structural Genomics/Proteomics Initiative",
+                     "Integrated Center for Structure and Function Innovation",
+                     "Scottish Structural Proteomics Facility",
+                     "Structural Genomics Consortium for Research on Gene Expression",
+                     "Bacterial targets at IGS-CNRS, France"
                   ],
                   "examples": [
                      "Midwest Center for Structural Genomics"
@@ -2011,16 +2011,16 @@
                "id": {
                   "type": "integer",
                   "enum": [
-                     8,
+                     9,
+                     4,
+                     3,
                      5,
                      6,
                      10,
                      1,
-                     4,
-                     9,
+                     7,
                      2,
-                     3,
-                     7
+                     8
                   ],
                   "examples": [
                      "1 2 3"
@@ -2030,63 +2030,63 @@
                "initial_of_center": {
                   "type": "string",
                   "enum": [
-                     "TBSGC",
-                     "STEMCELL",
-                     "BIGS",
-                     "CHTSB",
-                     "PSF",
-                     "SPINE",
-                     "MTBI",
-                     "PCSEP",
-                     "MPSbyNMR",
-                     "ATCG3D",
-                     "MPSBC",
-                     "SECSG",
-                     "IFN",
-                     "NHRs",
-                     "TMPC",
-                     "NYCOMPS",
-                     "NPCXstals",
-                     "NYSGXRC",
+                     "YSG",
                      "XMTB",
                      "CHSAM",
+                     "MCMR",
+                     "MPSbyNMR",
+                     "CEBS",
+                     "SSGCID",
                      "JCSG",
-                     "OPPF",
-                     "SGC",
+                     "IFN",
+                     "MTBI",
+                     "MSGP",
+                     "MSGPP",
                      "CSMP",
+                     "SGC",
+                     "STEMCELL",
                      "SGCGES",
+                     "MPSBC",
+                     "CESG",
+                     "CSGID",
+                     "ATCG3D",
+                     "NYSGRC",
+                     "MPID",
+                     "NESG",
+                     "MCSG",
+                     "SGPP",
+                     "TEMIMPS",
+                     "NYSGXRC",
+                     "RSGI",
+                     "SASTAD",
                      "BSGC",
                      "BSGI",
-                     "TJMP",
+                     "OPPF",
+                     "SPINE",
+                     "BIGS",
+                     "PCSEP",
                      "GPCR",
-                     "SGPP",
-                     "SPINE-2",
-                     "CELLMAT",
-                     "SSPF",
-                     "ISPC",
-                     "OCSP",
-                     "ISFI",
-                     "MCSG",
-                     "TransportPDB",
-                     "UC4CDI",
-                     "TEMIMPS",
-                     "SASTAD",
-                     "MCMR",
-                     "RSGI",
-                     "S2F",
-                     "CEBS",
-                     "CSGID",
-                     "TCELL",
-                     "MPP",
-                     "YSG",
-                     "NESG",
-                     "MSGPP",
-                     "MPID",
-                     "MSGP",
                      "NatPro",
-                     "NYSGRC",
-                     "CESG",
-                     "SSGCID"
+                     "TransportPDB",
+                     "TCELL",
+                     "SSPF",
+                     "ISFI",
+                     "MPP",
+                     "TMPC",
+                     "OCSP",
+                     "SPINE-2",
+                     "CHTSB",
+                     "NHRs",
+                     "TJMP",
+                     "CELLMAT",
+                     "PSF",
+                     "TBSGC",
+                     "NYCOMPS",
+                     "ISPC",
+                     "S2F",
+                     "NPCXstals",
+                     "SECSG",
+                     "UC4CDI"
                   ],
                   "examples": [
                      "JCSG"
@@ -2097,10 +2097,10 @@
                   "type": "string",
                   "enum": [
                      "PSI:Biology",
-                     "PSI, Protein Structure Initiative",
                      "NPPSFA, National Project on Protein Structural and Functional Analyses",
-                     "Enzyme Function Initiative",
-                     "NIAID, National Institute of Allergy and Infectious Diseases"
+                     "NIAID, National Institute of Allergy and Infectious Diseases",
+                     "PSI, Protein Structure Initiative",
+                     "Enzyme Function Initiative"
                   ],
                   "examples": [
                      "PSI, Protein Structure Initiative"
@@ -2131,9 +2131,10 @@
                "data_content_type": {
                   "type": "string",
                   "enum": [
-                     "NMR restraints",
-                     "NMR shifts",
                      "Structure model",
+                     "NMR shifts",
+                     "NMR restraints",
+                     "Chemical component",
                      "Structure factors"
                   ],
                   "examples": [
@@ -2173,9 +2174,10 @@
                "data_content_type": {
                   "type": "string",
                   "enum": [
-                     "NMR restraints",
-                     "NMR shifts",
                      "Structure model",
+                     "NMR shifts",
+                     "NMR restraints",
+                     "Chemical component",
                      "Structure factors"
                   ],
                   "examples": [
@@ -2212,8 +2214,8 @@
                   "type": "string",
                   "enum": [
                      "Initial release",
-                     "Coordinate replacement",
-                     "Obsolete"
+                     "Obsolete",
+                     "Coordinate replacement"
                   ],
                   "examples": [
                      "Initial release"
@@ -2238,9 +2240,10 @@
                "data_content_type": {
                   "type": "string",
                   "enum": [
-                     "NMR restraints",
-                     "NMR shifts",
                      "Structure model",
+                     "NMR shifts",
+                     "NMR restraints",
+                     "Chemical component",
                      "Structure factors"
                   ],
                   "examples": [
@@ -2251,23 +2254,23 @@
                "group": {
                   "type": "string",
                   "enum": [
-                     "Data processing",
-                     "Atomic model",
-                     "Data collection",
+                     "Version format compliance",
                      "Database references",
-                     "Experimental data",
-                     "Refinement description",
-                     "Structure summary",
-                     "Other",
-                     "Advisory",
+                     "Data collection",
                      "Derived calculations",
                      "Non-polymer description",
-                     "Initial release",
+                     "Structure summary",
+                     "Refinement description",
                      "Experimental preparation",
+                     "Source and taxonomy",
+                     "Data processing",
+                     "Initial release",
                      "Author supporting evidence",
-                     "Version format compliance",
-                     "Polymer sequence",
-                     "Source and taxonomy"
+                     "Experimental data",
+                     "Advisory",
+                     "Other",
+                     "Atomic model",
+                     "Polymer sequence"
                   ],
                   "examples": [
                      "citation"
@@ -2306,9 +2309,10 @@
                "data_content_type": {
                   "type": "string",
                   "enum": [
-                     "NMR restraints",
-                     "NMR shifts",
                      "Structure model",
+                     "NMR shifts",
+                     "NMR restraints",
+                     "Chemical component",
                      "Structure factors"
                   ],
                   "examples": [
@@ -2362,9 +2366,10 @@
                "data_content_type": {
                   "type": "string",
                   "enum": [
-                     "NMR restraints",
-                     "NMR shifts",
                      "Structure model",
+                     "NMR shifts",
+                     "NMR restraints",
+                     "Chemical component",
                      "Structure factors"
                   ],
                   "examples": [
@@ -2419,7 +2424,7 @@
                      "Welcome Trust",
                      "National Institutes of Health/National Institute of General Medical Sciences"
                   ],
-                  "description": "The name of the organization providing funding support for the\n entry."
+                  "description": "The name of the organization providing funding support for the \n entry."
                },
                "grant_number": {
                   "type": "string",
@@ -2462,8 +2467,8 @@
                "id": {
                   "type": "string",
                   "enum": [
-                     "OBSLTE",
-                     "SPRSDE"
+                     "SPRSDE",
+                     "OBSLTE"
                   ],
                   "examples": [
                      "OBSLTE"
@@ -2501,22 +2506,22 @@
                "content_type": {
                   "type": "string",
                   "enum": [
-                     "associated EM volume",
-                     "associated SAS data",
-                     "other EM volume",
-                     "complete structure",
-                     "native structure",
                      "associated NMR restraints",
-                     "minimized average structure",
+                     "native structure",
+                     "other EM volume",
                      "protein target sequence and/or protocol data",
-                     "representative structure",
                      "re-refinement",
-                     "ensemble",
-                     "associated structure factors",
-                     "other",
+                     "complete structure",
                      "derivative structure",
+                     "minimized average structure",
+                     "associated EM volume",
+                     "split",
+                     "associated SAS data",
+                     "associated structure factors",
+                     "representative structure",
                      "unspecified",
-                     "split"
+                     "other",
+                     "ensemble"
                   ],
                   "examples": [
                      "minimized average structure",
@@ -2576,8 +2581,8 @@
             "SG_entry": {
                "type": "string",
                "enum": [
-                  "N",
-                  "Y"
+                  "Y",
+                  "N"
                ],
                "examples": [
                   "Y"
@@ -2587,12 +2592,12 @@
             "deposit_site": {
                "type": "string",
                "enum": [
-                  "BMRB",
+                  "PDBE",
                   "BNL",
-                  "NDB",
-                  "RCSB",
                   "PDBJ",
-                  "PDBE"
+                  "BMRB",
+                  "NDB",
+                  "RCSB"
                ],
                "examples": [
                   "NDB",
@@ -2614,12 +2619,12 @@
             "methods_development_category": {
                "type": "string",
                "enum": [
-                  "RNA-Puzzles",
                   "GPCR Dock",
-                  "FoldIt",
-                  "CASP",
                   "D3R",
+                  "FoldIt",
+                  "RNA-Puzzles",
                   "CAPRI",
+                  "CASP",
                   "CASD-NMR"
                ],
                "examples": [
@@ -2631,8 +2636,8 @@
             "pdb_format_compatible": {
                "type": "string",
                "enum": [
-                  "N",
-                  "Y"
+                  "Y",
+                  "N"
                ],
                "examples": [
                   "Y"
@@ -2642,11 +2647,11 @@
             "process_site": {
                "type": "string",
                "enum": [
+                  "PDBE",
                   "BNL",
-                  "NDB",
-                  "RCSB",
                   "PDBJ",
-                  "PDBE"
+                  "NDB",
+                  "RCSB"
                ],
                "examples": [
                   "NDB",
@@ -2668,23 +2673,23 @@
             "status_code": {
                "type": "string",
                "enum": [
-                  "WDRN",
-                  "WAIT",
-                  "PROC",
-                  "BIB",
-                  "POLC",
-                  "REV",
-                  "AUTH",
                   "TRSF",
-                  "REL",
-                  "AUCO",
-                  "HOLD",
-                  "OBS",
+                  "POLC",
                   "RMVD",
-                  "DEL",
-                  "UPD",
+                  "HOLD",
+                  "AUTH",
                   "HPUB",
+                  "UPD",
+                  "BIB",
                   "REFI",
+                  "AUCO",
+                  "REV",
+                  "DEL",
+                  "WAIT",
+                  "WDRN",
+                  "REL",
+                  "OBS",
+                  "PROC",
                   "REPL"
                ],
                "examples": [
@@ -2696,16 +2701,16 @@
             "status_code_cs": {
                "type": "string",
                "enum": [
-                  "WDRN",
-                  "WAIT",
-                  "PROC",
                   "POLC",
-                  "REL",
                   "RMVD",
                   "HOLD",
-                  "OBS",
-                  "HPUB",
                   "AUTH",
+                  "HPUB",
+                  "WAIT",
+                  "WDRN",
+                  "REL",
+                  "OBS",
+                  "PROC",
                   "REPL"
                ],
                "examples": [
@@ -2716,16 +2721,16 @@
             "status_code_mr": {
                "type": "string",
                "enum": [
-                  "WDRN",
-                  "WAIT",
-                  "PROC",
                   "POLC",
-                  "REL",
                   "RMVD",
                   "HOLD",
-                  "OBS",
-                  "HPUB",
                   "AUTH",
+                  "HPUB",
+                  "WAIT",
+                  "WDRN",
+                  "REL",
+                  "OBS",
+                  "PROC",
                   "REPL"
                ],
                "examples": [
@@ -2736,16 +2741,16 @@
             "status_code_sf": {
                "type": "string",
                "enum": [
-                  "WDRN",
-                  "WAIT",
-                  "PROC",
                   "POLC",
-                  "REL",
                   "RMVD",
                   "HOLD",
-                  "OBS",
-                  "HPUB",
                   "AUTH",
+                  "HPUB",
+                  "WAIT",
+                  "WDRN",
+                  "REL",
+                  "OBS",
+                  "PROC",
                   "REPL"
                ],
                "examples": [
@@ -2778,8 +2783,8 @@
                "group_type": {
                   "type": "string",
                   "enum": [
-                     "undefined",
                      "changed state",
+                     "undefined",
                      "ground state"
                   ],
                   "description": "Text to describe a grouping of entries in multiple collections"
@@ -2811,7 +2816,7 @@
                },
                "prd_id": {
                   "type": "string",
-                  "description": "The value of _pdbx_molecule.prd_id is the PDB accession code for this\n reference molecule."
+                  "description": "The value of _pdbx_molecule.prd_id is the PDB accession code for this \n reference molecule."
                },
                "rcsb_comp_id": {
                   "type": "string",
@@ -2839,44 +2844,44 @@
                "class": {
                   "type": "string",
                   "enum": [
-                     "Anticancer",
-                     "Thrombin inhibitor, Trypsin inhibitor",
-                     "Antitumor",
-                     "Anticoagulant, Antithrombotic",
-                     "Lantibiotic",
-                     "Metabolism",
-                     "Immunosuppressant",
-                     "Antiinflammatory",
-                     "Antiviral",
-                     "Antimicrobial",
-                     "Antibiotic",
-                     "Antiparasitic",
-                     "Antifungal",
-                     "Antimicrobial, Antiretroviral",
-                     "Antineoplastic",
-                     "Toxin",
-                     "Antibiotic, Antineoplastic",
-                     "Antiretroviral",
-                     "Antimicrobial, Antiparasitic, Antibiotic",
-                     "Transport activator",
-                     "Trypsin inhibitor",
-                     "Metal transport",
-                     "Antibiotic, Antimicrobial",
-                     "Antimicrobial, Antitumor",
-                     "Anticoagulant",
-                     "Thrombin inhibitor",
-                     "Growth factor",
-                     "Inhibitor",
-                     "Receptor",
-                     "Unknown",
-                     "Antithrombotic",
-                     "Enzyme inhibitor",
-                     "Antibiotic, Anthelmintic",
-                     "Chaperone binding",
-                     "Antagonist",
-                     "Oxidation-reduction",
                      "CASPASE inhibitor",
-                     "Anthelmintic"
+                     "Toxin",
+                     "Anticancer",
+                     "Receptor",
+                     "Thrombin inhibitor",
+                     "Enzyme inhibitor",
+                     "Antibiotic, Antineoplastic",
+                     "Antimicrobial, Antiretroviral",
+                     "Antibiotic, Anthelmintic",
+                     "Antithrombotic",
+                     "Chaperone binding",
+                     "Immunosuppressant",
+                     "Antiviral",
+                     "Growth factor",
+                     "Metal transport",
+                     "Oxidation-reduction",
+                     "Antiparasitic",
+                     "Transport activator",
+                     "Antiretroviral",
+                     "Antagonist",
+                     "Antifungal",
+                     "Trypsin inhibitor",
+                     "Antitumor",
+                     "Thrombin inhibitor, Trypsin inhibitor",
+                     "Lantibiotic",
+                     "Anticoagulant, Antithrombotic",
+                     "Anthelmintic",
+                     "Anticoagulant",
+                     "Metabolism",
+                     "Antineoplastic",
+                     "Antimicrobial, Antiparasitic, Antibiotic",
+                     "Antimicrobial",
+                     "Antimicrobial, Antitumor",
+                     "Antibiotic",
+                     "Antiinflammatory",
+                     "Antibiotic, Antimicrobial",
+                     "Inhibitor",
+                     "Unknown"
                   ],
                   "description": "Broadly defines the function of the molecule."
                },
@@ -2893,43 +2898,43 @@
                },
                "prd_id": {
                   "type": "string",
-                  "description": "The value of _pdbx_molecule_features.prd_id is the PDB accession code for this\n reference molecule."
+                  "description": "The value of _pdbx_molecule_features.prd_id is the PDB accession code for this \n reference molecule."
                },
                "type": {
                   "type": "string",
                   "enum": [
-                     "Polysaccharide",
+                     "Cyclic peptide",
+                     "Keto acid",
+                     "Siderophore",
+                     "Cyclic depsipeptide",
                      "Imino sugar",
                      "Aminoglycoside",
-                     "Polypeptide",
-                     "Ansamycin",
-                     "Chalkophore, Polypeptide",
-                     "Thiopeptide",
-                     "Glycopeptide",
-                     "Cyclic lipopeptide",
-                     "Cyclic peptide",
-                     "Oligosaccharide",
-                     "Keto acid",
-                     "Anthraquinone",
-                     "Cyclic depsipeptide",
-                     "Non-polymer",
-                     "Quinolone",
-                     "Thiolactone",
-                     "Lipoglycopeptide",
-                     "Peptaibol",
-                     "Unknown",
-                     "Lipopeptide",
-                     "Nucleoside",
-                     "Chalkophore",
                      "Polycyclic",
-                     "Heterocyclic",
+                     "Glycopeptide",
+                     "Polypeptide",
                      "Macrolide",
+                     "Thiopeptide",
+                     "Peptaibol",
+                     "Cyclic lipopeptide",
+                     "Heterocyclic",
+                     "Oligopeptide",
+                     "Ansamycin",
+                     "Nucleoside",
+                     "Amino acid",
+                     "Quinolone",
+                     "Lipopeptide",
                      "Chromophore",
                      "Peptide-like",
-                     "Siderophore",
+                     "Non-polymer",
+                     "Thiolactone",
+                     "Oligosaccharide",
                      "Anthracycline",
-                     "Oligopeptide",
-                     "Amino acid"
+                     "Polysaccharide",
+                     "Anthraquinone",
+                     "Chalkophore",
+                     "Lipoglycopeptide",
+                     "Chalkophore, Polypeptide",
+                     "Unknown"
                   ],
                   "examples": [
                      "Peptide-like",
@@ -3006,10 +3011,10 @@
                   "target function",
                   "back calculated data agree with experimental NOESY spectrum",
                   "all calculated structures submitted",
-                  "The submitted conformer models are the 25 structures with the lowest\n    energy.",
-                  "The submitted conformer models are those with the fewest number of\n    constraint violations."
+                  "The submitted conformer models are the 25 structures with the lowest \n    energy.",
+                  "The submitted conformer models are those with the fewest number of \n    constraint violations."
                ],
-               "description": "\nBy highlighting the appropriate choice(s), describe how the submitted\nconformer (models) were selected."
+               "description": "\nBy highlighting the appropriate choice(s), describe how the submitted \nconformer (models) were selected."
             },
             "conformers_calculated_total_number": {
                "type": "integer",
@@ -3111,8 +3116,8 @@
                "sample_state": {
                   "type": "string",
                   "enum": [
-                     "isotropic",
-                     "anisotropic"
+                     "anisotropic",
+                     "isotropic"
                   ],
                   "examples": [
                      "isotropic"
@@ -3126,7 +3131,7 @@
                      "2",
                      "3"
                   ],
-                  "description": "The solution_id from the Experimental Sample to identify the sample\n that these conditions refer to.\n\n [Remember to save the entries here before returning to the\n  Experimental Sample form]"
+                  "description": "The solution_id from the Experimental Sample to identify the sample\n that these conditions refer to. \n\n [Remember to save the entries here before returning to the \n  Experimental Sample form]"
                },
                "spectrometer_id": {
                   "type": "integer",
@@ -3180,7 +3185,7 @@
                   "examples": [
                      "The high salinity of the sample may have contributed to overheating of the sample during experiments with long saturation periods like the TOCSY experiments."
                   ],
-                  "description": "\nGeneral details describing conditions of both the sample and the environment\nduring measurements."
+                  "description": "\nGeneral details describing conditions of both the sample and the environment \nduring measurements."
                },
                "ionic_strength": {
                   "type": "string",
@@ -3197,8 +3202,8 @@
                   "type": "string",
                   "enum": [
                      "Not defined",
-                     "mM",
-                     "M"
+                     "M",
+                     "mM"
                   ],
                   "examples": [
                      "M"
@@ -3230,10 +3235,10 @@
                "pH_units": {
                   "type": "string",
                   "enum": [
-                     "pD",
-                     "pH*",
                      "Not defined",
-                     "pH"
+                     "pH",
+                     "pH*",
+                     "pD"
                   ],
                   "examples": [
                      "pH"
@@ -3306,7 +3311,7 @@
                "details": {
                   "type": "string",
                   "examples": [
-                     "Additional comments about the NMR refinement can be placed here, e.g.\nthe structures are based on a total of 3344 restraints, 3167 are NOE-derived\ndistance constraints, 68 dihedral angle restraints,109 distance restraints\nfrom hydrogen bonds."
+                     "Additional comments about the NMR refinement can be placed here, e.g.\nthe structures are based on a total of 3344 restraints, 3167 are NOE-derived\ndistance constraints, 68 dihedral angle restraints,109 distance restraints \nfrom hydrogen bonds."
                   ],
                   "description": "Additional details about the NMR refinement."
                },
@@ -3353,7 +3358,7 @@
                "examples": [
                   "The structure closest to the average.\nThe structure with the lowest energy was selected.\nThe structure with the fewest number of violations was selected.\nA minimized average structure was calculated."
                ],
-               "description": "\nBy highlighting the appropriate choice(s), describe the criteria used to\nselect this structure as a representative structure, or if an average\nstructure has been calculated describe how this was done."
+               "description": "\nBy highlighting the appropriate choice(s), describe the criteria used to \nselect this structure as a representative structure, or if an average \nstructure has been calculated describe how this was done."
             }
          },
          "required": [
@@ -3370,7 +3375,7 @@
                   "examples": [
                      "2mM Ribonuclease  U-15N,13C; 50mM phosphate buffer NA; 90% H2O, 10% D2O"
                   ],
-                  "description": "\nA complete description of each NMR sample. Include the concentration\nand concentration units for each component (include buffers, etc.). For each\ncomponent describe the isotopic composition, including the % labeling level,\nif known.\n\nFor example:\n1. Uniform (random) labeling with 15N: U-15N\n2. Uniform (random) labeling with 13C, 15N at known labeling\n   levels: U-95% 13C;U-98% 15N\n3. Residue selective labeling: U-95% 15N-Thymine\n4. Site specific labeling: 95% 13C-Ala18,\n5. Natural abundance labeling in an otherwise uniformly labeled\n   biomolecule is designated by NA: U-13C; NA-K,H\n"
+                  "description": "\nA complete description of each NMR sample. Include the concentration \nand concentration units for each component (include buffers, etc.). For each\ncomponent describe the isotopic composition, including the % labeling level,\nif known. \n\nFor example:\n1. Uniform (random) labeling with 15N: U-15N\n2. Uniform (random) labeling with 13C, 15N at known labeling\n   levels: U-95% 13C;U-98% 15N\n3. Residue selective labeling: U-95% 15N-Thymine\n4. Site specific labeling: 95% 13C-Ala18,\n5. Natural abundance labeling in an otherwise uniformly labeled\n   biomolecule is designated by NA: U-13C; NA-K,H\n"
                },
                "details": {
                   "type": "string",
@@ -3384,7 +3389,7 @@
                   "examples": [
                      "15N_sample"
                   ],
-                  "description": "\nA value that uniquely identifies this sample from the other samples listed\nin the entry."
+                  "description": "\nA value that uniquely identifies this sample from the other samples listed \nin the entry."
                },
                "solution_id": {
                   "type": "string",
@@ -3405,28 +3410,28 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "gel solution",
-                     "oriented membrane film",
-                     "gel solid",
-                     "solution",
-                     "fibrous protein",
-                     "micelle",
-                     "solid",
-                     "liposome",
-                     "membrane",
-                     "polycrystalline powder",
-                     "lyophilized powder",
-                     "reverse micelle",
-                     "fiber",
-                     "single crystal",
+                     "filamentous virus",
                      "emulsion",
+                     "liposome",
+                     "oriented membrane film",
+                     "micelle",
+                     "fiber",
+                     "lyophilized powder",
                      "bicelle",
-                     "filamentous virus"
+                     "reverse micelle",
+                     "polycrystalline powder",
+                     "gel solution",
+                     "gel solid",
+                     "solid",
+                     "membrane",
+                     "fibrous protein",
+                     "single crystal",
+                     "solution"
                   ],
                   "examples": [
                      "bicelle"
                   ],
-                  "description": "\nA descriptive term for the sample that defines the general physical properties\nof the sample."
+                  "description": "\nA descriptive term for the sample that defines the general physical properties \nof the sample."
                }
             },
             "required": [
@@ -3554,6 +3559,9 @@
                   "type": "string",
                   "examples": [
                      "AVANCE",
+                     "AVANCE II",
+                     "AVANCE III",
+                     "AVANCE III HD",
                      "WH",
                      "WM",
                      "AM",
@@ -3985,6 +3993,494 @@
          "minItems": 1,
          "uniqueItems": true
       },
+      "pdbx_vrpt_summary": {
+         "type": "object",
+         "properties": {
+            "B_factor_type": {
+               "type": "string",
+               "enum": [
+                  "PARTIAL",
+                  "FULL"
+               ],
+               "description": "\nString for B_factor_type either \"PARTIAL\" or \"FULL\".\n"
+            },
+            "Babinet_b": {
+               "type": "number",
+               "description": "\nREFMAC scaling parameter as reported in log output line starting 'bulk solvent: scale'.\nExample:            X-ray entry specific, obtained in the eds step from REFMAC calculation.\n"
+            },
+            "Babinet_k": {
+               "type": "number",
+               "description": "\nREFMAC scaling parameter as reported in log output line starting 'bulk solvent: scale'.\nExample: \nX-ray entry specific, obtained in the eds step from REFMAC calculation.\n"
+            },
+            "CA_ONLY": {
+               "type": "string",
+               "enum": [
+                  "yes"
+               ],
+               "description": "\nThe string \"yes\".\n"
+            },
+            "DCC_R": {
+               "type": "number",
+               "description": "\nThe overall R-factor from a DCC recalculation of an electron density map.\nExample:            Currently value is rounded to 2 decimal places.\nX-ray entry specific, obtained from the DCC program.\n"
+            },
+            "DCC_Rfree": {
+               "type": "number",
+               "description": "\nEither a decimal number or the string \"NotAvailable\".\n"
+            },
+            "DCC_refinement_program": {
+               "type": "string",
+               "description": "\n The pdbx_vrpt_software used by DCC to perform the recaluclation of the electron density maps.\n&#160;Currently one of \"CNS\", \"REFMAC\" or \"PHENIX\".\n Example:            X-ray entry specific, obtained from the DCC program.\n"
+            },
+            "EDS_R": {
+               "type": "number",
+               "description": "\nThe overall R factor from the EDS REFMAC calculation (no free set is used in this).\nExample:            Currently value is rounded to 2 decimal places.\nX-ray entry specific, obtained in the eds step from REFMAC calculation.\n"
+            },
+            "EDS_resolution": {
+               "type": "number",
+               "description": "\nThe data high resolution diffraction limit, in Angstroms, found in the input structure factor file.\nExample:            X-ray entry specific, obtained in the eds step.\n"
+            },
+            "EDS_resolution_low": {
+               "type": "number",
+               "description": "\nThe data low resolution diffraction limit, in Angstroms, found in the input structure factor file.\nExample:            X-ray entry specific, obtained in the eds step.\n"
+            },
+            "Fo_Fc_correlation": {
+               "type": "number",
+               "description": "\nFo,Fc correlation: The difference between the observed structure factors (Fo) and the \ncalculated structure factors (Fc) measures the correlation between the PDB_model_num and the i\nexperimental data. \nExample:            X-ray entry specific, obtained in the eds step from REFMAC calculation.\n"
+            },
+            "I_over_sigma": {
+               "type": "string",
+               "description": "\nEach reflection has an intensity (I) and an uncertainty in measurement \n(sigma(I)), so I/sigma(I) is the signal-to-noise ratio. This\nratio decreases at higher resolution. <I/sigma(I)> is the mean of individual I/sigma(I)\nvalues. Value for outer resolution shell is given in parentheses. In case\nstructure factor amplitudes are deposited, Xtriage estimates the intensities\nfirst and then calculates this metric. When intensities are available in the\ndeposited file, these are converted to amplitudes and then back to intensity\nestimate before calculating the metric.  \nExample            X-ray entry specific, calculated by Phenix Xtriage program.\n"
+            },
+            "PDB_R": {
+               "type": "number",
+               "description": "\nEither a decimal number or the string \"NotAvailable\".\n"
+            },
+            "PDB_Rfree": {
+               "type": "number",
+               "description": "\nEither a decimal number or the string \"NotAvailable\".\n"
+            },
+            "PDB_deposition_date": {
+               "type": "string",
+               "format": "date",
+               "description": "\nDate in yyyy-mm-dd format when structure was deposited to the PDB.\nObtained from mmCIF table _database_PDB_rev item _database_PDB_rev.date_original \nReports produced by the validation server or during the initial depositon process should not have this item.\nIf there is a difficulty parsing the item then \"unknown\" will be given.\n"
+            },
+            "PDB_resolution": {
+               "type": "number",
+               "description": "\nEither a decimal number or the string \"NotAvailable\".\n"
+            },
+            "PDB_resolution_low": {
+               "type": "number",
+               "description": "\nEither a decimal number or the string \"NotAvailable\".\n"
+            },
+            "PDB_revision_date": {
+               "type": "string",
+               "format": "date",
+               "description": "\nDate in yyyy-mm-dd format when the structure was last revised by PDB.\nObtained from mmCIF table _database_PDB_rev item _database_PDB_rev.date\nReports produced by the validation server or during the initial depositon process should not have this item.\nIf there is a difficulty parsing the item then \"unknown\" will be given.\n"
+            },
+            "PDB_revision_number": {
+               "type": "number",
+               "description": "\nThe last highest number that appears in mmCIF item _database_PDB_rev.num.\nData items in the DATABASE_PDB_REV category record details about the history of the data block as archived by the Protein Data Bank (PDB).\nIf the input mmCIF coordinate file lacks the information then a value of -1 is supplied.\n"
+            },
+            "RNA_suiteness": {
+               "type": "number",
+               "description": "\nThe MolProbity conformer-match quality parameter for RNA structures.\nLow values are worse.\nExample:           Specific to structures that contain RNA polymers.\n"
+            },
+            "Wilson_B_aniso": {
+               "type": "string",
+               "description": "\nResult of absolute likelihood based Wilson scaling, \nThe anisotropic B value of the data is determined using a likelihood based approach. \nThe resulting B tensor is reported, the 3 diagonal values are given first, followed\nby the 3 off diagonal values.\nA large spread in (especially the diagonal) values indicates anisotropy. \nExample: \nX-ray entry specific, calculated by Phenix Xtriage program.\n"
+            },
+            "Wilson_B_estimate": {
+               "type": "number",
+               "description": "\nAn estimate of the overall B-value of the structure, calculated from the diffraction data. \nUnits Angstroms squared.\nIt serves as an indicator of the degree of order in the crystal and the value is usually \nnot hugely different from the average B-value calculated from the model.\nExample:            X-ray entry specific, calculated by Phenix Xtriage program.\n"
+            },
+            "absolute_percentile_DCC_Rfree": {
+               "type": "number",
+               "description": "\nStructures are judged in comparison to previously deposited PDB entries. \nThe comparison is carried out by calculation of the percentile rank, i.e. the percentage of entries \nthat are equal or poorer than this structure in terms of a quality indicator.\nPercentile ranks range from 0 (the worst) to 100 (the best).\n"
+            },
+            "absolute_percentile_RNA_suiteness": {
+               "type": "number",
+               "description": "\nStructures are judged in comparison to previously deposited PDB entries. \nThe comparison is carried out by calculation of the percentile rank, i.e. the percentage of entries \nthat are equal or poorer than this structure in terms of a quality indicator.\nPercentile ranks range from 0 (the worst) to 100 (the best).\n"
+            },
+            "absolute_percentile_clashscore": {
+               "type": "number",
+               "description": "\nStructures are judged in comparison to previously deposited PDB entries. \nThe comparison is carried out by calculation of the percentile rank, i.e. the percentage of entries \nthat are equal or poorer than this structure in terms of a quality indicator.\nPercentile ranks range from 0 (the worst) to 100 (the best).\n"
+            },
+            "absolute_percentile_percent_RSRZ_outliers": {
+               "type": "number",
+               "description": "\nStructures are judged in comparison to previously deposited PDB entries. \nThe comparison is carried out by calculation of the percentile rank, i.e. the percentage of entries \nthat are equal or poorer than this structure in terms of a quality indicator.\nPercentile ranks range from 0 (the worst) to 100 (the best).\n"
+            },
+            "absolute_percentile_percent_ramachandran_outliers": {
+               "type": "number",
+               "description": "\nStructures are judged in comparison to previously deposited PDB entries. \nThe comparison is carried out by calculation of the percentile rank, i.e. the percentage of entries \nthat are equal or poorer than this structure in terms of a quality indicator.\nPercentile ranks range from 0 (the worst) to 100 (the best).\n"
+            },
+            "absolute_percentile_percent_rotamer_outliers": {
+               "type": "number",
+               "description": "\nStructures are judged in comparison to previously deposited PDB entries. \nThe comparison is carried out by calculation of the percentile rank, i.e. the percentage of entries \nthat are equal or poorer than this structure in terms of a quality indicator.\nPercentile ranks range from 0 (the worst) to 100 (the best).\n"
+            },
+            "acentric_outliers": {
+               "type": "integer",
+               "description": "\nThe number of acentric reflections that Xtriage identifies as outliers on the basis \nof Wilson statistics. Note that if pseudo translational symmetry is present, \na large number of 'outliers' will be present.\nExample:            X-ray entry specific, calculated by Phenix Xtriage program.\n"
+            },
+            "angles_RMSZ": {
+               "type": "number",
+               "description": "\nThe overall root mean square of the Z-score for deviations of bond angles in comparison to \n\"standard geometry\" made using the MolProbity dangle program.\nStandard geometry parameters are taken from Engh and Huber (2001) and Parkinson et al. (1996).\nThis value is for all chains in the structure.\n"
+            },
+            "attempted_validation_steps": {
+               "type": "string",
+               "description": "\nThe steps that were attempted by the validation pipeline software. \nA step typically involves running a 3rd party validation tool, for instance \"mogul\"\nEach step that was successfully completed will result in a pdbx_vrpt_software element in the pdbx_vrpt_sotfware_notused list.\n"
+            },
+            "bonds_RMSZ": {
+               "type": "number",
+               "description": "\nThe overall root mean square of the Z-score for deviations of bond lengths in comparison to \n\"standard geometry\" made using the MolProbity dangle program.\nStandard geometry parameters are taken from Engh and Huber (2001) and Parkinson et al. (1996).\nThis value is for all chains in the structure.\n"
+            },
+            "bulk_solvent_b": {
+               "type": "number",
+               "description": "\nREFMAC scaling parameter as reported in log output line starting \n'Partial structure    1: scale.'\nExample: \nX-ray entry specific, obtained in the eds step from REFMAC calculation.\n"
+            },
+            "bulk_solvent_k": {
+               "type": "number",
+               "description": "\nREFMAC scaling parameter as reported in log output line starting \n'Partial structure    1: scale.'\nExample:            X-ray entry specific, obtained in the eds step from REFMAC calculation.\n"
+            },
+            "ccp4version": {
+               "type": "string",
+               "description": "\nThe version of CCP4 suite pdbx_vrpt_sotfware_notused used in the analysis.\nExample:            X-ray entry specific, obtained from the eds step. \n"
+            },
+            "centric_outliers": {
+               "type": "number",
+               "description": "\nThe number of centric reflections that Xtriage identifies as outliers.\nExample:            X-ray entry specific, calculated by Phenix Xtriage program.\n"
+            },
+            "chemical_shift_completeness": {
+               "type": "number",
+               "description": "\nOverall completeness of the chemical shift assignments for the well-defined \nregions of the structure.\n"
+            },
+            "chemical_shift_completeness_full_length": {
+               "type": "number",
+               "description": "\nOverall completeness of the chemical shift assignments for the full \nmacromolecule or complex as suggested by the molecular description of an entry\n(whether some portion of it is modelled or not).\n"
+            },
+            "chemical_shifts_input_filename": {
+               "type": "string",
+               "description": "\nThe filename for the input chemical shifts file given to the validation pipeline.\nNot reported for runs at the annotation or release stage. \n"
+            },
+            "clashscore": {
+               "type": "number",
+               "description": "\nThis score is derived from the number of pairs of atoms in the PDB_model_num that are unusually close to each other. \nIt is calculated by the MolProbity pdbx_vrpt_software and expressed as the number or such clashes per thousand atoms.\nFor structures determined by NMR the clashscore value here will only consider label_atom_id pairs in the \nwell-defined (core) residues from ensemble analysis.\n"
+            },
+            "clashscore_full_length": {
+               "type": "number",
+               "description": "\nOnly given for structures determined by NMR. The MolProbity pdbx_vrpt_clashes score for all label_atom_id pairs.\n"
+            },
+            "coordinates_input_filename": {
+               "type": "string",
+               "description": "\nThe filename for the input mmCIF coordinate file given to the validation pipeline.\nNot reported for runs at the annotation or release stage. \n"
+            },
+            "cyrange_error": {
+               "type": "string",
+               "description": "\nDiagnostic message from the wrapper of Cyrange software which identifies the \nwell-defined cores (domains) of NMR protein structures.\n"
+            },
+            "cyrange_number_of_domains": {
+               "type": "integer",
+               "description": "\nTotal number of well-defined cores (domains) identified by Cyrange\n"
+            },
+            "cyrange_version": {
+               "type": "string",
+               "description": "\nReference for the Cyrange software.\n"
+            },
+            "data_anisotropy": {
+               "type": "number",
+               "description": "\nThe ratio (Bmax &#8209; Bmin) / Bmean where Bmax, Bmin and Bmean are computed from the B-values \nassociated with the principal axes of the anisotropic thermal ellipsoid. \nThis ratio is usually less than 0.5; for only 1% of PDB entries it is more than 1.0 (Read et al., 2011).\nExample:            X-ray entry specific, obtained from the Xtriage program.\n"
+            },
+            "data_completeness": {
+               "type": "number",
+               "description": "\nA percentage, Normally percent proportion of the total number. Between 0% and 100%.\n"
+            },
+            "entry_id": {
+               "type": "string",
+               "description": "\nAn identifier for the structure.\nFor released or annotated structures this will be the PDB ID currently 4 characters, for example \"1CBS\".\nFor reports produced during initial depositon process a deposition ID will be given instead, for example \"D_1000219513\".\n"
+            },
+            "high_resol_relative_percentile_DCC_Rfree": {
+               "type": "number",
+               "description": "\nThe resolution bin limit in Angstroms for PDB depositions used in the comparison when calculating \nthe attribute \"relative-percentile-DCC_Rfree\". \nNote that the \"high_resol_relative_percentile_DCC_Rfree\" value is numerically smaller than the \ncorresponding low-* value.\nExample:            X-ray entry specific, produced by the percentiles step of the validation pipeline software.\n"
+            },
+            "high_resol_relative_percentile_RNA_suiteness": {
+               "type": "number",
+               "description": "\nThe resolution bin limit in Angstroms for PDB depositions used in the comparison when calculating \nthe attribute \"relative-percentile-RNAsuiteness\". \nNote that the \"high_resol_relative_percentile_RNA_suiteness\" value is numerically smaller than the \ncorresponding low value.\nExample:            Specific to entries that contain RNA polymers (and have a RNA_suiteness attribute),\nand have been determined by X-ray crystallography.\nProduced by the percentiles step of the validation pipeline software.\n"
+            },
+            "high_resol_relative_percentile_clashscore": {
+               "type": "number",
+               "description": "\nThe resolution bin limit in Angstroms for PDB depositions used in the comparison when calculating \nthe attribute \"relative-percentile-clashscore\". \nNote that the \"high_resol_relative_percentile_clashscore\" value is numerically smaller than the \ncorresponding low value.\nExample:            Specific to that have a clashscore attribute and have been determined by X-ray crystallography.\nProduced by the percentiles step of the validation pipeline software.\n"
+            },
+            "high_resol_relative_percentile_percent_RSRZ_outliers": {
+               "type": "number",
+               "description": "\nThe resolution bin limit in Angstroms for PDB depositions used in the comparison when calculating \nthe attribute \"relative-percentile-percent-RSRZ-outliers\". \nNote that the \"high_resol_relative_percentile_percent_RSRZ_outliers\" value is numerically smaller than the \ncorresponding low-* value.\nExample:            X-ray entry specific, produced by the percentiles step of the validation pipeline software.\n"
+            },
+            "high_resol_relative_percentile_percent_ramachandran_outliers": {
+               "type": "number",
+               "description": "\nThe resolution bin limit in Angstroms for PDB depositions used in the comparison when calculating \nthe attribute \"relative-percentile-percent-rama-outliers\". \nNote that the \"high_resol_relative_percentile_percent_ramachandran_outliers\" value is numerically smaller than the \ncorresponding low value.\nExample:            Specific to structures that have a percent_ramachandran_outliers attribute and have been determined by X-ray crystallography.\nProduced by the percentiles step of the validation pipeline software.\n"
+            },
+            "high_resol_relative_percentile_percent_rotamer_outliers": {
+               "type": "number",
+               "description": "\nThe resolution bin limit in Angstroms for PDB depositions used in the comparison when calculating \nthe attribute \"relative-percentile-percent-rota-outliers\". \nNote that the \"high_resol_relative_percentile_percent_rotamer_outliers\" value is numerically smaller than the \ncorresponding low value.\nExample:            Specific to that have a percent_rotamer_outliers attribute and have been determined by X-ray crystallography.\nProduced by the percentiles step of the validation pipeline software.\n"
+            },
+            "low_resol_relative_percentile_DCC_Rfree": {
+               "type": "number",
+               "description": "\nThe resolution bin limit in Angstroms for PDB depositions used in the comparison when calculating \nthe attribute \"relative-percentile-DCC_Rfree\". \nNote that the \"low_resol_relative_percentile_DCC_Rfree\" value is numerically greater than the \ncorresponding high value.\nExample:            X-ray entry specific, produced by the percentiles step of the validation pipeline software.\n"
+            },
+            "low_resol_relative_percentile_RNA_suiteness": {
+               "type": "number",
+               "description": "\nThe resolution bin limit in Angstroms for PDB depositions used in the comparison when calculating \nthe attribute \"relative-percentile-RNAsuiteness\". \nNote that the \"low_resol_relative_percentile_RNA_suiteness\" value is numerically greater than the \ncorresponding high value.\nExample:            Specific to entries that contain RNA polymers (and have a RNA_suiteness attribute),\nand have been determined by X-ray crystallography.\nProduced by the percentiles step of the validation pipeline software.\n"
+            },
+            "low_resol_relative_percentile_clashscore": {
+               "type": "number",
+               "description": "\nThe resolution bin limit in Angstroms for PDB depositions used in the comparison when calculating \nthe attribute \"relative-percentile-clashscore\". \nNote that the \"low_resol_relative_percentile_clashscore\" value is numerically greater than the \ncorresponding high value.\nExample:            Specific to that have a clashscore attribute and have been determined by X-ray crystallography.\nProduced by the percentiles step of the validation pipeline software.\n"
+            },
+            "low_resol_relative_percentile_percent_RSRZ_outliers": {
+               "type": "number",
+               "description": "\nThe resolution bin limit in Angstroms for PDB depositions used in the comparison when calculating \nthe attribute \"relative-percentile-percent-RSRZ-outliers\". \nNote that the \"low_resol_relative_percentile_percent_RSRZ_outliers\" value is numerically greater than the \ncorresponding high value.\nExample:            X-ray entry specific, produced by the percentiles step of the validation pipeline software.\n"
+            },
+            "low_resol_relative_percentile_percent_ramachandran_outliers": {
+               "type": "number",
+               "description": "\nThe resolution bin limit in Angstroms for PDB depositions used in the comparison when calculating \nthe attribute \"relative-percentile-percent-rama-outliers\". \nNote that the \"low_resol_relative_percentile_percent_ramachandran_outliers\" value is numerically greater than the \ncorresponding high value.\nExample:            Specific to that have a percent_ramachandran_outliers attribute and have been determined by X-ray crystallography.\nProduced by the percentiles step of the validation pipeline software.\n"
+            },
+            "low_resol_relative_percentile_percent_rotamer_outliers": {
+               "type": "number",
+               "description": "\nThe resolution bin limit in Angstroms for PDB depositions used in the comparison when calculating \nthe attribute \"relative-percentile-percent-rota-outliers\". \nNote that the \"low_resol_relative_percentile_percent_rotamer_outliers\" value is numerically greater than the \ncorresponding high value.\nExample:            Specific to that have a percent_rotamer_outliers attribute and have been determined by X-ray crystallography.\nProduced by the percentiles step of the validation pipeline software.\n"
+            },
+            "medoid_model": {
+               "type": "integer",
+               "description": "\nFor each Cyrange well-defined core (\"cyrange_domain\") the id of the PDB_model_num which is most \nsimilar to other models as measured by pairwise RMSDs over the domain. \nFor the whole entry (\"Entry\"), the medoid PDB_model_num of the largest core is taken as an overall\nrepresentative of the structure.\n"
+            },
+            "nmr_models_consistency_flag": {
+               "type": "string",
+               "description": "\nA flag indicating if all models in the NMR ensemble contain the exact \nsame atoms (\"True\") or if the models differ in this respect (\"False\").\n"
+            },
+            "nmrclust_error": {
+               "type": "string",
+               "description": "\nDiagnostic message from the wrapper of NMRClust software which clusters NMR models.\n"
+            },
+            "nmrclust_number_of_clusters": {
+               "type": "integer",
+               "description": "\nTotal number of clusters in the NMR ensemble identified by NMRClust.\n"
+            },
+            "nmrclust_number_of_models": {
+               "type": "integer",
+               "description": "\nNumber of models analysed by NMRClust - should in almost all cases be the\nsame as the number of models in the NMR ensemble.\n"
+            },
+            "nmrclust_number_of_outliers": {
+               "type": "integer",
+               "description": "\nNumber of models that do not belong to any cluster as deemed by NMRClust.\n"
+            },
+            "nmrclust_representative_model": {
+               "type": "integer",
+               "description": "\nOverall representative PDB_model_num of the NMR ensemble as identified by NMRClust. \n"
+            },
+            "nmrclust_version": {
+               "type": "string",
+               "description": "\nReference for the NMRClust software.\n"
+            },
+            "no_ligands_for_mogul": {
+               "type": "string",
+               "enum": [
+                  "yes"
+               ],
+               "description": "\nThe string \"yes\".\n"
+            },
+            "no_percentile_property": {
+               "type": "string",
+               "description": "\nWill be set to \"true\" if no property was found to do percentile analysis on. \nPlease note that currently due to a bug that this attribute is \"true\" erronously for NMR structures.\n"
+            },
+            "num_H_reduce": {
+               "type": "number",
+               "description": "\nThis is the number of hydrogen atoms added and optimized by the MolProbity reduce pdbx_vrpt_software as part of the\nall-atom clashscore.\n"
+            },
+            "num_PDBids_absolute_percentile_DCC_Rfree": {
+               "type": "integer",
+               "description": "\nThe number of PDB depositions used in the comparison when calculating the attribute \n\"absolute-percentile-DCC_Rfree\".\nExample: \nX-ray entry specific, produced by the percentiles step of the validation pipeline software.\n"
+            },
+            "num_PDBids_absolute_percentile_RNA_suiteness": {
+               "type": "integer",
+               "description": "\nThe number of PDB depositions used in the comparison when calculating the attribute \n\"absolute-percentile-RNAsuiteness\".\nExample:            Specific to entries that contain RNA polymers (and have a RNA_suiteness attribute).\nProduced by the percentiles step of the validation pipeline software.\n"
+            },
+            "num_PDBids_absolute_percentile_clashscore": {
+               "type": "integer",
+               "description": "\nThe number of PDB depositions used in the comparison when calculating the attribute \n\"absolute-percentile-clashscore\"\nExample:             Produced by the percentiles step of the validation pipeline software.\n"
+            },
+            "num_PDBids_absolute_percentile_percent_RSRZ_outliers": {
+               "type": "integer",
+               "description": "\nThe number of PDB depositions used in the comparison when calculating the attribute \n\"absolute-percentile-percent-RSRZ-outliers\".\nExample:            X-ray entry specific, produced by the percentiles step of the validation pipeline software.\n"
+            },
+            "num_PDBids_absolute_percentile_percent_ramachandran_outliers": {
+               "type": "integer",
+               "description": "\nThe number of PDB depositions used in the comparison when calculating the attribute \n\"absolute_percentile_percent_ramachandran_outliers\" \nExample:            Produced by the percentiles step of the validation pipeline software.\n"
+            },
+            "num_PDBids_absolute_percentile_percent_rotamer_outliers": {
+               "type": "integer",
+               "description": "\nThe number of PDB depositions used in the comparison when calculating the attribute\n\"absolute-percentile-percent-rota-outliers\"\nExample:             Produced by the percentiles step of the validation pipeline software.\n"
+            },
+            "num_PDBids_relative_percentile_DCC_Rfree": {
+               "type": "integer",
+               "description": "\nThe number of PDB depositions used in the comparison when calculating the attribute \n\"relative-percentile-DCC_Rfree\".\nExample: \nX-ray entry specific, produced by the percentiles step of the validation pipeline software.\n"
+            },
+            "num_PDBids_relative_percentile_RNA_suiteness": {
+               "type": "integer",
+               "description": "\nThe number of PDB depositions used in the comparison when calculating the attribute \n\"relative-percentile-RNAsuiteness\".\nExample:            Specific to entries that contain RNA polymers (and have a RNA_suiteness attribute).\nProduced by the percentiles step of the validation pipeline software.\n"
+            },
+            "num_PDBids_relative_percentile_clashscore": {
+               "type": "integer",
+               "description": "\n The number of PDB depositions used in the comparison when calculating the attribute \n\"relative-percentile-clashscore\"\nExample:            Produced by the percentiles step of the validation pipeline software.\n"
+            },
+            "num_PDBids_relative_percentile_percent_RSRZ_outliers": {
+               "type": "integer",
+               "description": "\nThe number of PDB depositions used in the comparison when calculating the attribute \n\"relative-percentile-percent-RSRZ-outliers\".\nExample:            X-ray entry specific, produced by the percentiles step of the validation pipeline software.\n"
+            },
+            "num_PDBids_relative_percentile_percent_ramachandran_outliers": {
+               "type": "integer",
+               "description": "\nThe number of PDB depositions used in the comparison when calculating the attribute \n\"relative-percentile-percent-rama-outliers\"\nExample:            Produced by the percentiles step of the validation pipeline software.\n"
+            },
+            "num_PDBids_relative_percentile_percent_rotamer_outliers": {
+               "type": "integer",
+               "description": "\n The number of PDB depositions used in the comparison when calculating the attribute \n\"relative-percentile-percent-rota-outliers\"\nExample:            Produced by the percentiles step of the validation pipeline software.\n"
+            },
+            "num_angles_RMSZ": {
+               "type": "integer",
+               "description": "\nThe number of bond angless compared to \"standard geometry\" made using the MolProbity dangle program.\nStandard geometry parameters are taken from Engh and Huber (2001) and Parkinson et al. (1996).\nThis value is for all chains in the structure.\n"
+            },
+            "num_bonds_RMSZ": {
+               "type": "integer",
+               "description": "\nThe number of bond lengths compared to \"standard geometry\" made using the MolProbity dangle program.\nStandard geometry parameters are taken from Engh and Huber (2001) and Parkinson et al. (1996).\nThis value is for all chains in the structure.\n"
+            },
+            "num_free_reflections": {
+               "type": "integer",
+               "description": "\nThe number of reflections in the free set as defined in the input structure factor file supplied to the validation pipeline. \nexample:            X-ray entry specific, obtained from the DCC program.\n"
+            },
+            "num_miller_indices": {
+               "type": "integer",
+               "description": "\nThe number of Miller Indices reported by the Xtriage program. This should be the same as the\nnumber of _refln in the input structure factor file.\nExample:            X-ray entry specific, calculated by Phenix Xtriage program.\n"
+            },
+            "panav_version": {
+               "type": "string",
+               "description": "\nReference for the PANAV software.\n"
+            },
+            "percent_RSRZ_outliers": {
+               "type": "number",
+               "description": "\nA percentage, Normally percent proportion of the total number. Between 0% and 100%.\n"
+            },
+            "percent_free_reflections": {
+               "type": "number",
+               "description": "\nA percentage, Normally percent proportion of the total number. Between 0% and 100%.\n"
+            },
+            "percent_ramachandran_outliers": {
+               "type": "number",
+               "description": "\nA percentage, Normally percent proportion of the total number. Between 0% and 100%.\n"
+            },
+            "percent_ramachandran_outliers_full_length": {
+               "type": "number",
+               "description": "\nA percentage, Normally percent proportion of the total number. Between 0% and 100%.\n"
+            },
+            "percent_rotamer_outliers": {
+               "type": "number",
+               "description": "\nA percentage, Normally percent proportion of the total number. Between 0% and 100%.\n"
+            },
+            "percent_rotamer_outliers_full_length": {
+               "type": "number",
+               "description": "\nA percentage, Normally percent proportion of the total number. Between 0% and 100%.\n"
+            },
+            "percentilebins": {
+               "type": "array",
+               "items": {
+                  "type": "string",
+                  "description": "\nThe percentile bins that this structure would contribute to in a recalculation of\npercentile. The string is a comma separated list.\nExample: An X-ray entry with a resolution of 1.8 Angstroms, \nthat would contribute to bins all structures, what ever bin 1.8 Angstrom resolution is in and \nthe all xray bin.\nExample #2: An EM entry that would contribute to all and em structures bins.\nExample #3: A NMR entry hat would contribute to all and nmr structures bins.\n"
+               },
+               "uniqueItems": false
+            },
+            "protein_DNA_RNA_entities": {
+               "type": "string",
+               "description": "\nComma separated list of the _entity.id's for the molecular entities that are present in the structure\nand have _entity_poly.type indicating that they are protein, RNA or DNA: that is in the list\n'polypeptide(L)', 'polypeptide(D)', 'polyribonucleotide, 'polydeoxyribonucleotide'  or\n'polydeoxyribonucleotide/polyribonucleotide hybrid'.\nNormally the entity.id's are integer numbers but not necessarily so. \nExample"
+            },
+            "rci_version": {
+               "type": "string",
+               "description": "\nVersion and reference of the RCI software\n"
+            },
+            "reflections_input_filename": {
+               "type": "string",
+               "description": "\nThe filename for the input mmCIF format reflection file given to the validation pipeline.\nNot reported for runs at the annotation or release stage. \n"
+            },
+            "refmac_version": {
+               "type": "string",
+               "description": "\nVersion of the REFMAC pdbx_vrpt_software used in the EDS step.                               \nExample:           X-ray entry specific, obtained in the eds step from REFMAC calculation.\n"
+            },
+            "relative_percentile_DCC_Rfree": {
+               "type": "number",
+               "description": "\nStructures are judged in comparison to previously deposited PDB entries. \nThe comparison is carried out by calculation of the percentile rank, i.e. the percentage of entries \nthat are equal or poorer than this structure in terms of a quality indicator.\nPercentile ranks range from 0 (the worst) to 100 (the best).\n"
+            },
+            "relative_percentile_RNA_suiteness": {
+               "type": "number",
+               "description": "\nStructures are judged in comparison to previously deposited PDB entries. \nThe comparison is carried out by calculation of the percentile rank, i.e. the percentage of entries \nthat are equal or poorer than this structure in terms of a quality indicator.\nPercentile ranks range from 0 (the worst) to 100 (the best).\n"
+            },
+            "relative_percentile_clashscore": {
+               "type": "number",
+               "description": "\nStructures are judged in comparison to previously deposited PDB entries. \nThe comparison is carried out by calculation of the percentile rank, i.e. the percentage of entries \nthat are equal or poorer than this structure in terms of a quality indicator.\nPercentile ranks range from 0 (the worst) to 100 (the best).\n"
+            },
+            "relative_percentile_percent_RSRZ_outliers": {
+               "type": "number",
+               "description": "\nStructures are judged in comparison to previously deposited PDB entries. \nThe comparison is carried out by calculation of the percentile rank, i.e. the percentage of entries \nthat are equal or poorer than this structure in terms of a quality indicator.\nPercentile ranks range from 0 (the worst) to 100 (the best).\n"
+            },
+            "relative_percentile_percent_ramachandran_outliers": {
+               "type": "number",
+               "description": "\nStructures are judged in comparison to previously deposited PDB entries. \nThe comparison is carried out by calculation of the percentile rank, i.e. the percentage of entries \nthat are equal or poorer than this structure in terms of a quality indicator.\nPercentile ranks range from 0 (the worst) to 100 (the best).\n"
+            },
+            "relative_percentile_percent_rotamer_outliers": {
+               "type": "number",
+               "description": "\nStructures are judged in comparison to previously deposited PDB entries. \nThe comparison is carried out by calculation of the percentile rank, i.e. the percentage of entries \nthat are equal or poorer than this structure in terms of a quality indicator.\nPercentile ranks range from 0 (the worst) to 100 (the best).\n"
+            },
+            "report_creation_date": {
+               "type": "string",
+               "description": "\nThe date, time and time-zone that the validation XML file was created. \nThe string will be formatted like \"Feb  7, 2017 -- 12:32 pm GMT\".\n"
+            },
+            "resol_high_from_reflectionsfile": {
+               "type": "number",
+               "description": "\nThe data high resolution diffraction limit, in Angstroms, obtained from cif item \n_reflns.d_resolution_high.\nX-ray entry specific.\n"
+            },
+            "resol_low_from_reflectionsfile": {
+               "type": "number",
+               "description": "\nThe data low resolution diffraction limit, in Angstroms, obtained from cif item \n_reflns.d_resolution_low.\nX-ray entry specific.\n"
+            },
+            "restypes_notchecked_for_bond_angle_geometry": {
+               "type": "array",
+               "items": {
+                  "type": "string",
+                  "description": "\nThis is a comma separated list of the residue types whose bond lengths and bond angles have \nnot been checked against \"standard geometry\" using the MolProbity dangle program.\nStandard geometry parameters are taken from Engh and Huber (2001) and Parkinson et al. (1996)\n"
+               },
+               "uniqueItems": false
+            },
+            "shiftchecker_version": {
+               "type": "string",
+               "description": "\nVersion of the software for chemical shift outlier detection - currently \nsame as revision number of the validation pipeline.\n"
+            },
+            "trans_NSC": {
+               "type": "string",
+               "description": "\nA sentence giving the result of Xtriage&#8217;s analysis on translational NCS.\nExample: largest off-origin peak in the Patterson function is 8.82% of the height of the origin peak. No significant pseudotranslation is detected.\"\nX-ray entry specific, obtained from the Xtriage program.\n"
+            },
+            "twin_L": {
+               "type": "number",
+               "description": "\nPadilla and Yeates twinning parameter <|L|>. \nTheoretical values is 0.5 in the untwinned case, and 0.375 in the perfectly twinned case.\nExample:            X-ray entry specific, obtained from the Xtriage program.\n"
+            },
+            "twin_L2": {
+               "type": "number",
+               "description": "\nPadilla and Yeates twinning parameter <|L**2|>. \nTheoretical values is 0.333 in the untwinned case, and 0.2 in the perfectly twinned case.\nExample:            X-ray entry specific, obtained from the Xtriage program.\n"
+            },
+            "twin_fraction": {
+               "type": "string",
+               "description": "\nEstimated twinning fraction for operators as identified by Xtriage. A semicolon separated\nlist of operators with fractions is givens \nExample:            X-ray entry specific, obtained from the Xtriage program.\n"
+            },
+            "xtriage_input_columns": {
+               "type": "string",
+               "description": "\nThe mmCIF item names of the _refln columns used as input to the Xtriage program.\nExample            X-ray entry specific, calculated by Phenix Xtriage program.\n"
+            }
+         },
+         "required": [
+            "entry_id"
+         ]
+      },
       "rcsb_accession_info": {
          "type": "object",
          "properties": {
@@ -4018,16 +4514,16 @@
             "status_code": {
                "type": "string",
                "enum": [
-                  "REFI",
-                  "WDRN",
-                  "WAIT",
-                  "PROC",
                   "POLC",
-                  "HPUB'",
-                  "REL",
-                  "AUCO",
                   "HOLD",
                   "AUTH",
+                  "REFI",
+                  "AUCO",
+                  "HPUB'",
+                  "WAIT",
+                  "WDRN",
+                  "REL",
+                  "PROC",
                   "REPL"
                ],
                "description": "The release status for the entry."
@@ -4099,12 +4595,12 @@
             "experimental_method": {
                "type": "string",
                "enum": [
-                  "Neutron",
-                  "Other",
-                  "Multiple methods",
-                  "X-ray",
                   "EM",
-                  "NMR"
+                  "X-ray",
+                  "Multiple methods",
+                  "NMR",
+                  "Neutron",
+                  "Other"
                ],
                "description": "The category of experimental method(s) used to determine the structure entry."
             },
@@ -4119,19 +4615,19 @@
             "polymer_composition": {
                "type": "string",
                "enum": [
-                  "heteromeric protein",
-                  "protein/NA",
-                  "oligosaccharide",
-                  "NA/oligosaccharide",
                   "protein/oligosaccharide",
-                  "homomeric protein",
+                  "NA/oligosaccharide",
+                  "protein/NA",
                   "DNA/RNA",
-                  "other",
-                  "DNA",
                   "other type composition",
+                  "DNA",
+                  "other type pair",
                   "NA-hybrid",
+                  "homomeric protein",
+                  "heteromeric protein",
                   "RNA",
-                  "other type pair"
+                  "other",
+                  "oligosaccharide"
                ],
                "description": "Polymer entity composition of the entry."
             },
@@ -4262,11 +4758,11 @@
                   "type": "string",
                   "enum": [
                      "userblock",
-                     "full",
-                     "atomblock",
                      "fullcycle",
+                     "diagonal",
+                     "full",
                      "sparse",
-                     "diagonal"
+                     "atomblock"
                   ],
                   "description": "Type of matrix used to accumulate the least-squares derivatives."
                },
@@ -4336,7 +4832,7 @@
                },
                "overall_SU_B": {
                   "type": "number",
-                  "description": "          The overall standard uncertainty (estimated standard deviation)\n           of the displacement parameters based on a maximum-likelihood\n           residual.\n\n           The overall standard uncertainty (sigma~B~)^2^ gives an idea\n           of the uncertainty in the B values of averagely defined\n           atoms (atoms with B values equal to the average B value).\n\n                                         N~a~\n(sigma~B~)^2^ = 8 ----------------------------------------------\n                  sum~i~ {[1/Sigma - (E~o~)^2^ (1-m^2^)](SUM_AS)s^4^}\n\n           N~a~           = number of atoms\n           E~o~           = normalized structure factors\n           m              = figure of merit of phases of reflections\n                            included in the summation\n           s              = reciprocal-space vector\n\n           SUM_AS         = (sigma~A~)^2^/Sigma^2^\n           Sigma          = (sigma~{E;exp}~)^2^ + epsilon [1-(sigma~A~)^2^]\n           sigma~{E;exp}~  = experimental uncertainties of normalized\n                            structure factors\n           sigma~A~        = <cos 2 pi s delta~x~> SQRT(Sigma~P~/Sigma~N~)\n                            estimated using maximum likelihood\n           Sigma~P~        = sum~{atoms in model}~ f^2^\n           Sigma~N~        = sum~{atoms in crystal}~ f^2^\n           f               = atom form factor\n           delta~x~        = expected error\n           epsilon         = multiplicity of diffracting plane\n\n           summation is over all reflections included in refinement\n\n           Ref: (sigma~A~ estimation) \"Refinement of macromolecular\n                structures by the maximum-likelihood method\",\n                Murshudov, G. N., Vagin, A. A. & Dodson, E. J. (1997).\n                Acta Cryst. D53, 240-255.\n\n                (SU B estimation) Murshudov, G. N. & Dodson,\n                E. J. (1997). Simplified error estimation a la\n                Cruickshank in macromolecular crystallography.\n                CCP4 Newsletter on Protein Crystallography, No. 33,\n                January 1997, pp. 31-39.\n\n               http://www.ccp4.ac.uk/newsletters/newsletter33/murshudov.html"
+                  "description": "          The overall standard uncertainty (estimated standard deviation)\n           of the displacement parameters based on a maximum-likelihood\n           residual.\n\n           The overall standard uncertainty (sigma~B~)^2^ gives an idea\n           of the uncertainty in the B values of averagely defined\n           atoms (atoms with B values equal to the average B value).\n\n                                         N~a~\n(sigma~B~)^2^ = 8 ----------------------------------------------\n                  sum~i~ {[1/Sigma - (E~o~)^2^ (1-m^2^)](SUM_AS)s^4^}\n\n           N~a~           = number of atoms\n           E~o~           = normalized structure factors\n           m              = figure of merit of phases of reflections\n                            included in the summation\n           s              = reciprocal-space vector\n\n           SUM_AS         = (sigma~A~)^2^/Sigma^2^\n           Sigma          = (sigma~{E;exp}~)^2^ + epsilon [1-(sigma~A~)^2^]\n           sigma~{E;exp}~  = experimental uncertainties of normalized\n                            structure factors\n           sigma~A~        = <cos 2 pi s delta~x~> SQRT(Sigma~P~/Sigma~N~)\n                            estimated using maximum likelihood\n           Sigma~P~        = sum~{atoms in model}~ f^2^\n           Sigma~N~        = sum~{atoms in crystal}~ f^2^\n           f               = atom form factor \n           delta~x~        = expected error\n           epsilon         = multiplicity of diffracting plane\n\n           summation is over all reflections included in refinement\n\n           Ref: (sigma~A~ estimation) \"Refinement of macromolecular\n                structures by the maximum-likelihood method\",\n                Murshudov, G. N., Vagin, A. A. & Dodson, E. J. (1997).\n                Acta Cryst. D53, 240-255.\n\n                (SU B estimation) Murshudov, G. N. & Dodson,\n                E. J. (1997). Simplified error estimation a la\n                Cruickshank in macromolecular crystallography.\n                CCP4 Newsletter on Protein Crystallography, No. 33,\n                January 1997, pp. 31-39.\n\n               http://www.ccp4.ac.uk/newsletters/newsletter33/murshudov.html"
                },
                "overall_SU_ML": {
                   "type": "number",
@@ -4360,8 +4856,8 @@
                "pdbx_TLS_residual_ADP_flag": {
                   "type": "string",
                   "enum": [
-                     "UNVERIFIED",
-                     "LIKELY RESIDUAL"
+                     "LIKELY RESIDUAL",
+                     "UNVERIFIED"
                   ],
                   "description": "A flag for TLS refinements identifying the type of atomic displacement parameters stored\n in _atom_site.B_iso_or_equiv."
                },
@@ -4375,7 +4871,7 @@
                },
                "pdbx_average_fsc_work": {
                   "type": "number",
-                  "description": "Average Fourier Shell Correlation (avgFSC) between model and\n observed structure factors for reflections included in refinement.\n\n The average FSC is a measure of the agreement between observed\n and calculated structure factors.\n\n                  sum(N~i~ FSC~work-i~)\n avgFSC~work~   = ---------------------\n                  sum(N~i~)\n\n\n N~i~          = the number of working reflections in the resolution shell i\n FSC~work-i~   = FSC for working reflections in the i-th resolution shell calculated as:\n\n                (sum(|F~o~| |F~c~| fom cos(phi~c~-phi~o~)))\n FSC~work-i~  = -------------------------------------------\n                (sum(|F~o~|^2^) (sum(|F~c~|^2^)))^1/2^\n\n |F~o~|   = amplitude of observed structure factor\n |F~c~|   = amplitude of calculated structure factor\n phi~o~   = phase of observed structure factor\n phi~c~   = phase of calculated structure factor\n fom      = figure of merit of the experimental phases.\n\n Summation of FSC~work-i~ is carried over all working reflections in the resolution shell.\n\n Summation of avgFSC~work~ is carried over all resolution shells.\n\n\n Ref:  Rosenthal P.B., Henderson R.\n       \"Optimal determination of particle orientation, absolute hand,\n       and contrast loss in single-particle electron cryomicroscopy.\n       Journal of Molecular Biology. 2003;333(4):721-745, equation (A6).\n"
+                  "description": "Average Fourier Shell Correlation (avgFSC) between model and \n observed structure factors for reflections included in refinement.\n\n The average FSC is a measure of the agreement between observed \n and calculated structure factors.\n\n                  sum(N~i~ FSC~work-i~) \n avgFSC~work~   = ---------------------\n                  sum(N~i~)\n\n\n N~i~          = the number of working reflections in the resolution shell i\n FSC~work-i~   = FSC for working reflections in the i-th resolution shell calculated as:\n\n                (sum(|F~o~| |F~c~| fom cos(phi~c~-phi~o~)))\n FSC~work-i~  = -------------------------------------------\n                (sum(|F~o~|^2^) (sum(|F~c~|^2^)))^1/2^\n\n |F~o~|   = amplitude of observed structure factor\n |F~c~|   = amplitude of calculated structure factor\n phi~o~   = phase of observed structure factor\n phi~c~   = phase of calculated structure factor\n fom      = figure of merit of the experimental phases.\n\n Summation of FSC~work-i~ is carried over all working reflections in the resolution shell.\n\n Summation of avgFSC~work~ is carried over all resolution shells.\n\n\n Ref:  Rosenthal P.B., Henderson R.\n       \"Optimal determination of particle orientation, absolute hand,\n       and contrast loss in single-particle electron cryomicroscopy.\n       Journal of Molecular Biology. 2003;333(4):721-745, equation (A6).\n"
                },
                "pdbx_data_cutoff_high_absF": {
                   "type": "number",
@@ -4479,7 +4975,7 @@
                },
                "pdbx_refine_id": {
                   "type": "string",
-                  "description": "This data item uniquely identifies a refinement within an entry.\n _refine.pdbx_refine_id can be used to distinguish the results of\n joint refinements."
+                  "description": "This data item uniquely identifies a refinement within an entry.\n _refine.pdbx_refine_id can be used to distinguish the results of \n joint refinements."
                },
                "pdbx_solvent_ion_probe_radii": {
                   "type": "number",
@@ -4580,7 +5076,7 @@
                },
                "pdbx_refine_id": {
                   "type": "string",
-                  "description": "This data item uniquely identifies a refinement within an entry.\n _refine_analyze.pdbx_refine_id can be used to distinguish the results\n of joint refinements."
+                  "description": "This data item uniquely identifies a refinement within an entry.\n _refine_analyze.pdbx_refine_id can be used to distinguish the results \n of joint refinements."
                }
             },
             "required": [
@@ -4642,7 +5138,7 @@
                },
                "pdbx_refine_id": {
                   "type": "string",
-                  "description": "This data item uniquely identifies a refinement within an entry.\n _refine_hist.pdbx_refine_id can be used to distinguish the results\n of joint refinements."
+                  "description": "This data item uniquely identifies a refinement within an entry.\n _refine_hist.pdbx_refine_id can be used to distinguish the results \n of joint refinements."
                }
             },
             "required": [
@@ -4672,7 +5168,7 @@
                },
                "pdbx_refine_id": {
                   "type": "string",
-                  "description": "This data item uniquely identifies a refinement within an entry.\n _refine_ls_restr.pdbx_refine_id can be used to distinguish the results\n of joint refinements."
+                  "description": "This data item uniquely identifies a refinement within an entry.\n _refine_ls_restr.pdbx_refine_id can be used to distinguish the results \n of joint refinements."
                },
                "pdbx_restraint_function": {
                   "type": "string",
@@ -4856,11 +5352,11 @@
                },
                "pdbx_CC_half": {
                   "type": "number",
-                  "description": "             The Pearson's correlation coefficient expressed as a decimal value\n              between the average intensities from randomly selected\n              half-datasets.\n\n\t      Ref: Karplus & Diederichs (2012), Science 336, 1030-33\n"
+                  "description": "             The Pearson's correlation coefficient expressed as a decimal value\n              between the average intensities from randomly selected \n              half-datasets.\n\n\t      Ref: Karplus & Diederichs (2012), Science 336, 1030-33\n"
                },
                "pdbx_R_split": {
                   "type": "number",
-                  "description": "             R split measures the agreement between the sets of intensities created by merging\n              odd- and even-numbered images  from the overall data.\n\n\t      Ref: T. A. White, R. A. Kirian, A. V. Martin, A. Aquila, K. Nass, A. Barty\n              and H. N. Chapman (2012), J. Appl. Cryst. 45, 335-341\n"
+                  "description": "             R split measures the agreement between the sets of intensities created by merging \n              odd- and even-numbered images  from the overall data.          \n\n\t      Ref: T. A. White, R. A. Kirian, A. V. Martin, A. Aquila, K. Nass, A. Barty \n              and H. N. Chapman (2012), J. Appl. Cryst. 45, 335-341\n"
                },
                "pdbx_Rmerge_I_obs": {
                   "type": "number",
@@ -5013,7 +5509,7 @@
                },
                "pdbx_R_split": {
                   "type": "number",
-                  "description": "\n              R split measures the agreement between the sets of intensities created by merging\n              odd- and even-numbered images from the data within the resolution shell.\n\n\t      Ref: T. A. White, R. A. Kirian, A. V. Martin, A. Aquila, K. Nass,\n\t      A. Barty and H. N. Chapman (2012), J. Appl. Cryst. 45, 335-341\n"
+                  "description": "\n              R split measures the agreement between the sets of intensities created by merging \n              odd- and even-numbered images from the data within the resolution shell.\n\n\t      Ref: T. A. White, R. A. Kirian, A. V. Martin, A. Aquila, K. Nass, \n\t      A. Barty and H. N. Chapman (2012), J. Appl. Cryst. 45, 335-341\n"
                },
                "pdbx_Rpim_I_all": {
                   "type": "number",
@@ -5057,7 +5553,7 @@
                },
                "pdbx_rejects": {
                   "type": "integer",
-                  "description": "The number of rejected reflections in the resolution\n shell.  Reflections may be rejected from scaling\n by setting the observation criterion,\n _reflns.observed_criterion.\n"
+                  "description": "The number of rejected reflections in the resolution \n shell.  Reflections may be rejected from scaling\n by setting the observation criterion,\n _reflns.observed_criterion.\n"
                },
                "percent_possible_all": {
                   "type": "number",
@@ -5126,28 +5622,28 @@
                "language": {
                   "type": "string",
                   "enum": [
-                     "Awk",
-                     "Tcl",
-                     "Python/C++",
-                     "assembler",
-                     "csh",
+                     "Python",
+                     "Java & Fortran",
                      "C",
                      "Basic",
-                     "C/C++",
-                     "Java & Fortran",
-                     "ksh",
-                     "Java",
-                     "Perl",
-                     "Pascal",
-                     "C++",
-                     "Fortran 90",
-                     "sh",
-                     "Ada",
-                     "Fortran 77",
-                     "Other",
-                     "Python",
                      "Fortran_77",
-                     "Fortran"
+                     "Fortran 90",
+                     "Tcl",
+                     "Ada",
+                     "csh",
+                     "Perl",
+                     "C++",
+                     "Other",
+                     "Pascal",
+                     "Java",
+                     "assembler",
+                     "ksh",
+                     "Awk",
+                     "Python/C++",
+                     "Fortran 77",
+                     "Fortran",
+                     "C/C++",
+                     "sh"
                   ],
                   "description": "The major computing language in which the software is\n coded."
                },
@@ -5194,12 +5690,12 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "filter",
-                     "other",
-                     "jiffy",
-                     "library",
                      "package",
-                     "program"
+                     "library",
+                     "filter",
+                     "jiffy",
+                     "program",
+                     "other"
                   ],
                   "description": "The classification of the software according to the most\n common types."
                },
@@ -5231,8 +5727,8 @@
             "pdbx_CASP_flag": {
                "type": "string",
                "enum": [
-                  "N",
-                  "Y"
+                  "Y",
+                  "N"
                ],
                "examples": [
                   "Y"
@@ -5323,14 +5819,14 @@
             "cell_setting": {
                "type": "string",
                "enum": [
-                  "cubic",
-                  "orthorhombic",
+                  "monoclinic",
+                  "hexagonal",
+                  "rhombohedral",
                   "trigonal",
+                  "orthorhombic",
                   "triclinic",
                   "tetragonal",
-                  "monoclinic",
-                  "rhombohedral",
-                  "hexagonal"
+                  "cubic"
                ],
                "description": "The cell settings for this space-group symmetry."
             },

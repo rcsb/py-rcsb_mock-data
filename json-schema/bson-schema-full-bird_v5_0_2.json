@@ -9,17 +9,17 @@
                "action_type": {
                   "bsonType": "string",
                   "enum": [
-                     "Modify linkage",
-                     "Other modification",
-                     "Modify type",
-                     "Modify molecule name",
                      "Obsolete molecule",
-                     "Initial release",
                      "Modify representation",
-                     "Modify class",
+                     "Other modification",
                      "Modify audit",
-                     "Modify taxonomy organism",
+                     "Modify type",
                      "Modify sequence",
+                     "Initial release",
+                     "Modify taxonomy organism",
+                     "Modify linkage",
+                     "Modify molecule name",
+                     "Modify class",
                      "Create molecule"
                   ]
                },
@@ -36,7 +36,13 @@
                   "bsonType": "string"
                },
                "processing_site": {
-                  "bsonType": "string"
+                  "bsonType": "string",
+                  "enum": [
+                     "BMRB",
+                     "PDBe",
+                     "RCSB",
+                     "PDBJ"
+                  ]
                }
             },
             "required": [
@@ -77,10 +83,10 @@
                "link_class": {
                   "bsonType": "string",
                   "enum": [
-                     "NN",
                      "PP",
                      "PN",
-                     "NP"
+                     "NP",
+                     "NN"
                   ]
                },
                "link_id": {
@@ -98,14 +104,14 @@
                "value_order": {
                   "bsonType": "string",
                   "enum": [
-                     "arom",
-                     "quad",
-                     "doub",
-                     "poly",
-                     "delo",
+                     "pi",
                      "trip",
                      "sing",
-                     "pi"
+                     "quad",
+                     "delo",
+                     "arom",
+                     "poly",
+                     "doub"
                   ]
                }
             },
@@ -201,9 +207,9 @@
                "type": {
                   "bsonType": "string",
                   "enum": [
-                     "nucleic-acid-like",
+                     "polysaccharide-like",
                      "peptide-like",
-                     "polysaccharide-like"
+                     "nucleic-acid-like"
                   ]
                }
             },
@@ -253,14 +259,14 @@
                "value_order": {
                   "bsonType": "string",
                   "enum": [
-                     "arom",
-                     "quad",
-                     "doub",
-                     "poly",
-                     "delo",
+                     "pi",
                      "trip",
                      "sing",
-                     "pi"
+                     "quad",
+                     "delo",
+                     "arom",
+                     "poly",
+                     "doub"
                   ]
                }
             },
@@ -286,8 +292,8 @@
                "hetero": {
                   "bsonType": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ]
                },
                "mon_id": {
@@ -299,8 +305,8 @@
                "observed": {
                   "bsonType": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ]
                },
                "parent_mon_id": {
@@ -332,8 +338,8 @@
                "NRP_flag": {
                   "bsonType": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ]
                },
                "one_letter_codes": {
@@ -439,39 +445,39 @@
                "items": {
                   "bsonType": "string",
                   "enum": [
+                     "CASPASE inhibitor",
+                     "Toxin",
                      "Anticancer",
+                     "Receptor",
+                     "Thrombin inhibitor",
+                     "Enzyme inhibitor",
+                     "Antithrombotic",
+                     "Chaperone binding",
                      "Transition state mimetic",
-                     "Antitumor",
-                     "Synthetic opioid",
-                     "Lantibiotic",
-                     "Metabolism",
                      "Immunosuppressant",
-                     "Antiinflammatory",
+                     "Synthetic opioid",
                      "Antiviral",
+                     "Growth factor",
+                     "Metal transport",
+                     "Oxidation-reduction",
+                     "RNA synthesis Inhibitor",
+                     "Antiparasitic",
+                     "Transport activator",
+                     "Antiretroviral",
+                     "Antagonist",
+                     "Antifungal",
+                     "Trypsin inhibitor",
+                     "Antitumor",
+                     "Lantibiotic",
+                     "Anthelmintic",
+                     "Anticoagulant",
+                     "Metabolism",
+                     "Antineoplastic",
                      "Antimicrobial",
                      "Antibiotic",
-                     "Antiparasitic",
-                     "Antifungal",
-                     "Antineoplastic",
-                     "Toxin",
-                     "RNA synthesis Inhibitor",
-                     "Antiretroviral",
-                     "Transport activator",
-                     "Trypsin inhibitor",
-                     "Metal transport",
-                     "Anticoagulant",
-                     "Thrombin inhibitor",
-                     "Growth factor",
+                     "Antiinflammatory",
                      "Inhibitor",
-                     "Receptor",
-                     "Unknown",
-                     "Antithrombotic",
-                     "Enzyme inhibitor",
-                     "Chaperone binding",
-                     "Antagonist",
-                     "Oxidation-reduction",
-                     "CASPASE inhibitor",
-                     "Anthelmintic"
+                     "Unknown"
                   ]
                },
                "uniqueItems": false
@@ -498,10 +504,10 @@
             "release_status": {
                "bsonType": "string",
                "enum": [
-                  "WAIT",
                   "REL",
-                  "HOLD",
-                  "OBS"
+                  "OBS",
+                  "WAIT",
+                  "HOLD"
                ]
             },
             "replaced_by": {
@@ -513,8 +519,8 @@
             "represent_as": {
                "bsonType": "string",
                "enum": [
-                  "polymer",
-                  "single molecule"
+                  "single molecule",
+                  "polymer"
                ]
             },
             "representative_PDB_id_code": {
@@ -525,39 +531,39 @@
                "items": {
                   "bsonType": "string",
                   "enum": [
-                     "Polysaccharide",
+                     "Cyclic peptide",
+                     "Keto acid",
+                     "Siderophore",
+                     "Cyclic depsipeptide",
                      "Imino sugar",
                      "Aminoglycoside",
-                     "Polypeptide",
-                     "Ansamycin",
-                     "Chalkophore, Polypeptide",
-                     "Thiopeptide",
-                     "Glycopeptide",
-                     "Cyclic lipopeptide",
-                     "Cyclic peptide",
-                     "Oligosaccharide",
-                     "Tricyclic pentaglycosidic antineoplastic antibiotic",
-                     "Keto acid",
-                     "Anthraquinone",
-                     "Cyclic depsipeptide",
-                     "Non-polymer",
-                     "Quinolone",
-                     "Thiolactone",
-                     "Lipoglycopeptide",
-                     "Peptaibol",
-                     "Unknown",
-                     "Lipopeptide",
-                     "Nucleoside",
-                     "Chalkophore",
                      "Polycyclic",
-                     "Heterocyclic",
+                     "Glycopeptide",
+                     "Polypeptide",
                      "Macrolide",
+                     "Thiopeptide",
+                     "Peptaibol",
+                     "Cyclic lipopeptide",
+                     "Heterocyclic",
+                     "Oligopeptide",
+                     "Ansamycin",
+                     "Nucleoside",
+                     "Amino acid",
+                     "Quinolone",
+                     "Lipopeptide",
                      "Chromophore",
                      "Peptide-like",
-                     "Siderophore",
+                     "Non-polymer",
+                     "Thiolactone",
+                     "Oligosaccharide",
+                     "Tricyclic pentaglycosidic antineoplastic antibiotic",
                      "Anthracycline",
-                     "Oligopeptide",
-                     "Amino acid"
+                     "Polysaccharide",
+                     "Anthraquinone",
+                     "Chalkophore",
+                     "Lipoglycopeptide",
+                     "Chalkophore, Polypeptide",
+                     "Unknown"
                   ]
                },
                "uniqueItems": false

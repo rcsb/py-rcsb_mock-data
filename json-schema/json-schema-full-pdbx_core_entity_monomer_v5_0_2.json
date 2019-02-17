@@ -1,6 +1,33 @@
 {
    "type": "object",
    "properties": {
+      "rcsb_entity_monomer_container_identifiers": {
+         "type": "object",
+         "properties": {
+            "comp_id": {
+               "type": "string",
+               "description": "Component identifier for entity monomer."
+            },
+            "entity_id": {
+               "type": "string",
+               "description": "Entity identifier for the container."
+            },
+            "entry_id": {
+               "type": "string",
+               "description": "Entry identifier for the container."
+            },
+            "ordinal_id": {
+               "type": "integer",
+               "description": "An ordinal identifier for an entity monomer component."
+            }
+         },
+         "required": [
+            "comp_id",
+            "entity_id",
+            "entry_id",
+            "ordinal_id"
+         ]
+      },
       "rcsb_entity_poly_info": {
          "type": "object",
          "properties": {
@@ -27,8 +54,8 @@
             "is_modified": {
                "type": "string",
                "enum": [
-                  "N",
-                  "Y"
+                  "Y",
+                  "N"
                ],
                "description": "Flag to indicate a non-standard monomer."
             },
