@@ -38,6 +38,7 @@
 #    18-Dec-2018 jdw Add _entity_poly.rcsb_prd_id
 #    16-Feb-2019 jdw Add rcsb_entity_instance_container_identifiers, rcsb_entity_monomer_container_identifiers,
 #                        rcsb_chem_comp_container_identifers, drugbank_container_identifiers
+#    18-Feb-2019 jdw Add rcsb_label_asym_id* to pdbx_validate_* categories.
 #
 ###########################################################################
 
@@ -57,12 +58,20 @@ data_rcsb_mmcif_ext.dic
 
     _dictionary.title           rcsb_mmcif_ext.dic
     _dictionary.datablock_id    rcsb_mmcif_ext.dic
-    _dictionary.version         0.1112
+    _dictionary.version         0.113
 #
      loop_
     _dictionary_history.version
     _dictionary_history.update
     _dictionary_history.revision
+ 0.113 2019-02-18
+;
+Changes (jdw):
++ Add attribute rcsb_label_asym_id* to categories:
+   pdbx_validate_close_contact,pdbx_validate_symm_contact,pdbx_validate_rmsd_bond,pdbx_validate_rmsd_angle,
+   pdbx_validate_torsion,pdbx_validate_peptide_omega,pdbx_validate_chiral,pdbx_validate_planes,pdbx_validate_planes_atom,
+   pdbx_validate_main_chain_plane,pdbx_validate_polymer_linkage.
+;
  0.112 2019-02-16
 ;
 Changes (jdw):
@@ -4609,4 +4618,318 @@ save__rcsb_entity_poly_info.is_modified
                                   Y N
      save_
 
+ ##
+ ##
 
+save__pdbx_validate_close_contact.rcsb_label_asym_id_1
+    _item_description.description
+;   Part of the identifier of the first of the two atom sites that
+    define the close contact.
+
+    This data item is a pointer to _atom_site.label_asym_id in the
+    ATOM_SITE category.
+;
+    _item.name                  '_pdbx_validate_close_contact.rcsb_label_asym_id_1'
+    _item.category_id           pdbx_validate_close_contact
+    _item.mandatory_code        no
+    _item_type.code         code
+    _item_linked.child_name     '_pdbx_validate_close_contact.rcsb_label_asym_id_1'
+    _item_linked.parent_name    '_atom_site.label_asym_id'
+
+     save_
+
+save__pdbx_validate_close_contact.rcsb_label_asym_id_2
+    _item_description.description
+;   Part of the identifier of the second of the two atom sites
+    that define the close contact.
+    This data item is a pointer to _atom_site.label_asym_id in the
+    ATOM_SITE category.
+;
+    _item.name                  '_pdbx_validate_close_contact.rcsb_label_asym_id_2'
+    _item.category_id           pdbx_validate_close_contact
+    _item.mandatory_code        no
+    _item_type.code         code
+    _item_linked.child_name     '_pdbx_validate_close_contact.rcsb_label_asym_id_2'
+    _item_linked.parent_name    '_atom_site.label_asym_id'
+     save_
+
+
+save__pdbx_validate_symm_contact.rcsb_label_asym_id_1
+    _item_description.description
+;   Part of the identifier of the first of the two atom sites that
+    define the close contact.
+
+    This data item is a pointer to id in the
+    ATOM_SITE category.
+;
+    _item.name                  '_pdbx_validate_symm_contact.rcsb_label_asym_id_1'
+    _item.category_id           pdbx_validate_symm_contact
+    _item.mandatory_code        no
+    _item_type.code         code
+    _item_linked.child_name     '_pdbx_validate_symm_contact.rcsb_label_asym_id_1'
+    _item_linked.parent_name    '_atom_site.label_asym_id'
+
+     save_
+
+
+save__pdbx_validate_symm_contact.rcsb_label_asym_id_2
+    _item_description.description
+;   Part of the identifier of the second of the two atom sites
+    that define the close contact.
+
+    This data item is a pointer to _atom_site.label_asym_id in the
+    ATOM_SITE category.
+;
+    _item.name                  '_pdbx_validate_symm_contact.rcsb_label_asym_id_2'
+    _item.category_id           pdbx_validate_symm_contact
+    _item.mandatory_code        no
+    _item_type.code         code
+    _item_linked.child_name     '_pdbx_validate_symm_contact.rcsb_label_asym_id_2'
+    _item_linked.parent_name    '_atom_site.label_asym_id'
+     save_
+
+
+save__pdbx_validate_rmsd_bond.rcsb_label_asym_id_1
+    _item_description.description
+;   Part of the identifier of the first of the two atom sites that
+    define the covalent bond.
+
+    This data item is a pointer to _atom_site.label_asym_id in the
+    ATOM_SITE category.
+;
+    _item.name                  '_pdbx_validate_rmsd_bond.rcsb_label_asym_id_1'
+    _item.category_id           pdbx_validate_rmsd_bond
+    _item.mandatory_code        no
+    _item_type.code         code
+    _item_linked.child_name   '_pdbx_validate_rmsd_bond.rcsb_label_asym_id_1'
+    _item_linked.parent_name  '_atom_site.label_asym_id'
+
+     save_
+
+
+save__pdbx_validate_rmsd_bond.rcsb_label_asym_id_2
+    _item_description.description
+;   Part of the identifier of the second of the two atom sites
+    that define the covalent bond.
+
+    This data item is a pointer to _atom_site.label_asym_id in the
+    ATOM_SITE category.
+;
+    _item.name                  '_pdbx_validate_rmsd_bond.rcsb_label_asym_id_2'
+    _item.category_id           pdbx_validate_rmsd_bond
+    _item.mandatory_code        no
+    _item_type.code         code
+    _item_linked.child_name   '_pdbx_validate_rmsd_bond.rcsb_label_asym_id_2'
+    _item_linked.parent_name  '_atom_site.label_asym_id'
+     save_
+
+
+save__pdbx_validate_rmsd_angle.rcsb_label_asym_id_1
+    _item_description.description
+;   Part of the identifier of the first of the three atom sites that
+    define the angle.
+
+    This data item is a pointer to _atom_site.label_asym_id in the
+    ATOM_SITE category.
+;
+    _item.name                  '_pdbx_validate_rmsd_angle.rcsb_label_asym_id_1'
+    _item.category_id           pdbx_validate_rmsd_angle
+    _item.mandatory_code        no
+    _item_type.code         code
+    _item_linked.child_name  '_pdbx_validate_rmsd_angle.rcsb_label_asym_id_1'
+    _item_linked.parent_name '_atom_site.label_asym_id'
+     save_
+
+save__pdbx_validate_rmsd_angle.rcsb_label_asym_id_2
+    _item_description.description
+;   identifier of the second of the three atom sites
+    that define the angle.
+    This data item is a pointer to _atom_site.label_asym_id in the
+    ATOM_SITE category.
+;
+    _item.name                  '_pdbx_validate_rmsd_angle.rcsb_label_asym_id_2'
+    _item.category_id           pdbx_validate_rmsd_angle
+    _item.mandatory_code        no
+    _item_type.code         code
+    _item_linked.child_name  '_pdbx_validate_rmsd_angle.rcsb_label_asym_id_2'
+    _item_linked.parent_name '_atom_site.label_asym_id'
+     save_
+
+save__pdbx_validate_rmsd_angle.rcsb_label_asym_id_3
+    _item_description.description
+;   Part of the identifier of the third of the three atom sites that
+    define the angle.
+
+    This data item is a pointer to _atom_site.label_asym_id in the
+    ATOM_SITE category.
+;
+    _item.name                  '_pdbx_validate_rmsd_angle.rcsb_label_asym_id_3'
+    _item.category_id           pdbx_validate_rmsd_angle
+    _item.mandatory_code        no
+    _item_type.code         code
+    _item_linked.child_name  '_pdbx_validate_rmsd_angle.rcsb_label_asym_id_3'
+    _item_linked.parent_name '_atom_site.label_asym_id'
+     save_
+
+save__pdbx_validate_torsion.rcsb_label_asym_id
+    _item_description.description
+;   Part of the identifier of the residue
+
+    This data item is a pointer to _atom_site.label_asym_id in the
+    ATOM_SITE category.
+;
+    _item.name                  '_pdbx_validate_torsion.rcsb_label_asym_id'
+    _item.category_id           pdbx_validate_torsion
+    _item.mandatory_code        no
+    _item_type.code         code
+    _item_linked.child_name   '_pdbx_validate_torsion.rcsb_label_asym_id'
+    _item_linked.parent_name  '_atom_site.label_asym_id'
+     save_
+
+save__pdbx_validate_peptide_omega.rcsb_label_asym_id_1
+    _item_description.description
+;   Part of the identifier of the first residue in the bond
+
+    This data item is a pointer to _atom_site.label_asym_id in the
+    ATOM_SITE category.
+;
+    _item.name                '_pdbx_validate_peptide_omega.rcsb_label_asym_id_1'
+    _item.category_id           pdbx_validate_peptide_omega
+    _item.mandatory_code        no
+    _item_type.code         code
+    _item_linked.child_name   '_pdbx_validate_peptide_omega.rcsb_label_asym_id_1'
+    _item_linked.parent_name  '_atom_site.label_asym_id'
+     save_
+
+
+save__pdbx_validate_peptide_omega.rcsb_label_asym_id_2
+    _item_description.description
+;   Part of the identifier of the second residue in the bond
+
+    This data item is a pointer to _atom_site.label_asym_id in the
+    ATOM_SITE category.
+;
+    _item.name                '_pdbx_validate_peptide_omega.rcsb_label_asym_id_2'
+    _item.category_id           pdbx_validate_peptide_omega
+    _item.mandatory_code        no
+    _item_type.code         code
+    _item_linked.child_name   '_pdbx_validate_peptide_omega.rcsb_label_asym_id_2'
+    _item_linked.parent_name  '_atom_site.label_asym_id'
+     save_
+
+save__pdbx_validate_chiral.rcsb_label_asym_id
+    _item_description.description
+;   Part of the identifier of the residue
+
+    This data item is a pointer to _atom_site.label_asym_id in the
+    ATOM_SITE category.
+;
+    _item.name                '_pdbx_validate_chiral.rcsb_label_asym_id'
+    _item.category_id           pdbx_validate_chiral
+    _item.mandatory_code        no
+    _item_type.code         code
+    _item_linked.child_name    '_pdbx_validate_chiral.rcsb_label_asym_id'
+    _item_linked.parent_name   '_atom_site.label_asym_id'
+     save_
+
+
+save__pdbx_validate_planes.rcsb_label_asym_id
+    _item_description.description
+;   Part of the identifier of the residue in which the plane is calculated
+
+    This data item is a pointer to _atom_site.label_asym_id in the
+    ATOM_SITE category.
+;
+    _item.name                  '_pdbx_validate_planes.rcsb_label_asym_id'
+    _item.category_id           pdbx_validate_planes
+    _item.mandatory_code        no
+    _item_type.code         code
+    _item_linked.child_name     '_pdbx_validate_planes.rcsb_label_asym_id'
+    _item_linked.parent_name    '_atom_site.label_asym_id'
+
+     save_
+
+
+save__pdbx_validate_planes_atom.rcsb_label_asym_id
+    _item_description.description
+;   Part of the identifier of an atom site that defines the plane
+
+    This data item is a pointer to _atom_site.label_asym_id in the
+    ATOM_SITE category.
+;
+    _item.name                  '_pdbx_validate_planes_atom.rcsb_label_asym_id'
+    _item.category_id           pdbx_validate_planes_atom
+    _item.mandatory_code        no
+    _item_type.code         code
+    _item_linked.child_name     '_pdbx_validate_planes_atom.rcsb_label_asym_id'
+    _item_linked.parent_name    '_atom_site.label_asym_id'
+
+     save_
+
+
+save__pdbx_validate_main_chain_plane.rcsb_label_asym_id
+    _item_description.description
+;   Part of the identifier of the residue in which the plane is calculated
+
+    This data item is a pointer to _atom_site.label_asym_id in the
+    ATOM_SITE category.
+;
+    _item.name                  '_pdbx_validate_main_chain_plane.rcsb_label_asym_id'
+    _item.category_id           pdbx_validate_main_chain_plane
+    _item.mandatory_code        no
+    _item_type.code         code
+    _item_linked.child_name     '_pdbx_validate_main_chain_plane.rcsb_label_asym_id'
+    _item_linked.parent_name    '_atom_site.label_asym_id'
+
+     save_
+
+
+save__pdbx_validate_polymer_linkage.rcsb_label_asym_id_1
+    _item_description.description
+;   Part of the identifier of the first of the two atom sites that
+    define the linkage.
+
+    This data item is a pointer to _atom_site.label_asym_id in the
+    ATOM_SITE category.
+;
+    _item.name                  '_pdbx_validate_polymer_linkage.rcsb_label_asym_id_1'
+    _item.category_id           pdbx_validate_polymer_linkage
+    _item.mandatory_code        no
+    _item_type.code         code
+    _item_linked.child_name     '_pdbx_validate_polymer_linkage.rcsb_label_asym_id_1'
+    _item_linked.parent_name    '_atom_site.label_asym_id'
+
+     save_
+
+
+save__pdbx_validate_polymer_linkage.rcsb_label_asym_id_2
+    _item_description.description
+;   Part of the identifier of the second of the two atom sites
+    that define the linkage.
+
+    This data item is a pointer to _atom_site.label_asym_id in the
+    ATOM_SITE category.
+;
+    _item.name                  '_pdbx_validate_polymer_linkage.rcsb_label_asym_id_2'
+    _item.category_id           pdbx_validate_polymer_linkage
+    _item.mandatory_code        no
+    _item_type.code         code
+    _item_linked.child_name     '_pdbx_validate_polymer_linkage.rcsb_label_asym_id_2'
+    _item_linked.parent_name    '_atom_site.label_asym_id'
+     save_
+
+save__pdbx_distant_solvent_atoms.rcsb_label_asym_id
+     _item_description.description
+;    Part of the identifier for the distant solvent atom.
+
+     This data item is a pointer to _atom_site.rcsb_label_asym_id in the
+     ATOM_SITE category.
+;
+     _item.name                 '_pdbx_distant_solvent_atoms.rcsb_label_asym_id'
+     _item.category_id           pdbx_distant_solvent_atoms
+     _item.mandatory_code        no
+     _item_type.code             code
+#     _item_linked.child_name    '_pdbx_distant_solvent_atoms.rcsb_label_asym_id'
+#     _item_linked.parent_name   '_atom_site.label_asym_id'
+
+      save_
