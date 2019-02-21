@@ -74,19 +74,19 @@
                "type": "string",
                "enum": [
                   "nat",
-                  "syn",
-                  "man"
+                  "man",
+                  "syn"
                ],
                "description": "The method by which the sample for the entity was produced.\n Entities isolated directly from natural sources (tissues, soil\n samples etc.) are expected to have further information in the\n ENTITY_SRC_NAT category. Entities isolated from genetically\n manipulated sources are expected to have further information in\n the ENTITY_SRC_GEN category."
             },
             "type": {
                "type": "string",
                "enum": [
+                  "water",
                   "branched",
-                  "polymer",
-                  "non-polymer",
                   "macrolide",
-                  "water"
+                  "polymer",
+                  "non-polymer"
                ],
                "description": "Defines the type of the entity.\n\n Polymer entities are expected to have corresponding\n ENTITY_POLY and associated entries.\n\n Non-polymer entities are expected to have corresponding\n CHEM_COMP and associated entries.\n\n Water entities are not expected to have corresponding\n entries in the ENTITY category."
             }
@@ -169,20 +169,20 @@
             "nstd_linkage": {
                "type": "string",
                "enum": [
-                  "no",
-                  "yes",
                   "y",
-                  "n"
+                  "no",
+                  "n",
+                  "yes"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer-to-monomer link different from that implied by\n _entity_poly.type."
             },
             "nstd_monomer": {
                "type": "string",
                "enum": [
-                  "no",
-                  "yes",
                   "y",
-                  "n"
+                  "no",
+                  "n",
+                  "yes"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer that is not considered standard."
             },
@@ -219,9 +219,9 @@
             "rcsb_entity_polymer_type": {
                "type": "string",
                "enum": [
+                  "Protein",
                   "NA-hybrid",
                   "Other",
-                  "Protein",
                   "RNA",
                   "DNA"
                ],
@@ -234,16 +234,16 @@
             "type": {
                "type": "string",
                "enum": [
-                  "polydeoxyribonucleotide",
-                  "cyclic-pseudo-peptide",
-                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
-                  "polyribonucleotide",
-                  "other",
-                  "polypeptide(D)",
-                  "peptide nucleic acid",
-                  "polypeptide(L)",
+                  "polysaccharide(L)",
                   "polysaccharide(D)",
-                  "polysaccharide(L)"
+                  "polypeptide(D)",
+                  "cyclic-pseudo-peptide",
+                  "polypeptide(L)",
+                  "peptide nucleic acid",
+                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
+                  "other",
+                  "polyribonucleotide",
+                  "polydeoxyribonucleotide"
                ],
                "description": "The type of the polymer."
             }
@@ -264,10 +264,10 @@
                "hetero": {
                   "type": "string",
                   "enum": [
-                     "no",
-                     "yes",
                      "y",
-                     "n"
+                     "no",
+                     "n",
+                     "yes"
                   ],
                   "description": "A flag to indicate whether this monomer in the polymer is\n heterogeneous in sequence."
                },
@@ -390,8 +390,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "sample",
-                     "model"
+                     "model",
+                     "sample"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -600,10 +600,10 @@
                "pdbx_seq_type": {
                   "type": "string",
                   "enum": [
-                     "Biological sequence",
-                     "Linker",
                      "C-terminal tag",
-                     "N-terminal tag"
+                     "N-terminal tag",
+                     "Linker",
+                     "Biological sequence"
                   ],
                   "description": "This data item povides additional information about the sequence type."
                },
@@ -666,8 +666,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "sample",
-                     "model"
+                     "model",
+                     "sample"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -877,8 +877,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "sample",
-                     "model"
+                     "model",
+                     "sample"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -937,140 +937,6 @@
                "asym_id",
                "instance_id",
                "prd_id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "pdbx_nonpoly_scheme": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "asym_id": {
-                  "type": "string",
-                  "examples": [
-                     "1",
-                     "A",
-                     "2B3"
-                  ],
-                  "description": "Pointer to _atom_site.label_asym_id."
-               },
-               "auth_mon_id": {
-                  "type": "string",
-                  "description": "Author provided residue identifier.   This value may differ from the PDB residue\n identifier and may not correspond to residue identification within the coordinate records."
-               },
-               "auth_seq_num": {
-                  "type": "string",
-                  "description": "Author provided residue numbering.   This value may differ from the PDB residue\n number and may not correspond to residue numbering within the coordinate records.\n"
-               },
-               "entity_id": {
-                  "type": "string",
-                  "description": "Pointer to _atom_site.label_entity_id."
-               },
-               "mon_id": {
-                  "type": "string",
-                  "description": "Pointer to _atom_site.label_comp_id."
-               },
-               "ndb_seq_num": {
-                  "type": "string",
-                  "description": "NDB/RCSB residue number."
-               },
-               "pdb_ins_code": {
-                  "type": "string",
-                  "description": "PDB insertion code."
-               },
-               "pdb_mon_id": {
-                  "type": "string",
-                  "description": "PDB residue identifier."
-               },
-               "pdb_seq_num": {
-                  "type": "string",
-                  "description": "PDB residue number."
-               },
-               "pdb_strand_id": {
-                  "type": "string",
-                  "description": "PDB strand/chain id."
-               }
-            },
-            "required": [
-               "asym_id",
-               "ndb_seq_num"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "pdbx_poly_seq_scheme": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "asym_id": {
-                  "type": "string",
-                  "examples": [
-                     "1",
-                     "A",
-                     "2B3"
-                  ],
-                  "description": "Pointer to _atom_site.label_asym_id."
-               },
-               "auth_mon_id": {
-                  "type": "string",
-                  "description": "Author provided residue identifier.   This value may differ from the PDB residue\n identifier and may not correspond to residue identifier within the coordinate records."
-               },
-               "auth_seq_num": {
-                  "type": "string",
-                  "description": "Author provided residue number.   This value may differ from the PDB residue\n number and may not correspond to residue numbering within the coordinate records.\n"
-               },
-               "entity_id": {
-                  "type": "string",
-                  "description": "Pointer to _entity.id."
-               },
-               "hetero": {
-                  "type": "string",
-                  "enum": [
-                     "no",
-                     "yes",
-                     "y",
-                     "n"
-                  ],
-                  "description": "Pointer to _entity_poly_seq.hetero"
-               },
-               "mon_id": {
-                  "type": "string",
-                  "description": "Pointer to _entity_poly_seq.mon_id."
-               },
-               "ndb_seq_num": {
-                  "type": "integer",
-                  "description": "NDB residue number."
-               },
-               "pdb_ins_code": {
-                  "type": "string",
-                  "description": "PDB insertion code."
-               },
-               "pdb_mon_id": {
-                  "type": "string",
-                  "description": "PDB residue identifier."
-               },
-               "pdb_seq_num": {
-                  "type": "string",
-                  "description": "PDB residue number."
-               },
-               "pdb_strand_id": {
-                  "type": "string",
-                  "description": "PDB strand/chain id."
-               },
-               "seq_id": {
-                  "type": "integer",
-                  "description": "Pointer to _entity_poly_seq.num"
-               }
-            },
-            "required": [
-               "asym_id",
-               "entity_id",
-               "mon_id",
-               "seq_id"
             ]
          },
          "minItems": 1,
@@ -1195,80 +1061,6 @@
          "minItems": 1,
          "uniqueItems": true
       },
-      "rcsb_entity_monomer_container_identifiers": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "comp_id": {
-                  "type": "string",
-                  "description": "Component identifier for entity monomer."
-               },
-               "entity_id": {
-                  "type": "string",
-                  "description": "Entity identifier for the container."
-               },
-               "entry_id": {
-                  "type": "string",
-                  "description": "Entry identifier for the container."
-               },
-               "ordinal_id": {
-                  "type": "integer",
-                  "description": "An ordinal identifier for an entity monomer component."
-               }
-            },
-            "required": [
-               "ordinal_id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
-      "rcsb_entity_poly_info": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "chem_comp_count": {
-                  "type": "integer",
-                  "description": "The number of the particular chemical components in the polymer entity."
-               },
-               "comp_id": {
-                  "type": "string",
-                  "description": "The component identifier for the monomer in the polymer sequence."
-               },
-               "entity_id": {
-                  "type": "string",
-                  "description": "The entity identifier for the polymer entity containing the monomer."
-               },
-               "entity_sequence_length": {
-                  "type": "integer",
-                  "description": "The number of the monones in the polymer entity sequence."
-               },
-               "entry_id": {
-                  "type": "string",
-                  "description": "The entry identifier containing the polymer entity."
-               },
-               "is_modified": {
-                  "type": "string",
-                  "enum": [
-                     "Y",
-                     "N"
-                  ],
-                  "description": "Flag to indicate a non-standard monomer."
-               },
-               "ordinal_id": {
-                  "type": "integer",
-                  "description": "An ordinal identifier for a polymer component."
-               }
-            },
-            "required": [
-               "ordinal_id"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
-      },
       "rcsb_entity_source_organism": {
          "type": "array",
          "items": {
@@ -1325,8 +1117,8 @@
                   "type": "string",
                   "enum": [
                      "synthetic",
-                     "genetically engineered",
-                     "natural"
+                     "natural",
+                     "genetically engineered"
                   ],
                   "description": "The source type for the entity\n"
                }
