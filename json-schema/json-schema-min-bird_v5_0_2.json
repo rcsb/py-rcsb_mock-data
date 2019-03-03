@@ -9,18 +9,18 @@
                "action_type": {
                   "type": "string",
                   "enum": [
-                     "Modify type",
-                     "Modify linkage",
+                     "Modify class",
+                     "Modify sequence",
+                     "Create molecule",
+                     "Modify taxonomy organism",
                      "Obsolete molecule",
                      "Modify representation",
                      "Initial release",
-                     "Create molecule",
-                     "Modify audit",
-                     "Modify class",
                      "Modify molecule name",
-                     "Other modification",
-                     "Modify sequence",
-                     "Modify taxonomy organism"
+                     "Modify type",
+                     "Modify audit",
+                     "Modify linkage",
+                     "Other modification"
                   ],
                   "description": "The action associated with this audit record."
                },
@@ -111,10 +111,10 @@
                "link_class": {
                   "type": "string",
                   "enum": [
-                     "PN",
                      "PP",
                      "NP",
-                     "NN"
+                     "NN",
+                     "PN"
                   ],
                   "description": "A code indicating the entity types involved in the linkage."
                },
@@ -137,14 +137,14 @@
                "value_order": {
                   "type": "string",
                   "enum": [
-                     "delo",
-                     "sing",
-                     "doub",
                      "poly",
                      "arom",
-                     "pi",
+                     "sing",
+                     "quad",
+                     "delo",
+                     "doub",
                      "trip",
-                     "quad"
+                     "pi"
                   ],
                   "description": "The bond order target for the chemical linkage."
                }
@@ -258,9 +258,9 @@
                "type": {
                   "type": "string",
                   "enum": [
+                     "peptide-like",
                      "nucleic-acid-like",
-                     "polysaccharide-like",
-                     "peptide-like"
+                     "polysaccharide-like"
                   ],
                   "examples": [
                      "peptide-like"
@@ -324,14 +324,14 @@
                "value_order": {
                   "type": "string",
                   "enum": [
-                     "delo",
-                     "sing",
-                     "doub",
                      "poly",
                      "arom",
-                     "pi",
+                     "sing",
+                     "quad",
+                     "delo",
+                     "doub",
                      "trip",
-                     "quad"
+                     "pi"
                   ],
                   "description": "The bond order target for the non-standard linkage."
                }
@@ -557,39 +557,39 @@
                "items": {
                   "type": "string",
                   "enum": [
-                     "RNA synthesis Inhibitor",
+                     "Antiparasitic",
+                     "Transport activator",
+                     "Antithrombotic",
                      "Anticoagulant",
-                     "Antibiotic",
-                     "Trypsin inhibitor",
-                     "Antifungal",
-                     "Antiretroviral",
+                     "Metal transport",
+                     "Antiviral",
+                     "Chaperone binding",
                      "Oxidation-reduction",
-                     "Toxin",
+                     "Unknown",
                      "Antineoplastic",
-                     "Antitumor",
-                     "CASPASE inhibitor",
+                     "Antagonist",
+                     "Transition state mimetic",
+                     "Antifungal",
+                     "RNA synthesis Inhibitor",
                      "Metabolism",
                      "Receptor",
-                     "Lantibiotic",
-                     "Unknown",
                      "Enzyme inhibitor",
-                     "Growth factor",
-                     "Antiinflammatory",
-                     "Antithrombotic",
-                     "Anthelmintic",
-                     "Antiparasitic",
-                     "Chaperone binding",
-                     "Inhibitor",
-                     "Immunosuppressant",
-                     "Antagonist",
-                     "Antimicrobial",
-                     "Transport activator",
-                     "Thrombin inhibitor",
-                     "Anticancer",
-                     "Antiviral",
-                     "Transition state mimetic",
                      "Synthetic opioid",
-                     "Metal transport"
+                     "Lantibiotic",
+                     "Antiretroviral",
+                     "Anticancer",
+                     "Immunosuppressant",
+                     "Toxin",
+                     "Antiinflammatory",
+                     "Anthelmintic",
+                     "Antibiotic",
+                     "CASPASE inhibitor",
+                     "Antitumor",
+                     "Antimicrobial",
+                     "Growth factor",
+                     "Trypsin inhibitor",
+                     "Inhibitor",
+                     "Thrombin inhibitor"
                   ],
                   "examples": [
                      "Anticancer",
@@ -634,8 +634,8 @@
                "type": "string",
                "enum": [
                   "OBS",
-                  "REL",
                   "WAIT",
+                  "REL",
                   "HOLD"
                ],
                "description": "Defines the current PDB release status for this molecule definition."
@@ -651,8 +651,8 @@
             "represent_as": {
                "type": "string",
                "enum": [
-                  "polymer",
-                  "single molecule"
+                  "single molecule",
+                  "polymer"
                ],
                "description": "Defines how this entity is represented in PDB data files."
             },
@@ -665,39 +665,39 @@
                "items": {
                   "type": "string",
                   "enum": [
-                     "Cyclic lipopeptide",
-                     "Amino acid",
-                     "Ansamycin",
                      "Anthraquinone",
-                     "Chromophore",
-                     "Thiolactone",
-                     "Nucleoside",
-                     "Chalkophore",
                      "Thiopeptide",
-                     "Unknown",
-                     "Polysaccharide",
-                     "Lipoglycopeptide",
-                     "Chalkophore, Polypeptide",
-                     "Keto acid",
-                     "Quinolone",
-                     "Heterocyclic",
-                     "Oligosaccharide",
-                     "Lipopeptide",
-                     "Peptide-like",
+                     "Cyclic peptide",
                      "Aminoglycoside",
+                     "Oligopeptide",
+                     "Quinolone",
+                     "Siderophore",
+                     "Tricyclic pentaglycosidic antineoplastic antibiotic",
+                     "Unknown",
+                     "Chromophore",
+                     "Imino sugar",
+                     "Chalkophore",
+                     "Lipoglycopeptide",
+                     "Oligosaccharide",
+                     "Chalkophore, Polypeptide",
+                     "Heterocyclic",
+                     "Peptaibol",
+                     "Lipopeptide",
+                     "Keto acid",
+                     "Cyclic depsipeptide",
+                     "Thiolactone",
+                     "Glycopeptide",
+                     "Amino acid",
                      "Non-polymer",
+                     "Anthracycline",
+                     "Ansamycin",
+                     "Cyclic lipopeptide",
+                     "Nucleoside",
                      "Polycyclic",
                      "Polypeptide",
-                     "Peptaibol",
+                     "Peptide-like",
                      "Macrolide",
-                     "Oligopeptide",
-                     "Cyclic depsipeptide",
-                     "Tricyclic pentaglycosidic antineoplastic antibiotic",
-                     "Siderophore",
-                     "Glycopeptide",
-                     "Anthracycline",
-                     "Imino sugar",
-                     "Cyclic peptide"
+                     "Polysaccharide"
                   ],
                   "examples": [
                      "Peptide-like",

@@ -83,11 +83,11 @@
             "type": {
                "type": "string",
                "enum": [
-                  "water",
-                  "branched",
+                  "non-polymer",
                   "macrolide",
+                  "branched",
                   "polymer",
-                  "non-polymer"
+                  "water"
                ],
                "description": "Defines the type of the entity.\n\n Polymer entities are expected to have corresponding\n ENTITY_POLY and associated entries.\n\n Non-polymer entities are expected to have corresponding\n CHEM_COMP and associated entries.\n\n Water entities are not expected to have corresponding\n entries in the ENTITY category."
             }
@@ -170,20 +170,20 @@
             "nstd_linkage": {
                "type": "string",
                "enum": [
-                  "y",
-                  "no",
+                  "yes",
                   "n",
-                  "yes"
+                  "y",
+                  "no"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer-to-monomer link different from that implied by\n _entity_poly.type."
             },
             "nstd_monomer": {
                "type": "string",
                "enum": [
-                  "y",
-                  "no",
+                  "yes",
                   "n",
-                  "yes"
+                  "y",
+                  "no"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer that is not considered standard."
             },
@@ -220,11 +220,11 @@
             "rcsb_entity_polymer_type": {
                "type": "string",
                "enum": [
-                  "Protein",
-                  "NA-hybrid",
                   "Other",
+                  "DNA",
+                  "NA-hybrid",
                   "RNA",
-                  "DNA"
+                  "Protein"
                ],
                "description": "A coarse-grained polymer entity type."
             },
@@ -235,16 +235,16 @@
             "type": {
                "type": "string",
                "enum": [
-                  "polysaccharide(L)",
-                  "polysaccharide(D)",
-                  "polypeptide(D)",
-                  "cyclic-pseudo-peptide",
-                  "polypeptide(L)",
                   "peptide nucleic acid",
-                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
-                  "other",
+                  "polysaccharide(L)",
+                  "polypeptide(L)",
+                  "polydeoxyribonucleotide",
                   "polyribonucleotide",
-                  "polydeoxyribonucleotide"
+                  "other",
+                  "cyclic-pseudo-peptide",
+                  "polypeptide(D)",
+                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
+                  "polysaccharide(D)"
                ],
                "description": "The type of the polymer."
             }
@@ -265,10 +265,10 @@
                "hetero": {
                   "type": "string",
                   "enum": [
-                     "y",
-                     "no",
+                     "yes",
                      "n",
-                     "yes"
+                     "y",
+                     "no"
                   ],
                   "description": "A flag to indicate whether this monomer in the polymer is\n heterogeneous in sequence."
                },
@@ -392,8 +392,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "model",
-                     "sample"
+                     "sample",
+                     "model"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -602,10 +602,10 @@
                "pdbx_seq_type": {
                   "type": "string",
                   "enum": [
-                     "C-terminal tag",
-                     "N-terminal tag",
                      "Linker",
-                     "Biological sequence"
+                     "Biological sequence",
+                     "C-terminal tag",
+                     "N-terminal tag"
                   ],
                   "description": "This data item povides additional information about the sequence type."
                },
@@ -668,8 +668,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "model",
-                     "sample"
+                     "sample",
+                     "model"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -879,8 +879,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "model",
-                     "sample"
+                     "sample",
+                     "model"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -1121,8 +1121,8 @@
                   "type": "string",
                   "enum": [
                      "synthetic",
-                     "natural",
-                     "genetically engineered"
+                     "genetically engineered",
+                     "natural"
                   ],
                   "description": "The source type for the entity\n"
                }
