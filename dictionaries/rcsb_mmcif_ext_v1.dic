@@ -40,6 +40,21 @@
 #                        rcsb_chem_comp_container_identifers, drugbank_container_identifiers
 #    18-Feb-2019 jdw Add rcsb_label_asym_id* to pdbx_validate_* categories.
 #
+#    12-Mar-2019.jdw Add _entity.rcsb_macromolecular_names_combined, rcsb_entry_info.software_programs_combined,
+#                        _rcsb_entity_container_identifiers.chem_comp_ligand,
+#                        _rcsb_entity_container_identifiers.chem_comp_monomers
+#                    Add data types int-csv and int-scsv
+#                    Add _entity.rcsb_ec_lineage_name _entity.rcsb_ec_lineage_id _entity.rcsb_ec_lineage_depth
+#                    Add sub-category rcsb_ec_lineage, taxonomy_lineage
+#                    Add _rcsb_entity_source_organism.taxonomy_lineage_id
+#                        _rcsb_entity_source_organism.taxonomy_lineage_name
+#                        _rcsb_entity_source_organism.taxonomy_lineage_depth
+#                    Add _rcsb_entity_host_organism.taxonomy_lineage_id,
+#                        _rcsb_entity_host_organism.taxonomy_lineage_name
+#                        _rcsb_entity_host_organism.taxonomy_lineage_depth
+#                    Add _rcsb_schema_container_identifiers.schema_name
+#                        _rcsb_schema_container_identifiers.collection_name
+#                        _rcsb_schema_container_identifiers.collection_schema_version
 ###########################################################################
 
 
@@ -58,12 +73,32 @@ data_rcsb_mmcif_ext.dic
 
     _dictionary.title           rcsb_mmcif_ext.dic
     _dictionary.datablock_id    rcsb_mmcif_ext.dic
-    _dictionary.version         0.113
+    _dictionary.version         0.114
 #
      loop_
     _dictionary_history.version
     _dictionary_history.update
     _dictionary_history.revision
+
+ 0.114 2019-03-13
+;
+Changes (jdw):
+    + Add _entity.rcsb_macromolecular_names_combined, rcsb_entry_info.software_programs_combined,
+          _rcsb_entity_container_identifiers.chem_comp_ligand,
+          _rcsb_entity_container_identifiers.chem_comp_monomers
+    + Add data types int-csv and int-scsv
+    + Add _entity.rcsb_ec_lineage_name _entity.rcsb_ec_lineage_id _entity.rcsb_ec_lineage_depth
+    + Add sub-category rcsb_ec_lineage, taxonomy_lineage
+    + Add _rcsb_entity_source_organism.taxonomy_lineage_id,
+          _rcsb_entity_source_organism.taxonomy_lineage_name,
+          _rcsb_entity_source_organism.taxonomy_lineage_depth
+    + Add _rcsb_entity_host_organism.taxonomy_lineage_id,
+          _rcsb_entity_host_organism.taxonomy_lineage_name,
+          _rcsb_entity_host_organism.taxonomy_lineage_depth
+    + Add_rcsb_schema_container_identifiers.schema_name
+         _rcsb_schema_container_identifiers.collection_name
+         _rcsb_schema_container_identifiers.collection_schema_version
+;
  0.113 2019-02-18
 ;
 Changes (jdw):
@@ -211,6 +246,14 @@ Changes (jdw):
                '[][ \t_(),.;:"&<>/\{}'`~!@#$%?+=*A-Za-z0-9|^-]*'
 ;              vertical bar separated alpha numeric text
 ;
+               int-csv      numb
+               '[0-9]+(,[0-9]+)?'
+;              comma separated numeric codes (integers) ...
+;
+               int-scsv      numb
+               '[0-9]+(;[0-9]+)?'
+;              semi-colon separated numeric codes (integers) ...
+;
                float3     numb
           '-?(([0-9]+)[.]?|([0-9]*[.][0-9]+))([(][0-9]+[)])?([eE][+-]?[0-9]+)?'
 ;              float item types are the subset of numbers that are the floating
@@ -233,7 +276,12 @@ Changes (jdw):
               'entity_feature'
 ;              Items specifying the features of an entity.
 ;
-
+              'rcsb_ec_lineage'
+;              Items specifying the details of enzyme classification lineage.
+;
+              'taxonomy_lineage'
+;              Items specifying the details of taxonomy classification lineage.
+;
 
 #################
 ## METHOD_LIST ##
@@ -255,39 +303,40 @@ sys.stdout.write("Number of rows %d \n" % len(self.getRowList()))
 ;
 # Methods for primary structure data files
 #
-rcsb_this_block                      calculate_with_helper python  'DictMethodHelper.setDatablockId'
-rcsb_timestamp                       calculate_with_helper python  'DictMethodHelper.setLoadDateTime'
-rcsb_file_container                  calculate_with_helper python  'DictMethodHelper.setLocator'
-rcsb_row_index                       calculate_with_helper python  'DictMethodHelper.setRowIndex'
-rcsb_add_entry_info                  calculate_with_helper python  'DictMethodHelper.addEntryInfo'
-rcsb_add_deposited_assembly          calculate_with_helper python  'DictMethodHelper.addDepositedAssembly'
-rcsb_filter_assembly_details         calculate_with_helper python  'DictMethodHelper.filterAssemblyDetails'
-rcsb_filter_assembly_details         calculate_with_helper python  'DictMethodHelper.filterAssemblyDetails'
-rcsb_assembly_candidates             calculate_with_helper python  'DictMethodHelper.assignAssemblyCandidates'
-rcsb_entity_source_organism          calculate_with_helper python  'DictMethodHelper.filterSourceOrganismDetails'
-rcsb_aggregate_citation_authors      calculate_with_helper python  'DictMethodHelper.aggregateCitationAuthors'
-rcsb_consolidate_accession_info      calculate_with_helper python  'DictMethodHelper.consolidateAccessionDetails'
-rcsb_entry_container_identifiers     calculate_with_helper python  'DictMethodHelper.buildContainerEntryIds'
-rcsb_entity_container_identifiers    calculate_with_helper python  'DictMethodHelper.buildContainerEntityIds'
-rcsb_entity_instance_container_identifiers calculate_with_helper python  'DictMethodHelper.buildContainerEntityInstanceIds'
-rcsb_assembly_container_identifiers  calculate_with_helper python  'DictMethodHelper.buildContainerAssemblyIds'
-rcsb_add_bird_entity_identifiers     calculate_with_helper python  'DictMethodHelper.addBirdEntityIds'
-rcsb_add_struct_ref_seq_entity_identifiers calculate_with_helper python  'DictMethodHelper.addStructRefSeqEntityIds'
-rcsb_item_method_deferred            calculate_with_helper python  'DictMethodHelper.deferredItemMethod'
+rcsb_this_block                             calculate_with_helper python  'DictMethodHelper.setDatablockId'
+rcsb_timestamp                              calculate_with_helper python  'DictMethodHelper.setLoadDateTime'
+rcsb_file_container                         calculate_with_helper python  'DictMethodHelper.setLocator'
+rcsb_row_index                              calculate_with_helper python  'DictMethodHelper.setRowIndex'
+rcsb_add_entry_info                         calculate_with_helper python  'DictMethodHelper.addEntryInfo'
+rcsb_add_deposited_assembly                 calculate_with_helper python  'DictMethodHelper.addDepositedAssembly'
+rcsb_filter_assembly_details                calculate_with_helper python  'DictMethodHelper.filterAssemblyDetails'
+rcsb_filter_assembly_details                calculate_with_helper python  'DictMethodHelper.filterAssemblyDetails'
+rcsb_assembly_candidates                    calculate_with_helper python  'DictMethodHelper.assignAssemblyCandidates'
+rcsb_entity_source_organism                 calculate_with_helper python  'DictMethodHelper.filterSourceOrganismDetails'
+rcsb_aggregate_citation_authors             calculate_with_helper python  'DictMethodHelper.aggregateCitationAuthors'
+rcsb_consolidate_accession_info             calculate_with_helper python  'DictMethodHelper.consolidateAccessionDetails'
+rcsb_entry_container_identifiers            calculate_with_helper python  'DictMethodHelper.buildContainerEntryIds'
+rcsb_entity_container_identifiers           calculate_with_helper python  'DictMethodHelper.buildContainerEntityIds'
+rcsb_entity_instance_container_identifiers  calculate_with_helper python  'DictMethodHelper.buildContainerEntityInstanceIds'
+rcsb_assembly_container_identifiers         calculate_with_helper python  'DictMethodHelper.buildContainerAssemblyIds'
+rcsb_add_bird_entity_identifiers            calculate_with_helper python  'DictMethodHelper.addBirdEntityIds'
+rcsb_add_struct_ref_seq_entity_identifiers  calculate_with_helper python  'DictMethodHelper.addStructRefSeqEntityIds'
+rcsb_add_entity_misc                        calculate_with_helper python  'DictMethodHelper.addEntityMisc'
+rcsb_item_method_deferred                   calculate_with_helper python  'DictMethodHelper.deferredItemMethod'
 #
-rcsb_entity_poly_info                        calculate_with_helper python  'DictMethodHelper.buildEntityPolyInfo'
-rcsb_filter_enum                             calculate_with_helper python  'DictMethodHelper.filterEnumerations'
-#rcsb_category_method_deferred               calculate_with_helper python  'DictMethodHelper.deferredCategoryMethod'
+rcsb_entity_poly_info                       calculate_with_helper python  'DictMethodHelper.buildEntityPolyInfo'
+rcsb_filter_enum                            calculate_with_helper python  'DictMethodHelper.filterEnumerations'
+#rcsb_category_method_deferred              calculate_with_helper python  'DictMethodHelper.deferredCategoryMethod'
 #
 # Methods for chemical reference data
 #
-rcsb_add_chem_comp_targets           calculate_with_helper python  'DictMethodHelper.addChemCompTargets'
-rcsb_add_chem_comp_synonyms          calculate_with_helper python  'DictMethodHelper.addChemCompSynonyms'
-rcsb_add_chem_comp_info              calculate_with_helper python  'DictMethodHelper.addChemCompInfo'
-rcsb_add_chem_comp_descriptor        calculate_with_helper python  'DictMethodHelper.addChemCompDescriptor'
-rcsb_add_chem_comp_related           calculate_with_helper python  'DictMethodHelper.addChemCompRelated'
+rcsb_add_chem_comp_targets                  calculate_with_helper python  'DictMethodHelper.addChemCompTargets'
+rcsb_add_chem_comp_synonyms                 calculate_with_helper python  'DictMethodHelper.addChemCompSynonyms'
+rcsb_add_chem_comp_info                     calculate_with_helper python  'DictMethodHelper.addChemCompInfo'
+rcsb_add_chem_comp_descriptor               calculate_with_helper python  'DictMethodHelper.addChemCompDescriptor'
+rcsb_add_chem_comp_related                  calculate_with_helper python  'DictMethodHelper.addChemCompRelated'
 
-rcsb_file_block_by_method            calculate_with_helper python  'DictMethodHelper.filterBlockByMethod'
+rcsb_file_block_by_method                   calculate_with_helper python  'DictMethodHelper.filterBlockByMethod'
 
 ##
 ##  Extension definitions start here -
@@ -678,6 +727,58 @@ save__entity.rcsb_source_part_count
     _item_type.code               int
      _item_methods.method_id     'rcsb_item_method_deferred'
      save_
+
+save__entity.rcsb_macromolecular_names_combined
+    _item_description.description
+;  Combined list of macromolecular names.
+
+;
+    _item.name                  '_entity.rcsb_macromolecular_names_combined'
+    _item.category_id             entity
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_methods.method_id       'rcsb_add_entity_misc'
+     save_
+##
+save__entity.rcsb_ec_lineage_id
+    _item_description.description
+;  Members of the enzyme classification lineage as parent classification codes.
+
+;
+    _item.name                  '_entity.rcsb_ec_lineage_id'
+    _item.category_id             entity
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_methods.method_id       'rcsb_add_entity_misc'
+    _item_sub_category.id         rcsb_ec_lineage
+     save_
+
+save__entity.rcsb_ec_lineage_name
+    _item_description.description
+;  Members of the enzyme classification lineage as parent classification names.
+
+;
+    _item.name                  '_entity.rcsb_ec_lineage_name'
+    _item.category_id             entity
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_methods.method_id       'rcsb_add_entity_misc'
+    _item_sub_category.id         rcsb_ec_lineage
+     save_
+
+save__entity.rcsb_ec_lineage_depth
+    _item_description.description
+;  Members of the enzyme classification lineage as parent classification hierarchy depth (1-N).
+
+;
+    _item.name                  '_entity.rcsb_ec_lineage_depth'
+    _item.category_id             entity
+    _item.mandatory_code          no
+    _item_type.code               int-scsv
+    _item_methods.method_id       'rcsb_add_entity_misc'
+    _item_sub_category.id         rcsb_ec_lineage
+     save_
+##
 
 #################
 ## ENTITY_POLY ##
@@ -1247,9 +1348,11 @@ save_rcsb_entity_container_identifiers
     _rcsb_entity_container_identifiers.entity_id
     _rcsb_entity_container_identifiers.asym_ids
     _rcsb_entity_container_identifiers.auth_asym_ids
-    1abc  1 A A
-    1abc  2 B B
-    1abc  3 C C
+    _rcsb_entity_container_identifiers.chem_comp_monomers
+    _rcsb_entity_container_identifiers.chem_comp_ligand
+    1abc  1 A A 'ALA,GLY,...' .
+    1abc  2 B B 'ALA,GLY,...' .
+    1abc  3 C C  . STN
 
 ;
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1303,6 +1406,25 @@ save__rcsb_entity_container_identifiers.auth_asym_ids
     _item_type.code               alphanum-csv
      save_
 
+save__rcsb_entity_container_identifiers.chem_comp_monomers
+    _item_description.description
+;    Unique list of monomer chemical component identifies in the entity in this container.
+;
+    _item.name                  '_rcsb_entity_container_identifiers.chem_comp_monomers'
+    _item.category_id             rcsb_entity_container_identifiers
+    _item.mandatory_code          no
+    _item_type.code               alphanum-csv
+     save_
+
+save__rcsb_entity_container_identifiers.chem_comp_ligand
+    _item_description.description
+;     Non-polymer(ligand) chemical component identifier for the entity in this container.
+;
+    _item.name                  '_rcsb_entity_container_identifiers.chem_comp_ligand'
+    _item.category_id             rcsb_entity_container_identifiers
+    _item.mandatory_code          no
+    _item_type.code               code
+     save_
 ##
 ##
 
@@ -2747,7 +2869,10 @@ save_rcsb_entity_source_organism
     _rcsb_entity_source_organism.end_seq_num
     _rcsb_entity_source_organism.ncbi_scientific_name
     _rcsb_entity_source_organism.ncbi_common_names
-    1 1 natural 'Homo sapiens' human 9606  'PDB Primary Data' 1 202 'Homo sapiens' human
+    _rcsb_entity_source_organism.taxonomy_lineage_id
+    _rcsb_entity_source_organism.taxonomy_lineage_name
+    _rcsb_entity_source_organism.taxonomy_lineage_depth
+    1 1 natural 'Homo sapiens' human 9606  'PDB Primary Data' 1 202 'Homo sapiens' human . . .
     # ... abbreviated
 ;
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -2926,6 +3051,38 @@ save__rcsb_entity_source_organism.ncbi_common_names
     _item_type.code               alphanum-scsv
      save_
 
+save__rcsb_entity_source_organism.taxonomy_lineage_id
+    _item_description.description
+;  Members of the NCBI Taxonomy lineage as parent taxonomy idcodes.
+;
+    _item.name                  '_rcsb_entity_source_organism.taxonomy_lineage_id'
+    _item.category_id            rcsb_entity_source_organism
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_sub_category.id         taxonomy_lineage
+     save_
+
+save__rcsb_entity_source_organism.taxonomy_lineage_name
+    _item_description.description
+;  Memebers of the NCBI Taxonomy lineage as parent taxonomy names.
+;
+    _item.name                  '_rcsb_entity_source_organism.taxonomy_lineage_name'
+    _item.category_id            rcsb_entity_source_organism
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_sub_category.id         taxonomy_lineage
+     save_
+
+save__rcsb_entity_source_organism.taxonomy_lineage_depth
+    _item_description.description
+;  Members of the NCBI Taxonomy lineage as parent taxonomy lineage depth (1-N)
+;
+    _item.name                  '_rcsb_entity_source_organism.taxonomy_lineage_depth'
+    _item.category_id            rcsb_entity_source_organism
+    _item.mandatory_code          no
+    _item_type.code               int-scsv
+    _item_sub_category.id         taxonomy_lineage
+     save_
 
 ###############################
 ## RCSB_ENTITY_HOST_ORGANISM ##
@@ -2964,7 +3121,10 @@ save_rcsb_entity_host_organism
     _rcsb_entity_host_organism.end_seq_num
     _rcsb_entity_host_organism.ncbi_scientific_name
     _rcsb_entity_host_organism.ncbi_common_names
-    1 1 'Escherichia coli' 'E. coli' 562  'PDB Primary Data' 1 102 'Escherichia coli' 'E. coli'
+    _rcsb_entity_host_organism.taxonomy_lineage_id
+    _rcsb_entity_host_organism.taxonomy_lineage_name
+    _rcsb_entity_host_organism.taxonomy_lineage_depth
+    1 1 'Escherichia coli' 'E. coli' 562  'PDB Primary Data' 1 102 'Escherichia coli' 'E. coli' . . .
     # ... abbreviated
 ;
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -3096,6 +3256,39 @@ save__rcsb_entity_host_organism.common_names_ncbi
     _item.category_id             rcsb_entity_host_organism
     _item.mandatory_code          no
     _item_type.code               alphanum-scsv
+     save_
+
+save__rcsb_entity_host_organism.taxonomy_lineage_id
+    _item_description.description
+;  Members of the NCBI Taxonomy lineage as parent taxonomy idcodes.
+;
+    _item.name                  '_rcsb_entity_host_organism.taxonomy_lineage_id'
+    _item.category_id            rcsb_entity_host_organism
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_sub_category.id         taxonomy_lineage
+     save_
+
+save__rcsb_entity_host_organism.taxonomy_lineage_name
+    _item_description.description
+;  Members of the NCBI Taxonomy lineage as parent taxonomy names.
+;
+    _item.name                  '_rcsb_entity_host_organism.taxonomy_lineage_name'
+    _item.category_id            rcsb_entity_host_organism
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_sub_category.id         taxonomy_lineage
+     save_
+
+save__rcsb_entity_host_organism.taxonomy_lineage_depth
+    _item_description.description
+;  Members of the NCBI Taxonomy lineage as parent taxonomy lineage depth (1-N)
+;
+    _item.name                  '_rcsb_entity_host_organism.taxonomy_lineage_depth'
+    _item.category_id            rcsb_entity_host_organism
+    _item.mandatory_code          no
+    _item_type.code               int-scsv
+    _item_sub_category.id         taxonomy_lineage
      save_
 
 #########################
@@ -3976,6 +4169,7 @@ save_rcsb_entry_info
      _rcsb_entry_info.nonpolymer_entity_count       2
      _rcsb_entry_info.solvent_entity_count          1
      _rcsb_entry_info.branched_entity_count         0
+     _rcsb_entry_info.software_programs_combined    'Phenix;Refmac'
 ;
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
    _pdbx_category_context.type         RCSB_LOCAL
@@ -4103,6 +4297,16 @@ save__rcsb_entry_info.entity_count
     _item.category_id             rcsb_entry_info
     _item.mandatory_code          no
     _item_type.code               int
+     save_
+
+save__rcsb_entry_info.software_programs_combined
+    _item_description.description
+;  Combined list of software programs names reported in connection with the production of this entry.
+;
+    _item.name                  '_rcsb_entry_info.software_programs_combined'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
      save_
 #
 #####################
@@ -4933,3 +5137,73 @@ save__pdbx_distant_solvent_atoms.rcsb_label_asym_id
 #     _item_linked.parent_name   '_atom_site.label_asym_id'
 
       save_
+
+########################################
+## RCSB_SCHEMA_CONTAINER_IDENTIFIERS
+########################################
+
+save_rcsb_schema_container_identifiers
+    _category.description
+;        The rcsb_schema_container_identifiers records identifiers relevant to the
+         schema container information.
+;
+    _category.id                  rcsb_schema_container_identifiers
+    _category.mandatory_code      no
+    loop_
+    _category_key.name          '_rcsb_schema_container_identifiers.schema_name'
+                                '_rcsb_schema_container_identifiers.collection_name'
+                                '_rcsb_schema_container_identifiers.version'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     loop_
+    _rcsb_schema_container_identifiers.schema_name
+    _rcsb_schema_container_identifiers.collection_name
+    _rcsb_schema_container_identifiers.collection_schema_version
+    pdbx_core pdbx_core_entry v5_0_2
+
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_schema_container_identifiers
+   #_category_methods.method_id         'rcsb_schema_container_identifiers'
+     save_
+
+save__rcsb_schema_container_identifiers.schema_name
+    _item_description.description
+;    Schema name associated with the data in the container.
+;
+    _item.name                  '_rcsb_schema_container_identifiers.schema_name'
+    _item.category_id             rcsb_schema_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+     save_
+
+save__rcsb_schema_container_identifiers.collection_name
+    _item_description.description
+;    Collection name associated with the data in the container.
+;
+    _item.name                  '_rcsb_schema_container_identifiers.collection_name'
+    _item.category_id             rcsb_schema_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+     save_
+
+save__rcsb_schema_container_identifiers.collection_schema_version
+    _item_description.description
+;    Version string for the schema and collection.
+;
+    _item.name                  '_rcsb_schema_container_identifiers.collection_schema_version'
+    _item.category_id             rcsb_schema_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+     save_
