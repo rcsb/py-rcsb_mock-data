@@ -96,8 +96,8 @@
                "type": "string",
                "enum": [
                   "EBI",
-                  "PDBE",
                   "PDBJ",
+                  "PDBE",
                   "RCSB"
                ],
                "description": "This data item identifies the deposition site that processed\n this chemical component defintion."
@@ -105,12 +105,12 @@
             "pdbx_release_status": {
                "type": "string",
                "enum": [
-                  "REF_ONLY",
-                  "DEL",
                   "HPUB",
-                  "OBS",
                   "REL",
-                  "HOLD"
+                  "DEL",
+                  "HOLD",
+                  "OBS",
+                  "REF_ONLY"
                ],
                "description": "This data item holds the current release status for the component."
             },
@@ -183,35 +183,35 @@
             "type": {
                "type": "string",
                "enum": [
-                  "DNA linking",
-                  "D-peptide NH3 amino terminus",
-                  "saccharide",
                   "L-peptide linking",
-                  "D-gamma-peptide, C-delta linking",
-                  "L-saccharide",
-                  "L-peptide NH3 amino terminus",
-                  "L-saccharide 1,4 and 1,4 linking",
-                  "D-peptide linking",
-                  "L-peptide COOH carboxy terminus",
-                  "peptide-like",
-                  "DNA OH 5 prime terminus",
-                  "D-peptide COOH carboxy terminus",
                   "DNA OH 3 prime terminus",
-                  "L-gamma-peptide, C-delta linking",
-                  "RNA linking",
-                  "L-RNA linking",
-                  "other",
-                  "RNA OH 5 prime terminus",
-                  "L-DNA linking",
-                  "D-beta-peptide, C-gamma linking",
-                  "peptide linking",
-                  "non-polymer",
-                  "L-saccharide 1,4 and 1,6 linking",
-                  "L-beta-peptide, C-gamma linking",
-                  "D-saccharide 1,4 and 1,4 linking",
-                  "D-saccharide 1,4 and 1,6 linking",
+                  "D-peptide linking",
                   "RNA OH 3 prime terminus",
-                  "D-saccharide"
+                  "D-beta-peptide, C-gamma linking",
+                  "RNA OH 5 prime terminus",
+                  "peptide-like",
+                  "L-peptide COOH carboxy terminus",
+                  "other",
+                  "L-saccharide 1,4 and 1,6 linking",
+                  "L-RNA linking",
+                  "D-peptide COOH carboxy terminus",
+                  "saccharide",
+                  "D-saccharide 1,4 and 1,6 linking",
+                  "D-saccharide",
+                  "L-beta-peptide, C-gamma linking",
+                  "DNA OH 5 prime terminus",
+                  "D-peptide NH3 amino terminus",
+                  "peptide linking",
+                  "L-saccharide 1,4 and 1,4 linking",
+                  "L-DNA linking",
+                  "RNA linking",
+                  "D-gamma-peptide, C-delta linking",
+                  "D-saccharide 1,4 and 1,4 linking",
+                  "L-gamma-peptide, C-delta linking",
+                  "L-saccharide",
+                  "non-polymer",
+                  "DNA linking",
+                  "L-peptide NH3 amino terminus"
                ],
                "description": "For standard polymer components, the type of the monomer.\n Note that monomers that will form polymers are of three types:\n linking monomers, monomers with some type of N-terminal (or 5')\n cap and monomers with some type of C-terminal (or 3') cap."
             }
@@ -330,8 +330,8 @@
                   "type": "string",
                   "enum": [
                      "N",
-                     "R",
-                     "S"
+                     "S",
+                     "R"
                   ],
                   "description": "The chiral configuration of the atom that is a chiral center."
                },
@@ -386,22 +386,22 @@
                   "type": "string",
                   "enum": [
                      "Z",
-                     "N",
-                     "E"
+                     "E",
+                     "N"
                   ],
                   "description": "Stereochemical configuration across a double bond."
                },
                "value_order": {
                   "type": "string",
                   "enum": [
+                     "trip",
+                     "quad",
+                     "delo",
+                     "doub",
                      "sing",
                      "poly",
-                     "delo",
                      "arom",
-                     "quad",
-                     "pi",
-                     "doub",
-                     "trip"
+                     "pi"
                   ],
                   "description": "The value that should be taken as the target for the chemical\n bond associated with the specified atoms, expressed as a bond\n order."
                }
@@ -423,31 +423,31 @@
                "action_type": {
                   "type": "string",
                   "enum": [
+                     "Modify parent residue",
                      "Modify component comp_id",
-                     "Modify value order",
-                     "Modify descriptor",
                      "Modify name",
-                     "Obsolete component",
-                     "Modify synonyms",
-                     "Modify model coordinates code",
+                     "Modify component atom id",
                      "Create component",
-                     "Modify formula",
-                     "Initial release",
                      "Modify one letter code",
                      "Modify atom id",
-                     "Modify charge",
-                     "Modify coordinates",
-                     "Modify subcomponent list",
-                     "Modify linking type",
-                     "Modify processing site",
-                     "Modify aromatic_flag",
-                     "Modify internal type",
-                     "Modify identifier",
-                     "Modify formal charge",
-                     "Modify leaving atom flag",
+                     "Modify model coordinates code",
+                     "Modify value order",
+                     "Modify synonyms",
                      "Other modification",
-                     "Modify parent residue",
-                     "Modify component atom id"
+                     "Modify linking type",
+                     "Obsolete component",
+                     "Modify internal type",
+                     "Modify charge",
+                     "Modify formula",
+                     "Modify coordinates",
+                     "Modify formal charge",
+                     "Modify aromatic_flag",
+                     "Modify identifier",
+                     "Modify processing site",
+                     "Initial release",
+                     "Modify descriptor",
+                     "Modify subcomponent list",
+                     "Modify leaving atom flag"
                   ],
                   "description": "The action associated with this audit record."
                },
@@ -509,20 +509,20 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "InChI_MAIN_FORMULA",
-                     "InChI_CHARGE",
-                     "InChIKey",
+                     "InChI_RECONNECT",
                      "InChI_MAIN_HATOM",
-                     "SMILES_CANNONICAL",
+                     "InChI_FIXEDH",
+                     "InChI_STEREO",
+                     "InChI_MAIN",
+                     "InChI_CHARGE",
+                     "SMILES",
+                     "SMILES_CANONICAL",
                      "InChI",
                      "InChI_MAIN_CONNECT",
-                     "InChI_MAIN",
-                     "SMILES_CANONICAL",
+                     "InChIKey",
                      "InChI_ISOTOPE",
-                     "InChI_FIXEDH",
-                     "SMILES",
-                     "InChI_RECONNECT",
-                     "InChI_STEREO"
+                     "SMILES_CANNONICAL",
+                     "InChI_MAIN_FORMULA"
                   ],
                   "description": "This data item contains the descriptor type."
                }
@@ -618,15 +618,15 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "SYSTEMATIC NAME",
+                     "CONDENSED IUPAC CARB SYMBOL",
+                     "CAS REGISTRY NUMBER",
+                     "COMMON NAME",
+                     "MDL Identifier",
                      "SNFG CARB SYMBOL",
                      "SYNONYM",
-                     "MDL Identifier",
-                     "PUBCHEM Identifier",
-                     "CAS REGISTRY NUMBER",
-                     "CONDENSED IUPAC CARB SYMBOL",
+                     "SYSTEMATIC NAME",
                      "IUPAC CARB SYMBOL",
-                     "COMMON NAME"
+                     "PUBCHEM Identifier"
                   ],
                   "description": "This data item contains the identifier type."
                }

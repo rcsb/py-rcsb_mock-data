@@ -28,13 +28,6 @@
             "pdbx_number_of_molecules": {
                "bsonType": "double"
             },
-            "rcsb_macromolecular_names_combined": {
-               "bsonType": "array",
-               "items": {
-                  "bsonType": "string"
-               },
-               "uniqueItems": false
-            },
             "rcsb_multiple_source_flag": {
                "bsonType": "string",
                "enum": [
@@ -48,8 +41,8 @@
             "src_method": {
                "bsonType": "string",
                "enum": [
-                  "syn",
                   "nat",
+                  "syn",
                   "man"
                ]
             },
@@ -57,10 +50,10 @@
                "bsonType": "string",
                "enum": [
                   "polymer",
-                  "water",
                   "macrolide",
-                  "branched",
-                  "non-polymer"
+                  "non-polymer",
+                  "water",
+                  "branched"
                ]
             },
             "rcsb_ec_lineage": {
@@ -75,6 +68,24 @@
                         "bsonType": "string"
                      },
                      "name": {
+                        "bsonType": "string"
+                     }
+                  }
+               },
+               "uniqueItems": false
+            },
+            "rcsb_macromolecular_names_combined": {
+               "bsonType": "array",
+               "items": {
+                  "bsonType": "object",
+                  "properties": {
+                     "name": {
+                        "bsonType": "string"
+                     },
+                     "provenance_code": {
+                        "bsonType": "string"
+                     },
+                     "source": {
                         "bsonType": "string"
                      }
                   }
@@ -137,19 +148,19 @@
             "nstd_linkage": {
                "bsonType": "string",
                "enum": [
-                  "no",
-                  "n",
                   "y",
-                  "yes"
+                  "yes",
+                  "no",
+                  "n"
                ]
             },
             "nstd_monomer": {
                "bsonType": "string",
                "enum": [
-                  "no",
-                  "n",
                   "y",
-                  "yes"
+                  "yes",
+                  "no",
+                  "n"
                ]
             },
             "pdbx_seq_one_letter_code": {
@@ -167,11 +178,11 @@
             "rcsb_entity_polymer_type": {
                "bsonType": "string",
                "enum": [
-                  "Other",
-                  "RNA",
                   "NA-hybrid",
+                  "Protein",
+                  "Other",
                   "DNA",
-                  "Protein"
+                  "RNA"
                ]
             },
             "rcsb_prd_id": {
@@ -181,15 +192,15 @@
                "bsonType": "string",
                "enum": [
                   "polyribonucleotide",
-                  "other",
-                  "polydeoxyribonucleotide",
-                  "cyclic-pseudo-peptide",
+                  "polypeptide(L)",
                   "polydeoxyribonucleotide/polyribonucleotide hybrid",
                   "polypeptide(D)",
-                  "polysaccharide(L)",
                   "peptide nucleic acid",
+                  "other",
                   "polysaccharide(D)",
-                  "polypeptide(L)"
+                  "polydeoxyribonucleotide",
+                  "cyclic-pseudo-peptide",
+                  "polysaccharide(L)"
                ]
             }
          },
@@ -208,10 +219,10 @@
                "hetero": {
                   "bsonType": "string",
                   "enum": [
-                     "no",
-                     "n",
                      "y",
-                     "yes"
+                     "yes",
+                     "no",
+                     "n"
                   ]
                },
                "mon_id": {
@@ -277,8 +288,8 @@
                "pdbx_alt_source_flag": {
                   "bsonType": "string",
                   "enum": [
-                     "sample",
-                     "model"
+                     "model",
+                     "sample"
                   ]
                },
                "pdbx_beg_seq_num": {
@@ -374,10 +385,10 @@
                "pdbx_seq_type": {
                   "bsonType": "string",
                   "enum": [
-                     "Biological sequence",
                      "N-terminal tag",
                      "Linker",
-                     "C-terminal tag"
+                     "C-terminal tag",
+                     "Biological sequence"
                   ]
                },
                "pdbx_src_id": {
@@ -418,8 +429,8 @@
                "pdbx_alt_source_flag": {
                   "bsonType": "string",
                   "enum": [
-                     "sample",
-                     "model"
+                     "model",
+                     "sample"
                   ]
                },
                "pdbx_atcc": {
@@ -534,8 +545,8 @@
                "pdbx_alt_source_flag": {
                   "bsonType": "string",
                   "enum": [
-                     "sample",
-                     "model"
+                     "model",
+                     "sample"
                   ]
                },
                "pdbx_beg_seq_num": {
@@ -758,8 +769,8 @@
                "source_type": {
                   "bsonType": "string",
                   "enum": [
-                     "synthetic",
                      "natural",
+                     "synthetic",
                      "genetically engineered"
                   ]
                },

@@ -55,6 +55,7 @@
 #                    Add _rcsb_schema_container_identifiers.schema_name
 #                        _rcsb_schema_container_identifiers.collection_name
 #                        _rcsb_schema_container_identifiers.collection_schema_version
+#   17-Mar-2019 jdw  Add subcategory rcsb_macromolecular_names_combined  and associated name source and provenance code.
 ###########################################################################
 
 
@@ -73,13 +74,21 @@ data_rcsb_mmcif_ext.dic
 
     _dictionary.title           rcsb_mmcif_ext.dic
     _dictionary.datablock_id    rcsb_mmcif_ext.dic
-    _dictionary.version         0.114
+    _dictionary.version         0.115
 #
      loop_
     _dictionary_history.version
     _dictionary_history.update
     _dictionary_history.revision
 
+ 0.115 2019-03-17
+;
+Changes (jdw):
+    + Add sub_category rcsb_macromolecular_names_combinded
+    + Add item _entity.rcsb_macromolecular_names_combined_name
+    + Add item _entity.rcsb_macromolecular_names_combined_source
+    + Add item _entity.rcsb_macromolecular_names_combined_provenance_code
+;
  0.114 2019-03-13
 ;
 Changes (jdw):
@@ -281,6 +290,10 @@ Changes (jdw):
 ;
               'taxonomy_lineage'
 ;              Items specifying the details of taxonomy classification lineage.
+;
+
+               'rcsb_macromolecular_names_combined'
+;              Items specifying macromolecular names aggregated from selected sources.
 ;
 
 #################
@@ -728,9 +741,37 @@ save__entity.rcsb_source_part_count
      _item_methods.method_id     'rcsb_item_method_deferred'
      save_
 
-save__entity.rcsb_macromolecular_names_combined
+save__entity.rcsb_macromolecular_names_combined_name
     _item_description.description
 ;  Combined list of macromolecular names.
+
+;
+    _item.name                  '_entity.rcsb_macromolecular_names_combined_name'
+    _item.category_id             entity
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_methods.method_id       'rcsb_add_entity_misc'
+    _item_sub_category.id         rcsb_macromolecular_names_combined
+     save_
+
+save__entity.rcsb_macromolecular_names_combined_source
+    _item_description.description
+;  Combined list of macromolecular names associated name source.
+
+;
+    _item.name                  '_entity.rcsb_macromolecular_names_combined_source'
+    _item.category_id             entity
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_methods.method_id       'rcsb_add_entity_misc'
+    _item_sub_category.id         rcsb_macromolecular_names_combined
+     save_
+
+save__entity.rcsb_macromolecular_names_combined_provenance_code
+    _item_description.description
+;  Combined list of macromolecular names associated provenance code.
+
+   ECO (https://github.com/evidenceontology/evidenceontology)
 
 ;
     _item.name                  '_entity.rcsb_macromolecular_names_combined'
@@ -738,6 +779,7 @@ save__entity.rcsb_macromolecular_names_combined
     _item.mandatory_code          no
     _item_type.code               alphanum-scsv
     _item_methods.method_id       'rcsb_add_entity_misc'
+    _item_sub_category.id         rcsb_macromolecular_names_combined
      save_
 ##
 save__entity.rcsb_ec_lineage_id
@@ -3004,6 +3046,8 @@ save__rcsb_entity_source_organism.ncbi_scientific_name
     _item_description.description
 ;    The scientific name associated with this taxonomy code aggregated by the NCBI Taxonomy Database.
 
+     This name corresponds to the taxonomy identifier assigned by the PDB depositor.
+
 
    References:
 
@@ -3029,6 +3073,8 @@ save__rcsb_entity_source_organism.ncbi_scientific_name
 save__rcsb_entity_source_organism.ncbi_common_names
     _item_description.description
 ;    Common names associated with this taxonomy code aggregated by the NCBI Taxonomy Database.
+
+     These name correspond to the taxonomy identifier assigned by the PDB depositor.
 
    References:
 
@@ -3180,6 +3226,7 @@ save__rcsb_entity_host_organism.ncbi_taxonomy_id
     _item_description.description
 ;  NCBI Taxonomy identifier for the host organism.
 
+
    Reference:
 
    Wheeler DL, Chappey C, Lash AE, Leipe DD, Madden TL, Schuler GD,
@@ -3241,6 +3288,8 @@ save__rcsb_entity_host_organism.end_seq_num
 save__rcsb_entity_host_organism.ncbi_scientific_name
     _item_description.description
 ;    The scientific name associated with this taxonomy code obtained from NCBI Taxonomy Database.
+
+     This name corresponds to the taxonomy identifier assigned by the PDB depositor.
 ;
     _item.name                  '_rcsb_entity_host_organism.ncbi_scientific_name'
     _item.category_id             rcsb_entity_host_organism
@@ -3251,6 +3300,8 @@ save__rcsb_entity_host_organism.ncbi_scientific_name
 save__rcsb_entity_host_organism.common_names_ncbi
     _item_description.description
 ;    Common names associated with this taxonomy code obtained from NCBI Taxonomy Database.
+
+     These names correspond to the taxonomy identifier assigned by the PDB depositor.
 ;
     _item.name                  '_rcsb_entity_host_organism.ncbi_common_names'
     _item.category_id             rcsb_entity_host_organism
