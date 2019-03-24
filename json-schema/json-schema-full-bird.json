@@ -6,21 +6,24 @@
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "action_type": {
                   "type": "string",
                   "enum": [
-                     "Modify audit",
-                     "Other modification",
-                     "Modify representation",
-                     "Initial release",
-                     "Modify taxonomy organism",
                      "Modify class",
-                     "Create molecule",
-                     "Modify type",
                      "Modify sequence",
-                     "Modify linkage",
+                     "Other modification",
+                     "Initial release",
                      "Obsolete molecule",
-                     "Modify molecule name"
+                     "Modify linkage",
+                     "Create molecule",
+                     "Modify audit",
+                     "Modify molecule name",
+                     "Modify representation",
+                     "Modify type",
+                     "Modify taxonomy organism"
                   ],
                   "description": "The action associated with this audit record."
                },
@@ -67,10 +70,12 @@
                }
             },
             "required": [
+               "db_id",
                "action_type",
                "date",
                "prd_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -80,6 +85,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "atom_id_1": {
                   "type": "string",
                   "description": "The atom identifier/name in the first of the two entities containing the linkage.\n"
@@ -111,8 +119,8 @@
                "link_class": {
                   "type": "string",
                   "enum": [
-                     "NP",
                      "PN",
+                     "NP",
                      "PP",
                      "NN"
                   ],
@@ -137,19 +145,20 @@
                "value_order": {
                   "type": "string",
                   "enum": [
+                     "pi",
                      "trip",
-                     "quad",
-                     "delo",
                      "doub",
-                     "sing",
-                     "poly",
                      "arom",
-                     "pi"
+                     "quad",
+                     "sing",
+                     "delo",
+                     "poly"
                   ],
                   "description": "The bond order target for the chemical linkage."
                }
             },
             "required": [
+               "db_id",
                "atom_id_1",
                "atom_id_2",
                "comp_id_1",
@@ -160,7 +169,8 @@
                "prd_id",
                "ref_entity_id_1",
                "ref_entity_id_2"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -170,6 +180,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "component_id": {
                   "type": "integer",
                   "description": "The component number of this entity within the molecule."
@@ -197,10 +210,12 @@
                }
             },
             "required": [
+               "db_id",
                "component_id",
                "prd_id",
                "ref_entity_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -210,6 +225,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "chem_comp_id": {
                   "type": "string",
                   "examples": [
@@ -235,9 +253,11 @@
                }
             },
             "required": [
+               "db_id",
                "prd_id",
                "ref_entity_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -247,6 +267,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "db_code": {
                   "type": "string",
                   "description": "The database code for this source information"
@@ -266,8 +289,8 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "polysaccharide-like",
                      "peptide-like",
+                     "polysaccharide-like",
                      "nucleic-acid-like"
                   ],
                   "examples": [
@@ -277,9 +300,11 @@
                }
             },
             "required": [
+               "db_id",
                "prd_id",
                "ref_entity_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -289,6 +314,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "atom_id_1": {
                   "type": "string",
                   "description": "The atom identifier/name in the first of the two components making\n the linkage.\n"
@@ -332,19 +360,20 @@
                "value_order": {
                   "type": "string",
                   "enum": [
+                     "pi",
                      "trip",
-                     "quad",
-                     "delo",
                      "doub",
-                     "sing",
-                     "poly",
                      "arom",
-                     "pi"
+                     "quad",
+                     "sing",
+                     "delo",
+                     "poly"
                   ],
                   "description": "The bond order target for the non-standard linkage."
                }
             },
             "required": [
+               "db_id",
                "atom_id_1",
                "atom_id_2",
                "comp_id_1",
@@ -353,7 +382,8 @@
                "link_id",
                "prd_id",
                "ref_entity_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -363,11 +393,14 @@
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "hetero": {
                   "type": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ],
                   "examples": [
                      "N"
@@ -385,8 +418,8 @@
                "observed": {
                   "type": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ],
                   "examples": [
                      "Y"
@@ -407,12 +440,14 @@
                }
             },
             "required": [
+               "db_id",
                "hetero",
                "mon_id",
                "num",
                "prd_id",
                "ref_entity_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -422,11 +457,14 @@
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "NRP_flag": {
                   "type": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ],
                   "examples": [
                      "Y"
@@ -455,12 +493,14 @@
                }
             },
             "required": [
+               "db_id",
                "NRP_flag",
                "one_letter_codes",
                "prd_id",
                "ref_entity_id",
                "type"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -470,6 +510,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "atcc": {
                   "type": "string",
                   "description": "The Americal Tissue Culture Collection code for organism from which the entity was isolated."
@@ -515,10 +558,12 @@
                }
             },
             "required": [
+               "db_id",
                "ordinal",
                "prd_id",
                "ref_entity_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -528,6 +573,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "chem_comp_id": {
                   "type": "string",
                   "examples": [
@@ -549,9 +597,11 @@
                }
             },
             "required": [
+               "db_id",
                "prd_id",
                "seq"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -559,6 +609,9 @@
       "pdbx_reference_molecule": {
          "type": "object",
          "properties": {
+            "db_id": {
+               "type": "string"
+            },
             "chem_comp_id": {
                "type": "string",
                "examples": [
@@ -572,39 +625,39 @@
                "items": {
                   "type": "string",
                   "enum": [
-                     "Trypsin inhibitor",
-                     "Enzyme inhibitor",
-                     "RNA synthesis Inhibitor",
-                     "Antitumor",
-                     "Antibiotic",
-                     "Receptor",
-                     "Growth factor",
-                     "Antifungal",
-                     "Antimicrobial",
-                     "Antiinflammatory",
-                     "CASPASE inhibitor",
-                     "Metal transport",
-                     "Antiretroviral",
-                     "Antineoplastic",
-                     "Synthetic opioid",
-                     "Metabolism",
-                     "Immunosuppressant",
-                     "Chaperone binding",
-                     "Anticancer",
-                     "Oxidation-reduction",
-                     "Inhibitor",
-                     "Unknown",
-                     "Thrombin inhibitor",
                      "Antiviral",
-                     "Anticoagulant",
-                     "Antiparasitic",
-                     "Transition state mimetic",
+                     "Antifungal",
+                     "Anticancer",
                      "Antithrombotic",
-                     "Antagonist",
-                     "Toxin",
+                     "Trypsin inhibitor",
+                     "Metal transport",
+                     "Thrombin inhibitor",
+                     "Antiparasitic",
+                     "Oxidation-reduction",
                      "Transport activator",
+                     "Unknown",
+                     "Antibiotic",
+                     "Immunosuppressant",
+                     "CASPASE inhibitor",
+                     "Lantibiotic",
+                     "Synthetic opioid",
+                     "Antitumor",
+                     "Antiretroviral",
+                     "Antagonist",
+                     "Transition state mimetic",
+                     "Anticoagulant",
+                     "Enzyme inhibitor",
+                     "Toxin",
+                     "Receptor",
+                     "Antimicrobial",
+                     "Metabolism",
+                     "Inhibitor",
+                     "Growth factor",
+                     "Chaperone binding",
+                     "Antineoplastic",
                      "Anthelmintic",
-                     "Lantibiotic"
+                     "Antiinflammatory",
+                     "RNA synthesis Inhibitor"
                   ],
                   "examples": [
                      "Anticancer",
@@ -649,8 +702,8 @@
             "release_status": {
                "type": "string",
                "enum": [
-                  "HOLD",
                   "OBS",
+                  "HOLD",
                   "WAIT",
                   "REL"
                ],
@@ -667,8 +720,8 @@
             "represent_as": {
                "type": "string",
                "enum": [
-                  "single molecule",
-                  "polymer"
+                  "polymer",
+                  "single molecule"
                ],
                "description": "Defines how this entity is represented in PDB data files."
             },
@@ -681,39 +734,39 @@
                "items": {
                   "type": "string",
                   "enum": [
-                     "Oligopeptide",
-                     "Ansamycin",
-                     "Cyclic depsipeptide",
-                     "Thiopeptide",
-                     "Amino acid",
-                     "Thiolactone",
-                     "Polypeptide",
-                     "Nucleoside",
-                     "Imino sugar",
-                     "Peptide-like",
-                     "Polycyclic",
-                     "Peptaibol",
-                     "Lipoglycopeptide",
-                     "Aminoglycoside",
-                     "Lipopeptide",
-                     "Glycopeptide",
-                     "Polysaccharide",
                      "Anthraquinone",
-                     "Tricyclic pentaglycosidic antineoplastic antibiotic",
-                     "Chalkophore",
-                     "Non-polymer",
-                     "Unknown",
-                     "Oligosaccharide",
-                     "Heterocyclic",
                      "Anthracycline",
-                     "Cyclic peptide",
-                     "Quinolone",
-                     "Siderophore",
+                     "Nucleoside",
+                     "Non-polymer",
+                     "Oligopeptide",
+                     "Imino sugar",
                      "Keto acid",
-                     "Macrolide",
+                     "Thiolactone",
+                     "Cyclic peptide",
                      "Chromophore",
+                     "Chalkophore, Polypeptide",
+                     "Ansamycin",
+                     "Unknown",
+                     "Polysaccharide",
+                     "Macrolide",
+                     "Siderophore",
                      "Cyclic lipopeptide",
-                     "Chalkophore, Polypeptide"
+                     "Glycopeptide",
+                     "Quinolone",
+                     "Peptide-like",
+                     "Tricyclic pentaglycosidic antineoplastic antibiotic",
+                     "Lipopeptide",
+                     "Polypeptide",
+                     "Cyclic depsipeptide",
+                     "Heterocyclic",
+                     "Amino acid",
+                     "Aminoglycoside",
+                     "Polycyclic",
+                     "Chalkophore",
+                     "Lipoglycopeptide",
+                     "Thiopeptide",
+                     "Oligosaccharide",
+                     "Peptaibol"
                   ],
                   "examples": [
                      "Peptide-like",
@@ -725,12 +778,17 @@
             }
          },
          "required": [
+            "db_id",
             "prd_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "rcsb_load_status": {
          "type": "object",
          "properties": {
+            "db_id": {
+               "type": "string"
+            },
             "datablock_name": {
                "type": "string",
                "description": "Source data block containing the loaded data set"
@@ -746,15 +804,18 @@
             }
          },
          "required": [
+            "db_id",
             "datablock_name",
             "load_date",
             "locator"
-         ]
+         ],
+         "additionalProperties": false
       }
    },
+   "additionalProperties": false,
    "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-full-bird.json",
    "$schema": "http://json-schema.org/draft-04/schema#",
-   "title": "schema: bird collection: bird version: v5_0_3",
-   "description": "RCSB Exchange Database JSON schema derived from the bird content type schema. This schema supports collection bird version v5_0_3. This schema is hosted in repository https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-full-bird.json and follows JSON schema specification version 4",
-   "$comment": "schema_version: v5_0_3"
+   "title": "schema: bird collection: bird version: 5.1.0",
+   "description": "RCSB Exchange Database JSON schema derived from the bird content type schema. This schema supports collection bird version 5.1.0. This schema is hosted in repository https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-full-bird.json and follows JSON schema specification version 4",
+   "$comment": "schema_version: 5.1.0"
 }

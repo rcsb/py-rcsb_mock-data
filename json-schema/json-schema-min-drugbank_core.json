@@ -1,6 +1,19 @@
 {
    "type": "object",
    "properties": {
+      "drugbank_container_identifiers": {
+         "type": "object",
+         "properties": {
+            "drugbank_id": {
+               "type": "string",
+               "description": "The DrugBank accession code"
+            }
+         },
+         "required": [
+            "drugbank_id"
+         ],
+         "additionalProperties": false
+      },
       "drugbank_info": {
          "type": "object",
          "properties": {
@@ -102,7 +115,8 @@
          },
          "required": [
             "drugbank_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "drugbank_target": {
          "type": "array",
@@ -120,6 +134,10 @@
                "ordinal": {
                   "type": "integer",
                   "description": "The value of _drugbank_target.ordinal distinguishes\n related examples for each chemical component."
+               },
+               "organism_common_name": {
+                  "type": "string",
+                  "description": "The organism common name."
                },
                "reference_database_accession_code": {
                   "type": "string",
@@ -156,7 +174,8 @@
             },
             "required": [
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -170,12 +189,13 @@
          "description": "Version string for the schema and collection."
       }
    },
+   "additionalProperties": false,
    "required": [
       "_drugbank_id"
    ],
    "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-min-drugbank_core.json",
    "$schema": "http://json-schema.org/draft-04/schema#",
-   "title": "schema: drugbank_core collection: drugbank_core version: v1_0_2",
-   "description": "RCSB Exchange Database JSON schema derived from the drugbank_core content type schema. This schema supports collection drugbank_core version v1_0_2. This schema is hosted in repository https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-min-drugbank_core.json and follows JSON schema specification version 4",
-   "$comment": "schema_version: v1_0_2"
+   "title": "schema: drugbank_core collection: drugbank_core version: 1.1.0",
+   "description": "RCSB Exchange Database JSON schema derived from the drugbank_core content type schema. This schema supports collection drugbank_core version 1.1.0. This schema is hosted in repository https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-min-drugbank_core.json and follows JSON schema specification version 4",
+   "$comment": "schema_version: 1.1.0"
 }

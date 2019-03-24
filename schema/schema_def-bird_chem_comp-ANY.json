@@ -2,7 +2,7 @@
    "NAME": "bird_chem_comp",
    "APP_NAME": "ANY",
    "DATABASE_NAME": "chem_comp",
-   "DATABASE_VERSION": "v5_0_3",
+   "DATABASE_VERSION": "5.1.0",
    "SELECTION_FILTERS": {
       "PUBLIC_RELEASE": [
          {
@@ -26,42 +26,21 @@
          "SCHEMA_SUB_CATEGORIES": [],
          "ATTRIBUTES": {
             "COMPONENT_ID": "component_id",
+            "ID": "id",
             "FORMULA": "formula",
             "FORMULA_WEIGHT": "formula_weight",
-            "ID": "id",
-            "MODEL_DETAILS": "model_details",
-            "MODEL_ERF": "model_erf",
-            "MODEL_SOURCE": "model_source",
-            "MON_NSTD_CLASS": "mon_nstd_class",
-            "MON_NSTD_DETAILS": "mon_nstd_details",
-            "MON_NSTD_FLAG": "mon_nstd_flag",
-            "MON_NSTD_PARENT": "mon_nstd_parent",
             "MON_NSTD_PARENT_COMP_ID": "mon_nstd_parent_comp_id",
             "NAME": "name",
-            "NUMBER_ATOMS_ALL": "number_atoms_all",
-            "NUMBER_ATOMS_NH": "number_atoms_nh",
             "ONE_LETTER_CODE": "one_letter_code",
             "PDBX_AMBIGUOUS_FLAG": "pdbx_ambiguous_flag",
-            "PDBX_CASNUM": "pdbx_casnum",
-            "PDBX_CLASS_1": "pdbx_class_1",
-            "PDBX_CLASS_2": "pdbx_class_2",
-            "PDBX_COMP_TYPE": "pdbx_comp_type",
-            "PDBX_COMPONENT_NO": "pdbx_component_no",
             "PDBX_FORMAL_CHARGE": "pdbx_formal_charge",
             "PDBX_INITIAL_DATE": "pdbx_initial_date",
-            "PDBX_MODIFICATION_DETAILS": "pdbx_modification_details",
             "PDBX_MODIFIED_DATE": "pdbx_modified_date",
-            "PDBX_NSCNUM": "pdbx_nscnum",
-            "PDBX_NUMBER_SUBCOMPONENTS": "pdbx_number_subcomponents",
             "PDBX_PROCESSING_SITE": "pdbx_processing_site",
             "PDBX_RELEASE_STATUS": "pdbx_release_status",
             "PDBX_REPLACED_BY": "pdbx_replaced_by",
             "PDBX_REPLACES": "pdbx_replaces",
-            "PDBX_RESERVED_NAME": "pdbx_reserved_name",
-            "PDBX_SMILES": "pdbx_smiles",
-            "PDBX_STATUS": "pdbx_status",
             "PDBX_SUBCOMPONENT_LIST": "pdbx_subcomponent_list",
-            "PDBX_TYPE_MODIFIED": "pdbx_type_modified",
             "THREE_LETTER_CODE": "three_letter_code",
             "TYPE": "type"
          },
@@ -90,9 +69,21 @@
                "METHOD_NAME": null,
                "ARGUMENTS": null
             },
+            "MON_NSTD_PARENT_COMP_ID": {
+               "CATEGORY": "chem_comp",
+               "ATTRIBUTE": "mon_nstd_parent_comp_id",
+               "METHOD_NAME": null,
+               "ARGUMENTS": null
+            },
             "NAME": {
                "CATEGORY": "chem_comp",
                "ATTRIBUTE": "name",
+               "METHOD_NAME": null,
+               "ARGUMENTS": null
+            },
+            "ONE_LETTER_CODE": {
+               "CATEGORY": "chem_comp",
+               "ATTRIBUTE": "one_letter_code",
                "METHOD_NAME": null,
                "ARGUMENTS": null
             },
@@ -120,9 +111,39 @@
                "METHOD_NAME": null,
                "ARGUMENTS": null
             },
+            "PDBX_PROCESSING_SITE": {
+               "CATEGORY": "chem_comp",
+               "ATTRIBUTE": "pdbx_processing_site",
+               "METHOD_NAME": null,
+               "ARGUMENTS": null
+            },
             "PDBX_RELEASE_STATUS": {
                "CATEGORY": "chem_comp",
                "ATTRIBUTE": "pdbx_release_status",
+               "METHOD_NAME": null,
+               "ARGUMENTS": null
+            },
+            "PDBX_REPLACED_BY": {
+               "CATEGORY": "chem_comp",
+               "ATTRIBUTE": "pdbx_replaced_by",
+               "METHOD_NAME": null,
+               "ARGUMENTS": null
+            },
+            "PDBX_REPLACES": {
+               "CATEGORY": "chem_comp",
+               "ATTRIBUTE": "pdbx_replaces",
+               "METHOD_NAME": null,
+               "ARGUMENTS": null
+            },
+            "PDBX_SUBCOMPONENT_LIST": {
+               "CATEGORY": "chem_comp",
+               "ATTRIBUTE": "pdbx_subcomponent_list",
+               "METHOD_NAME": null,
+               "ARGUMENTS": null
+            },
+            "THREE_LETTER_CODE": {
+               "CATEGORY": "chem_comp",
+               "ATTRIBUTE": "three_letter_code",
                "METHOD_NAME": null,
                "ARGUMENTS": null
             },
@@ -156,7 +177,7 @@
                "PRECISION": 0,
                "PRIMARY_KEY": true,
                "APP_TYPE": "char",
-               "WIDTH": 12,
+               "WIDTH": 10,
                "ITERABLE_DELIMITER": null,
                "FILTER_TYPES": [
                   "TRANSLATE_XMLCHARREFS"
@@ -172,7 +193,7 @@
                "PRECISION": 0,
                "PRIMARY_KEY": false,
                "APP_TYPE": "char",
-               "WIDTH": 26,
+               "WIDTH": 31,
                "ITERABLE_DELIMITER": null,
                "FILTER_TYPES": [
                   "TRANSLATE_XMLCHARREFS"
@@ -198,13 +219,45 @@
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
             },
-            "NAME": {
+            "MON_NSTD_PARENT_COMP_ID": {
                "ORDER": 5,
                "NULLABLE": true,
                "PRECISION": 0,
                "PRIMARY_KEY": false,
                "APP_TYPE": "char",
-               "WIDTH": 1089,
+               "WIDTH": 21,
+               "ITERABLE_DELIMITER": ",",
+               "FILTER_TYPES": [
+                  "TRANSLATE_XMLCHARREFS"
+               ],
+               "IS_CHAR_TYPE": true,
+               "ENUMERATION": {},
+               "CONTENT_CLASSES": [],
+               "SUB_CATEGORIES": []
+            },
+            "NAME": {
+               "ORDER": 6,
+               "NULLABLE": true,
+               "PRECISION": 0,
+               "PRIMARY_KEY": false,
+               "APP_TYPE": "char",
+               "WIDTH": 978,
+               "ITERABLE_DELIMITER": null,
+               "FILTER_TYPES": [
+                  "TRANSLATE_XMLCHARREFS"
+               ],
+               "IS_CHAR_TYPE": true,
+               "ENUMERATION": {},
+               "CONTENT_CLASSES": [],
+               "SUB_CATEGORIES": []
+            },
+            "ONE_LETTER_CODE": {
+               "ORDER": 7,
+               "NULLABLE": true,
+               "PRECISION": 0,
+               "PRIMARY_KEY": false,
+               "APP_TYPE": "char",
+               "WIDTH": 10,
                "ITERABLE_DELIMITER": null,
                "FILTER_TYPES": [
                   "TRANSLATE_XMLCHARREFS"
@@ -215,7 +268,7 @@
                "SUB_CATEGORIES": []
             },
             "PDBX_AMBIGUOUS_FLAG": {
-               "ORDER": 6,
+               "ORDER": 8,
                "NULLABLE": true,
                "PRECISION": 0,
                "PRIMARY_KEY": false,
@@ -231,7 +284,7 @@
                "SUB_CATEGORIES": []
             },
             "PDBX_FORMAL_CHARGE": {
-               "ORDER": 7,
+               "ORDER": 9,
                "NULLABLE": true,
                "PRECISION": 0,
                "PRIMARY_KEY": false,
@@ -247,7 +300,7 @@
                "SUB_CATEGORIES": []
             },
             "PDBX_INITIAL_DATE": {
-               "ORDER": 8,
+               "ORDER": 10,
                "NULLABLE": true,
                "PRECISION": 0,
                "PRIMARY_KEY": false,
@@ -263,7 +316,7 @@
                "SUB_CATEGORIES": []
             },
             "PDBX_MODIFIED_DATE": {
-               "ORDER": 9,
+               "ORDER": 11,
                "NULLABLE": true,
                "PRECISION": 0,
                "PRIMARY_KEY": false,
@@ -278,8 +331,8 @@
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
             },
-            "PDBX_RELEASE_STATUS": {
-               "ORDER": 10,
+            "PDBX_PROCESSING_SITE": {
+               "ORDER": 12,
                "NULLABLE": true,
                "PRECISION": 0,
                "PRIMARY_KEY": false,
@@ -291,58 +344,143 @@
                ],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "hpub": "HPUB",
-                  "rel": "REL",
-                  "del": "DEL",
-                  "hold": "HOLD",
-                  "obs": "OBS",
-                  "ref_only": "REF_ONLY"
+                  "ebi": "EBI",
+                  "pdbj": "PDBJ",
+                  "pdbe": "PDBE",
+                  "rcsb": "RCSB"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
             },
-            "TYPE": {
-               "ORDER": 11,
-               "NULLABLE": false,
+            "PDBX_RELEASE_STATUS": {
+               "ORDER": 13,
+               "NULLABLE": true,
                "PRECISION": 0,
                "PRIMARY_KEY": false,
                "APP_TYPE": "char",
-               "WIDTH": 14,
+               "WIDTH": 10,
                "ITERABLE_DELIMITER": null,
                "FILTER_TYPES": [
                   "TRANSLATE_XMLCHARREFS"
                ],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "l-peptide linking": "L-peptide linking",
-                  "dna oh 3 prime terminus": "DNA OH 3 prime terminus",
-                  "d-peptide linking": "D-peptide linking",
-                  "rna oh 3 prime terminus": "RNA OH 3 prime terminus",
-                  "d-beta-peptide, c-gamma linking": "D-beta-peptide, C-gamma linking",
-                  "rna oh 5 prime terminus": "RNA OH 5 prime terminus",
-                  "peptide-like": "peptide-like",
+                  "rel": "REL",
+                  "obs": "OBS",
+                  "hpub": "HPUB",
+                  "del": "DEL",
+                  "hold": "HOLD",
+                  "ref_only": "REF_ONLY"
+               },
+               "CONTENT_CLASSES": [],
+               "SUB_CATEGORIES": []
+            },
+            "PDBX_REPLACED_BY": {
+               "ORDER": 14,
+               "NULLABLE": true,
+               "PRECISION": 0,
+               "PRIMARY_KEY": false,
+               "APP_TYPE": "char",
+               "WIDTH": 10,
+               "ITERABLE_DELIMITER": null,
+               "FILTER_TYPES": [
+                  "TRANSLATE_XMLCHARREFS"
+               ],
+               "IS_CHAR_TYPE": true,
+               "ENUMERATION": {},
+               "CONTENT_CLASSES": [],
+               "SUB_CATEGORIES": []
+            },
+            "PDBX_REPLACES": {
+               "ORDER": 15,
+               "NULLABLE": true,
+               "PRECISION": 0,
+               "PRIMARY_KEY": false,
+               "APP_TYPE": "char",
+               "WIDTH": 10,
+               "ITERABLE_DELIMITER": null,
+               "FILTER_TYPES": [
+                  "TRANSLATE_XMLCHARREFS"
+               ],
+               "IS_CHAR_TYPE": true,
+               "ENUMERATION": {},
+               "CONTENT_CLASSES": [],
+               "SUB_CATEGORIES": []
+            },
+            "PDBX_SUBCOMPONENT_LIST": {
+               "ORDER": 16,
+               "NULLABLE": true,
+               "PRECISION": 0,
+               "PRIMARY_KEY": false,
+               "APP_TYPE": "char",
+               "WIDTH": 90,
+               "ITERABLE_DELIMITER": null,
+               "FILTER_TYPES": [
+                  "TRANSLATE_XMLCHARREFS"
+               ],
+               "IS_CHAR_TYPE": true,
+               "ENUMERATION": {},
+               "CONTENT_CLASSES": [],
+               "SUB_CATEGORIES": []
+            },
+            "THREE_LETTER_CODE": {
+               "ORDER": 17,
+               "NULLABLE": true,
+               "PRECISION": 0,
+               "PRIMARY_KEY": false,
+               "APP_TYPE": "char",
+               "WIDTH": 10,
+               "ITERABLE_DELIMITER": null,
+               "FILTER_TYPES": [
+                  "TRANSLATE_XMLCHARREFS"
+               ],
+               "IS_CHAR_TYPE": true,
+               "ENUMERATION": {},
+               "CONTENT_CLASSES": [],
+               "SUB_CATEGORIES": []
+            },
+            "TYPE": {
+               "ORDER": 18,
+               "NULLABLE": false,
+               "PRECISION": 0,
+               "PRIMARY_KEY": false,
+               "APP_TYPE": "char",
+               "WIDTH": 38,
+               "ITERABLE_DELIMITER": null,
+               "FILTER_TYPES": [
+                  "TRANSLATE_XMLCHARREFS"
+               ],
+               "IS_CHAR_TYPE": true,
+               "ENUMERATION": {
                   "l-peptide cooh carboxy terminus": "L-peptide COOH carboxy terminus",
-                  "other": "other",
-                  "l-saccharide 1,4 and 1,6 linking": "L-saccharide 1,4 and 1,6 linking",
                   "l-rna linking": "L-RNA linking",
-                  "d-peptide cooh carboxy terminus": "D-peptide COOH carboxy terminus",
+                  "dna oh 3 prime terminus": "DNA OH 3 prime terminus",
+                  "rna oh 3 prime terminus": "RNA OH 3 prime terminus",
                   "saccharide": "saccharide",
-                  "d-saccharide 1,4 and 1,6 linking": "D-saccharide 1,4 and 1,6 linking",
-                  "d-saccharide": "D-saccharide",
-                  "l-beta-peptide, c-gamma linking": "L-beta-peptide, C-gamma linking",
+                  "other": "other",
+                  "l-peptide nh3 amino terminus": "L-peptide NH3 amino terminus",
                   "dna oh 5 prime terminus": "DNA OH 5 prime terminus",
-                  "d-peptide nh3 amino terminus": "D-peptide NH3 amino terminus",
-                  "peptide linking": "peptide linking",
-                  "l-saccharide 1,4 and 1,4 linking": "L-saccharide 1,4 and 1,4 linking",
-                  "l-dna linking": "L-DNA linking",
-                  "rna linking": "RNA linking",
-                  "d-gamma-peptide, c-delta linking": "D-gamma-peptide, C-delta linking",
-                  "d-saccharide 1,4 and 1,4 linking": "D-saccharide 1,4 and 1,4 linking",
-                  "l-gamma-peptide, c-delta linking": "L-gamma-peptide, C-delta linking",
-                  "l-saccharide": "L-saccharide",
                   "non-polymer": "non-polymer",
+                  "l-saccharide 1,4 and 1,6 linking": "L-saccharide 1,4 and 1,6 linking",
+                  "d-saccharide": "D-saccharide",
+                  "d-peptide linking": "D-peptide linking",
+                  "peptide-like": "peptide-like",
+                  "l-saccharide 1,4 and 1,4 linking": "L-saccharide 1,4 and 1,4 linking",
+                  "l-saccharide": "L-saccharide",
+                  "d-gamma-peptide, c-delta linking": "D-gamma-peptide, C-delta linking",
+                  "rna oh 5 prime terminus": "RNA OH 5 prime terminus",
+                  "l-peptide linking": "L-peptide linking",
+                  "l-gamma-peptide, c-delta linking": "L-gamma-peptide, C-delta linking",
+                  "d-beta-peptide, c-gamma linking": "D-beta-peptide, C-gamma linking",
+                  "d-peptide cooh carboxy terminus": "D-peptide COOH carboxy terminus",
+                  "peptide linking": "peptide linking",
+                  "rna linking": "RNA linking",
+                  "l-dna linking": "L-DNA linking",
+                  "d-saccharide 1,4 and 1,4 linking": "D-saccharide 1,4 and 1,4 linking",
                   "dna linking": "DNA linking",
-                  "l-peptide nh3 amino terminus": "L-peptide NH3 amino terminus"
+                  "d-saccharide 1,4 and 1,6 linking": "D-saccharide 1,4 and 1,6 linking",
+                  "l-beta-peptide, c-gamma linking": "L-beta-peptide, C-gamma linking",
+                  "d-peptide nh3 amino terminus": "D-peptide NH3 amino terminus"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -389,24 +527,17 @@
          ],
          "ATTRIBUTES": {
             "COMPONENT_ID": "component_id",
-            "ALT_ATOM_ID": "alt_atom_id",
             "ATOM_ID": "atom_id",
-            "CHARGE": "charge",
             "COMP_ID": "comp_id",
+            "ALT_ATOM_ID": "alt_atom_id",
+            "CHARGE": "charge",
             "MODEL_CARTN_X": "model_Cartn_x",
-            "MODEL_CARTN_X_ESD": "model_Cartn_x_esd",
             "MODEL_CARTN_Y": "model_Cartn_y",
-            "MODEL_CARTN_Y_ESD": "model_Cartn_y_esd",
             "MODEL_CARTN_Z": "model_Cartn_z",
-            "MODEL_CARTN_Z_ESD": "model_Cartn_z_esd",
-            "PARTIAL_CHARGE": "partial_charge",
             "PDBX_ALIGN": "pdbx_align",
-            "PDBX_ALT_ATOM_ID": "pdbx_alt_atom_id",
-            "PDBX_ALT_COMP_ID": "pdbx_alt_comp_id",
             "PDBX_AROMATIC_FLAG": "pdbx_aromatic_flag",
             "PDBX_COMPONENT_ATOM_ID": "pdbx_component_atom_id",
             "PDBX_COMPONENT_COMP_ID": "pdbx_component_comp_id",
-            "PDBX_COMPONENT_ENTITY_ID": "pdbx_component_entity_id",
             "PDBX_COMPONENT_ID": "pdbx_component_id",
             "PDBX_LEAVING_ATOM_FLAG": "pdbx_leaving_atom_flag",
             "PDBX_MODEL_CARTN_X_IDEAL": "pdbx_model_Cartn_x_ideal",
@@ -414,11 +545,8 @@
             "PDBX_MODEL_CARTN_Z_IDEAL": "pdbx_model_Cartn_z_ideal",
             "PDBX_ORDINAL": "pdbx_ordinal",
             "PDBX_POLYMER_TYPE": "pdbx_polymer_type",
-            "PDBX_REF_ID": "pdbx_ref_id",
             "PDBX_RESIDUE_NUMBERING": "pdbx_residue_numbering",
             "PDBX_STEREO_CONFIG": "pdbx_stereo_config",
-            "PDBX_STND_ATOM_ID": "pdbx_stnd_atom_id",
-            "SUBSTRUCT_CODE": "substruct_code",
             "TYPE_SYMBOL": "type_symbol"
          },
          "ATTRIBUTE_MAP": {
@@ -536,12 +664,6 @@
                "METHOD_NAME": null,
                "ARGUMENTS": null
             },
-            "PDBX_REF_ID": {
-               "CATEGORY": "chem_comp_atom",
-               "ATTRIBUTE": "pdbx_ref_id",
-               "METHOD_NAME": null,
-               "ARGUMENTS": null
-            },
             "PDBX_RESIDUE_NUMBERING": {
                "CATEGORY": "chem_comp_atom",
                "ATTRIBUTE": "pdbx_residue_numbering",
@@ -598,7 +720,7 @@
                "PRECISION": 0,
                "PRIMARY_KEY": true,
                "APP_TYPE": "char",
-               "WIDTH": 12,
+               "WIDTH": 10,
                "ITERABLE_DELIMITER": null,
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
@@ -707,8 +829,8 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "n": "N",
-                  "y": "Y"
+                  "y": "Y",
+                  "n": "N"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -733,7 +855,7 @@
                "PRECISION": 0,
                "PRIMARY_KEY": false,
                "APP_TYPE": "char",
-               "WIDTH": 12,
+               "WIDTH": 10,
                "ITERABLE_DELIMITER": null,
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
@@ -766,8 +888,8 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "n": "N",
-                  "y": "Y"
+                  "y": "Y",
+                  "n": "N"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -840,33 +962,19 @@
                "PRECISION": 0,
                "PRIMARY_KEY": false,
                "APP_TYPE": "char",
-               "WIDTH": 13,
-               "ITERABLE_DELIMITER": null,
-               "FILTER_TYPES": [],
-               "IS_CHAR_TYPE": true,
-               "ENUMERATION": {
-                  "polymer": "polymer",
-                  "non-polymer": "non-polymer"
-               },
-               "CONTENT_CLASSES": [],
-               "SUB_CATEGORIES": []
-            },
-            "PDBX_REF_ID": {
-               "ORDER": 20,
-               "NULLABLE": true,
-               "PRECISION": 0,
-               "PRIMARY_KEY": false,
-               "APP_TYPE": "char",
                "WIDTH": 10,
                "ITERABLE_DELIMITER": null,
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
-               "ENUMERATION": {},
+               "ENUMERATION": {
+                  "non-polymer": "non-polymer",
+                  "polymer": "polymer"
+               },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
             },
             "PDBX_RESIDUE_NUMBERING": {
-               "ORDER": 21,
+               "ORDER": 20,
                "NULLABLE": true,
                "PRECISION": 0,
                "PRIMARY_KEY": false,
@@ -880,7 +988,7 @@
                "SUB_CATEGORIES": []
             },
             "PDBX_STEREO_CONFIG": {
-               "ORDER": 22,
+               "ORDER": 21,
                "NULLABLE": true,
                "PRECISION": 0,
                "PRIMARY_KEY": false,
@@ -890,15 +998,15 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "n": "N",
                   "s": "S",
-                  "r": "R"
+                  "r": "R",
+                  "n": "N"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
             },
             "TYPE_SYMBOL": {
-               "ORDER": 23,
+               "ORDER": 22,
                "NULLABLE": false,
                "PRECISION": 0,
                "PRIMARY_KEY": false,
@@ -959,8 +1067,6 @@
             "PDBX_AROMATIC_FLAG": "pdbx_aromatic_flag",
             "PDBX_ORDINAL": "pdbx_ordinal",
             "PDBX_STEREO_CONFIG": "pdbx_stereo_config",
-            "VALUE_DIST": "value_dist",
-            "VALUE_DIST_ESD": "value_dist_esd",
             "VALUE_ORDER": "value_order"
          },
          "ATTRIBUTE_MAP": {
@@ -1064,7 +1170,7 @@
                "PRECISION": 0,
                "PRIMARY_KEY": true,
                "APP_TYPE": "char",
-               "WIDTH": 12,
+               "WIDTH": 10,
                "ITERABLE_DELIMITER": null,
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
@@ -1083,8 +1189,8 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "n": "N",
-                  "y": "Y"
+                  "y": "Y",
+                  "n": "N"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -1132,14 +1238,14 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "trip": "trip",
-                  "quad": "quad",
-                  "delo": "delo",
-                  "doub": "doub",
-                  "sing": "sing",
-                  "poly": "poly",
                   "arom": "arom",
-                  "pi": "pi"
+                  "pi": "pi",
+                  "delo": "delo",
+                  "trip": "trip",
+                  "sing": "sing",
+                  "doub": "doub",
+                  "poly": "poly",
+                  "quad": "quad"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -1190,11 +1296,11 @@
          "SCHEMA_SUB_CATEGORIES": [],
          "ATTRIBUTES": {
             "COMPONENT_ID": "component_id",
+            "ORDINAL": "ordinal",
             "ACTION_TYPE": "action_type",
             "COMP_ID": "comp_id",
             "DATE": "date",
-            "DETAILS": "details",
-            "ORDINAL": "ordinal"
+            "DETAILS": "details"
          },
          "ATTRIBUTE_MAP": {
             "COMPONENT_ID": {
@@ -1224,6 +1330,12 @@
             "DATE": {
                "CATEGORY": "pdbx_chem_comp_audit",
                "ATTRIBUTE": "date",
+               "METHOD_NAME": null,
+               "ARGUMENTS": null
+            },
+            "DETAILS": {
+               "CATEGORY": "pdbx_chem_comp_audit",
+               "ATTRIBUTE": "details",
                "METHOD_NAME": null,
                "ARGUMENTS": null
             }
@@ -1267,36 +1379,36 @@
                "PRECISION": 0,
                "PRIMARY_KEY": false,
                "APP_TYPE": "char",
-               "WIDTH": 19,
+               "WIDTH": 34,
                "ITERABLE_DELIMITER": null,
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "modify parent residue": "Modify parent residue",
-                  "modify component comp_id": "Modify component comp_id",
-                  "modify name": "Modify name",
-                  "modify component atom id": "Modify component atom id",
-                  "create component": "Create component",
-                  "modify one letter code": "Modify one letter code",
-                  "modify atom id": "Modify atom id",
-                  "modify model coordinates code": "Modify model coordinates code",
-                  "modify value order": "Modify value order",
-                  "modify synonyms": "Modify synonyms",
-                  "other modification": "Other modification",
-                  "modify linking type": "Modify linking type",
-                  "obsolete component": "Obsolete component",
-                  "modify internal type": "Modify internal type",
-                  "modify charge": "Modify charge",
-                  "modify formula": "Modify formula",
                   "modify coordinates": "Modify coordinates",
+                  "modify name": "Modify name",
+                  "modify model coordinates code": "Modify model coordinates code",
                   "modify formal charge": "Modify formal charge",
-                  "modify aromatic_flag": "Modify aromatic_flag",
-                  "modify identifier": "Modify identifier",
-                  "modify processing site": "Modify processing site",
                   "initial release": "Initial release",
-                  "modify descriptor": "Modify descriptor",
+                  "modify internal type": "Modify internal type",
+                  "modify processing site": "Modify processing site",
+                  "modify atom id": "Modify atom id",
+                  "obsolete component": "Obsolete component",
+                  "modify aromatic_flag": "Modify aromatic_flag",
+                  "modify one letter code": "Modify one letter code",
+                  "modify charge": "Modify charge",
+                  "modify component comp_id": "Modify component comp_id",
+                  "modify identifier": "Modify identifier",
+                  "modify formula": "Modify formula",
+                  "modify parent residue": "Modify parent residue",
+                  "modify leaving atom flag": "Modify leaving atom flag",
+                  "modify value order": "Modify value order",
+                  "other modification": "Other modification",
                   "modify subcomponent list": "Modify subcomponent list",
-                  "modify leaving atom flag": "Modify leaving atom flag"
+                  "modify linking type": "Modify linking type",
+                  "modify component atom id": "Modify component atom id",
+                  "modify synonyms": "Modify synonyms",
+                  "create component": "Create component",
+                  "modify descriptor": "Modify descriptor"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -1307,7 +1419,7 @@
                "PRECISION": 0,
                "PRIMARY_KEY": false,
                "APP_TYPE": "char",
-               "WIDTH": 12,
+               "WIDTH": 10,
                "ITERABLE_DELIMITER": null,
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
@@ -1322,6 +1434,20 @@
                "PRIMARY_KEY": false,
                "APP_TYPE": "date",
                "WIDTH": 12,
+               "ITERABLE_DELIMITER": null,
+               "FILTER_TYPES": [],
+               "IS_CHAR_TYPE": true,
+               "ENUMERATION": {},
+               "CONTENT_CLASSES": [],
+               "SUB_CATEGORIES": []
+            },
+            "DETAILS": {
+               "ORDER": 6,
+               "NULLABLE": true,
+               "PRECISION": 0,
+               "PRIMARY_KEY": false,
+               "APP_TYPE": "char",
+               "WIDTH": 566,
                "ITERABLE_DELIMITER": null,
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
@@ -1370,11 +1496,10 @@
          "ATTRIBUTES": {
             "COMPONENT_ID": "component_id",
             "COMP_ID": "comp_id",
-            "DESCRIPTOR": "descriptor",
-            "ORDINAL": "ordinal",
             "PROGRAM": "program",
             "PROGRAM_VERSION": "program_version",
-            "TYPE": "type"
+            "TYPE": "type",
+            "DESCRIPTOR": "descriptor"
          },
          "ATTRIBUTE_MAP": {
             "COMPONENT_ID": {
@@ -1437,7 +1562,7 @@
                "PRECISION": 0,
                "PRIMARY_KEY": true,
                "APP_TYPE": "char",
-               "WIDTH": 12,
+               "WIDTH": 10,
                "ITERABLE_DELIMITER": null,
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
@@ -1484,20 +1609,20 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "inchi_reconnect": "InChI_RECONNECT",
+                  "smiles_cannonical": "SMILES_CANNONICAL",
                   "inchi_main_hatom": "InChI_MAIN_HATOM",
+                  "inchi": "InChI",
+                  "smiles": "SMILES",
+                  "inchi_main_connect": "InChI_MAIN_CONNECT",
                   "inchi_fixedh": "InChI_FIXEDH",
+                  "inchi_reconnect": "InChI_RECONNECT",
+                  "inchi_charge": "InChI_CHARGE",
                   "inchi_stereo": "InChI_STEREO",
                   "inchi_main": "InChI_MAIN",
-                  "inchi_charge": "InChI_CHARGE",
-                  "smiles": "SMILES",
+                  "inchi_main_formula": "InChI_MAIN_FORMULA",
                   "smiles_canonical": "SMILES_CANONICAL",
-                  "inchi": "InChI",
-                  "inchi_main_connect": "InChI_MAIN_CONNECT",
-                  "inchikey": "InChIKey",
                   "inchi_isotope": "InChI_ISOTOPE",
-                  "smiles_cannonical": "SMILES_CANNONICAL",
-                  "inchi_main_formula": "InChI_MAIN_FORMULA"
+                  "inchikey": "InChIKey"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -1508,7 +1633,7 @@
                "PRECISION": 0,
                "PRIMARY_KEY": false,
                "APP_TYPE": "char",
-               "WIDTH": 2761,
+               "WIDTH": 1564,
                "ITERABLE_DELIMITER": null,
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
@@ -1552,6 +1677,162 @@
          "SLICE_UNIT_CARDINALITY": {},
          "SLICE_CATEGORY_EXTRAS": {}
       },
+      "PDBX_CHEM_COMP_FEATURE": {
+         "SCHEMA_ID": "PDBX_CHEM_COMP_FEATURE",
+         "SCHEMA_NAME": "pdbx_chem_comp_feature",
+         "SCHEMA_TYPE": "transactional",
+         "SCHEMA_UNIT_CARDINALITY": false,
+         "SCHEMA_CONTENT_CLASSES": [],
+         "SCHEMA_MANDATORY": false,
+         "SCHEMA_SUB_CATEGORIES": [],
+         "ATTRIBUTES": {
+            "COMPONENT_ID": "component_id",
+            "COMP_ID": "comp_id",
+            "SOURCE": "source",
+            "TYPE": "type",
+            "VALUE": "value"
+         },
+         "ATTRIBUTE_MAP": {
+            "COMPONENT_ID": {
+               "CATEGORY": null,
+               "ATTRIBUTE": null,
+               "METHOD_NAME": "datablockid()",
+               "ARGUMENTS": null
+            },
+            "COMP_ID": {
+               "CATEGORY": "pdbx_chem_comp_feature",
+               "ATTRIBUTE": "comp_id",
+               "METHOD_NAME": null,
+               "ARGUMENTS": null
+            },
+            "SOURCE": {
+               "CATEGORY": "pdbx_chem_comp_feature",
+               "ATTRIBUTE": "source",
+               "METHOD_NAME": null,
+               "ARGUMENTS": null
+            },
+            "TYPE": {
+               "CATEGORY": "pdbx_chem_comp_feature",
+               "ATTRIBUTE": "type",
+               "METHOD_NAME": null,
+               "ARGUMENTS": null
+            },
+            "VALUE": {
+               "CATEGORY": "pdbx_chem_comp_feature",
+               "ATTRIBUTE": "value",
+               "METHOD_NAME": null,
+               "ARGUMENTS": null
+            }
+         },
+         "ATTRIBUTE_INFO": {
+            "COMPONENT_ID": {
+               "ORDER": 1,
+               "NULLABLE": false,
+               "PRECISION": 0,
+               "PRIMARY_KEY": true,
+               "APP_TYPE": "char",
+               "WIDTH": 10,
+               "ITERABLE_DELIMITER": null,
+               "FILTER_TYPES": [],
+               "ENUMERATION": {},
+               "IS_CHAR_TYPE": true,
+               "CONTENT_CLASSES": [
+                  "BLOCK_ATTRIBUTE"
+               ],
+               "SUB_CATEGORIES": []
+            },
+            "COMP_ID": {
+               "ORDER": 2,
+               "NULLABLE": false,
+               "PRECISION": 0,
+               "PRIMARY_KEY": true,
+               "APP_TYPE": "char",
+               "WIDTH": 10,
+               "ITERABLE_DELIMITER": null,
+               "FILTER_TYPES": [],
+               "IS_CHAR_TYPE": true,
+               "ENUMERATION": {},
+               "CONTENT_CLASSES": [],
+               "SUB_CATEGORIES": []
+            },
+            "SOURCE": {
+               "ORDER": 3,
+               "NULLABLE": false,
+               "PRECISION": 0,
+               "PRIMARY_KEY": true,
+               "APP_TYPE": "char",
+               "WIDTH": 18,
+               "ITERABLE_DELIMITER": null,
+               "FILTER_TYPES": [],
+               "IS_CHAR_TYPE": true,
+               "ENUMERATION": {},
+               "CONTENT_CLASSES": [],
+               "SUB_CATEGORIES": []
+            },
+            "TYPE": {
+               "ORDER": 4,
+               "NULLABLE": false,
+               "PRECISION": 0,
+               "PRIMARY_KEY": true,
+               "APP_TYPE": "char",
+               "WIDTH": 20,
+               "ITERABLE_DELIMITER": null,
+               "FILTER_TYPES": [],
+               "IS_CHAR_TYPE": true,
+               "ENUMERATION": {},
+               "CONTENT_CLASSES": [],
+               "SUB_CATEGORIES": []
+            },
+            "VALUE": {
+               "ORDER": 5,
+               "NULLABLE": false,
+               "PRECISION": 0,
+               "PRIMARY_KEY": true,
+               "APP_TYPE": "char",
+               "WIDTH": 103,
+               "ITERABLE_DELIMITER": null,
+               "FILTER_TYPES": [],
+               "IS_CHAR_TYPE": true,
+               "ENUMERATION": {},
+               "CONTENT_CLASSES": [],
+               "SUB_CATEGORIES": []
+            }
+         },
+         "SCHEMA_DELETE_ATTRIBUTE": "COMPONENT_ID",
+         "INDICES": {
+            "p1": {
+               "TYPE": "UNIQUE",
+               "ATTRIBUTES": [
+                  "COMPONENT_ID",
+                  "COMP_ID",
+                  "SOURCE",
+                  "TYPE",
+                  "VALUE"
+               ]
+            },
+            "s1": {
+               "TYPE": "SEARCH",
+               "ATTRIBUTES": [
+                  "COMPONENT_ID"
+               ]
+            }
+         },
+         "MAP_MERGE_INDICES": {
+            "pdbx_chem_comp_feature": {
+               "ATTRIBUTES": [
+                  "component_id",
+                  "comp_id",
+                  "source",
+                  "type",
+                  "value"
+               ],
+               "TYPE": "EQUI-JOIN"
+            }
+         },
+         "SLICE_ATTRIBUTES": {},
+         "SLICE_UNIT_CARDINALITY": {},
+         "SLICE_CATEGORY_EXTRAS": {}
+      },
       "PDBX_CHEM_COMP_IDENTIFIER": {
          "SCHEMA_ID": "PDBX_CHEM_COMP_IDENTIFIER",
          "SCHEMA_NAME": "pdbx_chem_comp_identifier",
@@ -1563,11 +1844,10 @@
          "ATTRIBUTES": {
             "COMPONENT_ID": "component_id",
             "COMP_ID": "comp_id",
-            "IDENTIFIER": "identifier",
-            "ORDINAL": "ordinal",
             "PROGRAM": "program",
             "PROGRAM_VERSION": "program_version",
-            "TYPE": "type"
+            "TYPE": "type",
+            "IDENTIFIER": "identifier"
          },
          "ATTRIBUTE_MAP": {
             "COMPONENT_ID": {
@@ -1630,7 +1910,7 @@
                "PRECISION": 0,
                "PRIMARY_KEY": true,
                "APP_TYPE": "char",
-               "WIDTH": 12,
+               "WIDTH": 10,
                "ITERABLE_DELIMITER": null,
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
@@ -1677,15 +1957,15 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "condensed iupac carb symbol": "CONDENSED IUPAC CARB SYMBOL",
-                  "cas registry number": "CAS REGISTRY NUMBER",
-                  "common name": "COMMON NAME",
-                  "mdl identifier": "MDL Identifier",
-                  "snfg carb symbol": "SNFG CARB SYMBOL",
                   "synonym": "SYNONYM",
+                  "pubchem identifier": "PUBCHEM Identifier",
+                  "mdl identifier": "MDL Identifier",
                   "systematic name": "SYSTEMATIC NAME",
                   "iupac carb symbol": "IUPAC CARB SYMBOL",
-                  "pubchem identifier": "PUBCHEM Identifier"
+                  "snfg carb symbol": "SNFG CARB SYMBOL",
+                  "cas registry number": "CAS REGISTRY NUMBER",
+                  "condensed iupac carb symbol": "CONDENSED IUPAC CARB SYMBOL",
+                  "common name": "COMMON NAME"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -1696,7 +1976,7 @@
                "PRECISION": 0,
                "PRIMARY_KEY": false,
                "APP_TYPE": "char",
-               "WIDTH": 2258,
+               "WIDTH": 978,
                "ITERABLE_DELIMITER": null,
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
@@ -1882,7 +2162,7 @@
       "CONTENT_TYPE_COLLECTION_INFO": [
          {
             "NAME": "bird_chem_comp",
-            "VERSION": "v5_0_3"
+            "VERSION": "5.1.0"
          }
       ],
       "COLLECTION_DOCUMENT_ATTRIBUTE_NAMES": {

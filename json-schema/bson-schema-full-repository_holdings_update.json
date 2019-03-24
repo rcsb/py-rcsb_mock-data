@@ -20,13 +20,27 @@
       "update_id": {
          "bsonType": "string"
       },
+      "update_type": {
+         "bsonType": "string",
+         "enum": [
+            "added",
+            "modified",
+            "obsolete",
+            "removed"
+         ]
+      },
       "_schema_version": {
          "bsonType": "string"
+      },
+      "_id": {
+         "bsonType": "objectId"
       }
    },
    "required": [
       "entry_id",
       "repository_content_types",
-      "update_id"
-   ]
+      "update_id",
+      "update_type"
+   ],
+   "additionalProperties": false
 }

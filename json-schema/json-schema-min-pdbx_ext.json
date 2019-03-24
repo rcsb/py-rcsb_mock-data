@@ -4,20 +4,28 @@
       "entry": {
          "type": "object",
          "properties": {
+            "structure_id": {
+               "type": "string"
+            },
             "id": {
                "type": "string",
                "description": "The value of _entry.id identifies the data block.\n\n Note that this item need not be a number; it can be any unique\n identifier."
             }
          },
          "required": [
+            "structure_id",
             "id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "ndb_struct_conf_na": {
          "type": "array",
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "entry_id": {
                   "type": "string",
                   "description": "This data item is a pointer to _entry.id in the\n ENTRY category."
@@ -25,30 +33,32 @@
                "feature": {
                   "type": "string",
                   "enum": [
-                     "internal loop",
-                     "tetraloop",
-                     "b-form double helix",
-                     "bulge loop",
                      "quadruple helix",
-                     "three-way junction",
-                     "mismatched base pair",
-                     "four-way junction",
-                     "hairpin loop",
                      "triple helix",
                      "parallel strands",
-                     "a-form double helix",
+                     "bulge loop",
+                     "four-way junction",
+                     "mismatched base pair",
+                     "hairpin loop",
                      "z-form double helix",
+                     "b-form double helix",
+                     "internal loop",
+                     "a-form double helix",
+                     "tetraloop",
+                     "three-way junction",
                      "double helix",
-                     "other right-handed double helix",
-                     "two-way junction"
+                     "two-way junction",
+                     "other right-handed double helix"
                   ],
                   "description": "This data item identifies a secondary structure\n feature of this entry."
                }
             },
             "required": [
+               "structure_id",
                "entry_id",
                "feature"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -58,6 +68,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "buckle": {
                   "type": "number",
                   "description": "\nThe value of the base pair buckle parameter."
@@ -168,6 +181,7 @@
                }
             },
             "required": [
+               "structure_id",
                "i_label_asym_id",
                "i_label_comp_id",
                "i_label_seq_id",
@@ -177,7 +191,8 @@
                "j_label_seq_id",
                "j_symmetry",
                "model_number"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -187,6 +202,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "helical_rise": {
                   "type": "number",
                   "description": "\nThe value of the base pair step helical rise parameter."
@@ -377,6 +395,7 @@
                }
             },
             "required": [
+               "structure_id",
                "i_label_asym_id_1",
                "i_label_asym_id_2",
                "i_label_comp_id_1",
@@ -394,7 +413,8 @@
                "j_symmetry_1",
                "j_symmetry_2",
                "model_number"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -404,6 +424,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "PDB_ins_code": {
                   "type": "string",
                   "description": "Optional identifier of the residue\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
@@ -442,8 +465,10 @@
                }
             },
             "required": [
+               "structure_id",
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -453,6 +478,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "PDB_ins_code_1": {
                   "type": "string",
                   "description": "Optional identifier of the first of the two atom sites that\n define the close contact.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
@@ -515,8 +543,10 @@
                }
             },
             "required": [
+               "structure_id",
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -526,6 +556,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "PDB_ins_code": {
                   "type": "string",
                   "description": "Optional identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
@@ -560,8 +593,10 @@
                }
             },
             "required": [
+               "structure_id",
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -571,6 +606,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "PDB_ins_code_1": {
                   "type": "string",
                   "description": "Optional identifier of the first residue in the bond\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
@@ -625,8 +663,10 @@
                }
             },
             "required": [
+               "structure_id",
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -636,6 +676,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "PDB_ins_code": {
                   "type": "string",
                   "description": "Optional identifier of the residue in which the plane is calculated\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
@@ -671,17 +714,19 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "SIDE CHAIN",
-                     "MAIN CHAIN",
                      "SIDE_CHAIN",
-                     "MAIN_CHAIN"
+                     "SIDE CHAIN",
+                     "MAIN_CHAIN",
+                     "MAIN CHAIN"
                   ],
                   "description": "The type of plane - MAIN CHAIN or SIDE CHAIN atoms"
                }
             },
             "required": [
+               "structure_id",
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -691,6 +736,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "PDB_ins_code_1": {
                   "type": "string",
                   "description": "Optional identifier of the first of the two atom sites that\n define the linkage.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
@@ -753,8 +801,10 @@
                }
             },
             "required": [
+               "structure_id",
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -764,6 +814,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "PDB_ins_code_1": {
                   "type": "string",
                   "description": "Optional identifier of the first of the three atom sites that\n define the angle.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
@@ -866,8 +919,10 @@
                }
             },
             "required": [
+               "structure_id",
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -877,6 +932,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "PDB_ins_code_1": {
                   "type": "string",
                   "description": "Optional identifier of the first of the two atom sites that\n define the covalent bond.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
@@ -955,8 +1013,10 @@
                }
             },
             "required": [
+               "structure_id",
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -966,6 +1026,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "PDB_ins_code_1": {
                   "type": "string",
                   "description": "Optional identifier of the first of the two atom sites that\n define the close contact."
@@ -1036,8 +1099,10 @@
                }
             },
             "required": [
+               "structure_id",
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1047,6 +1112,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "PDB_ins_code": {
                   "type": "string",
                   "description": "Optional identifier of the residue\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
@@ -1085,8 +1153,10 @@
                }
             },
             "required": [
+               "structure_id",
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1094,6 +1164,9 @@
       "rcsb_load_status": {
          "type": "object",
          "properties": {
+            "structure_id": {
+               "type": "string"
+            },
             "datablock_name": {
                "type": "string",
                "description": "Source data block containing the loaded data set"
@@ -1109,14 +1182,19 @@
             }
          },
          "required": [
+            "structure_id",
             "datablock_name"
-         ]
+         ],
+         "additionalProperties": false
       },
       "struct_conf": {
          "type": "array",
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "beg_auth_asym_id": {
                   "type": "string",
                   "description": "A component of the identifier for the residue at which the\n conformation segment begins.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
@@ -1199,8 +1277,10 @@
                }
             },
             "required": [
+               "structure_id",
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1210,57 +1290,62 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "id": {
                   "type": "string",
                   "enum": [
-                     "HELX_LH_OT_N",
-                     "TURN_TY3_P",
-                     "HELX_LH_GA_P",
-                     "HELX_RH_PI_P",
-                     "HELX_LH_N",
-                     "TURN_TY2_P",
-                     "HELX_LH_Z_N",
-                     "HELX_LH_AL_P",
-                     "TURN_TY2P_P",
-                     "HELX_LH_OT_P",
-                     "TURN_TY1_P",
-                     "HELX_LH_OM_P",
-                     "HELX_P",
-                     "HELX_RH_OT_P",
+                     "HELX_RH_AL_P",
                      "HELX_LH_PI_P",
-                     "HELX_RH_A_N",
-                     "HELX_LH_27_P",
-                     "HELX_RH_GA_P",
-                     "HELX_RH_27_P",
-                     "HELX_OT_N",
-                     "HELX_LH_3T_P",
-                     "HELX_RH_P",
+                     "HELX_OT_P",
+                     "HELX_RH_B_N",
+                     "HELX_LH_P",
                      "HELX_RH_OT_N",
                      "TURN_OT_P",
-                     "HELX_RH_AL_P",
-                     "HELX_LH_P",
-                     "TURN_P",
-                     "HELX_LH_A_N",
                      "HELX_RH_Z_N",
-                     "TURN_TY1P_P",
-                     "HELX_RH_3T_P",
+                     "HELX_LH_AL_P",
                      "HELX_RH_PP_P",
-                     "HELX_LH_B_N",
-                     "STRN",
-                     "HELX_LH_PP_P",
                      "HELX_RH_OM_P",
-                     "HELX_RH_N",
-                     "HELX_RH_B_N",
-                     "HELX_OT_P",
+                     "STRN",
+                     "HELX_RH_3T_P",
+                     "HELX_RH_PI_P",
+                     "TURN_TY1_P",
+                     "HELX_LH_GA_P",
+                     "HELX_RH_27_P",
+                     "HELX_RH_GA_P",
+                     "HELX_LH_3T_P",
+                     "HELX_LH_OM_P",
+                     "HELX_LH_N",
+                     "TURN_TY3_P",
+                     "HELX_RH_P",
+                     "HELX_RH_OT_P",
+                     "HELX_LH_B_N",
+                     "TURN_P",
+                     "HELX_LH_OT_P",
+                     "HELX_P",
+                     "HELX_N",
+                     "HELX_RH_A_N",
+                     "HELX_LH_PP_P",
+                     "TURN_TY1P_P",
                      "TURN_TY3P_P",
-                     "HELX_N"
+                     "HELX_LH_A_N",
+                     "HELX_LH_OT_N",
+                     "HELX_LH_27_P",
+                     "HELX_OT_N",
+                     "TURN_TY2_P",
+                     "TURN_TY2P_P",
+                     "HELX_LH_Z_N",
+                     "HELX_RH_N"
                   ],
                   "description": "The descriptor that categorizes the type of the conformation\n of the backbone of the polymer (whether protein or nucleic acid).\n Explicit values for the torsion angles that define each\n conformation are not given here, but it is expected that the\n author would provide such information in either the\n _struct_conf_type.criteria or _struct_conf_type.reference data\n items, or both."
                }
             },
             "required": [
+               "structure_id",
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1270,6 +1355,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "conn_type_id": {
                   "type": "string",
                   "description": "This data item is a pointer to _struct_conn_type.id in the\n STRUCT_CONN_TYPE category."
@@ -1293,8 +1381,8 @@
                   "type": "string",
                   "enum": [
                      "one",
-                     "both",
-                     "none"
+                     "none",
+                     "both"
                   ],
                   "description": "This data item identifies if the linkage has displaced leaving atoms\n on both, one or none of the connected atoms forming the linkage.\n Leaving atoms are defined within their chemical defintions of each\n connected component."
                },
@@ -1333,10 +1421,10 @@
                "pdbx_value_order": {
                   "type": "string",
                   "enum": [
-                     "doub",
-                     "sing",
                      "trip",
-                     "quad"
+                     "doub",
+                     "quad",
+                     "sing"
                   ],
                   "description": "The chemical bond order associated with the specified atoms in\n this contact."
                },
@@ -1414,8 +1502,10 @@
                }
             },
             "required": [
+               "structure_id",
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1425,26 +1515,31 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "id": {
                   "type": "string",
                   "enum": [
-                     "metalc",
-                     "covale_base",
-                     "covale_sugar",
-                     "modres",
-                     "hydrog",
                      "mismat",
-                     "covale_phosphate",
-                     "disulf",
+                     "saltbr",
                      "covale",
-                     "saltbr"
+                     "covale_sugar",
+                     "covale_phosphate",
+                     "covale_base",
+                     "modres",
+                     "disulf",
+                     "metalc",
+                     "hydrog"
                   ],
                   "description": "The chemical or structural type of the interaction."
                }
             },
             "required": [
+               "structure_id",
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1454,6 +1549,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "id": {
                   "type": "string",
                   "description": "The value of _struct_sheet.id must uniquely identify a record in\n the STRUCT_SHEET list.\n\n Note that this item need not be a number; it can be any unique\n identifier."
@@ -1464,8 +1562,10 @@
                }
             },
             "required": [
+               "structure_id",
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1475,6 +1575,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "pdbx_range_1_beg_PDB_ins_code": {
                   "type": "string",
                   "description": "Pointer to _atom_site.pdbx_PDB_ins_code."
@@ -1549,9 +1652,11 @@
                }
             },
             "required": [
+               "structure_id",
                "range_id_1",
                "sheet_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1561,6 +1666,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "range_id_1": {
                   "type": "string",
                   "description": "This data item is a pointer to _struct_sheet_range.id in\n the STRUCT_SHEET_RANGE category."
@@ -1583,10 +1691,12 @@
                }
             },
             "required": [
+               "structure_id",
                "range_id_1",
                "range_id_2",
                "sheet_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1596,6 +1706,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "structure_id": {
+                  "type": "string"
+               },
                "beg_auth_asym_id": {
                   "type": "string",
                   "description": "A component of the identifier for the residue at which the\n beta-sheet range begins.\n\n This data item is a pointer to _atom_site.auth_asym_id in the\n ATOM_SITE category."
@@ -1662,17 +1775,20 @@
                }
             },
             "required": [
+               "structure_id",
                "id",
                "sheet_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
       }
    },
+   "additionalProperties": false,
    "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-min-pdbx_ext.json",
    "$schema": "http://json-schema.org/draft-04/schema#",
-   "title": "schema: pdbx collection: pdbx_ext version: v5_0_3",
-   "description": "RCSB Exchange Database JSON schema derived from the pdbx content type schema. This schema supports collection pdbx_ext version v5_0_3. This schema is hosted in repository https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-min-pdbx_ext.json and follows JSON schema specification version 4",
-   "$comment": "schema_version: v5_0_3"
+   "title": "schema: pdbx collection: pdbx_ext version: 5.1.0",
+   "description": "RCSB Exchange Database JSON schema derived from the pdbx content type schema. This schema supports collection pdbx_ext version 5.1.0. This schema is hosted in repository https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-min-pdbx_ext.json and follows JSON schema specification version 4",
+   "$comment": "schema_version: 5.1.0"
 }

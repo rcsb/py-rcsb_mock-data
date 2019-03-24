@@ -22,22 +22,23 @@
             "rcsb_candidate_assembly": {
                "bsonType": "string",
                "enum": [
-                  "N",
-                  "Y"
+                  "Y",
+                  "N"
                ]
             },
             "rcsb_details": {
                "bsonType": "string",
                "enum": [
-                  "software_defined_assembly",
                   "author_defined_assembly",
-                  "author_and_software_defined_assembly"
+                  "author_and_software_defined_assembly",
+                  "software_defined_assembly"
                ]
             }
          },
          "required": [
             "id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "pdbx_struct_assembly_auth_evidence": {
          "bsonType": "array",
@@ -53,22 +54,22 @@
                "experimental_support": {
                   "bsonType": "string",
                   "enum": [
-                     "fluorescence resonance energy transfer",
-                     "scanning transmission electron microscopy",
-                     "mass spectrometry",
-                     "isothermal titration calorimetry",
-                     "native gel electrophoresis",
-                     "SAXS",
-                     "light scattering",
-                     "cross-linking",
-                     "microscopy",
-                     "surface plasmon resonance",
-                     "assay for oligomerization",
-                     "homology",
                      "gel filtration",
-                     "equilibrium centrifugation",
+                     "isothermal titration calorimetry",
+                     "surface plasmon resonance",
+                     "cross-linking",
+                     "mass spectrometry",
+                     "microscopy",
+                     "assay for oligomerization",
+                     "fluorescence resonance energy transfer",
+                     "light scattering",
+                     "homology",
                      "immunoprecipitation",
-                     "none"
+                     "native gel electrophoresis",
+                     "equilibrium centrifugation",
+                     "none",
+                     "SAXS",
+                     "scanning transmission electron microscopy"
                   ]
                },
                "id": {
@@ -78,7 +79,8 @@
             "required": [
                "assembly_id",
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -107,7 +109,8 @@
             },
             "required": [
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -123,9 +126,9 @@
                "type": {
                   "bsonType": "string",
                   "enum": [
-                     "ABSA (A^2)",
+                     "MORE",
                      "SSA (A^2)",
-                     "MORE"
+                     "ABSA (A^2)"
                   ]
                },
                "value": {
@@ -135,7 +138,8 @@
             "required": [
                "biol_id",
                "type"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -184,21 +188,21 @@
                "type": {
                   "bsonType": "string",
                   "enum": [
-                     "point symmetry operation",
-                     "transform to 3D crystal frame",
-                     "transform to point frame",
-                     "helical symmetry operation",
-                     "transform to helical frame",
-                     "identity operation",
-                     "3D crystal symmetry operation",
-                     "build 3D crystal asymmetric unit",
                      "build point asymmetric unit",
-                     "build helical asymmetric unit",
-                     "crystal symmetry operation",
-                     "2D crystal symmetry operation",
+                     "transform to point frame",
                      "build 2D crystal asymmetric unit",
                      "transform to crystal frame",
-                     "transform to 2D crystal frame"
+                     "3D crystal symmetry operation",
+                     "crystal symmetry operation",
+                     "identity operation",
+                     "helical symmetry operation",
+                     "point symmetry operation",
+                     "transform to 3D crystal frame",
+                     "2D crystal symmetry operation",
+                     "transform to 2D crystal frame",
+                     "build 3D crystal asymmetric unit",
+                     "build helical asymmetric unit",
+                     "transform to helical frame"
                   ]
                },
                "vector_1": {
@@ -213,7 +217,8 @@
             },
             "required": [
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -231,7 +236,8 @@
          "required": [
             "assembly_id",
             "entry_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "rcsb_load_status": {
          "bsonType": "object",
@@ -248,7 +254,8 @@
          },
          "required": [
             "datablock_name"
-         ]
+         ],
+         "additionalProperties": false
       },
       "_entry_id": {
          "bsonType": "string"
@@ -258,8 +265,12 @@
       },
       "_schema_version": {
          "bsonType": "string"
+      },
+      "_id": {
+         "bsonType": "objectId"
       }
    },
+   "additionalProperties": false,
    "required": [
       "_entry_id",
       "_assembly_id"

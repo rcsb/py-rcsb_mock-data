@@ -61,8 +61,8 @@
             "rcsb_multiple_source_flag": {
                "type": "string",
                "enum": [
-                  "N",
-                  "Y"
+                  "Y",
+                  "N"
                ],
                "description": "A code indicating the entity has multiple biological sources.\n"
             },
@@ -73,8 +73,8 @@
             "src_method": {
                "type": "string",
                "enum": [
-                  "nat",
                   "syn",
+                  "nat",
                   "man"
                ],
                "description": "The method by which the sample for the entity was produced.\n Entities isolated directly from natural sources (tissues, soil\n samples etc.) are expected to have further information in the\n ENTITY_SRC_NAT category. Entities isolated from genetically\n manipulated sources are expected to have further information in\n the ENTITY_SRC_GEN category."
@@ -82,11 +82,11 @@
             "type": {
                "type": "string",
                "enum": [
-                  "polymer",
+                  "branched",
                   "macrolide",
                   "non-polymer",
-                  "water",
-                  "branched"
+                  "polymer",
+                  "water"
                ],
                "description": "Defines the type of the entity.\n\n Polymer entities are expected to have corresponding\n ENTITY_POLY and associated entries.\n\n Non-polymer entities are expected to have corresponding\n CHEM_COMP and associated entries.\n\n Water entities are not expected to have corresponding\n entries in the ENTITY category."
             },
@@ -107,7 +107,8 @@
                         "type": "string",
                         "description": "Members of the enzyme classification lineage as parent classification names.\n"
                      }
-                  }
+                  },
+                  "additionalProperties": false
                },
                "uniqueItems": false
             },
@@ -124,18 +125,46 @@
                         "type": "string",
                         "description": "Combined list of macromolecular names associated provenance code.\n\n ECO (https://github.com/evidenceontology/evidenceontology)\n"
                      },
-                     "source": {
+                     "provenance_source": {
                         "type": "string",
+                        "enum": [
+                           "PDB Synonym",
+                           "PDB Preferred Name"
+                        ],
                         "description": "Combined list of macromolecular names associated name source.\n"
                      }
-                  }
+                  },
+                  "additionalProperties": false
+               },
+               "uniqueItems": false
+            },
+            "rcsb_enzyme_class_combined": {
+               "type": "array",
+               "items": {
+                  "type": "object",
+                  "properties": {
+                     "ec": {
+                        "type": "string",
+                        "description": "Combined list of enzyme class assignments.\n"
+                     },
+                     "provenance_code": {
+                        "type": "string",
+                        "description": "Combined list of enzyme class associated provenance codes.\n\n ECO (https://github.com/evidenceontology/evidenceontology)\n"
+                     },
+                     "provenance_source": {
+                        "type": "string",
+                        "description": "Combined list of enzyme class associated provenance sources.\n"
+                     }
+                  },
+                  "additionalProperties": false
                },
                "uniqueItems": false
             }
          },
          "required": [
             "id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "entity_keywords": {
          "type": "object",
@@ -156,7 +185,8 @@
          },
          "required": [
             "entity_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "entity_name_com": {
          "type": "object",
@@ -178,7 +208,8 @@
          },
          "required": [
             "entity_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "entity_name_sys": {
          "type": "object",
@@ -199,7 +230,8 @@
          },
          "required": [
             "entity_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "entity_poly": {
          "type": "object",
@@ -211,20 +243,20 @@
             "nstd_linkage": {
                "type": "string",
                "enum": [
-                  "y",
-                  "yes",
                   "no",
-                  "n"
+                  "n",
+                  "yes",
+                  "y"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer-to-monomer link different from that implied by\n _entity_poly.type."
             },
             "nstd_monomer": {
                "type": "string",
                "enum": [
-                  "y",
-                  "yes",
                   "no",
-                  "n"
+                  "n",
+                  "yes",
+                  "y"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer that is not considered standard."
             },
@@ -261,11 +293,11 @@
             "rcsb_entity_polymer_type": {
                "type": "string",
                "enum": [
-                  "NA-hybrid",
-                  "Protein",
-                  "Other",
                   "DNA",
-                  "RNA"
+                  "NA-hybrid",
+                  "Other",
+                  "RNA",
+                  "Protein"
                ],
                "description": "A coarse-grained polymer entity type."
             },
@@ -276,60 +308,24 @@
             "type": {
                "type": "string",
                "enum": [
+                  "cyclic-pseudo-peptide",
+                  "other",
                   "polyribonucleotide",
                   "polypeptide(L)",
-                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
-                  "polypeptide(D)",
                   "peptide nucleic acid",
-                  "other",
                   "polysaccharide(D)",
+                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
                   "polydeoxyribonucleotide",
-                  "cyclic-pseudo-peptide",
-                  "polysaccharide(L)"
+                  "polysaccharide(L)",
+                  "polypeptide(D)"
                ],
                "description": "The type of the polymer."
             }
          },
          "required": [
             "entity_id"
-         ]
-      },
-      "entity_poly_seq": {
-         "type": "array",
-         "items": {
-            "type": "object",
-            "properties": {
-               "entity_id": {
-                  "type": "string",
-                  "description": "This data item is a pointer to _entity.id in the ENTITY category."
-               },
-               "hetero": {
-                  "type": "string",
-                  "enum": [
-                     "y",
-                     "yes",
-                     "no",
-                     "n"
-                  ],
-                  "description": "A flag to indicate whether this monomer in the polymer is\n heterogeneous in sequence."
-               },
-               "mon_id": {
-                  "type": "string",
-                  "description": "This data item is a pointer to _chem_comp.id in the CHEM_COMP\n category."
-               },
-               "num": {
-                  "type": "integer",
-                  "description": "The value of _entity_poly_seq.num must uniquely and sequentially\n identify a record in the ENTITY_POLY_SEQ list.\n\n Note that this item must be a number and that the sequence\n numbers must progress in increasing numerical order."
-               }
-            },
-            "required": [
-               "entity_id",
-               "mon_id",
-               "num"
-            ]
-         },
-         "minItems": 1,
-         "uniqueItems": true
+         ],
+         "additionalProperties": false
       },
       "entity_src_gen": {
          "type": "array",
@@ -643,9 +639,9 @@
                   "type": "string",
                   "enum": [
                      "N-terminal tag",
-                     "Linker",
                      "C-terminal tag",
-                     "Biological sequence"
+                     "Biological sequence",
+                     "Linker"
                   ],
                   "description": "This data item povides additional information about the sequence type."
                },
@@ -669,7 +665,8 @@
             "required": [
                "entity_id",
                "pdbx_src_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -847,7 +844,8 @@
             "required": [
                "entity_id",
                "pdbx_src_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -874,7 +872,8 @@
          },
          "required": [
             "entity_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "pdbx_entity_src_syn": {
          "type": "array",
@@ -940,7 +939,8 @@
             "required": [
                "entity_id",
                "pdbx_src_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -979,7 +979,8 @@
                "asym_id",
                "instance_id",
                "prd_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1012,7 +1013,8 @@
             },
             "required": [
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1056,7 +1058,8 @@
          "required": [
             "entity_id",
             "entry_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "rcsb_entity_host_organism": {
          "type": "array",
@@ -1099,7 +1102,7 @@
                   "type": "string",
                   "description": "An identifier for an entity segment."
                },
-               "provenance_code": {
+               "provenance_source": {
                   "type": "string",
                   "enum": [
                      "PDB Primary Data"
@@ -1127,7 +1130,8 @@
                            "type": "string",
                            "description": "Members of the NCBI Taxonomy lineage as parent taxonomy names."
                         }
-                     }
+                     },
+                     "additionalProperties": false
                   },
                   "uniqueItems": false
                }
@@ -1135,7 +1139,8 @@
             "required": [
                "entity_id",
                "pdbx_src_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1181,7 +1186,7 @@
                   "type": "string",
                   "description": "An identifier for the entity segment."
                },
-               "provenance_code": {
+               "provenance_source": {
                   "type": "string",
                   "enum": [
                      "PDB Primary Data"
@@ -1196,8 +1201,8 @@
                   "type": "string",
                   "enum": [
                      "natural",
-                     "synthetic",
-                     "genetically engineered"
+                     "genetically engineered",
+                     "synthetic"
                   ],
                   "description": "The source type for the entity\n"
                },
@@ -1218,7 +1223,8 @@
                            "type": "string",
                            "description": "Memebers of the NCBI Taxonomy lineage as parent taxonomy names."
                         }
-                     }
+                     },
+                     "additionalProperties": false
                   },
                   "uniqueItems": false
                }
@@ -1226,7 +1232,8 @@
             "required": [
                "entity_id",
                "pdbx_src_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1250,7 +1257,8 @@
          },
          "required": [
             "datablock_name"
-         ]
+         ],
+         "additionalProperties": false
       },
       "struct_asym": {
          "type": "array",
@@ -1273,8 +1281,8 @@
                "pdbx_blank_PDB_chainid_flag": {
                   "type": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ],
                   "description": "A flag indicating that this entity was originally labeled\n with a blank PDB chain id."
                },
@@ -1288,7 +1296,8 @@
             },
             "required": [
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1355,7 +1364,8 @@
             },
             "required": [
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1466,7 +1476,8 @@
             },
             "required": [
                "align_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1559,7 +1570,8 @@
             },
             "required": [
                "pdbx_ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1585,13 +1597,14 @@
          "description": "Version string for the schema and collection."
       }
    },
+   "additionalProperties": false,
    "required": [
       "_entry_id",
       "_entity_id"
    ],
    "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-min-pdbx_core_entity.json",
    "$schema": "http://json-schema.org/draft-04/schema#",
-   "title": "schema: pdbx_core collection: pdbx_core_entity version: v5_0_3",
-   "description": "RCSB Exchange Database JSON schema derived from the pdbx_core content type schema. This schema supports collection pdbx_core_entity version v5_0_3. This schema is hosted in repository https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-min-pdbx_core_entity.json and follows JSON schema specification version 4",
-   "$comment": "schema_version: v5_0_3"
+   "title": "schema: pdbx_core collection: pdbx_core_entity version: 5.1.0",
+   "description": "RCSB Exchange Database JSON schema derived from the pdbx_core content type schema. This schema supports collection pdbx_core_entity version 5.1.0. This schema is hosted in repository https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-min-pdbx_core_entity.json and follows JSON schema specification version 4",
+   "$comment": "schema_version: 5.1.0"
 }

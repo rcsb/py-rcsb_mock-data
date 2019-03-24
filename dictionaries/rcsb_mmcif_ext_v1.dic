@@ -56,6 +56,9 @@
 #                        _rcsb_schema_container_identifiers.collection_name
 #                        _rcsb_schema_container_identifiers.collection_schema_version
 #   17-Mar-2019 jdw  Add subcategory rcsb_macromolecular_names_combined  and associated name source and provenance code.
+#   19-Mar-2019 jdw  Change provenance_code's to provenance_source to make way for proper provenance code assignments
+#                    Add _entity.rcsb_enzyme_class_combined_ec, _entity.rcsb_enzyme_class_combined_provenance_source,
+#                        _entity.rcsb_enzyme_class_combined_provenance_code
 ###########################################################################
 
 
@@ -74,20 +77,27 @@ data_rcsb_mmcif_ext.dic
 
     _dictionary.title           rcsb_mmcif_ext.dic
     _dictionary.datablock_id    rcsb_mmcif_ext.dic
-    _dictionary.version         0.115
+    _dictionary.version         0.116
 #
      loop_
     _dictionary_history.version
     _dictionary_history.update
     _dictionary_history.revision
 
+ 0.116 2019-03-19
+;
+Changes (jdw):
+    + Add _entity.rcsb_enzyme_class_combined_ec, _entity.rcsb_enzyme_class_combined_provenance_source,
+      _entity.rcsb_enzyme_class_combined_provenance_code
+    + Add subcategory rcsb_enzyme_class_combined
+;
  0.115 2019-03-17
 ;
 Changes (jdw):
     + Add sub_category rcsb_macromolecular_names_combinded
     + Add item _entity.rcsb_macromolecular_names_combined_name
     + Add item _entity.rcsb_macromolecular_names_combined_source
-    + Add item _entity.rcsb_macromolecular_names_combined_provenance_code
+    + Add item _entity.rcsb_macromolecular_names_combined_provenance_source
 ;
  0.114 2019-03-13
 ;
@@ -294,6 +304,9 @@ Changes (jdw):
 
                'rcsb_macromolecular_names_combined'
 ;              Items specifying macromolecular names aggregated from selected sources.
+;
+                'rcsb_enzyme_class_combined'
+;              Items specifying enzyme class aggregated from selected sources.
 ;
 
 #################
@@ -754,17 +767,21 @@ save__entity.rcsb_macromolecular_names_combined_name
     _item_sub_category.id         rcsb_macromolecular_names_combined
      save_
 
-save__entity.rcsb_macromolecular_names_combined_source
+save__entity.rcsb_macromolecular_names_combined_provenance_source
     _item_description.description
 ;  Combined list of macromolecular names associated name source.
 
 ;
-    _item.name                  '_entity.rcsb_macromolecular_names_combined_source'
+    _item.name                  '_entity.rcsb_macromolecular_names_combined_provenance_source'
     _item.category_id             entity
     _item.mandatory_code          no
     _item_type.code               alphanum-scsv
     _item_methods.method_id       'rcsb_add_entity_misc'
     _item_sub_category.id         rcsb_macromolecular_names_combined
+    loop_
+    _item_enumeration.value
+    'PDB Preferred Name'
+    'PDB Synonym'
      save_
 
 save__entity.rcsb_macromolecular_names_combined_provenance_code
@@ -774,7 +791,7 @@ save__entity.rcsb_macromolecular_names_combined_provenance_code
    ECO (https://github.com/evidenceontology/evidenceontology)
 
 ;
-    _item.name                  '_entity.rcsb_macromolecular_names_combined'
+    _item.name                  '_entity.rcsb_macromolecular_names_combined_provenance_code'
     _item.category_id             entity
     _item.mandatory_code          no
     _item_type.code               alphanum-scsv
@@ -820,6 +837,48 @@ save__entity.rcsb_ec_lineage_depth
     _item_methods.method_id       'rcsb_add_entity_misc'
     _item_sub_category.id         rcsb_ec_lineage
      save_
+
+save__entity.rcsb_enzyme_class_combined_ec
+    _item_description.description
+;  Combined list of enzyme class assignments.
+
+;
+    _item.name                  '_entity.rcsb_enzyme_class_combined_ec'
+    _item.category_id             entity
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_methods.method_id       'rcsb_add_entity_misc'
+    _item_sub_category.id         rcsb_enzyme_class_combined
+     save_
+
+save__entity.rcsb_enzyme_class_combined_provenance_source
+    _item_description.description
+;  Combined list of enzyme class associated provenance sources.
+
+;
+    _item.name                  '_entity.rcsb_enzyme_class_combined_provenance_source'
+    _item.category_id             entity
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_methods.method_id       'rcsb_add_entity_misc'
+    _item_sub_category.id         rcsb_enzyme_class_combined
+     save_
+
+save__entity.rcsb_enzyme_class_combined_provenance_code
+    _item_description.description
+;  Combined list of enzyme class associated provenance codes.
+
+   ECO (https://github.com/evidenceontology/evidenceontology)
+
+;
+    _item.name                  '_entity.rcsb_enzyme_class_combined'
+    _item.category_id             entity
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_methods.method_id       'rcsb_add_entity_misc'
+    _item_sub_category.id         rcsb_enzyme_class_combined
+     save_
+##
 ##
 
 #################
@@ -1887,7 +1946,8 @@ save_rcsb_repository_holdings_update
      _rcsb_repository_holdings_update.update_id
      _rcsb_repository_holdings_update.entry_id
      _rcsb_repository_holdings_update.repository_content_types
-    2018_23 7ABC 'coordinates,struture factors'
+     _rcsb_repository_holdings_update.update_type
+    2018_23 7ABC 'coordinates,struture factors' added
     # ... abbreviated ...
 
 ;
@@ -1933,6 +1993,21 @@ save__rcsb_repository_holdings_update.repository_content_types
     'coordinates' 'NMR restraints' 'NMR chemical shifts' 'structure factors'
 
      save_
+
+save__rcsb_repository_holdings_update.update_type
+    _item_description.description
+;    The list of update types associated with this entry.
+;
+    _item.name                  '_rcsb_repository_holdings_update.update_type'
+    _item.category_id             rcsb_repository_holdings_update
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case           'added'
+    loop_
+    _item_enumeration.value
+    'added' 'modified' 'obsolete' 'removed'
+     save_
+
 
 ######################################
 ## RCSB_REPOSITORY_HOLDINGS_REMOVED ##
@@ -2304,7 +2379,7 @@ save__rcsb_repository_holdings_unreleased.author_prerelease_sequence_status
     _item_example.case           'RELEASE IMMEDIATELY'
     loop_
     _item_enumeration.value
-    'HOLD FOR RELEASE' 'RELEASE IMMEDIATELY'
+    'HOLD FOR RELEASE' 'RELEASE IMMEDIATELY' 'RELEASE NOW' 'HOLD FOR PUBLICATION'
 
      save_
 
@@ -2906,7 +2981,7 @@ save_rcsb_entity_source_organism
     _rcsb_entity_source_organism.scientific_name
     _rcsb_entity_source_organism.common_name
     _rcsb_entity_source_organism.ncbi_taxonomy_id
-    _rcsb_entity_source_organism.provenance_code
+    _rcsb_entity_source_organism.provenance_source
     _rcsb_entity_source_organism.beg_seq_num
     _rcsb_entity_source_organism.end_seq_num
     _rcsb_entity_source_organism.ncbi_scientific_name
@@ -3001,12 +3076,12 @@ save__rcsb_entity_source_organism.source_type
     'natural' 'genetically engineered' 'synthetic'
      save_
 
-save__rcsb_entity_source_organism.provenance_code
+save__rcsb_entity_source_organism.provenance_source
     _item_description.description
 ;  A code indicating the provenance of the source organism details for the entity
 
 ;
-    _item.name                  '_rcsb_entity_source_organism.provenance_code'
+    _item.name                  '_rcsb_entity_source_organism.provenance_source'
     _item.category_id            rcsb_entity_source_organism
     _item.mandatory_code          no
     _item_type.code               line
@@ -3162,7 +3237,7 @@ save_rcsb_entity_host_organism
     _rcsb_entity_host_organism.scientific_name
     _rcsb_entity_host_organism.common_name
     _rcsb_entity_host_organism.ncbi_taxonomy_id
-    _rcsb_entity_host_organism.provenance_code
+    _rcsb_entity_host_organism.provenance_source
     _rcsb_entity_host_organism.beg_seq_num
     _rcsb_entity_host_organism.end_seq_num
     _rcsb_entity_host_organism.ncbi_scientific_name
@@ -3244,12 +3319,12 @@ save__rcsb_entity_host_organism.ncbi_taxonomy_id
     _item_type.code               int
      save_
 
-save__rcsb_entity_host_organism.provenance_code
+save__rcsb_entity_host_organism.provenance_source
     _item_description.description
 ;  A code indicating the provenance of the host organism.
 
 ;
-    _item.name                  '_rcsb_entity_host_organism.provenance_code'
+    _item.name                  '_rcsb_entity_host_organism.provenance_source'
     _item.category_id            rcsb_entity_host_organism
     _item.mandatory_code          no
     _item_type.code               line
@@ -3520,7 +3595,7 @@ loop_
      _rcsb_chem_comp_synonyms.comp_id
      _rcsb_chem_comp_synonyms.ordinal
      _rcsb_chem_comp_synonyms.name
-     _rcsb_chem_comp_synonyms.provenance_code
+     _rcsb_chem_comp_synonyms.provenance_source
     ATP 1 "adenosine 5'-(tetrahydrogen triphosphate)"  'PDB Reference Data'
     ATP 2 "Adenosine 5'-triphosphate"  'PDB Reference Data'
     ATP 3 Atriphos  DrugBank
@@ -3574,11 +3649,11 @@ save__rcsb_chem_comp_synonyms.comp_id
    #
 save_
 
-save__rcsb_chem_comp_synonyms.provenance_code
+save__rcsb_chem_comp_synonyms.provenance_source
    #
    _item_description.description  'The provenance of this synonym.'
    #
-   _item.name                    '_rcsb_chem_comp_synonyms.provenance_code'
+   _item.name                    '_rcsb_chem_comp_synonyms.provenance_source'
    _item.category_id             rcsb_chem_comp_synonyms
    _item.mandatory_code          no
    _item_type.code               line
@@ -4076,7 +4151,7 @@ save_rcsb_chem_comp_target
      _rcsb_chem_comp_target.organism_common_name
      _rcsb_chem_comp_target.reference_database_name
      _rcsb_chem_comp_target.reference_database_accession_code
-     _rcsb_chem_comp_target.provenance_code
+     _rcsb_chem_comp_target.provenance_source
      ATP 1 "O-phosphoseryl-tRNA(Sec) selenium transferase" target cofactor Human UniProt Q9HD40 DrugBank
 ;
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -4140,12 +4215,12 @@ save__rcsb_chem_comp_target.reference_database_accession_code
     _item_examples.case        'Q9HD40'
 save_
 
-save__rcsb_chem_comp_target.provenance_code
+save__rcsb_chem_comp_target.provenance_source
     _item_description.description
 ;  A code indicating the provenance of the target interaction assignment
 
 ;
-    _item.name                  '_rcsb_chem_comp_target.provenance_code'
+    _item.name                  '_rcsb_chem_comp_target.provenance_source'
     _item.category_id            rcsb_chem_comp_target
     _item.mandatory_code          no
     _item_type.code               line
@@ -4486,6 +4561,17 @@ save__drugbank_target.seq_one_letter_code
     _item_type.code               text
     _item_examples.case          'MAKQRSG...'
      save_
+
+save__drugbank_target.organism_common_name
+    _item_description.description
+;              The organism common name.
+;
+    _item.name                  '_drugbank_target.organism_common_name'
+    _item.category_id             drugbank_target
+    _item.mandatory_code          no
+    _item_type.code               text
+    save_
+
 
 ####################################
 ## DRUGBANK_CONTAINER_IDENTIFIERS ##
@@ -5190,7 +5276,7 @@ save__pdbx_distant_solvent_atoms.rcsb_label_asym_id
       save_
 
 ########################################
-## RCSB_SCHEMA_CONTAINER_IDENTIFIERS
+## RCSB_SCHEMA_CONTAINER_IDENTIFIERS  ##
 ########################################
 
 save_rcsb_schema_container_identifiers

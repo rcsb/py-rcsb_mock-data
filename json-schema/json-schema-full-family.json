@@ -6,6 +6,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "id": {
                   "type": "string",
                   "examples": [
@@ -68,8 +71,10 @@
                }
             },
             "required": [
+               "db_id",
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -79,6 +84,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "citation_id": {
                   "type": "string",
                   "description": "This data item is a pointer to _citation.id in the CITATION\n category."
@@ -100,10 +108,12 @@
                }
             },
             "required": [
+               "db_id",
                "citation_id",
                "name",
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -113,25 +123,28 @@
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "action_type": {
                   "type": "string",
                   "enum": [
-                     "Modify family classification",
-                     "Modify related structures",
-                     "Other modification",
-                     "Create family",
-                     "Modify family name",
-                     "Initial release",
-                     "Obsolete family",
-                     "Modify citation",
                      "Remove PRD",
-                     "Add PRD",
-                     "Modify feature",
-                     "Modify molecule details",
+                     "Other modification",
                      "Modify sequence",
-                     "Modify annotation",
                      "Obsolete familyt",
-                     "Modify synonyms"
+                     "Initial release",
+                     "Modify synonyms",
+                     "Add PRD",
+                     "Modify molecule details",
+                     "Modify citation",
+                     "Modify family classification",
+                     "Modify annotation",
+                     "Modify family name",
+                     "Modify feature",
+                     "Create family",
+                     "Modify related structures",
+                     "Obsolete family"
                   ],
                   "description": "The action associated with this audit record."
                },
@@ -172,10 +185,12 @@
                }
             },
             "required": [
+               "db_id",
                "action_type",
                "date",
                "family_prd_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -185,6 +200,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "chem_comp_id": {
                   "type": "string",
                   "examples": [
@@ -238,12 +256,14 @@
                }
             },
             "required": [
+               "db_id",
                "family_prd_id",
                "ordinal",
                "source",
                "text",
                "type"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -253,6 +273,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "family_prd_id": {
                   "type": "string",
                   "description": "The value of _pdbx_reference_molecule_details.family_prd_id is a reference to\n _pdbx_reference_molecule_list.family_prd_id' in category PDBX_REFERENCE_MOLECULE_FAMILY."
@@ -279,10 +302,12 @@
                }
             },
             "required": [
+               "db_id",
                "family_prd_id",
                "ordinal",
                "text"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -290,6 +315,9 @@
       "pdbx_reference_molecule_family": {
          "type": "object",
          "properties": {
+            "db_id": {
+               "type": "string"
+            },
             "family_prd_id": {
                "type": "string",
                "description": "The value of _pdbx_reference_entity.family_prd_id must uniquely identify a record in the\n PDBX_REFERENCE_MOLECULE_FAMILY list.\n\n By convention this ID uniquely identifies the reference family in\n in the PDB reference dictionary.\n\n The ID has the template form FAM_dddddd (e.g. FAM_000001)\n"
@@ -305,8 +333,8 @@
             "release_status": {
                "type": "string",
                "enum": [
-                  "HOLD",
                   "OBS",
+                  "HOLD",
                   "WAIT",
                   "REL"
                ],
@@ -322,14 +350,19 @@
             }
          },
          "required": [
+            "db_id",
             "family_prd_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "pdbx_reference_molecule_features": {
          "type": "array",
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "chem_comp_id": {
                   "type": "string",
                   "examples": [
@@ -379,13 +412,15 @@
                }
             },
             "required": [
+               "db_id",
                "family_prd_id",
                "ordinal",
                "prd_id",
                "source",
                "type",
                "value"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -395,6 +430,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "family_prd_id": {
                   "type": "string",
                   "description": "The value of _pdbx_reference_molecule_list.family_prd_id is a reference to\n _pdbx_reference_molecule_family.family_prd_id' in category PDBX_REFERENCE_MOLECULE_FAMILY."
@@ -405,9 +443,11 @@
                }
             },
             "required": [
+               "db_id",
                "family_prd_id",
                "prd_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -417,6 +457,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "citation_id": {
                   "type": "string",
                   "description": "A link to related reference information in the citation category."
@@ -466,9 +509,11 @@
                }
             },
             "required": [
+               "db_id",
                "family_prd_id",
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -478,6 +523,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "db_id": {
+                  "type": "string"
+               },
                "chem_comp_id": {
                   "type": "string",
                   "examples": [
@@ -514,12 +562,14 @@
                }
             },
             "required": [
+               "db_id",
                "family_prd_id",
                "name",
                "ordinal",
                "prd_id",
                "source"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -527,6 +577,9 @@
       "rcsb_load_status": {
          "type": "object",
          "properties": {
+            "db_id": {
+               "type": "string"
+            },
             "datablock_name": {
                "type": "string",
                "description": "Source data block containing the loaded data set"
@@ -542,15 +595,18 @@
             }
          },
          "required": [
+            "db_id",
             "datablock_name",
             "load_date",
             "locator"
-         ]
+         ],
+         "additionalProperties": false
       }
    },
+   "additionalProperties": false,
    "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-full-family.json",
    "$schema": "http://json-schema.org/draft-04/schema#",
-   "title": "schema: bird_family collection: family version: v5_0_3",
-   "description": "RCSB Exchange Database JSON schema derived from the bird_family content type schema. This schema supports collection family version v5_0_3. This schema is hosted in repository https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-full-family.json and follows JSON schema specification version 4",
-   "$comment": "schema_version: v5_0_3"
+   "title": "schema: bird_family collection: family version: 5.1.0",
+   "description": "RCSB Exchange Database JSON schema derived from the bird_family content type schema. This schema supports collection family version 5.1.0. This schema is hosted in repository https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-full-family.json and follows JSON schema specification version 4",
+   "$comment": "schema_version: 5.1.0"
 }

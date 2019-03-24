@@ -11,8 +11,10 @@
       "author_prerelease_sequence_status": {
          "bsonType": "string",
          "enum": [
-            "RELEASE IMMEDIATELY",
-            "HOLD FOR RELEASE"
+            "HOLD FOR PUBLICATION",
+            "RELEASE NOW",
+            "HOLD FOR RELEASE",
+            "RELEASE IMMEDIATELY"
          ]
       },
       "deposit_date": {
@@ -45,15 +47,15 @@
       "status_code": {
          "bsonType": "string",
          "enum": [
-            "REPL",
-            "HPUB",
-            "PROC",
-            "HOLD",
-            "WDRN",
             "AUTH",
-            "WAIT",
             "REFI",
             "POLC",
+            "PROC",
+            "REPL",
+            "WDRN",
+            "HPUB",
+            "WAIT",
+            "HOLD",
             "AUCO"
          ]
       },
@@ -65,11 +67,15 @@
       },
       "_schema_version": {
          "bsonType": "string"
+      },
+      "_id": {
+         "bsonType": "objectId"
       }
    },
    "required": [
       "entry_id",
       "status_code",
       "update_id"
-   ]
+   ],
+   "additionalProperties": false
 }

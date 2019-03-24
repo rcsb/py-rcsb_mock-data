@@ -4,6 +4,9 @@
       "chem_comp": {
          "bsonType": "object",
          "properties": {
+            "component_id": {
+               "bsonType": "string"
+            },
             "formula": {
                "bsonType": "string"
             },
@@ -50,12 +53,12 @@
             "pdbx_release_status": {
                "bsonType": "string",
                "enum": [
-                  "HPUB",
-                  "REL",
-                  "DEL",
                   "HOLD",
+                  "REL",
                   "OBS",
-                  "REF_ONLY"
+                  "HPUB",
+                  "REF_ONLY",
+                  "DEL"
                ]
             },
             "pdbx_replaced_by": {
@@ -73,47 +76,52 @@
             "type": {
                "bsonType": "string",
                "enum": [
-                  "L-peptide linking",
-                  "DNA OH 3 prime terminus",
-                  "D-peptide linking",
-                  "RNA OH 3 prime terminus",
-                  "D-beta-peptide, C-gamma linking",
-                  "RNA OH 5 prime terminus",
-                  "peptide-like",
-                  "L-peptide COOH carboxy terminus",
-                  "other",
-                  "L-saccharide 1,4 and 1,6 linking",
-                  "L-RNA linking",
-                  "D-peptide COOH carboxy terminus",
-                  "saccharide",
-                  "D-saccharide 1,4 and 1,6 linking",
-                  "D-saccharide",
-                  "L-beta-peptide, C-gamma linking",
-                  "DNA OH 5 prime terminus",
-                  "D-peptide NH3 amino terminus",
-                  "peptide linking",
-                  "L-saccharide 1,4 and 1,4 linking",
-                  "L-DNA linking",
-                  "RNA linking",
-                  "D-gamma-peptide, C-delta linking",
-                  "D-saccharide 1,4 and 1,4 linking",
                   "L-gamma-peptide, C-delta linking",
-                  "L-saccharide",
-                  "non-polymer",
                   "DNA linking",
-                  "L-peptide NH3 amino terminus"
+                  "L-RNA linking",
+                  "RNA OH 3 prime terminus",
+                  "RNA OH 5 prime terminus",
+                  "L-peptide linking",
+                  "saccharide",
+                  "D-peptide NH3 amino terminus",
+                  "L-peptide NH3 amino terminus",
+                  "peptide-like",
+                  "L-saccharide 1,4 and 1,4 linking",
+                  "peptide linking",
+                  "D-beta-peptide, C-gamma linking",
+                  "D-peptide COOH carboxy terminus",
+                  "RNA linking",
+                  "D-saccharide 1,4 and 1,4 linking",
+                  "D-gamma-peptide, C-delta linking",
+                  "L-peptide COOH carboxy terminus",
+                  "non-polymer",
+                  "D-peptide linking",
+                  "L-saccharide 1,4 and 1,6 linking",
+                  "D-saccharide 1,4 and 1,6 linking",
+                  "DNA OH 5 prime terminus",
+                  "L-DNA linking",
+                  "D-saccharide",
+                  "other",
+                  "DNA OH 3 prime terminus",
+                  "L-beta-peptide, C-gamma linking",
+                  "L-saccharide"
                ]
             }
          },
          "required": [
+            "component_id",
             "id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "chem_comp_atom": {
          "bsonType": "array",
          "items": {
             "bsonType": "object",
             "properties": {
+               "component_id": {
+                  "bsonType": "string"
+               },
                "alt_atom_id": {
                   "bsonType": "string"
                },
@@ -141,8 +149,8 @@
                "pdbx_aromatic_flag": {
                   "bsonType": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ]
                },
                "pdbx_component_atom_id": {
@@ -157,8 +165,8 @@
                "pdbx_leaving_atom_flag": {
                   "bsonType": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ]
                },
                "pdbx_model_Cartn_x_ideal": {
@@ -186,9 +194,9 @@
                "pdbx_stereo_config": {
                   "bsonType": "string",
                   "enum": [
-                     "N",
+                     "R",
                      "S",
-                     "R"
+                     "N"
                   ]
                },
                "type_symbol": {
@@ -196,9 +204,11 @@
                }
             },
             "required": [
+               "component_id",
                "atom_id",
                "comp_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -208,6 +218,9 @@
          "items": {
             "bsonType": "object",
             "properties": {
+               "component_id": {
+                  "bsonType": "string"
+               },
                "atom_id_1": {
                   "bsonType": "string"
                },
@@ -220,8 +233,8 @@
                "pdbx_aromatic_flag": {
                   "bsonType": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ]
                },
                "pdbx_ordinal": {
@@ -238,22 +251,24 @@
                "value_order": {
                   "bsonType": "string",
                   "enum": [
+                     "pi",
                      "trip",
-                     "quad",
-                     "delo",
                      "doub",
-                     "sing",
-                     "poly",
                      "arom",
-                     "pi"
+                     "quad",
+                     "sing",
+                     "delo",
+                     "poly"
                   ]
                }
             },
             "required": [
+               "component_id",
                "atom_id_1",
                "atom_id_2",
                "comp_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -263,34 +278,37 @@
          "items": {
             "bsonType": "object",
             "properties": {
+               "component_id": {
+                  "bsonType": "string"
+               },
                "action_type": {
                   "bsonType": "string",
                   "enum": [
-                     "Modify parent residue",
-                     "Modify component comp_id",
-                     "Modify name",
-                     "Modify component atom id",
-                     "Create component",
-                     "Modify one letter code",
-                     "Modify atom id",
-                     "Modify model coordinates code",
-                     "Modify value order",
-                     "Modify synonyms",
-                     "Other modification",
-                     "Modify linking type",
-                     "Obsolete component",
-                     "Modify internal type",
-                     "Modify charge",
-                     "Modify formula",
-                     "Modify coordinates",
-                     "Modify formal charge",
                      "Modify aromatic_flag",
-                     "Modify identifier",
-                     "Modify processing site",
-                     "Initial release",
-                     "Modify descriptor",
                      "Modify subcomponent list",
-                     "Modify leaving atom flag"
+                     "Modify processing site",
+                     "Modify formula",
+                     "Modify parent residue",
+                     "Modify model coordinates code",
+                     "Modify descriptor",
+                     "Modify synonyms",
+                     "Modify leaving atom flag",
+                     "Obsolete component",
+                     "Modify component atom id",
+                     "Modify value order",
+                     "Modify component comp_id",
+                     "Modify coordinates",
+                     "Modify one letter code",
+                     "Modify linking type",
+                     "Modify formal charge",
+                     "Modify atom id",
+                     "Modify identifier",
+                     "Modify internal type",
+                     "Other modification",
+                     "Initial release",
+                     "Modify name",
+                     "Modify charge",
+                     "Create component"
                   ]
                },
                "comp_id": {
@@ -307,8 +325,10 @@
                }
             },
             "required": [
+               "component_id",
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -318,6 +338,9 @@
          "items": {
             "bsonType": "object",
             "properties": {
+               "component_id": {
+                  "bsonType": "string"
+               },
                "comp_id": {
                   "bsonType": "string"
                },
@@ -333,29 +356,31 @@
                "type": {
                   "bsonType": "string",
                   "enum": [
-                     "InChI_RECONNECT",
-                     "InChI_MAIN_HATOM",
-                     "InChI_FIXEDH",
-                     "InChI_STEREO",
-                     "InChI_MAIN",
-                     "InChI_CHARGE",
-                     "SMILES",
-                     "SMILES_CANONICAL",
-                     "InChI",
                      "InChI_MAIN_CONNECT",
+                     "InChI_RECONNECT",
+                     "SMILES",
+                     "InChI",
+                     "InChI_MAIN_FORMULA",
                      "InChIKey",
-                     "InChI_ISOTOPE",
+                     "InChI_MAIN",
+                     "InChI_MAIN_HATOM",
+                     "InChI_CHARGE",
                      "SMILES_CANNONICAL",
-                     "InChI_MAIN_FORMULA"
+                     "SMILES_CANONICAL",
+                     "InChI_STEREO",
+                     "InChI_FIXEDH",
+                     "InChI_ISOTOPE"
                   ]
                }
             },
             "required": [
+               "component_id",
                "comp_id",
                "program",
                "program_version",
                "type"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -365,6 +390,9 @@
          "items": {
             "bsonType": "object",
             "properties": {
+               "component_id": {
+                  "bsonType": "string"
+               },
                "comp_id": {
                   "bsonType": "string"
                },
@@ -379,11 +407,13 @@
                }
             },
             "required": [
+               "component_id",
                "comp_id",
                "source",
                "type",
                "value"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -393,6 +423,9 @@
          "items": {
             "bsonType": "object",
             "properties": {
+               "component_id": {
+                  "bsonType": "string"
+               },
                "comp_id": {
                   "bsonType": "string"
                },
@@ -408,24 +441,26 @@
                "type": {
                   "bsonType": "string",
                   "enum": [
-                     "CONDENSED IUPAC CARB SYMBOL",
-                     "CAS REGISTRY NUMBER",
-                     "COMMON NAME",
-                     "MDL Identifier",
-                     "SNFG CARB SYMBOL",
                      "SYNONYM",
-                     "SYSTEMATIC NAME",
+                     "CAS REGISTRY NUMBER",
+                     "SNFG CARB SYMBOL",
+                     "MDL Identifier",
+                     "CONDENSED IUPAC CARB SYMBOL",
                      "IUPAC CARB SYMBOL",
+                     "SYSTEMATIC NAME",
+                     "COMMON NAME",
                      "PUBCHEM Identifier"
                   ]
                }
             },
             "required": [
+               "component_id",
                "comp_id",
                "program",
                "program_version",
                "type"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -433,6 +468,9 @@
       "rcsb_load_status": {
          "bsonType": "object",
          "properties": {
+            "component_id": {
+               "bsonType": "string"
+            },
             "datablock_name": {
                "bsonType": "string"
             },
@@ -444,8 +482,14 @@
             }
          },
          "required": [
+            "component_id",
             "datablock_name"
-         ]
+         ],
+         "additionalProperties": false
+      },
+      "_id": {
+         "bsonType": "objectId"
       }
-   }
+   },
+   "additionalProperties": false
 }

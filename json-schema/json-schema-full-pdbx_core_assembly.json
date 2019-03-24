@@ -40,8 +40,8 @@
             "rcsb_candidate_assembly": {
                "type": "string",
                "enum": [
-                  "N",
-                  "Y"
+                  "Y",
+                  "N"
                ],
                "examples": [
                   "Y"
@@ -51,9 +51,9 @@
             "rcsb_details": {
                "type": "string",
                "enum": [
-                  "software_defined_assembly",
                   "author_defined_assembly",
-                  "author_and_software_defined_assembly"
+                  "author_and_software_defined_assembly",
+                  "software_defined_assembly"
                ],
                "examples": [
                   "author_and_software_defined_assembly"
@@ -63,7 +63,8 @@
          },
          "required": [
             "id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "pdbx_struct_assembly_auth_evidence": {
          "type": "array",
@@ -81,22 +82,22 @@
                "experimental_support": {
                   "type": "string",
                   "enum": [
-                     "fluorescence resonance energy transfer",
-                     "scanning transmission electron microscopy",
-                     "mass spectrometry",
-                     "isothermal titration calorimetry",
-                     "native gel electrophoresis",
-                     "SAXS",
-                     "light scattering",
-                     "cross-linking",
-                     "microscopy",
-                     "surface plasmon resonance",
-                     "assay for oligomerization",
-                     "homology",
                      "gel filtration",
-                     "equilibrium centrifugation",
+                     "isothermal titration calorimetry",
+                     "surface plasmon resonance",
+                     "cross-linking",
+                     "mass spectrometry",
+                     "microscopy",
+                     "assay for oligomerization",
+                     "fluorescence resonance energy transfer",
+                     "light scattering",
+                     "homology",
                      "immunoprecipitation",
-                     "none"
+                     "native gel electrophoresis",
+                     "equilibrium centrifugation",
+                     "none",
+                     "SAXS",
+                     "scanning transmission electron microscopy"
                   ],
                   "description": "Provides the experimental method to determine the state of this assembly"
                },
@@ -109,7 +110,8 @@
                "assembly_id",
                "experimental_support",
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -151,7 +153,8 @@
                "asym_id_list",
                "oper_expression",
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -168,9 +171,9 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "ABSA (A^2)",
+                     "MORE",
                      "SSA (A^2)",
-                     "MORE"
+                     "ABSA (A^2)"
                   ],
                   "description": "The property type for the assembly."
                },
@@ -183,7 +186,8 @@
                "biol_id",
                "type",
                "value"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -252,21 +256,21 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "point symmetry operation",
-                     "transform to 3D crystal frame",
-                     "transform to point frame",
-                     "helical symmetry operation",
-                     "transform to helical frame",
-                     "identity operation",
-                     "3D crystal symmetry operation",
-                     "build 3D crystal asymmetric unit",
                      "build point asymmetric unit",
-                     "build helical asymmetric unit",
-                     "crystal symmetry operation",
-                     "2D crystal symmetry operation",
+                     "transform to point frame",
                      "build 2D crystal asymmetric unit",
                      "transform to crystal frame",
-                     "transform to 2D crystal frame"
+                     "3D crystal symmetry operation",
+                     "crystal symmetry operation",
+                     "identity operation",
+                     "helical symmetry operation",
+                     "point symmetry operation",
+                     "transform to 3D crystal frame",
+                     "2D crystal symmetry operation",
+                     "transform to 2D crystal frame",
+                     "build 3D crystal asymmetric unit",
+                     "build helical asymmetric unit",
+                     "transform to helical frame"
                   ],
                   "description": "A code to indicate the type of operator."
                },
@@ -286,7 +290,8 @@
             "required": [
                "id",
                "type"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -306,7 +311,8 @@
          "required": [
             "assembly_id",
             "entry_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "rcsb_load_status": {
          "type": "object",
@@ -329,7 +335,8 @@
             "datablock_name",
             "load_date",
             "locator"
-         ]
+         ],
+         "additionalProperties": false
       },
       "_entry_id": {
          "type": "string",
@@ -344,13 +351,14 @@
          "description": "Version string for the schema and collection."
       }
    },
+   "additionalProperties": false,
    "required": [
       "_entry_id",
       "_assembly_id"
    ],
    "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-full-pdbx_core_assembly.json",
    "$schema": "http://json-schema.org/draft-04/schema#",
-   "title": "schema: pdbx_core collection: pdbx_core_assembly version: v5_0_3",
-   "description": "RCSB Exchange Database JSON schema derived from the pdbx_core content type schema. This schema supports collection pdbx_core_assembly version v5_0_3. This schema is hosted in repository https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-full-pdbx_core_assembly.json and follows JSON schema specification version 4",
-   "$comment": "schema_version: v5_0_3"
+   "title": "schema: pdbx_core collection: pdbx_core_assembly version: 5.1.0",
+   "description": "RCSB Exchange Database JSON schema derived from the pdbx_core content type schema. This schema supports collection pdbx_core_assembly version 5.1.0. This schema is hosted in repository https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-full-pdbx_core_assembly.json and follows JSON schema specification version 4",
+   "$comment": "schema_version: 5.1.0"
 }

@@ -2,15 +2,17 @@
    "NAME": "drugbank_core",
    "APP_NAME": "SQL",
    "DATABASE_NAME": "chem_comp_core",
-   "DATABASE_VERSION": "v5_0_3",
+   "DATABASE_VERSION": "5.1.0",
    "SELECTION_FILTERS": {},
    "SCHEMA_DICT": {
       "DRUGBANK_CONTAINER_IDENTIFIERS": {
          "SCHEMA_ID": "DRUGBANK_CONTAINER_IDENTIFIERS",
          "SCHEMA_NAME": "drugbank_container_identifiers",
          "SCHEMA_TYPE": "transactional",
-         "SCHEMA_UNIT_CARDINALITY": false,
-         "SCHEMA_CONTENT_CLASSES": [],
+         "SCHEMA_UNIT_CARDINALITY": true,
+         "SCHEMA_CONTENT_CLASSES": [
+            "INTEGRATED_CONTENT"
+         ],
          "SCHEMA_MANDATORY": false,
          "SCHEMA_SUB_CATEGORIES": [],
          "ATTRIBUTES": {
@@ -36,7 +38,9 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {},
-               "CONTENT_CLASSES": [],
+               "CONTENT_CLASSES": [
+                  "INTEGRATED_CONTENT"
+               ],
                "SUB_CATEGORIES": []
             }
          },
@@ -72,13 +76,13 @@
          "SCHEMA_MANDATORY": false,
          "SCHEMA_SUB_CATEGORIES": [],
          "ATTRIBUTES": {
+            "DRUGBANK_ID": "drugbank_id",
             "AFFECTED_ORGANISMS": "affected_organisms",
             "BRAND_NAMES": "brand_names",
             "CAS_NUMBER": "cas_number",
             "DESCRIPTION": "description",
             "DRUG_CATEGORIES": "drug_categories",
             "DRUG_GROUPS": "drug_groups",
-            "DRUGBANK_ID": "drugbank_id",
             "INDICATION": "indication",
             "MECHANISM_OF_ACTION": "mechanism_of_action",
             "NAME": "name",
@@ -383,9 +387,10 @@
          "SCHEMA_MANDATORY": false,
          "SCHEMA_SUB_CATEGORIES": [],
          "ATTRIBUTES": {
+            "ORDINAL": "ordinal",
             "INTERACTION_TYPE": "interaction_type",
             "NAME": "name",
-            "ORDINAL": "ordinal",
+            "ORGANISM_COMMON_NAME": "organism_common_name",
             "REFERENCE_DATABASE_ACCESSION_CODE": "reference_database_accession_code",
             "REFERENCE_DATABASE_NAME": "reference_database_name",
             "SEQ_ONE_LETTER_CODE": "seq_one_letter_code",
@@ -407,6 +412,12 @@
             "NAME": {
                "CATEGORY": "drugbank_target",
                "ATTRIBUTE": "name",
+               "METHOD_NAME": null,
+               "ARGUMENTS": null
+            },
+            "ORGANISM_COMMON_NAME": {
+               "CATEGORY": "drugbank_target",
+               "ATTRIBUTE": "organism_common_name",
                "METHOD_NAME": null,
                "ARGUMENTS": null
             },
@@ -484,7 +495,7 @@
                ],
                "SUB_CATEGORIES": []
             },
-            "REFERENCE_DATABASE_ACCESSION_CODE": {
+            "ORGANISM_COMMON_NAME": {
                "ORDER": 4,
                "NULLABLE": true,
                "PRECISION": 0,
@@ -500,8 +511,24 @@
                ],
                "SUB_CATEGORIES": []
             },
-            "REFERENCE_DATABASE_NAME": {
+            "REFERENCE_DATABASE_ACCESSION_CODE": {
                "ORDER": 5,
+               "NULLABLE": true,
+               "PRECISION": 0,
+               "PRIMARY_KEY": false,
+               "APP_TYPE": "text",
+               "WIDTH": 10,
+               "ITERABLE_DELIMITER": null,
+               "FILTER_TYPES": [],
+               "IS_CHAR_TYPE": true,
+               "ENUMERATION": {},
+               "CONTENT_CLASSES": [
+                  "INTEGRATED_CONTENT"
+               ],
+               "SUB_CATEGORIES": []
+            },
+            "REFERENCE_DATABASE_NAME": {
+               "ORDER": 6,
                "NULLABLE": true,
                "PRECISION": 0,
                "PRIMARY_KEY": false,
@@ -519,7 +546,7 @@
                "SUB_CATEGORIES": []
             },
             "SEQ_ONE_LETTER_CODE": {
-               "ORDER": 6,
+               "ORDER": 7,
                "NULLABLE": true,
                "PRECISION": 0,
                "PRIMARY_KEY": false,
@@ -535,7 +562,7 @@
                "SUB_CATEGORIES": []
             },
             "TARGET_ACTIONS": {
-               "ORDER": 7,
+               "ORDER": 8,
                "NULLABLE": true,
                "PRECISION": 0,
                "PRIMARY_KEY": false,
@@ -577,7 +604,7 @@
       "CONTENT_TYPE_COLLECTION_INFO": [
          {
             "NAME": "drugbank_core",
-            "VERSION": "v1_0_2"
+            "VERSION": "1.1.0"
          }
       ],
       "COLLECTION_DOCUMENT_ATTRIBUTE_NAMES": {
@@ -624,7 +651,8 @@
          "drugbank_core": {
             "INCLUDE": [
                "DRUGBANK_INFO",
-               "DRUGBANK_TARGET"
+               "DRUGBANK_TARGET",
+               "DRUGBANK_CONTAINER_IDENTIFIERS"
             ],
             "EXCLUDE": [],
             "SLICE_FILTER": null

@@ -106,12 +106,12 @@
             "pdbx_release_status": {
                "type": "string",
                "enum": [
-                  "HPUB",
-                  "REL",
-                  "DEL",
                   "HOLD",
+                  "REL",
                   "OBS",
-                  "REF_ONLY"
+                  "HPUB",
+                  "REF_ONLY",
+                  "DEL"
                ],
                "description": "This data item holds the current release status for the component."
             },
@@ -184,35 +184,35 @@
             "type": {
                "type": "string",
                "enum": [
-                  "L-peptide linking",
-                  "DNA OH 3 prime terminus",
-                  "D-peptide linking",
-                  "RNA OH 3 prime terminus",
-                  "D-beta-peptide, C-gamma linking",
-                  "RNA OH 5 prime terminus",
-                  "peptide-like",
-                  "L-peptide COOH carboxy terminus",
-                  "other",
-                  "L-saccharide 1,4 and 1,6 linking",
-                  "L-RNA linking",
-                  "D-peptide COOH carboxy terminus",
-                  "saccharide",
-                  "D-saccharide 1,4 and 1,6 linking",
-                  "D-saccharide",
-                  "L-beta-peptide, C-gamma linking",
-                  "DNA OH 5 prime terminus",
-                  "D-peptide NH3 amino terminus",
-                  "peptide linking",
-                  "L-saccharide 1,4 and 1,4 linking",
-                  "L-DNA linking",
-                  "RNA linking",
-                  "D-gamma-peptide, C-delta linking",
-                  "D-saccharide 1,4 and 1,4 linking",
                   "L-gamma-peptide, C-delta linking",
-                  "L-saccharide",
-                  "non-polymer",
                   "DNA linking",
-                  "L-peptide NH3 amino terminus"
+                  "L-RNA linking",
+                  "RNA OH 3 prime terminus",
+                  "RNA OH 5 prime terminus",
+                  "L-peptide linking",
+                  "saccharide",
+                  "D-peptide NH3 amino terminus",
+                  "L-peptide NH3 amino terminus",
+                  "peptide-like",
+                  "L-saccharide 1,4 and 1,4 linking",
+                  "peptide linking",
+                  "D-beta-peptide, C-gamma linking",
+                  "D-peptide COOH carboxy terminus",
+                  "RNA linking",
+                  "D-saccharide 1,4 and 1,4 linking",
+                  "D-gamma-peptide, C-delta linking",
+                  "L-peptide COOH carboxy terminus",
+                  "non-polymer",
+                  "D-peptide linking",
+                  "L-saccharide 1,4 and 1,6 linking",
+                  "D-saccharide 1,4 and 1,6 linking",
+                  "DNA OH 5 prime terminus",
+                  "L-DNA linking",
+                  "D-saccharide",
+                  "other",
+                  "DNA OH 3 prime terminus",
+                  "L-beta-peptide, C-gamma linking",
+                  "L-saccharide"
                ],
                "description": "For standard polymer components, the type of the monomer.\n Note that monomers that will form polymers are of three types:\n linking monomers, monomers with some type of N-terminal (or 5')\n cap and monomers with some type of C-terminal (or 3') cap."
             }
@@ -220,7 +220,8 @@
          "required": [
             "id",
             "type"
-         ]
+         ],
+         "additionalProperties": false
       },
       "pdbx_chem_comp_audit": {
          "type": "array",
@@ -230,31 +231,31 @@
                "action_type": {
                   "type": "string",
                   "enum": [
-                     "Modify parent residue",
-                     "Modify component comp_id",
-                     "Modify name",
-                     "Modify component atom id",
-                     "Create component",
-                     "Modify one letter code",
-                     "Modify atom id",
-                     "Modify model coordinates code",
-                     "Modify value order",
-                     "Modify synonyms",
-                     "Other modification",
-                     "Modify linking type",
-                     "Obsolete component",
-                     "Modify internal type",
-                     "Modify charge",
-                     "Modify formula",
-                     "Modify coordinates",
-                     "Modify formal charge",
                      "Modify aromatic_flag",
-                     "Modify identifier",
-                     "Modify processing site",
-                     "Initial release",
-                     "Modify descriptor",
                      "Modify subcomponent list",
-                     "Modify leaving atom flag"
+                     "Modify processing site",
+                     "Modify formula",
+                     "Modify parent residue",
+                     "Modify model coordinates code",
+                     "Modify descriptor",
+                     "Modify synonyms",
+                     "Modify leaving atom flag",
+                     "Obsolete component",
+                     "Modify component atom id",
+                     "Modify value order",
+                     "Modify component comp_id",
+                     "Modify coordinates",
+                     "Modify one letter code",
+                     "Modify linking type",
+                     "Modify formal charge",
+                     "Modify atom id",
+                     "Modify identifier",
+                     "Modify internal type",
+                     "Other modification",
+                     "Initial release",
+                     "Modify name",
+                     "Modify charge",
+                     "Create component"
                   ],
                   "description": "The action associated with this audit record."
                },
@@ -284,7 +285,8 @@
                "comp_id",
                "date",
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -319,20 +321,20 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "InChI_RECONNECT",
-                     "InChI_MAIN_HATOM",
-                     "InChI_FIXEDH",
-                     "InChI_STEREO",
-                     "InChI_MAIN",
-                     "InChI_CHARGE",
-                     "SMILES",
-                     "SMILES_CANONICAL",
-                     "InChI",
                      "InChI_MAIN_CONNECT",
+                     "InChI_RECONNECT",
+                     "SMILES",
+                     "InChI",
+                     "InChI_MAIN_FORMULA",
                      "InChIKey",
-                     "InChI_ISOTOPE",
+                     "InChI_MAIN",
+                     "InChI_MAIN_HATOM",
+                     "InChI_CHARGE",
                      "SMILES_CANNONICAL",
-                     "InChI_MAIN_FORMULA"
+                     "SMILES_CANONICAL",
+                     "InChI_STEREO",
+                     "InChI_FIXEDH",
+                     "InChI_ISOTOPE"
                   ],
                   "description": "This data item contains the descriptor type."
                }
@@ -343,7 +345,8 @@
                "program",
                "program_version",
                "type"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -390,7 +393,8 @@
                "source",
                "type",
                "value"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -429,14 +433,14 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "CONDENSED IUPAC CARB SYMBOL",
-                     "CAS REGISTRY NUMBER",
-                     "COMMON NAME",
-                     "MDL Identifier",
-                     "SNFG CARB SYMBOL",
                      "SYNONYM",
-                     "SYSTEMATIC NAME",
+                     "CAS REGISTRY NUMBER",
+                     "SNFG CARB SYMBOL",
+                     "MDL Identifier",
+                     "CONDENSED IUPAC CARB SYMBOL",
                      "IUPAC CARB SYMBOL",
+                     "SYSTEMATIC NAME",
+                     "COMMON NAME",
                      "PUBCHEM Identifier"
                   ],
                   "description": "This data item contains the identifier type."
@@ -448,7 +452,8 @@
                "program",
                "program_version",
                "type"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -463,7 +468,8 @@
          },
          "required": [
             "comp_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "rcsb_chem_comp_descriptor": {
          "type": "object",
@@ -491,7 +497,8 @@
          },
          "required": [
             "comp_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "rcsb_chem_comp_info": {
          "type": "object",
@@ -530,7 +537,8 @@
          },
          "required": [
             "comp_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "rcsb_chem_comp_related": {
          "type": "array",
@@ -548,10 +556,10 @@
                "related_mapping_method": {
                   "type": "string",
                   "enum": [
-                     "matching InChIKey",
-                     "matching InChIKey-prefix",
+                     "assigned by resource",
                      "assigned by PDB",
-                     "assigned by resource"
+                     "matching InChIKey",
+                     "matching InChIKey-prefix"
                   ],
                   "examples": [
                      "assigned by resource"
@@ -568,11 +576,11 @@
                "resource_name": {
                   "type": "string",
                   "enum": [
-                     "ChEMBL",
                      "PubChem",
-                     "DrugBank",
+                     "CCDC/CSD",
+                     "ChEMBL",
                      "ChEBI",
-                     "CCDC/CSD"
+                     "DrugBank"
                   ],
                   "examples": [
                      "CCDC/CSD"
@@ -583,7 +591,8 @@
             "required": [
                "comp_id",
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -605,19 +614,19 @@
                   "type": "integer",
                   "description": "This data item is an ordinal index for the\n RCSB_CHEM_COMP_SYNONYMS category."
                },
-               "provenance_code": {
+               "provenance_source": {
                   "type": "string",
                   "enum": [
-                     "ChEMBL",
-                     "Lexichem",
-                     "PubChem",
-                     "DrugBank",
                      "OpenEye OEToolkits",
+                     "PubChem",
                      "OpenEye/Lexichem",
                      "ChEBI",
+                     "ChEMBL",
+                     "ACD-LABS",
+                     "DrugBank",
                      "PDB Reference Data",
-                     "ACDLabs",
-                     "ACD-LABS"
+                     "Lexichem",
+                     "ACDLabs"
                   ],
                   "description": "The provenance of this synonym."
                }
@@ -625,7 +634,8 @@
             "required": [
                "comp_id",
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -651,7 +661,7 @@
                   "type": "integer",
                   "description": "The value of _rcsb_chem_comp_target.ordinal distinguishes\n related examples for each chemical component."
                },
-               "provenance_code": {
+               "provenance_source": {
                   "type": "string",
                   "enum": [
                      "DrugBank",
@@ -688,7 +698,8 @@
             "required": [
                "comp_id",
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -714,7 +725,8 @@
             "datablock_name",
             "load_date",
             "locator"
-         ]
+         ],
+         "additionalProperties": false
       },
       "rcsb_schema_container_identifiers": {
          "type": "array",
@@ -738,7 +750,8 @@
                "collection_name",
                "collection_schema_version",
                "schema_name"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -758,12 +771,13 @@
          "description": "Version string for the schema and collection."
       }
    },
+   "additionalProperties": false,
    "required": [
       "_comp_id"
    ],
    "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-full-chem_comp_core.json",
    "$schema": "http://json-schema.org/draft-04/schema#",
-   "title": "schema: chem_comp_core collection: chem_comp_core version: v5_0_3",
-   "description": "RCSB Exchange Database JSON schema derived from the chem_comp_core content type schema. This schema supports collection chem_comp_core version v5_0_3. This schema is hosted in repository https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-full-chem_comp_core.json and follows JSON schema specification version 4",
-   "$comment": "schema_version: v5_0_3"
+   "title": "schema: chem_comp_core collection: chem_comp_core version: 5.1.0",
+   "description": "RCSB Exchange Database JSON schema derived from the chem_comp_core content type schema. This schema supports collection chem_comp_core version 5.1.0. This schema is hosted in repository https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-full-chem_comp_core.json and follows JSON schema specification version 4",
+   "$comment": "schema_version: 5.1.0"
 }

@@ -4,6 +4,9 @@
       "chem_comp": {
          "type": "object",
          "properties": {
+            "component_id": {
+               "type": "string"
+            },
             "formula": {
                "type": "string",
                "examples": [
@@ -106,12 +109,12 @@
             "pdbx_release_status": {
                "type": "string",
                "enum": [
-                  "HPUB",
-                  "REL",
-                  "DEL",
                   "HOLD",
+                  "REL",
                   "OBS",
-                  "REF_ONLY"
+                  "HPUB",
+                  "REF_ONLY",
+                  "DEL"
                ],
                "description": "This data item holds the current release status for the component."
             },
@@ -184,49 +187,54 @@
             "type": {
                "type": "string",
                "enum": [
-                  "L-peptide linking",
-                  "DNA OH 3 prime terminus",
-                  "D-peptide linking",
-                  "RNA OH 3 prime terminus",
-                  "D-beta-peptide, C-gamma linking",
-                  "RNA OH 5 prime terminus",
-                  "peptide-like",
-                  "L-peptide COOH carboxy terminus",
-                  "other",
-                  "L-saccharide 1,4 and 1,6 linking",
-                  "L-RNA linking",
-                  "D-peptide COOH carboxy terminus",
-                  "saccharide",
-                  "D-saccharide 1,4 and 1,6 linking",
-                  "D-saccharide",
-                  "L-beta-peptide, C-gamma linking",
-                  "DNA OH 5 prime terminus",
-                  "D-peptide NH3 amino terminus",
-                  "peptide linking",
-                  "L-saccharide 1,4 and 1,4 linking",
-                  "L-DNA linking",
-                  "RNA linking",
-                  "D-gamma-peptide, C-delta linking",
-                  "D-saccharide 1,4 and 1,4 linking",
                   "L-gamma-peptide, C-delta linking",
-                  "L-saccharide",
-                  "non-polymer",
                   "DNA linking",
-                  "L-peptide NH3 amino terminus"
+                  "L-RNA linking",
+                  "RNA OH 3 prime terminus",
+                  "RNA OH 5 prime terminus",
+                  "L-peptide linking",
+                  "saccharide",
+                  "D-peptide NH3 amino terminus",
+                  "L-peptide NH3 amino terminus",
+                  "peptide-like",
+                  "L-saccharide 1,4 and 1,4 linking",
+                  "peptide linking",
+                  "D-beta-peptide, C-gamma linking",
+                  "D-peptide COOH carboxy terminus",
+                  "RNA linking",
+                  "D-saccharide 1,4 and 1,4 linking",
+                  "D-gamma-peptide, C-delta linking",
+                  "L-peptide COOH carboxy terminus",
+                  "non-polymer",
+                  "D-peptide linking",
+                  "L-saccharide 1,4 and 1,6 linking",
+                  "D-saccharide 1,4 and 1,6 linking",
+                  "DNA OH 5 prime terminus",
+                  "L-DNA linking",
+                  "D-saccharide",
+                  "other",
+                  "DNA OH 3 prime terminus",
+                  "L-beta-peptide, C-gamma linking",
+                  "L-saccharide"
                ],
                "description": "For standard polymer components, the type of the monomer.\n Note that monomers that will form polymers are of three types:\n linking monomers, monomers with some type of N-terminal (or 5')\n cap and monomers with some type of C-terminal (or 3') cap."
             }
          },
          "required": [
+            "component_id",
             "id",
             "type"
-         ]
+         ],
+         "additionalProperties": false
       },
       "chem_comp_atom": {
          "type": "array",
          "items": {
             "type": "object",
             "properties": {
+               "component_id": {
+                  "type": "string"
+               },
                "alt_atom_id": {
                   "type": "string",
                   "description": "An alternative identifier for the atom. This data item would be\n used in cases where alternative nomenclatures exist for labelling\n atoms in a group."
@@ -268,8 +276,8 @@
                "pdbx_aromatic_flag": {
                   "type": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ],
                   "description": "A flag indicating an aromatic atom."
                },
@@ -297,8 +305,8 @@
                "pdbx_leaving_atom_flag": {
                   "type": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ],
                   "description": "A flag indicating a leaving atom."
                },
@@ -333,9 +341,9 @@
                "pdbx_stereo_config": {
                   "type": "string",
                   "enum": [
-                     "N",
+                     "R",
                      "S",
-                     "R"
+                     "N"
                   ],
                   "description": "The chiral configuration of the atom that is a chiral center."
                },
@@ -350,10 +358,12 @@
                }
             },
             "required": [
+               "component_id",
                "atom_id",
                "comp_id",
                "type_symbol"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -363,6 +373,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "component_id": {
+                  "type": "string"
+               },
                "atom_id_1": {
                   "type": "string",
                   "description": "The ID of the first of the two atoms that define the bond.\n\n This data item is a pointer to _chem_comp_atom.atom_id in the\n CHEM_COMP_ATOM category."
@@ -378,8 +391,8 @@
                "pdbx_aromatic_flag": {
                   "type": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ],
                   "description": "A flag indicating an aromatic bond."
                },
@@ -399,23 +412,25 @@
                "value_order": {
                   "type": "string",
                   "enum": [
+                     "pi",
                      "trip",
-                     "quad",
-                     "delo",
                      "doub",
-                     "sing",
-                     "poly",
                      "arom",
-                     "pi"
+                     "quad",
+                     "sing",
+                     "delo",
+                     "poly"
                   ],
                   "description": "The value that should be taken as the target for the chemical\n bond associated with the specified atoms, expressed as a bond\n order."
                }
             },
             "required": [
+               "component_id",
                "atom_id_1",
                "atom_id_2",
                "comp_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -425,34 +440,37 @@
          "items": {
             "type": "object",
             "properties": {
+               "component_id": {
+                  "type": "string"
+               },
                "action_type": {
                   "type": "string",
                   "enum": [
-                     "Modify parent residue",
-                     "Modify component comp_id",
-                     "Modify name",
-                     "Modify component atom id",
-                     "Create component",
-                     "Modify one letter code",
-                     "Modify atom id",
-                     "Modify model coordinates code",
-                     "Modify value order",
-                     "Modify synonyms",
-                     "Other modification",
-                     "Modify linking type",
-                     "Obsolete component",
-                     "Modify internal type",
-                     "Modify charge",
-                     "Modify formula",
-                     "Modify coordinates",
-                     "Modify formal charge",
                      "Modify aromatic_flag",
-                     "Modify identifier",
-                     "Modify processing site",
-                     "Initial release",
-                     "Modify descriptor",
                      "Modify subcomponent list",
-                     "Modify leaving atom flag"
+                     "Modify processing site",
+                     "Modify formula",
+                     "Modify parent residue",
+                     "Modify model coordinates code",
+                     "Modify descriptor",
+                     "Modify synonyms",
+                     "Modify leaving atom flag",
+                     "Obsolete component",
+                     "Modify component atom id",
+                     "Modify value order",
+                     "Modify component comp_id",
+                     "Modify coordinates",
+                     "Modify one letter code",
+                     "Modify linking type",
+                     "Modify formal charge",
+                     "Modify atom id",
+                     "Modify identifier",
+                     "Modify internal type",
+                     "Other modification",
+                     "Initial release",
+                     "Modify name",
+                     "Modify charge",
+                     "Create component"
                   ],
                   "description": "The action associated with this audit record."
                },
@@ -478,11 +496,13 @@
                }
             },
             "required": [
+               "component_id",
                "action_type",
                "comp_id",
                "date",
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -492,6 +512,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "component_id": {
+                  "type": "string"
+               },
                "comp_id": {
                   "type": "string",
                   "description": "This data item is a pointer to _chem_comp.id in the CHEM_COMP\n category."
@@ -517,31 +540,33 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "InChI_RECONNECT",
-                     "InChI_MAIN_HATOM",
-                     "InChI_FIXEDH",
-                     "InChI_STEREO",
-                     "InChI_MAIN",
-                     "InChI_CHARGE",
-                     "SMILES",
-                     "SMILES_CANONICAL",
-                     "InChI",
                      "InChI_MAIN_CONNECT",
+                     "InChI_RECONNECT",
+                     "SMILES",
+                     "InChI",
+                     "InChI_MAIN_FORMULA",
                      "InChIKey",
-                     "InChI_ISOTOPE",
+                     "InChI_MAIN",
+                     "InChI_MAIN_HATOM",
+                     "InChI_CHARGE",
                      "SMILES_CANNONICAL",
-                     "InChI_MAIN_FORMULA"
+                     "SMILES_CANONICAL",
+                     "InChI_STEREO",
+                     "InChI_FIXEDH",
+                     "InChI_ISOTOPE"
                   ],
                   "description": "This data item contains the descriptor type."
                }
             },
             "required": [
+               "component_id",
                "comp_id",
                "descriptor",
                "program",
                "program_version",
                "type"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -551,6 +576,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "component_id": {
+                  "type": "string"
+               },
                "comp_id": {
                   "type": "string",
                   "examples": [
@@ -584,11 +612,13 @@
                }
             },
             "required": [
+               "component_id",
                "comp_id",
                "source",
                "type",
                "value"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -598,6 +628,9 @@
          "items": {
             "type": "object",
             "properties": {
+               "component_id": {
+                  "type": "string"
+               },
                "comp_id": {
                   "type": "string",
                   "description": "This data item is a pointer to _chem_comp.id in the CHEM_COMP\n category."
@@ -627,26 +660,28 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "CONDENSED IUPAC CARB SYMBOL",
-                     "CAS REGISTRY NUMBER",
-                     "COMMON NAME",
-                     "MDL Identifier",
-                     "SNFG CARB SYMBOL",
                      "SYNONYM",
-                     "SYSTEMATIC NAME",
+                     "CAS REGISTRY NUMBER",
+                     "SNFG CARB SYMBOL",
+                     "MDL Identifier",
+                     "CONDENSED IUPAC CARB SYMBOL",
                      "IUPAC CARB SYMBOL",
+                     "SYSTEMATIC NAME",
+                     "COMMON NAME",
                      "PUBCHEM Identifier"
                   ],
                   "description": "This data item contains the identifier type."
                }
             },
             "required": [
+               "component_id",
                "comp_id",
                "identifier",
                "program",
                "program_version",
                "type"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -654,6 +689,9 @@
       "rcsb_load_status": {
          "type": "object",
          "properties": {
+            "component_id": {
+               "type": "string"
+            },
             "datablock_name": {
                "type": "string",
                "description": "Source data block containing the loaded data set"
@@ -669,15 +707,18 @@
             }
          },
          "required": [
+            "component_id",
             "datablock_name",
             "load_date",
             "locator"
-         ]
+         ],
+         "additionalProperties": false
       }
    },
+   "additionalProperties": false,
    "$id": "https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-full-chem_comp.json",
    "$schema": "http://json-schema.org/draft-04/schema#",
-   "title": "schema: chem_comp collection: chem_comp version: v5_0_3",
-   "description": "RCSB Exchange Database JSON schema derived from the chem_comp content type schema. This schema supports collection chem_comp version v5_0_3. This schema is hosted in repository https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-full-chem_comp.json and follows JSON schema specification version 4",
-   "$comment": "schema_version: v5_0_3"
+   "title": "schema: chem_comp collection: chem_comp version: 5.1.0",
+   "description": "RCSB Exchange Database JSON schema derived from the chem_comp content type schema. This schema supports collection chem_comp version 5.1.0. This schema is hosted in repository https://github.com/rcsb/py-rcsb.db/tree/master/rcsb.db/data/json-schema/json-schema-full-chem_comp.json and follows JSON schema specification version 4",
+   "$comment": "schema_version: 5.1.0"
 }

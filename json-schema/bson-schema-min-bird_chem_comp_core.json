@@ -13,33 +13,6 @@
             "id": {
                "bsonType": "string"
             },
-            "model_details": {
-               "bsonType": "string"
-            },
-            "model_erf": {
-               "bsonType": "string"
-            },
-            "model_source": {
-               "bsonType": "string"
-            },
-            "mon_nstd_class": {
-               "bsonType": "string"
-            },
-            "mon_nstd_details": {
-               "bsonType": "string"
-            },
-            "mon_nstd_flag": {
-               "bsonType": "string",
-               "enum": [
-                  "y",
-                  "yes",
-                  "no",
-                  "n"
-               ]
-            },
-            "mon_nstd_parent": {
-               "bsonType": "string"
-            },
             "mon_nstd_parent_comp_id": {
                "bsonType": "array",
                "items": {
@@ -50,39 +23,11 @@
             "name": {
                "bsonType": "string"
             },
-            "number_atoms_all": {
-               "bsonType": "int"
-            },
-            "number_atoms_nh": {
-               "bsonType": "int"
-            },
             "one_letter_code": {
                "bsonType": "string"
             },
             "pdbx_ambiguous_flag": {
                "bsonType": "string"
-            },
-            "pdbx_casnum": {
-               "bsonType": "string"
-            },
-            "pdbx_class_1": {
-               "bsonType": "string"
-            },
-            "pdbx_class_2": {
-               "bsonType": "string"
-            },
-            "pdbx_comp_type": {
-               "bsonType": "string",
-               "enum": [
-                  "inorganic ligand",
-                  "organometalic ligand",
-                  "metal cation",
-                  "organic ligand",
-                  "solvent"
-               ]
-            },
-            "pdbx_component_no": {
-               "bsonType": "int"
             },
             "pdbx_formal_charge": {
                "bsonType": "int"
@@ -90,17 +35,8 @@
             "pdbx_initial_date": {
                "bsonType": "date"
             },
-            "pdbx_modification_details": {
-               "bsonType": "string"
-            },
             "pdbx_modified_date": {
                "bsonType": "date"
-            },
-            "pdbx_nscnum": {
-               "bsonType": "string"
-            },
-            "pdbx_number_subcomponents": {
-               "bsonType": "int"
             },
             "pdbx_processing_site": {
                "bsonType": "string",
@@ -114,11 +50,11 @@
             "pdbx_release_status": {
                "bsonType": "string",
                "enum": [
-                  "HPUB",
                   "REL",
+                  "OBS",
+                  "HPUB",
                   "DEL",
                   "HOLD",
-                  "OBS",
                   "REF_ONLY"
                ]
             },
@@ -128,20 +64,8 @@
             "pdbx_replaces": {
                "bsonType": "string"
             },
-            "pdbx_reserved_name": {
-               "bsonType": "string"
-            },
-            "pdbx_smiles": {
-               "bsonType": "string"
-            },
-            "pdbx_status": {
-               "bsonType": "string"
-            },
             "pdbx_subcomponent_list": {
                "bsonType": "string"
-            },
-            "pdbx_type_modified": {
-               "bsonType": "int"
             },
             "three_letter_code": {
                "bsonType": "string"
@@ -149,41 +73,42 @@
             "type": {
                "bsonType": "string",
                "enum": [
-                  "L-peptide linking",
-                  "DNA OH 3 prime terminus",
-                  "D-peptide linking",
-                  "RNA OH 3 prime terminus",
-                  "D-beta-peptide, C-gamma linking",
-                  "RNA OH 5 prime terminus",
-                  "peptide-like",
                   "L-peptide COOH carboxy terminus",
-                  "other",
-                  "L-saccharide 1,4 and 1,6 linking",
                   "L-RNA linking",
-                  "D-peptide COOH carboxy terminus",
+                  "DNA OH 3 prime terminus",
+                  "RNA OH 3 prime terminus",
                   "saccharide",
-                  "D-saccharide 1,4 and 1,6 linking",
-                  "D-saccharide",
-                  "L-beta-peptide, C-gamma linking",
+                  "other",
+                  "L-peptide NH3 amino terminus",
                   "DNA OH 5 prime terminus",
-                  "D-peptide NH3 amino terminus",
-                  "peptide linking",
-                  "L-saccharide 1,4 and 1,4 linking",
-                  "L-DNA linking",
-                  "RNA linking",
-                  "D-gamma-peptide, C-delta linking",
-                  "D-saccharide 1,4 and 1,4 linking",
-                  "L-gamma-peptide, C-delta linking",
-                  "L-saccharide",
                   "non-polymer",
+                  "L-saccharide 1,4 and 1,6 linking",
+                  "D-saccharide",
+                  "D-peptide linking",
+                  "peptide-like",
+                  "L-saccharide 1,4 and 1,4 linking",
+                  "L-saccharide",
+                  "D-gamma-peptide, C-delta linking",
+                  "RNA OH 5 prime terminus",
+                  "L-peptide linking",
+                  "L-gamma-peptide, C-delta linking",
+                  "D-beta-peptide, C-gamma linking",
+                  "D-peptide COOH carboxy terminus",
+                  "peptide linking",
+                  "RNA linking",
+                  "L-DNA linking",
+                  "D-saccharide 1,4 and 1,4 linking",
                   "DNA linking",
-                  "L-peptide NH3 amino terminus"
+                  "D-saccharide 1,4 and 1,6 linking",
+                  "L-beta-peptide, C-gamma linking",
+                  "D-peptide NH3 amino terminus"
                ]
             }
          },
          "required": [
             "id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "citation": {
          "bsonType": "array",
@@ -205,10 +130,10 @@
                "coordinate_linkage": {
                   "bsonType": "string",
                   "enum": [
-                     "y",
-                     "yes",
+                     "n",
                      "no",
-                     "n"
+                     "y",
+                     "yes"
                   ]
                },
                "country": {
@@ -263,8 +188,8 @@
                "unpublished_flag": {
                   "bsonType": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ]
                },
                "year": {
@@ -273,7 +198,8 @@
             },
             "required": [
                "id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -286,31 +212,31 @@
                "action_type": {
                   "bsonType": "string",
                   "enum": [
-                     "Modify parent residue",
-                     "Modify component comp_id",
-                     "Modify name",
-                     "Modify component atom id",
-                     "Create component",
-                     "Modify one letter code",
-                     "Modify atom id",
-                     "Modify model coordinates code",
-                     "Modify value order",
-                     "Modify synonyms",
-                     "Other modification",
-                     "Modify linking type",
-                     "Obsolete component",
-                     "Modify internal type",
-                     "Modify charge",
-                     "Modify formula",
                      "Modify coordinates",
+                     "Modify name",
+                     "Modify model coordinates code",
                      "Modify formal charge",
-                     "Modify aromatic_flag",
-                     "Modify identifier",
-                     "Modify processing site",
                      "Initial release",
-                     "Modify descriptor",
+                     "Modify internal type",
+                     "Modify processing site",
+                     "Modify atom id",
+                     "Obsolete component",
+                     "Modify aromatic_flag",
+                     "Modify one letter code",
+                     "Modify charge",
+                     "Modify component comp_id",
+                     "Modify identifier",
+                     "Modify formula",
+                     "Modify parent residue",
+                     "Modify leaving atom flag",
+                     "Modify value order",
+                     "Other modification",
                      "Modify subcomponent list",
-                     "Modify leaving atom flag"
+                     "Modify linking type",
+                     "Modify component atom id",
+                     "Modify synonyms",
+                     "Create component",
+                     "Modify descriptor"
                   ]
                },
                "comp_id": {
@@ -319,13 +245,17 @@
                "date": {
                   "bsonType": "date"
                },
+               "details": {
+                  "bsonType": "string"
+               },
                "ordinal": {
                   "bsonType": "int"
                }
             },
             "required": [
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -350,20 +280,20 @@
                "type": {
                   "bsonType": "string",
                   "enum": [
-                     "InChI_RECONNECT",
+                     "SMILES_CANNONICAL",
                      "InChI_MAIN_HATOM",
+                     "InChI",
+                     "SMILES",
+                     "InChI_MAIN_CONNECT",
                      "InChI_FIXEDH",
+                     "InChI_RECONNECT",
+                     "InChI_CHARGE",
                      "InChI_STEREO",
                      "InChI_MAIN",
-                     "InChI_CHARGE",
-                     "SMILES",
+                     "InChI_MAIN_FORMULA",
                      "SMILES_CANONICAL",
-                     "InChI",
-                     "InChI_MAIN_CONNECT",
-                     "InChIKey",
                      "InChI_ISOTOPE",
-                     "SMILES_CANNONICAL",
-                     "InChI_MAIN_FORMULA"
+                     "InChIKey"
                   ]
                }
             },
@@ -372,7 +302,37 @@
                "program",
                "program_version",
                "type"
-            ]
+            ],
+            "additionalProperties": false
+         },
+         "minItems": 1,
+         "uniqueItems": true
+      },
+      "pdbx_chem_comp_feature": {
+         "bsonType": "array",
+         "items": {
+            "bsonType": "object",
+            "properties": {
+               "comp_id": {
+                  "bsonType": "string"
+               },
+               "source": {
+                  "bsonType": "string"
+               },
+               "type": {
+                  "bsonType": "string"
+               },
+               "value": {
+                  "bsonType": "string"
+               }
+            },
+            "required": [
+               "comp_id",
+               "source",
+               "type",
+               "value"
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -397,15 +357,15 @@
                "type": {
                   "bsonType": "string",
                   "enum": [
-                     "CONDENSED IUPAC CARB SYMBOL",
-                     "CAS REGISTRY NUMBER",
-                     "COMMON NAME",
-                     "MDL Identifier",
-                     "SNFG CARB SYMBOL",
                      "SYNONYM",
+                     "PUBCHEM Identifier",
+                     "MDL Identifier",
                      "SYSTEMATIC NAME",
                      "IUPAC CARB SYMBOL",
-                     "PUBCHEM Identifier"
+                     "SNFG CARB SYMBOL",
+                     "CAS REGISTRY NUMBER",
+                     "CONDENSED IUPAC CARB SYMBOL",
+                     "COMMON NAME"
                   ]
                }
             },
@@ -414,7 +374,8 @@
                "program",
                "program_version",
                "type"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -427,22 +388,22 @@
                "action_type": {
                   "bsonType": "string",
                   "enum": [
-                     "Modify family classification",
-                     "Modify related structures",
-                     "Other modification",
-                     "Create family",
                      "Modify family name",
-                     "Initial release",
                      "Obsolete family",
-                     "Modify citation",
-                     "Remove PRD",
-                     "Add PRD",
-                     "Modify feature",
-                     "Modify molecule details",
                      "Modify sequence",
+                     "Other modification",
+                     "Modify related structures",
+                     "Create family",
+                     "Modify family classification",
+                     "Modify citation",
+                     "Modify feature",
                      "Modify annotation",
+                     "Remove PRD",
+                     "Modify synonyms",
+                     "Initial release",
+                     "Modify molecule details",
                      "Obsolete familyt",
-                     "Modify synonyms"
+                     "Add PRD"
                   ]
                },
                "annotator": {
@@ -465,7 +426,8 @@
                "action_type",
                "date",
                "family_prd_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -478,18 +440,18 @@
                "action_type": {
                   "bsonType": "string",
                   "enum": [
-                     "Modify audit",
+                     "Modify class",
+                     "Modify sequence",
+                     "Modify taxonomy organism",
                      "Other modification",
+                     "Modify audit",
+                     "Modify type",
+                     "Obsolete molecule",
+                     "Modify linkage",
                      "Modify representation",
                      "Initial release",
-                     "Modify taxonomy organism",
-                     "Modify class",
-                     "Create molecule",
-                     "Modify type",
-                     "Modify sequence",
-                     "Modify linkage",
-                     "Obsolete molecule",
-                     "Modify molecule name"
+                     "Modify molecule name",
+                     "Create molecule"
                   ]
                },
                "annotator": {
@@ -509,8 +471,8 @@
                   "enum": [
                      "PDBJ",
                      "BMRB",
-                     "PDBe",
-                     "RCSB"
+                     "RCSB",
+                     "PDBe"
                   ]
                }
             },
@@ -518,7 +480,8 @@
                "action_type",
                "date",
                "prd_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -548,7 +511,8 @@
                "component_id",
                "prd_id",
                "ref_entity_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -573,16 +537,17 @@
                "type": {
                   "bsonType": "string",
                   "enum": [
-                     "polysaccharide-like",
                      "peptide-like",
-                     "nucleic-acid-like"
+                     "nucleic-acid-like",
+                     "polysaccharide-like"
                   ]
                }
             },
             "required": [
                "prd_id",
                "ref_entity_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -625,14 +590,14 @@
                "value_order": {
                   "bsonType": "string",
                   "enum": [
-                     "trip",
-                     "quad",
-                     "delo",
-                     "doub",
-                     "sing",
-                     "poly",
                      "arom",
-                     "pi"
+                     "pi",
+                     "delo",
+                     "trip",
+                     "sing",
+                     "doub",
+                     "poly",
+                     "quad"
                   ]
                }
             },
@@ -641,7 +606,8 @@
                "link_id",
                "prd_id",
                "ref_entity_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -654,8 +620,8 @@
                "hetero": {
                   "bsonType": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ]
                },
                "mon_id": {
@@ -667,8 +633,8 @@
                "observed": {
                   "bsonType": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ]
                },
                "parent_mon_id": {
@@ -687,7 +653,8 @@
                "num",
                "prd_id",
                "ref_entity_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -700,8 +667,8 @@
                "NRP_flag": {
                   "bsonType": "string",
                   "enum": [
-                     "N",
-                     "Y"
+                     "Y",
+                     "N"
                   ]
                },
                "one_letter_codes": {
@@ -720,7 +687,8 @@
             "required": [
                "prd_id",
                "ref_entity_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -765,7 +733,8 @@
                "ordinal",
                "prd_id",
                "ref_entity_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -781,39 +750,39 @@
                "items": {
                   "bsonType": "string",
                   "enum": [
-                     "Trypsin inhibitor",
-                     "Enzyme inhibitor",
-                     "RNA synthesis Inhibitor",
-                     "Antitumor",
-                     "Antibiotic",
-                     "Receptor",
-                     "Growth factor",
-                     "Antifungal",
-                     "Antimicrobial",
-                     "Antiinflammatory",
-                     "CASPASE inhibitor",
                      "Metal transport",
-                     "Antiretroviral",
-                     "Antineoplastic",
-                     "Synthetic opioid",
-                     "Metabolism",
-                     "Immunosuppressant",
-                     "Chaperone binding",
-                     "Anticancer",
-                     "Oxidation-reduction",
-                     "Inhibitor",
-                     "Unknown",
-                     "Thrombin inhibitor",
-                     "Antiviral",
-                     "Anticoagulant",
-                     "Antiparasitic",
-                     "Transition state mimetic",
                      "Antithrombotic",
+                     "Inhibitor",
+                     "Immunosuppressant",
+                     "Antibiotic",
+                     "Antimicrobial",
+                     "Anticancer",
+                     "RNA synthesis Inhibitor",
+                     "Antiparasitic",
+                     "Metabolism",
+                     "Antifungal",
+                     "Anticoagulant",
                      "Antagonist",
-                     "Toxin",
-                     "Transport activator",
+                     "Chaperone binding",
+                     "Oxidation-reduction",
+                     "Thrombin inhibitor",
+                     "Antitumor",
                      "Anthelmintic",
-                     "Lantibiotic"
+                     "CASPASE inhibitor",
+                     "Antiviral",
+                     "Growth factor",
+                     "Synthetic opioid",
+                     "Toxin",
+                     "Lantibiotic",
+                     "Trypsin inhibitor",
+                     "Receptor",
+                     "Transition state mimetic",
+                     "Transport activator",
+                     "Enzyme inhibitor",
+                     "Antineoplastic",
+                     "Antiinflammatory",
+                     "Unknown",
+                     "Antiretroviral"
                   ]
                },
                "uniqueItems": false
@@ -842,10 +811,10 @@
             "release_status": {
                "bsonType": "string",
                "enum": [
-                  "HOLD",
                   "OBS",
-                  "WAIT",
-                  "REL"
+                  "HOLD",
+                  "REL",
+                  "WAIT"
                ]
             },
             "replaced_by": {
@@ -869,39 +838,39 @@
                "items": {
                   "bsonType": "string",
                   "enum": [
-                     "Oligopeptide",
-                     "Ansamycin",
                      "Cyclic depsipeptide",
-                     "Thiopeptide",
                      "Amino acid",
-                     "Thiolactone",
-                     "Polypeptide",
-                     "Nucleoside",
-                     "Imino sugar",
-                     "Peptide-like",
-                     "Polycyclic",
-                     "Peptaibol",
-                     "Lipoglycopeptide",
-                     "Aminoglycoside",
-                     "Lipopeptide",
-                     "Glycopeptide",
                      "Polysaccharide",
-                     "Anthraquinone",
-                     "Tricyclic pentaglycosidic antineoplastic antibiotic",
-                     "Chalkophore",
-                     "Non-polymer",
-                     "Unknown",
-                     "Oligosaccharide",
-                     "Heterocyclic",
-                     "Anthracycline",
-                     "Cyclic peptide",
-                     "Quinolone",
                      "Siderophore",
-                     "Keto acid",
+                     "Peptaibol",
+                     "Ansamycin",
+                     "Polypeptide",
                      "Macrolide",
+                     "Keto acid",
+                     "Chalkophore, Polypeptide",
+                     "Aminoglycoside",
+                     "Glycopeptide",
+                     "Oligosaccharide",
+                     "Peptide-like",
+                     "Oligopeptide",
+                     "Lipoglycopeptide",
+                     "Heterocyclic",
                      "Chromophore",
+                     "Anthraquinone",
+                     "Thiopeptide",
+                     "Anthracycline",
+                     "Quinolone",
                      "Cyclic lipopeptide",
-                     "Chalkophore, Polypeptide"
+                     "Nucleoside",
+                     "Polycyclic",
+                     "Cyclic peptide",
+                     "Thiolactone",
+                     "Chalkophore",
+                     "Lipopeptide",
+                     "Imino sugar",
+                     "Tricyclic pentaglycosidic antineoplastic antibiotic",
+                     "Non-polymer",
+                     "Unknown"
                   ]
                },
                "uniqueItems": false
@@ -912,7 +881,8 @@
          },
          "required": [
             "prd_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "pdbx_reference_molecule_annotation": {
          "bsonType": "array",
@@ -941,7 +911,8 @@
             "required": [
                "family_prd_id",
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -970,7 +941,8 @@
             "required": [
                "family_prd_id",
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -987,10 +959,10 @@
             "release_status": {
                "bsonType": "string",
                "enum": [
-                  "HOLD",
                   "OBS",
-                  "WAIT",
-                  "REL"
+                  "HOLD",
+                  "REL",
+                  "WAIT"
                ]
             },
             "replaced_by": {
@@ -1002,7 +974,8 @@
          },
          "required": [
             "family_prd_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "pdbx_reference_molecule_features": {
          "bsonType": "array",
@@ -1035,7 +1008,8 @@
                "family_prd_id",
                "ordinal",
                "prd_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1055,7 +1029,8 @@
             "required": [
                "family_prd_id",
                "prd_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1093,7 +1068,8 @@
             "required": [
                "family_prd_id",
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1123,7 +1099,8 @@
                "family_prd_id",
                "ordinal",
                "prd_id"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1137,7 +1114,8 @@
          },
          "required": [
             "comp_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "rcsb_chem_comp_descriptor": {
          "bsonType": "object",
@@ -1160,7 +1138,8 @@
          },
          "required": [
             "comp_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "rcsb_chem_comp_info": {
          "bsonType": "object",
@@ -1186,7 +1165,8 @@
          },
          "required": [
             "comp_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "rcsb_chem_comp_related": {
          "bsonType": "array",
@@ -1202,10 +1182,10 @@
                "related_mapping_method": {
                   "bsonType": "string",
                   "enum": [
-                     "matching InChIKey",
+                     "assigned by resource",
                      "matching InChIKey-prefix",
-                     "assigned by PDB",
-                     "assigned by resource"
+                     "matching InChIKey",
+                     "assigned by PDB"
                   ]
                },
                "resource_accession_code": {
@@ -1214,18 +1194,19 @@
                "resource_name": {
                   "bsonType": "string",
                   "enum": [
-                     "ChEMBL",
-                     "PubChem",
-                     "DrugBank",
                      "ChEBI",
-                     "CCDC/CSD"
+                     "ChEMBL",
+                     "CCDC/CSD",
+                     "PubChem",
+                     "DrugBank"
                   ]
                }
             },
             "required": [
                "comp_id",
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1244,26 +1225,27 @@
                "ordinal": {
                   "bsonType": "int"
                },
-               "provenance_code": {
+               "provenance_source": {
                   "bsonType": "string",
                   "enum": [
+                     "PDB Reference Data",
+                     "OpenEye/Lexichem",
+                     "OpenEye OEToolkits",
+                     "ChEBI",
                      "ChEMBL",
-                     "Lexichem",
+                     "ACD-LABS",
                      "PubChem",
                      "DrugBank",
-                     "OpenEye OEToolkits",
-                     "OpenEye/Lexichem",
-                     "ChEBI",
-                     "PDB Reference Data",
                      "ACDLabs",
-                     "ACD-LABS"
+                     "Lexichem"
                   ]
                }
             },
             "required": [
                "comp_id",
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1285,7 +1267,7 @@
                "ordinal": {
                   "bsonType": "int"
                },
-               "provenance_code": {
+               "provenance_source": {
                   "bsonType": "string",
                   "enum": [
                      "DrugBank",
@@ -1312,7 +1294,8 @@
             "required": [
                "comp_id",
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1332,7 +1315,8 @@
          },
          "required": [
             "datablock_name"
-         ]
+         ],
+         "additionalProperties": false
       },
       "rcsb_schema_container_identifiers": {
          "bsonType": "array",
@@ -1352,7 +1336,8 @@
             "required": [
                "collection_name",
                "schema_name"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -1365,8 +1350,12 @@
       },
       "_schema_version": {
          "bsonType": "string"
+      },
+      "_id": {
+         "bsonType": "objectId"
       }
    },
+   "additionalProperties": false,
    "required": [
       "_prd_id"
    ]

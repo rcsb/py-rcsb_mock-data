@@ -1,6 +1,18 @@
 {
    "bsonType": "object",
    "properties": {
+      "drugbank_container_identifiers": {
+         "bsonType": "object",
+         "properties": {
+            "drugbank_id": {
+               "bsonType": "string"
+            }
+         },
+         "required": [
+            "drugbank_id"
+         ],
+         "additionalProperties": false
+      },
       "drugbank_info": {
          "bsonType": "object",
          "properties": {
@@ -63,7 +75,8 @@
          },
          "required": [
             "drugbank_id"
-         ]
+         ],
+         "additionalProperties": false
       },
       "drugbank_target": {
          "bsonType": "array",
@@ -78,6 +91,9 @@
                },
                "ordinal": {
                   "bsonType": "int"
+               },
+               "organism_common_name": {
+                  "bsonType": "string"
                },
                "reference_database_accession_code": {
                   "bsonType": "string"
@@ -101,7 +117,8 @@
             },
             "required": [
                "ordinal"
-            ]
+            ],
+            "additionalProperties": false
          },
          "minItems": 1,
          "uniqueItems": true
@@ -111,8 +128,12 @@
       },
       "_schema_version": {
          "bsonType": "string"
+      },
+      "_id": {
+         "bsonType": "objectId"
       }
    },
+   "additionalProperties": false,
    "required": [
       "_drugbank_id"
    ]
