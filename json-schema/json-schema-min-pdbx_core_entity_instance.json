@@ -363,8 +363,8 @@
             "type": {
                "type": "string",
                "enum": [
-                  "P ATOMS ONLY",
-                  "CA ATOMS ONLY"
+                  "CA ATOMS ONLY",
+                  "P ATOMS ONLY"
                ],
                "examples": [
                   "CA ATOMS ONLY",
@@ -383,10 +383,6 @@
          "items": {
             "type": "object",
             "properties": {
-               "PDB_ins_code": {
-                  "type": "string",
-                  "description": "Part of the identifier for the distant solvent atom.\n\n This data item is a pointer to _atom_site.pdbx_PDB_ins_code in the\n ATOM_SITE category."
-               },
                "PDB_model_num": {
                   "type": "integer",
                   "description": " Part of the identifier for the distant solvent atom.\n\nThis data item is a pointer to _atom_site.pdbx_PDB_model_num in the\nATOM_SITE category."
@@ -415,22 +411,6 @@
                   "type": "string",
                   "description": "Part of the identifier for the distant solvent atom.\n\n This data item is a pointer to _atom_site.label_alt.id in the\n ATOM_SITE category."
                },
-               "label_asym_id": {
-                  "type": "string",
-                  "description": "Part of the identifier for the distant solvent atom.\n\n This data item is a pointer to _atom_site.label_asym_id in the\n ATOM_SITE category."
-               },
-               "label_atom_id": {
-                  "type": "string",
-                  "description": "Part of the identifier for the distant solvent atom.\n\n This data item is a pointer to _atom_site.label_atom_id in the\n ATOM_SITE category."
-               },
-               "label_comp_id": {
-                  "type": "string",
-                  "description": "Part of the identifier for the distant solvent atom.\n\n This data item is a pointer to _atom_site.label_comp_id in the\n ATOM_SITE category."
-               },
-               "label_seq_id": {
-                  "type": "integer",
-                  "description": "Part of the identifier for the distant solvent atom.\n\n This data item is a pointer to _atom_site.label_seq_id in the\n ATOM_SITE category."
-               },
                "neighbor_ligand_distance": {
                   "type": "number",
                   "description": "Distance to closest neighboring ligand or solvent atom.\n"
@@ -438,10 +418,6 @@
                "neighbor_macromolecule_distance": {
                   "type": "number",
                   "description": "Distance to closest neighboring macromolecule atom.\n"
-               },
-               "rcsb_label_asym_id": {
-                  "type": "string",
-                  "description": "Part of the identifier for the distant solvent atom.\n\n This data item is a pointer to _atom_site.rcsb_label_asym_id in the\n ATOM_SITE category."
                }
             },
             "required": [
@@ -814,8 +790,8 @@
                "polymer_flag": {
                   "type": "string",
                   "enum": [
-                     "Y",
-                     "N"
+                     "N",
+                     "Y"
                   ],
                   "description": "The value of polymer flag indicates whether the unobserved or zero\n occupancy atom is part of a polymer chain"
                }
@@ -880,8 +856,8 @@
                "polymer_flag": {
                   "type": "string",
                   "enum": [
-                     "Y",
-                     "N"
+                     "N",
+                     "Y"
                   ],
                   "description": "The value of polymer flag indicates whether the unobserved or\n zero occupancy residue is part of a polymer chain or not"
                }
@@ -1212,8 +1188,8 @@
                   "enum": [
                      "SIDE_CHAIN",
                      "SIDE CHAIN",
-                     "MAIN_CHAIN",
-                     "MAIN CHAIN"
+                     "MAIN CHAIN",
+                     "MAIN_CHAIN"
                   ],
                   "description": "The type of plane - MAIN CHAIN or SIDE CHAIN atoms"
                }
@@ -2065,9 +2041,9 @@
                   "type": "string",
                   "enum": [
                      "Rotameric",
-                     "NotAvailable",
                      "NonRotameric",
-                     "Triaged/NotBinned"
+                     "Triaged/NotBinned",
+                     "NotAvailable"
                   ],
                   "description": "\nMolProbity RNA_suite conformation analysis.\nRNA specific produced by the molprobity step.\n"
                },
@@ -2681,8 +2657,8 @@
                "problem": {
                   "type": "string",
                   "enum": [
-                     "WRONG HAND",
-                     "PLANAR"
+                     "PLANAR",
+                     "WRONG HAND"
                   ],
                   "description": "\nThe type of chiral problem that the label_atom_id has.\neither \"WRONG HAND\" or \"PLANAR\"\n"
                }
@@ -2791,11 +2767,11 @@
             "entity_type": {
                "type": "string",
                "enum": [
-                  "branched",
-                  "macrolide",
+                  "water",
                   "non-polymer",
+                  "macrolide",
                   "polymer",
-                  "water"
+                  "branched"
                ],
                "description": "Defines the type of the entity."
             },
@@ -2851,8 +2827,8 @@
             "pdbx_blank_PDB_chainid_flag": {
                "type": "string",
                "enum": [
-                  "Y",
-                  "N"
+                  "N",
+                  "Y"
                ],
                "description": "A flag indicating that this entity was originally labeled\n with a blank PDB chain id."
             },
@@ -2990,9 +2966,9 @@
                "pdbx_leaving_atom_flag": {
                   "type": "string",
                   "enum": [
+                     "both",
                      "one",
-                     "none",
-                     "both"
+                     "none"
                   ],
                   "description": "This data item identifies if the linkage has displaced leaving atoms\n on both, one or none of the connected atoms forming the linkage.\n Leaving atoms are defined within their chemical defintions of each\n connected component."
                },
@@ -3031,9 +3007,9 @@
                "pdbx_value_order": {
                   "type": "string",
                   "enum": [
+                     "quad",
                      "trip",
                      "doub",
-                     "quad",
                      "sing"
                   ],
                   "description": "The chemical bond order associated with the specified atoms in\n this contact."
