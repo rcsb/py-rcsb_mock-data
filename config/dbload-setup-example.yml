@@ -37,6 +37,7 @@
 # 20-Mar-2019 jdw remove category chem_comp from the consolidated bird content class, excluded entity_poly_seq from pdbx_entity_core
 # 24-Mar-2019 jdw add sifts-summary path defails and miscellaneous schema updates
 # 25-Mar-2019 jdw add em_3d_fitting_list to the entry_core collection
+# 31-Mar-2019 jdw add block_attributes: REF_PARENT_CATEGORY_NAME: REF_PARENT_ATTRIBUTE_NAME: to provide parent details for synthetic key
 #
 #
 # Master Pinelands configuration file example
@@ -1169,16 +1170,20 @@ schemadef_helper:
                 - drugbank_target
             EXCLUDE: []
     block_attributes:
-        ihm_dev:
+        ihm_dev_NO:
             ATTRIBUTE_NAME: structure_id
             CIF_TYPE_CODE: code
             MAX_WIDTH: 16
             METHOD: datablockid()
+            REF_PARENT_CATEGORY_NAME: entry
+            REF_PARENT_ATTRIBUTE_NAME: id
         pdbx:
             ATTRIBUTE_NAME: structure_id
             CIF_TYPE_CODE: code
             MAX_WIDTH: 12
             METHOD: datablockid()
+            REF_PARENT_CATEGORY_NAME: entry
+            REF_PARENT_ATTRIBUTE_NAME: id
         bird:
             ATTRIBUTE_NAME: db_id
             CIF_TYPE_CODE: code
@@ -1194,11 +1199,15 @@ schemadef_helper:
             CIF_TYPE_CODE: code
             MAX_WIDTH: 10
             METHOD: datablockid()
+            REF_PARENT_CATEGORY_NAME: comp
+            REF_PARENT_ATTRIBUTE_NAME: id
         bird_chem_comp:
             ATTRIBUTE_NAME: component_id
             CIF_TYPE_CODE: code
             MAX_WIDTH: 10
             METHOD: datablockid()
+            REF_PARENT_CATEGORY_NAME: comp
+            REF_PARENT_ATTRIBUTE_NAME: id
         pdb_distro:
             ATTRIBUTE_NAME: structure_id
             CIF_TYPE_CODE: code
