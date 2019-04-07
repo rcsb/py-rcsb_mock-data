@@ -39,6 +39,8 @@
 # 25-Mar-2019 jdw add em_3d_fitting_list to the entry_core collection
 # 31-Mar-2019 jdw add block_attributes: REF_PARENT_CATEGORY_NAME: REF_PARENT_ATTRIBUTE_NAME: to provide parent details for this
 #                 synthetic key
+#  1-Apr-2019 jdw add ihm_dev_full to relax schema content exclusions.
+#  6-Apr-2019 jdw add STRUCT_DOMAIN_CLASSIFICATION_DATA_PATH
 #
 #
 # Master Pinelands configuration file example
@@ -86,6 +88,8 @@ site_info:
     SCHEMA_DEF_LOCATOR_PATH: schema
     JSON_SCHEMA_LOCATOR_PATH: json-schema
     INSTANCE_DATA_TYPE_INFO_LOCATOR_PATH: data_type_info
+    #
+    STRUCT_DOMAIN_CLASSIFICATION_DATA_PATH: domains_struct
     #
     MONGO_DB_HOST: localhost
     MONGO_DB_PORT: '27017'
@@ -203,6 +207,9 @@ dictionary_helper:
             - CATEGORY_NAME: chem_comp
     cardinality_parent_items:
         ihm_dev:
+            CATEGORY_NAME: entry
+            ATTRIBUTE_NAME: id
+        ihm_dev_full:
             CATEGORY_NAME: entry
             ATTRIBUTE_NAME: id
         bird:
@@ -323,6 +330,10 @@ dictionary_helper:
           ATTRIBUTE_NAME: pdbx_ec
           DELIMITER: ","
     content_classes:
+        ?       - GENERATED_CONTENT
+                - ihm_dev_full
+        :       - CATEGORY_NAME: chem_comp_atom
+        #
         ?       - GENERATED_CONTENT
                 - pdbx
         :       - CATEGORY_NAME: rcsb_load_status
@@ -1068,6 +1079,10 @@ schemadef_helper:
             DATABASE_NAME: ihm_dev
             VERSION: 1.1.0
             INSTANCE_DATA_TYPE_INFO_FILENAME: scan-ihm_dev-type-map.json
+        ihm_dev_full:
+            DATABASE_NAME: ihm_dev
+            VERSION: 1.1.0
+            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-ihm_dev-type-map.json
         pdbx:
             DATABASE_NAME: pdbx
             VERSION: 5.1.0
@@ -1171,7 +1186,14 @@ schemadef_helper:
                 - drugbank_target
             EXCLUDE: []
     block_attributes:
-        ihm_dev_NO:
+        ihm_dev:
+            ATTRIBUTE_NAME: structure_id
+            CIF_TYPE_CODE: code
+            MAX_WIDTH: 16
+            METHOD: datablockid()
+            REF_PARENT_CATEGORY_NAME: entry
+            REF_PARENT_ATTRIBUTE_NAME: id
+        ihm_dev_full:
             ATTRIBUTE_NAME: structure_id
             CIF_TYPE_CODE: code
             MAX_WIDTH: 16
@@ -1281,6 +1303,9 @@ document_helper:
         ihm_dev:
             - NAME: ihm_dev
               VERSION: 1.1.0
+        ihm_dev_full:
+            - NAME: ihm_dev_full
+              VERSION: 1.1.0
         pdbx:
             - NAME: pdbx
               VERSION: 5.1.0
@@ -1354,6 +1379,9 @@ document_helper:
             INCLUDE: []
             EXCLUDE:
                 - ATOM_SITE
+        ihm_dev_full:
+            INCLUDE: []
+            EXCLUDE: []
         chem_comp_core:
             INCLUDE: []
             EXCLUDE:
@@ -1663,6 +1691,19 @@ document_helper:
               PRIVATE_DOCUMENT_NAME: _schema_version
               MANDATORY: False
               UPDATE_ON_LOAD: True
+        ihm_dev_full:
+            - NAME: entry.id
+              CATEGORY_NAME: entry
+              ATTRIBUTE_NAME: id
+              PRIVATE_DOCUMENT_NAME: _entry_id
+              MANDATORY: True
+              UPDATE_ON_LOAD: False
+            - NAME: rcsb_schema_container_identifiers.collection_schema_version
+              CATEGORY_NAME: rcsb_schema_container_identifiers
+              ATTRIBUTE_NAME: collection_schema_version
+              PRIVATE_DOCUMENT_NAME: _schema_version
+              MANDATORY: False
+              UPDATE_ON_LOAD: True
         pdbx_core_entity:
             - NAME: entry.id
               CATEGORY_NAME: rcsb_entity_container_identifiers
@@ -1939,6 +1980,10 @@ document_helper:
     #
     collection_indices:
         ihm_dev:
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - entry.id
+        ihm_dev_full:
             - INDEX_NAME: primary
               ATTRIBUTE_NAMES:
               - entry.id
