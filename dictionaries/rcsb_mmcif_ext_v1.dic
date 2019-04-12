@@ -60,6 +60,10 @@
 #                    Add _entity.rcsb_enzyme_class_combined_ec, _entity.rcsb_enzyme_class_combined_provenance_source,
 #                        _entity.rcsb_enzyme_class_combined_provenance_code
 #    6-Apr-2019 jdw  Add subcategory 'domain_class_lineage' and category rcsb_entity_instance_domain
+#                    Add entity.poly.rcsb_mutation_count,rcsb_conflict_count,rcsb_insertion_count,and rcsb_deletion_count.
+#   10-Apr-2019 jdw  Add  _rcsb_chem_comp_container_identifiers.drugbank_id
+#   11-Apr-2019 jdw  Add  rcsb_entry_info.resolution_combined, _entity_poly.rcsb_sample_sequence_length
+#                         rcsb_entity_instance_validation_container_identifiers, _rcsb_entry_info.disulfide_bond_count
 #
 ###########################################################################
 
@@ -79,13 +83,23 @@ data_rcsb_mmcif_ext.dic
 
     _dictionary.title           rcsb_mmcif_ext.dic
     _dictionary.datablock_id    rcsb_mmcif_ext.dic
-    _dictionary.version         0.117
-#
+    _dictionary.version         0.119
+    #
      loop_
     _dictionary_history.version
     _dictionary_history.update
     _dictionary_history.revision
-
+ 0.119 2019-04-11
+;
+Changes (jdw):
+    +  Added  rcsb_entry_info.resolution_combined, _entity_poly.rcsb_sample_sequence_length
+              rcsb_entity_instance_validation_container_identifiers, _rcsb_entry_info.disulfide_bond_count
+;
+ 0.118 2019-04-08
+;
+Changes (jdw):
+     + Added entity.poly.rcsb_mutation_count,rcsb_conflict_count,rcsb_insertion_count,and rcsb_deletion_count
+;
  0.117 2019-04-06
 ;
 Changes (jdw):
@@ -286,7 +300,10 @@ Changes (jdw):
 ;              float item types are the subset of numbers that are the floating
                numbers with limited precision.
 ;
-
+               float-csv        numb
+            '(\s*-?\d+(\.\d+)?)(\s*,\s*-?\d+(\.\d+)?)*'
+;            comma separated list of simple floating point numbers
+;
 ##################
 ## SUB_CATEGORY ##
 ##################
@@ -932,6 +949,71 @@ save__entity_poly.rcsb_prd_id
     _item_methods.method_id      'rcsb_item_method_deferred'
     _item_linked.child_name       '_entity_poly.rcsb_prd_id'
     _item_linked.parent_name      '_pdbx_molecule.prd_id'
+     save_
+
+save__entity_poly.rcsb_mutation_count
+    _item_description.description
+;  Number of engineered mutations relative to the reference sequence.
+
+;
+    _item.name                  '_entity_poly.rcsb_mutation_count'
+    _item.category_id             entity_poly
+    _item.mandatory_code          no
+    _item_type.code               int
+    _item_example.case.            2
+    _item_methods.method_id      'rcsb_item_method_deferred'
+     save_
+
+save__entity_poly.rcsb_conflict_count
+    _item_description.description
+;  Number of monomer conflicts relative to the reference sequence.
+
+;
+    _item.name                  '_entity_poly.rcsb_conflict_count'
+    _item.category_id             entity_poly
+    _item.mandatory_code          no
+    _item_type.code               int
+    _item_example.case.            2
+    _item_methods.method_id      'rcsb_item_method_deferred'
+     save_
+
+save__entity_poly.rcsb_deletion_count
+    _item_description.description
+;  Number of monomer deletions relative to the reference sequence.
+
+;
+    _item.name                  '_entity_poly.rcsb_deletion_count'
+    _item.category_id             entity_poly
+    _item.mandatory_code          no
+    _item_type.code               int
+    _item_example.case.            1
+    _item_methods.method_id      'rcsb_item_method_deferred'
+     save_
+
+save__entity_poly.rcsb_insertion_count
+    _item_description.description
+;  Number of monomer insertions relative to the reference sequence.
+
+;
+    _item.name                  '_entity_poly.rcsb_insertion_count'
+    _item.category_id             entity_poly
+    _item.mandatory_code          no
+    _item_type.code               int
+    _item_example.case.            3
+    _item_methods.method_id      'rcsb_item_method_deferred'
+     save_
+
+save__entity_poly.rcsb_sample_sequence_length
+    _item_description.description
+;  Number of monomer in the sample sequence.
+
+;
+    _item.name                  '_entity_poly.rcsb_sample_sequence_length'
+    _item.category_id             entity_poly
+    _item.mandatory_code          no
+    _item_type.code               int
+    _item_example.case.            120
+    _item_methods.method_id      'rcsb_item_method_deferred'
      save_
 
 ##############################
@@ -1662,6 +1744,140 @@ save__rcsb_entity_instance_container_identifiers.entity_type
 ;
     _item.name                  '_rcsb_entity_instance_container_identifiers.entity_type'
     _item.category_id             rcsb_entity_instance_container_identifiers
+    _item.mandatory_code          no
+    _item_type.code               ucode
+    loop_
+    _item_enumeration.value
+    _item_enumeration.detail      polymer      'entity is a polymer'
+                                  non-polymer  'entity is not a polymer'
+                                  macrolide    'entity is a macrolide'
+                                  water        'water in the solvent model'
+                                  branched     'entity is branched'
+     save_
+##
+##
+##
+
+save_rcsb_entity_instance_validation_container_identifiers
+    _category.description
+;        The rcsb_entity_instance_validation_container_identifiers records identifiers relevant to the
+         container of entity instance validation information.
+;
+    _category.id                  rcsb_entity_instance_validation_container_identifiers
+    _category.mandatory_code      no
+    loop_
+    _category_key.name          '_rcsb_entity_instance_validation_container_identifiers.entry_id'
+                                '_rcsb_entity_instance_validation_container_identifiers.asym_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     loop_
+    _rcsb_entity_instance_validation_container_identifiers.entry_id
+    _rcsb_entity_instance_validation_container_identifiers.entity_id
+    _rcsb_entity_instance_validation_container_identifiers.entity_type
+    _rcsb_entity_instance_validation_container_identifiers.asym_id
+    _rcsb_entity_instance_validation_container_identifiers.auth_asym_id
+    _rcsb_entity_instance_validation_container_identifiers.comp_id
+    _rcsb_entity_instance_validation_container_identifiers.auth_seq_id
+    1abc  1 'polymer' A A . .
+    1abc  2 'polymer' B B . .
+    1abc  3 'polymer' C C . .
+
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_entity_instance_validation_container_identifiers
+   _category_methods.method_id         'rcsb_entity_instance_container_identifiers'
+     save_
+
+save__rcsb_entity_instance_validation_container_identifiers.entry_id
+    _item_description.description
+;    Entry identifier for the container.
+;
+    _item.name                  '_rcsb_entity_instance_validation_container_identifiers.entry_id'
+    _item.category_id             rcsb_entity_instance_validation_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_entity_instance_validation_container_identifiers.entry_id'
+    _item_linked.parent_name      '_entry.id'
+
+     save_
+
+save__rcsb_entity_instance_validation_container_identifiers.entity_id
+    _item_description.description
+;    Entiy identifier for the container.
+;
+    _item.name                  '_rcsb_entity_instance_validation_container_identifiers.entity_id'
+    _item.category_id             rcsb_entity_instance_validation_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_entity_instance_validation_container_identifiers.entity_id'
+    _item_linked.parent_name      '_entity.id'
+     save_
+
+save__rcsb_entity_instance_validation_container_identifiers.asym_id
+    _item_description.description
+;    Instance identifier for this container.
+;
+    _item.name                  '_rcsb_entity_instance_validation_container_identifiers.asym_id'
+    _item.category_id             rcsb_entity_instance_validation_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_entity_instance_validation_container_identifiers.asym_id'
+    _item_linked.parent_name      '_struct_asym.id'
+     save_
+
+save__rcsb_entity_instance_validation_container_identifiers.auth_asym_id
+    _item_description.description
+;    Author instance identifier for this container.
+;
+    _item.name                  '_rcsb_entity_instance_validation_container_identifiers.auth_asym_id'
+    _item.category_id             rcsb_entity_instance_validation_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_entity_instance_validation_container_identifiers.auth_asym_id'
+    _item_linked.parent_name      '_atom_site.auth_asym_id'
+     save_
+
+save__rcsb_entity_instance_validation_container_identifiers.comp_id
+    _item_description.description
+;    Component identifier for non-polymer entity instance.
+;
+    _item.name                  '_rcsb_entity_instance_validation_container_identifiers.comp_id'
+    _item.category_id             rcsb_entity_instance_validation_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_entity_instance_validation_container_identifiers.comp_id'
+    _item_linked.parent_name      '_chem_comp.id'
+     save_
+
+save__rcsb_entity_instance_validation_container_identifiers.auth_seq_id
+    _item_description.description
+;    Residue number for non-polymer entity instance.
+;
+    _item.name                  '_rcsb_entity_instance_validation_container_identifiers.auth_seq_id'
+    _item.category_id             rcsb_entity_instance_validation_container_identifiers
+    _item.mandatory_code          yes
+    _item_type.code               code
+    #_item_linked.child_name       '_rcsb_entity_instance_validation_container_identifiers.auth_seq_id'
+    #_item_linked.parent_name      '_chem_comp.id'
+     save_
+
+save__rcsb_entity_instance_validation_container_identifiers.entity_type
+    _item_description.description
+;              Defines the type of the entity.
+;
+    _item.name                  '_rcsb_entity_instance_validation_container_identifiers.entity_type'
+    _item.category_id             rcsb_entity_instance_validation_container_identifiers
     _item.mandatory_code          no
     _item_type.code               ucode
     loop_
@@ -3737,6 +3953,19 @@ save__rcsb_chem_comp_container_identifiers.comp_id
    #
 save_
 
+save__rcsb_chem_comp_container_identifiers.drugbank_id
+   #
+   _item_description.description
+; The DrugBank identifier corresponding to the chemical component.
+;
+   #
+   _item.name                    '_rcsb_chem_comp_container_identifiers.drugbank_id'
+   _item.category_id             rcsb_chem_comp_container_identifiers
+   _item.mandatory_code          yes
+   _item_type.code               ucode
+   #
+save_
+
 #########################
 ## RCSB_CHEM_COMP_INFO ##
 #########################
@@ -4309,6 +4538,7 @@ save_rcsb_entry_info
      _rcsb_entry_info.solvent_entity_count          1
      _rcsb_entry_info.branched_entity_count         0
      _rcsb_entry_info.software_programs_combined    'Phenix;Refmac'
+     _rcsb_entry_info.resolution_combined           2.10
 ;
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
    _pdbx_category_context.type         RCSB_LOCAL
@@ -4446,6 +4676,46 @@ save__rcsb_entry_info.software_programs_combined
     _item.category_id             rcsb_entry_info
     _item.mandatory_code          no
     _item_type.code               alphanum-scsv
+     save_
+
+save__rcsb_entry_info.resolution_combined
+    _item_description.description
+;  Combined estimates of experimental resolution.
+;
+    _item.name                  '_rcsb_entry_info.resolution_combined'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               float-csv
+     save_
+
+save__rcsb_entry_info.deposited_atom_count
+    _item_description.description
+;  The number of atomic coordinates deposited.
+;
+    _item.name                  '_rcsb_entry_info.deposited_atom_count'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entry_info.deposited_model_count
+    _item_description.description
+;  The number of model structures deposited.
+;
+    _item.name                  '_rcsb_entry_info.deposited_model_count'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entry_info.disulfide_bond_count
+    _item_description.description
+;  The number of disulfide bonds.
+;
+    _item.name                  '_rcsb_entry_info.disulfide_bond_count'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
      save_
 #
 #####################
@@ -4800,6 +5070,17 @@ save__drugbank_info.drug_groups
     _item.mandatory_code          no
     _item_type.code               alphanum-scsv
     _item_examples.case         'approved;nutraceutical'
+    save_
+
+save__drugbank_info.atc_codes
+    _item_description.description
+;              The Anatomical Therapeutic Chemical Classification System (ATC) codes.
+;
+    _item.name                  '_drugbank_info.atc_codes'
+    _item.category_id             drugbank_info
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_examples.case         'A11HA04'
     save_
 
 save__drugbank_info.cas_number
@@ -5370,7 +5651,7 @@ save_rcsb_entity_instance_domain
 ;
     _category.id                  rcsb_entity_instance_domain
     _category.mandatory_code      no
-    _category_key.name          '_rcsb_entity_instance_domain.id'
+    _category_key.name          '_rcsb_entity_instance_domain.ordinal'
      loop_
     _category_group.id           'inclusive_group'
                                  'rcsb_group'
@@ -5449,8 +5730,8 @@ save__rcsb_entity_instance_domain.domain_id
     _item.category_id         rcsb_entity_instance_domain
     _item.mandatory_code      yes
     _item_type.code           code
-    _item_linked.child_name   '_rcsb_entity_instance_domain.domain_id'
-    _item_linked.parent_name  '_pdbx_domain.id'
+    #_item_linked.child_name   '_rcsb_entity_instance_domain.domain_id'
+    #_item_linked.parent_name  '_pdbx_domain.id'
 
      save_
 
@@ -5618,6 +5899,24 @@ save__rcsb_entity_instance_domain.end_auth_asym_id
     _item_type.code               code
     _item_linked.child_name     '_rcsb_entity_instance_domain.end_auth_asym_id'
     _item_linked.parent_name    '_atom_site.auth_asym_id'
+
+     save_
+
+
+save__rcsb_entity_instance_domain.end_auth_seq_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain ends.
+
+               This data item is a pointer to _atom_site.auth_seq_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain.end_auth_seq_id'
+    _item.category_id             rcsb_entity_instance_domain
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_instance_domain.end_auth_seq_id'
+    _item_linked.parent_name    '_atom_site.auth_seq_id'
 
      save_
 
