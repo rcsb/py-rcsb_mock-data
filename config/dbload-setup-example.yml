@@ -346,6 +346,70 @@ dictionary_helper:
         ?       - GENERATED_CONTENT
                 - ihm_dev_full
         :       - CATEGORY_NAME: chem_comp_atom
+                - CATEGORY_NAME: ihm_entity_poly_segment
+                - CATEGORY_NAME: ihm_starting_model_details
+                - CATEGORY_NAME: ihm_starting_comparative_models
+                - CATEGORY_NAME: ihm_starting_computational_models
+                - CATEGORY_NAME: ihm_starting_model_seq_dif
+                - CATEGORY_NAME: ihm_model_representation
+                - CATEGORY_NAME: ihm_model_representation_details
+                - CATEGORY_NAME: ihm_struct_assembly_details
+                - CATEGORY_NAME: ihm_struct_assembly
+                - CATEGORY_NAME: ihm_struct_assembly_class
+                - CATEGORY_NAME: ihm_struct_assembly_class_link
+                - CATEGORY_NAME: ihm_modeling_protocol
+                - CATEGORY_NAME: ihm_modeling_protocol_details
+                - CATEGORY_NAME: ihm_multi_state_modeling
+                - CATEGORY_NAME: ihm_multi_state_model_group_link
+                - CATEGORY_NAME: ihm_ordered_ensemble
+                - CATEGORY_NAME: ihm_modeling_post_process
+                - CATEGORY_NAME: ihm_ensemble_info
+                - CATEGORY_NAME: ihm_model_list
+                - CATEGORY_NAME: ihm_model_group
+                - CATEGORY_NAME: ihm_model_group_link
+                - CATEGORY_NAME: ihm_model_representative
+                - CATEGORY_NAME: ihm_dataset_list
+                - CATEGORY_NAME: ihm_dataset_group
+                - CATEGORY_NAME: ihm_dataset_group_link
+                - CATEGORY_NAME: ihm_related_datasets
+                - CATEGORY_NAME: ihm_dataset_related_db_reference
+                - CATEGORY_NAME: ihm_external_reference_info
+                - CATEGORY_NAME: ihm_external_files
+                - CATEGORY_NAME: ihm_dataset_external_reference
+                - CATEGORY_NAME: ihm_localization_density_files
+                - CATEGORY_NAME: ihm_predicted_contact_restraint
+                - CATEGORY_NAME: ihm_hydroxyl_radical_fp_restraint
+                - CATEGORY_NAME: ihm_cross_link_list
+                - CATEGORY_NAME: ihm_cross_link_restraint
+                - CATEGORY_NAME: ihm_cross_link_result
+                - CATEGORY_NAME: ihm_cross_link_result_parameters
+                - CATEGORY_NAME: ihm_2dem_class_average_restraint
+                - CATEGORY_NAME: ihm_2dem_class_average_fitting
+                - CATEGORY_NAME: ihm_3dem_restraint
+                - CATEGORY_NAME: ihm_sas_restraint
+                - CATEGORY_NAME: ihm_starting_model_coord
+                - CATEGORY_NAME: ihm_sphere_obj_site
+                - CATEGORY_NAME: ihm_gaussian_obj_site
+                - CATEGORY_NAME: ihm_gaussian_obj_ensemble
+                - CATEGORY_NAME: ihm_residues_not_modeled
+                - CATEGORY_NAME: ihm_feature_list
+                - CATEGORY_NAME: ihm_pseudo_site_feature
+                - CATEGORY_NAME: ihm_poly_atom_feature
+                - CATEGORY_NAME: ihm_poly_residue_feature
+                - CATEGORY_NAME: ihm_non_poly_feature
+                - CATEGORY_NAME: ihm_interface_residue_feature
+                - CATEGORY_NAME: ihm_derived_distance_restraint
+                - CATEGORY_NAME: ihm_geometric_object_list
+                - CATEGORY_NAME: ihm_geometric_object_center
+                - CATEGORY_NAME: ihm_geometric_object_transformation
+                - CATEGORY_NAME: ihm_geometric_object_sphere
+                - CATEGORY_NAME: ihm_geometric_object_torus
+                - CATEGORY_NAME: ihm_geometric_object_half_torus
+                - CATEGORY_NAME: ihm_geometric_object_axis
+                - CATEGORY_NAME: ihm_geometric_object_plane
+                - CATEGORY_NAME: ihm_geometric_object_distance_restraint
+        #
+        #
         #
         ?       - GENERATED_CONTENT
                 - pdbx
@@ -1089,11 +1153,11 @@ schemadef_helper:
     schema_info:
         ihm_dev:
             DATABASE_NAME: ihm_dev
-            VERSION: 1.1.0
+            VERSION: 1.1.1
             INSTANCE_DATA_TYPE_INFO_FILENAME: scan-ihm_dev-type-map.json
         ihm_dev_full:
             DATABASE_NAME: ihm_dev
-            VERSION: 1.1.0
+            VERSION: 1.1.1
             INSTANCE_DATA_TYPE_INFO_FILENAME: scan-ihm_dev-type-map.json
         pdbx:
             DATABASE_NAME: pdbx
@@ -1317,7 +1381,7 @@ document_helper:
               VERSION: 1.1.0
         ihm_dev_full:
             - NAME: ihm_dev_full
-              VERSION: 1.1.0
+              VERSION: 1.2.0
         pdbx:
             - NAME: pdbx
               VERSION: 5.1.0
@@ -2409,4 +2473,16 @@ document_helper:
     collection_retain_singleton:
         pdbx_core_entity_monomer: True
 
-
+    collection_suppress_category_relationships:
+        ihm_dev_full:
+            - PARENT_CATEGORY_NAME: chem_comp_atom
+            - PARENT_CATEGORY_NAME: entity_poly_seq
+              CHILD_CATEGORY_NAME: atom_site
+            - PARENT_CATEGORY_NAME: entity_poly_seq
+              CHILD_CATEGORY_NAME: IHM_STARTING_MODEL_COORD
+            - PARENT_CATEGORY_NAME: entity_poly_seq
+              CHILD_CATEGORY_NAME: IHM_SPHERE_OBJ_SITE
+            - PARENT_CATEGORY_NAME: entity_poly_seq
+              CHILD_CATEGORY_NAME: IHM_GAUSSIAN_OBJ_SITE
+            - PARENT_CATEGORY_NAME: entity_poly_seq
+              CHILD_CATEGORY_NAME: IHM_GAUSSIAN_OBJ_ENSEMBLE
