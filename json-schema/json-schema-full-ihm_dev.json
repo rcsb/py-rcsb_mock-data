@@ -134,8 +134,8 @@
                   "type": "string",
                   "enum": [
                      "y",
-                     "no",
                      "n",
+                     "no",
                      "yes"
                   ],
                   "description": "'yes' indicates that this is a 'standard' monomer, 'no'\n indicates that it is 'nonstandard'. Nonstandard monomers\n should be described in more detail using the\n _chem_comp.mon_nstd_parent, _chem_comp.mon_nstd_class and\n _chem_comp.mon_nstd_details data items."
@@ -153,35 +153,35 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "D-saccharide",
-                     "RNA OH 3 prime terminus",
-                     "peptide-like",
-                     "DNA linking",
-                     "L-saccharide 1,4 and 1,4 linking",
-                     "L-saccharide 1,4 and 1,6 linking",
-                     "saccharide",
-                     "D-peptide COOH carboxy terminus",
-                     "D-peptide linking",
-                     "RNA OH 5 prime terminus",
-                     "L-peptide COOH carboxy terminus",
-                     "D-saccharide 1,4 and 1,6 linking",
-                     "non-polymer",
-                     "DNA OH 3 prime terminus",
-                     "L-peptide NH3 amino terminus",
-                     "L-beta-peptide, C-gamma linking",
-                     "D-gamma-peptide, C-delta linking",
-                     "D-saccharide 1,4 and 1,4 linking",
-                     "L-DNA linking",
-                     "D-peptide NH3 amino terminus",
+                     "peptide linking",
+                     "L-gamma-peptide, C-delta linking",
                      "DNA OH 5 prime terminus",
+                     "D-beta-peptide, C-gamma linking",
                      "L-saccharide",
                      "L-RNA linking",
-                     "L-gamma-peptide, C-delta linking",
-                     "peptide linking",
+                     "saccharide",
+                     "D-peptide NH3 amino terminus",
                      "L-peptide linking",
-                     "D-beta-peptide, C-gamma linking",
+                     "RNA linking",
+                     "DNA OH 3 prime terminus",
+                     "L-beta-peptide, C-gamma linking",
+                     "D-saccharide 1,4 and 1,4 linking",
+                     "D-saccharide 1,4 and 1,6 linking",
+                     "D-gamma-peptide, C-delta linking",
+                     "D-peptide COOH carboxy terminus",
+                     "DNA linking",
+                     "D-peptide linking",
+                     "L-peptide COOH carboxy terminus",
+                     "non-polymer",
+                     "D-saccharide",
+                     "RNA OH 5 prime terminus",
+                     "RNA OH 3 prime terminus",
                      "other",
-                     "RNA linking"
+                     "L-saccharide 1,4 and 1,4 linking",
+                     "peptide-like",
+                     "L-saccharide 1,4 and 1,6 linking",
+                     "L-peptide NH3 amino terminus",
+                     "L-DNA linking"
                   ],
                   "description": "For standard polymer components, the type of the monomer.\n Note that monomers that will form polymers are of three types:\n linking monomers, monomers with some type of N-terminal (or 5')\n cap and monomers with some type of C-terminal (or 3') cap."
                }
@@ -374,8 +374,8 @@
                "src_method": {
                   "type": "string",
                   "enum": [
-                     "syn",
                      "nat",
+                     "syn",
                      "man"
                   ],
                   "description": "The method by which the sample for the entity was produced.\n Entities isolated directly from natural sources (tissues, soil\n samples etc.) are expected to have further information in the\n ENTITY_SRC_NAT category. Entities isolated from genetically\n manipulated sources are expected to have further information in\n the ENTITY_SRC_GEN category."
@@ -383,11 +383,11 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "branched",
-                     "polymer",
                      "macrolide",
+                     "branched",
                      "water",
-                     "non-polymer"
+                     "non-polymer",
+                     "polymer"
                   ],
                   "description": "Defines the type of the entity.\n\n Polymer entities are expected to have corresponding\n ENTITY_POLY and associated entries.\n\n Non-polymer entities are expected to have corresponding\n CHEM_COMP and associated entries.\n\n Water entities are not expected to have corresponding\n entries in the ENTITY category."
                }
@@ -480,8 +480,8 @@
                   "type": "string",
                   "enum": [
                      "y",
-                     "no",
                      "n",
+                     "no",
                      "yes"
                   ],
                   "description": "A flag to indicate whether the polymer contains at least\n one monomer unit with chirality different from that specified in\n _entity_poly.type."
@@ -490,8 +490,8 @@
                   "type": "string",
                   "enum": [
                      "y",
-                     "no",
                      "n",
+                     "no",
                      "yes"
                   ],
                   "description": "A flag to indicate whether the polymer contains at least\n one monomer-to-monomer link different from that implied by\n _entity_poly.type."
@@ -500,8 +500,8 @@
                   "type": "string",
                   "enum": [
                      "y",
-                     "no",
                      "n",
+                     "no",
                      "yes"
                   ],
                   "description": "A flag to indicate whether the polymer contains at least\n one monomer that is not considered standard."
@@ -523,8 +523,8 @@
                "pdbx_sequence_evidence_code": {
                   "type": "string",
                   "enum": [
-                     "depositor provided",
-                     "derived from coordinates"
+                     "derived from coordinates",
+                     "depositor provided"
                   ],
                   "description": "Evidence for the assignment of the polymer sequence."
                },
@@ -540,15 +540,15 @@
                "type": {
                   "type": "string",
                   "enum": [
-                     "polydeoxyribonucleotide/polyribonucleotide hybrid",
                      "polydeoxyribonucleotide",
-                     "polyribonucleotide",
                      "polypeptide(D)",
+                     "polysaccharide(L)",
+                     "polydeoxyribonucleotide/polyribonucleotide hybrid",
+                     "cyclic-pseudo-peptide",
                      "other",
                      "polypeptide(L)",
-                     "cyclic-pseudo-peptide",
-                     "polysaccharide(L)",
                      "peptide nucleic acid",
+                     "polyribonucleotide",
                      "polysaccharide(D)"
                   ],
                   "description": "The type of the polymer."
@@ -573,14 +573,14 @@
                },
                "entity_id": {
                   "type": "string",
-                  "description": "This data item is a pointer to _entity.id in the ENTITY category."
+                  "description": "This data item is a pointer to _entity_poly.entity_id in the \n ENTITY_POLY category."
                },
                "hetero": {
                   "type": "string",
                   "enum": [
                      "y",
-                     "no",
                      "n",
+                     "no",
                      "yes"
                   ],
                   "description": "A flag to indicate whether this monomer in the polymer is\n heterogeneous in sequence."
@@ -639,8 +639,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "sample",
-                     "model"
+                     "model",
+                     "sample"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -699,10 +699,6 @@
                   "type": "integer",
                   "description": "The model number corresponding to the 2DEM fitting result presented.\n This data item is a pointer to _ihm_model_list.model_id in the \n IHM_MODEL_LIST category."
                },
-               "ordinal_id": {
-                  "type": "integer",
-                  "description": "A unique identifier for the 2dem class average fitting data."
-               },
                "restraint_id": {
                   "type": "integer",
                   "description": "Identifier to the 2dem class average restraint.\n This data item is a pointer to the _ihm_2dem_class_average_restraint.id in the\n IHM_2DEM_CLASS_AVERAGE_RESTRAINT category."
@@ -760,7 +756,6 @@
                "structure_id",
                "cross_correlation_coefficient",
                "model_id",
-               "ordinal_id",
                "restraint_id"
             ],
             "additionalProperties": false
@@ -791,8 +786,8 @@
                "image_segment_flag": {
                   "type": "string",
                   "enum": [
-                     "YES",
-                     "NO"
+                     "NO",
+                     "YES"
                   ],
                   "description": "A flag that indicates whether or not the 2DEM class average image is segmented i.e.,\n whether the whole image is used or only a portion of it is used (by masking \n or by other means) as restraint in the modeling."
                },
@@ -814,7 +809,7 @@
                },
                "struct_assembly_id": {
                   "type": "integer",
-                  "description": "An indicator to whether the whole assembly that is modeled is fit into the image \n or if only a subset of the structural assembly is fit into the image. \n This data item is a pointer to _ihm_struct_assembly.assembly_id in the\n IHM_STRUCT_ASSEMBLY category. The IHM_STRUCT_ASSEMBLY category provides the \n details regarding the different structural assemblies used in the modeling. \n The default value for this data item is \"1\" indicating that the entire assembly \n being modeled is fit into the EM data."
+                  "description": "An indicator to whether the whole assembly that is modeled is fit into the image \n or if only a subset of the structural assembly is fit into the image. \n This data item is a pointer to _ihm_struct_assembly.id in the\n IHM_STRUCT_ASSEMBLY category. The IHM_STRUCT_ASSEMBLY category provides the \n details regarding the different structural assemblies used in the modeling. \n The default value for this data item is \"1\" indicating that the entire assembly \n being modeled is fit into the EM data."
                }
             },
             "required": [
@@ -822,7 +817,6 @@
                "dataset_list_id",
                "id",
                "image_resolution",
-               "number_raw_micrographs",
                "pixel_size_height",
                "pixel_size_width",
                "struct_assembly_id"
@@ -866,13 +860,9 @@
                   "type": "integer",
                   "description": "In case of Gaussian mixture models, the number of gaussians\n is a parameter used to covert the 3DEM maps and models into\n GMMs. This captures the level of granularity used in\n representing the maps and/or models as 3D Gaussians."
                },
-               "ordinal_id": {
-                  "type": "integer",
-                  "description": "A unique identifier for the 3DEM restraint description."
-               },
                "struct_assembly_id": {
                   "type": "integer",
-                  "description": "An indicator to whether the whole assembly that is modeled is fit into the 3DEM map\n or if only a subset of the structural assembly is fit into the map.\n This data item is a pointer to _ihm_struct_assembly.assembly_id in the\n IHM_STRUCT_ASSEMBLY category. The IHM_STRUCT_ASSEMBLY category provides the\n details regarding the different structural assemblies used in the modeling.\n The default value for this data item is \"1\" indicating that the entire assembly\n being modeled is fit into the EM map."
+                  "description": "An indicator to whether the whole assembly that is modeled is fit into the 3DEM map\n or if only a subset of the structural assembly is fit into the map.\n This data item is a pointer to _ihm_struct_assembly.id in the\n IHM_STRUCT_ASSEMBLY category. The IHM_STRUCT_ASSEMBLY category provides the\n details regarding the different structural assemblies used in the modeling.\n The default value for this data item is \"1\" indicating that the entire assembly\n being modeled is fit into the EM map."
                }
             },
             "required": [
@@ -880,7 +870,6 @@
                "cross_correlation_coefficient",
                "dataset_list_id",
                "model_id",
-               "ordinal_id",
                "struct_assembly_id"
             ],
             "additionalProperties": false
@@ -935,16 +924,16 @@
                "linker_type": {
                   "type": "string",
                   "enum": [
-                     "DST",
-                     "EGS",
                      "sulfo-SDA",
-                     "DSS",
-                     "sulfo-SMCC",
-                     "DSSO",
-                     "EDC",
-                     "BS2G",
+                     "DST",
                      "BS3",
-                     "Other"
+                     "EGS",
+                     "sulfo-SMCC",
+                     "Other",
+                     "DSS",
+                     "BS2G",
+                     "EDC",
+                     "DSSO"
                   ],
                   "description": "The type of crosslinker used."
                },
@@ -1010,8 +999,8 @@
                "conditional_crosslink_flag": {
                   "type": "string",
                   "enum": [
-                     "ANY",
-                     "ALL"
+                     "ALL",
+                     "ANY"
                   ],
                   "description": "The cross link conditionality."
                },
@@ -1038,9 +1027,9 @@
                "model_granularity": {
                   "type": "string",
                   "enum": [
+                     "by-residue",
                      "by-feature",
-                     "by-atom",
-                     "by-residue"
+                     "by-atom"
                   ],
                   "description": "The coarse-graining information for the crosslink implementation."
                },
@@ -1108,10 +1097,6 @@
                   "type": "integer",
                   "description": "The model number corresponding to the cross link result presented.\n This data item is a pointer to _ihm_model_list.model_id in the\n IHM_MODEL_LIST category."
                },
-               "ordinal_id": {
-                  "type": "integer",
-                  "description": "A unique identifier for the restraint/model combination."
-               },
                "psi": {
                   "type": "number",
                   "minimum": 0.0,
@@ -1134,7 +1119,6 @@
             "required": [
                "structure_id",
                "model_id",
-               "ordinal_id",
                "restraint_id"
             ],
             "additionalProperties": false
@@ -1181,25 +1165,10 @@
             "properties": {
                "structure_id": {
                   "type": "string"
-               },
-               "dataset_list_id": {
-                  "type": "integer",
-                  "description": "An identifier to the dataset. This data item is a pointer to\n _ihm_dataset_list.id in the IHM_DATASET_LIST category."
-               },
-               "group_id": {
-                  "type": "integer",
-                  "description": "An identifier for the dataset group."
-               },
-               "ordinal_id": {
-                  "type": "integer",
-                  "description": "A unique identifier for the entry."
                }
             },
             "required": [
-               "structure_id",
-               "dataset_list_id",
-               "group_id",
-               "ordinal_id"
+               "structure_id"
             ],
             "additionalProperties": false
          },
@@ -1217,34 +1186,34 @@
                "data_type": {
                   "type": "string",
                   "enum": [
-                     "2DEM class average",
-                     "SAS data",
-                     "DNA footprinting data",
-                     "Predicted contacts",
                      "Mass Spectrometry data",
-                     "Other",
-                     "CX-MS data",
-                     "H/D exchange data",
-                     "EM raw micrographs",
-                     "Mutagenesis data",
-                     "Experimental model",
-                     "3DEM volume",
-                     "Integrative model",
                      "Comparative model",
-                     "Hydroxyl radical footprinting data",
-                     "EPR data",
-                     "Yeast two-hybrid screening data",
-                     "Single molecule FRET data",
+                     "H/D exchange data",
+                     "Other",
+                     "EM raw micrographs",
                      "NMR data",
-                     "De Novo model"
+                     "Hydroxyl radical footprinting data",
+                     "CX-MS data",
+                     "Yeast two-hybrid screening data",
+                     "SAS data",
+                     "Single molecule FRET data",
+                     "Integrative model",
+                     "De Novo model",
+                     "Experimental model",
+                     "2DEM class average",
+                     "3DEM volume",
+                     "Mutagenesis data",
+                     "EPR data",
+                     "DNA footprinting data",
+                     "Predicted contacts"
                   ],
                   "description": "The type of data held in the dataset."
                },
                "database_hosted": {
                   "type": "string",
                   "enum": [
-                     "YES",
-                     "NO"
+                     "NO",
+                     "YES"
                   ],
                   "description": "A flag that indicates whether the dataset is archived in \n an IHM related database or elsewhere."
                },
@@ -1296,16 +1265,16 @@
                "db_name": {
                   "type": "string",
                   "enum": [
-                     "PDB",
-                     "MODEL ARCHIVE",
-                     "BioGRID",
-                     "EMDB",
-                     "SASBDB",
-                     "PRIDE",
-                     "BMRB",
                      "MASSIVE",
+                     "BioGRID",
+                     "MODEL ARCHIVE",
+                     "BMRB",
+                     "PRIDE",
+                     "SASBDB",
                      "EMPIAR",
-                     "Other"
+                     "Other",
+                     "EMDB",
+                     "PDB"
                   ],
                   "description": "The name of the database containing the dataset entry."
                },
@@ -1347,7 +1316,7 @@
                },
                "dataset_list_id": {
                   "type": "integer",
-                  "description": "Identifier to the input data from which the distance restraint is derived.\n This data item is a pointer to the _ihm_dataset_list.id in the\n IHM_DATASET_LIST category."
+                  "description": "Identifier to the input data from which the distance restraint is derived.\n This data item is a pointer to the _ihm_dataset_list.id in the\n IHM_DATASET_LIST category. \n This data item may not be applicable for all cases. For example, in case of\n ambiguous interface restraints where the interface residues are identified\n from multiple experiments, the reference to the _ihm_dataset_list.id is \n handled in the IHM_INTERFACE_RESIDUE_FEATURE category rather than here."
                },
                "distance_upper_limit": {
                   "type": "number",
@@ -1364,8 +1333,8 @@
                "group_conditionality": {
                   "type": "string",
                   "enum": [
-                     "ANY",
-                     "ALL"
+                     "ALL",
+                     "ANY"
                   ],
                   "description": "If a group of atoms or residues are restrained, this data item defines \n the conditionality based on which the restraint is applied in the modeling."
                },
@@ -1385,8 +1354,8 @@
                   "type": "string",
                   "enum": [
                      "lower and upper bound",
-                     "lower bound",
-                     "upper bound"
+                     "upper bound",
+                     "lower bound"
                   ],
                   "description": "The type of distance restraint applied."
                }
@@ -1415,9 +1384,9 @@
                "ensemble_clustering_feature": {
                   "type": "string",
                   "enum": [
-                     "RMSD",
                      "other",
-                     "dRMSD"
+                     "dRMSD",
+                     "RMSD"
                   ],
                   "description": "The parameter/feature used for clustering the models, if applicable."
                },
@@ -1425,8 +1394,8 @@
                   "type": "string",
                   "enum": [
                      "Hierarchical",
-                     "Partitioning (k-means)",
-                     "Other"
+                     "Other",
+                     "Partitioning (k-means)"
                   ],
                   "description": "The clustering method used to obtain the ensemble, if applicable."
                },
@@ -1456,7 +1425,7 @@
                },
                "model_group_id": {
                   "type": "integer",
-                  "description": "An identifier for the cluster or group of models being deposited.\n This data item is a pointer to the _ihm_model_list.model_group_id\n in the IHM_MODEL_LIST category."
+                  "description": "An identifier for the cluster or group of models being deposited.\n This data item is a pointer to the _ihm_model_group.id\n in the IHM_MODEL_GROUP category."
                },
                "num_ensemble_models": {
                   "type": "integer",
@@ -1494,9 +1463,9 @@
                   "enum": [
                      "Input data or restraints",
                      "Modeling workflow or script",
+                     "Other",
                      "Visualization script",
-                     "Modeling or post-processing output",
-                     "Other"
+                     "Modeling or post-processing output"
                   ],
                   "description": "The type of content in the file."
                },
@@ -1512,25 +1481,25 @@
                "file_format": {
                   "type": "string",
                   "enum": [
-                     "PDB",
-                     "PDF",
-                     "TIF",
-                     "CLUSTALW",
-                     "PIR/NBRF",
                      "A3M",
-                     "CIF",
                      "Other",
                      "MRC",
-                     "JPG",
+                     "PIR/NBRF",
+                     "TIF",
                      "PNG",
-                     "FASTA",
-                     "HDF5",
-                     "DCD",
-                     "A2M",
-                     "CCP4",
-                     "PGM",
+                     "JPG",
                      "GIF",
-                     "TXT"
+                     "TXT",
+                     "PDB",
+                     "A2M",
+                     "PDF",
+                     "CCP4",
+                     "CLUSTALW",
+                     "DCD",
+                     "PGM",
+                     "CIF",
+                     "HDF5",
+                     "FASTA"
                   ],
                   "description": "Format of the external file."
                },
@@ -1560,7 +1529,6 @@
             "required": [
                "structure_id",
                "content_type",
-               "file_path",
                "id",
                "reference_id"
             ],
@@ -1604,8 +1572,8 @@
                "reference_type": {
                   "type": "string",
                   "enum": [
-                     "DOI",
-                     "Supplementary Files"
+                     "Supplementary Files",
+                     "DOI"
                   ],
                   "description": "The type of external reference. \n Currently, only Digital Object Identifiers (DOIs) and supplementary files \n stored locally are supported."
                },
@@ -1614,8 +1582,8 @@
                   "enum": [
                      "Publication",
                      "Other",
-                     "File",
-                     "Archive"
+                     "Archive",
+                     "File"
                   ],
                   "description": "The type of object that the external reference points to, usually\n a single file or an archive."
                }
@@ -1642,7 +1610,13 @@
                },
                "entity_type": {
                   "type": "string",
-                  "description": "The type of entity.\n This data item is a pointer to _entity.type in the ENTITY category."
+                  "enum": [
+                     "water",
+                     "non-polymer",
+                     "other",
+                     "polymer"
+                  ],
+                  "description": "The type of entity."
                },
                "feature_id": {
                   "type": "integer",
@@ -1651,9 +1625,10 @@
                "feature_type": {
                   "type": "string",
                   "enum": [
+                     "pseudo site",
                      "residue",
-                     "residue range",
                      "atom",
+                     "residue range",
                      "ligand"
                   ],
                   "description": "The type of feature."
@@ -1681,8 +1656,8 @@
                "axis_type": {
                   "type": "string",
                   "enum": [
-                     "x-axis",
                      "z-axis",
+                     "x-axis",
                      "y-axis"
                   ],
                   "description": "The type of axis."
@@ -1762,8 +1737,8 @@
                "group_conditionality": {
                   "type": "string",
                   "enum": [
-                     "ANY",
-                     "ALL"
+                     "ALL",
+                     "ANY"
                   ],
                   "description": "If a group of atoms or residues are restrained, this data item defines\n the conditionality based on which the restraint is applied in the modeling."
                },
@@ -1779,11 +1754,11 @@
                   "type": "string",
                   "enum": [
                      "center",
-                     "outer surface",
                      "plane",
-                     "other",
                      "axis",
-                     "inner surface"
+                     "inner surface",
+                     "other",
+                     "outer surface"
                   ],
                   "description": "The characteristic of the geometric object used in the restraint."
                },
@@ -1795,10 +1770,10 @@
                   "type": "string",
                   "enum": [
                      "harmonic",
-                     "lower and upper bound",
+                     "upper bound",
                      "other",
-                     "lower bound",
-                     "upper bound"
+                     "lower and upper bound",
+                     "lower bound"
                   ],
                   "description": "The type of restraint applied."
                }
@@ -1830,9 +1805,9 @@
                "section": {
                   "type": "string",
                   "enum": [
+                     "inner half",
                      "other",
-                     "outer half",
-                     "inner half"
+                     "outer half"
                   ],
                   "description": "The section of the torus representing the half-torus."
                },
@@ -1874,12 +1849,12 @@
                "object_type": {
                   "type": "string",
                   "enum": [
-                     "half-torus",
                      "sphere",
+                     "torus",
                      "plane",
-                     "other",
                      "axis",
-                     "torus"
+                     "other",
+                     "half-torus"
                   ],
                   "description": "The type of geomtric object."
                }
@@ -1909,9 +1884,9 @@
                "plane_type": {
                   "type": "string",
                   "enum": [
-                     "yz-plane",
+                     "xz-plane",
                      "xy-plane",
-                     "xz-plane"
+                     "yz-plane"
                   ],
                   "description": "The type of plane."
                }
@@ -2064,14 +2039,6 @@
                "id": {
                   "type": "integer",
                   "description": "A unique identifier."
-               },
-               "seq_id_begin": {
-                  "type": "integer",
-                  "description": "The leading sequence index corresponding to this localization density.\n This data item is a pointer to _entity_poly_seq.num in the ENTITY_POLY category."
-               },
-               "seq_id_end": {
-                  "type": "integer",
-                  "description": "The trailing sequence index corresponding to this localization density.\n This data item is a pointer to _entity_poly_seq.num in the ENTITY_POLY category."
                }
             },
             "required": [
@@ -2080,9 +2047,7 @@
                "ensemble_id",
                "entity_id",
                "file_id",
-               "id",
-               "seq_id_begin",
-               "seq_id_end"
+               "id"
             ],
             "additionalProperties": false
          },
@@ -2099,27 +2064,7 @@
                },
                "assembly_id": {
                   "type": "integer",
-                  "description": "An identifier to the structure assembly corresponding to the model.\n This data item is a pointer to the _ihm_struct_assembly.assembly_id\n in the IHM_STRUCT_ASSEMBLY category."
-               },
-               "model_group_id": {
-                  "type": "integer",
-                  "description": "An identifier to group structural models into collections or sets.\n This data item can be used to group models into structural clusters\n or using other criteria based on experimental data or other\n relationships such as those belonging to the same state or time stamp.\n An ensemble of models and its representative can either be grouped together \n or can be separate groups in the ihm_model_list table. The choice between \n the two options should be decided based on how the modeling was carried out \n and how the representative was chosen. If the representative is a member of \n the ensemble (i.e., best scoring model), then it is recommended that the \n representative and the ensemble belong to the same model group. If the \n representative is calculated from the ensemble (i.e., centroid), then it is \n recommended that the representative be separated into a different group. \n If the models do not need to be grouped into collections, then the\n _ihm_model_list.model_group_id is the same as _ihm_model_list.model_id."
-               },
-               "model_group_name": {
-                  "type": "string",
-                  "examples": [
-                     "cluster1",
-                     "cluster2",
-                     "ensemble1",
-                     "ensemble2",
-                     "open state",
-                     "closed state",
-                     "bound state",
-                     "unbound state",
-                     "bound state ensemble 1",
-                     "unbound state ensemble 2"
-                  ],
-                  "description": "A decsriptive name for the model group."
+                  "description": "An identifier to the structure assembly corresponding to the model.\n This data item is a pointer to the _ihm_struct_assembly.id\n in the IHM_STRUCT_ASSEMBLY category."
                },
                "model_id": {
                   "type": "integer",
@@ -2134,25 +2079,19 @@
                   ],
                   "description": "A decsriptive name for the model."
                },
-               "ordinal_id": {
-                  "type": "integer",
-                  "description": "A unique identifier for the model / model group combination."
-               },
                "protocol_id": {
                   "type": "integer",
-                  "description": "An identifier to the modeling protocol that produced the model.\n This data item is a pointer to the _ihm_modeling_protocol.protocol_id\n in the IHM_MODELING_PROTOCOL category."
+                  "description": "An identifier to the modeling protocol that produced the model.\n This data item is a pointer to the _ihm_modeling_protocol.id\n in the IHM_MODELING_PROTOCOL category."
                },
                "representation_id": {
                   "type": "integer",
-                  "description": "An identifier to the multi-scale model representation id of the model.\n This data item is a pointer to the _ihm_model_representation.representation_id\n in the IHM_MODEL_REPRESENTATION category."
+                  "description": "An identifier to the multi-scale model representation id of the model.\n This data item is a pointer to the _ihm_model_representation.id\n in the IHM_MODEL_REPRESENTATION category."
                }
             },
             "required": [
                "structure_id",
                "assembly_id",
-               "model_group_id",
                "model_id",
-               "ordinal_id",
                "protocol_id",
                "representation_id"
             ],
@@ -2168,83 +2107,10 @@
             "properties": {
                "structure_id": {
                   "type": "string"
-               },
-               "entity_asym_id": {
-                  "type": "string",
-                  "description": "An asym/strand identifier for the entity molecule.\n This data item is a pointer to _struct_asym.id in the\n STRUCT_ASYM category."
-               },
-               "entity_description": {
-                  "type": "string",
-                  "description": "A text description of the molecular entity"
-               },
-               "entity_id": {
-                  "type": "string",
-                  "description": "A unique identifier distinct molecular entities.\n This data item is a pointer to _entity.id in the\n ENTITY category."
-               },
-               "model_granularity": {
-                  "type": "string",
-                  "enum": [
-                     "by-feature",
-                     "by-atom",
-                     "by-residue",
-                     "multi-residue"
-                  ],
-                  "description": "The level of detail at which model primitive objects are applied to the structure."
-               },
-               "model_mode": {
-                  "type": "string",
-                  "enum": [
-                     "flexible",
-                     "rigid"
-                  ],
-                  "description": "The manner in which the segment is modeled."
-               },
-               "model_object_count": {
-                  "type": "integer",
-                  "description": "The number of primitive objects used to model a feature in the case of 'by-feature' granularity."
-               },
-               "model_object_primitive": {
-                  "type": "string",
-                  "enum": [
-                     "atomistic",
-                     "other",
-                     "gaussian",
-                     "sphere"
-                  ],
-                  "description": "The primitive object used to model this segment."
-               },
-               "ordinal_id": {
-                  "type": "integer",
-                  "description": "A unique identifier for the model details record."
-               },
-               "representation_id": {
-                  "type": "integer",
-                  "description": "An identifier that collects or groups together a set of representations.\n This data item may be used to identify a complete model representation."
-               },
-               "segment_id": {
-                  "type": "integer",
-                  "description": "An identifier for the residue range segment within the structural model."
-               },
-               "seq_id_begin": {
-                  "type": "integer",
-                  "description": "The leading residue index for the sequence segment modeled using this starting model.\n This data item is a pointer to _entity_poly_seq.num in the ENTITY_POLY_SEQ category."
-               },
-               "seq_id_end": {
-                  "type": "integer",
-                  "description": "The trailing residue index for the sequence segment modeled using this starting model.\n This data item is a pointer to _entity_poly_seq.num in the ENTITY_POLY_SEQ category."
-               },
-               "starting_model_id": {
-                  "type": "string",
-                  "description": "The identifier for the starting structural model. \n This data item is a pointer to _ihm_starting_model_details.starting_model_id\n in the IHM_STARTING_MODEL_DETAILS category."
                }
             },
             "required": [
-               "structure_id",
-               "entity_asym_id",
-               "entity_id",
-               "ordinal_id",
-               "representation_id",
-               "segment_id"
+               "structure_id"
             ],
             "additionalProperties": false
          },
@@ -2265,7 +2131,7 @@
                },
                "model_group_id": {
                   "type": "integer",
-                  "description": "The model group identifier corresponding to the representative model. \n This data item is a pointer to _ihm_model_list.model_group_id in the\n IHM_MODEL_LIST category."
+                  "description": "The model group identifier corresponding to the representative model. \n This data item is a pointer to _ihm_model_group.id in the\n IHM_MODEL_GROUP category."
                },
                "model_id": {
                   "type": "integer",
@@ -2274,15 +2140,15 @@
                "selection_criteria": {
                   "type": "string",
                   "enum": [
-                     "fewest violations",
-                     "closest to the average",
-                     "target function",
-                     "minimized average structure",
-                     "centroid",
-                     "best scoring model",
                      "other selction criteria",
+                     "minimized average structure",
+                     "closest to the average",
+                     "fewest violations",
+                     "best scoring model",
                      "lowest energy",
-                     "medoid"
+                     "medoid",
+                     "target function",
+                     "centroid"
                   ],
                   "description": "The selection criteria based on which the representative is chosen."
                }
@@ -2313,16 +2179,16 @@
                },
                "dataset_group_id": {
                   "type": "integer",
-                  "description": "An index for the dataset group being used in the post modeling process.\n This data item is a pointer to the _ihm_dataset_group.group_id in the\n IHM_DATASET_GROUP category."
+                  "description": "An index for the dataset group being used in the post modeling process.\n This data item is a pointer to the _ihm_dataset_group.id in the\n IHM_DATASET_GROUP category."
                },
                "feature": {
                   "type": "string",
                   "enum": [
-                     "RMSD",
                      "dRMSD",
                      "other",
                      "energy/score",
-                     "none"
+                     "none",
+                     "RMSD"
                   ],
                   "description": "The parameter/feature used in the post modeling analysis."
                },
@@ -2348,7 +2214,7 @@
                },
                "protocol_id": {
                   "type": "integer",
-                  "description": "An identifier for the modeling protocol, whose post modeling analysis\n is being carried out. \n This data item is a pointer to the _ihm_modeling_protocol.protocol_id\n in the IHM_MODELING_PROTOCOL category."
+                  "description": "An identifier for the modeling protocol, whose post modeling analysis\n is being carried out. \n This data item is a pointer to the _ihm_modeling_protocol.id\n in the IHM_MODELING_PROTOCOL category."
                },
                "software_id": {
                   "type": "integer",
@@ -2360,17 +2226,17 @@
                },
                "struct_assembly_id": {
                   "type": "integer",
-                  "description": "An index for the structural assembly being processed.\n This is an indicator to whether the whole assembly is processed\n or if only a subset of the structural assembly is processed.\n This data item is a pointer to _ihm_struct_assembly.assembly_id in the\n IHM_STRUCT_ASSEMBLY category."
+                  "description": "An index for the structural assembly being processed.\n This is an indicator to whether the whole assembly is processed\n or if only a subset of the structural assembly is processed.\n This data item is a pointer to _ihm_struct_assembly.id in the\n IHM_STRUCT_ASSEMBLY category."
                },
                "type": {
                   "type": "string",
                   "enum": [
+                     "cluster",
                      "filter",
                      "other",
-                     "cluster",
-                     "validation",
                      "none",
-                     "rescore"
+                     "rescore",
+                     "validation"
                   ],
                   "description": "The type of post modeling analysis being carried out."
                }
@@ -2397,104 +2263,17 @@
                "structure_id": {
                   "type": "string"
                },
-               "dataset_group_id": {
-                  "type": "integer",
-                  "description": "An index for the dataset group being used in the modeling protocol.\n This data item is a pointer to the _ihm_dataset_group.group_id in the\n IHM_DATASET_GROUP category."
-               },
-               "multi_scale_flag": {
-                  "type": "string",
-                  "enum": [
-                     "YES",
-                     "NO"
-                  ],
-                  "description": "A flag to indicate if the modeling is multi scale."
-               },
-               "multi_state_flag": {
-                  "type": "string",
-                  "enum": [
-                     "YES",
-                     "NO"
-                  ],
-                  "description": "A flag to indicate if the modeling is multi state."
-               },
-               "num_models_begin": {
-                  "type": "integer",
-                  "description": "The number of models in the beginning of the step."
-               },
-               "num_models_end": {
-                  "type": "integer",
-                  "description": "The number of models at the end of the step."
-               },
-               "ordered_flag": {
-                  "type": "string",
-                  "enum": [
-                     "YES",
-                     "NO"
-                  ],
-                  "description": "A flag to indicate if the modeling involves an ensemble ordered by time or other order."
-               },
-               "ordinal_id": {
-                  "type": "integer",
-                  "description": "A unique identifier for the modeling protocol/step combination."
-               },
-               "protocol_id": {
-                  "type": "integer",
-                  "description": "An index for the modeling protocol carried out."
-               },
                "protocol_name": {
                   "type": "string",
                   "examples": [
-                     "Multi-scale modeling",
-                     "Multi-state modeling",
-                     "Multi-scale time-ordered modeling"
+                     "Multi-scale modeling of the Nuclear Pore Complex",
+                     "Multi-state modeling of the RNA 4-Way Junction"
                   ],
                   "description": "The name for the modeling protocol."
-               },
-               "software_id": {
-                  "type": "integer",
-                  "description": "Identifier to the software used in the modeling protocol step. \n This data item is a pointer to the _software.pdbx_ordinal in the\n SOFTWARE category."
-               },
-               "step_id": {
-                  "type": "integer",
-                  "description": "An index for a particular step within the modeling protocol."
-               },
-               "step_method": {
-                  "type": "string",
-                  "examples": [
-                     "Replica exchange monte carlo",
-                     "Simulated annealing monte carlo",
-                     "Monte carlo sampling"
-                  ],
-                  "description": "Description of the method involved in the modeling step."
-               },
-               "step_name": {
-                  "type": "string",
-                  "examples": [
-                     "Sampling/Scoring",
-                     "Refinement"
-                  ],
-                  "description": "The name or type of the modeling step."
-               },
-               "struct_assembly_description": {
-                  "type": "string",
-                  "examples": [
-                     "Nup84 sub-complex",
-                     "PhoQ"
-                  ],
-                  "description": "A textual description of the structural assembly being modeled."
-               },
-               "struct_assembly_id": {
-                  "type": "integer",
-                  "description": "An index for the structural assembly being modeled. \n This is an indicator to whether the whole assembly is modeled\n or if only a subset of the structural assembly is modeled.\n This data item is a pointer to _ihm_struct_assembly.assembly_id in the\n IHM_STRUCT_ASSEMBLY category. The IHM_STRUCT_ASSEMBLY category provides the\n details regarding the different structural assemblies used in the modeling.\n The default value for this data item is \"1\", indicating that the entire\n assembly is being modeled."
                }
             },
             "required": [
-               "structure_id",
-               "dataset_group_id",
-               "ordinal_id",
-               "protocol_id",
-               "step_id",
-               "struct_assembly_id"
+               "structure_id"
             ],
             "additionalProperties": false
          },
@@ -2517,25 +2296,17 @@
                   ],
                   "description": "The type of multi-state modeling experiment carried out."
                },
-               "model_group_id": {
-                  "type": "integer",
-                  "description": "The model group id corresponding to the particular state in the multi-state model.\n This data item is a pointer to _ihm_model_list.model_group_id in the\n IHM_MODEL_LIST category.\n If there is only a single model corresponding to a particular state, then the \n _ihm_model_list.model_group_id is the same as the _ihm_model_list.model_id."
-               },
-               "ordinal_id": {
-                  "type": "integer",
-                  "description": "A unique identifier for the multiple states being described."
-               },
                "population_fraction": {
                   "type": "number",
                   "description": "A fraction representing the population of the particular state."
                },
                "state_group_id": {
                   "type": "integer",
-                  "description": "An identifier for a collections of states in the multi-state modeling.\n If the states do not need to be grouped into collections, then\n _ihm_multi_state_modeling.state_group_id is the same as\n _ihm_multi_state_modeling.state_id."
+                  "description": "An identifier for a collections of states in the multi-state modeling.\n This data item can be used when structural models belong to diffent\n multi-state modeling types."
                },
                "state_id": {
                   "type": "integer",
-                  "description": "An identifier for the particular state in the multi-state modeling."
+                  "description": "A unique identifier for a particular state in the multi-state modeling."
                },
                "state_name": {
                   "type": "string",
@@ -2564,9 +2335,6 @@
             },
             "required": [
                "structure_id",
-               "model_group_id",
-               "ordinal_id",
-               "state_group_id",
                "state_id",
                "state_name",
                "state_type"
@@ -2590,11 +2358,11 @@
                },
                "model_group_id_begin": {
                   "type": "integer",
-                  "description": "The model group id corresponding to the node at the origin of directed edge. \n This data item is a pointer to _ihm_model_list.model_group_id in the\n IHM_MODEL_LIST category. \n If the node involves a single model instead of a collection of models, \n then the _ihm_model_list.model_group_id is the same as the _ihm_model_list.model_id."
+                  "description": "The model group id corresponding to the node at the origin of directed edge. \n This data item is a pointer to _ihm_model_group.id in the\n IHM_MODEL_GROUP category."
                },
                "model_group_id_end": {
                   "type": "integer",
-                  "description": "The model group id corresponding to the node at the end of the directed edge.\n This data item is a pointer to _ihm_model_list.model_group_id in the\n IHM_MODEL_LIST category.\n If the node involves a single model instead of a collection of models, \n then the _ihm_model_list.model_group_id is the same as the _ihm_model_list.model_id."
+                  "description": "The model group id corresponding to the node at the end of the directed edge.\n This data item is a pointer to _ihm_model_group.id in the\n IHM_MODEL_GROUP category."
                },
                "ordered_by": {
                   "type": "string",
@@ -2643,7 +2411,7 @@
                },
                "asym_id": {
                   "type": "string",
-                  "description": "An asym/strand identifier for the residue / residue range.\n This data item is a pointer to _struct_asym.id in the\n STRUCT_ASYM category."
+                  "description": "An asym/strand identifier for the residue / residue range, if applicable.\n This data item is a pointer to _struct_asym.id in the\n STRUCT_ASYM category."
                },
                "comp_id_begin": {
                   "type": "string",
@@ -2668,16 +2436,16 @@
                "rep_atom": {
                   "type": "string",
                   "enum": [
-                     "CB",
-                     "CA"
+                     "CA",
+                     "CB"
                   ],
                   "description": "If _ihm_poly_residue_feature.granularity is by-residue, then indicate the atom used to represent \n the residue in three-dimension. Default is the C-alpha atom."
                },
                "residue_range_granularity": {
                   "type": "string",
                   "enum": [
-                     "by-feature",
-                     "by-residue"
+                     "by-residue",
+                     "by-feature"
                   ],
                   "description": "The coarse-graining information, if the feature is a residue range."
                },
@@ -2692,7 +2460,6 @@
             },
             "required": [
                "structure_id",
-               "asym_id",
                "entity_id",
                "feature_id",
                "ordinal_id",
@@ -2719,14 +2486,6 @@
                "asym_id_2": {
                   "type": "string",
                   "description": "An asym/strand identifier for the second monomer partner in the predicted contact.\n This data item is a pointer to _struct_asym.id in the\n STRUCT_ASYM category."
-               },
-               "atom_id_1": {
-                  "type": "string",
-                  "description": "The atom id of the first partner in the predicted contact.\n This data item is a pointer to _chem_comp_atom.atom_id in the \n CHEM_COMP_ATOM category."
-               },
-               "atom_id_2": {
-                  "type": "string",
-                  "description": "The atom id of the second partner in the predicted contact.\n This data item is a pointer to _chem_comp_atom.atom_id in the \n CHEM_COMP_ATOM category."
                },
                "comp_id_1": {
                   "type": "string",
@@ -2759,9 +2518,8 @@
                "model_granularity": {
                   "type": "string",
                   "enum": [
-                     "by-feature",
-                     "by-atom",
-                     "by-residue"
+                     "by-residue",
+                     "by-feature"
                   ],
                   "description": "The granularity of the predicted contact as applied to the multi-scale model."
                },
@@ -2775,8 +2533,8 @@
                   "type": "string",
                   "enum": [
                      "lower and upper bound",
-                     "lower bound",
-                     "upper bound"
+                     "upper bound",
+                     "lower bound"
                   ],
                   "description": "The type of distance restraint applied."
                },
@@ -2828,17 +2586,12 @@
                "dataset_list_id_primary": {
                   "type": "integer",
                   "description": "The primary dataset list id from which the corresponding derived dataset is obtained.\n This data item is a pointer to _ihm_dataset_list.id in the\n IHM_DATASET_LIST category."
-               },
-               "ordinal_id": {
-                  "type": "integer",
-                  "description": "A unique identifier for the entry."
                }
             },
             "required": [
                "structure_id",
                "dataset_list_id_derived",
-               "dataset_list_id_primary",
-               "ordinal_id"
+               "dataset_list_id_primary"
             ],
             "additionalProperties": false
          },
@@ -2893,15 +2646,11 @@
                   "type": "integer",
                   "description": "The model number corresponding to the SAS fitting result presented.\n This data item is a pointer to _ihm_model_list.model_id in the\n IHM_MODEL_LIST category."
                },
-               "ordinal_id": {
-                  "type": "integer",
-                  "description": "A unique identifier for the SAS restraint description."
-               },
                "profile_segment_flag": {
                   "type": "string",
                   "enum": [
-                     "YES",
-                     "NO"
+                     "NO",
+                     "YES"
                   ],
                   "description": "A flag that indicates whether or not the SAS profile is segmented i.e.,\n whether the whole SAS profile is used or only a portion of it is used \n (by masking or by other means) as restraint in the modeling."
                },
@@ -2911,14 +2660,13 @@
                },
                "struct_assembly_id": {
                   "type": "integer",
-                  "description": "An indicator to whether the whole assembly that is modeled is fit into the SAS data\n or if only a subset of the structural assembly is fit into the data.\n This data item is a pointer to _ihm_struct_assembly.assembly_id in the\n IHM_STRUCT_ASSEMBLY category. The IHM_STRUCT_ASSEMBLY category provides the\n details regarding the different structural assemblies used in the modeling.\n The default value for this data item is \"1\" indicating that the entire assembly\n being modeled is fit into the SAS data."
+                  "description": "An indicator to whether the whole assembly that is modeled is fit into the SAS data\n or if only a subset of the structural assembly is fit into the data.\n This data item is a pointer to _ihm_struct_assembly.id in the\n IHM_STRUCT_ASSEMBLY category. The IHM_STRUCT_ASSEMBLY category provides the\n details regarding the different structural assemblies used in the modeling.\n The default value for this data item is \"1\" indicating that the entire assembly\n being modeled is fit into the SAS data."
                }
             },
             "required": [
                "structure_id",
                "dataset_list_id",
                "model_id",
-               "ordinal_id",
                "struct_assembly_id"
             ],
             "additionalProperties": false
@@ -2937,10 +2685,6 @@
                "alignment_file_id": {
                   "type": "integer",
                   "description": "The file id corresponding to the sequence alignment of the template sequence and the comparative model sequence. \n This data item is a pointer to _ihm_external_files.id in the IHM_EXTERNAL_FILES category."
-               },
-               "ordinal_id": {
-                  "type": "integer",
-                  "description": "A unique identifier for the starting comparative model."
                },
                "starting_model_auth_asym_id": {
                   "type": "string",
@@ -2981,18 +2725,17 @@
                "template_sequence_identity_denominator": {
                   "type": "integer",
                   "enum": [
-                     1,
                      4,
                      5,
-                     2,
-                     3
+                     3,
+                     1,
+                     2
                   ],
                   "description": "The denominator used while calculating the sequence identity provided in \n _ihm_starting_comparative_models.template_sequence_identity."
                }
             },
             "required": [
                "structure_id",
-               "ordinal_id",
                "starting_model_auth_asym_id",
                "starting_model_id",
                "template_auth_asym_id",
@@ -3059,14 +2802,6 @@
                   "type": "string",
                   "description": "A unique identifier for the distinct molecular entities.\n This data item is a pointer to _entity.id in the ENTITY category."
                },
-               "seq_id_begin": {
-                  "type": "integer",
-                  "description": "The leading residue index for the sequence segment modeled using this starting model.\n This data item is a pointer to _entity_poly_seq.num in the ENTITY_POLY_SEQ category."
-               },
-               "seq_id_end": {
-                  "type": "integer",
-                  "description": "The trailing residue index for the sequence segment modeled using this starting model.\n This data item is a pointer to _entity_poly_seq.num in the ENTITY_POLY_SEQ category."
-               },
                "starting_model_auth_asym_id": {
                   "type": "string",
                   "description": "The author assigned chainId/auth_asym_id corresponding to this starting model. \n This corresponds to the chainId/auth_asym_id of the experimental models in the\n PDB or comparative models in the Model Archive or the starting models referenced\n via a DOI. If starting models are included in IHM_STARTING_MODEL_COORD, then\n this will be the same as _ihm_starting_model_details.asym_id."
@@ -3082,11 +2817,11 @@
                "starting_model_source": {
                   "type": "string",
                   "enum": [
+                     "other",
                      "integrative model",
-                     "experimental model",
-                     "comparative model",
                      "ab initio model",
-                     "other"
+                     "comparative model",
+                     "experimental model"
                   ],
                   "description": "The source of the starting model."
                }
@@ -3145,10 +2880,6 @@
                   "type": "string",
                   "description": "A unique identifier for the distinct molecular entities.\n This data item is a pointer to _entity_poly_seq.entity_id in the ENTITY_POLY category."
                },
-               "ordinal_id": {
-                  "type": "integer",
-                  "description": "A unique identifier for the entry."
-               },
                "seq_id": {
                   "type": "integer",
                   "description": "The residue index.\n This data item is a pointer to _entity_poly_seq.num in the ENTITY_POLY_SEQ category."
@@ -3166,7 +2897,6 @@
                "db_comp_id",
                "db_seq_id",
                "entity_id",
-               "ordinal_id",
                "seq_id",
                "starting_model_id"
             ],
@@ -3182,47 +2912,10 @@
             "properties": {
                "structure_id": {
                   "type": "string"
-               },
-               "assembly_id": {
-                  "type": "integer",
-                  "description": "An identifier for the structural assembly. \n This data item will remain the same for all components \n of an assembly."
-               },
-               "asym_id": {
-                  "type": "string",
-                  "description": "An asym/strand identifier for the component in the assembly.\n This data item is a pointer to _struct_asym.id in the\n STRUCT_ASYM category."
-               },
-               "entity_description": {
-                  "type": "string",
-                  "description": "A text description of the molecular entity\n"
-               },
-               "entity_id": {
-                  "type": "string",
-                  "description": "A unique identifier for distinct molecular entities.\n This data item is a pointer to _entity.id in the \n ENTITY category."
-               },
-               "ordinal_id": {
-                  "type": "integer",
-                  "description": "A unique identifier for the structural assembly description."
-               },
-               "parent_assembly_id": {
-                  "type": "integer",
-                  "description": "The parent of this assembly in a hierarchy. \n This data item is an internal category pointer to \n _ihm_struct_assembly.assembly_id \n This data item should point to the assembly id of the immediate\n parent in a hierarchy. \n By convention, the full assembly (top of hierarchy) is assigned parent id 0 (zero).\n In case of assemblies that do not conform to a hierarchy, \n _ihm_struct_assembly.parent_assembly_id is the same as \n _ihm_struct_assembly.assembly_id indicating a self-parent. \n"
-               },
-               "seq_id_begin": {
-                  "type": "integer",
-                  "description": "The starting residue index for the sequence segment of the entity instance \n that is part of the assembly.\n This data item is a pointer to _entity_poly_seq.num in the ENTITY_POLY_SEQ category."
-               },
-               "seq_id_end": {
-                  "type": "integer",
-                  "description": "The ending residue index for the sequence segment of the entity instance \n that is part of the assembly.\n This data item is a pointer to _entity_poly_seq.num in the ENTITY_POLY_SEQ category."
                }
             },
             "required": [
-               "structure_id",
-               "assembly_id",
-               "asym_id",
-               "entity_id",
-               "ordinal_id",
-               "parent_assembly_id"
+               "structure_id"
             ],
             "additionalProperties": false
          },
@@ -3237,17 +2930,9 @@
                "structure_id": {
                   "type": "string"
                },
-               "assembly_description": {
-                  "type": "string",
-                  "description": "Description of the structural assembly."
-               },
                "assembly_id": {
                   "type": "integer",
-                  "description": "A unique identifier for the structural assembly."
-               },
-               "assembly_name": {
-                  "type": "string",
-                  "description": "A name for the structural assembly."
+                  "description": "An identifier for the structural assembly. \n This data item will remain the same for all components \n of an assembly. \n This data item is a pointer to _ihm_struct_assembly.id\n in the IHM_STRUCT_ASSEMBLY category."
                }
             },
             "required": [
@@ -3574,8 +3259,8 @@
                "occupancy_flag": {
                   "type": "integer",
                   "enum": [
-                     0,
-                     1
+                     1,
+                     0
                   ],
                   "description": "The value of occupancy flag indicates whether the atom is\n either unobserved (=1) or has zero occupancy (=0)"
                },
@@ -3647,8 +3332,8 @@
                "occupancy_flag": {
                   "type": "integer",
                   "enum": [
-                     0,
-                     1
+                     1,
+                     0
                   ],
                   "description": "The value of occupancy flag indicates whether the residue\n is unobserved (= 1) or the coordinates have an occupancy of zero (=0)"
                },
@@ -3739,10 +3424,10 @@
                   "enum": [
                      "jiffy",
                      "filter",
-                     "other",
                      "program",
-                     "library",
-                     "package"
+                     "other",
+                     "package",
+                     "library"
                   ],
                   "description": "The classification of the software according to the most\n common types."
                },
@@ -3863,15 +3548,15 @@
                "pdbx_type": {
                   "type": "string",
                   "enum": [
-                     "HETIC",
-                     "ATOMN",
-                     "HETAIN",
-                     "ATOMS",
-                     "HETAC",
-                     "HETAD",
-                     "HETAS",
                      "ATOMP",
-                     "HETAI"
+                     "HETAS",
+                     "ATOMS",
+                     "HETAD",
+                     "HETAI",
+                     "ATOMN",
+                     "HETAC",
+                     "HETAIN",
+                     "HETIC"
                   ],
                   "description": "This data item describes the general type of the structural elements\n in the ATOM_SITE category."
                }

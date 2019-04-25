@@ -64,6 +64,10 @@
 #   10-Apr-2019 jdw  Add  _rcsb_chem_comp_container_identifiers.drugbank_id
 #   11-Apr-2019 jdw  Add  rcsb_entry_info.resolution_combined, _entity_poly.rcsb_sample_sequence_length
 #                         rcsb_entity_instance_validation_container_identifiers, _rcsb_entry_info.disulfide_bond_count
+#   25-Apr-2019 jdw  Add rcsb_entry_info.deposited_unmodeled_polymer_monomer_count,
+#                        rcsb_entry_info.deposited_unmodeled_polymer_monomer_count,
+#                        add ncbi_parent_scientific_name in rcsb_entity_source_organism and rcsb_entity_host_organism
+#
 #
 ###########################################################################
 
@@ -83,12 +87,18 @@ data_rcsb_mmcif_ext.dic
 
     _dictionary.title           rcsb_mmcif_ext.dic
     _dictionary.datablock_id    rcsb_mmcif_ext.dic
-    _dictionary.version         0.119
+    _dictionary.version         0.120
     #
      loop_
     _dictionary_history.version
     _dictionary_history.update
     _dictionary_history.revision
+ 0.120 2019-04-25
+;
+Changes (jdw):
+    + add rcsb_entry_info.deposited_modeled_polymer_monomer_count and rcsb_entry_info.deposited_unmodeled_polymer_monomer_count
+    + add ncbi_parent_scientific_name in both rcsb_entity_source_organism and rcsb_entity_host_organism categories
+;
  0.119 2019-04-11
 ;
 Changes (jdw):
@@ -3260,6 +3270,8 @@ save__rcsb_entity_source_organism.scientific_name
     _item_type.code               text
      save_
 
+
+
 save__rcsb_entity_source_organism.common_name
     _item_description.description
 ;    The common name for the source organism assigned by the PDB depositor.
@@ -3373,6 +3385,33 @@ save__rcsb_entity_source_organism.ncbi_scientific_name
     _item.mandatory_code          no
     _item_type.code               text
      save_
+
+save__rcsb_entity_source_organism.ncbi_parent_scientific_name
+    _item_description.description
+;    The parent scientific name in the NCBI taxonomy hierarchy (depth=1) of the source organism assigned by the PDB depositor.
+
+
+   References:
+
+   Sayers EW, Barrett T, Benson DA, Bryant SH, Canese K, Chetvernin V,
+   Church DM, DiCuccio M, Edgar R, Federhen S, Feolo M, Geer LY,
+   Helmberg W, Kapustin Y, Landsman D, Lipman DJ, Madden TL, Maglott DR,
+   Miller V, Mizrachi I, Ostell J, Pruitt KD, Schuler GD, Sequeira E,
+   Sherry ST, Shumway M, Sirotkin K, Souvorov A, Starchenko G,
+   Tatusova TA, Wagner L, Yaschenko E, Ye J (2009). Database resources
+   of the National Center for Biotechnology Information. Nucleic Acids
+   Res. 2009 Jan;37(Database issue):D5-15. Epub 2008 Oct 21.
+
+   Benson DA, Karsch-Mizrachi I, Lipman DJ, Ostell J, Sayers EW (2009).
+   GenBank. Nucleic Acids Res. 2009 Jan;37(Database issue):D26-31.
+   Epub 2008 Oct 21.
+;
+    _item.name                  '_rcsb_entity_source_organism.ncbi_parent_scientific_name'
+    _item.category_id             rcsb_entity_source_organism
+    _item.mandatory_code          no
+    _item_type.code               text
+     save_
+
 
 save__rcsb_entity_source_organism.ncbi_common_names
     _item_description.description
@@ -3596,6 +3635,17 @@ save__rcsb_entity_host_organism.ncbi_scientific_name
      This name corresponds to the taxonomy identifier assigned by the PDB depositor.
 ;
     _item.name                  '_rcsb_entity_host_organism.ncbi_scientific_name'
+    _item.category_id             rcsb_entity_host_organism
+    _item.mandatory_code          no
+    _item_type.code               text
+     save_
+
+save__rcsb_entity_host_organism.ncbi_parent_scientific_name
+    _item_description.description
+;    The parent scientific name in the NCBI taxonomy hierarchy (depth=1) associated with this taxonomy code.
+
+;
+    _item.name                  '_rcsb_entity_host_organism.ncbi_parent_scientific_name'
     _item.category_id             rcsb_entity_host_organism
     _item.mandatory_code          no
     _item_type.code               text
@@ -4713,6 +4763,26 @@ save__rcsb_entry_info.disulfide_bond_count
 ;  The number of disulfide bonds.
 ;
     _item.name                  '_rcsb_entry_info.disulfide_bond_count'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entry_info.deposited_modeled_polymer_monomer_count
+    _item_description.description
+;  The number of modeled polymer monomers in the deposted coordinate data.
+;
+    _item.name                  '_rcsb_entry_info.deposited_modeled_polymer_monomer_count
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entry_info.deposited_unmodeled_polymer_monomer_count
+    _item_description.description
+;  The number of unmodeled polymer monomers in the deposted coordinate data.
+;
+    _item.name                  '_rcsb_entry_info.deposited_unmodeled_polymer_monomer_count
     _item.category_id             rcsb_entry_info
     _item.mandatory_code          no
     _item_type.code               int
