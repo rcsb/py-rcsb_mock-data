@@ -67,7 +67,7 @@
 #   25-Apr-2019 jdw  Add rcsb_entry_info.deposited_unmodeled_polymer_monomer_count,
 #                        rcsb_entry_info.deposited_unmodeled_polymer_monomer_count,
 #                        add ncbi_parent_scientific_name in rcsb_entity_source_organism and rcsb_entity_host_organism
-#    1-May-2019 ndw  Add _rcsb_entry_info.deposited_polymer_monomer_count
+#    1-May-2019 jdw  Add _rcsb_entry_info.deposited_polymer_monomer_count
 #                    _rcsb_entry_info.polymer_entity_count_protein
 #                    _rcsb_entry_info.polymer_entity_count_nucleic_acid
 #                    _rcsb_entry_info.polymer_entity_count_nucleic_acid_hybrid
@@ -78,7 +78,7 @@
 #                    _rcsb_entry_info.polymer_entity_taxonomy_count
 #                    _rcsb_entry_info.assembly_count
 #.                   Add categories rcsb_entity_instance_domain_scop and rcsb_entity_instance_domain_cath
-#
+#   4-May-2019  jdw  extend content in rcsb_entity_instance_domain_scop and rcsb_entity_instance_domain_cath
 #
 ###########################################################################
 ###########################################################################
@@ -96,12 +96,17 @@ data_rcsb_mmcif_ext.dic
 
     _dictionary.title           rcsb_mmcif_ext.dic
     _dictionary.datablock_id    rcsb_mmcif_ext.dic
-    _dictionary.version         0.121
+    _dictionary.version         0.122
     #
      loop_
     _dictionary_history.version
     _dictionary_history.update
     _dictionary_history.revision
+0.122 2019-05-04
+;
+Changes (jdw):
+  + extend content in categories rcsb_entity_instance_domain_scop and rcsb_entity_instance_domain_cath
+;
  0.121 2019-05-02
 ;
 Changes (jdw):
@@ -6162,13 +6167,14 @@ save__rcsb_entity_instance_domain.domain_class_lineage_depth
      save_
 #
 ######################################
-## rcsb_entity_instance_domain_cath ##
+## RCSB_ENTITY_INSTANCE_DOMAIN_CATH ##
 ######################################
 
 save_rcsb_entity_instance_domain_cath
     _category.description
 ;              Data items in the rcsb_entity_instance_domain_cath category record
-               details about CATH domain assignments.
+               details about CATH domain assignments in polymer entity instances
+               domain.
 ;
     _category.id                  rcsb_entity_instance_domain_cath
     _category.mandatory_code      no
@@ -6195,7 +6201,12 @@ save_rcsb_entity_instance_domain_cath
     _rcsb_entity_instance_domain_cath.domain_class_lineage_depth
     _rcsb_entity_instance_domain_cath.domain_assigned_by
     _rcsb_entity_instance_domain_cath.domain_assigned_version
-    1 4hrtA00 ? 1.10.490.10  Globins ? ? ? CATH V4_0_2
+
+    _rcsb_entity_instance_domain_cath.beg_auth_asym_id
+    _rcsb_entity_instance_domain_cath.beg_auth_seq_id
+    _rcsb_entity_instance_domain_cath.end_auth_asym_id
+    _rcsb_entity_instance_domain_cath.end_auth_seq_id
+    1 4hrtA00 ? 1.10.490.10  Globins ? ? ? CATH V4_0_2   A 1  A 149
      ...
 ;
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -6213,6 +6224,29 @@ save__rcsb_entity_instance_domain_cath.ordinal
     _item.category_id         rcsb_entity_instance_domain_cath
     _item.mandatory_code      yes
     _item_type.code           int
+     save_
+
+save__rcsb_entity_instance_domain_cath.entry_id
+    _item_description.description
+;    Structure entry identifier.
+;
+    _item.name                  '_rcsb_entity_instance_domain_cath.entry_id'
+    _item.category_id             rcsb_entity_instance_domain_cath
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '1ABC'
+     save_
+
+save__rcsb_entity_instance_domain_cath.entity_id
+    _item_description.description
+;    The entity identifier for the polymer entity instance.
+;
+    _item.name                  '_rcsb_entity_instance_domain_cath.entity_id'
+    _item.category_id             rcsb_entity_instance_domain_cath
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_instance_domain_cath.entity_id'
+    _item_linked.parent_name    '_entity.id'
      save_
 
 save__rcsb_entity_instance_domain_cath.domain_id
@@ -6239,6 +6273,17 @@ save__rcsb_entity_instance_domain_cath.domain_name
     _item_type.code           text
      save_
 
+save__rcsb_entity_instance_domain_cath.domain_assigned_by
+    _item_description.description
+;               Identifies the individual, organization or program that
+                assigned the domain feature.
+;
+    _item.name               '_rcsb_entity_instance_domain_cath.domain_assigned_by'
+    _item.category_id         rcsb_entity_instance_domain_cath
+    _item.mandatory_code      yes
+    _item_type.code           text
+     save_
+
 save__rcsb_entity_instance_domain_cath.domain_assigned_version
     _item_description.description
 ;               Identifies the version of the domain assignment.
@@ -6247,6 +6292,159 @@ save__rcsb_entity_instance_domain_cath.domain_assigned_version
     _item.category_id         rcsb_entity_instance_domain_cath
     _item.mandatory_code      no
     _item_type.code           text
+     save_
+
+save__rcsb_entity_instance_domain_cath.beg_label_asym_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain begins.
+
+               This data item is a pointer to _atom_site.label_asym_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain_cath.beg_label_asym_id'
+    _item.category_id             rcsb_entity_instance_domain_cath
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_instance_domain_cath.beg_label_asym_id'
+    _item_linked.parent_name    '_atom_site.label_asym_id'
+
+     save_
+
+save__rcsb_entity_instance_domain_cath.beg_auth_asym_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain begins.
+
+               This data item is a pointer to _atom_site.auth_asym_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain_cath.beg_auth_asym_id'
+    _item.category_id             rcsb_entity_instance_domain_cath
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_instance_domain_cath.beg_auth_asym_id'
+    _item_linked.parent_name    '_atom_site.auth_asym_id'
+
+     save_
+
+save__rcsb_entity_instance_domain_cath.beg_label_comp_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain begins.
+
+               This data item is a pointer to _atom_site.label_comp_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain_cath.beg_label_comp_id'
+    _item.category_id             rcsb_entity_instance_domain_cath
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_instance_domain_cath.beg_label_comp_id'
+    _item_linked.parent_name    '_atom_site.label_comp_id'
+     save_
+
+save__rcsb_entity_instance_domain_cath.beg_auth_seq_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain begins.
+
+               This data item is a pointer to _atom_site.auth_seq_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain_cath.beg_auth_seq_id'
+    _item.category_id             rcsb_entity_instance_domain_cath
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_instance_domain_cath.beg_auth_seq_id'
+    _item_linked.parent_name    '_atom_site.auth_seq_id'
+
+     save_
+
+save__rcsb_entity_instance_domain_cath.end_label_asym_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain ends.
+
+               This data item is a pointer to _atom_site.label_asym_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain_cath.end_label_asym_id'
+    _item.category_id             rcsb_entity_instance_domain_cath
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_instance_domain_cath.end_label_asym_id'
+    _item_linked.parent_name    '_atom_site.label_asym_id'
+
+     save_
+
+save__rcsb_entity_instance_domain_cath.end_label_comp_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain ends.
+
+               This data item is a pointer to _atom_site.label_comp_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain_cath.end_label_comp_id'
+    _item.category_id             rcsb_entity_instance_domain_cath
+    _item.mandatory_code          no
+    _item_type.code               ucode
+    _item_linked.child_name     '_rcsb_entity_instance_domain_cath.end_label_comp_id'
+    _item_linked.parent_name    '_atom_site.label_comp_id'
+
+     save_
+
+save__rcsb_entity_instance_domain_cath.end_label_seq_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain ends.
+
+               This data item is a pointer to _atom_site.label_seq_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain_cath.end_label_seq_id'
+    _item.category_id             rcsb_entity_instance_domain_cath
+    _item.mandatory_code          no
+    _item_type.code               int
+    _item_linked.child_name     '_rcsb_entity_instance_domain_cath.end_label_seq_id'
+    _item_linked.parent_name    '_atom_site.label_seq_id'
+
+     save_
+
+save__rcsb_entity_instance_domain_cath.end_auth_asym_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain ends.
+
+               This data item is a pointer to _atom_site.auth_asym_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain_cath.end_auth_asym_id'
+    _item.category_id             rcsb_entity_instance_domain_cath
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_instance_domain_cath.end_auth_asym_id'
+    _item_linked.parent_name    '_atom_site.auth_asym_id'
+
+     save_
+
+
+save__rcsb_entity_instance_domain_cath.end_auth_seq_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain ends.
+
+               This data item is a pointer to _atom_site.auth_seq_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain_cath.end_auth_seq_id'
+    _item.category_id             rcsb_entity_instance_domain_cath
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_instance_domain_cath.end_auth_seq_id'
+    _item_linked.parent_name    '_atom_site.auth_seq_id'
+
      save_
 
 save__rcsb_entity_instance_domain_cath.domain_class_lineage_id
@@ -6282,14 +6480,15 @@ save__rcsb_entity_instance_domain_cath.domain_class_lineage_depth
     _item_sub_category.id         domain_class_lineage
      save_
 #
- ######################################
-## rcsb_entity_instance_domain_scop ##
+######################################
+## RCSB_ENTITY_INSTANCE_DOMAIN_SCOP ##
 ######################################
 
 save_rcsb_entity_instance_domain_scop
     _category.description
 ;              Data items in the rcsb_entity_instance_domain_scop category record
-               details about SCOP/SCOPe domain assignments.
+               details about SCOP domain assignments in polymer entity instances
+               domain.
 ;
     _category.id                  rcsb_entity_instance_domain_scop
     _category.mandatory_code      no
@@ -6307,6 +6506,8 @@ save_rcsb_entity_instance_domain_scop
 ;
      loop_
     _rcsb_entity_instance_domain_scop.ordinal
+    _rcsb_entity_instance_domain_scop.entry_id
+    _rcsb_entity_instance_domain_scop.entity_id
     _rcsb_entity_instance_domain_scop.domain_id
     _rcsb_entity_instance_domain_scop.domain_name
     _rcsb_entity_instance_domain_scop.domain_class_id
@@ -6316,7 +6517,11 @@ save_rcsb_entity_instance_domain_scop
     _rcsb_entity_instance_domain_scop.domain_class_lineage_depth
     _rcsb_entity_instance_domain_scop.domain_assigned_by
     _rcsb_entity_instance_domain_scop.domain_assigned_version
-    1 4hrtA00 ? 1.10.490.10  Globins ? ? ? CATH V4_0_2
+    _rcsb_entity_instance_domain_scop.beg_auth_asym_id
+    _rcsb_entity_instance_domain_scop.beg_auth_seq_id
+    _rcsb_entity_instance_domain_scop.end_auth_asym_id
+    _rcsb_entity_instance_domain_scop.end_auth_seq_id
+    1 1ABC 1  191417 'automated matches' ?  ? ? ? ? SCOPe V4_0_2   A 1  A 149
      ...
 ;
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -6334,6 +6539,29 @@ save__rcsb_entity_instance_domain_scop.ordinal
     _item.category_id         rcsb_entity_instance_domain_scop
     _item.mandatory_code      yes
     _item_type.code           int
+     save_
+
+save__rcsb_entity_instance_domain_scop.entry_id
+    _item_description.description
+;    Structure entry identifier.
+;
+    _item.name                  '_rcsb_entity_instance_domain_scop.entry_id'
+    _item.category_id             rcsb_entity_instance_domain_scop
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '1ABC'
+     save_
+
+save__rcsb_entity_instance_domain_scop.entity_id
+    _item_description.description
+;    The entity identifier for the polymer entity instance.
+;
+    _item.name                  '_rcsb_entity_instance_domain_scop.entity_id'
+    _item.category_id             rcsb_entity_instance_domain_scop
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_instance_domain_scop.entity_id'
+    _item_linked.parent_name    '_entity.id'
      save_
 
 save__rcsb_entity_instance_domain_scop.domain_id
@@ -6360,6 +6588,17 @@ save__rcsb_entity_instance_domain_scop.domain_name
     _item_type.code           text
      save_
 
+save__rcsb_entity_instance_domain_scop.domain_assigned_by
+    _item_description.description
+;               Identifies the individual, organization or program that
+                assigned the domain feature.
+;
+    _item.name               '_rcsb_entity_instance_domain_scop.domain_assigned_by'
+    _item.category_id         rcsb_entity_instance_domain_scop
+    _item.mandatory_code      yes
+    _item_type.code           text
+     save_
+
 save__rcsb_entity_instance_domain_scop.domain_assigned_version
     _item_description.description
 ;               Identifies the version of the domain assignment.
@@ -6368,6 +6607,159 @@ save__rcsb_entity_instance_domain_scop.domain_assigned_version
     _item.category_id         rcsb_entity_instance_domain_scop
     _item.mandatory_code      no
     _item_type.code           text
+     save_
+
+save__rcsb_entity_instance_domain_scop.beg_label_asym_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain begins.
+
+               This data item is a pointer to _atom_site.label_asym_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain_scop.beg_label_asym_id'
+    _item.category_id             rcsb_entity_instance_domain_scop
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_instance_domain_scop.beg_label_asym_id'
+    _item_linked.parent_name    '_atom_site.label_asym_id'
+
+     save_
+
+save__rcsb_entity_instance_domain_scop.beg_auth_asym_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain begins.
+
+               This data item is a pointer to _atom_site.auth_asym_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain_scop.beg_auth_asym_id'
+    _item.category_id             rcsb_entity_instance_domain_scop
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_instance_domain_scop.beg_auth_asym_id'
+    _item_linked.parent_name    '_atom_site.auth_asym_id'
+
+     save_
+
+save__rcsb_entity_instance_domain_scop.beg_label_comp_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain begins.
+
+               This data item is a pointer to _atom_site.label_comp_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain_scop.beg_label_comp_id'
+    _item.category_id             rcsb_entity_instance_domain_scop
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_instance_domain_scop.beg_label_comp_id'
+    _item_linked.parent_name    '_atom_site.label_comp_id'
+     save_
+
+save__rcsb_entity_instance_domain_scop.beg_auth_seq_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain begins.
+
+               This data item is a pointer to _atom_site.auth_seq_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain_scop.beg_auth_seq_id'
+    _item.category_id             rcsb_entity_instance_domain_scop
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_instance_domain_scop.beg_auth_seq_id'
+    _item_linked.parent_name    '_atom_site.auth_seq_id'
+
+     save_
+
+save__rcsb_entity_instance_domain_scop.end_label_asym_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain ends.
+
+               This data item is a pointer to _atom_site.label_asym_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain_scop.end_label_asym_id'
+    _item.category_id             rcsb_entity_instance_domain_scop
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_instance_domain_scop.end_label_asym_id'
+    _item_linked.parent_name    '_atom_site.label_asym_id'
+
+     save_
+
+save__rcsb_entity_instance_domain_scop.end_label_comp_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain ends.
+
+               This data item is a pointer to _atom_site.label_comp_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain_scop.end_label_comp_id'
+    _item.category_id             rcsb_entity_instance_domain_scop
+    _item.mandatory_code          no
+    _item_type.code               ucode
+    _item_linked.child_name     '_rcsb_entity_instance_domain_scop.end_label_comp_id'
+    _item_linked.parent_name    '_atom_site.label_comp_id'
+
+     save_
+
+save__rcsb_entity_instance_domain_scop.end_label_seq_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain ends.
+
+               This data item is a pointer to _atom_site.label_seq_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain_scop.end_label_seq_id'
+    _item.category_id             rcsb_entity_instance_domain_scop
+    _item.mandatory_code          no
+    _item_type.code               int
+    _item_linked.child_name     '_rcsb_entity_instance_domain_scop.end_label_seq_id'
+    _item_linked.parent_name    '_atom_site.label_seq_id'
+
+     save_
+
+save__rcsb_entity_instance_domain_scop.end_auth_asym_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain ends.
+
+               This data item is a pointer to _atom_site.auth_asym_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain_scop.end_auth_asym_id'
+    _item.category_id             rcsb_entity_instance_domain_scop
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_instance_domain_scop.end_auth_asym_id'
+    _item_linked.parent_name    '_atom_site.auth_asym_id'
+
+     save_
+
+
+save__rcsb_entity_instance_domain_scop.end_auth_seq_id
+    _item_description.description
+;              A component of the identifier for the monomer at which this
+               segment of the domain ends.
+
+               This data item is a pointer to _atom_site.auth_seq_id in the
+               ATOM_SITE category.
+;
+    _item.name                  '_rcsb_entity_instance_domain_scop.end_auth_seq_id'
+    _item.category_id             rcsb_entity_instance_domain_scop
+    _item.mandatory_code          no
+    _item_type.code               code
+    _item_linked.child_name     '_rcsb_entity_instance_domain_scop.end_auth_seq_id'
+    _item_linked.parent_name    '_atom_site.auth_seq_id'
+
      save_
 
 save__rcsb_entity_instance_domain_scop.domain_class_lineage_id

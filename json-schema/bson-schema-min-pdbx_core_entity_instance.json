@@ -266,8 +266,8 @@
             "type": {
                "bsonType": "string",
                "enum": [
-                  "CA ATOMS ONLY",
-                  "P ATOMS ONLY"
+                  "P ATOMS ONLY",
+                  "CA ATOMS ONLY"
                ]
             }
          },
@@ -627,11 +627,11 @@
             "entity_type": {
                "bsonType": "string",
                "enum": [
-                  "macrolide",
-                  "water",
-                  "polymer",
                   "non-polymer",
-                  "branched"
+                  "branched",
+                  "polymer",
+                  "water",
+                  "macrolide"
                ]
             },
             "entry_id": {
@@ -644,7 +644,88 @@
          ],
          "additionalProperties": false
       },
-      "rcsb_entity_instance_domain": {
+      "rcsb_entity_instance_domain_cath": {
+         "bsonType": "array",
+         "items": {
+            "bsonType": "object",
+            "properties": {
+               "beg_auth_asym_id": {
+                  "bsonType": "string"
+               },
+               "beg_auth_seq_id": {
+                  "bsonType": "string"
+               },
+               "beg_label_asym_id": {
+                  "bsonType": "string"
+               },
+               "beg_label_comp_id": {
+                  "bsonType": "string"
+               },
+               "domain_assigned_by": {
+                  "bsonType": "string"
+               },
+               "domain_assigned_version": {
+                  "bsonType": "string"
+               },
+               "domain_id": {
+                  "bsonType": "string"
+               },
+               "domain_name": {
+                  "bsonType": "string"
+               },
+               "end_auth_asym_id": {
+                  "bsonType": "string"
+               },
+               "end_auth_seq_id": {
+                  "bsonType": "string"
+               },
+               "end_label_asym_id": {
+                  "bsonType": "string"
+               },
+               "end_label_comp_id": {
+                  "bsonType": "string"
+               },
+               "end_label_seq_id": {
+                  "bsonType": "int"
+               },
+               "entity_id": {
+                  "bsonType": "string"
+               },
+               "entry_id": {
+                  "bsonType": "string"
+               },
+               "ordinal": {
+                  "bsonType": "int"
+               },
+               "domain_class_lineage": {
+                  "bsonType": "array",
+                  "items": {
+                     "bsonType": "object",
+                     "properties": {
+                        "depth": {
+                           "bsonType": "int"
+                        },
+                        "id": {
+                           "bsonType": "string"
+                        },
+                        "name": {
+                           "bsonType": "string"
+                        }
+                     },
+                     "additionalProperties": false
+                  },
+                  "uniqueItems": false
+               }
+            },
+            "required": [
+               "ordinal"
+            ],
+            "additionalProperties": false
+         },
+         "minItems": 1,
+         "uniqueItems": true
+      },
+      "rcsb_entity_instance_domain_scop": {
          "bsonType": "array",
          "items": {
             "bsonType": "object",
@@ -882,10 +963,10 @@
                "pdbx_value_order": {
                   "bsonType": "string",
                   "enum": [
-                     "quad",
-                     "doub",
                      "trip",
-                     "sing"
+                     "sing",
+                     "quad",
+                     "doub"
                   ]
                },
                "ptnr1_auth_asym_id": {

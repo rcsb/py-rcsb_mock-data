@@ -46,6 +46,7 @@
 # 25-Apr-2019 jdw suppress struct_asym in core_entity, add ncbi_taxonomy_scientific_name in source and host organism collections
 #                 add polymer monomer counts in rcsb_entry_info. Upversion core entry and core entity colleciton schemas.
 #  2-May-2019 jdw update core_entity, core_entry schema, and core_entity_instance
+#  3-May-2019 jdw replace rcsb_entity_instance_domain with cath and scop specific analogs
 #
 #
 # Master Pinelands configuration file example
@@ -558,7 +559,9 @@ dictionary_helper:
                 - CATEGORY_NAME: pdbx_validate_planes_atom
                 - CATEGORY_NAME: pdbx_validate_main_chain_plane
                 - CATEGORY_NAME: pdbx_validate_polymer_linkage
-                - CATEGORY_NAME: rcsb_entity_instance_domain
+                #- CATEGORY_NAME: rcsb_entity_instance_domain
+                - CATEGORY_NAME: rcsb_entity_instance_domain_scop
+                - CATEGORY_NAME: rcsb_entity_instance_domain_cath
                 # - CATEGORY_NAME: pdbx_distant_solvent_atoms
                 #
         ?       - GENERATED_CONTENT
@@ -1400,7 +1403,7 @@ document_helper:
             - NAME: pdbx_core_entity_monomer
               VERSION: 5.1.0
             - NAME: pdbx_core_entity_instance
-              VERSION: 5.3.0
+              VERSION: 5.3.1
             - NAME: pdbx_core_entity_instance_validation
               VERSION: 5.1.0
         bird:
@@ -1570,6 +1573,8 @@ document_helper:
                 - pdbx_vrpt_mogul_torsion_outliers
                 - pdbx_vrpt_mogul_ring_outliers
                 - rcsb_entity_instance_domain
+                - rcsb_entity_instance_domain_scop
+                - rcsb_entity_instance_domain_cath
                 - struct_asym
             SLICE: ENTITY
         pdbx_core_entity_monomer:
