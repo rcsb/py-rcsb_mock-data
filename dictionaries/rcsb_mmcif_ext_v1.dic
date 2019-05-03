@@ -67,11 +67,20 @@
 #   25-Apr-2019 jdw  Add rcsb_entry_info.deposited_unmodeled_polymer_monomer_count,
 #                        rcsb_entry_info.deposited_unmodeled_polymer_monomer_count,
 #                        add ncbi_parent_scientific_name in rcsb_entity_source_organism and rcsb_entity_host_organism
+#    1-May-2019 ndw  Add _rcsb_entry_info.deposited_polymer_monomer_count
+#                    _rcsb_entry_info.polymer_entity_count_protein
+#                    _rcsb_entry_info.polymer_entity_count_nucleic_acid
+#                    _rcsb_entry_info.polymer_entity_count_nucleic_acid_hybrid
+#                    _rcsb_entry_info.polymer_entity_count_DNA
+#                    _rcsb_entry_info.polymer_entity_count_RNA
+#                    _rcsb_entry_info.nonpolymer_ligand_entity_count
+#                    _rcsb_entry_info.selected_polymer_entity_types
+#                    _rcsb_entry_info.polymer_entity_taxonomy_count
+#                    _rcsb_entry_info.assembly_count
+#.                   Add categories rcsb_entity_instance_domain_scop and rcsb_entity_instance_domain_cath
 #
 #
 ###########################################################################
-
-
 ###########################################################################
 #       RCSB mmCIF/PDBx Extension Dictionary
 ###########################################################################
@@ -87,12 +96,27 @@ data_rcsb_mmcif_ext.dic
 
     _dictionary.title           rcsb_mmcif_ext.dic
     _dictionary.datablock_id    rcsb_mmcif_ext.dic
-    _dictionary.version         0.120
+    _dictionary.version         0.121
     #
      loop_
     _dictionary_history.version
     _dictionary_history.update
     _dictionary_history.revision
+ 0.121 2019-05-02
+;
+Changes (jdw):
+    + add _rcsb_entry_info.deposited_polymer_monomer_count
+          _rcsb_entry_info.polymer_entity_count_protein
+          _rcsb_entry_info.polymer_entity_count_nucleic_acid
+          _rcsb_entry_info.polymer_entity_count_nucleic_acid_hybrid
+          _rcsb_entry_info.polymer_entity_count_DNA
+          _rcsb_entry_info.polymer_entity_count_RNA
+          _rcsb_entry_info.nonpolymer_ligand_entity_count
+          _rcsb_entry_info.selected_polymer_entity_types
+          _rcsb_entry_info.polymer_entity_taxonomy_count
+          _rcsb_entry_info.assembly_count
+    + add categories rcsb_entity_instance_domain_scop and rcsb_entity_instance_domain_cath
+;
  0.120 2019-04-25
 ;
 Changes (jdw):
@@ -373,7 +397,6 @@ rcsb_file_container                         calculate_with_helper python  'DictM
 rcsb_row_index                              calculate_with_helper python  'DictMethodHelper.setRowIndex'
 rcsb_add_entry_info                         calculate_with_helper python  'DictMethodHelper.addEntryInfo'
 rcsb_add_deposited_assembly                 calculate_with_helper python  'DictMethodHelper.addDepositedAssembly'
-rcsb_filter_assembly_details                calculate_with_helper python  'DictMethodHelper.filterAssemblyDetails'
 rcsb_filter_assembly_details                calculate_with_helper python  'DictMethodHelper.filterAssemblyDetails'
 rcsb_assembly_candidates                    calculate_with_helper python  'DictMethodHelper.assignAssemblyCandidates'
 rcsb_entity_source_organism                 calculate_with_helper python  'DictMethodHelper.filterSourceOrganismDetails'
@@ -4612,7 +4635,7 @@ save__rcsb_entry_info.entry_id
 
 save__rcsb_entry_info.polymer_composition
     _item_description.description
-;    Polymer entity composition of the entry.
+;    Categories describing the polymer entity composition for the entry.
 ;
     _item.name                  '_rcsb_entry_info.polymer_composition'
     _item.category_id             rcsb_entry_info
@@ -4635,6 +4658,25 @@ save__rcsb_entry_info.polymer_composition
     'other' 'Neither an individual protein, nucleic acid polymer nor oligosaccharide entity'
     'other type pair' 'Other combinations of 2 polymer types'
     'other type composition' 'Other combinations of 3 or more polymer types'
+     save_
+
+save__rcsb_entry_info.selected_polymer_entity_types
+    _item_description.description
+;    Selected polymer entity type categories describing the entry.
+;
+    _item.name                  '_rcsb_entry_info.selected_polymer_entity_types'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               line
+    _item_example.case           'Protein (only)'
+    loop_
+    _item_enumeration.value
+    _item_enumeration.detail
+    'Protein (only)' 'protein entity/entities only'
+    'DNA (only)' 'DNA entity/entities only'
+    'RNA (only)' 'RNA entity/entities only'
+    'Protein/NA' 'Both protein and nucleic acid (DNA or RNA) polymer entities'
+    'Other' 'Another polymer type composition'
      save_
 
 save__rcsb_entry_info.experimental_method
@@ -4678,11 +4720,21 @@ save__rcsb_entry_info.polymer_entity_count
     _item_type.code               int
      save_
 
+save__rcsb_entry_info.nonpolymer_ligand_entity_count
+    _item_description.description
+;  The number of distinct non-polymer entities exclusive of solvent in the structure entry.
+;
+    _item.name                  '_rcsb_entry_info.nonpolymer_ligand_entity_count'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
 save__rcsb_entry_info.nonpolymer_entity_count
     _item_description.description
 ;  The number of distinct non-polymer entities in the structure entry.
 ;
-    _item.name                  '_rcsb_entry_info.nonpolymer_method_count'
+    _item.name                  '_rcsb_entry_info.nonpolymer_entity_count'
     _item.category_id             rcsb_entry_info
     _item.mandatory_code          no
     _item_type.code               int
@@ -4692,7 +4744,7 @@ save__rcsb_entry_info.branched_entity_count
     _item_description.description
 ;  The number of distinct branched entities in the structure entry.
 ;
-    _item.name                  '_rcsb_entry_info.branched_method_count'
+    _item.name                  '_rcsb_entry_info.branched_entity_count'
     _item.category_id             rcsb_entry_info
     _item.mandatory_code          no
     _item_type.code               int
@@ -4702,7 +4754,7 @@ save__rcsb_entry_info.solvent_entity_count
     _item_description.description
 ;  The number of distinct solvent entities in the structure entry.
 ;
-    _item.name                  '_rcsb_entry_info.solvent_method_count'
+    _item.name                  '_rcsb_entry_info.solvent_entity_count'
     _item.category_id             rcsb_entry_info
     _item.mandatory_code          no
     _item_type.code               int
@@ -4770,9 +4822,11 @@ save__rcsb_entry_info.disulfide_bond_count
 
 save__rcsb_entry_info.deposited_modeled_polymer_monomer_count
     _item_description.description
-;  The number of modeled polymer monomers in the deposted coordinate data.
+;  The number of modeled polymer monomers in the deposited coordinate data.
+   This is the total count of monomers with reported coordinate data for all polymer
+   entity instances in the deposited coordinate data.
 ;
-    _item.name                  '_rcsb_entry_info.deposited_modeled_polymer_monomer_count
+    _item.name                  '_rcsb_entry_info.deposited_modeled_polymer_monomer_count'
     _item.category_id             rcsb_entry_info
     _item.mandatory_code          no
     _item_type.code               int
@@ -4780,9 +4834,93 @@ save__rcsb_entry_info.deposited_modeled_polymer_monomer_count
 
 save__rcsb_entry_info.deposited_unmodeled_polymer_monomer_count
     _item_description.description
-;  The number of unmodeled polymer monomers in the deposted coordinate data.
+;  The number of unmodeled polymer monomers in the deposited coordinate data. This is
+   the total count of monomers with unreported coordinate data for all polymer
+   entity instances in the deposited coordinate data.
 ;
-    _item.name                  '_rcsb_entry_info.deposited_unmodeled_polymer_monomer_count
+    _item.name                  '_rcsb_entry_info.deposited_unmodeled_polymer_monomer_count'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entry_info.deposited_polymer_monomer_count
+    _item_description.description
+;  The number of polymer monomers in sample entity instances in the deposited data set.
+   This is the total count of monomers for all polymer entity instances reported
+   in the deposited coordinate data.
+;
+    _item.name                  '_rcsb_entry_info.deposited_polymer_monomer_count'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entry_info.polymer_entity_count_protein
+    _item_description.description
+;  The number of distinct protein polymer entities.
+;
+    _item.name                  '_rcsb_entry_info.polymer_entity_count_protein'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entry_info.polymer_entity_count_nucleic_acid
+    _item_description.description
+;  The number of distinct nucleic acid polymer entities (DNA or RNA).
+;
+    _item.name                  '_rcsb_entry_info.polymer_entity_count_nucleic_acid'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entry_info.polymer_entity_count_DNA
+    _item_description.description
+;  The number of distinct DNA polymer entities.
+;
+    _item.name                  '_rcsb_entry_info.polymer_entity_count_DNA'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entry_info.polymer_entity_count_RNA
+    _item_description.description
+;  The number of distinct RNA polymer entities.
+;
+    _item.name                  '_rcsb_entry_info.polymer_entity_count_RNA'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entry_info.polymer_entity_count_nucleic_acid_hybrid
+    _item_description.description
+;  The number of distinct hybrid nucleic acid polymer entities.
+;
+    _item.name                  '_rcsb_entry_info.polymer_entity_count_nucleic_acid_hybrid'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entry_info.polymer_entity_taxonomy_count
+    _item_description.description
+;  The number of distinct taxonomies represented among the polymer entities in the entry.
+;
+    _item.name                  '_rcsb_entry_info.polymer_entity_taxonomy_count'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entry_info.assembly_count
+    _item_description.description
+;  The number of assemblies defined for this entry including the deposited assembly.
+;
+    _item.name                  '_rcsb_entry_info.assembly_count'
     _item.category_id             rcsb_entry_info
     _item.mandatory_code          no
     _item_type.code               int
@@ -6018,6 +6156,248 @@ save__rcsb_entity_instance_domain.domain_class_lineage_depth
 ;
     _item.name                  '_rcsb_entity_instance_domain.domain_class_lineage_depth'
     _item.category_id            rcsb_entity_instance_domain
+    _item.mandatory_code          no
+    _item_type.code               int-scsv
+    _item_sub_category.id         domain_class_lineage
+     save_
+#
+######################################
+## rcsb_entity_instance_domain_cath ##
+######################################
+
+save_rcsb_entity_instance_domain_cath
+    _category.description
+;              Data items in the rcsb_entity_instance_domain_cath category record
+               details about CATH domain assignments.
+;
+    _category.id                  rcsb_entity_instance_domain_cath
+    _category.mandatory_code      no
+    _category_key.name          '_rcsb_entity_instance_domain_cath.ordinal'
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     loop_
+    _rcsb_entity_instance_domain_cath.ordinal
+    _rcsb_entity_instance_domain_cath.domain_id
+    _rcsb_entity_instance_domain_cath.domain_name
+    _rcsb_entity_instance_domain_cath.domain_class_id
+    _rcsb_entity_instance_domain_cath.domain_class_name
+    _rcsb_entity_instance_domain_cath.domain_class_lineage_id
+    _rcsb_entity_instance_domain_cath.domain_class_lineage_name
+    _rcsb_entity_instance_domain_cath.domain_class_lineage_depth
+    _rcsb_entity_instance_domain_cath.domain_assigned_by
+    _rcsb_entity_instance_domain_cath.domain_assigned_version
+    1 4hrtA00 ? 1.10.490.10  Globins ? ? ? CATH V4_0_2
+     ...
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    _pdbx_category_context.type         RCSB_LOCAL
+    _pdbx_category_context.category_id  rcsb_entity_instance_domain_cath
+    _category_methods.method_id         rcsb_entity_instance_domain
+     save_
+
+
+save__rcsb_entity_instance_domain_cath.ordinal
+    _item_description.description
+;              Ordinal identifier for this category
+;
+    _item.name               '_rcsb_entity_instance_domain_cath.ordinal'
+    _item.category_id         rcsb_entity_instance_domain_cath
+    _item.mandatory_code      yes
+    _item_type.code           int
+     save_
+
+save__rcsb_entity_instance_domain_cath.domain_id
+    _item_description.description
+;              An identifer for the domain.
+;
+    _item.name               '_rcsb_entity_instance_domain_cath.domain_id'
+    _item.category_id         rcsb_entity_instance_domain_cath
+    _item.mandatory_code      yes
+    _item_type.code           code
+    #_item_linked.child_name   '_rcsb_entity_instance_domain_cath.domain_id'
+    #_item_linked.parent_name  '_pdbx_domain.id'
+
+     save_
+
+
+save__rcsb_entity_instance_domain_cath.domain_name
+    _item_description.description
+;              A name for the domain.
+;
+    _item.name               '_rcsb_entity_instance_domain_cath.domain_name'
+    _item.category_id         rcsb_entity_instance_domain_cath
+    _item.mandatory_code      no
+    _item_type.code           text
+     save_
+
+save__rcsb_entity_instance_domain_cath.domain_assigned_version
+    _item_description.description
+;               Identifies the version of the domain assignment.
+;
+    _item.name               '_rcsb_entity_instance_domain_cath.domain_assigned_version'
+    _item.category_id         rcsb_entity_instance_domain_cath
+    _item.mandatory_code      no
+    _item_type.code           text
+     save_
+
+save__rcsb_entity_instance_domain_cath.domain_class_lineage_id
+    _item_description.description
+;  Members of the domain class lineage as parent domain class identifiers.
+;
+    _item.name                  '_rcsb_entity_instance_domain_cath.domain_class_lineage_id'
+    _item.category_id            rcsb_entity_instance_domain_cath
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_sub_category.id         domain_class_lineage
+     save_
+
+save__rcsb_entity_instance_domain_cath.domain_class_lineage_name
+    _item_description.description
+;  Memebers of the domain class lineage as parent domain class names.
+;
+    _item.name                  '_rcsb_entity_instance_domain_cath.domain_class_lineage_name'
+    _item.category_id            rcsb_entity_instance_domain_cath
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_sub_category.id         domain_class_lineage
+     save_
+
+save__rcsb_entity_instance_domain_cath.domain_class_lineage_depth
+    _item_description.description
+;  Members of the domain class lineage as parent lineage depth (1-N)
+;
+    _item.name                  '_rcsb_entity_instance_domain_cath.domain_class_lineage_depth'
+    _item.category_id            rcsb_entity_instance_domain_cath
+    _item.mandatory_code          no
+    _item_type.code               int-scsv
+    _item_sub_category.id         domain_class_lineage
+     save_
+#
+ ######################################
+## rcsb_entity_instance_domain_scop ##
+######################################
+
+save_rcsb_entity_instance_domain_scop
+    _category.description
+;              Data items in the rcsb_entity_instance_domain_scop category record
+               details about SCOP/SCOPe domain assignments.
+;
+    _category.id                  rcsb_entity_instance_domain_scop
+    _category.mandatory_code      no
+    _category_key.name          '_rcsb_entity_instance_domain_scop.ordinal'
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+     loop_
+    _rcsb_entity_instance_domain_scop.ordinal
+    _rcsb_entity_instance_domain_scop.domain_id
+    _rcsb_entity_instance_domain_scop.domain_name
+    _rcsb_entity_instance_domain_scop.domain_class_id
+    _rcsb_entity_instance_domain_scop.domain_class_name
+    _rcsb_entity_instance_domain_scop.domain_class_lineage_id
+    _rcsb_entity_instance_domain_scop.domain_class_lineage_name
+    _rcsb_entity_instance_domain_scop.domain_class_lineage_depth
+    _rcsb_entity_instance_domain_scop.domain_assigned_by
+    _rcsb_entity_instance_domain_scop.domain_assigned_version
+    1 4hrtA00 ? 1.10.490.10  Globins ? ? ? CATH V4_0_2
+     ...
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    _pdbx_category_context.type         RCSB_LOCAL
+    _pdbx_category_context.category_id  rcsb_entity_instance_domain_scop
+    _category_methods.method_id         rcsb_entity_instance_domain
+     save_
+
+
+save__rcsb_entity_instance_domain_scop.ordinal
+    _item_description.description
+;              Ordinal identifier for this category
+;
+    _item.name               '_rcsb_entity_instance_domain_scop.ordinal'
+    _item.category_id         rcsb_entity_instance_domain_scop
+    _item.mandatory_code      yes
+    _item_type.code           int
+     save_
+
+save__rcsb_entity_instance_domain_scop.domain_id
+    _item_description.description
+;              An identifer for the domain.
+;
+    _item.name               '_rcsb_entity_instance_domain_scop.domain_id'
+    _item.category_id         rcsb_entity_instance_domain_scop
+    _item.mandatory_code      yes
+    _item_type.code           code
+    #_item_linked.child_name   '_rcsb_entity_instance_domain_scop.domain_id'
+    #_item_linked.parent_name  '_pdbx_domain.id'
+
+     save_
+
+
+save__rcsb_entity_instance_domain_scop.domain_name
+    _item_description.description
+;              A name for the domain.
+;
+    _item.name               '_rcsb_entity_instance_domain_scop.domain_name'
+    _item.category_id         rcsb_entity_instance_domain_scop
+    _item.mandatory_code      no
+    _item_type.code           text
+     save_
+
+save__rcsb_entity_instance_domain_scop.domain_assigned_version
+    _item_description.description
+;               Identifies the version of the domain assignment.
+;
+    _item.name               '_rcsb_entity_instance_domain_scop.domain_assigned_version'
+    _item.category_id         rcsb_entity_instance_domain_scop
+    _item.mandatory_code      no
+    _item_type.code           text
+     save_
+
+save__rcsb_entity_instance_domain_scop.domain_class_lineage_id
+    _item_description.description
+;  Members of the domain class lineage as parent domain class identifiers.
+;
+    _item.name                  '_rcsb_entity_instance_domain_scop.domain_class_lineage_id'
+    _item.category_id            rcsb_entity_instance_domain_scop
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_sub_category.id         domain_class_lineage
+     save_
+
+save__rcsb_entity_instance_domain_scop.domain_class_lineage_name
+    _item_description.description
+;  Memebers of the domain class lineage as parent domain class names.
+;
+    _item.name                  '_rcsb_entity_instance_domain_scop.domain_class_lineage_name'
+    _item.category_id            rcsb_entity_instance_domain_scop
+    _item.mandatory_code          no
+    _item_type.code               alphanum-scsv
+    _item_sub_category.id         domain_class_lineage
+     save_
+
+save__rcsb_entity_instance_domain_scop.domain_class_lineage_depth
+    _item_description.description
+;  Members of the domain class lineage as parent lineage depth (1-N)
+;
+    _item.name                  '_rcsb_entity_instance_domain_scop.domain_class_lineage_depth'
+    _item.category_id            rcsb_entity_instance_domain_scop
     _item.mandatory_code          no
     _item_type.code               int-scsv
     _item_sub_category.id         domain_class_lineage
