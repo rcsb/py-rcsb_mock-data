@@ -81,6 +81,10 @@
 #   4-May-2019  jdw  extend content in rcsb_entity_instance_domain_scop and rcsb_entity_instance_domain_cath
 #   5-May-2019  jdw  add _entity_poly.rcsb_non_std_monomer_count and entity_poly.rcsb_non_std_monomers
 #                    add _rcsb_entity_container_identifiers.prd_id
+#  13-May-2019  jdw  add rcsb_entry_info.deposited_polymer_entity_instance_count and deposited_nonpolymer_entity_instance_count
+#  15-May-2019  jdw  add _rcsb_entry_info.na_polymer_entity_types update enumerations for _rcsb_entry_info.selected_polymer_entity_types
+#  16-May-2019  jdw  add rcsb_assembly_info category  extend enumerations for rcsb_assembly_info.polymer_composition with
+#                        'protein/NA/oligosaccharide'
 #
 ###########################################################################
 ###########################################################################
@@ -98,12 +102,25 @@ data_rcsb_mmcif_ext.dic
 
     _dictionary.title           rcsb_mmcif_ext.dic
     _dictionary.datablock_id    rcsb_mmcif_ext.dic
-    _dictionary.version         0.123
+    _dictionary.version         0.125
     #
      loop_
     _dictionary_history.version
     _dictionary_history.update
     _dictionary_history.revision
+0.125 2019-05-16
+;
+Changes (jdw):
+ + add _rcsb_entry_info.na_polymer_entity_types
+ + Update enumeration for _rcsb_entry_info.selected_polymer_entity_types
+ + add category rcsb_assembly_info
+ + removed _rcsb_entry_info.nonpolymer_ligand_entity_count
+;
+0.124 2019-05-11
+;
+Changes (jdw):
+ + add items rcsb_entry_info.deposited_polymer_entity_instance_count and deposited_nonpolymer_entity_instance_count
+;
 0.123 2019-05-05
 ;
 Changes (jdw):
@@ -423,6 +440,7 @@ rcsb_add_bird_entity_identifiers            calculate_with_helper python  'DictM
 rcsb_add_struct_ref_seq_entity_identifiers  calculate_with_helper python  'DictMethodHelper.addStructRefSeqEntityIds'
 rcsb_add_entity_misc                        calculate_with_helper python  'DictMethodHelper.addEntityMisc'
 rcsb_entity_instance_domain                 calculate_with_helper python  'DictMethodHelper.buildEntityInstanceDomain'
+rcsb_add_assembly_info                      calculate_with_helper python  'DictMethodHelper.addAssemblyInfo'
 rcsb_item_method_deferred                   calculate_with_helper python  'DictMethodHelper.deferredItemMethod'
 #
 rcsb_entity_poly_info                       calculate_with_helper python  'DictMethodHelper.buildEntityPolyInfo'
@@ -1642,7 +1660,7 @@ save__rcsb_entity_container_identifiers.entry_id
 
 save__rcsb_entity_container_identifiers.entity_id
     _item_description.description
-;    Entiy identifier for the container.
+;    Entity identifier for the container.
 ;
     _item.name                  '_rcsb_entity_container_identifiers.entity_id'
     _item.category_id             rcsb_entity_container_identifiers
@@ -1760,7 +1778,7 @@ save__rcsb_entity_instance_container_identifiers.entry_id
 
 save__rcsb_entity_instance_container_identifiers.entity_id
     _item_description.description
-;    Entiy identifier for the container.
+;    Entity identifier for the container.
 ;
     _item.name                  '_rcsb_entity_instance_container_identifiers.entity_id'
     _item.category_id             rcsb_entity_instance_container_identifiers
@@ -1894,7 +1912,7 @@ save__rcsb_entity_instance_validation_container_identifiers.entry_id
 
 save__rcsb_entity_instance_validation_container_identifiers.entity_id
     _item_description.description
-;    Entiy identifier for the container.
+;    Entity identifier for the container.
 ;
     _item.name                  '_rcsb_entity_instance_validation_container_identifiers.entity_id'
     _item.category_id             rcsb_entity_instance_validation_container_identifiers
@@ -2111,7 +2129,7 @@ save__rcsb_assembly_container_identifiers.entry_id
 
 save__rcsb_assembly_container_identifiers.assembly_id
     _item_description.description
-;    Entiy identifier for the container.
+;    Assembly identifier for the container.
 ;
     _item.name                  '_rcsb_assembly_container_identifiers.assembly_id'
     _item.category_id             rcsb_assembly_container_identifiers
@@ -4702,6 +4720,7 @@ save__rcsb_entry_info.polymer_composition
     'oligosaccharide' 'One of more oligosaccharide entities'
     'protein/oligosaccharide' 'Both protein and oligosaccharide entities'
     'NA/oligosaccharide' 'Both NA and oligosaccharide entities'
+    'protein/NA/oligosaccharide' 'Protein, nucleic acid, and oligosaccharide entities'
     'other' 'Neither an individual protein, nucleic acid polymer nor oligosaccharide entity'
     'other type pair' 'Other combinations of 2 polymer types'
     'other type composition' 'Other combinations of 3 or more polymer types'
@@ -4720,9 +4739,27 @@ save__rcsb_entry_info.selected_polymer_entity_types
     _item_enumeration.value
     _item_enumeration.detail
     'Protein (only)' 'protein entity/entities only'
+    'Nucleic acid (only)' 'Nucleic acid (DNA, RNA, NA-hybrid entity/entities only'
+    'Protein/NA' 'Both protein and nucleic acid (DNA or RNA) polymer entities'
+    'Other' 'Another polymer type composition'
+     save_
+
+save__rcsb_entry_info.na_polymer_entity_types
+    _item_description.description
+;    Nucleic acid polymer entity type categories describing the entry.
+;
+    _item.name                  '_rcsb_entry_info.na_polymer_entity_types'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               line
+    _item_example.case           'DNA (only)'
+    loop_
+    _item_enumeration.value
+    _item_enumeration.detail
     'DNA (only)' 'DNA entity/entities only'
     'RNA (only)' 'RNA entity/entities only'
-    'Protein/NA' 'Both protein and nucleic acid (DNA or RNA) polymer entities'
+    'NA-hybrid (only)' 'NA-hybrid entity/entities only'
+    'DNA/RNA (only)' 'Both DNA and RNA polymer entities'
     'Other' 'Another polymer type composition'
      save_
 
@@ -4767,19 +4804,9 @@ save__rcsb_entry_info.polymer_entity_count
     _item_type.code               int
      save_
 
-save__rcsb_entry_info.nonpolymer_ligand_entity_count
-    _item_description.description
-;  The number of distinct non-polymer entities exclusive of solvent in the structure entry.
-;
-    _item.name                  '_rcsb_entry_info.nonpolymer_ligand_entity_count'
-    _item.category_id             rcsb_entry_info
-    _item.mandatory_code          no
-    _item_type.code               int
-     save_
-
 save__rcsb_entry_info.nonpolymer_entity_count
     _item_description.description
-;  The number of distinct non-polymer entities in the structure entry.
+;  The number of distinct non-polymer entities in the structure entry exclusive of solvent.
 ;
     _item.name                  '_rcsb_entry_info.nonpolymer_entity_count'
     _item.category_id             rcsb_entry_info
@@ -4968,6 +4995,30 @@ save__rcsb_entry_info.assembly_count
 ;  The number of assemblies defined for this entry including the deposited assembly.
 ;
     _item.name                  '_rcsb_entry_info.assembly_count'
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entry_info.deposited_polymer_entity_instance_count
+    _item_description.description
+;  The number of polymer instances in the deposited data set.
+   This is the total count of polymer entity instances reported
+   in the deposited coordinate data.
+;
+    _item.name                  '_rcsb_entry_info.deposited_polymer_entity_instance_count
+    _item.category_id             rcsb_entry_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_entry_info.deposited_nonpolymer_entity_instance_count
+    _item_description.description
+;  The number of non-polymer instances in the deposited data set.
+   This is the total count of non-polymer entity instances reported
+   in the deposited coordinate data.
+;
+    _item.name                  '_rcsb_entry_info.deposited_nonpolymer_entity_instance_count
     _item.category_id             rcsb_entry_info
     _item.mandatory_code          no
     _item_type.code               int
@@ -6837,3 +6888,443 @@ save__rcsb_entity_instance_domain_scop.domain_class_lineage_depth
     _item_sub_category.id         domain_class_lineage
      save_
 #
+########################
+## RCSB_ASSEMBLY_INFO ##
+########################
+
+save_rcsb_assembly_info
+    _category.description
+;        The rcsb_assembly_info category records the selected features of
+         assemblies generated from the components of PDB entries.
+;
+    _category.id                  rcsb_assembly_info
+    _category.mandatory_code      no
+    loop_
+    _category_key.name           '_rcsb_assembly_info.entry_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+        loop_
+        _rcsb_assembly_info.entry_id
+        _rcsb_assembly_info.assembly_id
+        _rcsb_assembly_info.polymer_atom_count
+        _rcsb_assembly_info.nonpolymer_atom_count
+        _rcsb_assembly_info.branched_atom_count
+        _rcsb_assembly_info.solvent_atom_count
+        _rcsb_assembly_info.atom_count
+        _rcsb_assembly_info.modeled_polymer_monomer_count
+        _rcsb_assembly_info.unmodeled_polymer_monomer_count
+        _rcsb_assembly_info.polymer_monomer_count
+        _rcsb_assembly_info.polymer_composition
+        _rcsb_assembly_info.selected_polymer_entity_types
+        _rcsb_assembly_info.na_polymer_entity_types
+        _rcsb_assembly_info.polymer_entity_instance_count
+        _rcsb_assembly_info.nonpolymer_entity_instance_count
+        _rcsb_assembly_info.branched_entity_instance_count
+        _rcsb_assembly_info.solvent_entity_instance_count
+        _rcsb_assembly_info.polymer_entity_instance_count_protein
+        _rcsb_assembly_info.polymer_entity_instance_count_nucleic_acid
+        _rcsb_assembly_info.polymer_entity_instance_count_DNA
+        _rcsb_assembly_info.polymer_entity_instance_count_RNA
+        _rcsb_assembly_info.polymer_entity_instance_count_nucleic_acid_hybrid
+        _rcsb_assembly_info.polymer_entity_count
+        _rcsb_assembly_info.nonpolymer_entity_count
+        _rcsb_assembly_info.branched_entity_count
+        _rcsb_assembly_info.solvent_entity_count
+        _rcsb_assembly_info.polymer_entity_count_protein
+        _rcsb_assembly_info.polymer_entity_count_nucleic_acid
+        _rcsb_assembly_info.polymer_entity_count_DNA
+        _rcsb_assembly_info.polymer_entity_count_RNA
+        _rcsb_assembly_info.polymer_entity_count_nucleic_acid_hybrid
+        5VP2 1         147235 1638 0 3114 151987 10511 363 10874 protein/NA Protein/NA Other 56  1596 0 44 49 7  0 7  0 55 5 0 1 49 6 0 6 0
+        5VP2 2         145646 1267 0 2035 148948 10443 431 10874 protein/NA Protein/NA Other 56  1225 0 45 49 7  0 7  0 55 5 0 1 49 6 0 6 0
+        5VP2 deposited 292881 2905 0 5149 300935 20954 794 21748 protein/NA Protein/NA Other 112 2821 0 89 98 14 0 14 0 55 5 0 1 49 6 0 6 0
+        # ...
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_assembly_info
+   #
+   _category_methods.method_id   'rcsb_add_assembly_info'
+     save_
+
+save__rcsb_assembly_info.entry_id
+    _item_description.description
+;    The PDB entry accession code.
+;
+    _item.name                  '_rcsb_assembly_info.entry_id'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '1ABC'
+    _item_linked.child_name       '_rcsb_assembly_info.entry_id'
+    _item_linked.parent_name      '_entry.id'
+     save_
+
+save__rcsb_assembly_info.assembly_id
+    _item_description.description
+;    Entiy identifier for the container.
+;
+    _item.name                  '_rcsb_assembly_info.assembly_id'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_assembly_info.assembly_id'
+    _item_linked.parent_name      '_pdbx_struct_assembly.id'
+     save_
+##
+
+save__rcsb_assembly_info.polymer_atom_count
+    _item_description.description
+;  The assembly polymer entity atomic coordinate count.
+;
+    _item.name                  '_rcsb_assembly_info.polymer_atom_count'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.nonpolymer_atom_count
+    _item_description.description
+;  The assembly non-polymer entity atomic coordinate count.
+;
+    _item.name                  '_rcsb_assembly_info.nonpolymer_atom_count'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.branched_atom_count
+    _item_description.description
+;  The assembly branched entity atomic coordinate count.
+;
+    _item.name                  '_rcsb_assembly_info.branched_atom_count'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.solvent_atom_count
+    _item_description.description
+;  The assembly solvent atomic coordinate count.
+;
+    _item.name                  '_rcsb_assembly_info.solvent_atom_count'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.atom_count
+    _item_description.description
+;  The assembly atomic coordinate count.
+;
+    _item.name                  '_rcsb_assembly_info.atom_count'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+#
+save__rcsb_assembly_info.modeled_polymer_monomer_count
+    _item_description.description
+;  The number of modeled polymer monomers in the assembly coordinate data.
+   This is the total count of monomers with reported coordinate data for all polymer
+   entity instances in the generated assembly coordinate data.
+;
+    _item.name                  '_rcsb_assembly_info.modeled_polymer_monomer_count'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.unmodeled_polymer_monomer_count
+    _item_description.description
+;  The number of unmodeled polymer monomers in the assembly coordinate data. This is
+   the total count of monomers with unreported coordinate data for all polymer
+   entity instances in the generated assembly coordinate data.
+;
+    _item.name                  '_rcsb_assembly_info.unmodeled_polymer_monomer_count'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.polymer_monomer_count
+    _item_description.description
+;  The number of polymer monomers in sample entity instances comprising the assembly data set.
+   This is the total count of monomers for all polymer entity instances
+   in the generated assembly coordinate data.
+;
+    _item.name                  '_rcsb_assembly_info.deposited_polymer_monomer_count'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+##
+
+
+save__rcsb_assembly_info.polymer_composition
+    _item_description.description
+;    Categories describing the polymer entity composition for the generated assembly.
+;
+    _item.name                  '_rcsb_assembly_info.polymer_composition'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               line
+    _item_example.case           'homomeric protein'
+    loop_
+    _item_enumeration.value
+    _item_enumeration.detail
+    'homomeric protein' 'single protein entity'
+    'heteromeric protein' 'multiple protein entities'
+    'DNA' 'DNA entity/entities only'
+    'RNA' 'RNA entity/entities only'
+    'NA-hybrid' 'DNA/RNA hybrid entity/entities only'
+    'protein/NA' 'Both protein and nucleic acid polymer entities'
+    'DNA/RNA' 'Both DNA and RNA polymer entities'
+    'oligosaccharide' 'One of more oligosaccharide entities'
+    'protein/oligosaccharide' 'Both protein and oligosaccharide entities'
+    'NA/oligosaccharide' 'Both NA and oligosaccharide entities'
+    'protein/NA/oligosaccharide' 'Protein, nucleic acid, and oligosaccharide entities'
+    'other' 'Neither an individual protein, nucleic acid polymer nor oligosaccharide entity'
+    'other type pair' 'Other combinations of 2 polymer types'
+    'other type composition' 'Other combinations of 3 or more polymer types'
+     save_
+
+save__rcsb_assembly_info.selected_polymer_entity_types
+    _item_description.description
+;    Selected polymer entity type categories describing the generated assembly.
+;
+    _item.name                  '_rcsb_assembly_info.selected_polymer_entity_types'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               line
+    _item_example.case           'Protein (only)'
+    loop_
+    _item_enumeration.value
+    _item_enumeration.detail
+    'Protein (only)' 'protein entity/entities only'
+    'Nucleic acid (only)' 'Nucleic acid (DNA, RNA, NA-hybrid entity/entities only'
+    'Protein/NA' 'Both protein and nucleic acid (DNA or RNA) polymer entities'
+    'Other' 'Another polymer type composition'
+     save_
+
+save__rcsb_assembly_info.na_polymer_entity_types
+    _item_description.description
+;    Nucleic acid polymer entity type categories describing the generated assembly.
+;
+    _item.name                  '_rcsb_assembly_info.na_polymer_entity_types'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               line
+    _item_example.case           'DNA (only)'
+    loop_
+    _item_enumeration.value
+    _item_enumeration.detail
+    'DNA (only)' 'DNA entity/entities only'
+    'RNA (only)' 'RNA entity/entities only'
+    'NA-hybrid (only)' 'NA-hybrid entity/entities only'
+    'DNA/RNA (only)' 'Both DNA and RNA polymer entities'
+    'Other' 'Another polymer type composition'
+     save_
+## ----------------------------
+
+save__rcsb_assembly_info.polymer_entity_instance_count
+    _item_description.description
+;  The number of polymer instances in the generated assembly data set.
+   This is the total count of polymer entity instances generated in the assembly coordinate data.
+;
+    _item.name                  '_rcsb_assembly_info.deposited_polymer_entity_instance_count
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.nonpolymer_entity_instance_count
+    _item_description.description
+;  The number of non-polymer instances in the generated assembly data set exclusive of solvent.
+   This is the total count of non-polymer entity instances generated in the assembly coordinate data.
+;
+    _item.name                  '_rcsb_assembly_info.deposited_nonpolymer_entity_instance_count
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+#
+save__rcsb_assembly_info.branched_entity_instance_count
+    _item_description.description
+;  The number of branched instances in the generated assembly data set.
+   This is the total count of branched entity instances generated in the assembly coordinate data.
+;
+    _item.name                  '_rcsb_assembly_info.branched_entity_instance_count'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.solvent_entity_instance_count
+    _item_description.description
+;  The number of solvent instances in the generated assembly data set.
+   This is the total count of solvent entity instances generated in the assembly coordinate data.
+;
+    _item.name                  '_rcsb_assembly_info.solvent_entity_instance_count'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+##
+save__rcsb_assembly_info.polymer_entity_instance_count_protein
+    _item_description.description
+;  The number of protein polymer instances in the generated assembly data set.
+   This is the total count of protein polymer entity instances generated in the assembly coordinate data.
+;
+    _item.name                  '_rcsb_assembly_info.polymer_entity_instance_count_protein'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.polymer_entity_instance_count_nucleic_acid
+    _item_description.description
+;   The number of nucleic acid polymer instances in the generated assembly data set.
+    This is the total count of nucleic acid polymer entity instances generated in the assembly coordinate data.
+;
+    _item.name                  '_rcsb_assembly_info.polymer_entity_instance_count_nucleic_acid'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.polymer_entity_instance_count_DNA
+    _item_description.description
+;  The number of DNA polymer instances in the generated assembly data set.
+   This is the total count of DNA polymer entity instances generated in the assembly coordinate data.
+;
+    _item.name                  '_rcsb_assembly_info.polymer_entity_instance_count_DNA'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.polymer_entity_instance_count_RNA
+    _item_description.description
+;  The number of RNA polymer instances in the generated assembly data set.
+   This is the total count of RNA polymer entity instances generated in the assembly coordinate data.
+;
+    _item.name                  '_rcsb_assembly_info.polymer_entity_instance_count_RNA'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.polymer_entity_instance_count_nucleic_acid_hybrid
+    _item_description.description
+;  The number of hybrid nucleic acide polymer instances in the generated assembly data set.
+   This is the total count of hybrid nucleic acid polymer entity instances generated in the assembly coordinate data.
+;
+    _item.name                  '_rcsb_assembly_info.polymer_entity_instance_count_nucleic_acid_hybrid'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+##
+save__rcsb_assembly_info.polymer_entity_count
+    _item_description.description
+;  The number of distinct polymer entities in the generated assembly.
+;
+    _item.name                  '_rcsb_assembly_info.polymer_entity_count'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.nonpolymer_entity_count
+    _item_description.description
+;  The number of distinct non-polymer entities in the generated assembly exclusive of solvent.
+;
+    _item.name                  '_rcsb_assembly_info.nonpolymer_entity_count'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.branched_entity_count
+    _item_description.description
+;  The number of distinct branched entities in the generated assembly.
+;
+    _item.name                  '_rcsb_assembly_info.branched_entity_count'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.solvent_entity_count
+    _item_description.description
+;  The number of distinct solvent entities in the generated assembly.
+;
+    _item.name                  '_rcsb_assembly_info.solvent_entity_count'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.polymer_entity_count_protein
+    _item_description.description
+;  The number of distinct protein polymer entities in the generated assembly.
+;
+    _item.name                  '_rcsb_assembly_info.polymer_entity_count_protein'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.polymer_entity_count_nucleic_acid
+    _item_description.description
+;  The number of distinct nucleic acid polymer entities (DNA or RNA) in the generated assembly.
+;
+    _item.name                  '_rcsb_assembly_info.polymer_entity_count_nucleic_acid'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.polymer_entity_count_DNA
+    _item_description.description
+;  The number of distinct DNA polymer entities in the generated assembly.
+;
+    _item.name                  '_rcsb_assembly_info.polymer_entity_count_DNA'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.polymer_entity_count_RNA
+    _item_description.description
+;  The number of distinct RNA polymer entities in the generated assembly.
+;
+    _item.name                  '_rcsb_assembly_info.polymer_entity_count_RNA'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_assembly_info.polymer_entity_count_nucleic_acid_hybrid
+    _item_description.description
+;  The number of distinct hybrid nucleic acid polymer entities in the generated assembly.
+;
+    _item.name                  '_rcsb_assembly_info.polymer_entity_count_nucleic_acid_hybrid'
+    _item.category_id             rcsb_assembly_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
