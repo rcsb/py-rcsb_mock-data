@@ -47,7 +47,10 @@
 #                 add polymer monomer counts in rcsb_entry_info. Upversion core entry and core entity colleciton schemas.
 #  2-May-2019 jdw update core_entity, core_entry schema, and core_entity_instance
 #  3-May-2019 jdw replace rcsb_entity_instance_domain with cath and scop specific analogs
-# 16-May-2019 jdw add rcsb_assembly_info
+# 16-May-2019 jdw add rcsb_assembly_info up-version pdbx_core_assembly
+# 20-May-2019 jdw add rcsb_prot_sec_struct_info filter primary categories from pdbx_core_entity_instance and
+#                 up-version pdbx_core_entity_instance to 6.0.1
+#
 #
 #
 # Master Pinelands configuration file example
@@ -503,6 +506,7 @@ dictionary_helper:
                       - rcsb_enzyme_class_combined_provenance_code
                 - CATEGORY_NAME: rcsb_entry_info
                 - CATEGORY_NAME: rcsb_assembly_info
+                - CATEGORY_NAME: rcsb_prot_sec_struct_info
                 - CATEGORY_NAME: entity_poly
                   ATTRIBUTE_NAME_LIST:
                       - rcsb_entity_polymer_type
@@ -1402,11 +1406,11 @@ document_helper:
             - NAME: pdbx_core_entry
               VERSION: 5.3.0
             - NAME: pdbx_core_assembly
-              VERSION: 5.1.0
+              VERSION: 5.2.0
             - NAME: pdbx_core_entity_monomer
               VERSION: 5.1.0
             - NAME: pdbx_core_entity_instance
-              VERSION: 5.3.1
+              VERSION: 6.0.1
             - NAME: pdbx_core_entity_instance_validation
               VERSION: 5.1.0
         bird:
@@ -1686,6 +1690,16 @@ document_helper:
         pdbx_core_entity_instance:
             INCLUDE: []
             EXCLUDE:
+                - struct_conf
+                - struct_site
+                - struct_site_gen
+                - struct_sheet_hbond
+                - pdbx_struct_sheet_hbond
+                - struct_sheet_range
+                - struct_sheet_order
+                - pdbx_struct_conn_angle
+                - pdbx_distant_solvent_atoms
+                #
                 - pdbx_poly_seq_scheme
                 - pdbx_nonpoly_scheme
                 - pdbx_struct_chem_comp_diagnostics

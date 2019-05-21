@@ -61,8 +61,8 @@
             "rcsb_multiple_source_flag": {
                "type": "string",
                "enum": [
-                  "N",
-                  "Y"
+                  "Y",
+                  "N"
                ],
                "description": "A code indicating the entity has multiple biological sources.\n"
             },
@@ -73,20 +73,20 @@
             "src_method": {
                "type": "string",
                "enum": [
-                  "man",
+                  "syn",
                   "nat",
-                  "syn"
+                  "man"
                ],
                "description": "The method by which the sample for the entity was produced.\n Entities isolated directly from natural sources (tissues, soil\n samples etc.) are expected to have further information in the\n ENTITY_SRC_NAT category. Entities isolated from genetically\n manipulated sources are expected to have further information in\n the ENTITY_SRC_GEN category."
             },
             "type": {
                "type": "string",
                "enum": [
-                  "polymer",
-                  "water",
-                  "branched",
                   "non-polymer",
-                  "macrolide"
+                  "polymer",
+                  "macrolide",
+                  "branched",
+                  "water"
                ],
                "description": "Defines the type of the entity.\n\n Polymer entities are expected to have corresponding\n ENTITY_POLY and associated entries.\n\n Non-polymer entities are expected to have corresponding\n CHEM_COMP and associated entries.\n\n Water entities are not expected to have corresponding\n entries in the ENTITY category."
             },
@@ -128,8 +128,8 @@
                      "provenance_source": {
                         "type": "string",
                         "enum": [
-                           "PDB Synonym",
-                           "PDB Preferred Name"
+                           "PDB Preferred Name",
+                           "PDB Synonym"
                         ],
                         "description": "Combined list of macromolecular names associated name source.\n"
                      }
@@ -245,8 +245,8 @@
                "enum": [
                   "n",
                   "yes",
-                  "no",
-                  "y"
+                  "y",
+                  "no"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer-to-monomer link different from that implied by\n _entity_poly.type."
             },
@@ -255,8 +255,8 @@
                "enum": [
                   "n",
                   "yes",
-                  "no",
-                  "y"
+                  "y",
+                  "no"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer that is not considered standard."
             },
@@ -301,11 +301,11 @@
             "rcsb_entity_polymer_type": {
                "type": "string",
                "enum": [
-                  "Protein",
+                  "RNA",
                   "NA-hybrid",
-                  "DNA",
                   "Other",
-                  "RNA"
+                  "Protein",
+                  "DNA"
                ],
                "description": "A coarse-grained polymer entity type."
             },
@@ -328,16 +328,16 @@
             "type": {
                "type": "string",
                "enum": [
-                  "other",
-                  "peptide nucleic acid",
-                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
-                  "polypeptide(D)",
+                  "polydeoxyribonucleotide",
                   "cyclic-pseudo-peptide",
                   "polyribonucleotide",
-                  "polysaccharide(L)",
+                  "peptide nucleic acid",
                   "polysaccharide(D)",
                   "polypeptide(L)",
-                  "polydeoxyribonucleotide"
+                  "polysaccharide(L)",
+                  "polydeoxyribonucleotide/polyribonucleotide hybrid",
+                  "polypeptide(D)",
+                  "other"
                ],
                "description": "The type of the polymer."
             }
@@ -448,8 +448,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "sample",
-                     "model"
+                     "model",
+                     "sample"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -658,9 +658,9 @@
                "pdbx_seq_type": {
                   "type": "string",
                   "enum": [
+                     "C-terminal tag",
                      "Linker",
                      "N-terminal tag",
-                     "C-terminal tag",
                      "Biological sequence"
                   ],
                   "description": "This data item povides additional information about the sequence type."
@@ -725,8 +725,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "sample",
-                     "model"
+                     "model",
+                     "sample"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -938,8 +938,8 @@
                "pdbx_alt_source_flag": {
                   "type": "string",
                   "enum": [
-                     "sample",
-                     "model"
+                     "model",
+                     "sample"
                   ],
                   "description": "This data item identifies cases in which an alternative source\n modeled."
                },
@@ -1232,8 +1232,8 @@
                "source_type": {
                   "type": "string",
                   "enum": [
-                     "synthetic",
                      "natural",
+                     "synthetic",
                      "genetically engineered"
                   ],
                   "description": "The source type for the entity\n"

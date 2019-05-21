@@ -85,6 +85,7 @@
 #  15-May-2019  jdw  add _rcsb_entry_info.na_polymer_entity_types update enumerations for _rcsb_entry_info.selected_polymer_entity_types
 #  16-May-2019  jdw  add rcsb_assembly_info category  extend enumerations for rcsb_assembly_info.polymer_composition with
 #                        'protein/NA/oligosaccharide'
+#  19-May-2019. jdw  add  category rcsb_prot_sec_struct_info
 #
 ###########################################################################
 ###########################################################################
@@ -102,17 +103,23 @@ data_rcsb_mmcif_ext.dic
 
     _dictionary.title           rcsb_mmcif_ext.dic
     _dictionary.datablock_id    rcsb_mmcif_ext.dic
-    _dictionary.version         0.125
+    _dictionary.version         0.126
     #
      loop_
     _dictionary_history.version
     _dictionary_history.update
     _dictionary_history.revision
+0.126 2019-05-19
+;
+Changes (jdw):
+ + add  category rcsb_prot_sec_struct_info
+;
+
 0.125 2019-05-16
 ;
 Changes (jdw):
  + add _rcsb_entry_info.na_polymer_entity_types
- + Update enumeration for _rcsb_entry_info.selected_polymer_entity_types
+ + update enumeration for _rcsb_entry_info.selected_polymer_entity_types
  + add category rcsb_assembly_info
  + removed _rcsb_entry_info.nonpolymer_ligand_entity_count
 ;
@@ -441,6 +448,7 @@ rcsb_add_struct_ref_seq_entity_identifiers  calculate_with_helper python  'DictM
 rcsb_add_entity_misc                        calculate_with_helper python  'DictMethodHelper.addEntityMisc'
 rcsb_entity_instance_domain                 calculate_with_helper python  'DictMethodHelper.buildEntityInstanceDomain'
 rcsb_add_assembly_info                      calculate_with_helper python  'DictMethodHelper.addAssemblyInfo'
+rcsb_add_prot_sec_struct_info               calculate_with_helper python  'DictMethodHelper.addProtSecStructInfo'
 rcsb_item_method_deferred                   calculate_with_helper python  'DictMethodHelper.deferredItemMethod'
 #
 rcsb_entity_poly_info                       calculate_with_helper python  'DictMethodHelper.buildEntityPolyInfo'
@@ -5573,7 +5581,7 @@ save__pdbx_validate_close_contact.rcsb_label_asym_id_1
     _item.name                  '_pdbx_validate_close_contact.rcsb_label_asym_id_1'
     _item.category_id           pdbx_validate_close_contact
     _item.mandatory_code        no
-    _item_type.code         code
+    _item_type.code             code
     _item_linked.child_name     '_pdbx_validate_close_contact.rcsb_label_asym_id_1'
     _item_linked.parent_name    '_atom_site.label_asym_id'
 
@@ -6972,7 +6980,7 @@ save__rcsb_assembly_info.entry_id
 
 save__rcsb_assembly_info.assembly_id
     _item_description.description
-;    Entiy identifier for the container.
+;    Entity identifier for the container.
 ;
     _item.name                  '_rcsb_assembly_info.assembly_id'
     _item.category_id             rcsb_assembly_info
@@ -7328,3 +7336,320 @@ save__rcsb_assembly_info.polymer_entity_count_nucleic_acid_hybrid
     _item_type.code               int
      save_
 
+#
+###############################
+## RCSB_PROT_SEC_STRUCT_INFO ##
+###############################
+
+save_rcsb_prot_sec_struct_info
+    _category.description
+;       The rcsb_prot_sec_struct_info category records the selected protein
+        secondary structure features for polymer instances.
+
+        Protein secondary structure features calculated using the algorithms
+        described in:
+
+        Hutchinson, E.G. and Thornton, J.M., PROMOTIF--a program to identify
+        and analyze structural motifs in proteins. Protein Sci., 1996, 5(2), pp 212-20;
+        PubMed PMID: 8745398; PubMed Central PMCID: PMC2143354.
+;
+    _category.id                  rcsb_prot_sec_struct_info
+    _category.mandatory_code      no
+    loop_
+    _category_key.name           '_rcsb_prot_sec_struct_info.entry_id'
+                                 '_rcsb_prot_sec_struct_info.asym_id'
+
+     loop_
+    _category_group.id           'inclusive_group'
+                                 'rcsb_group'
+     loop_
+    _category_examples.detail
+    _category_examples.case
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+;
+    Example 1 -
+;
+;
+    #
+    _rcsb_prot_sec_struct_info.entry_id                       1O3Q
+    _rcsb_prot_sec_struct_info.label_asym_id                  C
+    _rcsb_prot_sec_struct_info.helix_count                    7
+    _rcsb_prot_sec_struct_info.beta_strand_count              12
+    _rcsb_prot_sec_struct_info.unassigned_count               16
+    _rcsb_prot_sec_struct_info.helix_length                   9,5,11,29,15,10,15
+    _rcsb_prot_sec_struct_info.beta_strand_length             5,7,7,2,3,4,6,7,3,5,5,4
+    _rcsb_prot_sec_struct_info.unassigned_length              2,4,7,2,5,4,1,8,3,4,2,1,1,2,2,1
+    _rcsb_prot_sec_struct_info.helix_coverage_percent         46.50
+    _rcsb_prot_sec_struct_info.beta_strand_coverage_percent   29.00
+    _rcsb_prot_sec_struct_info.unassigned_coverage_percent    24.50
+    _rcsb_prot_sec_struct_info.beta_sheet_sense               anti-parallel,anti-parallel,anti-parallel,anti-parallel,anti-parallel,anti-parallel,anti-parallel,anti-parallel,anti-parallel,anti-parallel,anti-parallel,anti-parallel
+    _rcsb_prot_sec_struct_info.beta_sheet_strand_count        4,4,4,4,4,4,4,4,4,4,4,4
+    _rcsb_prot_sec_struct_info.feature_monomer_sequence       HHHHHHHHH__SSSSS____SSS_______SSSSSSS__SSSSSS_____SSSSSSS____SS_HHHHH________SSSS___SSSSSSSHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH____SSS__SSSSS_HHHHHHHHHH_HHHHHHHHHHHHHHH__SSSS__SSSSS_
+    _rcsb_prot_sec_struct_info.feature_sequence               H_S_S_S_S_S_S_H_S_SH_S_S_H_H_S_S_
+    #
+;
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+   _pdbx_category_context.type         RCSB_LOCAL
+   _pdbx_category_context.category_id  rcsb_prot_sec_struct_info
+   #
+   _category_methods.method_id   'rcsb_add_prot_sec_struct_info'
+     save_
+
+save__rcsb_prot_sec_struct_info.entry_id
+    _item_description.description
+;    The PDB entry accession code.
+;
+    _item.name                  '_rcsb_prot_sec_struct_info.entry_id'
+    _item.category_id             rcsb_prot_sec_struct_info
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_example.case          '1ABC'
+    _item_linked.child_name       '_rcsb_prot_sec_struct_info.entry_id'
+    _item_linked.parent_name      '_entry.id'
+     save_
+
+save__rcsb_prot_sec_struct_info.label_asym_id
+    _item_description.description
+;   Protein polymer instance identifier.
+
+    This data item is a pointer to _atom_site.label_asym_id in the
+    ATOM_SITE category.
+;
+    _item.name                  '_rcsb_prot_sec_struct_info.label_asym_id'
+    _item.category_id             rcsb_prot_sec_struct_info
+    _item.mandatory_code          yes
+    _item_type.code               code
+    _item_linked.child_name       '_rcsb_prot_sec_struct_info.label_asym_id'
+    _item_linked.parent_name      '_atom_site.label_asym_id'
+     save_
+##
+
+save__rcsb_prot_sec_struct_info.helix_count
+    _item_description.description
+;  The number helical segments in the protein polymer instance.
+
+   Protein secondary structure features calculated using the algorithms
+   described in:
+
+   Hutchinson, E.G. and Thornton, J.M., PROMOTIF--a program to identify
+   and analyze structural motifs in proteins. Protein Sci., 1996, 5(2), pp 212-20;
+   PubMed PMID: 8745398; PubMed Central PMCID: PMC2143354.
+;
+    _item.name                  '_rcsb_prot_sec_struct_info.helix_count'
+    _item.category_id             rcsb_prot_sec_struct_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_prot_sec_struct_info.beta_strand_count
+    _item_description.description
+;  The number beta strand segments in the protein polymer instance.
+
+   Protein secondary structure features calculated using the algorithms
+   described in:
+
+   Hutchinson, E.G. and Thornton, J.M., PROMOTIF--a program to identify
+   and analyze structural motifs in proteins. Protein Sci., 1996, 5(2), pp 212-20;
+   PubMed PMID: 8745398; PubMed Central PMCID: PMC2143354.
+;
+    _item.name                  '_rcsb_prot_sec_struct_info.beta_strand_count'
+    _item.category_id             rcsb_prot_sec_struct_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_prot_sec_struct_info.unassigned_count
+    _item_description.description
+;  The number of unassigned segments (neither helix or beta strand) in the protein polymer instance.
+
+   Protein secondary structure features calculated using the algorithms
+   described in:
+
+   Hutchinson, E.G. and Thornton, J.M., PROMOTIF--a program to identify
+   and analyze structural motifs in proteins. Protein Sci., 1996, 5(2), pp 212-20;
+   PubMed PMID: 8745398; PubMed Central PMCID: PMC2143354.
+;
+    _item.name                  '_rcsb_prot_sec_struct_info.unassigned_count'
+    _item.category_id             rcsb_prot_sec_struct_info
+    _item.mandatory_code          no
+    _item_type.code               int
+     save_
+
+save__rcsb_prot_sec_struct_info.helix_length
+    _item_description.description
+;  The monomer lengths of helical segments in the protein polymer instance.
+
+   Protein secondary structure features calculated using the algorithms
+   described in:
+
+   Hutchinson, E.G. and Thornton, J.M., PROMOTIF--a program to identify
+   and analyze structural motifs in proteins. Protein Sci., 1996, 5(2), pp 212-20;
+   PubMed PMID: 8745398; PubMed Central PMCID: PMC2143354.
+;
+    _item.name                  '_rcsb_prot_sec_struct_info.helix_length'
+    _item.category_id             rcsb_prot_sec_struct_info
+    _item.mandatory_code          no
+    _item_type.code               int-csv
+     save_
+
+save__rcsb_prot_sec_struct_info.beta_strand_length
+    _item_description.description
+;  The monomer lengths of beta strand segments in the protein polymer instance.
+
+   Protein secondary structure features calculated using the algorithms
+   described in:
+
+   Hutchinson, E.G. and Thornton, J.M., PROMOTIF--a program to identify
+   and analyze structural motifs in proteins. Protein Sci., 1996, 5(2), pp 212-20;
+   PubMed PMID: 8745398; PubMed Central PMCID: PMC2143354.
+;
+    _item.name                  '_rcsb_prot_sec_struct_info.beta_strand_length'
+    _item.category_id             rcsb_prot_sec_struct_info
+    _item.mandatory_code          no
+    _item_type.code               int-csv
+     save_
+
+save__rcsb_prot_sec_struct_info.unassigned_length
+    _item_description.description
+;  The monomer lengths of unassigned segments (neither helix or beta strand) in the protein polymer instance.
+
+   Protein secondary structure features calculated using the algorithms
+   described in:
+
+   Hutchinson, E.G. and Thornton, J.M., PROMOTIF--a program to identify
+   and analyze structural motifs in proteins. Protein Sci., 1996, 5(2), pp 212-20;
+   PubMed PMID: 8745398; PubMed Central PMCID: PMC2143354.
+;
+    _item.name                  '_rcsb_prot_sec_struct_info.unassigned_length'
+    _item.category_id             rcsb_prot_sec_struct_info
+    _item.mandatory_code          no
+    _item_type.code               int-csv
+     save_
+
+save__rcsb_prot_sec_struct_info.helix_coverage_percent
+    _item_description.description
+;  The percent monomer coverage of helical segments in the protein polymer instance.
+
+   Protein secondary structure features calculated using the algorithms
+   described in:
+
+   Hutchinson, E.G. and Thornton, J.M., PROMOTIF--a program to identify
+   and analyze structural motifs in proteins. Protein Sci., 1996, 5(2), pp 212-20;
+   PubMed PMID: 8745398; PubMed Central PMCID: PMC2143354.
+;
+    _item.name                  '_rcsb_prot_sec_struct_info.helix_coverage_percent'
+    _item.category_id             rcsb_prot_sec_struct_info
+    _item.mandatory_code          no
+    _item_type.code               float
+     save_
+
+save__rcsb_prot_sec_struct_info.beta_strand_coverage_percent
+    _item_description.description
+;  The percent monomer coverage of beta strand segments in the protein polymer instance.
+
+   Protein secondary structure features calculated using the algorithms
+   described in:
+
+   Hutchinson, E.G. and Thornton, J.M., PROMOTIF--a program to identify
+   and analyze structural motifs in proteins. Protein Sci., 1996, 5(2), pp 212-20;
+   PubMed PMID: 8745398; PubMed Central PMCID: PMC2143354.
+;
+    _item.name                  '_rcsb_prot_sec_struct_info.beta_strand_coverage_percent'
+    _item.category_id             rcsb_prot_sec_struct_info
+    _item.mandatory_code          no
+    _item_type.code               float
+     save_
+
+save__rcsb_prot_sec_struct_info.unassigned_coverage_percent
+    _item_description.description
+;  The percent monomer coverage of unassigned segments (neither helix or beta strand) in the protein polymer instance.
+
+   Protein secondary structure features calculated using the algorithms
+   described in:
+
+   Hutchinson, E.G. and Thornton, J.M., PROMOTIF--a program to identify
+   and analyze structural motifs in proteins. Protein Sci., 1996, 5(2), pp 212-20;
+   PubMed PMID: 8745398; PubMed Central PMCID: PMC2143354.
+;
+    _item.name                  '_rcsb_prot_sec_struct_info.unassigned_coverage_percent'
+    _item.category_id             rcsb_prot_sec_struct_info
+    _item.mandatory_code          no
+    _item_type.code               float
+     save_
+
+save__rcsb_prot_sec_struct_info.beta_sheet_sense
+    _item_description.description
+;  The orientation sense for complete beta sheet for the contributing beta strands in the
+   protein polymer instance.
+
+   Protein secondary structure features calculated using the algorithms
+   described in:
+
+   Hutchinson, E.G. and Thornton, J.M., PROMOTIF--a program to identify
+   and analyze structural motifs in proteins. Protein Sci., 1996, 5(2), pp 212-20;
+   PubMed PMID: 8745398; PubMed Central PMCID: PMC2143354.
+;
+    _item.name                  '_rcsb_prot_sec_struct_info.beta_sheet_sense'
+    _item.category_id             rcsb_prot_sec_struct_info
+    _item.mandatory_code          no
+    _item_type.code               alphanum-csv
+    loop_
+    _item_enumeration.value
+        'parallel'
+        'anti-parallel'
+        'mixed'
+     save_
+
+save__rcsb_prot_sec_struct_info.beta_sheet_strand_count
+    _item_description.description
+;  The number beta strands in the complete beta sheet for the contributing beta strands in the
+   protein polymer instance.
+
+   Protein secondary structure features calculated using the algorithms
+   described in:
+
+   Hutchinson, E.G. and Thornton, J.M., PROMOTIF--a program to identify
+   and analyze structural motifs in proteins. Protein Sci., 1996, 5(2), pp 212-20;
+   PubMed PMID: 8745398; PubMed Central PMCID: PMC2143354.
+;
+    _item.name                  '_rcsb_prot_sec_struct_info.beta_sheet_strand_count'
+    _item.category_id             rcsb_prot_sec_struct_info
+    _item.mandatory_code          no
+    _item_type.code               int-csv
+     save_
+
+save__rcsb_prot_sec_struct_info.feature_monomer_sequence
+    _item_description.description
+;  The sequence of secondary structure features (e.g., H, S) assigned to each monomer in the
+   protein polymer instance.
+
+   Protein secondary structure features calculated using the algorithms
+   described in:
+
+   Hutchinson, E.G. and Thornton, J.M., PROMOTIF--a program to identify
+   and analyze structural motifs in proteins. Protein Sci., 1996, 5(2), pp 212-20;
+   PubMed PMID: 8745398; PubMed Central PMCID: PMC2143354.
+;
+    _item.name                  '_rcsb_prot_sec_struct_info.feature_monomer_sequence'
+    _item.category_id             rcsb_prot_sec_struct_info
+    _item.mandatory_code          no
+    _item_type.code               text
+     save_
+
+save__rcsb_prot_sec_struct_info.feature_sequence
+    _item_description.description
+;  The sequence of secondary structure features (e.g., H, S) in the
+   protein polymer instance.
+
+   Protein secondary structure features calculated using the algorithms
+   described in:
+
+   Hutchinson, E.G. and Thornton, J.M., PROMOTIF--a program to identify
+   and analyze structural motifs in proteins. Protein Sci., 1996, 5(2), pp 212-20;
+   PubMed PMID: 8745398; PubMed Central PMCID: PMC2143354.
+;
+    _item.name                  '_rcsb_prot_sec_struct_info.feature_sequence'
+    _item.category_id             rcsb_prot_sec_struct_info
+    _item.mandatory_code          no
+    _item_type.code               text
+     save_
