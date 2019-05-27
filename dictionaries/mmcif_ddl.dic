@@ -1,7 +1,7 @@
 ###########################################################################
 #
 # File:  mmcif_ddl.dic
-# Date:  Wed Apr  3 10:08:55 EDT 2019
+# Date:  Mon May 27 11:56:52 EDT 2019
 #
 # Created from files in CVS module dict-mmcif_ddl.dic unless noted:
 #        mmcif_ddl-header.dic
@@ -40,7 +40,7 @@ data_mmcif_ddl.dic
 
     _dictionary.datablock_id               mmcif_ddl.dic
     _dictionary.title                      mmcif_ddl.dic
-    _dictionary.version                    2.1.17
+    _dictionary.version                    2.2.1
 
      loop_
     _dictionary_history.version
@@ -319,7 +319,12 @@ data_mmcif_ddl.dic
 ;     Changes: (JW)
       + Add extension item _item_sub_category.pdbx_label
 ;
-
+       2.2.1 2019-05-27
+;      Changes (JW):
+       +  Add items _method_list.method_source and _method_list.implementation_source
+       +  Make item _method_list.inline optional
+       +  Update examples for items in category method_list
+;
 ### EOF mmcif_ddl-header.dic ####
 ###########################################################################
 #
@@ -2655,7 +2660,6 @@ save__item_units_list.detail
 # ----------------------------------------------------------------------------
 
 
-
 save_method_list
 
     _category.description
@@ -2713,20 +2717,53 @@ save__method_list.detail
      save_
 
 
+save__method_list.implementation_source
+
+    _item_description.name             '_method_list.implementation_source'
+    _item_description.description
+;
+     A code that describes the source of the method implementation.
+;
+    _item.name                         '_method_list.implementation_source'
+    _item.category_id                    method_list
+    _item.mandatory_code                 yes
+    _item_type.name                    '_method_list.implementation_source'
+    _item_type.code                      code
+     loop_
+    _item_examples.name
+    _item_examples.case
+    _item_examples.detail
+      '_method_list.implementation_source'  inline       'inline method implementation'
+      '_method_list.implementation_source'  reference    'reference to an external method implementation'
+    save_
+
 save__method_list.inline
 
     _item_description.name             '_method_list.inline'
     _item_description.description
 ;
-     Inline text of a method associated with the data item.
+     Inline text of the method implementation.
 ;
     _item.name                         '_method_list.inline'
     _item.category_id                    method_list
-    _item.mandatory_code                 yes
+    _item.mandatory_code                 no
     _item_type.name                    '_method_list.inline'
     _item_type.code                      text
      save_
 
+save__method_list.implementation
+
+    _item_description.name             '_method_list.implementation'
+    _item_description.description
+;
+     A language specific reference to the implementation of the method.
+;
+    _item.name                         '_method_list.implementation'
+    _item.category_id                    method_list
+    _item.mandatory_code                 no
+    _item_type.name                    '_method_list.implementation'
+    _item_type.code                      text
+     save_
 
 save__method_list.code
 
@@ -2744,14 +2781,15 @@ save__method_list.code
     _item_examples.name
     _item_examples.case
     _item_examples.detail
-      '_method_list.code'  calculation     'method to calculate the item '
-      '_method_list.code'  verification    'method to verify the data item '
-      '_method_list.code'  cast            'method to provide cast conversion '
-      '_method_list.code'  addition        'method to define item + item '
-      '_method_list.code'  division        'method to define item / item '
-      '_method_list.code'  multiplication  'method to define item * item '
-      '_method_list.code'  equivalence     'method to define item = item '
-      '_method_list.code'  other           'miscellaneous method '
+      '_method_list.code'  calculation                 'method to calculate the item '
+      '_method_list.code'  calculation_with_helper     'helper method to calculate the item '
+      '_method_list.code'  verification                'method to verify the data item '
+      '_method_list.code'  cast                        'method to provide cast conversion '
+      '_method_list.code'  addition                    'method to define item + item '
+      '_method_list.code'  division                    'method to define item / item '
+      '_method_list.code'  multiplication              'method to define item * item '
+      '_method_list.code'  equivalence                 'method to define item = item '
+      '_method_list.code'  other                       'miscellaneous method '
      save_
 
 
@@ -2760,7 +2798,7 @@ save__method_list.language
     _item_description.name             '_method_list.language'
     _item_description.description
 ;
-     Language in which the method is expressed.
+     Implemetnation language in which the method is expressed.
 ;
     _item.name                         '_method_list.language'
     _item.category_id                    method_list
@@ -2771,16 +2809,19 @@ save__method_list.language
     _item_examples.name
     _item_examples.case
     _item_examples.detail
-        '_method_list.language'          BNF       ?
-        '_method_list.language'          C         ?
-        '_method_list.language'          C++       ?
-        '_method_list.language'          FORTRAN   ?
-        '_method_list.language'          LISP      ?
-        '_method_list.language'          PASCAL    ?
-        '_method_list.language'          PEARL     ?
-        '_method_list.language'          TCL       ?
-        '_method_list.language'          OTHER     ?
+        '_method_list.language'          C          ?
+        '_method_list.language'          C++        ?
+        '_method_list.language'          Python     ?
+        '_method_list.language'          Ruby       ?
+        '_method_list.language'          Java       ?
+        '_method_list.language'          Javascript ?
+        '_method_list.language'          other      ?
      save_
+
+
+# ----------------------------------------------------------------------------
+
+
 
 
 # ----------------------------------------------------------------------------
