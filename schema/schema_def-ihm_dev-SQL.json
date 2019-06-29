@@ -350,6 +350,7 @@
             "FORMULA_WEIGHT": "formula_weight",
             "MON_NSTD_FLAG": "mon_nstd_flag",
             "NAME": "name",
+            "PDBX_SYNONYMS": "pdbx_synonyms",
             "TYPE": "type"
          },
          "ATTRIBUTE_MAP": {
@@ -386,6 +387,12 @@
             "NAME": {
                "CATEGORY": "chem_comp",
                "ATTRIBUTE": "name",
+               "METHOD_NAME": null,
+               "ARGUMENTS": null
+            },
+            "PDBX_SYNONYMS": {
+               "CATEGORY": "chem_comp",
+               "ATTRIBUTE": "pdbx_synonyms",
                "METHOD_NAME": null,
                "ARGUMENTS": null
             },
@@ -474,10 +481,10 @@
                ],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "n": "n",
-                  "yes": "yes",
+                  "no": "no",
                   "y": "y",
-                  "no": "no"
+                  "yes": "yes",
+                  "n": "n"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -498,8 +505,24 @@
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
             },
-            "TYPE": {
+            "PDBX_SYNONYMS": {
                "ORDER": 7,
+               "NULLABLE": true,
+               "PRECISION": 0,
+               "PRIMARY_KEY": false,
+               "APP_TYPE": "text",
+               "WIDTH": 40,
+               "ITERABLE_DELIMITER": null,
+               "FILTER_TYPES": [
+                  "TRANSLATE_XMLCHARREFS"
+               ],
+               "IS_CHAR_TYPE": true,
+               "ENUMERATION": {},
+               "CONTENT_CLASSES": [],
+               "SUB_CATEGORIES": []
+            },
+            "TYPE": {
+               "ORDER": 8,
                "NULLABLE": false,
                "PRECISION": 0,
                "PRIMARY_KEY": false,
@@ -511,35 +534,35 @@
                ],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "l-peptide linking": "L-peptide linking",
-                  "l-dna linking": "L-DNA linking",
-                  "saccharide": "saccharide",
-                  "l-saccharide": "L-saccharide",
-                  "l-gamma-peptide, c-delta linking": "L-gamma-peptide, C-delta linking",
-                  "l-peptide cooh carboxy terminus": "L-peptide COOH carboxy terminus",
-                  "d-beta-peptide, c-gamma linking": "D-beta-peptide, C-gamma linking",
+                  "d-saccharide 1,4 and 1,4 linking": "D-saccharide 1,4 and 1,4 linking",
                   "l-saccharide 1,4 and 1,4 linking": "L-saccharide 1,4 and 1,4 linking",
+                  "l-dna linking": "L-DNA linking",
                   "l-saccharide 1,4 and 1,6 linking": "L-saccharide 1,4 and 1,6 linking",
-                  "l-beta-peptide, c-gamma linking": "L-beta-peptide, C-gamma linking",
-                  "d-saccharide 1,4 and 1,6 linking": "D-saccharide 1,4 and 1,6 linking",
-                  "d-peptide nh3 amino terminus": "D-peptide NH3 amino terminus",
-                  "dna oh 5 prime terminus": "DNA OH 5 prime terminus",
+                  "non-polymer": "non-polymer",
+                  "peptide linking": "peptide linking",
+                  "d-saccharide": "D-saccharide",
                   "l-rna linking": "L-RNA linking",
+                  "l-saccharide": "L-saccharide",
+                  "dna linking": "DNA linking",
+                  "d-peptide nh3 amino terminus": "D-peptide NH3 amino terminus",
                   "peptide-like": "peptide-like",
-                  "dna oh 3 prime terminus": "DNA OH 3 prime terminus",
-                  "rna linking": "RNA linking",
                   "l-peptide nh3 amino terminus": "L-peptide NH3 amino terminus",
+                  "d-peptide cooh carboxy terminus": "D-peptide COOH carboxy terminus",
+                  "rna linking": "RNA linking",
+                  "dna oh 5 prime terminus": "DNA OH 5 prime terminus",
+                  "d-gamma-peptide, c-delta linking": "D-gamma-peptide, C-delta linking",
+                  "d-beta-peptide, c-gamma linking": "D-beta-peptide, C-gamma linking",
+                  "dna oh 3 prime terminus": "DNA OH 3 prime terminus",
+                  "l-peptide linking": "L-peptide linking",
                   "other": "other",
                   "d-peptide linking": "D-peptide linking",
-                  "d-saccharide": "D-saccharide",
-                  "non-polymer": "non-polymer",
-                  "d-peptide cooh carboxy terminus": "D-peptide COOH carboxy terminus",
-                  "peptide linking": "peptide linking",
-                  "dna linking": "DNA linking",
-                  "rna oh 3 prime terminus": "RNA OH 3 prime terminus",
+                  "l-gamma-peptide, c-delta linking": "L-gamma-peptide, C-delta linking",
                   "rna oh 5 prime terminus": "RNA OH 5 prime terminus",
-                  "d-saccharide 1,4 and 1,4 linking": "D-saccharide 1,4 and 1,4 linking",
-                  "d-gamma-peptide, c-delta linking": "D-gamma-peptide, C-delta linking"
+                  "saccharide": "saccharide",
+                  "rna oh 3 prime terminus": "RNA OH 3 prime terminus",
+                  "d-saccharide 1,4 and 1,6 linking": "D-saccharide 1,4 and 1,6 linking",
+                  "l-beta-peptide, c-gamma linking": "L-beta-peptide, C-gamma linking",
+                  "l-peptide cooh carboxy terminus": "L-peptide COOH carboxy terminus"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -1244,9 +1267,9 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "syn": "syn",
+                  "man": "man",
                   "nat": "nat",
-                  "man": "man"
+                  "syn": "syn"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -1262,11 +1285,11 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "non-polymer": "non-polymer",
-                  "polymer": "polymer",
-                  "macrolide": "macrolide",
                   "branched": "branched",
-                  "water": "water"
+                  "macrolide": "macrolide",
+                  "polymer": "polymer",
+                  "water": "water",
+                  "non-polymer": "non-polymer"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -1641,10 +1664,10 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "n": "n",
-                  "yes": "yes",
+                  "no": "no",
                   "y": "y",
-                  "no": "no"
+                  "yes": "yes",
+                  "n": "n"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -1660,10 +1683,10 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "n": "n",
-                  "yes": "yes",
+                  "no": "no",
                   "y": "y",
-                  "no": "no"
+                  "yes": "yes",
+                  "n": "n"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -1679,10 +1702,10 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "n": "n",
-                  "yes": "yes",
+                  "no": "no",
                   "y": "y",
-                  "no": "no"
+                  "yes": "yes",
+                  "n": "n"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -1761,16 +1784,16 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "polydeoxyribonucleotide": "polydeoxyribonucleotide",
-                  "cyclic-pseudo-peptide": "cyclic-pseudo-peptide",
                   "polyribonucleotide": "polyribonucleotide",
-                  "peptide nucleic acid": "peptide nucleic acid",
-                  "polysaccharide(d)": "polysaccharide(D)",
                   "polypeptide(l)": "polypeptide(L)",
-                  "polysaccharide(l)": "polysaccharide(L)",
                   "polydeoxyribonucleotide/polyribonucleotide hybrid": "polydeoxyribonucleotide/polyribonucleotide hybrid",
+                  "polysaccharide(l)": "polysaccharide(L)",
+                  "other": "other",
+                  "peptide nucleic acid": "peptide nucleic acid",
+                  "polydeoxyribonucleotide": "polydeoxyribonucleotide",
+                  "polysaccharide(d)": "polysaccharide(D)",
                   "polypeptide(d)": "polypeptide(D)",
-                  "other": "other"
+                  "cyclic-pseudo-peptide": "cyclic-pseudo-peptide"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -1930,10 +1953,10 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "n": "n",
-                  "yes": "yes",
+                  "no": "no",
                   "y": "y",
-                  "no": "no"
+                  "yes": "yes",
+                  "n": "n"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -3365,16 +3388,16 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "dsso": "DSSO",
-                  "sulfo-smcc": "sulfo-SMCC",
-                  "bs2g": "BS2G",
-                  "egs": "EGS",
                   "sulfo-sda": "sulfo-SDA",
+                  "bs3": "BS3",
+                  "sulfo-smcc": "sulfo-SMCC",
+                  "other": "Other",
                   "edc": "EDC",
                   "dss": "DSS",
-                  "other": "Other",
-                  "dst": "DST",
-                  "bs3": "BS3"
+                  "egs": "EGS",
+                  "dsso": "DSSO",
+                  "bs2g": "BS2G",
+                  "dst": "DST"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -3725,8 +3748,8 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "all": "ALL",
-                  "any": "ANY"
+                  "any": "ANY",
+                  "all": "ALL"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -3802,9 +3825,9 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
+                  "by-atom": "by-atom",
                   "by-residue": "by-residue",
-                  "by-feature": "by-feature",
-                  "by-atom": "by-atom"
+                  "by-feature": "by-feature"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -3834,9 +3857,9 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "lower bound": "lower bound",
+                  "harmonic": "harmonic",
                   "upper bound": "upper bound",
-                  "harmonic": "harmonic"
+                  "lower bound": "lower bound"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -4370,26 +4393,26 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "mass spectrometry data": "Mass Spectrometry data",
-                  "integrative model": "Integrative model",
-                  "other": "Other",
-                  "single molecule fret data": "Single molecule FRET data",
-                  "cx-ms data": "CX-MS data",
-                  "3dem volume": "3DEM volume",
-                  "mutagenesis data": "Mutagenesis data",
-                  "yeast two-hybrid screening data": "Yeast two-hybrid screening data",
-                  "experimental model": "Experimental model",
-                  "h/d exchange data": "H/D exchange data",
-                  "predicted contacts": "Predicted contacts",
-                  "nmr data": "NMR data",
                   "em raw micrographs": "EM raw micrographs",
                   "sas data": "SAS data",
+                  "cx-ms data": "CX-MS data",
+                  "yeast two-hybrid screening data": "Yeast two-hybrid screening data",
+                  "mass spectrometry data": "Mass Spectrometry data",
+                  "integrative model": "Integrative model",
+                  "3dem volume": "3DEM volume",
                   "2dem class average": "2DEM class average",
+                  "nmr data": "NMR data",
+                  "single molecule fret data": "Single molecule FRET data",
+                  "other": "Other",
                   "epr data": "EPR data",
-                  "hydroxyl radical footprinting data": "Hydroxyl radical footprinting data",
-                  "de novo model": "De Novo model",
+                  "experimental model": "Experimental model",
+                  "predicted contacts": "Predicted contacts",
+                  "h/d exchange data": "H/D exchange data",
                   "comparative model": "Comparative model",
-                  "dna footprinting data": "DNA footprinting data"
+                  "de novo model": "De Novo model",
+                  "dna footprinting data": "DNA footprinting data",
+                  "mutagenesis data": "Mutagenesis data",
+                  "hydroxyl radical footprinting data": "Hydroxyl radical footprinting data"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -4586,16 +4609,16 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "model archive": "MODEL ARCHIVE",
                   "pdb": "PDB",
-                  "empiar": "EMPIAR",
-                  "bmrb": "BMRB",
-                  "massive": "MASSIVE",
-                  "biogrid": "BioGRID",
-                  "other": "Other",
                   "emdb": "EMDB",
+                  "biogrid": "BioGRID",
+                  "pride": "PRIDE",
+                  "other": "Other",
+                  "empiar": "EMPIAR",
+                  "massive": "MASSIVE",
                   "sasbdb": "SASBDB",
-                  "pride": "PRIDE"
+                  "bmrb": "BMRB",
+                  "model archive": "MODEL ARCHIVE"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -4838,8 +4861,8 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "all": "ALL",
-                  "any": "ANY"
+                  "any": "ANY",
+                  "all": "ALL"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -4883,9 +4906,9 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "lower and upper bound": "lower and upper bound",
+                  "upper bound": "upper bound",
                   "lower bound": "lower bound",
-                  "upper bound": "upper bound"
+                  "lower and upper bound": "lower and upper bound"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -5051,8 +5074,8 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "rmsd": "RMSD",
                   "drmsd": "dRMSD",
+                  "rmsd": "RMSD",
                   "other": "other"
                },
                "CONTENT_CLASSES": [],
@@ -5070,8 +5093,8 @@
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
                   "other": "Other",
-                  "partitioning (k-means)": "Partitioning (k-means)",
-                  "hierarchical": "Hierarchical"
+                  "hierarchical": "Hierarchical",
+                  "partitioning (k-means)": "Partitioning (k-means)"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -5314,10 +5337,10 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "modeling workflow or script": "Modeling workflow or script",
                   "modeling or post-processing output": "Modeling or post-processing output",
-                  "other": "Other",
+                  "modeling workflow or script": "Modeling workflow or script",
                   "input data or restraints": "Input data or restraints",
+                  "other": "Other",
                   "visualization script": "Visualization script"
                },
                "CONTENT_CLASSES": [],
@@ -5348,25 +5371,25 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "ccp4": "CCP4",
-                  "clustalw": "CLUSTALW",
-                  "other": "Other",
-                  "a2m": "A2M",
-                  "pir/nbrf": "PIR/NBRF",
                   "pdb": "PDB",
-                  "cif": "CIF",
-                  "hdf5": "HDF5",
-                  "a3m": "A3M",
-                  "tif": "TIF",
-                  "txt": "TXT",
-                  "pdf": "PDF",
-                  "jpg": "JPG",
-                  "png": "PNG",
+                  "clustalw": "CLUSTALW",
                   "dcd": "DCD",
-                  "fasta": "FASTA",
-                  "pgm": "PGM",
+                  "txt": "TXT",
+                  "tif": "TIF",
                   "mrc": "MRC",
-                  "gif": "GIF"
+                  "pgm": "PGM",
+                  "a3m": "A3M",
+                  "hdf5": "HDF5",
+                  "gif": "GIF",
+                  "fasta": "FASTA",
+                  "jpg": "JPG",
+                  "other": "Other",
+                  "png": "PNG",
+                  "pdf": "PDF",
+                  "ccp4": "CCP4",
+                  "cif": "CIF",
+                  "a2m": "A2M",
+                  "pir/nbrf": "PIR/NBRF"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -5588,8 +5611,8 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "doi": "DOI",
-                  "supplementary files": "Supplementary Files"
+                  "supplementary files": "Supplementary Files",
+                  "doi": "DOI"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -5606,9 +5629,9 @@
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
                   "publication": "Publication",
+                  "other": "Other",
                   "archive": "Archive",
-                  "file": "File",
-                  "other": "Other"
+                  "file": "File"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -5725,9 +5748,9 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
+                  "non-polymer": "non-polymer",
                   "polymer": "polymer",
                   "water": "water",
-                  "non-polymer": "non-polymer",
                   "other": "other"
                },
                "CONTENT_CLASSES": [],
@@ -5744,11 +5767,11 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "atom": "atom",
-                  "pseudo site": "pseudo site",
                   "residue": "residue",
                   "residue range": "residue range",
-                  "ligand": "ligand"
+                  "pseudo site": "pseudo site",
+                  "ligand": "ligand",
+                  "atom": "atom"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -5858,9 +5881,9 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
+                  "x-axis": "x-axis",
                   "y-axis": "y-axis",
-                  "z-axis": "z-axis",
-                  "x-axis": "x-axis"
+                  "z-axis": "z-axis"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -6211,8 +6234,8 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "all": "ALL",
-                  "any": "ANY"
+                  "any": "ANY",
+                  "all": "ALL"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -6242,12 +6265,12 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "outer surface": "outer surface",
-                  "plane": "plane",
                   "center": "center",
                   "axis": "axis",
+                  "other": "other",
                   "inner surface": "inner surface",
-                  "other": "other"
+                  "outer surface": "outer surface",
+                  "plane": "plane"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -6277,11 +6300,11 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "lower and upper bound": "lower and upper bound",
-                  "lower bound": "lower bound",
-                  "upper bound": "upper bound",
                   "harmonic": "harmonic",
-                  "other": "other"
+                  "other": "other",
+                  "lower bound": "lower bound",
+                  "lower and upper bound": "lower and upper bound",
+                  "upper bound": "upper bound"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -6398,9 +6421,9 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "inner half": "inner half",
                   "outer half": "outer half",
-                  "other": "other"
+                  "other": "other",
+                  "inner half": "inner half"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -6545,12 +6568,12 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "plane": "plane",
-                  "torus": "torus",
-                  "sphere": "sphere",
+                  "half-torus": "half-torus",
                   "axis": "axis",
                   "other": "other",
-                  "half-torus": "half-torus"
+                  "torus": "torus",
+                  "sphere": "sphere",
+                  "plane": "plane"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -6660,9 +6683,9 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "xy-plane": "xy-plane",
                   "xz-plane": "xz-plane",
-                  "yz-plane": "yz-plane"
+                  "yz-plane": "yz-plane",
+                  "xy-plane": "xy-plane"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -7751,15 +7774,15 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "medoid": "medoid",
-                  "centroid": "centroid",
-                  "closest to the average": "closest to the average",
-                  "other selction criteria": "other selction criteria",
-                  "target function": "target function",
                   "lowest energy": "lowest energy",
-                  "best scoring model": "best scoring model",
+                  "target function": "target function",
+                  "fewest violations": "fewest violations",
+                  "other selction criteria": "other selction criteria",
+                  "closest to the average": "closest to the average",
+                  "centroid": "centroid",
                   "minimized average structure": "minimized average structure",
-                  "fewest violations": "fewest violations"
+                  "medoid": "medoid",
+                  "best scoring model": "best scoring model"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -7967,11 +7990,11 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "none": "none",
-                  "rmsd": "RMSD",
                   "energy/score": "energy/score",
+                  "none": "none",
+                  "other": "other",
                   "drmsd": "dRMSD",
-                  "other": "other"
+                  "rmsd": "RMSD"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -8085,12 +8108,12 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "validation": "validation",
-                  "rescore": "rescore",
-                  "cluster": "cluster",
-                  "none": "none",
                   "filter": "filter",
-                  "other": "other"
+                  "cluster": "cluster",
+                  "rescore": "rescore",
+                  "none": "none",
+                  "other": "other",
+                  "validation": "validation"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -8307,8 +8330,8 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "single molecule": "Single molecule",
-                  "fraction of bulk": "Fraction of bulk"
+                  "fraction of bulk": "Fraction of bulk",
+                  "single molecule": "Single molecule"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -8824,8 +8847,8 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "ca": "CA",
-                  "cb": "CB"
+                  "cb": "CB",
+                  "ca": "CA"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -9228,9 +9251,9 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "lower and upper bound": "lower and upper bound",
+                  "upper bound": "upper bound",
                   "lower bound": "lower bound",
-                  "upper bound": "upper bound"
+                  "lower and upper bound": "lower and upper bound"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -9587,8 +9610,8 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "multiple": "Multiple",
-                  "single": "Single"
+                  "single": "Single",
+                  "multiple": "Multiple"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -9938,9 +9961,9 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": false,
                "ENUMERATION": {
+                  "5": 5,
                   "2": 2,
                   "4": 4,
-                  "5": 5,
                   "3": 3,
                   "1": 1
                },
@@ -10299,11 +10322,11 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "comparative model": "comparative model",
-                  "integrative model": "integrative model",
                   "ab initio model": "ab initio model",
+                  "comparative model": "comparative model",
+                  "other": "other",
                   "experimental model": "experimental model",
-                  "other": "other"
+                  "integrative model": "integrative model"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -12034,8 +12057,8 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": false,
                "ENUMERATION": {
-                  "0": 0,
-                  "1": 1
+                  "1": 1,
+                  "0": 0
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -12316,8 +12339,8 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": false,
                "ENUMERATION": {
-                  "0": 0,
-                  "1": 1
+                  "1": 1,
+                  "0": 0
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -12556,12 +12579,12 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "package": "package",
-                  "program": "program",
-                  "jiffy": "jiffy",
                   "filter": "filter",
                   "library": "library",
-                  "other": "other"
+                  "program": "program",
+                  "other": "other",
+                  "jiffy": "jiffy",
+                  "package": "package"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
@@ -12970,15 +12993,15 @@
                "FILTER_TYPES": [],
                "IS_CHAR_TYPE": true,
                "ENUMERATION": {
-                  "hetad": "HETAD",
-                  "atoms": "ATOMS",
                   "hetas": "HETAS",
-                  "hetic": "HETIC",
+                  "hetad": "HETAD",
                   "hetac": "HETAC",
                   "hetai": "HETAI",
-                  "hetain": "HETAIN",
+                  "atomp": "ATOMP",
                   "atomn": "ATOMN",
-                  "atomp": "ATOMP"
+                  "hetic": "HETIC",
+                  "atoms": "ATOMS",
+                  "hetain": "HETAIN"
                },
                "CONTENT_CLASSES": [],
                "SUB_CATEGORIES": []
