@@ -61,8 +61,8 @@
             "rcsb_multiple_source_flag": {
                "type": "string",
                "enum": [
-                  "Y",
-                  "N"
+                  "N",
+                  "Y"
                ],
                "description": "A code indicating the entity has multiple biological sources.\n"
             },
@@ -73,19 +73,19 @@
             "src_method": {
                "type": "string",
                "enum": [
-                  "syn",
+                  "man",
                   "nat",
-                  "man"
+                  "syn"
                ],
                "description": "The method by which the sample for the entity was produced.\n Entities isolated directly from natural sources (tissues, soil\n samples etc.) are expected to have further information in the\n ENTITY_SRC_NAT category. Entities isolated from genetically\n manipulated sources are expected to have further information in\n the ENTITY_SRC_GEN category."
             },
             "type": {
                "type": "string",
                "enum": [
+                  "branched",
+                  "macrolide",
                   "non-polymer",
                   "polymer",
-                  "macrolide",
-                  "branched",
                   "water"
                ],
                "description": "Defines the type of the entity.\n\n Polymer entities are expected to have corresponding\n ENTITY_POLY and associated entries.\n\n Non-polymer entities are expected to have corresponding\n CHEM_COMP and associated entries.\n\n Water entities are not expected to have corresponding\n entries in the ENTITY category."
@@ -244,9 +244,9 @@
                "type": "string",
                "enum": [
                   "n",
-                  "yes",
+                  "no",
                   "y",
-                  "no"
+                  "yes"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer-to-monomer link different from that implied by\n _entity_poly.type."
             },
@@ -254,9 +254,9 @@
                "type": "string",
                "enum": [
                   "n",
-                  "yes",
+                  "no",
                   "y",
-                  "no"
+                  "yes"
                ],
                "description": "A flag to indicate whether the polymer contains at least\n one monomer that is not considered standard."
             },
@@ -301,11 +301,11 @@
             "rcsb_entity_polymer_type": {
                "type": "string",
                "enum": [
-                  "RNA",
+                  "DNA",
                   "NA-hybrid",
                   "Other",
                   "Protein",
-                  "DNA"
+                  "RNA"
                ],
                "description": "A coarse-grained polymer entity type."
             },
@@ -328,16 +328,16 @@
             "type": {
                "type": "string",
                "enum": [
-                  "polydeoxyribonucleotide",
                   "cyclic-pseudo-peptide",
-                  "polyribonucleotide",
+                  "other",
                   "peptide nucleic acid",
-                  "polysaccharide(D)",
-                  "polypeptide(L)",
-                  "polysaccharide(L)",
+                  "polydeoxyribonucleotide",
                   "polydeoxyribonucleotide/polyribonucleotide hybrid",
                   "polypeptide(D)",
-                  "other"
+                  "polypeptide(L)",
+                  "polyribonucleotide",
+                  "polysaccharide(D)",
+                  "polysaccharide(L)"
                ],
                "description": "The type of the polymer."
             }
@@ -658,10 +658,10 @@
                "pdbx_seq_type": {
                   "type": "string",
                   "enum": [
+                     "Biological sequence",
                      "C-terminal tag",
                      "Linker",
-                     "N-terminal tag",
-                     "Biological sequence"
+                     "N-terminal tag"
                   ],
                   "description": "This data item povides additional information about the sequence type."
                },
@@ -1232,9 +1232,9 @@
                "source_type": {
                   "type": "string",
                   "enum": [
+                     "genetically engineered",
                      "natural",
-                     "synthetic",
-                     "genetically engineered"
+                     "synthetic"
                   ],
                   "description": "The source type for the entity\n"
                },
