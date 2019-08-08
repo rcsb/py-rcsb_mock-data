@@ -51,6 +51,9 @@
 # 20-May-2019 jdw add rcsb_prot_sec_struct_info filter primary categories from pdbx_core_entity_instance and
 #                 up-version pdbx_core_entity_instance to 6.0.1
 #  3-Jul-2019 jdw Updates for the latest changes in IHM dictionaries.
+# 17-Jul-2019 jdw Add DICT_LOCATOR_CONFIG_LIST
+# 22-Jul-2019 jdw Add DICT_HELPER_MODULE_PATH_MAP
+#  7-Aug-2019 jdw Add DICT_LOCATOR_CONFIG_MAP
 #
 # ExDB configuration file example
 ---
@@ -78,6 +81,57 @@ site_info:
     VRPT_DICT_LOCATOR: dictionaries/vrpt_mmcif_ext.dic
     VRPT_DICT_MAPPING_LOCATOR: dictionaries/vrpt_dictmap.json
     #
+    DICT_LOCATOR_CONFIG_LIST: PDBX_DICT_LOCATOR,RCSB_DICT_LOCATOR,VRPT_DICT_LOCATOR
+    DICT_LOCATOR_CONFIG_MAP:
+      pdbx:
+        - PDBX_DICT_LOCATOR
+        - RCSB_DICT_LOCATOR
+      pdbx_core:
+        - PDBX_DICT_LOCATOR
+        - RCSB_DICT_LOCATOR
+        - VRPT_DICT_LOCATOR
+      chem_comp_core:
+        - PDBX_DICT_LOCATOR
+        - RCSB_DICT_LOCATOR
+      bird_chem_comp_core:
+        - PDBX_DICT_LOCATOR
+        - RCSB_DICT_LOCATOR
+      bird:
+        - PDBX_DICT_LOCATOR
+        - RCSB_DICT_LOCATOR
+      bird_family:
+        - PDBX_DICT_LOCATOR
+        - RCSB_DICT_LOCATOR
+      repository_holdings:
+        - PDBX_DICT_LOCATOR
+        - RCSB_DICT_LOCATOR
+      entity_sequence_clusters:
+        - PDBX_DICT_LOCATOR
+        - RCSB_DICT_LOCATOR
+      data_exchange:
+        - PDBX_DICT_LOCATOR
+        - RCSB_DICT_LOCATOR
+      drugbank_core:
+        - PDBX_DICT_LOCATOR
+        - RCSB_DICT_LOCATOR
+      ihm_dev:
+        - PDBX_DICT_LOCATOR
+        - IHMDEV_DICT_LOCATOR
+        - FLR_DICT_LOCATOR
+        - RCSB_DICT_LOCATOR
+      ihm_dev_full:
+        - PDBX_DICT_LOCATOR
+        - IHMDEV_DICT_LOCATOR
+        - FLR_DICT_LOCATOR
+        - RCSB_DICT_LOCATOR
+
+    DICT_HELPER_MODULE_PATH_MAP:
+      rcsb.db.helpers.DictMethodEntryHelper: rcsb.db.helpers.DictMethodEntryHelper
+      rcsb.db.helpers.DictMethodChemRefHelper: rcsb.db.helpers.DictMethodChemRefHelper
+      rcsb.db.helpers.DictMethodEntityHelper: rcsb.db.helpers.DictMethodEntityHelper
+      rcsb.db.helpers.DictMethodAssemblyHelper: rcsb.db.helpers.DictMethodAssemblyHelper
+      rcsb.db.helpers.DictMethodEntityInstanceHelper: rcsb.db.helpers.DictMethodEntityInstanceHelper
+    #
     PROVENANCE_INFO_LOCATOR: provenance/rcsb_extend_provenance_info.json
     APP_DATA_TYPE_INFO_LOCATOR: data_type_info/app_data_type_mapping.cif
     DICT_HELPER_MODULE: rcsb.db.helpers.DictInfoHelper
@@ -91,7 +145,6 @@ site_info:
     NCBI_TAXONOMY_PATH: NCBI
     ENZYME_CLASSIFICATION_DATA_PATH: ec
     SIFTS_SUMMARY_PATH: sifts-summary
-
     #
     SCHEMA_DEF_LOCATOR_PATH: schema
     JSON_SCHEMA_LOCATOR_PATH: json-schema
@@ -133,7 +186,7 @@ schema_catalog_info:
   #
   # Schema subset used for CI testing -
   #
-  SCHEMA_NAMES_TEST: pdbx,pdbx_core,chem_comp_core,bird_chem_comp_core
+  SCHEMA_NAMES_TEST: pdbx,pdbx_core,chem_comp_core,bird_chem_comp_core,ihm_dev
   DATATYPING_TEST: ANY,SQL
   SCHEMA_TYPES_TEST: rcsb,json,bson
   SCHEMA_LEVELS_TEST: min,full
@@ -481,8 +534,6 @@ dictionary_helper:
                 - CATEGORY_NAME: ihm_geometric_object_plane
                 - CATEGORY_NAME: ihm_geometric_object_distance_restraint
         #
-        #
-        #
         ?       - GENERATED_CONTENT
                 - pdbx
         :       - CATEGORY_NAME: rcsb_load_status
@@ -517,14 +568,6 @@ dictionary_helper:
                   ATTRIBUTE_NAME_LIST:
                       - rcsb_entity_id
                 - CATEGORY_NAME: rcsb_entity_poly_info
-                  ATTRIBUTE_NAME_LIST:
-                      - ordinal_id
-                      - entry_id
-                      - entity_id
-                      - comp_id
-                      - chem_comp_count
-                      - entity_sequence_length
-                      - is_modified
                 - CATEGORY_NAME: pdbx_struct_assembly_gen
                   ATTRIBUTE_NAME_LIST:
                       - ordinal
@@ -533,26 +576,8 @@ dictionary_helper:
                       - rcsb_details
                       - rcsb_candidate_assembly
                 - CATEGORY_NAME: rcsb_entry_container_identifiers
-                  ATTRIBUTE_NAME_LIST:
-                      - entry_id
-                      - entity_ids
-                      - polymer_entity_ids
-                      - non-polymer_entity_ids
-                      - assembly_ids
-                      - software_programs_combined
                 - CATEGORY_NAME: rcsb_entity_container_identifiers
-                  ATTRIBUTE_NAME_LIST:
-                      - entry_id
-                      - entity_id
-                      - asym_ids
-                      - auth_asym_ids
-                      - chem_comp_ligands
-                      - chem_comp_monomers
-                      - nonpolymer_comp_id
                 - CATEGORY_NAME: rcsb_assembly_container_identifiers
-                  ATTRIBUTE_NAME_LIST:
-                      - entry_id
-                      - assembly_id
                 - CATEGORY_NAME: rcsb_entity_source_organism
                 - CATEGORY_NAME: rcsb_entity_host_organism
                 - CATEGORY_NAME: entity
@@ -570,7 +595,7 @@ dictionary_helper:
                       - rcsb_enzyme_class_combined_provenance_code
                 - CATEGORY_NAME: rcsb_entry_info
                 - CATEGORY_NAME: rcsb_assembly_info
-                - CATEGORY_NAME: rcsb_prot_sec_struct_info
+                #- CATEGORY_NAME: rcsb_prot_sec_struct_info
                 - CATEGORY_NAME: entity_poly
                   ATTRIBUTE_NAME_LIST:
                       - rcsb_entity_polymer_type
@@ -580,6 +605,9 @@ dictionary_helper:
                       - rcsb_deletion_count
                       - rcsb_insertion_count
                       - rcsb_sample_sequence_length
+                      - rcsb_artifact_monomer_count
+                      - rcsb_non_std_monomer_count
+                      - rcsb_non_std_monomers
                 - CATEGORY_NAME: rcsb_accession_info
                   ATTRIBUTE_NAME_LIST:
                       - entry_id
@@ -630,9 +658,11 @@ dictionary_helper:
                 - CATEGORY_NAME: pdbx_validate_planes_atom
                 - CATEGORY_NAME: pdbx_validate_main_chain_plane
                 - CATEGORY_NAME: pdbx_validate_polymer_linkage
-                #- CATEGORY_NAME: rcsb_entity_instance_domain
-                - CATEGORY_NAME: rcsb_entity_instance_domain_scop
-                - CATEGORY_NAME: rcsb_entity_instance_domain_cath
+                - CATEGORY_NAME: rcsb_polymer_instance_feature
+                - CATEGORY_NAME: rcsb_polymer_instance_feature_summary
+                - CATEGORY_NAME: rcsb_polymer_entity_feature
+                - CATEGORY_NAME: rcsb_polymer_entity_feature_summary
+                - CATEGORY_NAME: rcsb_struct_conn
                 # - CATEGORY_NAME: pdbx_distant_solvent_atoms
                 #
         ?       - GENERATED_CONTENT
@@ -1218,6 +1248,9 @@ dictionary_helper:
         ?       - ENTITY_INSTANCE
                 - pdbx_core
         :       - rcsb_load_status
+        ?       - ENTITY_MONOMER
+                - pdbx_core
+        :       - rcsb_load_status
         ?       - ASSEMBLY
                 - pdbx_core
         :       - rcsb_load_status
@@ -1346,7 +1379,7 @@ schemadef_helper:
                 - drugbank_info
                 - drugbank_target
             EXCLUDE: []
-    block_attributes:
+    schema_block_attributes:
         ihm_dev:
             ATTRIBUTE_NAME: structure_id
             CIF_TYPE_CODE: code
@@ -1398,7 +1431,7 @@ schemadef_helper:
             MAX_WIDTH: 12
             METHOD: datablockid()
     #
-    exclude_attributes:
+    schema_exclude_attributes:
         pdbx_core:
             - CATEGORY_NAME: cell
               ATTRIBUTE_NAME: length_a_esd
@@ -1537,7 +1570,7 @@ document_helper:
             - NAME: drugbank_core
               VERSION: 1.1.0
     #
-    schema_content_filters:
+    collection_schema_content_filters:
         ihm_dev:
             INCLUDE: []
             EXCLUDE:
@@ -1623,7 +1656,6 @@ document_helper:
                 - rcsb_entity_instance_validation_container_identifiers
                 - rcsb_entity_instance_container_identifiers
                 - rcsb_entity_monomer_container_identifiers
-                - rcsb_entity_poly_info
                 - entity_poly_seq
                 - pdbx_poly_seq_scheme
                 - pdbx_nonpoly_scheme
@@ -1652,10 +1684,14 @@ document_helper:
                 - pdbx_vrpt_mogul_angle_outliers
                 - pdbx_vrpt_mogul_torsion_outliers
                 - pdbx_vrpt_mogul_ring_outliers
-                - rcsb_entity_instance_domain
-                - rcsb_entity_instance_domain_scop
-                - rcsb_entity_instance_domain_cath
+                - rcsb_polymer_instance_feature
+                - rcsb_polymer_instance_feature_summary
                 - struct_asym
+                - rcsb_struct_conn
+                - struct_ref
+                - struct_ref_seq
+                - struct_ref_seq_dif
+                - rcsb_poly_info
             SLICE: ENTITY
         pdbx_core_entity_monomer:
             INCLUDE: []
@@ -1764,6 +1800,7 @@ document_helper:
             INCLUDE: []
             EXCLUDE:
                 - struct_conf
+                - struct_conn
                 - struct_site
                 - struct_site_gen
                 - struct_sheet_hbond
@@ -1937,6 +1974,49 @@ document_helper:
                 - drugbank_container_identifiers
             EXCLUDE: []
             SLICE:
+    #
+    collection_attribute_content_filters:
+        pdbx_core:
+            - CATEGORY_NAME: cell
+              ATTRIBUTE_NAME_LIST:
+                - length_a_esd
+                - length_b_esd
+                - length_c_esd
+                - angle_alpha_esd
+                - angle_beta_esd
+                - angle_gamma_esd
+                - reciprocal_angle_alpha
+                - reciprocal_angle_beta
+                - reciprocal_angle_gamma
+        chem_comp_core:
+            - CATEGORY_NAME: chem_comp
+              ATTRIBUTE_NAME_LIST:
+                - pdbx_model_coordinates_details
+                - pdbx_model_coordinates_missing_flag
+                - pdbx_ideal_coordinates_details
+                - pdbx_ideal_coordinates_missing_flag
+                - pdbx_model_coordinates_db_code
+                - pdbx_synonyms
+                - pdbx_type
+            - CATEGORY_NAME: pdbx_chem_comp_audit
+              ATTRIBUTE_NAME_LIST:
+                - processing_site
+                - annotator
+        bird_chem_comp_core:
+            - CATEGORY_NAME: chem_comp
+              ATTRIBUTE_NAME_LIST:
+                - pdbx_model_coordinates_details
+                - pdbx_model_coordinates_missing_flag
+                - pdbx_ideal_coordinates_details
+                - pdbx_ideal_coordinates_missing_flag
+                - pdbx_model_coordinates_db_code
+                - pdbx_synonyms
+                - pdbx_type
+            - CATEGORY_NAME: pdbx_chem_comp_audit
+              ATTRIBUTE_NAME_LIST:
+                - processing_site
+                - annotator
+    #
     collection_private_keys:
         ihm_dev:
             - NAME: entry.id
@@ -1972,26 +2052,20 @@ document_helper:
               MANDATORY: True
               UPDATE_ON_LOAD: False
             - NAME: entity.id
-              CATEGORY_NAME: entity
-              ATTRIBUTE_NAME: id
+              CATEGORY_NAME: rcsb_entity_container_identifiers
+              ATTRIBUTE_NAME: entity_id
               PRIVATE_DOCUMENT_NAME: _entity_id
               MANDATORY: True
               UPDATE_ON_LOAD: False
             - NAME: chem_comp.id
-              CATEGORY_NAME: pdbx_entity_nonpoly
-              ATTRIBUTE_NAME: comp_id
+              CATEGORY_NAME: rcsb_entity_container_identifiers
+              ATTRIBUTE_NAME: nonpolymer_comp_id
               PRIVATE_DOCUMENT_NAME: _comp_id
               MANDATORY: False
               UPDATE_ON_LOAD: False
-            - NAME: _pdbx_entity_nonpoly.rcsb_prd_id
-              CATEGORY_NAME: pdbx_entity_nonpoly
-              ATTRIBUTE_NAME: rcsb_prd_id
-              PRIVATE_DOCUMENT_NAME: _prd_id
-              MANDATORY: False
-              UPDATE_ON_LOAD: False
-            - NAME: _entity_poly.rcsb_prd_id
-              CATEGORY_NAME: entity_poly
-              ATTRIBUTE_NAME: rcsb_prd_id
+            - NAME: rcsb_entity_container_identifiers.prd_id
+              CATEGORY_NAME: rcsb_entity_container_identifiers
+              ATTRIBUTE_NAME: prd_id
               PRIVATE_DOCUMENT_NAME: _prd_id
               MANDATORY: False
               UPDATE_ON_LOAD: False
@@ -2120,8 +2194,8 @@ document_helper:
               MANDATORY: True
               UPDATE_ON_LOAD: False
             - NAME: pdbx_struct_assembly.id
-              CATEGORY_NAME: pdbx_struct_assembly
-              ATTRIBUTE_NAME: id
+              CATEGORY_NAME: rcsb_assembly_container_identifiers
+              ATTRIBUTE_NAME: assembly_id
               PRIVATE_DOCUMENT_NAME: _assembly_id
               MANDATORY: True
               UPDATE_ON_LOAD: False
@@ -2133,8 +2207,8 @@ document_helper:
               UPDATE_ON_LOAD: True
         pdbx_core_entry:
             - NAME: entry.id
-              CATEGORY_NAME: entry
-              ATTRIBUTE_NAME: id
+              CATEGORY_NAME: rcsb_entry_container_identifiers
+              ATTRIBUTE_NAME: entry_id
               PRIVATE_DOCUMENT_NAME: _entry_id
               MANDATORY: True
               UPDATE_ON_LOAD: False
@@ -2146,8 +2220,8 @@ document_helper:
               UPDATE_ON_LOAD: True
         chem_comp_core:
             - NAME: chem_comp.id
-              CATEGORY_NAME: chem_comp
-              ATTRIBUTE_NAME: id
+              CATEGORY_NAME: rcsb_chem_comp_container_identifiers
+              ATTRIBUTE_NAME: comp_id
               PRIVATE_DOCUMENT_NAME: _comp_id
               MANDATORY: True
               UPDATE_ON_LOAD: False
@@ -2177,8 +2251,8 @@ document_helper:
               MANDATORY: False
               UPDATE_ON_LOAD: True
         drugbank_core:
-            - NAME: drugbank_info.drugbank_id
-              CATEGORY_NAME: drugbank_info
+            - NAME: drugbank_container_identifiers.drugbank_id
+              CATEGORY_NAME: drugbank_container_identifiers
               ATTRIBUTE_NAME: drugbank_id
               PRIVATE_DOCUMENT_NAME: _drugbank_id
               MANDATORY: True
@@ -2564,9 +2638,21 @@ document_helper:
               HAS_UNIT_CARDINALITY: False
             - NAME: rcsb_enzyme_class_combined
               HAS_UNIT_CARDINALITY: False
-        pdbx_core_entity_instance:
-            - NAME: domain_class_lineage
+            - NAME: feature_ranges
               HAS_UNIT_CARDINALITY: False
+            - NAME: feature_positions
+              HAS_UNIT_CARDINALITY: False
+        pdbx_core_entity_instance:
+            - NAME: feature_class_lineage
+              HAS_UNIT_CARDINALITY: False
+            - NAME: feature_ranges
+              HAS_UNIT_CARDINALITY: False
+            - NAME: feature_positions
+              HAS_UNIT_CARDINALITY: False
+            - NAME: connect_target
+              HAS_UNIT_CARDINALITY: True
+            - NAME: connect_partner
+              HAS_UNIT_CARDINALITY: True
         pdbx_core_entity_instance_validation:
             - NAME: domain_class_lineage
               HAS_UNIT_CARDINALITY: False
