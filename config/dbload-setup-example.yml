@@ -30,7 +30,7 @@
 #  3-Mar-2019 jdw adjust release filter for chem_comp_* collections to accept only REL and REF_ONLY status codes.
 # 14-Mar-2019 jdw simplify the handling of versioning removing these from database and collection names and schema file names,
 #                 version configuration now managed in separate configuration options, NCBI_TAXONOMY_LOCATOR removed,
-#                 added configuration options NCBI_TAXONOMY_PATH and ENZYME_CLASSIFICATION_DATA_PATH, provide separate
+#                 added configuration options NCBI_TAXONOMY_CACHE_PATH and ENZYME_CLASSIFICATION_CACHE_PATH, provide separate
 #                 configuration options schema version assignment within collections, normalize chem_comp attributes
 #                 between chem_comp_core and bird_chem_comp_core collections, up-version api and json schema, add VRPT_REPO_PATH_ENV.
 # 17-Mar-2019 jdw add subcategory aggregate rcsb_macromolecular_names_combined
@@ -40,7 +40,7 @@
 # 31-Mar-2019 jdw add block_attributes: REF_PARENT_CATEGORY_NAME: REF_PARENT_ATTRIBUTE_NAME: to provide parent details for this
 #                 synthetic key
 #  1-Apr-2019 jdw add ihm_dev_full to relax schema content exclusions.
-#  6-Apr-2019 jdw add STRUCT_DOMAIN_CLASSIFICATION_DATA_PATH
+#  6-Apr-2019 jdw add STRUCT_DOMAIN_CLASSIFICATION_CACHE_PATH
 #  8-Apr-2019 jdw adding category rcsb_entity_instance_domain
 #  9-Apr-2019 jdw add tree node list, create moved instance level validation to entity_instance_validation
 # 25-Apr-2019 jdw suppress struct_asym in core_entity, add ncbi_taxonomy_scientific_name in source and host organism collections
@@ -52,9 +52,12 @@
 #                 up-version pdbx_core_entity_instance to 6.0.1
 #  3-Jul-2019 jdw Updates for the latest changes in IHM dictionaries.
 # 17-Jul-2019 jdw Add DICT_LOCATOR_CONFIG_LIST
-# 22-Jul-2019 jdw Add DICT_HELPER_MODULE_PATH_MAP
+# 22-Jul-2019 jdw Add DICT_METHOD_HELPER_MODULE_PATH_MAP
 #  7-Aug-2019 jdw Add DICT_LOCATOR_CONFIG_MAP
 # 11-Aug-2019 jdw Add DrugBank details
+# 15-Aug-2019 jdw Add EM_DIFFRACTION, EM_DIFFRACTION_SHELL, EM_DIFFRACTION_STATS to entry core
+# 22-Aug-2019 jdw Make configuration sections uniformly *_configuration.
+# 26-Aug-2019 jdw Further standardization of option terminology
 #
 # ExDB configuration file example
 ---
@@ -62,7 +65,29 @@ DEFAULT: {}
 #
 # Site specific path and server configuration options -
 #
-site_info:
+site_info_configuration:
+    CONFIG_SUPPORT_TOKEN: CONFIG_SUPPORT_TOKEN_ENV
+    #
+    # Database server connection details
+    #
+    MONGO_DB_HOST: localhost
+    MONGO_DB_PORT: '27017'
+    MONGO_DB_USER: ''
+    MONGO_DB_PASSWORD: ''
+    MYSQL_DB_HOST_NAME: localhost
+    MYSQL_DB_PORT_NUMBER: '3306'
+    _MYSQL_DB_USER_NAME: wrIzBGtCsQmkjc7tbEPQ3oEaOnpvivXaKcQsvXD6kn4KHMvA7LCL4O9GlAI=
+    _MYSQL_DB_PASSWORD: qXPp32Z6DhNVMwo9fQIK5+KB13c1Jd43E3Bn6LmJcSyXc0NAt4H/hwo/xglYpmELV5Vqaw==
+    MYSQL_DB_DATABASE_NAME: mysql
+    CRATE_DB_HOST: localhost
+    CRATE_DB_PORT: '4200'
+    COCKROACH_DB_HOST: localhost
+    COCKROACH_DB_PORT: '26257'
+    COCKROACH_DB_NAME: system
+    _COCKROACH_DB_USER_NAME: HR2ez8iLbEpvN+hXKIQS3qa6/QpiFRpf/WvrfHiwfjcL09E+iWTQJhsxTsw=
+    #
+    # Primary repository data and related computed repository data paths
+    #
     BIRD_REPO_PATH: MOCK_BIRD_REPO
     BIRD_FAMILY_REPO_PATH: MOCK_BIRD_FAMILY_REPO
     BIRD_CHEM_COMP_REPO_PATH: MOCK_BIRD_CC_REPO
@@ -74,15 +99,178 @@ site_info:
     VRPT_REPO_PATH_ENV: VRPT_REPO_PATH_ALT
     #
     RCSB_SEQUENCE_CLUSTER_DATA_PATH: cluster_data/mmseqs-20180608
-    PDBX_DICT_LOCATOR: dictionaries/mmcif_pdbx_v5_next.dic
-    RCSB_DICT_LOCATOR: dictionaries/rcsb_mmcif_ext_v1.dic
-    IHMDEV_DICT_LOCATOR: dictionaries/ihm-extension.dic
-    FLR_DICT_LOCATOR: dictionaries/flr-extension.dic
     #
-    VRPT_DICT_LOCATOR: dictionaries/vrpt_mmcif_ext.dic
-    VRPT_DICT_MAPPING_LOCATOR: dictionaries/vrpt_dictmap.json
+    # Supporting and integrated resource data cache directory names
     #
-    DICT_LOCATOR_CONFIG_LIST: PDBX_DICT_LOCATOR,RCSB_DICT_LOCATOR,VRPT_DICT_LOCATOR
+    DRUGBANK_CACHE_DIR: DrugBank
+    _DRUGBANK_AUTH_USERNAME: 0qrpNd4OhGuVsJqEpcsAVEovZ0hl6QkgxmbTy3bPssd06Z9tuM6bJqgsWwmFCd0JnjIMIEWyKPMmF1pI5g==
+    _DRUGBANK_AUTH_PASSWORD: lA/K132i8DOtLdMHfm3gpNqprZ6ABKjsCRxfcXIMnxpKQzBv/B6dmC7x1vRO86JhqdT0b84=
+    #
+    CHEM_COMP_MODEL_CACHE_DIR: chem_comp_models
+    NCBI_TAXONOMY_CACHE_DIR: NCBI
+    ENZYME_CLASSIFICATION_CACHE_DIR: ec
+    STRUCT_DOMAIN_CLASSIFICATION_CACHE_DIR: domains_struct
+    SIFTS_SUMMARY_CACHE_DIR: sifts_summary
+    DICTIONARY_CACHE_DIR: dictionaries
+    DATA_TYPE_INFO_CACHE_DIR: data_type_and_coverage
+    REPO_UTIL_CACHE_DIR: repo_util
+    #
+    PROVENANCE_INFO_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/master/provenance/rcsb_extend_provenance_info.json
+    PROVENANCE_INFO_CACHE_DIR:  provenance
+    #
+    SCHEMA_DEFINITION_LOCATOR_PATH: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/master/schema_definitions
+    SCHEMA_DEFINITION_CACHE_DIR: schema_definitions
+    JSON_SCHEMA_DEFINITION_LOCATOR_PATH: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/master/json_schema_definitions
+    JSON_SCHEMA_DEFINITION_CACHE_DIR: json_schema_definitions
+    #
+    # Helper class binding and mappings
+    #
+    DICT_METHOD_HELPER_MODULE_PATH_MAP:
+      rcsb.db.helpers.DictMethodEntryHelper: rcsb.db.helpers.DictMethodEntryHelper
+      rcsb.db.helpers.DictMethodChemRefHelper: rcsb.db.helpers.DictMethodChemRefHelper
+      rcsb.db.helpers.DictMethodEntityHelper: rcsb.db.helpers.DictMethodEntityHelper
+      rcsb.db.helpers.DictMethodAssemblyHelper: rcsb.db.helpers.DictMethodAssemblyHelper
+      rcsb.db.helpers.DictMethodEntityInstanceHelper: rcsb.db.helpers.DictMethodEntityInstanceHelper
+
+    CONTENT_DEF_HELPER_MODULE: rcsb.db.helpers.ContentDefinitionHelper
+    DOCUMENT_DEF_HELPER_MODULE: rcsb.db.helpers.DocumentDefinitionHelper
+#
+# Inventory of current schema defintions and derivative collection types.
+#
+database_catalog_configuration:
+  # All defined database definitions -
+  DATABASE_NAMES_ALL: pdbx,pdbx_core,chem_comp,chem_comp_core,bird,bird_family,bird_chem_comp,bird_chem_comp_core,repository_holdings,sequence_clusters,data_exchange,drugbank_core,ihm_dev
+  DATATYPING_ALL: ANY,SQL
+  ENCODING_TYPES_ALL: rcsb,json,bson
+  VALIDATION_LEVELS_ALL: min,full
+  #
+  #  Databases in active use -
+  #
+  DATABASE_NAMES_DEPLOYED: pdbx_core,chem_comp_core,bird_chem_comp_core,repository_holdings,sequence_clusters,data_exchange,drugbank_core,ihm_dev
+  DATATYPING_DEPLOYED: ANY,SQL
+  ENCODING_TYPES_DEPLOYED: rcsb,json,bson
+  VALIDATION_LEVELS_DEPLOYED: min,full
+  #
+  # Database subset used for CI testing -
+  #
+  DATABASE_NAMES_TEST: chem_comp_core,bird_chem_comp_core,pdbx_core
+  DATATYPING_TEST: ANY,SQL
+  ENCODING_TYPES_TEST: rcsb,json,bson
+  VALIDATION_LEVELS_TEST: min,full
+  #
+
+#
+# Some schema details for integrated collections -
+#
+sequence_clusters_configuration:
+    DATABASE_NAME: sequence_clusters
+    DATABASE_VERSION_STRING: v5
+    COLLECTION_ENTITY_MEMBERS: entity_members
+    COLLECTION_ENTITY_MEMBERS_INDEX: data_set_id,entry_id,entity_id
+    COLLECTION_CLUSTER_MEMBERS: cluster_members
+    COLLECTION_CLUSTER_MEMBERS_INDEX: data_set_id,identity,cluster_id
+    COLLECTION_VERSION_STRING: 1.1.0
+    ENTITY_SCHEMA_NAME: rcsb_entity_sequence_cluster_entity_list
+    CLUSTER_SCHEMA_NAME: rcsb_entity_sequence_cluster_identifier_list
+    SEQUENCE_IDENTITY_LEVELS: 100,95,90,70,50,30
+    COLLECTION_CLUSTER_PROVENANCE: cluster_provenance
+    PROVENANCE_KEY_NAME: rcsb_entity_sequence_cluster_prov
+    INSTANCE_DATA_TYPE_INFO_FILENAME: scan-sequence_clusters-type-map.json
+repository_holdings_configuration:
+    DATABASE_NAME: repository_holdings
+    DATABASE_VERSION_STRING: v5
+    COLLECTION_HOLDINGS_UPDATE: repository_holdings_update
+    COLLECTION_HOLDINGS_CURRENT: repository_holdings_current
+    COLLECTION_HOLDINGS_UNRELEASED: repository_holdings_unreleased
+    COLLECTION_HOLDINGS_PRERELEASE: repository_holdings_prerelease
+    COLLECTION_HOLDINGS_REMOVED: repository_holdings_removed
+    COLLECTION_HOLDINGS_REMOVED_AUTHORS: repository_holdings_removed_audit_authors
+    COLLECTION_HOLDINGS_SUPERSEDED: repository_holdings_superseded
+    COLLECTION_HOLDINGS_TRANSFERRED: repository_holdings_transferred
+    COLLECTION_HOLDINGS_INSILICO_MODELS: repository_holdings_insilico_models
+    COLLECTION_VERSION_STRING: 1.1.0
+
+data_exchange_configuration:
+    DATABASE_NAME: data_exchange
+    DATABASE_VERSION_STRING: v5
+    COLLECTION_UPDATE_STATUS: rcsb_data_exchange_status
+    COLLECTION_VERSION_STRING: 1.1.0
+
+tree_node_lists_configuration:
+    DATABASE_NAME: tree_node_lists
+    DATABASE_VERSION_STRING: v5
+    COLLECTION_VERSION_STRING: 2.0.1
+    COLLECTION_TAXONOMY: tree_taxonomy_node_list
+    COLLECTION_ENZYME: tree_ec_node_list
+    COLLECTION_SCOP: tree_scop_node_list
+    COLLECTION_CATH: tree_cath_node_list
+
+#
+# Common configuration options for helper classes used for dictionary content generation
+# schema construction --
+#
+content_info_helper_configuration:
+    database_names:
+        ihm_dev:
+            VERSION: 1.1.1
+            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-ihm_dev-type-map.json
+        ihm_dev_full:
+            VERSION: 1.1.1
+            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-ihm_dev-type-map.json
+        pdbx:
+            VERSION: 5.1.0
+            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-pdbx-type-map.json
+        pdbx_core:
+            VERSION: 5.2.0
+            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-pdbx-type-map.json
+        bird:
+            VERSION: 5.1.0
+            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-bird-type-map.json
+        bird_family:
+            VERSION: 5.1.0
+            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-bird_family-type-map.json
+        chem_comp:
+            VERSION: 5.1.0
+            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-chem_comp-type-map.json
+        chem_comp_core:
+            VERSION: 5.1.0
+            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-chem_comp-type-map.json
+        bird_chem_comp:
+            VERSION: 5.1.0
+            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-chem_comp-type-map.json
+        bird_chem_comp_core:
+            VERSION: 5.1.0
+            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-chem_comp-type-map.json
+        pdb_distro:
+            VERSION: 1.1.0
+            INSTANCE_DATA_TYPE_INFO_FILENAME:
+        repository_holdings:
+            VERSION: 5.1.0
+            INSTANCE_DATA_TYPE_INFO_FILENAME:
+        sequence_clusters:
+            VERSION: 5.1.0
+            INSTANCE_DATA_TYPE_INFO_FILENAME:
+        data_exchange:
+            VERSION: 5.1.0
+            INSTANCE_DATA_TYPE_INFO_FILENAME:
+        drugbank_core:
+            VERSION: 5.1.0
+            INSTANCE_DATA_TYPE_INFO_FILENAME:
+    #
+    # Source dictionary locators -
+    #
+    PDBX_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/master/dictionaries/mmcif_pdbx_v5_next.dic
+    RCSB_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/master/dictionaries/rcsb_mmcif_ext_v1.dic
+    IHMDEV_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/master/dictionaries/ihm-extension.dic
+    FLR_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/master/dictionaries/flr-extension.dic
+    VRPT_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/master/dictionaries/vrpt_mmcif_ext.dic
+    VRPT_DICT_MAPPING_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/master/dictionaries/vrpt_dictmap.json
+    #
+    # Data type details and type mapping
+    APP_DATA_TYPE_INFO_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/master/data_type_and_coverage/app_data_type_mapping.cif
+    INSTANCE_DATA_TYPE_INFO_LOCATOR_PATH:  https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/master/data_type_and_coverage
+    #
+    # Database to dictionary mapping
     DICT_LOCATOR_CONFIG_MAP:
       pdbx:
         - PDBX_DICT_LOCATOR
@@ -91,6 +279,12 @@ site_info:
         - PDBX_DICT_LOCATOR
         - RCSB_DICT_LOCATOR
         - VRPT_DICT_LOCATOR
+      chem_comp:
+        - PDBX_DICT_LOCATOR
+        - RCSB_DICT_LOCATOR
+      bird_chem_comp:
+        - PDBX_DICT_LOCATOR
+        - RCSB_DICT_LOCATOR
       chem_comp_core:
         - PDBX_DICT_LOCATOR
         - RCSB_DICT_LOCATOR
@@ -106,7 +300,7 @@ site_info:
       repository_holdings:
         - PDBX_DICT_LOCATOR
         - RCSB_DICT_LOCATOR
-      entity_sequence_clusters:
+      sequence_clusters:
         - PDBX_DICT_LOCATOR
         - RCSB_DICT_LOCATOR
       data_exchange:
@@ -126,140 +320,6 @@ site_info:
         - FLR_DICT_LOCATOR
         - RCSB_DICT_LOCATOR
 
-    DICT_HELPER_MODULE_PATH_MAP:
-      rcsb.db.helpers.DictMethodEntryHelper: rcsb.db.helpers.DictMethodEntryHelper
-      rcsb.db.helpers.DictMethodChemRefHelper: rcsb.db.helpers.DictMethodChemRefHelper
-      rcsb.db.helpers.DictMethodEntityHelper: rcsb.db.helpers.DictMethodEntityHelper
-      rcsb.db.helpers.DictMethodAssemblyHelper: rcsb.db.helpers.DictMethodAssemblyHelper
-      rcsb.db.helpers.DictMethodEntityInstanceHelper: rcsb.db.helpers.DictMethodEntityInstanceHelper
-    #
-    PROVENANCE_INFO_LOCATOR: provenance/rcsb_extend_provenance_info.json
-    APP_DATA_TYPE_INFO_LOCATOR: data_type_info/app_data_type_mapping.cif
-    DICT_HELPER_MODULE: rcsb.db.helpers.DictInfoHelper
-    SCHEMADEF_HELPER_MODULE: rcsb.db.helpers.SchemaDefHelper
-    DOCUMENT_HELPER_MODULE: rcsb.db.helpers.SchemaDocumentHelper
-    DICT_METHOD_HELPER_MODULE: rcsb.db.helpers.DictMethodRunnerHelper
-    DRUGBANK_MAPPING_LOCATOR: DrugBank/drugbank_pdb_mapping.json
-    DRUGBANK_DATA_LOCATOR: DrugBank/full_database.xml.gz
-    DRUGBANK_AUTH_USERNAME: UeUwTS5FjMKe5DFx7/03GP7FJue5Orxnbn55c3uZenZ1gYWdEOOUg9i8QR7y9krt6V2udXnOEXdEHLaMRg==
-    DRUGBANK_AUTH_PASSWORD: oSdiphOUmP29ODnwzDYz4HOtrGdTqsKkMZkner2TqyS268xSLGWfmF9aY2Qaip++JHp9a58=
-    CONFIG_SUPPORT_TOKEN: CONFIG_SUPPORT_TOKEN_ENV
-    #
-    CCDC_MAPPING_LOCATOR: chem_comp_models/ccdc_pdb_mapping.json
-    #
-    NCBI_TAXONOMY_PATH: NCBI
-    ENZYME_CLASSIFICATION_DATA_PATH: ec
-    SIFTS_SUMMARY_PATH: sifts-summary
-    #
-    SCHEMA_DEF_LOCATOR_PATH: schema
-    JSON_SCHEMA_LOCATOR_PATH: json-schema
-    INSTANCE_DATA_TYPE_INFO_LOCATOR_PATH: data_type_info
-    #
-    STRUCT_DOMAIN_CLASSIFICATION_DATA_PATH: domains_struct
-    #
-    MONGO_DB_HOST: localhost
-    MONGO_DB_PORT: '27017'
-    MONGO_DB_USER: ''
-    MONGO_DB_PASSWORD: ''
-    MYSQL_DB_HOST_NAME: localhost
-    MYSQL_DB_PORT_NUMBER: '3306'
-    MYSQL_DB_USER_NAME: root
-    MYSQL_DB_PASSWORD: ChangeMeSoon
-    MYSQL_DB_DATABASE_NAME: mysql
-    CRATE_DB_HOST: localhost
-    CRATE_DB_PORT: '4200'
-    COCKROACH_DB_HOST: localhost
-    COCKROACH_DB_PORT: '26257'
-    COCKROACH_DB_NAME: system
-    COCKROACH_DB_USER_NAME: root
-#
-# Inventory of current databases and collections -
-#
-schema_catalog_info:
-  # All defined schema -
-  SCHEMA_NAMES_ALL: pdbx,pdbx_core,chem_comp,chem_comp_core,bird,bird_family,bird_chem_comp,bird_chem_comp_core,repository_holdings,entity_sequence_clusters,data_exchange,drugbank_core,ihm_dev
-  DATATYPING_ALL: ANY,SQL
-  SCHEMA_TYPES_ALL: rcsb,json,bson
-  SCHEMA_LEVELS_ALL: min,full
-  #
-  #  Schema in active use -
-  #
-  SCHEMA_NAMES_DEPLOYED: pdbx_core,chem_comp_core,bird_chem_comp_core,repository_holdings,entity_sequence_clusters,data_exchange,drugbank_core,ihm_dev
-  DATATYPING_DEPLOYED: ANY,SQL
-  SCHEMA_TYPES_DEPLOYED: rcsb,json,bson
-  SCHEMA_LEVELS_DEPLOYED: min,full
-  #
-  # Schema subset used for CI testing -
-  #
-  SCHEMA_NAMES_TEST: pdbx,pdbx_core,chem_comp_core,bird_chem_comp_core,ihm_dev
-  DATATYPING_TEST: ANY,SQL
-  SCHEMA_TYPES_TEST: rcsb,json,bson
-  SCHEMA_LEVELS_TEST: min,full
-  #
-  #SCHEMA_NAMES_TEST: pdbx_core,chem_comp_core,bird_chem_comp_core,repository_holdings,entity_sequence_clusters,data_exchange,drugbank_core
-  #DATATYPING_TEST: ANY,SQL
-  #SCHEMA_FORMATS_TEST: rcsb,json,bson
-  #SCHEMA_LEVELS_TEST: min,full#
-#
-# Some schema details for integrated collections -
-#
-entity_sequence_clusters:
-    DATABASE_NAME: sequence_clusters
-    DATABASE_VERSION_STRING: v5
-    COLLECTION_ENTITY_MEMBERS: entity_members
-    COLLECTION_ENTITY_MEMBERS_INDEX: data_set_id,entry_id,entity_id
-    COLLECTION_CLUSTER_MEMBERS: cluster_members
-    COLLECTION_CLUSTER_MEMBERS_INDEX: data_set_id,identity,cluster_id
-    COLLECTION_VERSION_STRING: 1.1.0
-    ENTITY_SCHEMA_NAME: rcsb_entity_sequence_cluster_entity_list
-    CLUSTER_SCHEMA_NAME: rcsb_entity_sequence_cluster_identifer_list
-    SEQUENCE_IDENTITY_LEVELS: 100,95,90,70,50,30
-    COLLECTION_CLUSTER_PROVENANCE: cluster_provenance
-    PROVENANCE_KEY_NAME: rcsb_entity_sequence_cluster_prov
-    #SCHEMA_NAME: entity_sequence_clusters
-    #SCHEMA_DEF_FILENAME_SQL: schema_def-entity_sequence_clusters-SQL.json
-    #SCHEMA_DEF_FILENAME_ANY: schema_def-entity_sequence_clusters-ANY.json
-    INSTANCE_DATA_TYPE_INFO_FILENAME: scan-entity_sequence_clusters-type-map.json
-repository_holdings:
-    DATABASE_NAME: repository_holdings
-    DATABASE_VERSION_STRING: v5
-    COLLECTION_HOLDINGS_UPDATE: repository_holdings_update
-    COLLECTION_HOLDINGS_CURRENT: repository_holdings_current
-    COLLECTION_HOLDINGS_UNRELEASED: repository_holdings_unreleased
-    COLLECTION_HOLDINGS_PRERELEASE: repository_holdings_prerelease
-    COLLECTION_HOLDINGS_REMOVED: repository_holdings_removed
-    COLLECTION_HOLDINGS_REMOVED_AUTHORS: repository_holdings_removed_audit_authors
-    COLLECTION_HOLDINGS_SUPERSEDED: repository_holdings_superseded
-    COLLECTION_HOLDINGS_TRANSFERRED: repository_holdings_transferred
-    COLLECTION_HOLDINGS_INSILICO_MODELS: repository_holdings_insilico_models
-    COLLECTION_VERSION_STRING: 1.1.0
-    #SCHEMA_NAME: entity_sequence_clusters
-    #SCHEMA_DEF_FILENAME_SQL: schema_def-repository_holdings-SQL.json
-    #SCHEMA_DEF_FILENAME_ANY: schema_def-repository_holdings-ANY.json
-    #INSTANCE_DATA_TYPE_INFO_FILENAME: scan-repository_holdings-type-map.json
-data_exchange:
-    DATABASE_NAME: data_exchange
-    DATABASE_VERSION_STRING: v5
-    COLLECTION_UPDATE_STATUS: rcsb_data_exchange_status
-    COLLECTION_VERSION_STRING: 1.1.0
-    # SCHEMA_NAME: data_exchange
-    #SCHEMA_DEF_FILENAME_SQL: schema_def-data_exchange-SQL.json
-    #SCHEMA_DEF_FILENAME_ANY: schema_def-data_exchange-ANY.json
-    #INSTANCE_DATA_TYPE_INFO_FILENAME: scan-data_exchange-type-map.json
-tree_node_lists:
-    DATABASE_NAME: tree_node_lists
-    DATABASE_VERSION_STRING: v5
-    COLLECTION_VERSION_STRING: 2.0.1
-    COLLECTION_TAXONOMY: tree_taxonomy_node_list
-    COLLECTION_ENZYME: tree_ec_node_list
-    COLLECTION_SCOP: tree_scop_node_list
-    COLLECTION_CATH: tree_cath_node_list
-
-#
-# Common configuration options for helper classes used for dictionary content generation
-# schema construction --
-#
-dictionary_helper:
     item_transformers:
         STRIP_WS:
             - CATEGORY_NAME: entity_poly
@@ -337,7 +397,6 @@ dictionary_helper:
                   VALUES:
                       - REL
                       - REF_ONLY
-                      #- OBS
         ?       - PUBLIC_RELEASE
                 - chem_comp_core
         :       - CATEGORY_NAME: chem_comp
@@ -345,7 +404,7 @@ dictionary_helper:
                   VALUES:
                       - REL
                       - REF_ONLY
-                      #- OBS
+                      # - OBS
         ?       - PUBLIC_RELEASE
                 - bird_chem_comp
         :       - CATEGORY_NAME: chem_comp
@@ -353,28 +412,24 @@ dictionary_helper:
                   VALUES:
                       - REL
                       - REF_ONLY
-                      #- OBS
         ?       - PUBLIC_RELEASE
                 - bird_chem_comp_core
         :       - CATEGORY_NAME: pdbx_reference_molecule
                   ATTRIBUTE_NAME: release_status
                   VALUES:
                       - REL
-                      #- OBS
         ?       - PUBLIC_RELEASE
                 - bird
         :       - CATEGORY_NAME: pdbx_reference_molecule
                   ATTRIBUTE_NAME: release_status
                   VALUES:
                       - REL
-                      #- OBS
         ?       - PUBLIC_RELEASE
                 - bird_family
         :       - CATEGORY_NAME: pdbx_reference_molecule_family
                   ATTRIBUTE_NAME: release_status
                   VALUES:
                       - REL
-                      #- OBS
     type_code_classes:
         iterable:
             - TYPE_CODE: ucode-alphanum-csv
@@ -472,7 +527,7 @@ dictionary_helper:
                 - CATEGORY_NAME: ihm_geometric_object_axis
                 - CATEGORY_NAME: ihm_geometric_object_plane
                 - CATEGORY_NAME: ihm_geometric_object_distance_restraint
-        #
+                - CATEGORY_NAME: rcsb_load_status
         ?       - GENERATED_CONTENT
                 - ihm_dev
         :       - CATEGORY_NAME: chem_comp_atom
@@ -538,6 +593,7 @@ dictionary_helper:
                 - CATEGORY_NAME: ihm_geometric_object_axis
                 - CATEGORY_NAME: ihm_geometric_object_plane
                 - CATEGORY_NAME: ihm_geometric_object_distance_restraint
+                - CATEGORY_NAME: rcsb_load_status
         #
         ?       - GENERATED_CONTENT
                 - pdbx
@@ -968,7 +1024,7 @@ dictionary_helper:
                       - id_codes_replaced_by
                 - CATEGORY_NAME: rcsb_schema_container_identifiers
         ?       - SEQUENCE_CLUSTER_CONTENT
-                - entity_sequence_clusters
+                - sequence_clusters
         :       - CATEGORY_NAME: rcsb_entity_sequence_cluster_list
                   ATTRIBUTE_NAME_LIST:
                       - data_set_id
@@ -1241,6 +1297,7 @@ dictionary_helper:
                 - pdbx_core
         :       - rcsb_entity_poly_info
                 - rcsb_entity_monomer_container_identifiers
+                - rcsb_load_status
         ?       - ENTITY_INSTANCE
                 - pdbx_core
         :       - rcsb_load_status
@@ -1260,73 +1317,8 @@ dictionary_helper:
                 - pdbx_core
         :       - rcsb_load_status
                 - pdbx_struct_oper_list
-#
-##
-#
-schemadef_helper:
     #
-    schema_info:
-        ihm_dev:
-            DATABASE_NAME: ihm_dev
-            VERSION: 1.1.1
-            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-ihm_dev-type-map.json
-        ihm_dev_full:
-            DATABASE_NAME: ihm_dev
-            VERSION: 1.1.1
-            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-ihm_dev-type-map.json
-        pdbx:
-            DATABASE_NAME: pdbx
-            VERSION: 5.1.0
-            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-pdbx-type-map.json
-        pdbx_core:
-            DATABASE_NAME: pdbx_core
-            VERSION: 5.2.0
-            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-pdbx-type-map.json
-        bird:
-            DATABASE_NAME: bird
-            VERSION: 5.1.0
-            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-bird-type-map.json
-        bird_family:
-            DATABASE_NAME: bird
-            VERSION: 5.1.0
-            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-bird_family-type-map.json
-        chem_comp:
-            DATABASE_NAME: chem_comp
-            VERSION: 5.1.0
-            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-chem_comp-type-map.json
-        chem_comp_core:
-            DATABASE_NAME: chem_comp_core
-            VERSION: 5.1.0
-            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-chem_comp-type-map.json
-        bird_chem_comp:
-            DATABASE_NAME: chem_comp
-            VERSION: 5.1.0
-            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-chem_comp-type-map.json
-        bird_chem_comp_core:
-            DATABASE_NAME: chem_comp_core
-            VERSION: 5.1.0
-            INSTANCE_DATA_TYPE_INFO_FILENAME: scan-chem_comp-type-map.json
-        pdb_distro:
-            DATABASE_NAME: stat
-            VERSION: 1.1.0
-            INSTANCE_DATA_TYPE_INFO_FILENAME:
-        repository_holdings:
-            DATABASE_NAME: repository_holdings
-            VERSION: 5.1.0
-            INSTANCE_DATA_TYPE_INFO_FILENAME:
-        entity_sequence_clusters:
-            DATABASE_NAME: sequence_clusters
-            VERSION: 5.1.0
-            INSTANCE_DATA_TYPE_INFO_FILENAME:
-        data_exchange:
-            DATABASE_NAME: data_exchange
-            VERSION: 5.1.0
-            INSTANCE_DATA_TYPE_INFO_FILENAME:
-        drugbank_core:
-            DATABASE_NAME: chem_comp_core
-            VERSION: 5.1.0
-            INSTANCE_DATA_TYPE_INFO_FILENAME:
-    #
+
     schema_content_filters:
         ihm_dev_full:
             INCLUDE: []
@@ -1366,7 +1358,7 @@ schemadef_helper:
                 - rcsb_repository_holdings_transferred
                 - rcsb_repository_holdings_insilico_models
             EXCLUDE: []
-        entity_sequence_clusters:
+        sequence_clusters:
             INCLUDE:
                 - rcsb_instance_sequence_cluster_list
                 - rcsb_entity_sequence_cluster_list
@@ -1495,10 +1487,9 @@ schemadef_helper:
             - CATEGORY_NAME: pdbx_chem_comp_audit
               ATTRIBUTE_NAME: annotator
 #
-#
-document_helper:
-    #
-    schema_collection_names:
+document_helper_configuration:
+    # Document level configuration
+    document_collection_names:
         ihm_dev:
             - NAME: ihm_dev
               VERSION: 1.1.0
@@ -1561,7 +1552,7 @@ document_helper:
               VERSION: 1.1.0
             - NAME: repository_holdings_insilico_models
               VERSION: 1.1.0
-        entity_sequence_clusters:
+        sequence_clusters:
             - NAME: cluster_members
               VERSION: 1.1.0
             - NAME: cluster_provenance
@@ -1575,7 +1566,7 @@ document_helper:
             - NAME: drugbank_core
               VERSION: 1.1.0
     #
-    collection_schema_content_filters:
+    document_collection_content_filters:
         ihm_dev:
             INCLUDE: []
             EXCLUDE:
@@ -1721,6 +1712,9 @@ document_helper:
                 - EM_3D_FITTING
                 - EM_3D_FITTING_LIST
                 - EM_3D_RECONSTRUCTION
+                - EM_DIFFRACTION
+                - EM_DIFFRACTION_SHELL
+                - EM_DIFFRACTION_STATS
                 - EM_EMBEDDING
                 - EM_ENTITY_ASSEMBLY
                 - EM_EXPERIMENT
