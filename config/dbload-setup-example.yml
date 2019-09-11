@@ -61,6 +61,7 @@
 #  2-Sep-2019 jdw added parallel site_info_remote_configuration section
 #  3-Sep-2019 jdw standardized database access options and add cache dir for exdb
 #  6-Sep-2019 jdw incorporate metadata for search type and brief description
+#  9-Sep-2019 jdw add COLLECTION_ATC: tree_atc_node_list
 #
 # ExDB configuration file example
 ---
@@ -102,7 +103,7 @@ site_info_configuration:
     VRPT_REPO_PATH_ENV: VRPT_REPO_PATH_ALT
     #
     RCSB_SEQUENCE_CLUSTER_DATA_PATH: cluster_data/mmseqs-20180608
-    SIFTS_SUMMARY_PATH: sifts-summary
+    SIFTS_SUMMARY_DATA_PATH: sifts-summary
     # -------------------------------------------------------------------------------------------
     #   -- Below are common across current deployments -
     #
@@ -182,7 +183,7 @@ site_info_remote_configuration:
     VRPT_REPO_PATH_ENV: VRPT_REPO_PATH_ALT
     #
     RCSB_SEQUENCE_CLUSTER_DATA_PATH: /net/users/update/Data/sequence-clusters/current-mmseqs
-    SIFTS_SUMMARY_PATH: /net/data-remote/ebi/sifts/flatfiles/csv
+    SIFTS_SUMMARY_DATA_PATH: /net/data-remote/ebi/sifts/flatfiles/csv
     # -------------------------------------------------------------------------------------------
     #   -- Options below in this section are common across current deployments -
     #
@@ -192,6 +193,7 @@ site_info_remote_configuration:
     _DRUGBANK_AUTH_USERNAME: 0qrpNd4OhGuVsJqEpcsAVEovZ0hl6QkgxmbTy3bPssd06Z9tuM6bJqgsWwmFCd0JnjIMIEWyKPMmF1pI5g==
     _DRUGBANK_AUTH_PASSWORD: lA/K132i8DOtLdMHfm3gpNqprZ6ABKjsCRxfcXIMnxpKQzBv/B6dmC7x1vRO86JhqdT0b84=
     #
+    ATC_CACHE_DIR: atc
     CHEM_COMP_MODEL_CACHE_DIR: chem_comp_models
     NCBI_TAXONOMY_CACHE_DIR: NCBI
     ENZYME_CLASSIFICATION_CACHE_DIR: ec
@@ -293,6 +295,7 @@ tree_node_lists_configuration:
     COLLECTION_ENZYME: tree_ec_node_list
     COLLECTION_SCOP: tree_scop_node_list
     COLLECTION_CATH: tree_cath_node_list
+    COLLECTION_ATC: tree_atc_node_list
 
 #
 # Common configuration options for helper classes used for dictionary content generation
