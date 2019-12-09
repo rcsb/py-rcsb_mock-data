@@ -67,6 +67,7 @@
 #  1-Nov-2019 jdw exclude category pdbx_molecule from core_entry and rename citation in bird_chem_comp_core
 # 25-Nov-2019 jdw add CITATION_REFERENCE_CACHE_DIR and CHEM_COMP_MODEL_CACHE_DIR -> CHEM_COMP_CACHE_DIR
 #  5-Dec-2019 jdw Major revisions for typed entity collections and assocated search contexts.
+#  9-Dec-2019 jdw Add placeholders for uniprot_core
 #
 # ExDB configuration file example
 ---
@@ -353,6 +354,9 @@ content_info_helper_configuration:
         drugbank_core:
             VERSION: 5.1.0
             INSTANCE_DATA_TYPE_INFO_FILENAME:
+        uniprot_core:
+            VERSION: 1.0.0
+            INSTANCE_DATA_TYPE_INFO_FILENAME:
     #
     # Source dictionary locators -
     #
@@ -415,6 +419,9 @@ content_info_helper_configuration:
         - PDBX_DICT_LOCATOR
         - IHMDEV_DICT_LOCATOR
         - FLR_DICT_LOCATOR
+        - RCSB_DICT_LOCATOR
+      uniprot_core:
+        - PDBX_DICT_LOCATOR
         - RCSB_DICT_LOCATOR
 
     item_transformers:
@@ -1330,6 +1337,9 @@ content_info_helper_configuration:
                 - drugbank_info
                 - drugbank_target
             EXCLUDE: []
+        uniprot_core:
+            INCLUDE: []
+            EXCLUDE: []
     schema_block_attributes:
         ihm_dev:
             ATTRIBUTE_NAME: structure_id
@@ -1501,6 +1511,9 @@ document_helper_configuration:
         drugbank_core:
             - NAME: drugbank_core
               VERSION: 1.1.0
+        uniprot_core:
+            - NAME: uniprot_core
+              VERSION: 1.0.0
     #
     document_collection_content_filters:
         ihm_dev:
@@ -2259,7 +2272,10 @@ document_helper_configuration:
                 - drugbank_container_identifiers
             EXCLUDE: []
             SLICE:
-
+        uniprot_core:
+            INCLUDE: []
+            EXCLUDE: []
+            SLICE:
     #
     collection_indices:
         ihm_dev:
@@ -2572,6 +2588,11 @@ document_helper_configuration:
             - INDEX_NAME: primary
               ATTRIBUTE_NAMES:
               - drugbank_info.drugbank_id
+        uniprot_core:
+            - INDEX_NAME: primary
+              ATTRIBUTE_NAMES:
+              - rcsb_uniprot_container_identifiers.uniprot_id
+
     collection_subcategory_aggregates:
         bird_chem_comp_core:
             - NAME: resource_lineage
