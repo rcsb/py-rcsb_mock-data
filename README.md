@@ -17,6 +17,7 @@ Current mock data includes:
 | MOCK_PDBX_SANDBOX | PDBx/mmCIF example data files |
 | MOCK_VALIDATION_REPORTS | PDB validation report examples data files |
 | NCBI | NCBI Taxonomy database example and mapping files |
+| MOCK_MODBASE_MODELS | ModBase individual model file example |
 | cluster_data | mmseq2 sequence cluster example data files |
 | DrugBank | DrugBank example data files and mapping files |
 | config | RCSB application configuration example data files |
@@ -29,4 +30,3 @@ Current mock data includes:
 | schema-maps | Legacy RCSB schema data files |
 | sifts-summary | SIFTS summary mapping data files |
 | UniProt | UniProt resource files |
-
