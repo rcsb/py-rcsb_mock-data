@@ -14,14 +14,6 @@
 #   24-Jul-2021 - adjust stash mock configuration
 #    1-Aug-2021 - add PDBX_OBSOLETE_REPO_PATH
 #    2-Aug-2021 - make git local storage on the testing branch in the site_info_configuration section
-#   16-Sep-2021 - Add PDB_REPO_URL and PDBDEV_REPO_URL items
-#   28-Sep-2021 - Add MA_DICT_LOCATOR item
-#   29-Sep-2021 - Add DISCOVERY_MODE to control remote and local data access
-#    8-Oct-2021 - Add fallback url for PDB repository content PDB_REPO_FALLBACK_URL
-#                 Make dictionaries point to the new dictionary asset layout
-#                 and deprecate REPO_UTIL_CACHE_DIR
-#   12-Oct-2021 - Add method class mapping for rcsb.utils.dictionary.DictMethodCompModelHelper
-# --
 ---
 DEFAULT: {}
 ##
@@ -58,7 +50,6 @@ site_info_configuration:
   PDBX_REPO_PATH: MOCK_PDBX_SANDBOX
   PDBX_OBSOLETE_REPO_PATH: MOCK_PDBX_SANDBOX
   RCSB_EXCHANGE_SANDBOX_PATH: MOCK_EXCHANGE_SANDBOX
-  # PDBX_COMP_MODEL_SANDBOX_PATH: MOCK_COMP_MODEL_SANDBOX
   IHM_DEV_REPO_PATH: MOCK_IHM_REPO
   VRPT_REPO_PATH: MOCK_VALIDATION_REPORTS
   VRPT_REPO_PATH_ENV: VRPT_REPO_PATH_ALT
@@ -67,14 +58,7 @@ site_info_configuration:
   #
   RCSB_SEQUENCE_CLUSTER_DATA_PATH: cluster_data/mmseqs_clusters_current
   SIFTS_SUMMARY_DATA_PATH: sifts-summary
-  #
-  # --------- Configuration for remote and local data access ----
-  DISCOVERY_MODE: remote
-  PDB_REPO_URL: https://ftp.wwpdb.org/pub
-  PDB_REPO_FALLBACK_URL: https://ftp.wwpdb.org/pub
-  PDBDEV_REPO_URL: https://pdb-dev.wwpdb.org
-  # ---------
-  #
+  # -------------------------------------------------------------------------------------------
   #   -- Below are common across current deployments -
   #
   # Supporting and integrated resource data cache directory names
@@ -92,7 +76,7 @@ site_info_configuration:
   SIFTS_SUMMARY_CACHE_DIR: sifts_summary
   DICTIONARY_CACHE_DIR: dictionaries
   DATA_TYPE_INFO_CACHE_DIR: data_type_and_coverage
-  # REPO_UTIL_CACHE_DIR: repo_util
+  REPO_UTIL_CACHE_DIR: repo_util
   EXDB_CACHE_DIR: exdb
   CITATION_REFERENCE_CACHE_DIR: cit_ref
   #
@@ -113,19 +97,15 @@ site_info_configuration:
     rcsb.utils.dictionary.DictMethodEntityHelper: rcsb.utils.dictionary.DictMethodEntityHelper
     rcsb.utils.dictionary.DictMethodAssemblyHelper: rcsb.utils.dictionary.DictMethodAssemblyHelper
     rcsb.utils.dictionary.DictMethodEntityInstanceHelper: rcsb.utils.dictionary.DictMethodEntityInstanceHelper
-    rcsb.utils.dictionary.DictMethodCompModelHelper: rcsb.utils.dictionary.DictMethodCompModelHelper
   # ------ ------ ------ ------ ------ ------ ------ -------
-  # Make dictionaries point to the new dictionary asset layout  -
+  # ADDED rcsb.db V0.966 Source dictionary locators -
   #
-  PDBX_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionary_files/reference/mmcif_pdbx_v5_next.dic
-  RCSB_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionary_files/dist/rcsb_mmcif_ext.dic
-  RCSB_COMP_MODEL_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionary_files/dist/rcsb_mmcif_comp_model_ext.dic
-  IHMDEV_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionary_files/reference/ihm-extension.dic
-  FLR_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionary_files/reference/flr-extension.dic
-  VRPT_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionary_files/reference/vrpt_mmcif_ext.dic
-  VRPT_DICT_MAPPING_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionary_files/reference/vrpt_dictmap.json
-  #
-  MA_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionary_files/reference/mmcif_ma.dic
+  PDBX_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionaries/mmcif_pdbx_v5_next.dic
+  RCSB_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionaries/rcsb_mmcif_ext_v1.dic
+  IHMDEV_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionaries/ihm-extension.dic
+  FLR_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionaries/flr-extension.dic
+  VRPT_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionaries/vrpt_mmcif_ext.dic
+  VRPT_DICT_MAPPING_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionaries/vrpt_dictmap.json
   # ------ ------ ------ ------ ------ ------ ------ ------ ------
   # Added in rcsb.db V0.966 - Data type details and type mapping
   APP_DATA_TYPE_INFO_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/data_type_and_coverage/app_data_type_mapping.cif
@@ -214,14 +194,6 @@ site_info_remote_configuration:
   #
   RCSB_SEQUENCE_CLUSTER_DATA_PATH: /net/users/update/Data/sequence-clusters/current-mmseqs
   SIFTS_SUMMARY_DATA_PATH: /net/data-remote/ebi/sifts/flatfiles/csv
-  #
-  # --------- Configuration for remote and local data access ----
-  #
-  DISCOVERY_MODE: remote
-  PDB_REPO_URL: https://ftp.wwpdb.org/pub
-  PDB_REPO_FALLBACK_URL: https://ftp.wwpdb.org/pub
-  PDBDEV_REPO_URL: https://pdb-dev.wwpdb.org
-  #
   # -------------------------------------------------------------------------------------------
   #   -- Options below in this section are common across current deployments -
   #
@@ -239,7 +211,7 @@ site_info_remote_configuration:
   SIFTS_SUMMARY_CACHE_DIR: sifts_summary
   DICTIONARY_CACHE_DIR: dictionaries
   DATA_TYPE_INFO_CACHE_DIR: data_type_and_coverage
-  # REPO_UTIL_CACHE_DIR: repo_util
+  REPO_UTIL_CACHE_DIR: repo_util
   EXDB_CACHE_DIR: exdb
   CITATION_REFERENCE_CACHE_DIR: cit_ref
   #
@@ -259,19 +231,15 @@ site_info_remote_configuration:
     rcsb.utils.dictionary.DictMethodEntityHelper: rcsb.utils.dictionary.DictMethodEntityHelper
     rcsb.utils.dictionary.DictMethodAssemblyHelper: rcsb.utils.dictionary.DictMethodAssemblyHelper
     rcsb.utils.dictionary.DictMethodEntityInstanceHelper: rcsb.utils.dictionary.DictMethodEntityInstanceHelper
-    rcsb.utils.dictionary.DictMethodCompModelHelper: rcsb.utils.dictionary.DictMethodCompModelHelper
   #
-  # Make dictionaries point to the new dictionary asset layout  -
+  # ADDED rcsb.db V0.966 Source dictionary locators -
   #
-  PDBX_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionary_files/reference/mmcif_pdbx_v5_next.dic
-  RCSB_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionary_files/dist/rcsb_mmcif_ext.dic
-  RCSB_COMP_MODEL_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionary_files/dist/rcsb_mmcif_comp_model_ext.dic
-  IHMDEV_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionary_files/reference/ihm-extension.dic
-  FLR_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionary_files/reference/flr-extension.dic
-  VRPT_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionary_files/reference/vrpt_mmcif_ext.dic
-  VRPT_DICT_MAPPING_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionary_files/reference/vrpt_dictmap.json
-  #
-  MA_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionary_files/reference/mmcif_ma.dic
+  PDBX_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionaries/mmcif_pdbx_v5_next.dic
+  RCSB_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionaries/rcsb_mmcif_ext_v1.dic
+  IHMDEV_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionaries/ihm-extension.dic
+  FLR_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionaries/flr-extension.dic
+  VRPT_DICT_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionaries/vrpt_mmcif_ext.dic
+  VRPT_DICT_MAPPING_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/dictionaries/vrpt_dictmap.json
   #
   # Added in rcsb.db V0.966 - Data type details and type mapping
   APP_DATA_TYPE_INFO_LOCATOR: https://raw.githubusercontent.com/rcsb/py-rcsb_exdb_assets/development/data_type_and_coverage/app_data_type_mapping.cif
